@@ -1,15 +1,16 @@
-#[doc = r"Register block"]
-#[repr(C)]
-pub struct RegisterBlock {
-    #[doc = "0x00 - Indicates the type of platform in use"]
-    pub platform: PLATFORM,
+use crate::generic::*;
+#[doc = "Testbench manager. Allows the programmer to know what platform their software is running on."]
+#[derive(Copy, Clone)]
+pub struct Tbman(*mut u8);
+unsafe impl Send for Tbman {}
+unsafe impl Sync for Tbman {}
+impl Tbman {
+    pub const fn from_ptr(ptr: *mut u8) -> Self {
+        Self(ptr)
+    }
+    #[doc = "Indicates the type of platform in use"]
+    pub fn platform(self) -> Reg<fields::Platform, RW> {
+        unsafe { Reg::new(self.0.add(0usize), fields::Platform::from_bits(5)) }
+    }
 }
-#[doc = "Indicates the type of platform in use\n\nThis register you can [`read`](crate::generic::Reg::read). See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [platform](platform) module"]
-pub type PLATFORM = crate::Reg<u32, _PLATFORM>;
-#[allow(missing_docs)]
-#[doc(hidden)]
-pub struct _PLATFORM;
-#[doc = "`read()` method returns [platform::R](platform::R) reader structure"]
-impl crate::Readable for PLATFORM {}
-#[doc = "Indicates the type of platform in use"]
-pub mod platform;
+pub mod fields;
