@@ -8,16 +8,16 @@ impl Sysinfo {
         Self(ptr)
     }
     #[doc = "JEDEC JEP-106 compliant chip identifier."]
-    pub fn chip_id(self) -> Reg<fields::ChipId, RW> {
-        unsafe { Reg::new(self.0.add(0usize), fields::ChipId::from_bits(0)) }
+    pub fn chip_id(self) -> Reg<regs::ChipId, RW> {
+        unsafe { Reg::new(self.0.add(0usize)) }
     }
     #[doc = "Platform register. Allows software to know what environment it is running in."]
-    pub fn platform(self) -> Reg<fields::Platform, RW> {
-        unsafe { Reg::new(self.0.add(4usize), fields::Platform::from_bits(0)) }
+    pub fn platform(self) -> Reg<regs::Platform, RW> {
+        unsafe { Reg::new(self.0.add(4usize)) }
     }
     #[doc = "Git hash of the chip source. Used to identify chip version."]
     pub fn gitref_rp2040(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(64usize), 0) }
+        unsafe { Reg::new(self.0.add(64usize)) }
     }
 }
-pub mod fields;
+pub mod regs;

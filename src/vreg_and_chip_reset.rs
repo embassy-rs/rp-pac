@@ -9,16 +9,16 @@ impl VregAndChipReset {
         Self(ptr)
     }
     #[doc = "Voltage regulator control and status"]
-    pub fn vreg(self) -> Reg<fields::Vreg, RW> {
-        unsafe { Reg::new(self.0.add(0usize), fields::Vreg::from_bits(177)) }
+    pub fn vreg(self) -> Reg<regs::Vreg, RW> {
+        unsafe { Reg::new(self.0.add(0usize)) }
     }
     #[doc = "brown-out detection control"]
-    pub fn bod(self) -> Reg<fields::Bod, RW> {
-        unsafe { Reg::new(self.0.add(4usize), fields::Bod::from_bits(145)) }
+    pub fn bod(self) -> Reg<regs::Bod, RW> {
+        unsafe { Reg::new(self.0.add(4usize)) }
     }
     #[doc = "Chip reset control and status"]
-    pub fn chip_reset(self) -> Reg<fields::ChipReset, RW> {
-        unsafe { Reg::new(self.0.add(8usize), fields::ChipReset::from_bits(0)) }
+    pub fn chip_reset(self) -> Reg<regs::ChipReset, RW> {
+        unsafe { Reg::new(self.0.add(8usize)) }
     }
 }
-pub mod fields;
+pub mod regs;

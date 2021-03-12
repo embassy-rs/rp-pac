@@ -8,93 +8,93 @@ impl IoQspi {
         Self(ptr)
     }
     #[doc = "GPIO status"]
-    pub fn gpio_qspi_sclk_status(self) -> Reg<fields::GpioQspiSclkStatus, RW> {
-        unsafe { Reg::new(self.0.add(0usize), fields::GpioQspiSclkStatus::from_bits(0)) }
+    pub fn gpio_qspi_sclk_status(self) -> Reg<regs::GpioQspiSclkStatus, RW> {
+        unsafe { Reg::new(self.0.add(0usize)) }
     }
     #[doc = "GPIO control including function select and overrides."]
-    pub fn gpio_qspi_sclk_ctrl(self) -> Reg<fields::GpioQspiSclkCtrl, RW> {
-        unsafe { Reg::new(self.0.add(4usize), fields::GpioQspiSclkCtrl::from_bits(31)) }
+    pub fn gpio_qspi_sclk_ctrl(self) -> Reg<regs::GpioQspiSclkCtrl, RW> {
+        unsafe { Reg::new(self.0.add(4usize)) }
     }
     #[doc = "GPIO status"]
-    pub fn gpio_qspi_ss_status(self) -> Reg<fields::GpioQspiSsStatus, RW> {
-        unsafe { Reg::new(self.0.add(8usize), fields::GpioQspiSsStatus::from_bits(0)) }
+    pub fn gpio_qspi_ss_status(self) -> Reg<regs::GpioQspiSsStatus, RW> {
+        unsafe { Reg::new(self.0.add(8usize)) }
     }
     #[doc = "GPIO control including function select and overrides."]
-    pub fn gpio_qspi_ss_ctrl(self) -> Reg<fields::GpioQspiSsCtrl, RW> {
-        unsafe { Reg::new(self.0.add(12usize), fields::GpioQspiSsCtrl::from_bits(31)) }
+    pub fn gpio_qspi_ss_ctrl(self) -> Reg<regs::GpioQspiSsCtrl, RW> {
+        unsafe { Reg::new(self.0.add(12usize)) }
     }
     #[doc = "GPIO status"]
-    pub fn gpio_qspi_sd0_status(self) -> Reg<fields::GpioQspiSd0Status, RW> {
-        unsafe { Reg::new(self.0.add(16usize), fields::GpioQspiSd0Status::from_bits(0)) }
+    pub fn gpio_qspi_sd0_status(self) -> Reg<regs::GpioQspiSd0Status, RW> {
+        unsafe { Reg::new(self.0.add(16usize)) }
     }
     #[doc = "GPIO control including function select and overrides."]
-    pub fn gpio_qspi_sd0_ctrl(self) -> Reg<fields::GpioQspiSd0Ctrl, RW> {
-        unsafe { Reg::new(self.0.add(20usize), fields::GpioQspiSd0Ctrl::from_bits(31)) }
+    pub fn gpio_qspi_sd0_ctrl(self) -> Reg<regs::GpioQspiSd0Ctrl, RW> {
+        unsafe { Reg::new(self.0.add(20usize)) }
     }
     #[doc = "GPIO status"]
-    pub fn gpio_qspi_sd1_status(self) -> Reg<fields::GpioQspiSd1Status, RW> {
-        unsafe { Reg::new(self.0.add(24usize), fields::GpioQspiSd1Status::from_bits(0)) }
+    pub fn gpio_qspi_sd1_status(self) -> Reg<regs::GpioQspiSd1Status, RW> {
+        unsafe { Reg::new(self.0.add(24usize)) }
     }
     #[doc = "GPIO control including function select and overrides."]
-    pub fn gpio_qspi_sd1_ctrl(self) -> Reg<fields::GpioQspiSd1Ctrl, RW> {
-        unsafe { Reg::new(self.0.add(28usize), fields::GpioQspiSd1Ctrl::from_bits(31)) }
+    pub fn gpio_qspi_sd1_ctrl(self) -> Reg<regs::GpioQspiSd1Ctrl, RW> {
+        unsafe { Reg::new(self.0.add(28usize)) }
     }
     #[doc = "GPIO status"]
-    pub fn gpio_qspi_sd2_status(self) -> Reg<fields::GpioQspiSd2Status, RW> {
-        unsafe { Reg::new(self.0.add(32usize), fields::GpioQspiSd2Status::from_bits(0)) }
+    pub fn gpio_qspi_sd2_status(self) -> Reg<regs::GpioQspiSd2Status, RW> {
+        unsafe { Reg::new(self.0.add(32usize)) }
     }
     #[doc = "GPIO control including function select and overrides."]
-    pub fn gpio_qspi_sd2_ctrl(self) -> Reg<fields::GpioQspiSd2Ctrl, RW> {
-        unsafe { Reg::new(self.0.add(36usize), fields::GpioQspiSd2Ctrl::from_bits(31)) }
+    pub fn gpio_qspi_sd2_ctrl(self) -> Reg<regs::GpioQspiSd2Ctrl, RW> {
+        unsafe { Reg::new(self.0.add(36usize)) }
     }
     #[doc = "GPIO status"]
-    pub fn gpio_qspi_sd3_status(self) -> Reg<fields::GpioQspiSd3Status, RW> {
-        unsafe { Reg::new(self.0.add(40usize), fields::GpioQspiSd3Status::from_bits(0)) }
+    pub fn gpio_qspi_sd3_status(self) -> Reg<regs::GpioQspiSd3Status, RW> {
+        unsafe { Reg::new(self.0.add(40usize)) }
     }
     #[doc = "GPIO control including function select and overrides."]
-    pub fn gpio_qspi_sd3_ctrl(self) -> Reg<fields::GpioQspiSd3Ctrl, RW> {
-        unsafe { Reg::new(self.0.add(44usize), fields::GpioQspiSd3Ctrl::from_bits(31)) }
+    pub fn gpio_qspi_sd3_ctrl(self) -> Reg<regs::GpioQspiSd3Ctrl, RW> {
+        unsafe { Reg::new(self.0.add(44usize)) }
     }
     #[doc = "Raw Interrupts"]
-    pub fn intr(self) -> Reg<fields::Intr, RW> {
-        unsafe { Reg::new(self.0.add(48usize), fields::Intr::from_bits(0)) }
+    pub fn intr(self) -> Reg<regs::Intr, RW> {
+        unsafe { Reg::new(self.0.add(48usize)) }
     }
     #[doc = "Interrupt Enable for proc0"]
-    pub fn proc0_inte(self) -> Reg<fields::Proc0Inte, RW> {
-        unsafe { Reg::new(self.0.add(52usize), fields::Proc0Inte::from_bits(0)) }
+    pub fn proc0_inte(self) -> Reg<regs::Proc0Inte, RW> {
+        unsafe { Reg::new(self.0.add(52usize)) }
     }
     #[doc = "Interrupt Force for proc0"]
-    pub fn proc0_intf(self) -> Reg<fields::Proc0Intf, RW> {
-        unsafe { Reg::new(self.0.add(56usize), fields::Proc0Intf::from_bits(0)) }
+    pub fn proc0_intf(self) -> Reg<regs::Proc0Intf, RW> {
+        unsafe { Reg::new(self.0.add(56usize)) }
     }
     #[doc = "Interrupt status after masking & forcing for proc0"]
-    pub fn proc0_ints(self) -> Reg<fields::Proc0Ints, RW> {
-        unsafe { Reg::new(self.0.add(60usize), fields::Proc0Ints::from_bits(0)) }
+    pub fn proc0_ints(self) -> Reg<regs::Proc0Ints, RW> {
+        unsafe { Reg::new(self.0.add(60usize)) }
     }
     #[doc = "Interrupt Enable for proc1"]
-    pub fn proc1_inte(self) -> Reg<fields::Proc1Inte, RW> {
-        unsafe { Reg::new(self.0.add(64usize), fields::Proc1Inte::from_bits(0)) }
+    pub fn proc1_inte(self) -> Reg<regs::Proc1Inte, RW> {
+        unsafe { Reg::new(self.0.add(64usize)) }
     }
     #[doc = "Interrupt Force for proc1"]
-    pub fn proc1_intf(self) -> Reg<fields::Proc1Intf, RW> {
-        unsafe { Reg::new(self.0.add(68usize), fields::Proc1Intf::from_bits(0)) }
+    pub fn proc1_intf(self) -> Reg<regs::Proc1Intf, RW> {
+        unsafe { Reg::new(self.0.add(68usize)) }
     }
     #[doc = "Interrupt status after masking & forcing for proc1"]
-    pub fn proc1_ints(self) -> Reg<fields::Proc1Ints, RW> {
-        unsafe { Reg::new(self.0.add(72usize), fields::Proc1Ints::from_bits(0)) }
+    pub fn proc1_ints(self) -> Reg<regs::Proc1Ints, RW> {
+        unsafe { Reg::new(self.0.add(72usize)) }
     }
     #[doc = "Interrupt Enable for dormant_wake"]
-    pub fn dormant_wake_inte(self) -> Reg<fields::DormantWakeInte, RW> {
-        unsafe { Reg::new(self.0.add(76usize), fields::DormantWakeInte::from_bits(0)) }
+    pub fn dormant_wake_inte(self) -> Reg<regs::DormantWakeInte, RW> {
+        unsafe { Reg::new(self.0.add(76usize)) }
     }
     #[doc = "Interrupt Force for dormant_wake"]
-    pub fn dormant_wake_intf(self) -> Reg<fields::DormantWakeIntf, RW> {
-        unsafe { Reg::new(self.0.add(80usize), fields::DormantWakeIntf::from_bits(0)) }
+    pub fn dormant_wake_intf(self) -> Reg<regs::DormantWakeIntf, RW> {
+        unsafe { Reg::new(self.0.add(80usize)) }
     }
     #[doc = "Interrupt status after masking & forcing for dormant_wake"]
-    pub fn dormant_wake_ints(self) -> Reg<fields::DormantWakeInts, RW> {
-        unsafe { Reg::new(self.0.add(84usize), fields::DormantWakeInts::from_bits(0)) }
+    pub fn dormant_wake_ints(self) -> Reg<regs::DormantWakeInts, RW> {
+        unsafe { Reg::new(self.0.add(84usize)) }
     }
 }
-pub mod fields;
-pub mod values;
+pub mod regs;
+pub mod vals;

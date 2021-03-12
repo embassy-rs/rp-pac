@@ -1,21 +1,83 @@
-_svd: "./rp2040.svd"
+transforms:
+- MergeEnums:
+    from: pio0::vals::Sm\d+ExecctrlStatusSel
+    to: pio0::vals::SmExecctrlStatusSel
+- MergeEnums:
+    from: io_[^:]+::vals::Gpio.+Ctrl(.+)over
+    to: io::vals::${1}over
+- MergeEnums:
+    from: pads_[^:]+::vals::.+Drive
+    to: pads::vals::Drive
+- MergeEnums:
+    from: pads_[^:]+::vals::VoltageSelectVoltageSelect
+    to: pads::vals::VoltageSelect
+- MergeEnums:
+    from: pwm::vals::Ch\dCsrDivmode
+    to: pwm::vals::Divmode
+- MergeEnums:
+    from: dma::vals::Ch\d+CtrlTrigTreqSel
+    to: dma::vals::TreqSel
+- MergeEnums:
+    from: dma::vals::Ch\d+CtrlTrigDataSize
+    to: dma::vals::DataSize
+- MergeEnums:
+    from: rosc::vals::.+Passwd
+    to: rosc::vals::Passwd
+- MergeFieldsets:
+    from: resets::regs::(Reset|ResetDone)
+    to: resets::regs::Peripherals
+- DeleteEnum:
+    from: dma::vals::Ch\d+CtrlTrigRingSize
+- RenameFields:
+    fieldset: pio0::regs::Sm\d+(Pinctrl|Shiftctrl|Clkdiv|Execctrl|Addr|Instr)
+    from: sm\d+_(.*)
+    to: $1
+- MergeFieldsets:
+    from: pio0::regs::Sm\d+(Pinctrl|Shiftctrl|Clkdiv|Execctrl|Addr|Instr)
+    to: pio0::regs::Sm$1
+- RenameFields:
+    fieldset: pio0::regs::InstrMem\d+
+    from: instr_mem\d+
+    to: instr_mem
+- MergeFieldsets:
+    from: pio0::regs::InstrMem\d+
+    to: pio0::regs::InstrMem
 
-PIO0:
-  _array:
-    "INSTR_MEM*": {}
-    "TXF*": {}
-    "RXF*": {}
+- MergeFieldsets:
+    from: pio0::regs::(Irq\dInt.|Intr)
+    to: pio0::regs::Intr
 
-  _cluster:
-    "SM%s":
-      "SM*_CLKDIV": {}
-      "SM*_EXECCTRL": {}
-      "SM*_SHIFTCTRL": {}
-      "SM*_ADDR": {}
-      "SM*_INSTR": {}
-      "SM*_PINCTRL": {}
+- MakeArray:
+    block: pio0::Pio0
+    from: (instr_mem|txf|rxf)\d+
+    to: $1
 
-    "SM_IRQ%s":
-      "IRQ*_INTE": {}
-      "IRQ*_INTF": {}
-      "IRQ*_INTS": {}
+- MakeBlock:
+    block: pio0::Pio0
+    from: sm(\d+)_(.+)
+    to_outer: sm$1
+    to_inner: $2
+    to_block: pio0::StateMachine
+
+- MakeArray:
+    block: pio0::Pio0
+    from: sm\d+
+    to: sm
+
+- MakeBlock:
+    block: pio0::Pio0
+    from: irq(\d+)_(.+)
+    to_outer: irq$1
+    to_inner: $2
+    to_block: pio0::Irq
+
+- MakeArray:
+    block: pio0::Pio0
+    from: irq\d+
+    to: irqs
+
+- MergeFieldsets:
+    from: dma::regs::Timer\d+
+    to: dma::regs::Timer
+    
+- FindDuplicateFieldsets: {}

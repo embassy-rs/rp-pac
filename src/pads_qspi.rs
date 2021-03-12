@@ -8,32 +8,32 @@ impl PadsQspi {
         Self(ptr)
     }
     #[doc = "Voltage select. Per bank control"]
-    pub fn voltage_select(self) -> Reg<fields::VoltageSelect, RW> {
-        unsafe { Reg::new(self.0.add(0usize), fields::VoltageSelect::from_bits(0)) }
+    pub fn voltage_select(self) -> Reg<regs::VoltageSelect, RW> {
+        unsafe { Reg::new(self.0.add(0usize)) }
     }
     #[doc = "Pad control register"]
-    pub fn gpio_qspi_sclk(self) -> Reg<fields::GpioQspiSclk, RW> {
-        unsafe { Reg::new(self.0.add(4usize), fields::GpioQspiSclk::from_bits(86)) }
+    pub fn gpio_qspi_sclk(self) -> Reg<regs::GpioQspiSclk, RW> {
+        unsafe { Reg::new(self.0.add(4usize)) }
     }
     #[doc = "Pad control register"]
-    pub fn gpio_qspi_sd0(self) -> Reg<fields::GpioQspiSd0, RW> {
-        unsafe { Reg::new(self.0.add(8usize), fields::GpioQspiSd0::from_bits(82)) }
+    pub fn gpio_qspi_sd0(self) -> Reg<regs::GpioQspiSd0, RW> {
+        unsafe { Reg::new(self.0.add(8usize)) }
     }
     #[doc = "Pad control register"]
-    pub fn gpio_qspi_sd1(self) -> Reg<fields::GpioQspiSd1, RW> {
-        unsafe { Reg::new(self.0.add(12usize), fields::GpioQspiSd1::from_bits(82)) }
+    pub fn gpio_qspi_sd1(self) -> Reg<regs::GpioQspiSd1, RW> {
+        unsafe { Reg::new(self.0.add(12usize)) }
     }
     #[doc = "Pad control register"]
-    pub fn gpio_qspi_sd2(self) -> Reg<fields::GpioQspiSd2, RW> {
-        unsafe { Reg::new(self.0.add(16usize), fields::GpioQspiSd2::from_bits(82)) }
+    pub fn gpio_qspi_sd2(self) -> Reg<regs::GpioQspiSd2, RW> {
+        unsafe { Reg::new(self.0.add(16usize)) }
     }
     #[doc = "Pad control register"]
-    pub fn gpio_qspi_sd3(self) -> Reg<fields::GpioQspiSd3, RW> {
-        unsafe { Reg::new(self.0.add(20usize), fields::GpioQspiSd3::from_bits(82)) }
+    pub fn gpio_qspi_sd3(self) -> Reg<regs::GpioQspiSd3, RW> {
+        unsafe { Reg::new(self.0.add(20usize)) }
     }
     #[doc = "Pad control register"]
-    pub fn gpio_qspi_ss(self) -> Reg<fields::GpioQspiSs, RW> {
-        unsafe { Reg::new(self.0.add(24usize), fields::GpioQspiSs::from_bits(90)) }
+    pub fn gpio_qspi_ss(self) -> Reg<regs::GpioQspiSs, RW> {
+        unsafe { Reg::new(self.0.add(24usize)) }
     }
 }
-pub mod fields;
+pub mod regs;

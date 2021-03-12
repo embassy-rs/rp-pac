@@ -1,2 +1,2 @@
 use crate::generic::*;
-pub mod values;
+pub mod vals;

@@ -8,92 +8,92 @@ impl Uart0 {
         Self(ptr)
     }
     #[doc = "Data Register, UARTDR"]
-    pub fn uartdr(self) -> Reg<fields::Uartdr, RW> {
-        unsafe { Reg::new(self.0.add(0usize), fields::Uartdr::from_bits(0)) }
+    pub fn uartdr(self) -> Reg<regs::Uartdr, RW> {
+        unsafe { Reg::new(self.0.add(0usize)) }
     }
     #[doc = "Receive Status Register/Error Clear Register, UARTRSR/UARTECR"]
-    pub fn uartrsr(self) -> Reg<fields::Uartrsr, RW> {
-        unsafe { Reg::new(self.0.add(4usize), fields::Uartrsr::from_bits(0)) }
+    pub fn uartrsr(self) -> Reg<regs::Uartrsr, RW> {
+        unsafe { Reg::new(self.0.add(4usize)) }
     }
     #[doc = "Flag Register, UARTFR"]
-    pub fn uartfr(self) -> Reg<fields::Uartfr, RW> {
-        unsafe { Reg::new(self.0.add(24usize), fields::Uartfr::from_bits(144)) }
+    pub fn uartfr(self) -> Reg<regs::Uartfr, RW> {
+        unsafe { Reg::new(self.0.add(24usize)) }
     }
     #[doc = "IrDA Low-Power Counter Register, UARTILPR"]
-    pub fn uartilpr(self) -> Reg<fields::Uartilpr, RW> {
-        unsafe { Reg::new(self.0.add(32usize), fields::Uartilpr::from_bits(0)) }
+    pub fn uartilpr(self) -> Reg<regs::Uartilpr, RW> {
+        unsafe { Reg::new(self.0.add(32usize)) }
     }
     #[doc = "Integer Baud Rate Register, UARTIBRD"]
-    pub fn uartibrd(self) -> Reg<fields::Uartibrd, RW> {
-        unsafe { Reg::new(self.0.add(36usize), fields::Uartibrd::from_bits(0)) }
+    pub fn uartibrd(self) -> Reg<regs::Uartibrd, RW> {
+        unsafe { Reg::new(self.0.add(36usize)) }
     }
     #[doc = "Fractional Baud Rate Register, UARTFBRD"]
-    pub fn uartfbrd(self) -> Reg<fields::Uartfbrd, RW> {
-        unsafe { Reg::new(self.0.add(40usize), fields::Uartfbrd::from_bits(0)) }
+    pub fn uartfbrd(self) -> Reg<regs::Uartfbrd, RW> {
+        unsafe { Reg::new(self.0.add(40usize)) }
     }
     #[doc = "Line Control Register, UARTLCR_H"]
-    pub fn uartlcr_h(self) -> Reg<fields::UartlcrH, RW> {
-        unsafe { Reg::new(self.0.add(44usize), fields::UartlcrH::from_bits(0)) }
+    pub fn uartlcr_h(self) -> Reg<regs::UartlcrH, RW> {
+        unsafe { Reg::new(self.0.add(44usize)) }
     }
     #[doc = "Control Register, UARTCR"]
-    pub fn uartcr(self) -> Reg<fields::Uartcr, RW> {
-        unsafe { Reg::new(self.0.add(48usize), fields::Uartcr::from_bits(768)) }
+    pub fn uartcr(self) -> Reg<regs::Uartcr, RW> {
+        unsafe { Reg::new(self.0.add(48usize)) }
     }
     #[doc = "Interrupt FIFO Level Select Register, UARTIFLS"]
-    pub fn uartifls(self) -> Reg<fields::Uartifls, RW> {
-        unsafe { Reg::new(self.0.add(52usize), fields::Uartifls::from_bits(18)) }
+    pub fn uartifls(self) -> Reg<regs::Uartifls, RW> {
+        unsafe { Reg::new(self.0.add(52usize)) }
     }
     #[doc = "Interrupt Mask Set/Clear Register, UARTIMSC"]
-    pub fn uartimsc(self) -> Reg<fields::Uartimsc, RW> {
-        unsafe { Reg::new(self.0.add(56usize), fields::Uartimsc::from_bits(0)) }
+    pub fn uartimsc(self) -> Reg<regs::Uartimsc, RW> {
+        unsafe { Reg::new(self.0.add(56usize)) }
     }
     #[doc = "Raw Interrupt Status Register, UARTRIS"]
-    pub fn uartris(self) -> Reg<fields::Uartris, RW> {
-        unsafe { Reg::new(self.0.add(60usize), fields::Uartris::from_bits(0)) }
+    pub fn uartris(self) -> Reg<regs::Uartris, RW> {
+        unsafe { Reg::new(self.0.add(60usize)) }
     }
     #[doc = "Masked Interrupt Status Register, UARTMIS"]
-    pub fn uartmis(self) -> Reg<fields::Uartmis, RW> {
-        unsafe { Reg::new(self.0.add(64usize), fields::Uartmis::from_bits(0)) }
+    pub fn uartmis(self) -> Reg<regs::Uartmis, RW> {
+        unsafe { Reg::new(self.0.add(64usize)) }
     }
     #[doc = "Interrupt Clear Register, UARTICR"]
-    pub fn uarticr(self) -> Reg<fields::Uarticr, RW> {
-        unsafe { Reg::new(self.0.add(68usize), fields::Uarticr::from_bits(0)) }
+    pub fn uarticr(self) -> Reg<regs::Uarticr, RW> {
+        unsafe { Reg::new(self.0.add(68usize)) }
     }
     #[doc = "DMA Control Register, UARTDMACR"]
-    pub fn uartdmacr(self) -> Reg<fields::Uartdmacr, RW> {
-        unsafe { Reg::new(self.0.add(72usize), fields::Uartdmacr::from_bits(0)) }
+    pub fn uartdmacr(self) -> Reg<regs::Uartdmacr, RW> {
+        unsafe { Reg::new(self.0.add(72usize)) }
     }
     #[doc = "UARTPeriphID0 Register"]
-    pub fn uartperiphid0(self) -> Reg<fields::Uartperiphid0, RW> {
-        unsafe { Reg::new(self.0.add(4064usize), fields::Uartperiphid0::from_bits(17)) }
+    pub fn uartperiphid0(self) -> Reg<regs::Uartperiphid0, RW> {
+        unsafe { Reg::new(self.0.add(4064usize)) }
     }
     #[doc = "UARTPeriphID1 Register"]
-    pub fn uartperiphid1(self) -> Reg<fields::Uartperiphid1, RW> {
-        unsafe { Reg::new(self.0.add(4068usize), fields::Uartperiphid1::from_bits(16)) }
+    pub fn uartperiphid1(self) -> Reg<regs::Uartperiphid1, RW> {
+        unsafe { Reg::new(self.0.add(4068usize)) }
     }
     #[doc = "UARTPeriphID2 Register"]
-    pub fn uartperiphid2(self) -> Reg<fields::Uartperiphid2, RW> {
-        unsafe { Reg::new(self.0.add(4072usize), fields::Uartperiphid2::from_bits(52)) }
+    pub fn uartperiphid2(self) -> Reg<regs::Uartperiphid2, RW> {
+        unsafe { Reg::new(self.0.add(4072usize)) }
     }
     #[doc = "UARTPeriphID3 Register"]
-    pub fn uartperiphid3(self) -> Reg<fields::Uartperiphid3, RW> {
-        unsafe { Reg::new(self.0.add(4076usize), fields::Uartperiphid3::from_bits(0)) }
+    pub fn uartperiphid3(self) -> Reg<regs::Uartperiphid3, RW> {
+        unsafe { Reg::new(self.0.add(4076usize)) }
     }
     #[doc = "UARTPCellID0 Register"]
-    pub fn uartpcellid0(self) -> Reg<fields::Uartpcellid0, RW> {
-        unsafe { Reg::new(self.0.add(4080usize), fields::Uartpcellid0::from_bits(13)) }
+    pub fn uartpcellid0(self) -> Reg<regs::Uartpcellid0, RW> {
+        unsafe { Reg::new(self.0.add(4080usize)) }
     }
     #[doc = "UARTPCellID1 Register"]
-    pub fn uartpcellid1(self) -> Reg<fields::Uartpcellid1, RW> {
-        unsafe { Reg::new(self.0.add(4084usize), fields::Uartpcellid1::from_bits(240)) }
+    pub fn uartpcellid1(self) -> Reg<regs::Uartpcellid1, RW> {
+        unsafe { Reg::new(self.0.add(4084usize)) }
     }
     #[doc = "UARTPCellID2 Register"]
-    pub fn uartpcellid2(self) -> Reg<fields::Uartpcellid2, RW> {
-        unsafe { Reg::new(self.0.add(4088usize), fields::Uartpcellid2::from_bits(5)) }
+    pub fn uartpcellid2(self) -> Reg<regs::Uartpcellid2, RW> {
+        unsafe { Reg::new(self.0.add(4088usize)) }
     }
     #[doc = "UARTPCellID3 Register"]
-    pub fn uartpcellid3(self) -> Reg<fields::Uartpcellid3, RW> {
-        unsafe { Reg::new(self.0.add(4092usize), fields::Uartpcellid3::from_bits(177)) }
+    pub fn uartpcellid3(self) -> Reg<regs::Uartpcellid3, RW> {
+        unsafe { Reg::new(self.0.add(4092usize)) }
     }
 }
-pub mod fields;
+pub mod regs;

@@ -8,20 +8,20 @@ impl Psm {
         Self(ptr)
     }
     #[doc = "Force block out of reset (i.e. power it on)"]
-    pub fn frce_on(self) -> Reg<fields::FrceOn, RW> {
-        unsafe { Reg::new(self.0.add(0usize), fields::FrceOn::from_bits(0)) }
+    pub fn frce_on(self) -> Reg<regs::FrceOn, RW> {
+        unsafe { Reg::new(self.0.add(0usize)) }
     }
     #[doc = "Force into reset (i.e. power it off)"]
-    pub fn frce_off(self) -> Reg<fields::FrceOff, RW> {
-        unsafe { Reg::new(self.0.add(4usize), fields::FrceOff::from_bits(0)) }
+    pub fn frce_off(self) -> Reg<regs::FrceOff, RW> {
+        unsafe { Reg::new(self.0.add(4usize)) }
     }
     #[doc = "Set to 1 if this peripheral should be reset when the watchdog fires."]
-    pub fn wdsel(self) -> Reg<fields::Wdsel, RW> {
-        unsafe { Reg::new(self.0.add(8usize), fields::Wdsel::from_bits(0)) }
+    pub fn wdsel(self) -> Reg<regs::Wdsel, RW> {
+        unsafe { Reg::new(self.0.add(8usize)) }
     }
     #[doc = "Indicates the peripheral's registers are ready to access."]
-    pub fn done(self) -> Reg<fields::Done, RW> {
-        unsafe { Reg::new(self.0.add(12usize), fields::Done::from_bits(0)) }
+    pub fn done(self) -> Reg<regs::Done, RW> {
+        unsafe { Reg::new(self.0.add(12usize)) }
     }
 }
-pub mod fields;
+pub mod regs;

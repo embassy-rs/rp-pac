@@ -9,122 +9,117 @@ impl XipSsi {
         Self(ptr)
     }
     #[doc = "Control register 0"]
-    pub fn ctrlr0(self) -> Reg<fields::Ctrlr0, RW> {
-        unsafe { Reg::new(self.0.add(0usize), fields::Ctrlr0::from_bits(0)) }
+    pub fn ctrlr0(self) -> Reg<regs::Ctrlr0, RW> {
+        unsafe { Reg::new(self.0.add(0usize)) }
     }
     #[doc = "Master Control register 1"]
-    pub fn ctrlr1(self) -> Reg<fields::Ctrlr1, RW> {
-        unsafe { Reg::new(self.0.add(4usize), fields::Ctrlr1::from_bits(0)) }
+    pub fn ctrlr1(self) -> Reg<regs::Ctrlr1, RW> {
+        unsafe { Reg::new(self.0.add(4usize)) }
     }
     #[doc = "SSI Enable"]
-    pub fn ssienr(self) -> Reg<fields::Ssienr, RW> {
-        unsafe { Reg::new(self.0.add(8usize), fields::Ssienr::from_bits(0)) }
+    pub fn ssienr(self) -> Reg<regs::Ssienr, RW> {
+        unsafe { Reg::new(self.0.add(8usize)) }
     }
     #[doc = "Microwire Control"]
-    pub fn mwcr(self) -> Reg<fields::Mwcr, RW> {
-        unsafe { Reg::new(self.0.add(12usize), fields::Mwcr::from_bits(0)) }
+    pub fn mwcr(self) -> Reg<regs::Mwcr, RW> {
+        unsafe { Reg::new(self.0.add(12usize)) }
     }
     #[doc = "Slave enable"]
-    pub fn ser(self) -> Reg<fields::Ser, RW> {
-        unsafe { Reg::new(self.0.add(16usize), fields::Ser::from_bits(0)) }
+    pub fn ser(self) -> Reg<regs::Ser, RW> {
+        unsafe { Reg::new(self.0.add(16usize)) }
     }
     #[doc = "Baud rate"]
-    pub fn baudr(self) -> Reg<fields::Baudr, RW> {
-        unsafe { Reg::new(self.0.add(20usize), fields::Baudr::from_bits(0)) }
+    pub fn baudr(self) -> Reg<regs::Baudr, RW> {
+        unsafe { Reg::new(self.0.add(20usize)) }
     }
     #[doc = "TX FIFO threshold level"]
-    pub fn txftlr(self) -> Reg<fields::Txftlr, RW> {
-        unsafe { Reg::new(self.0.add(24usize), fields::Txftlr::from_bits(0)) }
+    pub fn txftlr(self) -> Reg<regs::Txftlr, RW> {
+        unsafe { Reg::new(self.0.add(24usize)) }
     }
     #[doc = "RX FIFO threshold level"]
-    pub fn rxftlr(self) -> Reg<fields::Rxftlr, RW> {
-        unsafe { Reg::new(self.0.add(28usize), fields::Rxftlr::from_bits(0)) }
+    pub fn rxftlr(self) -> Reg<regs::Rxftlr, RW> {
+        unsafe { Reg::new(self.0.add(28usize)) }
     }
     #[doc = "TX FIFO level"]
-    pub fn txflr(self) -> Reg<fields::Txflr, RW> {
-        unsafe { Reg::new(self.0.add(32usize), fields::Txflr::from_bits(0)) }
+    pub fn txflr(self) -> Reg<regs::Txflr, RW> {
+        unsafe { Reg::new(self.0.add(32usize)) }
     }
     #[doc = "RX FIFO level"]
-    pub fn rxflr(self) -> Reg<fields::Rxflr, RW> {
-        unsafe { Reg::new(self.0.add(36usize), fields::Rxflr::from_bits(0)) }
+    pub fn rxflr(self) -> Reg<regs::Rxflr, RW> {
+        unsafe { Reg::new(self.0.add(36usize)) }
     }
     #[doc = "Status register"]
-    pub fn sr(self) -> Reg<fields::Sr, RW> {
-        unsafe { Reg::new(self.0.add(40usize), fields::Sr::from_bits(0)) }
+    pub fn sr(self) -> Reg<regs::Sr, RW> {
+        unsafe { Reg::new(self.0.add(40usize)) }
     }
     #[doc = "Interrupt mask"]
-    pub fn imr(self) -> Reg<fields::Imr, RW> {
-        unsafe { Reg::new(self.0.add(44usize), fields::Imr::from_bits(0)) }
+    pub fn imr(self) -> Reg<regs::Imr, RW> {
+        unsafe { Reg::new(self.0.add(44usize)) }
     }
     #[doc = "Interrupt status"]
-    pub fn isr(self) -> Reg<fields::Isr, RW> {
-        unsafe { Reg::new(self.0.add(48usize), fields::Isr::from_bits(0)) }
+    pub fn isr(self) -> Reg<regs::Isr, RW> {
+        unsafe { Reg::new(self.0.add(48usize)) }
     }
     #[doc = "Raw interrupt status"]
-    pub fn risr(self) -> Reg<fields::Risr, RW> {
-        unsafe { Reg::new(self.0.add(52usize), fields::Risr::from_bits(0)) }
+    pub fn risr(self) -> Reg<regs::Risr, RW> {
+        unsafe { Reg::new(self.0.add(52usize)) }
     }
     #[doc = "TX FIFO overflow interrupt clear"]
-    pub fn txoicr(self) -> Reg<fields::Txoicr, RW> {
-        unsafe { Reg::new(self.0.add(56usize), fields::Txoicr::from_bits(0)) }
+    pub fn txoicr(self) -> Reg<regs::Txoicr, RW> {
+        unsafe { Reg::new(self.0.add(56usize)) }
     }
     #[doc = "RX FIFO overflow interrupt clear"]
-    pub fn rxoicr(self) -> Reg<fields::Rxoicr, RW> {
-        unsafe { Reg::new(self.0.add(60usize), fields::Rxoicr::from_bits(0)) }
+    pub fn rxoicr(self) -> Reg<regs::Rxoicr, RW> {
+        unsafe { Reg::new(self.0.add(60usize)) }
     }
     #[doc = "RX FIFO underflow interrupt clear"]
-    pub fn rxuicr(self) -> Reg<fields::Rxuicr, RW> {
-        unsafe { Reg::new(self.0.add(64usize), fields::Rxuicr::from_bits(0)) }
+    pub fn rxuicr(self) -> Reg<regs::Rxuicr, RW> {
+        unsafe { Reg::new(self.0.add(64usize)) }
     }
     #[doc = "Multi-master interrupt clear"]
-    pub fn msticr(self) -> Reg<fields::Msticr, RW> {
-        unsafe { Reg::new(self.0.add(68usize), fields::Msticr::from_bits(0)) }
+    pub fn msticr(self) -> Reg<regs::Msticr, RW> {
+        unsafe { Reg::new(self.0.add(68usize)) }
     }
     #[doc = "Interrupt clear"]
-    pub fn icr(self) -> Reg<fields::Icr, RW> {
-        unsafe { Reg::new(self.0.add(72usize), fields::Icr::from_bits(0)) }
+    pub fn icr(self) -> Reg<regs::Icr, RW> {
+        unsafe { Reg::new(self.0.add(72usize)) }
     }
     #[doc = "DMA control"]
-    pub fn dmacr(self) -> Reg<fields::Dmacr, RW> {
-        unsafe { Reg::new(self.0.add(76usize), fields::Dmacr::from_bits(0)) }
+    pub fn dmacr(self) -> Reg<regs::Dmacr, RW> {
+        unsafe { Reg::new(self.0.add(76usize)) }
     }
     #[doc = "DMA TX data level"]
-    pub fn dmatdlr(self) -> Reg<fields::Dmatdlr, RW> {
-        unsafe { Reg::new(self.0.add(80usize), fields::Dmatdlr::from_bits(0)) }
+    pub fn dmatdlr(self) -> Reg<regs::Dmatdlr, RW> {
+        unsafe { Reg::new(self.0.add(80usize)) }
     }
     #[doc = "DMA RX data level"]
-    pub fn dmardlr(self) -> Reg<fields::Dmardlr, RW> {
-        unsafe { Reg::new(self.0.add(84usize), fields::Dmardlr::from_bits(0)) }
+    pub fn dmardlr(self) -> Reg<regs::Dmardlr, RW> {
+        unsafe { Reg::new(self.0.add(84usize)) }
     }
     #[doc = "Identification register"]
-    pub fn idr(self) -> Reg<fields::Idr, RW> {
-        unsafe { Reg::new(self.0.add(88usize), fields::Idr::from_bits(1364414537)) }
+    pub fn idr(self) -> Reg<regs::Idr, RW> {
+        unsafe { Reg::new(self.0.add(88usize)) }
     }
     #[doc = "Version ID"]
-    pub fn ssi_version_id(self) -> Reg<fields::SsiVersionId, RW> {
-        unsafe {
-            Reg::new(
-                self.0.add(92usize),
-                fields::SsiVersionId::from_bits(875573546),
-            )
-        }
+    pub fn ssi_version_id(self) -> Reg<regs::SsiVersionId, RW> {
+        unsafe { Reg::new(self.0.add(92usize)) }
     }
     #[doc = "Data Register 0 (of 36)"]
-    pub fn dr0(self) -> Reg<fields::Dr0, RW> {
-        unsafe { Reg::new(self.0.add(96usize), fields::Dr0::from_bits(0)) }
+    pub fn dr0(self) -> Reg<regs::Dr0, RW> {
+        unsafe { Reg::new(self.0.add(96usize)) }
     }
     #[doc = "RX sample delay"]
-    pub fn rx_sample_dly(self) -> Reg<fields::RxSampleDly, RW> {
-        unsafe { Reg::new(self.0.add(240usize), fields::RxSampleDly::from_bits(0)) }
+    pub fn rx_sample_dly(self) -> Reg<regs::RxSampleDly, RW> {
+        unsafe { Reg::new(self.0.add(240usize)) }
     }
     #[doc = "SPI control"]
-    pub fn spi_ctrlr0(self) -> Reg<fields::SpiCtrlr0, RW> {
-        unsafe { Reg::new(self.0.add(244usize), fields::SpiCtrlr0::from_bits(50331648)) }
+    pub fn spi_ctrlr0(self) -> Reg<regs::SpiCtrlr0, RW> {
+        unsafe { Reg::new(self.0.add(244usize)) }
     }
     #[doc = "TX drive edge"]
-    pub fn txd_drive_edge(self) -> Reg<fields::TxdDriveEdge, RW> {
-        unsafe { Reg::new(self.0.add(248usize), fields::TxdDriveEdge::from_bits(0)) }
+    pub fn txd_drive_edge(self) -> Reg<regs::TxdDriveEdge, RW> {
+        unsafe { Reg::new(self.0.add(248usize)) }
     }
 }
-pub mod fields;
-pub mod values;
+pub mod regs;
+pub mod vals;

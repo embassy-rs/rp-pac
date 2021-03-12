@@ -1,19 +1,11 @@
 [package]
-name = "rp2040-pac"
-version = "0.1.1"
-authors = ["eolder <evanmolder@gmail.com>", "Jonathan Pallant <github@thejpster.org.uk>"]
+name = "rp2040-pac2"
+version = "0.1.0"
 edition = "2018"
-homepage = "https://github.com/rp-rs/rp2040-pac"
-description = "A Peripheral Access Crate for the Raspberry Pi RP2040 SoC"
-license-file = "svd/rp2040.svd"
 
 [dependencies]
 cortex-m = "0.7.1"
-vcell = "0.1.0"
-
-[dependencies.cortex-m-rt]
-optional = true
-version = "0.6"
+cortex-m-rt = { optional = true, version = "0.6" }
 
 [features]
 rt = ["cortex-m-rt/device"]

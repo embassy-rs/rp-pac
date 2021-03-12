@@ -9,8 +9,8 @@ impl Tbman {
         Self(ptr)
     }
     #[doc = "Indicates the type of platform in use"]
-    pub fn platform(self) -> Reg<fields::Platform, RW> {
-        unsafe { Reg::new(self.0.add(0usize), fields::Platform::from_bits(5)) }
+    pub fn platform(self) -> Reg<regs::Platform, RW> {
+        unsafe { Reg::new(self.0.add(0usize)) }
     }
 }
-pub mod fields;
+pub mod regs;
