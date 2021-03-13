@@ -1,388 +1,189 @@
 use crate::generic::*;
+#[derive(Copy, Clone)]
+pub struct Fifo(pub *mut u8);
+unsafe impl Send for Fifo {}
+unsafe impl Sync for Fifo {}
+impl Fifo {
+    #[doc = "Status register for inter-core FIFOs (mailboxes). There is one FIFO in the core 0 -> core 1 direction, and one core 1 -> core 0. Both are 32 bits wide and 8 words deep. Core 0 can see the read side of the 1->0 FIFO (RX), and the write side of 0->1 FIFO (TX). Core 1 can see the read side of the 0->1 FIFO (RX), and the write side of 1->0 FIFO (TX). The SIO IRQ for each core is the logical OR of the VLD, WOF and ROE fields of its FIFO_ST register."]
+    pub fn st(self) -> Reg<regs::FifoSt, RW> {
+        unsafe { Reg::from_ptr(self.0.add(0usize)) }
+    }
+    #[doc = "Write access to this core's TX FIFO"]
+    pub fn wr(self) -> Reg<u32, W> {
+        unsafe { Reg::from_ptr(self.0.add(4usize)) }
+    }
+    #[doc = "Read access to this core's RX FIFO"]
+    pub fn rd(self) -> Reg<u32, R> {
+        unsafe { Reg::from_ptr(self.0.add(8usize)) }
+    }
+}
+#[derive(Copy, Clone)]
+pub struct Div(pub *mut u8);
+unsafe impl Send for Div {}
+unsafe impl Sync for Div {}
+impl Div {
+    #[doc = "Divider unsigned dividend Write to the DIVIDEND operand of the divider, i.e. the p in `p / q`. Any operand write starts a new calculation. The results appear in QUOTIENT, REMAINDER. UDIVIDEND/SDIVIDEND are aliases of the same internal register. The U alias starts an unsigned calculation, and the S alias starts a signed calculation."]
+    pub fn udividend(self) -> Reg<u32, RW> {
+        unsafe { Reg::from_ptr(self.0.add(0usize)) }
+    }
+    #[doc = "Divider unsigned divisor Write to the DIVISOR operand of the divider, i.e. the q in `p / q`. Any operand write starts a new calculation. The results appear in QUOTIENT, REMAINDER. UDIVIDEND/SDIVIDEND are aliases of the same internal register. The U alias starts an unsigned calculation, and the S alias starts a signed calculation."]
+    pub fn udivisor(self) -> Reg<u32, RW> {
+        unsafe { Reg::from_ptr(self.0.add(4usize)) }
+    }
+    #[doc = "Divider signed dividend The same as UDIVIDEND, but starts a signed calculation, rather than unsigned."]
+    pub fn sdividend(self) -> Reg<u32, RW> {
+        unsafe { Reg::from_ptr(self.0.add(8usize)) }
+    }
+    #[doc = "Divider signed divisor The same as UDIVISOR, but starts a signed calculation, rather than unsigned."]
+    pub fn sdivisor(self) -> Reg<u32, RW> {
+        unsafe { Reg::from_ptr(self.0.add(12usize)) }
+    }
+    #[doc = "Divider result quotient The result of `DIVIDEND / DIVISOR` (division). Contents undefined while CSR_READY is low. For signed calculations, QUOTIENT is negative when the signs of DIVIDEND and DIVISOR differ. This register can be written to directly, for context save/restore purposes. This halts any in-progress calculation and sets the CSR_READY and CSR_DIRTY flags. Reading from QUOTIENT clears the CSR_DIRTY flag, so should read results in the order REMAINDER, QUOTIENT if CSR_DIRTY is used."]
+    pub fn quotient(self) -> Reg<u32, RW> {
+        unsafe { Reg::from_ptr(self.0.add(16usize)) }
+    }
+    #[doc = "Divider result remainder The result of `DIVIDEND % DIVISOR` (modulo). Contents undefined while CSR_READY is low. For signed calculations, REMAINDER is negative only when DIVIDEND is negative. This register can be written to directly, for context save/restore purposes. This halts any in-progress calculation and sets the CSR_READY and CSR_DIRTY flags."]
+    pub fn remainder(self) -> Reg<u32, RW> {
+        unsafe { Reg::from_ptr(self.0.add(20usize)) }
+    }
+    #[doc = "Control and status register for divider."]
+    pub fn csr(self) -> Reg<regs::DivCsr, RW> {
+        unsafe { Reg::from_ptr(self.0.add(24usize)) }
+    }
+}
+#[derive(Copy, Clone)]
+pub struct Gpio(pub *mut u8);
+unsafe impl Send for Gpio {}
+unsafe impl Sync for Gpio {}
+impl Gpio {
+    #[doc = "GPIO output value"]
+    pub fn value(self) -> Reg<u32, RW> {
+        unsafe { Reg::from_ptr(self.0.add(0usize)) }
+    }
+    #[doc = "GPIO output value set"]
+    pub fn value_set(self) -> Reg<u32, RW> {
+        unsafe { Reg::from_ptr(self.0.add(4usize)) }
+    }
+    #[doc = "GPIO output value clear"]
+    pub fn value_clr(self) -> Reg<u32, RW> {
+        unsafe { Reg::from_ptr(self.0.add(8usize)) }
+    }
+    #[doc = "GPIO output value XOR"]
+    pub fn value_xor(self) -> Reg<u32, RW> {
+        unsafe { Reg::from_ptr(self.0.add(12usize)) }
+    }
+}
 #[doc = "Single-cycle IO block Provides core-local and inter-core hardware for the two processors, with single-cycle access."]
 #[derive(Copy, Clone)]
-pub struct Sio(*mut u8);
+pub struct Sio(pub *mut u8);
 unsafe impl Send for Sio {}
 unsafe impl Sync for Sio {}
 impl Sio {
-    pub const fn from_ptr(ptr: *mut u8) -> Self {
-        Self(ptr)
-    }
     #[doc = "Processor core identifier Value is 0 when read from processor core 0, and 1 when read from processor core 1."]
     pub fn cpuid(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(0usize)) }
-    }
-    #[doc = "Input value for GPIO pins"]
-    pub fn gpio_in(self) -> Reg<regs::GpioIn, RW> {
-        unsafe { Reg::new(self.0.add(4usize)) }
-    }
-    #[doc = "Input value for QSPI pins"]
-    pub fn gpio_hi_in(self) -> Reg<regs::GpioHiIn, RW> {
-        unsafe { Reg::new(self.0.add(8usize)) }
-    }
-    #[doc = "GPIO output value"]
-    pub fn gpio_out(self) -> Reg<regs::GpioOut, RW> {
-        unsafe { Reg::new(self.0.add(16usize)) }
-    }
-    #[doc = "GPIO output value set"]
-    pub fn gpio_out_set(self) -> Reg<regs::GpioOutSet, RW> {
-        unsafe { Reg::new(self.0.add(20usize)) }
-    }
-    #[doc = "GPIO output value clear"]
-    pub fn gpio_out_clr(self) -> Reg<regs::GpioOutClr, RW> {
-        unsafe { Reg::new(self.0.add(24usize)) }
-    }
-    #[doc = "GPIO output value XOR"]
-    pub fn gpio_out_xor(self) -> Reg<regs::GpioOutXor, RW> {
-        unsafe { Reg::new(self.0.add(28usize)) }
-    }
-    #[doc = "GPIO output enable"]
-    pub fn gpio_oe(self) -> Reg<regs::GpioOe, RW> {
-        unsafe { Reg::new(self.0.add(32usize)) }
-    }
-    #[doc = "GPIO output enable set"]
-    pub fn gpio_oe_set(self) -> Reg<regs::GpioOeSet, RW> {
-        unsafe { Reg::new(self.0.add(36usize)) }
-    }
-    #[doc = "GPIO output enable clear"]
-    pub fn gpio_oe_clr(self) -> Reg<regs::GpioOeClr, RW> {
-        unsafe { Reg::new(self.0.add(40usize)) }
-    }
-    #[doc = "GPIO output enable XOR"]
-    pub fn gpio_oe_xor(self) -> Reg<regs::GpioOeXor, RW> {
-        unsafe { Reg::new(self.0.add(44usize)) }
-    }
-    #[doc = "QSPI output value"]
-    pub fn gpio_hi_out(self) -> Reg<regs::GpioHiOut, RW> {
-        unsafe { Reg::new(self.0.add(48usize)) }
-    }
-    #[doc = "QSPI output value set"]
-    pub fn gpio_hi_out_set(self) -> Reg<regs::GpioHiOutSet, RW> {
-        unsafe { Reg::new(self.0.add(52usize)) }
-    }
-    #[doc = "QSPI output value clear"]
-    pub fn gpio_hi_out_clr(self) -> Reg<regs::GpioHiOutClr, RW> {
-        unsafe { Reg::new(self.0.add(56usize)) }
-    }
-    #[doc = "QSPI output value XOR"]
-    pub fn gpio_hi_out_xor(self) -> Reg<regs::GpioHiOutXor, RW> {
-        unsafe { Reg::new(self.0.add(60usize)) }
-    }
-    #[doc = "QSPI output enable"]
-    pub fn gpio_hi_oe(self) -> Reg<regs::GpioHiOe, RW> {
-        unsafe { Reg::new(self.0.add(64usize)) }
-    }
-    #[doc = "QSPI output enable set"]
-    pub fn gpio_hi_oe_set(self) -> Reg<regs::GpioHiOeSet, RW> {
-        unsafe { Reg::new(self.0.add(68usize)) }
-    }
-    #[doc = "QSPI output enable clear"]
-    pub fn gpio_hi_oe_clr(self) -> Reg<regs::GpioHiOeClr, RW> {
-        unsafe { Reg::new(self.0.add(72usize)) }
-    }
-    #[doc = "QSPI output enable XOR"]
-    pub fn gpio_hi_oe_xor(self) -> Reg<regs::GpioHiOeXor, RW> {
-        unsafe { Reg::new(self.0.add(76usize)) }
-    }
-    #[doc = "Status register for inter-core FIFOs (mailboxes). There is one FIFO in the core 0 -> core 1 direction, and one core 1 -> core 0. Both are 32 bits wide and 8 words deep. Core 0 can see the read side of the 1->0 FIFO (RX), and the write side of 0->1 FIFO (TX). Core 1 can see the read side of the 0->1 FIFO (RX), and the write side of 1->0 FIFO (TX). The SIO IRQ for each core is the logical OR of the VLD, WOF and ROE fields of its FIFO_ST register."]
-    pub fn fifo_st(self) -> Reg<regs::FifoSt, RW> {
-        unsafe { Reg::new(self.0.add(80usize)) }
-    }
-    #[doc = "Write access to this core's TX FIFO"]
-    pub fn fifo_wr(self) -> Reg<u32, W> {
-        unsafe { Reg::new(self.0.add(84usize)) }
-    }
-    #[doc = "Read access to this core's RX FIFO"]
-    pub fn fifo_rd(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(88usize)) }
+        unsafe { Reg::from_ptr(self.0.add(0usize)) }
     }
     #[doc = "Spinlock state A bitmap containing the state of all 32 spinlocks (1=locked). Mainly intended for debugging."]
     pub fn spinlock_st(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(92usize)) }
+        unsafe { Reg::from_ptr(self.0.add(92usize)) }
     }
-    #[doc = "Divider unsigned dividend Write to the DIVIDEND operand of the divider, i.e. the p in `p / q`. Any operand write starts a new calculation. The results appear in QUOTIENT, REMAINDER. UDIVIDEND/SDIVIDEND are aliases of the same internal register. The U alias starts an unsigned calculation, and the S alias starts a signed calculation."]
-    pub fn div_udividend(self) -> Reg<u32, RW> {
-        unsafe { Reg::new(self.0.add(96usize)) }
+    pub fn div(self) -> Div {
+        unsafe { Div(self.0.add(96usize)) }
     }
-    #[doc = "Divider unsigned divisor Write to the DIVISOR operand of the divider, i.e. the q in `p / q`. Any operand write starts a new calculation. The results appear in QUOTIENT, REMAINDER. UDIVIDEND/SDIVIDEND are aliases of the same internal register. The U alias starts an unsigned calculation, and the S alias starts a signed calculation."]
-    pub fn div_udivisor(self) -> Reg<u32, RW> {
-        unsafe { Reg::new(self.0.add(100usize)) }
+    pub fn fifo(self) -> Fifo {
+        unsafe { Fifo(self.0.add(80usize)) }
     }
-    #[doc = "Divider signed dividend The same as UDIVIDEND, but starts a signed calculation, rather than unsigned."]
-    pub fn div_sdividend(self) -> Reg<u32, RW> {
-        unsafe { Reg::new(self.0.add(104usize)) }
+    pub fn interp(self, n: usize) -> Interp {
+        assert!(n < 2usize);
+        unsafe { Interp(self.0.add(128usize + n * 64usize)) }
     }
-    #[doc = "Divider signed divisor The same as UDIVISOR, but starts a signed calculation, rather than unsigned."]
-    pub fn div_sdivisor(self) -> Reg<u32, RW> {
-        unsafe { Reg::new(self.0.add(108usize)) }
+    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
+    pub fn spinlock(self, n: usize) -> Reg<u32, R> {
+        assert!(n < 32usize);
+        unsafe { Reg::from_ptr(self.0.add(256usize + n * 4usize)) }
     }
-    #[doc = "Divider result quotient The result of `DIVIDEND / DIVISOR` (division). Contents undefined while CSR_READY is low. For signed calculations, QUOTIENT is negative when the signs of DIVIDEND and DIVISOR differ. This register can be written to directly, for context save/restore purposes. This halts any in-progress calculation and sets the CSR_READY and CSR_DIRTY flags. Reading from QUOTIENT clears the CSR_DIRTY flag, so should read results in the order REMAINDER, QUOTIENT if CSR_DIRTY is used."]
-    pub fn div_quotient(self) -> Reg<u32, RW> {
-        unsafe { Reg::new(self.0.add(112usize)) }
+    pub fn gpio_out(self, n: usize) -> Gpio {
+        assert!(n < 2usize);
+        unsafe { Gpio(self.0.add(16usize + n * 32usize)) }
     }
-    #[doc = "Divider result remainder The result of `DIVIDEND % DIVISOR` (modulo). Contents undefined while CSR_READY is low. For signed calculations, REMAINDER is negative only when DIVIDEND is negative. This register can be written to directly, for context save/restore purposes. This halts any in-progress calculation and sets the CSR_READY and CSR_DIRTY flags."]
-    pub fn div_remainder(self) -> Reg<u32, RW> {
-        unsafe { Reg::new(self.0.add(116usize)) }
+    #[doc = "Input value for GPIO pins"]
+    pub fn gpio_in(self, n: usize) -> Reg<u32, RW> {
+        assert!(n < 2usize);
+        unsafe { Reg::from_ptr(self.0.add(4usize + n * 4usize)) }
     }
-    #[doc = "Control and status register for divider."]
-    pub fn div_csr(self) -> Reg<regs::DivCsr, RW> {
-        unsafe { Reg::new(self.0.add(120usize)) }
+    pub fn gpio_oe(self, n: usize) -> Gpio {
+        assert!(n < 2usize);
+        unsafe { Gpio(self.0.add(32usize + n * 32usize)) }
     }
+}
+#[derive(Copy, Clone)]
+pub struct Interp(pub *mut u8);
+unsafe impl Send for Interp {}
+unsafe impl Sync for Interp {}
+impl Interp {
     #[doc = "Read/write access to accumulator 0"]
-    pub fn interp0_accum0(self) -> Reg<u32, RW> {
-        unsafe { Reg::new(self.0.add(128usize)) }
+    pub fn accum0(self) -> Reg<u32, RW> {
+        unsafe { Reg::from_ptr(self.0.add(0usize)) }
     }
     #[doc = "Read/write access to accumulator 1"]
-    pub fn interp0_accum1(self) -> Reg<u32, RW> {
-        unsafe { Reg::new(self.0.add(132usize)) }
+    pub fn accum1(self) -> Reg<u32, RW> {
+        unsafe { Reg::from_ptr(self.0.add(4usize)) }
     }
     #[doc = "Read/write access to BASE0 register."]
-    pub fn interp0_base0(self) -> Reg<u32, RW> {
-        unsafe { Reg::new(self.0.add(136usize)) }
+    pub fn base0(self) -> Reg<u32, RW> {
+        unsafe { Reg::from_ptr(self.0.add(8usize)) }
     }
     #[doc = "Read/write access to BASE1 register."]
-    pub fn interp0_base1(self) -> Reg<u32, RW> {
-        unsafe { Reg::new(self.0.add(140usize)) }
+    pub fn base1(self) -> Reg<u32, RW> {
+        unsafe { Reg::from_ptr(self.0.add(12usize)) }
     }
     #[doc = "Read/write access to BASE2 register."]
-    pub fn interp0_base2(self) -> Reg<u32, RW> {
-        unsafe { Reg::new(self.0.add(144usize)) }
+    pub fn base2(self) -> Reg<u32, RW> {
+        unsafe { Reg::from_ptr(self.0.add(16usize)) }
     }
     #[doc = "Read LANE0 result, and simultaneously write lane results to both accumulators (POP)."]
-    pub fn interp0_pop_lane0(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(148usize)) }
+    pub fn pop_lane0(self) -> Reg<u32, R> {
+        unsafe { Reg::from_ptr(self.0.add(20usize)) }
     }
     #[doc = "Read LANE1 result, and simultaneously write lane results to both accumulators (POP)."]
-    pub fn interp0_pop_lane1(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(152usize)) }
+    pub fn pop_lane1(self) -> Reg<u32, R> {
+        unsafe { Reg::from_ptr(self.0.add(24usize)) }
     }
     #[doc = "Read FULL result, and simultaneously write lane results to both accumulators (POP)."]
-    pub fn interp0_pop_full(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(156usize)) }
+    pub fn pop_full(self) -> Reg<u32, R> {
+        unsafe { Reg::from_ptr(self.0.add(28usize)) }
     }
     #[doc = "Read LANE0 result, without altering any internal state (PEEK)."]
-    pub fn interp0_peek_lane0(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(160usize)) }
+    pub fn peek_lane0(self) -> Reg<u32, R> {
+        unsafe { Reg::from_ptr(self.0.add(32usize)) }
     }
     #[doc = "Read LANE1 result, without altering any internal state (PEEK)."]
-    pub fn interp0_peek_lane1(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(164usize)) }
+    pub fn peek_lane1(self) -> Reg<u32, R> {
+        unsafe { Reg::from_ptr(self.0.add(36usize)) }
     }
     #[doc = "Read FULL result, without altering any internal state (PEEK)."]
-    pub fn interp0_peek_full(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(168usize)) }
+    pub fn peek_full(self) -> Reg<u32, R> {
+        unsafe { Reg::from_ptr(self.0.add(40usize)) }
     }
     #[doc = "Control register for lane 0"]
-    pub fn interp0_ctrl_lane0(self) -> Reg<regs::Interp0CtrlLane0, RW> {
-        unsafe { Reg::new(self.0.add(172usize)) }
+    pub fn ctrl_lane0(self) -> Reg<regs::Interp0CtrlLane0, RW> {
+        unsafe { Reg::from_ptr(self.0.add(44usize)) }
     }
     #[doc = "Control register for lane 1"]
-    pub fn interp0_ctrl_lane1(self) -> Reg<regs::Interp0CtrlLane1, RW> {
-        unsafe { Reg::new(self.0.add(176usize)) }
+    pub fn ctrl_lane1(self) -> Reg<regs::Interp0CtrlLane1, RW> {
+        unsafe { Reg::from_ptr(self.0.add(48usize)) }
     }
     #[doc = "Values written here are atomically added to ACCUM0 Reading yields lane 0's raw shift and mask value (BASE0 not added)."]
-    pub fn interp0_accum0_add(self) -> Reg<regs::Interp0Accum0Add, RW> {
-        unsafe { Reg::new(self.0.add(180usize)) }
+    pub fn accum0_add(self) -> Reg<regs::Interp0Accum0Add, RW> {
+        unsafe { Reg::from_ptr(self.0.add(52usize)) }
     }
     #[doc = "Values written here are atomically added to ACCUM1 Reading yields lane 1's raw shift and mask value (BASE1 not added)."]
-    pub fn interp0_accum1_add(self) -> Reg<regs::Interp0Accum1Add, RW> {
-        unsafe { Reg::new(self.0.add(184usize)) }
+    pub fn accum1_add(self) -> Reg<regs::Interp0Accum1Add, RW> {
+        unsafe { Reg::from_ptr(self.0.add(56usize)) }
     }
     #[doc = "On write, the lower 16 bits go to BASE0, upper bits to BASE1 simultaneously. Each half is sign-extended to 32 bits if that lane's SIGNED flag is set."]
-    pub fn interp0_base_1and0(self) -> Reg<u32, RW> {
-        unsafe { Reg::new(self.0.add(188usize)) }
-    }
-    #[doc = "Read/write access to accumulator 0"]
-    pub fn interp1_accum0(self) -> Reg<u32, RW> {
-        unsafe { Reg::new(self.0.add(192usize)) }
-    }
-    #[doc = "Read/write access to accumulator 1"]
-    pub fn interp1_accum1(self) -> Reg<u32, RW> {
-        unsafe { Reg::new(self.0.add(196usize)) }
-    }
-    #[doc = "Read/write access to BASE0 register."]
-    pub fn interp1_base0(self) -> Reg<u32, RW> {
-        unsafe { Reg::new(self.0.add(200usize)) }
-    }
-    #[doc = "Read/write access to BASE1 register."]
-    pub fn interp1_base1(self) -> Reg<u32, RW> {
-        unsafe { Reg::new(self.0.add(204usize)) }
-    }
-    #[doc = "Read/write access to BASE2 register."]
-    pub fn interp1_base2(self) -> Reg<u32, RW> {
-        unsafe { Reg::new(self.0.add(208usize)) }
-    }
-    #[doc = "Read LANE0 result, and simultaneously write lane results to both accumulators (POP)."]
-    pub fn interp1_pop_lane0(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(212usize)) }
-    }
-    #[doc = "Read LANE1 result, and simultaneously write lane results to both accumulators (POP)."]
-    pub fn interp1_pop_lane1(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(216usize)) }
-    }
-    #[doc = "Read FULL result, and simultaneously write lane results to both accumulators (POP)."]
-    pub fn interp1_pop_full(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(220usize)) }
-    }
-    #[doc = "Read LANE0 result, without altering any internal state (PEEK)."]
-    pub fn interp1_peek_lane0(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(224usize)) }
-    }
-    #[doc = "Read LANE1 result, without altering any internal state (PEEK)."]
-    pub fn interp1_peek_lane1(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(228usize)) }
-    }
-    #[doc = "Read FULL result, without altering any internal state (PEEK)."]
-    pub fn interp1_peek_full(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(232usize)) }
-    }
-    #[doc = "Control register for lane 0"]
-    pub fn interp1_ctrl_lane0(self) -> Reg<regs::Interp1CtrlLane0, RW> {
-        unsafe { Reg::new(self.0.add(236usize)) }
-    }
-    #[doc = "Control register for lane 1"]
-    pub fn interp1_ctrl_lane1(self) -> Reg<regs::Interp1CtrlLane1, RW> {
-        unsafe { Reg::new(self.0.add(240usize)) }
-    }
-    #[doc = "Values written here are atomically added to ACCUM0 Reading yields lane 0's raw shift and mask value (BASE0 not added)."]
-    pub fn interp1_accum0_add(self) -> Reg<regs::Interp1Accum0Add, RW> {
-        unsafe { Reg::new(self.0.add(244usize)) }
-    }
-    #[doc = "Values written here are atomically added to ACCUM1 Reading yields lane 1's raw shift and mask value (BASE1 not added)."]
-    pub fn interp1_accum1_add(self) -> Reg<regs::Interp1Accum1Add, RW> {
-        unsafe { Reg::new(self.0.add(248usize)) }
-    }
-    #[doc = "On write, the lower 16 bits go to BASE0, upper bits to BASE1 simultaneously. Each half is sign-extended to 32 bits if that lane's SIGNED flag is set."]
-    pub fn interp1_base_1and0(self) -> Reg<u32, RW> {
-        unsafe { Reg::new(self.0.add(252usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock0(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(256usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock1(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(260usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock2(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(264usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock3(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(268usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock4(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(272usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock5(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(276usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock6(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(280usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock7(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(284usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock8(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(288usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock9(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(292usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock10(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(296usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock11(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(300usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock12(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(304usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock13(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(308usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock14(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(312usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock15(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(316usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock16(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(320usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock17(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(324usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock18(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(328usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock19(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(332usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock20(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(336usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock21(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(340usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock22(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(344usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock23(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(348usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock24(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(352usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock25(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(356usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock26(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(360usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock27(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(364usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock28(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(368usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock29(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(372usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock30(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(376usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock31(self) -> Reg<u32, R> {
-        unsafe { Reg::new(self.0.add(380usize)) }
+    pub fn base_1and0(self) -> Reg<u32, RW> {
+        unsafe { Reg::from_ptr(self.0.add(60usize)) }
     }
 }
 pub mod regs;

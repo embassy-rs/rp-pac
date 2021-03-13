@@ -2,14 +2,8 @@ use crate::generic::*;
 #[doc = "Control and status register"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct Divmode(u8);
+pub struct Divmode(pub u8);
 impl Divmode {
-    pub const fn to_bits(&self) -> u8 {
-        self.0
-    }
-    pub const fn from_bits(val: u8) -> Divmode {
-        Divmode(val)
-    }
     #[doc = "Free-running counting at rate dictated by fractional divider"]
     pub const DIV: Self = Self(0);
     #[doc = "Fractional divider operation is gated by the PWM B pin."]

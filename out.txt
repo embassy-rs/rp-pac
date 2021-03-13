@@ -1,0 +1,2881 @@
+warning: unused import: `std::borrow::Cow`
+ --> src/generate/block.rs:1:5
+  |
+1 | use std::borrow::Cow;
+  |     ^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: unused import: `std::cmp::Ordering`
+ --> src/generate/block.rs:2:5
+  |
+2 | use std::cmp::Ordering;
+  |     ^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `std::collections::HashMap`
+ --> src/generate/block.rs:3:5
+  |
+3 | use std::collections::HashMap;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `log::warn`
+ --> src/generate/block.rs:5:5
+  |
+5 | use log::warn;
+  |     ^^^^^^^^^
+
+warning: unused imports: `Punct`, `Spacing`
+ --> src/generate/block.rs:7:26
+  |
+7 | use proc_macro2::{Ident, Punct, Spacing, Span};
+  |                          ^^^^^  ^^^^^^^
+
+warning: unused import: `ToTokens`
+ --> src/generate/block.rs:8:20
+  |
+8 | use quote::{quote, ToTokens};
+  |                    ^^^^^^^^
+
+warning: unused import: `svd_parser::derive_from::DeriveFrom`
+ --> src/generate/block.rs:9:5
+  |
+9 | use svd_parser::derive_from::DeriveFrom;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `Context`, `anyhow`, `bail`
+  --> src/generate/block.rs:12:14
+   |
+12 | use anyhow::{anyhow, bail, Context, Result};
+   |              ^^^^^^  ^^^^  ^^^^^^^
+
+warning: unused imports: `ToTokens`, `TokenStreamExt`
+ --> src/generate/device.rs:2:20
+  |
+2 | use quote::{quote, ToTokens, TokenStreamExt};
+  |                    ^^^^^^^^  ^^^^^^^^^^^^^^
+
+warning: unused import: `util::ToSanitizedSnakeCase`
+ --> src/generate/device.rs:3:5
+  |
+3 | use util::ToSanitizedSnakeCase;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `std::borrow::Cow`
+ --> src/generate/enumm.rs:1:5
+  |
+1 | use std::borrow::Cow;
+  |     ^^^^^^^^^^^^^^^^
+
+warning: unused import: `std::cmp::Ordering`
+ --> src/generate/enumm.rs:2:5
+  |
+2 | use std::cmp::Ordering;
+  |     ^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `std::collections::HashMap`
+ --> src/generate/enumm.rs:3:5
+  |
+3 | use std::collections::HashMap;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `log::warn`
+ --> src/generate/enumm.rs:5:5
+  |
+5 | use log::warn;
+  |     ^^^^^^^^^
+
+warning: unused imports: `Punct`, `Spacing`
+ --> src/generate/enumm.rs:7:26
+  |
+7 | use proc_macro2::{Ident, Punct, Spacing, Span};
+  |                          ^^^^^  ^^^^^^^
+
+warning: unused import: `ToTokens`
+ --> src/generate/enumm.rs:8:20
+  |
+8 | use quote::{quote, ToTokens};
+  |                    ^^^^^^^^
+
+warning: unused import: `svd_parser::derive_from::DeriveFrom`
+ --> src/generate/enumm.rs:9:5
+  |
+9 | use svd_parser::derive_from::DeriveFrom;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `Context`, `anyhow`, `bail`
+  --> src/generate/enumm.rs:12:14
+   |
+12 | use anyhow::{anyhow, bail, Context, Result};
+   |              ^^^^^^  ^^^^  ^^^^^^^
+
+warning: unused import: `TokenStreamExt`
+  --> src/generate/mod.rs:11:20
+   |
+11 | use quote::{quote, TokenStreamExt};
+   |                    ^^^^^^^^^^^^^^
+
+warning: unused imports: `num::NonZeroU32`, `rc::Rc`
+ --> src/ir.rs:6:33
+  |
+6 | use std::{collections::HashMap, num::NonZeroU32, rc::Rc};
+  |                                 ^^^^^^^^^^^^^^^  ^^^^^^
+
+warning: unused import: `log::*`
+ --> src/transform/mod.rs:1:5
+  |
+1 | use log::*;
+  |     ^^^^^^
+
+warning: unused imports: `HashMap`, `HashSet`
+ --> src/transform/mod.rs:3:24
+  |
+3 | use std::collections::{HashMap, HashSet};
+  |                        ^^^^^^^  ^^^^^^^
+
+warning: unused import: `HashMap`
+ --> src/transform/delete_enums.rs:3:24
+  |
+3 | use std::collections::{HashMap, HashSet};
+  |                        ^^^^^^^
+
+warning: unused import: `HashMap`
+ --> src/transform/delete_fieldsets.rs:3:24
+  |
+3 | use std::collections::{HashMap, HashSet};
+  |                        ^^^^^^^
+
+warning: unused import: `HashMap`
+ --> src/transform/find_duplicate_enums.rs:3:24
+  |
+3 | use std::collections::{HashMap, HashSet};
+  |                        ^^^^^^^
+
+warning: unused import: `HashMap`
+ --> src/transform/find_duplicate_fieldsets.rs:3:24
+  |
+3 | use std::collections::{HashMap, HashSet};
+  |                        ^^^^^^^
+
+warning: unused import: `Result`
+ --> src/transform/load_svd.rs:1:23
+  |
+1 | use anyhow::{Context, Result};
+  |                       ^^^^^^
+
+warning: unused import: `log::error`
+ --> src/transform/load_svd.rs:2:5
+  |
+2 | use log::error;
+  |     ^^^^^^^^^^
+
+warning: unused import: `log::*`
+ --> src/transform/load_svd.rs:3:5
+  |
+3 | use log::*;
+  |     ^^^^^^
+
+warning: unused import: `log::*`
+ --> src/transform/load_svd.rs:4:5
+  |
+4 | use log::*;
+  |     ^^^^^^
+
+warning: unused import: `std::io::Write`
+ --> src/transform/load_svd.rs:7:5
+  |
+7 | use std::io::Write;
+  |     ^^^^^^^^^^^^^^
+
+warning: unused import: `std::process`
+ --> src/transform/load_svd.rs:8:5
+  |
+8 | use std::process;
+  |     ^^^^^^^^^^^^
+
+warning: unused imports: `HashMap`, `HashSet`
+  --> src/transform/load_svd.rs:10:19
+   |
+10 |     collections::{HashMap, HashSet},
+   |                   ^^^^^^^  ^^^^^^^
+
+warning: unused import: `super::common::*`
+  --> src/transform/load_svd.rs:15:5
+   |
+15 | use super::common::*;
+   |     ^^^^^^^^^^^^^^^^
+
+warning: unused imports: `HashMap`, `HashSet`
+ --> src/transform/make_block.rs:3:24
+  |
+3 | use std::collections::{HashMap, HashSet};
+  |                        ^^^^^^^  ^^^^^^^
+
+warning: unused import: `HashMap`
+ --> src/transform/merge_blocks.rs:3:24
+  |
+3 | use std::collections::{HashMap, HashSet};
+  |                        ^^^^^^^
+
+warning: unused import: `HashMap`
+ --> src/transform/merge_enums.rs:3:24
+  |
+3 | use std::collections::{HashMap, HashSet};
+  |                        ^^^^^^^
+
+warning: unused import: `HashMap`
+ --> src/transform/merge_fieldsets.rs:3:24
+  |
+3 | use std::collections::{HashMap, HashSet};
+  |                        ^^^^^^^
+
+warning: unused imports: `Access`, `Cluster`, `RegisterCluster`, `Register`
+ --> src/util.rs:5:11
+  |
+5 |     svd::{Access, Cluster, Register, RegisterCluster},
+  |           ^^^^^^  ^^^^^^^  ^^^^^^^^  ^^^^^^^^^^^^^^^
+
+warning: unused import: `bail`
+  --> src/util.rs:11:22
+   |
+11 | use anyhow::{anyhow, bail, Result};
+   |                      ^^^^
+
+warning: unused import: `syn::token::Token`
+  --> src/util.rs:12:5
+   |
+12 | use syn::token::Token;
+   |     ^^^^^^^^^^^^^^^^^
+
+warning: unused variable: `ir`
+  --> src/generate/enumm.rs:16:15
+   |
+16 | pub fn render(ir: &IR, e: &Enum) -> Result<TokenStream> {
+   |               ^^ help: if this is intentional, prefix it with an underscore: `_ir`
+   |
+   = note: `#[warn(unused_variables)]` on by default
+
+warning: unused variable: `fb`
+  --> src/transform/common.rs:87:30
+   |
+87 |             if let Some((ib, fb)) = b
+   |                              ^^ help: if this is intentional, prefix it with an underscore: `_fb`
+
+warning: unused variable: `byte_stride`
+  --> src/transform/make_block.rs:45:21
+   |
+45 |                 let byte_stride = if len == 1 {
+   |                     ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_byte_stride`
+
+warning: unused variable: `b3`
+  --> src/transform/make_block.rs:66:46
+   |
+66 |                 let b2_id = if let Some((id, b3)) = ir.blocks.find(|b| b.path == b2.path) {
+   |                                              ^^ help: if this is intentional, prefix it with an underscore: `_b3`
+
+warning: unused variable: `fs2`
+  --> src/transform/merge_blocks.rs:54:17
+   |
+54 |             let fs2 = ir.blocks.get(*id);
+   |                 ^^^ help: if this is intentional, prefix it with an underscore: `_fs2`
+
+warning: variable does not need to be mutable
+  --> src/svd2ir.rs:23:9
+   |
+23 |     let mut regs_path = pushit(&path, "regs".to_owned());
+   |         ----^^^^^^^^^
+   |         |
+   |         help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` on by default
+
+warning: variable does not need to be mutable
+  --> src/svd2ir.rs:24:9
+   |
+24 |     let mut vals_path = pushit(&path, "vals".to_owned());
+   |         ----^^^^^^^^^
+   |         |
+   |         help: remove this `mut`
+
+warning: associated function is never used: `find_mut`
+   --> src/ir.rs:111:12
+    |
+111 |     pub fn find_mut(&mut self, mut f: impl FnMut(&T) -> bool) -> Option<(Id<T>, &mut T)> {
+    |            ^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` on by default
+
+warning: function is never used: `dfalse`
+  --> src/transform/common.rs:15:4
+   |
+15 | fn dfalse() -> bool {
+   |    ^^^^^^
+
+warning: function is never used: `dtrue`
+  --> src/transform/common.rs:18:4
+   |
+18 | fn dtrue() -> bool {
+   |    ^^^^^
+
+warning: constant is never used: `BITS_PER_BYTE`
+  --> src/util.rs:14:1
+   |
+14 | pub const BITS_PER_BYTE: u32 = 8;
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: function is never used: `unsuffixed_or_bool`
+   --> src/util.rs:209:8
+    |
+209 | pub fn unsuffixed_or_bool(n: u64, width: u32) -> TokenStream {
+    |        ^^^^^^^^^^^^^^^^^^
+
+warning: function is never used: `build_rs`
+   --> src/util.rs:259:8
+    |
+259 | pub fn build_rs() -> TokenStream {
+    |        ^^^^^^^^
+
+warning: unused `Result` that must be used
+  --> src/main.rs:99:5
+   |
+99 |     transform::Sanitize {}.run(&mut ir);
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_must_use)]` on by default
+   = note: this `Result` may be an `Err` variant, which should be handled
+
+warning: 55 warnings emitted
+
+    Finished dev [unoptimized + debuginfo] target(s) in 0.02s
+     Running `/home/dirbaio/rp/svd2rust/target/debug/svd4rust -i svd/rp2040.svd -c svd/rp2040.yaml`
+[INFO  svd4rust] running: DeleteFieldsets(DeleteFieldsets { from: ".*", useless: true, soft: false })
+[INFO  svd4rust::transform::delete_fieldsets] deleting fieldset xip_ssi::regs::Dr0
+[INFO  svd4rust::transform::delete_fieldsets] deleting fieldset i2c0::regs::IcCompType
+[INFO  svd4rust::transform::delete_fieldsets] deleting fieldset xip_ssi::regs::SsiVersionId
+[INFO  svd4rust::transform::delete_fieldsets] deleting fieldset ppb::regs::NvicIser
+[INFO  svd4rust::transform::delete_fieldsets] deleting fieldset xip_ssi::regs::Idr
+[INFO  svd4rust::transform::delete_fieldsets] deleting fieldset ppb::regs::NvicIcer
+[INFO  svd4rust::transform::delete_fieldsets] deleting fieldset i2c0::regs::IcCompVersion
+[INFO  svd4rust::transform::delete_fieldsets] deleting fieldset ppb::regs::NvicIspr
+[INFO  svd4rust::transform::delete_fieldsets] deleting fieldset ppb::regs::NvicIcpr
+[INFO  svd4rust] running: MergeEnums(MergeEnums { from: "dma::vals::Ch\\d+CtrlTrigTreqSel", to: "dma::vals::TreqSel" })
+[INFO  svd4rust::transform::merge_enums] Merging enums, dest: dma::vals::TreqSel
+[INFO  svd4rust::transform::merge_enums]    dma::vals::Ch8CtrlTrigTreqSel
+[INFO  svd4rust::transform::merge_enums]    dma::vals::Ch2CtrlTrigTreqSel
+[INFO  svd4rust::transform::merge_enums]    dma::vals::Ch6CtrlTrigTreqSel
+[INFO  svd4rust::transform::merge_enums]    dma::vals::Ch10CtrlTrigTreqSel
+[INFO  svd4rust::transform::merge_enums]    dma::vals::Ch5CtrlTrigTreqSel
+[INFO  svd4rust::transform::merge_enums]    dma::vals::Ch3CtrlTrigTreqSel
+[INFO  svd4rust::transform::merge_enums]    dma::vals::Ch9CtrlTrigTreqSel
+[INFO  svd4rust::transform::merge_enums]    dma::vals::Ch11CtrlTrigTreqSel
+[INFO  svd4rust::transform::merge_enums]    dma::vals::Ch1CtrlTrigTreqSel
+[INFO  svd4rust::transform::merge_enums]    dma::vals::Ch7CtrlTrigTreqSel
+[INFO  svd4rust::transform::merge_enums]    dma::vals::Ch0CtrlTrigTreqSel
+[INFO  svd4rust::transform::merge_enums]    dma::vals::Ch4CtrlTrigTreqSel
+[INFO  svd4rust] running: MergeEnums(MergeEnums { from: "dma::vals::Ch\\d+CtrlTrigDataSize", to: "dma::vals::DataSize" })
+[INFO  svd4rust::transform::merge_enums] Merging enums, dest: dma::vals::DataSize
+[INFO  svd4rust::transform::merge_enums]    dma::vals::Ch8CtrlTrigDataSize
+[INFO  svd4rust::transform::merge_enums]    dma::vals::Ch9CtrlTrigDataSize
+[INFO  svd4rust::transform::merge_enums]    dma::vals::Ch3CtrlTrigDataSize
+[INFO  svd4rust::transform::merge_enums]    dma::vals::Ch2CtrlTrigDataSize
+[INFO  svd4rust::transform::merge_enums]    dma::vals::Ch4CtrlTrigDataSize
+[INFO  svd4rust::transform::merge_enums]    dma::vals::Ch1CtrlTrigDataSize
+[INFO  svd4rust::transform::merge_enums]    dma::vals::Ch5CtrlTrigDataSize
+[INFO  svd4rust::transform::merge_enums]    dma::vals::Ch7CtrlTrigDataSize
+[INFO  svd4rust::transform::merge_enums]    dma::vals::Ch11CtrlTrigDataSize
+[INFO  svd4rust::transform::merge_enums]    dma::vals::Ch10CtrlTrigDataSize
+[INFO  svd4rust::transform::merge_enums]    dma::vals::Ch6CtrlTrigDataSize
+[INFO  svd4rust::transform::merge_enums]    dma::vals::Ch0CtrlTrigDataSize
+[INFO  svd4rust] running: DeleteEnums(DeleteEnums { from: "dma::vals::Ch\\d+CtrlTrigRingSize", bit_size: None, soft: false })
+[INFO  svd4rust::transform::delete_enums] deleting enum dma::vals::Ch3CtrlTrigRingSize
+[INFO  svd4rust::transform::delete_enums] deleting enum dma::vals::Ch2CtrlTrigRingSize
+[INFO  svd4rust::transform::delete_enums] deleting enum dma::vals::Ch11CtrlTrigRingSize
+[INFO  svd4rust::transform::delete_enums] deleting enum dma::vals::Ch1CtrlTrigRingSize
+[INFO  svd4rust::transform::delete_enums] deleting enum dma::vals::Ch10CtrlTrigRingSize
+[INFO  svd4rust::transform::delete_enums] deleting enum dma::vals::Ch0CtrlTrigRingSize
+[INFO  svd4rust::transform::delete_enums] deleting enum dma::vals::Ch8CtrlTrigRingSize
+[INFO  svd4rust::transform::delete_enums] deleting enum dma::vals::Ch5CtrlTrigRingSize
+[INFO  svd4rust::transform::delete_enums] deleting enum dma::vals::Ch4CtrlTrigRingSize
+[INFO  svd4rust::transform::delete_enums] deleting enum dma::vals::Ch6CtrlTrigRingSize
+[INFO  svd4rust::transform::delete_enums] deleting enum dma::vals::Ch9CtrlTrigRingSize
+[INFO  svd4rust::transform::delete_enums] deleting enum dma::vals::Ch7CtrlTrigRingSize
+[INFO  svd4rust] running: MergeFieldsets(MergeFieldsets { from: "dma::regs::Timer\\d+", to: "dma::regs::Timer", main: None, check: Names })
+[INFO  svd4rust::transform::merge_fieldsets] Merging fieldsets, dest: dma::regs::Timer
+[INFO  svd4rust::transform::merge_fieldsets]    dma::regs::Timer0
+[INFO  svd4rust::transform::merge_fieldsets]    dma::regs::Timer1
+[INFO  svd4rust] running: MergeFieldsets(MergeFieldsets { from: "dma::regs::Ch\\d+CtrlTrig", to: "dma::regs::CtrlTrig", main: None, check: Names })
+[INFO  svd4rust::transform::merge_fieldsets] Merging fieldsets, dest: dma::regs::CtrlTrig
+[INFO  svd4rust::transform::merge_fieldsets]    dma::regs::Ch9CtrlTrig
+[INFO  svd4rust::transform::merge_fieldsets]    dma::regs::Ch10CtrlTrig
+[INFO  svd4rust::transform::merge_fieldsets]    dma::regs::Ch6CtrlTrig
+[INFO  svd4rust::transform::merge_fieldsets]    dma::regs::Ch7CtrlTrig
+[INFO  svd4rust::transform::merge_fieldsets]    dma::regs::Ch1CtrlTrig
+[INFO  svd4rust::transform::merge_fieldsets]    dma::regs::Ch4CtrlTrig
+[INFO  svd4rust::transform::merge_fieldsets]    dma::regs::Ch5CtrlTrig
+[INFO  svd4rust::transform::merge_fieldsets]    dma::regs::Ch2CtrlTrig
+[INFO  svd4rust::transform::merge_fieldsets]    dma::regs::Ch8CtrlTrig
+[INFO  svd4rust::transform::merge_fieldsets]    dma::regs::Ch11CtrlTrig
+[INFO  svd4rust::transform::merge_fieldsets]    dma::regs::Ch3CtrlTrig
+[INFO  svd4rust::transform::merge_fieldsets]    dma::regs::Ch0CtrlTrig
+[INFO  svd4rust] running: MergeFieldsets(MergeFieldsets { from: "dma::regs::Ch\\d+DbgCtdreq", to: "dma::regs::DbgCtdreq", main: None, check: Layout })
+[INFO  svd4rust::transform::merge_fieldsets] Merging fieldsets, dest: dma::regs::DbgCtdreq
+[INFO  svd4rust::transform::merge_fieldsets]    dma::regs::Ch9DbgCtdreq
+[INFO  svd4rust::transform::merge_fieldsets]    dma::regs::Ch0DbgCtdreq
+[INFO  svd4rust::transform::merge_fieldsets]    dma::regs::Ch6DbgCtdreq
+[INFO  svd4rust::transform::merge_fieldsets]    dma::regs::Ch7DbgCtdreq
+[INFO  svd4rust::transform::merge_fieldsets]    dma::regs::Ch11DbgCtdreq
+[INFO  svd4rust::transform::merge_fieldsets]    dma::regs::Ch3DbgCtdreq
+[INFO  svd4rust::transform::merge_fieldsets]    dma::regs::Ch2DbgCtdreq
+[INFO  svd4rust::transform::merge_fieldsets]    dma::regs::Ch10DbgCtdreq
+[INFO  svd4rust::transform::merge_fieldsets]    dma::regs::Ch8DbgCtdreq
+[INFO  svd4rust::transform::merge_fieldsets]    dma::regs::Ch1DbgCtdreq
+[INFO  svd4rust::transform::merge_fieldsets]    dma::regs::Ch4DbgCtdreq
+[INFO  svd4rust::transform::merge_fieldsets]    dma::regs::Ch5DbgCtdreq
+[INFO  svd4rust] running: Rename(Rename { from: "uart0::(.*)", to: "uart::$1" })
+[INFO  svd4rust] running: Rename(Rename { from: "uart0::Uart0", to: "uart::Uart" })
+[INFO  svd4rust] running: Rename(Rename { from: "spi0::(.*)", to: "spi::$1" })
+[INFO  svd4rust] running: Rename(Rename { from: "spi0::Spi0", to: "spi::Spi" })
+[INFO  svd4rust] running: Rename(Rename { from: "i2c0::(.*)", to: "i2c::$1" })
+[INFO  svd4rust] running: Rename(Rename { from: "i2c0::I2c0", to: "i2c::I2c" })
+[INFO  svd4rust] running: Rename(Rename { from: "pio0::(.*)", to: "pio::$1" })
+[INFO  svd4rust] running: Rename(Rename { from: "pio::Pio0", to: "pio::Pio" })
+[INFO  svd4rust] running: MergeEnums(MergeEnums { from: "pio::vals::Sm\\d+ExecctrlStatusSel", to: "pio::vals::SmExecctrlStatusSel" })
+[INFO  svd4rust::transform::merge_enums] Merging enums, dest: pio::vals::SmExecctrlStatusSel
+[INFO  svd4rust::transform::merge_enums]    pio::vals::Sm2ExecctrlStatusSel
+[INFO  svd4rust::transform::merge_enums]    pio::vals::Sm0ExecctrlStatusSel
+[INFO  svd4rust::transform::merge_enums]    pio::vals::Sm3ExecctrlStatusSel
+[INFO  svd4rust::transform::merge_enums]    pio::vals::Sm1ExecctrlStatusSel
+[INFO  svd4rust] running: RenameFields(RenameFields { fieldset: "pio::regs::Sm\\d+(Pinctrl|Shiftctrl|Clkdiv|Execctrl|Addr|Instr)", from: "sm\\d+_(.*)", to: "$1" })
+[INFO  svd4rust] running: MergeFieldsets(MergeFieldsets { from: "pio::regs::Sm\\d+(Pinctrl|Shiftctrl|Clkdiv|Execctrl|Addr|Instr)", to: "pio::regs::Sm$1", main: None, check: Names })
+[INFO  svd4rust::transform::merge_fieldsets] Merging fieldsets, dest: pio::regs::SmPinctrl
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Sm0Pinctrl
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Sm3Pinctrl
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Sm1Pinctrl
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Sm2Pinctrl
+[INFO  svd4rust::transform::merge_fieldsets] Merging fieldsets, dest: pio::regs::SmClkdiv
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Sm0Clkdiv
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Sm3Clkdiv
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Sm1Clkdiv
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Sm2Clkdiv
+[INFO  svd4rust::transform::merge_fieldsets] Merging fieldsets, dest: pio::regs::SmShiftctrl
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Sm3Shiftctrl
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Sm2Shiftctrl
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Sm1Shiftctrl
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Sm0Shiftctrl
+[INFO  svd4rust::transform::merge_fieldsets] Merging fieldsets, dest: pio::regs::SmExecctrl
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Sm3Execctrl
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Sm2Execctrl
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Sm1Execctrl
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Sm0Execctrl
+[INFO  svd4rust::transform::merge_fieldsets] Merging fieldsets, dest: pio::regs::SmAddr
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Sm1Addr
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Sm3Addr
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Sm2Addr
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Sm0Addr
+[INFO  svd4rust::transform::merge_fieldsets] Merging fieldsets, dest: pio::regs::SmInstr
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Sm2Instr
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Sm0Instr
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Sm1Instr
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Sm3Instr
+[INFO  svd4rust] running: RenameFields(RenameFields { fieldset: "pio::regs::InstrMem\\d+", from: "instr_mem\\d+", to: "instr_mem" })
+[INFO  svd4rust] running: MergeFieldsets(MergeFieldsets { from: "pio::regs::InstrMem\\d+", to: "pio::regs::InstrMem", main: None, check: Names })
+[INFO  svd4rust::transform::merge_fieldsets] Merging fieldsets, dest: pio::regs::InstrMem
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem17
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem27
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem31
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem14
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem19
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem5
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem20
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem6
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem1
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem30
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem11
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem12
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem18
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem0
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem22
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem7
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem15
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem28
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem21
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem4
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem26
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem29
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem8
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem2
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem24
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem10
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem13
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem16
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem3
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem23
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem9
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::InstrMem25
+[INFO  svd4rust] running: MergeFieldsets(MergeFieldsets { from: "pio::regs::(Irq\\dInt.|Intr)", to: "pio::regs::Intr", main: None, check: Names })
+[INFO  svd4rust::transform::merge_fieldsets] Merging fieldsets, dest: pio::regs::Intr
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Irq0Intf
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Irq1Ints
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Intr
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Irq1Intf
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Irq1Inte
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Irq0Inte
+[INFO  svd4rust::transform::merge_fieldsets]    pio::regs::Irq0Ints
+[INFO  svd4rust] running: MakeRegisterArray(MakeRegisterArray { blocks: "pio::Pio", from: "(instr_mem|txf|rxf)\\d+", to: "$1" })
+[INFO  svd4rust::transform::make_register_array] arrayizing to txf
+[INFO  svd4rust::transform::make_register_array]     txf0
+[INFO  svd4rust::transform::make_register_array]     txf1
+[INFO  svd4rust::transform::make_register_array]     txf2
+[INFO  svd4rust::transform::make_register_array]     txf3
+[INFO  svd4rust::transform::make_register_array] offs 16 stride 4
+[INFO  svd4rust::transform::make_register_array] arrayizing to rxf
+[INFO  svd4rust::transform::make_register_array]     rxf0
+[INFO  svd4rust::transform::make_register_array]     rxf1
+[INFO  svd4rust::transform::make_register_array]     rxf2
+[INFO  svd4rust::transform::make_register_array]     rxf3
+[INFO  svd4rust::transform::make_register_array] offs 32 stride 4
+[INFO  svd4rust::transform::make_register_array] arrayizing to instr_mem
+[INFO  svd4rust::transform::make_register_array]     instr_mem0
+[INFO  svd4rust::transform::make_register_array]     instr_mem1
+[INFO  svd4rust::transform::make_register_array]     instr_mem2
+[INFO  svd4rust::transform::make_register_array]     instr_mem3
+[INFO  svd4rust::transform::make_register_array]     instr_mem4
+[INFO  svd4rust::transform::make_register_array]     instr_mem5
+[INFO  svd4rust::transform::make_register_array]     instr_mem6
+[INFO  svd4rust::transform::make_register_array]     instr_mem7
+[INFO  svd4rust::transform::make_register_array]     instr_mem8
+[INFO  svd4rust::transform::make_register_array]     instr_mem9
+[INFO  svd4rust::transform::make_register_array]     instr_mem10
+[INFO  svd4rust::transform::make_register_array]     instr_mem11
+[INFO  svd4rust::transform::make_register_array]     instr_mem12
+[INFO  svd4rust::transform::make_register_array]     instr_mem13
+[INFO  svd4rust::transform::make_register_array]     instr_mem14
+[INFO  svd4rust::transform::make_register_array]     instr_mem15
+[INFO  svd4rust::transform::make_register_array]     instr_mem16
+[INFO  svd4rust::transform::make_register_array]     instr_mem17
+[INFO  svd4rust::transform::make_register_array]     instr_mem18
+[INFO  svd4rust::transform::make_register_array]     instr_mem19
+[INFO  svd4rust::transform::make_register_array]     instr_mem20
+[INFO  svd4rust::transform::make_register_array]     instr_mem21
+[INFO  svd4rust::transform::make_register_array]     instr_mem22
+[INFO  svd4rust::transform::make_register_array]     instr_mem23
+[INFO  svd4rust::transform::make_register_array]     instr_mem24
+[INFO  svd4rust::transform::make_register_array]     instr_mem25
+[INFO  svd4rust::transform::make_register_array]     instr_mem26
+[INFO  svd4rust::transform::make_register_array]     instr_mem27
+[INFO  svd4rust::transform::make_register_array]     instr_mem28
+[INFO  svd4rust::transform::make_register_array]     instr_mem29
+[INFO  svd4rust::transform::make_register_array]     instr_mem30
+[INFO  svd4rust::transform::make_register_array]     instr_mem31
+[INFO  svd4rust::transform::make_register_array] offs 72 stride 4
+[INFO  svd4rust] running: MakeBlock(MakeBlock { blocks: "pio::Pio", from: "sm(\\d+)_(.+)", to_outer: "sm$1", to_block: "pio::StateMachine", to_inner: "$2" })
+[INFO  svd4rust::transform::make_block] blockifizing to sm2
+[INFO  svd4rust::transform::make_block]     sm2_clkdiv
+[INFO  svd4rust::transform::make_block]     sm2_execctrl
+[INFO  svd4rust::transform::make_block]     sm2_shiftctrl
+[INFO  svd4rust::transform::make_block]     sm2_addr
+[INFO  svd4rust::transform::make_block]     sm2_instr
+[INFO  svd4rust::transform::make_block]     sm2_pinctrl
+[INFO  svd4rust::transform::make_block] blockifizing to sm1
+[INFO  svd4rust::transform::make_block]     sm1_clkdiv
+[INFO  svd4rust::transform::make_block]     sm1_execctrl
+[INFO  svd4rust::transform::make_block]     sm1_shiftctrl
+[INFO  svd4rust::transform::make_block]     sm1_addr
+[INFO  svd4rust::transform::make_block]     sm1_instr
+[INFO  svd4rust::transform::make_block]     sm1_pinctrl
+[INFO  svd4rust::transform::make_block] blockifizing to sm3
+[INFO  svd4rust::transform::make_block]     sm3_clkdiv
+[INFO  svd4rust::transform::make_block]     sm3_execctrl
+[INFO  svd4rust::transform::make_block]     sm3_shiftctrl
+[INFO  svd4rust::transform::make_block]     sm3_addr
+[INFO  svd4rust::transform::make_block]     sm3_instr
+[INFO  svd4rust::transform::make_block]     sm3_pinctrl
+[INFO  svd4rust::transform::make_block] blockifizing to sm0
+[INFO  svd4rust::transform::make_block]     sm0_clkdiv
+[INFO  svd4rust::transform::make_block]     sm0_execctrl
+[INFO  svd4rust::transform::make_block]     sm0_shiftctrl
+[INFO  svd4rust::transform::make_block]     sm0_addr
+[INFO  svd4rust::transform::make_block]     sm0_instr
+[INFO  svd4rust::transform::make_block]     sm0_pinctrl
+[INFO  svd4rust] running: MakeRegisterArray(MakeRegisterArray { blocks: "pio::Pio", from: "sm\\d+", to: "sm" })
+[INFO  svd4rust::transform::make_register_array] arrayizing to sm
+[INFO  svd4rust::transform::make_register_array]     sm0
+[INFO  svd4rust::transform::make_register_array]     sm1
+[INFO  svd4rust::transform::make_register_array]     sm2
+[INFO  svd4rust::transform::make_register_array]     sm3
+[INFO  svd4rust::transform::make_register_array] offs 200 stride 24
+[INFO  svd4rust] running: MakeBlock(MakeBlock { blocks: "pio::Pio", from: "irq(\\d+)_(.+)", to_outer: "irq$1", to_block: "pio::Irq", to_inner: "$2" })
+[INFO  svd4rust::transform::make_block] blockifizing to irq1
+[INFO  svd4rust::transform::make_block]     irq1_inte
+[INFO  svd4rust::transform::make_block]     irq1_intf
+[INFO  svd4rust::transform::make_block]     irq1_ints
+[INFO  svd4rust::transform::make_block] blockifizing to irq0
+[INFO  svd4rust::transform::make_block]     irq0_inte
+[INFO  svd4rust::transform::make_block]     irq0_intf
+[INFO  svd4rust::transform::make_block]     irq0_ints
+[INFO  svd4rust] running: MakeRegisterArray(MakeRegisterArray { blocks: "pio::Pio", from: "irq\\d+", to: "irqs" })
+[INFO  svd4rust::transform::make_register_array] arrayizing to irqs
+[INFO  svd4rust::transform::make_register_array]     irq0
+[INFO  svd4rust::transform::make_register_array]     irq1
+[INFO  svd4rust::transform::make_register_array] offs 300 stride 12
+[INFO  svd4rust] running: MakeBlock(MakeBlock { blocks: "sio::Sio", from: "interp(\\d+)_(.*)", to_outer: "interp$1", to_block: "sio::Interp", to_inner: "$2" })
+[INFO  svd4rust::transform::make_block] blockifizing to interp0
+[INFO  svd4rust::transform::make_block]     interp0_accum0
+[INFO  svd4rust::transform::make_block]     interp0_accum1
+[INFO  svd4rust::transform::make_block]     interp0_base0
+[INFO  svd4rust::transform::make_block]     interp0_base1
+[INFO  svd4rust::transform::make_block]     interp0_base2
+[INFO  svd4rust::transform::make_block]     interp0_pop_lane0
+[INFO  svd4rust::transform::make_block]     interp0_pop_lane1
+[INFO  svd4rust::transform::make_block]     interp0_pop_full
+[INFO  svd4rust::transform::make_block]     interp0_peek_lane0
+[INFO  svd4rust::transform::make_block]     interp0_peek_lane1
+[INFO  svd4rust::transform::make_block]     interp0_peek_full
+[INFO  svd4rust::transform::make_block]     interp0_ctrl_lane0
+[INFO  svd4rust::transform::make_block]     interp0_ctrl_lane1
+[INFO  svd4rust::transform::make_block]     interp0_accum0_add
+[INFO  svd4rust::transform::make_block]     interp0_accum1_add
+[INFO  svd4rust::transform::make_block]     interp0_base_1and0
+[INFO  svd4rust::transform::make_block] blockifizing to interp1
+[INFO  svd4rust::transform::make_block]     interp1_accum0
+[INFO  svd4rust::transform::make_block]     interp1_accum1
+[INFO  svd4rust::transform::make_block]     interp1_base0
+[INFO  svd4rust::transform::make_block]     interp1_base1
+[INFO  svd4rust::transform::make_block]     interp1_base2
+[INFO  svd4rust::transform::make_block]     interp1_pop_lane0
+[INFO  svd4rust::transform::make_block]     interp1_pop_lane1
+[INFO  svd4rust::transform::make_block]     interp1_pop_full
+[INFO  svd4rust::transform::make_block]     interp1_peek_lane0
+[INFO  svd4rust::transform::make_block]     interp1_peek_lane1
+[INFO  svd4rust::transform::make_block]     interp1_peek_full
+[INFO  svd4rust::transform::make_block]     interp1_ctrl_lane0
+[INFO  svd4rust::transform::make_block]     interp1_ctrl_lane1
+[INFO  svd4rust::transform::make_block]     interp1_accum0_add
+[INFO  svd4rust::transform::make_block]     interp1_accum1_add
+[INFO  svd4rust::transform::make_block]     interp1_base_1and0
+[INFO  svd4rust] running: MakeBlock(MakeBlock { blocks: "sio::Sio", from: "div_(.*)", to_outer: "div", to_block: "sio::Div", to_inner: "$1" })
+[INFO  svd4rust::transform::make_block] blockifizing to div
+[INFO  svd4rust::transform::make_block]     div_udividend
+[INFO  svd4rust::transform::make_block]     div_udivisor
+[INFO  svd4rust::transform::make_block]     div_sdividend
+[INFO  svd4rust::transform::make_block]     div_sdivisor
+[INFO  svd4rust::transform::make_block]     div_quotient
+[INFO  svd4rust::transform::make_block]     div_remainder
+[INFO  svd4rust::transform::make_block]     div_csr
+[INFO  svd4rust] running: MakeBlock(MakeBlock { blocks: "sio::Sio", from: "fifo_(.*)", to_outer: "fifo", to_block: "sio::Fifo", to_inner: "$1" })
+[INFO  svd4rust::transform::make_block] blockifizing to fifo
+[INFO  svd4rust::transform::make_block]     fifo_st
+[INFO  svd4rust::transform::make_block]     fifo_wr
+[INFO  svd4rust::transform::make_block]     fifo_rd
+[INFO  svd4rust] running: MakeRegisterArray(MakeRegisterArray { blocks: "sio::Sio", from: "interp(\\d+)", to: "interp" })
+[INFO  svd4rust::transform::make_register_array] arrayizing to interp
+[INFO  svd4rust::transform::make_register_array]     interp0
+[INFO  svd4rust::transform::make_register_array]     interp1
+[INFO  svd4rust::transform::make_register_array] offs 128 stride 64
+[INFO  svd4rust] running: MakeRegisterArray(MakeRegisterArray { blocks: "sio::Sio", from: "spinlock(\\d+)", to: "spinlock" })
+[INFO  svd4rust::transform::make_register_array] arrayizing to spinlock
+[INFO  svd4rust::transform::make_register_array]     spinlock0
+[INFO  svd4rust::transform::make_register_array]     spinlock1
+[INFO  svd4rust::transform::make_register_array]     spinlock2
+[INFO  svd4rust::transform::make_register_array]     spinlock3
+[INFO  svd4rust::transform::make_register_array]     spinlock4
+[INFO  svd4rust::transform::make_register_array]     spinlock5
+[INFO  svd4rust::transform::make_register_array]     spinlock6
+[INFO  svd4rust::transform::make_register_array]     spinlock7
+[INFO  svd4rust::transform::make_register_array]     spinlock8
+[INFO  svd4rust::transform::make_register_array]     spinlock9
+[INFO  svd4rust::transform::make_register_array]     spinlock10
+[INFO  svd4rust::transform::make_register_array]     spinlock11
+[INFO  svd4rust::transform::make_register_array]     spinlock12
+[INFO  svd4rust::transform::make_register_array]     spinlock13
+[INFO  svd4rust::transform::make_register_array]     spinlock14
+[INFO  svd4rust::transform::make_register_array]     spinlock15
+[INFO  svd4rust::transform::make_register_array]     spinlock16
+[INFO  svd4rust::transform::make_register_array]     spinlock17
+[INFO  svd4rust::transform::make_register_array]     spinlock18
+[INFO  svd4rust::transform::make_register_array]     spinlock19
+[INFO  svd4rust::transform::make_register_array]     spinlock20
+[INFO  svd4rust::transform::make_register_array]     spinlock21
+[INFO  svd4rust::transform::make_register_array]     spinlock22
+[INFO  svd4rust::transform::make_register_array]     spinlock23
+[INFO  svd4rust::transform::make_register_array]     spinlock24
+[INFO  svd4rust::transform::make_register_array]     spinlock25
+[INFO  svd4rust::transform::make_register_array]     spinlock26
+[INFO  svd4rust::transform::make_register_array]     spinlock27
+[INFO  svd4rust::transform::make_register_array]     spinlock28
+[INFO  svd4rust::transform::make_register_array]     spinlock29
+[INFO  svd4rust::transform::make_register_array]     spinlock30
+[INFO  svd4rust::transform::make_register_array]     spinlock31
+[INFO  svd4rust::transform::make_register_array] offs 256 stride 4
+[INFO  svd4rust] running: DeleteFieldsets(DeleteFieldsets { from: "sio::regs::Gpio.*", useless: false, soft: false })
+[INFO  svd4rust::transform::delete_fieldsets] deleting fieldset sio::regs::GpioOeSet
+[INFO  svd4rust::transform::delete_fieldsets] deleting fieldset sio::regs::GpioHiOeClr
+[INFO  svd4rust::transform::delete_fieldsets] deleting fieldset sio::regs::GpioOutXor
+[INFO  svd4rust::transform::delete_fieldsets] deleting fieldset sio::regs::GpioHiIn
+[INFO  svd4rust::transform::delete_fieldsets] deleting fieldset sio::regs::GpioHiOutClr
+[INFO  svd4rust::transform::delete_fieldsets] deleting fieldset sio::regs::GpioOe
+[INFO  svd4rust::transform::delete_fieldsets] deleting fieldset sio::regs::GpioOeXor
+[INFO  svd4rust::transform::delete_fieldsets] deleting fieldset sio::regs::GpioHiOut
+[INFO  svd4rust::transform::delete_fieldsets] deleting fieldset sio::regs::GpioHiOutXor
+[INFO  svd4rust::transform::delete_fieldsets] deleting fieldset sio::regs::GpioHiOutSet
+[INFO  svd4rust::transform::delete_fieldsets] deleting fieldset sio::regs::GpioOutSet
+[INFO  svd4rust::transform::delete_fieldsets] deleting fieldset sio::regs::GpioHiOeSet
+[INFO  svd4rust::transform::delete_fieldsets] deleting fieldset sio::regs::GpioOut
+[INFO  svd4rust::transform::delete_fieldsets] deleting fieldset sio::regs::GpioOutClr
+[INFO  svd4rust::transform::delete_fieldsets] deleting fieldset sio::regs::GpioHiOeXor
+[INFO  svd4rust::transform::delete_fieldsets] deleting fieldset sio::regs::GpioIn
+[INFO  svd4rust::transform::delete_fieldsets] deleting fieldset sio::regs::GpioHiOe
+[INFO  svd4rust::transform::delete_fieldsets] deleting fieldset sio::regs::GpioOeClr
+[INFO  svd4rust] running: MakeBlock(MakeBlock { blocks: "sio::Sio", from: "gpio_(hi_)?(out|oe)(|_set|_clr|_xor)", to_outer: "gpio_$1$2", to_block: "sio::Gpio", to_inner: "value$3" })
+[INFO  svd4rust::transform::make_block] blockifizing to gpio_out
+[INFO  svd4rust::transform::make_block]     gpio_out
+[INFO  svd4rust::transform::make_block]     gpio_out_set
+[INFO  svd4rust::transform::make_block]     gpio_out_clr
+[INFO  svd4rust::transform::make_block]     gpio_out_xor
+[INFO  svd4rust::transform::make_block] blockifizing to gpio_hi_out
+[INFO  svd4rust::transform::make_block]     gpio_hi_out
+[INFO  svd4rust::transform::make_block]     gpio_hi_out_set
+[INFO  svd4rust::transform::make_block]     gpio_hi_out_clr
+[INFO  svd4rust::transform::make_block]     gpio_hi_out_xor
+[INFO  svd4rust::transform::make_block] blockifizing to gpio_oe
+[INFO  svd4rust::transform::make_block]     gpio_oe
+[INFO  svd4rust::transform::make_block]     gpio_oe_set
+[INFO  svd4rust::transform::make_block]     gpio_oe_clr
+[INFO  svd4rust::transform::make_block]     gpio_oe_xor
+[INFO  svd4rust::transform::make_block] blockifizing to gpio_hi_oe
+[INFO  svd4rust::transform::make_block]     gpio_hi_oe
+[INFO  svd4rust::transform::make_block]     gpio_hi_oe_set
+[INFO  svd4rust::transform::make_block]     gpio_hi_oe_clr
+[INFO  svd4rust::transform::make_block]     gpio_hi_oe_xor
+[INFO  svd4rust] running: MakeRegisterArray(MakeRegisterArray { blocks: "sio::Sio", from: "gpio_(hi_)?(in|out|oe)", to: "gpio_$2" })
+[INFO  svd4rust::transform::make_register_array] arrayizing to gpio_out
+[INFO  svd4rust::transform::make_register_array]     gpio_out
+[INFO  svd4rust::transform::make_register_array]     gpio_hi_out
+[INFO  svd4rust::transform::make_register_array] offs 16 stride 32
+[INFO  svd4rust::transform::make_register_array] arrayizing to gpio_in
+[INFO  svd4rust::transform::make_register_array]     gpio_in
+[INFO  svd4rust::transform::make_register_array]     gpio_hi_in
+[INFO  svd4rust::transform::make_register_array] offs 4 stride 4
+[INFO  svd4rust::transform::make_register_array] arrayizing to gpio_oe
+[INFO  svd4rust::transform::make_register_array]     gpio_oe
+[INFO  svd4rust::transform::make_register_array]     gpio_hi_oe
+[INFO  svd4rust::transform::make_register_array] offs 32 stride 32
+[INFO  svd4rust] running: Rename(Rename { from: "io_bank0::(.*)", to: "io::$1" })
+[INFO  svd4rust] running: Rename(Rename { from: "io::IoBank0", to: "io::Io" })
+[INFO  svd4rust] running: MergeEnums(MergeEnums { from: "io::vals::Gpio.+Ctrl(.+)over", to: "io::vals::${1}over" })
+[INFO  svd4rust::transform::merge_enums] Merging enums, dest: io::vals::Irqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio21CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio17CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio28CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio3CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio22CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio24CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio10CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio5CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio29CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio26CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio23CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio15CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio27CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio14CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio20CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio25CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio7CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio16CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio8CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio9CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio18CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio13CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio12CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio2CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio1CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio4CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio6CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio11CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio0CtrlIrqover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio19CtrlIrqover
+[INFO  svd4rust::transform::merge_enums] Merging enums, dest: io::vals::Inover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio13CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio21CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio11CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio3CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio29CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio28CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio25CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio15CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio8CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio24CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio12CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio10CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio18CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio27CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio7CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio22CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio26CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio5CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio16CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio2CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio17CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio6CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio20CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio23CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio4CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio14CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio9CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio1CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio0CtrlInover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio19CtrlInover
+[INFO  svd4rust::transform::merge_enums] Merging enums, dest: io::vals::Outover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio5CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio19CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio18CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio15CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio16CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio23CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio8CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio25CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio3CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio20CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio10CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio26CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio7CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio24CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio14CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio2CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio6CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio12CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio29CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio17CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio0CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio13CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio11CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio22CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio21CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio9CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio27CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio28CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio4CtrlOutover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio1CtrlOutover
+[INFO  svd4rust::transform::merge_enums] Merging enums, dest: io::vals::Oeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio2CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio12CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio18CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio8CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio1CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio3CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio22CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio0CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio28CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio6CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio9CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio13CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio24CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio5CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio23CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio29CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio10CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio20CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio21CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio17CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio11CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio4CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio7CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio25CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio19CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio27CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio15CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio14CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio26CtrlOeover
+[INFO  svd4rust::transform::merge_enums]    io::vals::Gpio16CtrlOeover
+[INFO  svd4rust] running: DeleteEnums(DeleteEnums { from: "io::vals::Gpio\\d+CtrlFuncsel", bit_size: None, soft: true })
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio18CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio7CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio1CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio8CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio15CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio2CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio5CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio4CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio20CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio16CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio22CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio27CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio14CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio17CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio9CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio28CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio25CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio29CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio12CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio24CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio11CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio6CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio26CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio23CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio19CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio0CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio3CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio21CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio13CtrlFuncsel
+[INFO  svd4rust::transform::delete_enums] deleting enum io::vals::Gpio10CtrlFuncsel
+[INFO  svd4rust] running: MergeFieldsets(MergeFieldsets { from: "io::regs::Gpio\\d+(Status|Ctrl)", to: "io::regs::Gpio$1", main: None, check: Names })
+[INFO  svd4rust::transform::merge_fieldsets] Merging fieldsets, dest: io::regs::GpioStatus
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio6Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio26Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio28Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio2Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio19Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio27Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio9Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio8Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio29Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio22Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio21Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio16Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio1Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio24Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio25Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio18Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio20Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio3Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio17Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio10Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio15Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio13Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio14Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio4Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio23Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio11Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio5Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio0Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio12Status
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio7Status
+[INFO  svd4rust::transform::merge_fieldsets] Merging fieldsets, dest: io::regs::GpioCtrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio27Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio16Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio18Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio14Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio24Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio1Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio28Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio9Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio6Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio12Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio23Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio2Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio15Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio25Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio17Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio22Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio10Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio4Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio21Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio13Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio8Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio7Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio5Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio0Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio26Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio29Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio19Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio20Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio11Ctrl
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Gpio3Ctrl
+[INFO  svd4rust] running: MakeBlock(MakeBlock { blocks: "io::Io", from: "gpio(\\d+)_(.*)", to_outer: "gpio$1", to_block: "io::Gpio", to_inner: "$2" })
+[INFO  svd4rust::transform::make_block] blockifizing to gpio28
+[INFO  svd4rust::transform::make_block]     gpio28_status
+[INFO  svd4rust::transform::make_block]     gpio28_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio10
+[INFO  svd4rust::transform::make_block]     gpio10_status
+[INFO  svd4rust::transform::make_block]     gpio10_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio15
+[INFO  svd4rust::transform::make_block]     gpio15_status
+[INFO  svd4rust::transform::make_block]     gpio15_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio1
+[INFO  svd4rust::transform::make_block]     gpio1_status
+[INFO  svd4rust::transform::make_block]     gpio1_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio17
+[INFO  svd4rust::transform::make_block]     gpio17_status
+[INFO  svd4rust::transform::make_block]     gpio17_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio25
+[INFO  svd4rust::transform::make_block]     gpio25_status
+[INFO  svd4rust::transform::make_block]     gpio25_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio23
+[INFO  svd4rust::transform::make_block]     gpio23_status
+[INFO  svd4rust::transform::make_block]     gpio23_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio29
+[INFO  svd4rust::transform::make_block]     gpio29_status
+[INFO  svd4rust::transform::make_block]     gpio29_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio9
+[INFO  svd4rust::transform::make_block]     gpio9_status
+[INFO  svd4rust::transform::make_block]     gpio9_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio14
+[INFO  svd4rust::transform::make_block]     gpio14_status
+[INFO  svd4rust::transform::make_block]     gpio14_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio16
+[INFO  svd4rust::transform::make_block]     gpio16_status
+[INFO  svd4rust::transform::make_block]     gpio16_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio19
+[INFO  svd4rust::transform::make_block]     gpio19_status
+[INFO  svd4rust::transform::make_block]     gpio19_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio21
+[INFO  svd4rust::transform::make_block]     gpio21_status
+[INFO  svd4rust::transform::make_block]     gpio21_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio7
+[INFO  svd4rust::transform::make_block]     gpio7_status
+[INFO  svd4rust::transform::make_block]     gpio7_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio20
+[INFO  svd4rust::transform::make_block]     gpio20_status
+[INFO  svd4rust::transform::make_block]     gpio20_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio11
+[INFO  svd4rust::transform::make_block]     gpio11_status
+[INFO  svd4rust::transform::make_block]     gpio11_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio0
+[INFO  svd4rust::transform::make_block]     gpio0_status
+[INFO  svd4rust::transform::make_block]     gpio0_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio22
+[INFO  svd4rust::transform::make_block]     gpio22_status
+[INFO  svd4rust::transform::make_block]     gpio22_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio13
+[INFO  svd4rust::transform::make_block]     gpio13_status
+[INFO  svd4rust::transform::make_block]     gpio13_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio5
+[INFO  svd4rust::transform::make_block]     gpio5_status
+[INFO  svd4rust::transform::make_block]     gpio5_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio4
+[INFO  svd4rust::transform::make_block]     gpio4_status
+[INFO  svd4rust::transform::make_block]     gpio4_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio3
+[INFO  svd4rust::transform::make_block]     gpio3_status
+[INFO  svd4rust::transform::make_block]     gpio3_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio8
+[INFO  svd4rust::transform::make_block]     gpio8_status
+[INFO  svd4rust::transform::make_block]     gpio8_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio12
+[INFO  svd4rust::transform::make_block]     gpio12_status
+[INFO  svd4rust::transform::make_block]     gpio12_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio6
+[INFO  svd4rust::transform::make_block]     gpio6_status
+[INFO  svd4rust::transform::make_block]     gpio6_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio24
+[INFO  svd4rust::transform::make_block]     gpio24_status
+[INFO  svd4rust::transform::make_block]     gpio24_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio18
+[INFO  svd4rust::transform::make_block]     gpio18_status
+[INFO  svd4rust::transform::make_block]     gpio18_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio26
+[INFO  svd4rust::transform::make_block]     gpio26_status
+[INFO  svd4rust::transform::make_block]     gpio26_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio27
+[INFO  svd4rust::transform::make_block]     gpio27_status
+[INFO  svd4rust::transform::make_block]     gpio27_ctrl
+[INFO  svd4rust::transform::make_block] blockifizing to gpio2
+[INFO  svd4rust::transform::make_block]     gpio2_status
+[INFO  svd4rust::transform::make_block]     gpio2_ctrl
+[INFO  svd4rust] running: MakeRegisterArray(MakeRegisterArray { blocks: "io::Io", from: "gpio\\d+", to: "gpio" })
+[INFO  svd4rust::transform::make_register_array] arrayizing to gpio
+[INFO  svd4rust::transform::make_register_array]     gpio0
+[INFO  svd4rust::transform::make_register_array]     gpio1
+[INFO  svd4rust::transform::make_register_array]     gpio2
+[INFO  svd4rust::transform::make_register_array]     gpio3
+[INFO  svd4rust::transform::make_register_array]     gpio4
+[INFO  svd4rust::transform::make_register_array]     gpio5
+[INFO  svd4rust::transform::make_register_array]     gpio6
+[INFO  svd4rust::transform::make_register_array]     gpio7
+[INFO  svd4rust::transform::make_register_array]     gpio8
+[INFO  svd4rust::transform::make_register_array]     gpio9
+[INFO  svd4rust::transform::make_register_array]     gpio10
+[INFO  svd4rust::transform::make_register_array]     gpio11
+[INFO  svd4rust::transform::make_register_array]     gpio12
+[INFO  svd4rust::transform::make_register_array]     gpio13
+[INFO  svd4rust::transform::make_register_array]     gpio14
+[INFO  svd4rust::transform::make_register_array]     gpio15
+[INFO  svd4rust::transform::make_register_array]     gpio16
+[INFO  svd4rust::transform::make_register_array]     gpio17
+[INFO  svd4rust::transform::make_register_array]     gpio18
+[INFO  svd4rust::transform::make_register_array]     gpio19
+[INFO  svd4rust::transform::make_register_array]     gpio20
+[INFO  svd4rust::transform::make_register_array]     gpio21
+[INFO  svd4rust::transform::make_register_array]     gpio22
+[INFO  svd4rust::transform::make_register_array]     gpio23
+[INFO  svd4rust::transform::make_register_array]     gpio24
+[INFO  svd4rust::transform::make_register_array]     gpio25
+[INFO  svd4rust::transform::make_register_array]     gpio26
+[INFO  svd4rust::transform::make_register_array]     gpio27
+[INFO  svd4rust::transform::make_register_array]     gpio28
+[INFO  svd4rust::transform::make_register_array]     gpio29
+[INFO  svd4rust::transform::make_register_array] offs 0 stride 8
+[INFO  svd4rust] running: MakeFieldArray(MakeFieldArray { fieldsets: "io::regs::.*Int.*", from: "gpio\\d+_(.*)", to: "$1" })
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio16_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio17_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio18_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio19_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio20_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio21_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio22_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio23_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio16_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio17_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio18_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio19_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio20_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio21_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio22_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio23_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio16_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio17_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio18_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio19_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio20_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio21_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio22_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio23_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio16_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio17_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio18_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio19_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio20_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio21_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio22_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio23_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio24_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio25_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio26_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio27_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio28_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio29_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio24_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio25_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio26_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio27_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio28_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio29_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio24_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio25_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio26_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio27_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio28_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio29_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio24_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio25_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio26_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio27_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio28_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio29_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio16_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio17_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio18_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio19_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio20_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio21_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio22_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio23_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio16_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio17_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio18_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio19_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio20_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio21_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio22_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio23_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio16_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio17_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio18_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio19_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio20_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio21_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio22_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio23_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio16_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio17_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio18_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio19_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio20_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio21_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio22_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio23_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio24_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio25_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio26_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio27_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio28_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio29_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio24_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio25_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio26_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio27_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio28_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio29_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio24_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio25_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio26_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio27_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio28_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio29_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio24_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio25_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio26_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio27_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio28_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio29_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio8_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio9_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio10_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio11_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio12_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio13_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio14_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio15_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio8_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio9_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio10_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio11_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio12_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio13_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio14_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio15_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio8_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio9_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio10_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio11_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio12_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio13_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio14_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio15_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio8_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio9_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio10_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio11_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio12_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio13_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio14_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio15_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio24_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio25_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio26_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio27_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio28_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio29_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio24_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio25_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio26_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio27_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio28_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio29_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio24_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio25_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio26_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio27_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio28_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio29_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio24_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio25_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio26_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio27_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio28_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio29_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio24_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio25_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio26_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio27_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio28_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio29_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio24_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio25_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio26_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio27_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio28_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio29_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio24_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio25_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio26_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio27_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio28_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio29_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio24_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio25_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio26_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio27_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio28_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio29_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio8_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio9_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio10_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio11_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio12_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio13_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio14_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio15_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio8_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio9_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio10_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio11_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio12_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio13_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio14_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio15_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio8_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio9_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio10_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio11_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio12_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio13_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio14_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio15_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio8_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio9_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio10_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio11_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio12_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio13_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio14_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio15_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio16_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio17_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio18_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio19_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio20_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio21_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio22_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio23_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio16_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio17_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio18_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio19_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio20_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio21_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio22_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio23_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio16_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio17_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio18_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio19_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio20_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio21_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio22_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio23_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio16_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio17_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio18_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio19_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio20_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio21_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio22_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio23_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio24_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio25_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio26_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio27_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio28_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio29_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio24_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio25_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio26_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio27_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio28_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio29_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio24_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio25_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio26_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio27_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio28_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio29_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio24_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio25_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio26_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio27_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio28_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio29_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio16_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio17_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio18_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio19_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio20_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio21_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio22_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio23_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio16_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio17_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio18_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio19_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio20_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio21_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio22_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio23_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio16_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio17_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio18_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio19_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio20_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio21_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio22_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio23_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio16_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio17_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio18_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio19_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio20_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio21_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio22_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio23_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio8_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio9_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio10_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio11_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio12_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio13_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio14_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio15_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio8_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio9_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio10_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio11_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio12_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio13_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio14_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio15_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio8_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio9_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio10_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio11_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio12_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio13_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio14_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio15_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio8_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio9_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio10_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio11_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio12_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio13_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio14_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio15_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio16_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio17_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio18_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio19_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio20_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio21_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio22_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio23_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio16_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio17_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio18_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio19_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio20_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio21_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio22_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio23_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio16_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio17_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio18_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio19_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio20_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio21_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio22_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio23_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio16_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio17_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio18_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio19_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio20_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio21_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio22_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio23_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio8_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio9_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio10_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio11_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio12_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio13_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio14_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio15_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio8_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio9_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio10_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio11_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio12_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio13_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio14_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio15_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio8_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio9_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio10_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio11_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio12_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio13_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio14_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio15_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio8_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio9_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio10_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio11_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio12_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio13_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio14_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio15_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio16_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio17_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio18_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio19_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio20_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio21_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio22_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio23_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio16_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio17_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio18_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio19_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio20_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio21_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio22_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio23_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio16_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio17_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio18_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio19_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio20_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio21_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio22_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio23_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio16_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio17_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio18_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio19_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio20_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio21_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio22_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio23_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio24_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio25_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio26_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio27_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio28_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio29_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio24_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio25_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio26_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio27_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio28_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio29_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio24_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio25_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio26_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio27_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio28_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio29_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio24_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio25_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio26_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio27_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio28_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio29_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio8_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio9_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio10_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio11_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio12_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio13_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio14_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio15_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio8_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio9_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio10_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio11_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio12_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio13_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio14_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio15_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio8_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio9_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio10_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio11_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio12_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio13_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio14_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio15_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio8_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio9_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio10_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio11_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio12_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio13_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio14_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio15_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio0_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio1_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio2_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio3_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio4_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio5_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio6_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio7_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio0_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio1_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio2_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio3_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio4_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio5_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio6_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio7_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio0_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio1_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio2_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio3_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio4_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio5_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio6_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio7_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio0_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio1_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio2_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio3_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio4_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio5_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio6_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio7_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio16_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio17_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio18_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio19_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio20_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio21_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio22_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio23_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio16_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio17_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio18_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio19_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio20_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio21_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio22_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio23_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio16_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio17_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio18_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio19_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio20_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio21_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio22_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio23_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio16_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio17_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio18_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio19_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio20_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio21_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio22_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio23_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio16_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio17_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio18_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio19_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio20_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio21_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio22_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio23_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio16_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio17_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio18_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio19_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio20_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio21_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio22_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio23_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio16_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio17_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio18_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio19_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio20_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio21_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio22_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio23_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio16_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio17_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio18_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio19_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio20_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio21_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio22_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio23_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio0_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio1_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio2_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio3_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio4_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio5_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio6_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio7_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio0_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio1_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio2_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio3_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio4_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio5_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio6_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio7_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio0_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio1_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio2_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio3_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio4_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio5_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio6_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio7_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio0_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio1_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio2_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio3_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio4_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio5_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio6_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio7_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio8_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio9_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio10_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio11_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio12_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio13_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio14_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio15_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio8_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio9_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio10_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio11_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio12_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio13_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio14_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio15_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio8_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio9_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio10_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio11_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio12_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio13_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio14_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio15_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio8_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio9_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio10_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio11_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio12_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio13_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio14_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio15_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio0_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio1_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio2_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio3_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio4_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio5_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio6_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio7_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio0_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio1_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio2_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio3_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio4_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio5_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio6_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio7_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio0_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio1_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio2_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio3_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio4_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio5_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio6_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio7_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio0_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio1_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio2_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio3_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio4_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio5_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio6_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio7_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio16_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio17_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio18_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio19_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio20_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio21_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio22_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio23_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio16_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio17_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio18_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio19_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio20_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio21_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio22_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio23_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio16_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio17_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio18_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio19_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio20_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio21_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio22_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio23_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio16_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio17_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio18_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio19_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio20_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio21_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio22_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio23_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio8_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio9_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio10_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio11_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio12_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio13_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio14_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio15_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio8_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio9_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio10_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio11_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio12_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio13_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio14_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio15_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio8_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio9_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio10_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio11_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio12_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio13_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio14_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio15_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio8_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio9_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio10_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio11_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio12_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio13_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio14_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio15_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio0_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio1_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio2_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio3_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio4_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio5_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio6_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio7_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio0_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio1_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio2_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio3_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio4_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio5_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio6_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio7_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio0_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio1_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio2_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio3_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio4_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio5_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio6_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio7_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio0_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio1_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio2_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio3_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio4_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio5_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio6_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio7_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio24_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio25_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio26_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio27_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio28_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio29_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio24_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio25_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio26_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio27_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio28_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio29_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio24_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio25_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio26_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio27_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio28_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio29_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio24_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio25_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio26_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio27_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio28_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio29_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio0_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio1_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio2_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio3_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio4_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio5_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio6_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio7_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio0_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio1_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio2_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio3_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio4_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio5_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio6_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio7_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio0_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio1_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio2_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio3_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio4_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio5_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio6_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio7_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio0_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio1_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio2_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio3_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio4_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio5_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio6_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio7_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio0_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio1_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio2_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio3_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio4_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio5_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio6_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio7_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio0_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio1_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio2_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio3_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio4_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio5_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio6_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio7_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio0_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio1_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio2_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio3_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio4_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio5_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio6_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio7_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio0_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio1_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio2_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio3_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio4_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio5_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio6_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio7_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio0_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio1_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio2_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio3_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio4_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio5_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio6_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio7_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio0_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio1_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio2_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio3_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio4_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio5_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio6_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio7_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio0_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio1_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio2_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio3_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio4_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio5_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio6_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio7_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio0_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio1_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio2_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio3_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio4_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio5_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio6_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio7_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio8_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio9_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio10_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio11_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio12_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio13_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio14_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio15_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio8_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio9_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio10_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio11_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio12_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio13_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio14_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio15_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio8_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio9_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio10_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio11_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio12_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio13_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio14_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio15_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio8_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio9_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio10_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio11_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio12_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio13_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio14_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio15_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio24_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio25_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio26_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio27_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio28_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio29_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio24_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio25_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio26_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio27_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio28_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio29_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio24_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio25_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio26_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio27_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio28_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio29_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio24_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio25_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio26_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio27_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio28_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio29_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio0_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio1_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio2_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio3_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio4_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio5_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio6_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio7_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio0_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio1_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio2_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio3_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio4_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio5_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio6_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio7_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio0_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio1_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio2_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio3_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio4_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio5_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio6_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio7_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio0_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio1_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio2_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio3_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio4_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio5_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio6_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio7_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio0_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio1_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio2_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio3_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio4_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio5_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio6_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio7_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio0_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio1_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio2_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio3_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio4_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio5_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio6_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio7_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio0_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio1_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio2_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio3_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio4_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio5_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio6_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio7_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio0_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio1_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio2_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio3_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio4_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio5_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio6_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio7_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio8_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio9_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio10_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio11_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio12_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio13_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio14_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio15_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio8_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio9_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio10_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio11_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio12_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio13_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio14_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio15_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio8_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio9_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio10_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio11_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio12_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio13_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio14_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio15_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio8_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio9_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio10_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio11_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio12_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio13_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio14_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio15_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio24_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio25_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio26_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio27_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio28_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio29_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio24_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio25_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio26_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio27_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio28_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio29_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio24_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio25_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio26_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio27_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio28_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio29_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio24_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio25_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio26_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio27_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio28_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio29_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio16_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio17_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio18_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio19_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio20_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio21_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio22_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio23_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio16_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio17_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio18_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio19_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio20_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio21_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio22_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio23_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio16_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio17_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio18_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio19_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio20_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio21_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio22_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio23_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio16_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio17_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio18_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio19_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio20_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio21_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio22_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio23_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio0_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio1_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio2_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio3_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio4_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio5_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio6_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio7_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio0_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio1_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio2_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio3_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio4_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio5_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio6_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio7_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio0_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio1_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio2_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio3_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio4_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio5_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio6_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio7_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio0_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio1_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio2_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio3_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio4_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio5_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio6_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio7_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio8_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio9_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio10_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio11_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio12_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio13_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio14_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio15_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio8_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio9_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio10_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio11_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio12_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio13_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio14_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio15_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio8_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio9_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio10_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio11_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio12_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio13_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio14_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio15_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio8_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio9_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio10_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio11_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio12_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio13_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio14_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio15_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio24_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio25_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio26_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio27_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio28_edge_high
+[INFO  svd4rust::transform::make_field_array]     gpio29_edge_high
+[INFO  svd4rust::transform::make_field_array] offs 3 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio24_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio25_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio26_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio27_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio28_edge_low
+[INFO  svd4rust::transform::make_field_array]     gpio29_edge_low
+[INFO  svd4rust::transform::make_field_array] offs 2 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_high
+[INFO  svd4rust::transform::make_field_array]     gpio24_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio25_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio26_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio27_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio28_level_high
+[INFO  svd4rust::transform::make_field_array]     gpio29_level_high
+[INFO  svd4rust::transform::make_field_array] offs 1 stride 4
+[INFO  svd4rust::transform::make_field_array] arrayizing to level_low
+[INFO  svd4rust::transform::make_field_array]     gpio24_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio25_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio26_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio27_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio28_level_low
+[INFO  svd4rust::transform::make_field_array]     gpio29_level_low
+[INFO  svd4rust::transform::make_field_array] offs 0 stride 4
+[INFO  svd4rust] running: MergeFieldsets(MergeFieldsets { from: "io::regs::.*Int.*", to: "io::regs::Int", main: Some(".*0"), check: None })
+[INFO  svd4rust::transform::merge_fieldsets] Merging fieldsets, dest: io::regs::Int
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::DormantWakeInte1
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Intr0
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::DormantWakeInts3
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::DormantWakeInts2
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::DormantWakeInts1
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Proc0Ints0
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Intr3
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Intr2
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Proc0Intf0
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Proc0Inte2
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::DormantWakeIntf1
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::DormantWakeIntf0
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Proc1Ints2
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Proc0Ints2
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::DormantWakeInte0
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Proc0Inte3
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Proc1Inte1
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Proc0Intf1
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::DormantWakeInte3
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Intr1
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Proc1Inte0
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Proc0Ints3
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Proc1Intf0
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Proc0Inte0
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::DormantWakeIntf2
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Proc1Inte2
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Proc0Intf2
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Proc1Intf2
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Proc1Intf1
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Proc1Ints1
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::DormantWakeIntf3
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Proc0Inte1
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::DormantWakeInte2
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Proc1Inte3
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Proc0Intf3
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::DormantWakeInts0
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Proc0Ints1
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Proc1Ints0
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Proc1Ints3
+[INFO  svd4rust::transform::merge_fieldsets]    io::regs::Proc1Intf3
+[INFO  svd4rust] running: MakeRegisterArray(MakeRegisterArray { blocks: "io::Io", from: "(.*int.*)\\d+", to: "$1" })
+[INFO  svd4rust::transform::make_register_array] arrayizing to proc0_intf
+[INFO  svd4rust::transform::make_register_array]     proc0_intf0
+[INFO  svd4rust::transform::make_register_array]     proc0_intf1
+[INFO  svd4rust::transform::make_register_array]     proc0_intf2
+[INFO  svd4rust::transform::make_register_array]     proc0_intf3
+[INFO  svd4rust::transform::make_register_array] offs 272 stride 4
+[INFO  svd4rust::transform::make_register_array] arrayizing to proc1_inte
+[INFO  svd4rust::transform::make_register_array]     proc1_inte0
+[INFO  svd4rust::transform::make_register_array]     proc1_inte1
+[INFO  svd4rust::transform::make_register_array]     proc1_inte2
+[INFO  svd4rust::transform::make_register_array]     proc1_inte3
+[INFO  svd4rust::transform::make_register_array] offs 304 stride 4
+[INFO  svd4rust::transform::make_register_array] arrayizing to proc1_intf
+[INFO  svd4rust::transform::make_register_array]     proc1_intf0
+[INFO  svd4rust::transform::make_register_array]     proc1_intf1
+[INFO  svd4rust::transform::make_register_array]     proc1_intf2
+[INFO  svd4rust::transform::make_register_array]     proc1_intf3
+[INFO  svd4rust::transform::make_register_array] offs 320 stride 4
+[INFO  svd4rust::transform::make_register_array] arrayizing to dormant_wake_inte
+[INFO  svd4rust::transform::make_register_array]     dormant_wake_inte0
+[INFO  svd4rust::transform::make_register_array]     dormant_wake_inte1
+[INFO  svd4rust::transform::make_register_array]     dormant_wake_inte2
+[INFO  svd4rust::transform::make_register_array]     dormant_wake_inte3
+[INFO  svd4rust::transform::make_register_array] offs 352 stride 4
+[INFO  svd4rust::transform::make_register_array] arrayizing to proc0_inte
+[INFO  svd4rust::transform::make_register_array]     proc0_inte0
+[INFO  svd4rust::transform::make_register_array]     proc0_inte1
+[INFO  svd4rust::transform::make_register_array]     proc0_inte2
+[INFO  svd4rust::transform::make_register_array]     proc0_inte3
+[INFO  svd4rust::transform::make_register_array] offs 256 stride 4
+[INFO  svd4rust::transform::make_register_array] arrayizing to dormant_wake_ints
+[INFO  svd4rust::transform::make_register_array]     dormant_wake_ints0
+[INFO  svd4rust::transform::make_register_array]     dormant_wake_ints1
+[INFO  svd4rust::transform::make_register_array]     dormant_wake_ints2
+[INFO  svd4rust::transform::make_register_array]     dormant_wake_ints3
+[INFO  svd4rust::transform::make_register_array] offs 384 stride 4
+[INFO  svd4rust::transform::make_register_array] arrayizing to dormant_wake_intf
+[INFO  svd4rust::transform::make_register_array]     dormant_wake_intf0
+[INFO  svd4rust::transform::make_register_array]     dormant_wake_intf1
+[INFO  svd4rust::transform::make_register_array]     dormant_wake_intf2
+[INFO  svd4rust::transform::make_register_array]     dormant_wake_intf3
+[INFO  svd4rust::transform::make_register_array] offs 368 stride 4
+[INFO  svd4rust::transform::make_register_array] arrayizing to intr
+[INFO  svd4rust::transform::make_register_array]     intr0
+[INFO  svd4rust::transform::make_register_array]     intr1
+[INFO  svd4rust::transform::make_register_array]     intr2
+[INFO  svd4rust::transform::make_register_array]     intr3
+[INFO  svd4rust::transform::make_register_array] offs 240 stride 4
+[INFO  svd4rust::transform::make_register_array] arrayizing to proc1_ints
+[INFO  svd4rust::transform::make_register_array]     proc1_ints0
+[INFO  svd4rust::transform::make_register_array]     proc1_ints1
+[INFO  svd4rust::transform::make_register_array]     proc1_ints2
+[INFO  svd4rust::transform::make_register_array]     proc1_ints3
+[INFO  svd4rust::transform::make_register_array] offs 336 stride 4
+[INFO  svd4rust::transform::make_register_array] arrayizing to proc0_ints
+[INFO  svd4rust::transform::make_register_array]     proc0_ints0
+[INFO  svd4rust::transform::make_register_array]     proc0_ints1
+[INFO  svd4rust::transform::make_register_array]     proc0_ints2
+[INFO  svd4rust::transform::make_register_array]     proc0_ints3
+[INFO  svd4rust::transform::make_register_array] offs 288 stride 4
+[INFO  svd4rust] running: MakeBlock(MakeBlock { blocks: "io::Io", from: "(.*)_(int[sfre])", to_outer: "int_$1", to_block: "io::Int", to_inner: "$2" })
+[INFO  svd4rust::transform::make_block] blockifizing to int_proc1
+[INFO  svd4rust::transform::make_block]     proc1_inte
+[INFO  svd4rust::transform::make_block]     proc1_intf
+[INFO  svd4rust::transform::make_block]     proc1_ints
+[INFO  svd4rust::transform::make_block] blockifizing to int_dormant_wake
+[INFO  svd4rust::transform::make_block]     dormant_wake_inte
+[INFO  svd4rust::transform::make_block]     dormant_wake_intf
+[INFO  svd4rust::transform::make_block]     dormant_wake_ints
+[INFO  svd4rust::transform::make_block] blockifizing to int_proc0
+[INFO  svd4rust::transform::make_block]     proc0_inte
+[INFO  svd4rust::transform::make_block]     proc0_intf
+[INFO  svd4rust::transform::make_block]     proc0_ints
+[INFO  svd4rust] running: MakeRegisterArray(MakeRegisterArray { blocks: "io::Io", from: "int_proc\\d", to: "int_proc" })
+[INFO  svd4rust::transform::make_register_array] arrayizing to int_proc
+[INFO  svd4rust::transform::make_register_array]     int_proc0
+[INFO  svd4rust::transform::make_register_array]     int_proc1
+[INFO  svd4rust::transform::make_register_array] offs 256 stride 48
+[INFO  svd4rust] running: MergeBlocks(MergeBlocks { from: "(io::Io|io_qspi::IoQspi)", to: "io::Io", main: Some("io::Io"), check: None })
+[INFO  svd4rust::transform::merge_blocks] Merging fieldsets, dest: io::Io
+[INFO  svd4rust::transform::merge_blocks]    io_qspi::IoQspi
+[INFO  svd4rust::transform::merge_blocks]    io::Io
+[INFO  svd4rust] running: Rename(Rename { from: "pads_bank0::(.*)", to: "pads::$1" })
+[INFO  svd4rust] running: Rename(Rename { from: "pads::PadsBank0", to: "pads::Pads" })
+[INFO  svd4rust] running: MergeEnums(MergeEnums { from: "pads::vals::.*Drive", to: "pads::vals::Drive" })
+[INFO  svd4rust::transform::merge_enums] Merging enums, dest: pads::vals::Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio9Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::SwclkDrive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio1Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio29Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio11Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio5Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio14Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio8Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio28Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio16Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::SwdDrive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio23Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio27Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio18Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio2Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio25Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio17Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio22Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio4Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio0Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio24Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio20Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio6Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio10Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio12Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio3Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio26Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio13Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio21Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio15Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio19Drive
+[INFO  svd4rust::transform::merge_enums]    pads::vals::Gpio7Drive
+[INFO  svd4rust] running: MergeFieldsets(MergeFieldsets { from: "pads::regs::(Gpio\\d+|Swclk|Swd)", to: "pads::regs::GpioCtrl", main: None, check: Names })
+[INFO  svd4rust::transform::merge_fieldsets] Merging fieldsets, dest: pads::regs::GpioCtrl
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio2
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio6
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio21
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio16
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio17
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio20
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio3
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio5
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio27
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio15
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio1
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Swclk
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio22
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio9
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio11
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio28
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio18
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio26
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio19
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio8
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio23
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio12
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio13
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio7
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio24
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio25
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio10
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio14
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio4
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio29
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Swd
+[INFO  svd4rust::transform::merge_fieldsets]    pads::regs::Gpio0
+[INFO  svd4rust] running: MakeRegisterArray(MakeRegisterArray { blocks: "pads::Pads", from: "(gpio\\d+|swclk|swd)", to: "gpio" })
+[INFO  svd4rust::transform::make_register_array] arrayizing to gpio
+[INFO  svd4rust::transform::make_register_array]     gpio0
+[INFO  svd4rust::transform::make_register_array]     gpio1
+[INFO  svd4rust::transform::make_register_array]     gpio2
+[INFO  svd4rust::transform::make_register_array]     gpio3
+[INFO  svd4rust::transform::make_register_array]     gpio4
+[INFO  svd4rust::transform::make_register_array]     gpio5
+[INFO  svd4rust::transform::make_register_array]     gpio6
+[INFO  svd4rust::transform::make_register_array]     gpio7
+[INFO  svd4rust::transform::make_register_array]     gpio8
+[INFO  svd4rust::transform::make_register_array]     gpio9
+[INFO  svd4rust::transform::make_register_array]     gpio10
+[INFO  svd4rust::transform::make_register_array]     gpio11
+[INFO  svd4rust::transform::make_register_array]     gpio12
+[INFO  svd4rust::transform::make_register_array]     gpio13
+[INFO  svd4rust::transform::make_register_array]     gpio14
+[INFO  svd4rust::transform::make_register_array]     gpio15
+[INFO  svd4rust::transform::make_register_array]     gpio16
+[INFO  svd4rust::transform::make_register_array]     gpio17
+[INFO  svd4rust::transform::make_register_array]     gpio18
+[INFO  svd4rust::transform::make_register_array]     gpio19
+[INFO  svd4rust::transform::make_register_array]     gpio20
+[INFO  svd4rust::transform::make_register_array]     gpio21
+[INFO  svd4rust::transform::make_register_array]     gpio22
+[INFO  svd4rust::transform::make_register_array]     gpio23
+[INFO  svd4rust::transform::make_register_array]     gpio24
+[INFO  svd4rust::transform::make_register_array]     gpio25
+[INFO  svd4rust::transform::make_register_array]     gpio26
+[INFO  svd4rust::transform::make_register_array]     gpio27
+[INFO  svd4rust::transform::make_register_array]     gpio28
+[INFO  svd4rust::transform::make_register_array]     gpio29
+[INFO  svd4rust::transform::make_register_array]     swclk
+[INFO  svd4rust::transform::make_register_array]     swd
+[INFO  svd4rust::transform::make_register_array] offs 4 stride 4
+[INFO  svd4rust] running: MergeBlocks(MergeBlocks { from: "(pads::Pads|pads_qspi::PadsQspi)", to: "pads::Pads", main: Some("pads::Pads"), check: None })
+[INFO  svd4rust::transform::merge_blocks] Merging fieldsets, dest: pads::Pads
+[INFO  svd4rust::transform::merge_blocks]    pads_qspi::PadsQspi
+[INFO  svd4rust::transform::merge_blocks]    pads::Pads
+[INFO  svd4rust] running: Rename(Rename { from: "pll_sys::(.*)", to: "pll::$1" })
+[INFO  svd4rust] running: Rename(Rename { from: "pll::PllSys", to: "pll::Pll" })
+[INFO  svd4rust] running: MergeEnums(MergeEnums { from: "pwm::vals::Ch\\dCsrDivmode", to: "pwm::vals::Divmode" })
+[INFO  svd4rust::transform::merge_enums] Merging enums, dest: pwm::vals::Divmode
+[INFO  svd4rust::transform::merge_enums]    pwm::vals::Ch6CsrDivmode
+[INFO  svd4rust::transform::merge_enums]    pwm::vals::Ch4CsrDivmode
+[INFO  svd4rust::transform::merge_enums]    pwm::vals::Ch0CsrDivmode
+[INFO  svd4rust::transform::merge_enums]    pwm::vals::Ch2CsrDivmode
+[INFO  svd4rust::transform::merge_enums]    pwm::vals::Ch5CsrDivmode
+[INFO  svd4rust::transform::merge_enums]    pwm::vals::Ch3CsrDivmode
+[INFO  svd4rust::transform::merge_enums]    pwm::vals::Ch7CsrDivmode
+[INFO  svd4rust::transform::merge_enums]    pwm::vals::Ch1CsrDivmode
+[INFO  svd4rust] running: MergeEnums(MergeEnums { from: "rosc::vals::.+Passwd", to: "rosc::vals::Passwd" })
+[INFO  svd4rust::transform::merge_enums] Merging enums, dest: rosc::vals::Passwd
+[INFO  svd4rust::transform::merge_enums]    rosc::vals::FreqaPasswd
+[INFO  svd4rust::transform::merge_enums]    rosc::vals::FreqbPasswd
+[INFO  svd4rust] running: MergeFieldsets(MergeFieldsets { from: "resets::regs::(Reset|ResetDone)", to: "resets::regs::Peripherals", main: None, check: Names })
+[INFO  svd4rust::transform::merge_fieldsets] Merging fieldsets, dest: resets::regs::Peripherals
+[INFO  svd4rust::transform::merge_fieldsets]    resets::regs::ResetDone
+[INFO  svd4rust::transform::merge_fieldsets]    resets::regs::Reset

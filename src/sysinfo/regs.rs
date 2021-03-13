@@ -2,14 +2,8 @@ use crate::generic::*;
 #[doc = "Platform register. Allows software to know what environment it is running in."]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct Platform(u32);
+pub struct Platform(pub u32);
 impl Platform {
-    pub const fn to_bits(&self) -> u32 {
-        self.0
-    }
-    pub const fn from_bits(val: u32) -> Platform {
-        Platform(val)
-    }
     pub const fn asic(&self) -> bool {
         let val = (self.0 >> 1u32) & 0x01;
         val != 0
@@ -33,14 +27,8 @@ impl Default for Platform {
 #[doc = "JEDEC JEP-106 compliant chip identifier."]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct ChipId(u32);
+pub struct ChipId(pub u32);
 impl ChipId {
-    pub const fn to_bits(&self) -> u32 {
-        self.0
-    }
-    pub const fn from_bits(val: u32) -> ChipId {
-        ChipId(val)
-    }
     pub const fn revision(&self) -> u8 {
         let val = (self.0 >> 28u32) & 0x0f;
         val as u8

@@ -1,15 +1,47 @@
 use crate::generic::*;
+#[doc = "Result of most recent ADC conversion"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Result(pub u32);
+impl Result {
+    pub const fn result(&self) -> u16 {
+        let val = (self.0 >> 0u32) & 0x0fff;
+        val as u16
+    }
+    pub fn set_result(&mut self, val: u16) {
+        self.0 = (self.0 & !(0x0fff << 0u32)) | (((val as u32) & 0x0fff) << 0u32);
+    }
+}
+impl Default for Result {
+    fn default() -> Result {
+        Result(0)
+    }
+}
+#[doc = "Interrupt Force"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Intf(pub u32);
+impl Intf {
+    #[doc = "Triggered when the sample FIFO reaches a certain level. This level can be programmed via the FCS_THRESH field."]
+    pub const fn fifo(&self) -> bool {
+        let val = (self.0 >> 0u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Triggered when the sample FIFO reaches a certain level. This level can be programmed via the FCS_THRESH field."]
+    pub fn set_fifo(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
+    }
+}
+impl Default for Intf {
+    fn default() -> Intf {
+        Intf(0)
+    }
+}
 #[doc = "Interrupt status after masking & forcing"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct Ints(u32);
+pub struct Ints(pub u32);
 impl Ints {
-    pub const fn to_bits(&self) -> u32 {
-        self.0
-    }
-    pub const fn from_bits(val: u32) -> Ints {
-        Ints(val)
-    }
     #[doc = "Triggered when the sample FIFO reaches a certain level. This level can be programmed via the FCS_THRESH field."]
     pub const fn fifo(&self) -> bool {
         let val = (self.0 >> 0u32) & 0x01;
@@ -25,41 +57,11 @@ impl Default for Ints {
         Ints(0)
     }
 }
-#[doc = "Result of most recent ADC conversion"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Result(u32);
-impl Result {
-    pub const fn to_bits(&self) -> u32 {
-        self.0
-    }
-    pub const fn from_bits(val: u32) -> Result {
-        Result(val)
-    }
-    pub const fn result(&self) -> u16 {
-        let val = (self.0 >> 0u32) & 0x0fff;
-        val as u16
-    }
-    pub fn set_result(&mut self, val: u16) {
-        self.0 = (self.0 & !(0x0fff << 0u32)) | (((val as u32) & 0x0fff) << 0u32);
-    }
-}
-impl Default for Result {
-    fn default() -> Result {
-        Result(0)
-    }
-}
 #[doc = "ADC Control and Status"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct Cs(u32);
+pub struct Cs(pub u32);
 impl Cs {
-    pub const fn to_bits(&self) -> u32 {
-        self.0
-    }
-    pub const fn from_bits(val: u32) -> Cs {
-        Cs(val)
-    }
     #[doc = "Round-robin sampling. 1 bit per channel. Set all bits to 0 to disable. Otherwise, the ADC will cycle through each enabled channel in a round-robin fashion. The first channel to be sampled will be the one currently indicated by AINSEL. AINSEL will be updated after each conversion with the newly-selected channel."]
     pub const fn rrobin(&self) -> u8 {
         let val = (self.0 >> 16u32) & 0x1f;
@@ -150,14 +152,8 @@ impl Default for Cs {
 #[doc = "FIFO control and status"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct Fcs(u32);
+pub struct Fcs(pub u32);
 impl Fcs {
-    pub const fn to_bits(&self) -> u32 {
-        self.0
-    }
-    pub const fn from_bits(val: u32) -> Fcs {
-        Fcs(val)
-    }
     #[doc = "DREQ/IRQ asserted when level >= threshold"]
     pub const fn thresh(&self) -> u8 {
         let val = (self.0 >> 24u32) & 0x0f;
@@ -250,102 +246,11 @@ impl Default for Fcs {
         Fcs(0)
     }
 }
-#[doc = "Interrupt Enable"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Inte(u32);
-impl Inte {
-    pub const fn to_bits(&self) -> u32 {
-        self.0
-    }
-    pub const fn from_bits(val: u32) -> Inte {
-        Inte(val)
-    }
-    #[doc = "Triggered when the sample FIFO reaches a certain level. This level can be programmed via the FCS_THRESH field."]
-    pub const fn fifo(&self) -> bool {
-        let val = (self.0 >> 0u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Triggered when the sample FIFO reaches a certain level. This level can be programmed via the FCS_THRESH field."]
-    pub fn set_fifo(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
-    }
-}
-impl Default for Inte {
-    fn default() -> Inte {
-        Inte(0)
-    }
-}
-#[doc = "Conversion result FIFO"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Fifo(u32);
-impl Fifo {
-    pub const fn to_bits(&self) -> u32 {
-        self.0
-    }
-    pub const fn from_bits(val: u32) -> Fifo {
-        Fifo(val)
-    }
-    #[doc = "1 if this particular sample experienced a conversion error. Remains in the same location if the sample is shifted."]
-    pub const fn err(&self) -> bool {
-        let val = (self.0 >> 15u32) & 0x01;
-        val != 0
-    }
-    #[doc = "1 if this particular sample experienced a conversion error. Remains in the same location if the sample is shifted."]
-    pub fn set_err(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 15u32)) | (((val as u32) & 0x01) << 15u32);
-    }
-    pub const fn val(&self) -> u16 {
-        let val = (self.0 >> 0u32) & 0x0fff;
-        val as u16
-    }
-    pub fn set_val(&mut self, val: u16) {
-        self.0 = (self.0 & !(0x0fff << 0u32)) | (((val as u32) & 0x0fff) << 0u32);
-    }
-}
-impl Default for Fifo {
-    fn default() -> Fifo {
-        Fifo(0)
-    }
-}
-#[doc = "Raw Interrupts"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Intr(u32);
-impl Intr {
-    pub const fn to_bits(&self) -> u32 {
-        self.0
-    }
-    pub const fn from_bits(val: u32) -> Intr {
-        Intr(val)
-    }
-    #[doc = "Triggered when the sample FIFO reaches a certain level. This level can be programmed via the FCS_THRESH field."]
-    pub const fn fifo(&self) -> bool {
-        let val = (self.0 >> 0u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Triggered when the sample FIFO reaches a certain level. This level can be programmed via the FCS_THRESH field."]
-    pub fn set_fifo(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
-    }
-}
-impl Default for Intr {
-    fn default() -> Intr {
-        Intr(0)
-    }
-}
 #[doc = "Clock divider. If non-zero, CS_START_MANY will start conversions at regular intervals rather than back-to-back. The divider is reset when either of these fields are written. Total period is 1 + INT + FRAC / 256"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct Div(u32);
+pub struct Div(pub u32);
 impl Div {
-    pub const fn to_bits(&self) -> u32 {
-        self.0
-    }
-    pub const fn from_bits(val: u32) -> Div {
-        Div(val)
-    }
     #[doc = "Integer part of clock divisor."]
     pub const fn int(&self) -> u16 {
         let val = (self.0 >> 8u32) & 0xffff;
@@ -370,17 +275,11 @@ impl Default for Div {
         Div(0)
     }
 }
-#[doc = "Interrupt Force"]
+#[doc = "Raw Interrupts"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct Intf(u32);
-impl Intf {
-    pub const fn to_bits(&self) -> u32 {
-        self.0
-    }
-    pub const fn from_bits(val: u32) -> Intf {
-        Intf(val)
-    }
+pub struct Intr(pub u32);
+impl Intr {
     #[doc = "Triggered when the sample FIFO reaches a certain level. This level can be programmed via the FCS_THRESH field."]
     pub const fn fifo(&self) -> bool {
         let val = (self.0 >> 0u32) & 0x01;
@@ -391,8 +290,55 @@ impl Intf {
         self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
     }
 }
-impl Default for Intf {
-    fn default() -> Intf {
-        Intf(0)
+impl Default for Intr {
+    fn default() -> Intr {
+        Intr(0)
+    }
+}
+#[doc = "Conversion result FIFO"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Fifo(pub u32);
+impl Fifo {
+    #[doc = "1 if this particular sample experienced a conversion error. Remains in the same location if the sample is shifted."]
+    pub const fn err(&self) -> bool {
+        let val = (self.0 >> 15u32) & 0x01;
+        val != 0
+    }
+    #[doc = "1 if this particular sample experienced a conversion error. Remains in the same location if the sample is shifted."]
+    pub fn set_err(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 15u32)) | (((val as u32) & 0x01) << 15u32);
+    }
+    pub const fn val(&self) -> u16 {
+        let val = (self.0 >> 0u32) & 0x0fff;
+        val as u16
+    }
+    pub fn set_val(&mut self, val: u16) {
+        self.0 = (self.0 & !(0x0fff << 0u32)) | (((val as u32) & 0x0fff) << 0u32);
+    }
+}
+impl Default for Fifo {
+    fn default() -> Fifo {
+        Fifo(0)
+    }
+}
+#[doc = "Interrupt Enable"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Inte(pub u32);
+impl Inte {
+    #[doc = "Triggered when the sample FIFO reaches a certain level. This level can be programmed via the FCS_THRESH field."]
+    pub const fn fifo(&self) -> bool {
+        let val = (self.0 >> 0u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Triggered when the sample FIFO reaches a certain level. This level can be programmed via the FCS_THRESH field."]
+    pub fn set_fifo(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
+    }
+}
+impl Default for Inte {
+    fn default() -> Inte {
+        Inte(0)
     }
 }

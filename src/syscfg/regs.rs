@@ -1,15 +1,27 @@
 use crate::generic::*;
+#[doc = "For each bit, if 1, bypass the input synchronizer between that GPIO and the GPIO input register in the SIO. The input synchronizers should generally be unbypassed, to avoid injecting metastabilities into processors. If you're feeling brave, you can bypass to save two cycles of input latency. This register applies to GPIO 0...29."]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct ProcInSyncBypass(pub u32);
+impl ProcInSyncBypass {
+    pub const fn proc_in_sync_bypass(&self) -> u32 {
+        let val = (self.0 >> 0u32) & 0x3fff_ffff;
+        val as u32
+    }
+    pub fn set_proc_in_sync_bypass(&mut self, val: u32) {
+        self.0 = (self.0 & !(0x3fff_ffff << 0u32)) | (((val as u32) & 0x3fff_ffff) << 0u32);
+    }
+}
+impl Default for ProcInSyncBypass {
+    fn default() -> ProcInSyncBypass {
+        ProcInSyncBypass(0)
+    }
+}
 #[doc = "Control power downs to memories. Set high to power down memories. Use with extreme caution"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct Mempowerdown(u32);
+pub struct Mempowerdown(pub u32);
 impl Mempowerdown {
-    pub const fn to_bits(&self) -> u32 {
-        self.0
-    }
-    pub const fn from_bits(val: u32) -> Mempowerdown {
-        Mempowerdown(val)
-    }
     pub const fn rom(&self) -> bool {
         let val = (self.0 >> 7u32) & 0x01;
         val != 0
@@ -72,17 +84,29 @@ impl Default for Mempowerdown {
         Mempowerdown(0)
     }
 }
+#[doc = "For each bit, if 1, bypass the input synchronizer between that GPIO and the GPIO input register in the SIO. The input synchronizers should generally be unbypassed, to avoid injecting metastabilities into processors. If you're feeling brave, you can bypass to save two cycles of input latency. This register applies to GPIO 30...35 (the QSPI IOs)."]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct ProcInSyncBypassHi(pub u32);
+impl ProcInSyncBypassHi {
+    pub const fn proc_in_sync_bypass_hi(&self) -> u8 {
+        let val = (self.0 >> 0u32) & 0x3f;
+        val as u8
+    }
+    pub fn set_proc_in_sync_bypass_hi(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x3f << 0u32)) | (((val as u32) & 0x3f) << 0u32);
+    }
+}
+impl Default for ProcInSyncBypassHi {
+    fn default() -> ProcInSyncBypassHi {
+        ProcInSyncBypassHi(0)
+    }
+}
 #[doc = "Configuration for processors"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct ProcConfig(u32);
+pub struct ProcConfig(pub u32);
 impl ProcConfig {
-    pub const fn to_bits(&self) -> u32 {
-        self.0
-    }
-    pub const fn from_bits(val: u32) -> ProcConfig {
-        ProcConfig(val)
-    }
     #[doc = "Configure proc1 DAP instance ID. Recommend that this is NOT changed until you require debug access in multi-chip environment WARNING: do not set to 15 as this is reserved for RescueDP"]
     pub const fn proc1_dap_instid(&self) -> u8 {
         let val = (self.0 >> 28u32) & 0x0f;
@@ -128,14 +152,8 @@ impl Default for ProcConfig {
 #[doc = "Directly control the SWD debug port of either processor"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct Dbgforce(u32);
+pub struct Dbgforce(pub u32);
 impl Dbgforce {
-    pub const fn to_bits(&self) -> u32 {
-        self.0
-    }
-    pub const fn from_bits(val: u32) -> Dbgforce {
-        Dbgforce(val)
-    }
     #[doc = "Attach processor 1 debug port to syscfg controls, and disconnect it from external SWD pads."]
     pub const fn proc1_attach(&self) -> bool {
         let val = (self.0 >> 7u32) & 0x01;
@@ -212,53 +230,5 @@ impl Dbgforce {
 impl Default for Dbgforce {
     fn default() -> Dbgforce {
         Dbgforce(0)
-    }
-}
-#[doc = "For each bit, if 1, bypass the input synchronizer between that GPIO and the GPIO input register in the SIO. The input synchronizers should generally be unbypassed, to avoid injecting metastabilities into processors. If you're feeling brave, you can bypass to save two cycles of input latency. This register applies to GPIO 0...29."]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct ProcInSyncBypass(u32);
-impl ProcInSyncBypass {
-    pub const fn to_bits(&self) -> u32 {
-        self.0
-    }
-    pub const fn from_bits(val: u32) -> ProcInSyncBypass {
-        ProcInSyncBypass(val)
-    }
-    pub const fn proc_in_sync_bypass(&self) -> u32 {
-        let val = (self.0 >> 0u32) & 0x3fff_ffff;
-        val as u32
-    }
-    pub fn set_proc_in_sync_bypass(&mut self, val: u32) {
-        self.0 = (self.0 & !(0x3fff_ffff << 0u32)) | (((val as u32) & 0x3fff_ffff) << 0u32);
-    }
-}
-impl Default for ProcInSyncBypass {
-    fn default() -> ProcInSyncBypass {
-        ProcInSyncBypass(0)
-    }
-}
-#[doc = "For each bit, if 1, bypass the input synchronizer between that GPIO and the GPIO input register in the SIO. The input synchronizers should generally be unbypassed, to avoid injecting metastabilities into processors. If you're feeling brave, you can bypass to save two cycles of input latency. This register applies to GPIO 30...35 (the QSPI IOs)."]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct ProcInSyncBypassHi(u32);
-impl ProcInSyncBypassHi {
-    pub const fn to_bits(&self) -> u32 {
-        self.0
-    }
-    pub const fn from_bits(val: u32) -> ProcInSyncBypassHi {
-        ProcInSyncBypassHi(val)
-    }
-    pub const fn proc_in_sync_bypass_hi(&self) -> u8 {
-        let val = (self.0 >> 0u32) & 0x3f;
-        val as u8
-    }
-    pub fn set_proc_in_sync_bypass_hi(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x3f << 0u32)) | (((val as u32) & 0x3f) << 0u32);
-    }
-}
-impl Default for ProcInSyncBypassHi {
-    fn default() -> ProcInSyncBypassHi {
-        ProcInSyncBypassHi(0)
     }
 }

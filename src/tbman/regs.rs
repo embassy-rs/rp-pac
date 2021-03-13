@@ -2,14 +2,8 @@ use crate::generic::*;
 #[doc = "Indicates the type of platform in use"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct Platform(u32);
+pub struct Platform(pub u32);
 impl Platform {
-    pub const fn to_bits(&self) -> u32 {
-        self.0
-    }
-    pub const fn from_bits(val: u32) -> Platform {
-        Platform(val)
-    }
     #[doc = "Indicates the platform is an FPGA"]
     pub const fn fpga(&self) -> bool {
         let val = (self.0 >> 1u32) & 0x01;
