@@ -1,23 +1,5 @@
 use crate::generic::*;
 #[derive(Copy, Clone)]
-pub struct Irq(pub *mut u8);
-unsafe impl Send for Irq {}
-unsafe impl Sync for Irq {}
-impl Irq {
-    #[doc = "Interrupt Enable for irq1"]
-    pub fn inte(self) -> Reg<regs::Intr, RW> {
-        unsafe { Reg::from_ptr(self.0.add(0usize)) }
-    }
-    #[doc = "Interrupt Force for irq1"]
-    pub fn intf(self) -> Reg<regs::Intr, RW> {
-        unsafe { Reg::from_ptr(self.0.add(4usize)) }
-    }
-    #[doc = "Interrupt status after masking & forcing for irq1"]
-    pub fn ints(self) -> Reg<regs::Intr, RW> {
-        unsafe { Reg::from_ptr(self.0.add(8usize)) }
-    }
-}
-#[derive(Copy, Clone)]
 pub struct StateMachine(pub *mut u8);
 unsafe impl Send for StateMachine {}
 unsafe impl Sync for StateMachine {}
@@ -45,6 +27,24 @@ impl StateMachine {
     #[doc = "State machine pin control"]
     pub fn pinctrl(self) -> Reg<regs::SmPinctrl, RW> {
         unsafe { Reg::from_ptr(self.0.add(20usize)) }
+    }
+}
+#[derive(Copy, Clone)]
+pub struct Irq(pub *mut u8);
+unsafe impl Send for Irq {}
+unsafe impl Sync for Irq {}
+impl Irq {
+    #[doc = "Interrupt Enable for irq0"]
+    pub fn inte(self) -> Reg<regs::Intr, RW> {
+        unsafe { Reg::from_ptr(self.0.add(0usize)) }
+    }
+    #[doc = "Interrupt Force for irq0"]
+    pub fn intf(self) -> Reg<regs::Intr, RW> {
+        unsafe { Reg::from_ptr(self.0.add(4usize)) }
+    }
+    #[doc = "Interrupt status after masking & forcing for irq0"]
+    pub fn ints(self) -> Reg<regs::Intr, RW> {
+        unsafe { Reg::from_ptr(self.0.add(8usize)) }
     }
 }
 #[doc = "Programmable IO block"]

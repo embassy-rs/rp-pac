@@ -17,7 +17,7 @@ impl SniffCtrlCalc {
     #[doc = "Calculate a simple 32-bit checksum (addition with a 32 bit accumulator)"]
     pub const SUM: Self = Self(0x0f);
 }
-#[doc = "DMA Channel 8 Control and Status"]
+#[doc = "DMA Channel 0 Control and Status"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
 pub struct DataSize(pub u8);
@@ -26,7 +26,7 @@ impl DataSize {
     pub const SIZE_HALFWORD: Self = Self(0x01);
     pub const SIZE_WORD: Self = Self(0x02);
 }
-#[doc = "DMA Channel 8 Control and Status"]
+#[doc = "DMA Channel 4 Control and Status"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
 pub struct TreqSel(pub u8);

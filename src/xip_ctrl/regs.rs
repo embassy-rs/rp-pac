@@ -1,24 +1,4 @@
 use crate::generic::*;
-#[doc = "FIFO stream address"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct StreamAddr(pub u32);
-impl StreamAddr {
-    #[doc = "The address of the next word to be streamed from flash to the streaming FIFO. Increments automatically after each flash access. Write the initial access address here before starting a streaming read."]
-    pub const fn stream_addr(&self) -> u32 {
-        let val = (self.0 >> 2u32) & 0x3fff_ffff;
-        val as u32
-    }
-    #[doc = "The address of the next word to be streamed from flash to the streaming FIFO. Increments automatically after each flash access. Write the initial access address here before starting a streaming read."]
-    pub fn set_stream_addr(&mut self, val: u32) {
-        self.0 = (self.0 & !(0x3fff_ffff << 2u32)) | (((val as u32) & 0x3fff_ffff) << 2u32);
-    }
-}
-impl Default for StreamAddr {
-    fn default() -> StreamAddr {
-        StreamAddr(0)
-    }
-}
 #[doc = "FIFO stream control"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
@@ -37,6 +17,26 @@ impl StreamCtr {
 impl Default for StreamCtr {
     fn default() -> StreamCtr {
         StreamCtr(0)
+    }
+}
+#[doc = "Cache Flush control"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Flush(pub u32);
+impl Flush {
+    #[doc = "Write 1 to flush the cache. This clears the tag memory, but the data memory retains its contents. (This means cache-as-SRAM contents is not affected by flush or reset.) Reading will hold the bus (stall the processor) until the flush completes. Alternatively STAT can be polled until completion."]
+    pub const fn flush(&self) -> bool {
+        let val = (self.0 >> 0u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Write 1 to flush the cache. This clears the tag memory, but the data memory retains its contents. (This means cache-as-SRAM contents is not affected by flush or reset.) Reading will hold the bus (stall the processor) until the flush completes. Alternatively STAT can be polled until completion."]
+    pub fn set_flush(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
+    }
+}
+impl Default for Flush {
+    fn default() -> Flush {
+        Flush(0)
     }
 }
 #[doc = "Cache Status"]
@@ -115,23 +115,23 @@ impl Default for Ctrl {
         Ctrl(0)
     }
 }
-#[doc = "Cache Flush control"]
+#[doc = "FIFO stream address"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct Flush(pub u32);
-impl Flush {
-    #[doc = "Write 1 to flush the cache. This clears the tag memory, but the data memory retains its contents. (This means cache-as-SRAM contents is not affected by flush or reset.) Reading will hold the bus (stall the processor) until the flush completes. Alternatively STAT can be polled until completion."]
-    pub const fn flush(&self) -> bool {
-        let val = (self.0 >> 0u32) & 0x01;
-        val != 0
+pub struct StreamAddr(pub u32);
+impl StreamAddr {
+    #[doc = "The address of the next word to be streamed from flash to the streaming FIFO. Increments automatically after each flash access. Write the initial access address here before starting a streaming read."]
+    pub const fn stream_addr(&self) -> u32 {
+        let val = (self.0 >> 2u32) & 0x3fff_ffff;
+        val as u32
     }
-    #[doc = "Write 1 to flush the cache. This clears the tag memory, but the data memory retains its contents. (This means cache-as-SRAM contents is not affected by flush or reset.) Reading will hold the bus (stall the processor) until the flush completes. Alternatively STAT can be polled until completion."]
-    pub fn set_flush(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
+    #[doc = "The address of the next word to be streamed from flash to the streaming FIFO. Increments automatically after each flash access. Write the initial access address here before starting a streaming read."]
+    pub fn set_stream_addr(&mut self, val: u32) {
+        self.0 = (self.0 & !(0x3fff_ffff << 2u32)) | (((val as u32) & 0x3fff_ffff) << 2u32);
     }
 }
-impl Default for Flush {
-    fn default() -> Flush {
-        Flush(0)
+impl Default for StreamAddr {
+    fn default() -> StreamAddr {
+        StreamAddr(0)
     }
 }

@@ -21,20 +21,6 @@ impl Int {
     }
 }
 #[derive(Copy, Clone)]
-pub struct Gpio(pub *mut u8);
-unsafe impl Send for Gpio {}
-unsafe impl Sync for Gpio {}
-impl Gpio {
-    #[doc = "GPIO status"]
-    pub fn status(self) -> Reg<regs::GpioStatus, RW> {
-        unsafe { Reg::from_ptr(self.0.add(0usize)) }
-    }
-    #[doc = "GPIO control including function select and overrides."]
-    pub fn ctrl(self) -> Reg<regs::GpioCtrl, RW> {
-        unsafe { Reg::from_ptr(self.0.add(4usize)) }
-    }
-}
-#[derive(Copy, Clone)]
 pub struct Io(pub *mut u8);
 unsafe impl Send for Io {}
 unsafe impl Sync for Io {}
@@ -54,6 +40,20 @@ impl Io {
     pub fn int_proc(self, n: usize) -> Int {
         assert!(n < 2usize);
         unsafe { Int(self.0.add(256usize + n * 48usize)) }
+    }
+}
+#[derive(Copy, Clone)]
+pub struct Gpio(pub *mut u8);
+unsafe impl Send for Gpio {}
+unsafe impl Sync for Gpio {}
+impl Gpio {
+    #[doc = "GPIO status"]
+    pub fn status(self) -> Reg<regs::GpioStatus, RW> {
+        unsafe { Reg::from_ptr(self.0.add(0usize)) }
+    }
+    #[doc = "GPIO control including function select and overrides."]
+    pub fn ctrl(self) -> Reg<regs::GpioCtrl, RW> {
+        unsafe { Reg::from_ptr(self.0.add(4usize)) }
     }
 }
 pub mod regs;

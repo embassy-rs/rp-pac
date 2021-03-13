@@ -1,10 +1,10 @@
 use crate::generic::*;
 #[doc = "DW_apb_i2c address block"]
 #[derive(Copy, Clone)]
-pub struct I2c0(pub *mut u8);
-unsafe impl Send for I2c0 {}
-unsafe impl Sync for I2c0 {}
-impl I2c0 {
+pub struct I2c(pub *mut u8);
+unsafe impl Send for I2c {}
+unsafe impl Sync for I2c {}
+impl I2c {
     #[doc = "I2C Control Register. This register can be written only when the DW_apb_i2c is disabled, which corresponds to the IC_ENABLE[0]
 register being set to 0. Writes at other times have no effect. Read/Write Access: - bit 10 is read only. - bit 11 is read only - bit 16 is read only - bit 17 is read only - bits 18 and 19 are read only."]
     pub fn ic_con(self) -> Reg<regs::IcCon, RW> {

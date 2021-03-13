@@ -1,5 +1,5 @@
 use crate::generic::*;
-#[doc = "Execution/behavioural settings for state machine 2"]
+#[doc = "Execution/behavioural settings for state machine 0"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
 pub struct SmExecctrlStatusSel(pub u8);

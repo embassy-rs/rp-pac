@@ -1,9 +1,9 @@
 use crate::generic::*;
 #[derive(Copy, Clone)]
-pub struct Spi0(pub *mut u8);
-unsafe impl Send for Spi0 {}
-unsafe impl Sync for Spi0 {}
-impl Spi0 {
+pub struct Spi(pub *mut u8);
+unsafe impl Send for Spi {}
+unsafe impl Sync for Spi {}
+impl Spi {
     #[doc = "Control register 0, SSPCR0 on page 3-4"]
     pub fn sspcr0(self) -> Reg<regs::Sspcr0, RW> {
         unsafe { Reg::from_ptr(self.0.add(0usize)) }

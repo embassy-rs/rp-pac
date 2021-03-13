@@ -1,11 +1,4 @@
 use crate::generic::*;
-#[doc = "Controls the output divider"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Div(pub u16);
-impl Div {
-    pub const PASS: Self = Self(0x0aa0);
-}
 #[doc = "Ring Oscillator control"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
@@ -30,4 +23,11 @@ impl CtrlFreqRange {
     pub const MEDIUM: Self = Self(0x0fa5);
     pub const HIGH: Self = Self(0x0fa7);
     pub const TOOHIGH: Self = Self(0x0fa6);
+}
+#[doc = "Controls the output divider"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Div(pub u16);
+impl Div {
+    pub const PASS: Self = Self(0x0aa0);
 }

@@ -1,4 +1,59 @@
 use crate::generic::*;
+#[doc = "Interrupt Enable for proc0"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Int(pub u32);
+impl Int {
+    pub fn level_high(&self, n: usize) -> bool {
+        assert!(n < 8usize);
+        let offs = 1u32 + (n as u32) * 4u32;
+        let val = (self.0 >> offs) & 0x01;
+        val != 0
+    }
+    pub fn set_level_high(&mut self, n: usize, val: bool) {
+        assert!(n < 8usize);
+        let offs = 1u32 + (n as u32) * 4u32;
+        self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
+    }
+    pub fn edge_high(&self, n: usize) -> bool {
+        assert!(n < 8usize);
+        let offs = 3u32 + (n as u32) * 4u32;
+        let val = (self.0 >> offs) & 0x01;
+        val != 0
+    }
+    pub fn set_edge_high(&mut self, n: usize, val: bool) {
+        assert!(n < 8usize);
+        let offs = 3u32 + (n as u32) * 4u32;
+        self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
+    }
+    pub fn level_low(&self, n: usize) -> bool {
+        assert!(n < 8usize);
+        let offs = 0u32 + (n as u32) * 4u32;
+        let val = (self.0 >> offs) & 0x01;
+        val != 0
+    }
+    pub fn set_level_low(&mut self, n: usize, val: bool) {
+        assert!(n < 8usize);
+        let offs = 0u32 + (n as u32) * 4u32;
+        self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
+    }
+    pub fn edge_low(&self, n: usize) -> bool {
+        assert!(n < 8usize);
+        let offs = 2u32 + (n as u32) * 4u32;
+        let val = (self.0 >> offs) & 0x01;
+        val != 0
+    }
+    pub fn set_edge_low(&mut self, n: usize, val: bool) {
+        assert!(n < 8usize);
+        let offs = 2u32 + (n as u32) * 4u32;
+        self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
+    }
+}
+impl Default for Int {
+    fn default() -> Int {
+        Int(0)
+    }
+}
 #[doc = "GPIO status"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
@@ -128,60 +183,5 @@ impl GpioCtrl {
 impl Default for GpioCtrl {
     fn default() -> GpioCtrl {
         GpioCtrl(0)
-    }
-}
-#[doc = "Raw Interrupts"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Int(pub u32);
-impl Int {
-    pub fn edge_high(&self, n: usize) -> bool {
-        assert!(n < 8usize);
-        let offs = 3u32 + (n as u32) * 4u32;
-        let val = (self.0 >> offs) & 0x01;
-        val != 0
-    }
-    pub fn set_edge_high(&mut self, n: usize, val: bool) {
-        assert!(n < 8usize);
-        let offs = 3u32 + (n as u32) * 4u32;
-        self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
-    }
-    pub fn level_high(&self, n: usize) -> bool {
-        assert!(n < 8usize);
-        let offs = 1u32 + (n as u32) * 4u32;
-        let val = (self.0 >> offs) & 0x01;
-        val != 0
-    }
-    pub fn set_level_high(&mut self, n: usize, val: bool) {
-        assert!(n < 8usize);
-        let offs = 1u32 + (n as u32) * 4u32;
-        self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
-    }
-    pub fn edge_low(&self, n: usize) -> bool {
-        assert!(n < 8usize);
-        let offs = 2u32 + (n as u32) * 4u32;
-        let val = (self.0 >> offs) & 0x01;
-        val != 0
-    }
-    pub fn set_edge_low(&mut self, n: usize, val: bool) {
-        assert!(n < 8usize);
-        let offs = 2u32 + (n as u32) * 4u32;
-        self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
-    }
-    pub fn level_low(&self, n: usize) -> bool {
-        assert!(n < 8usize);
-        let offs = 0u32 + (n as u32) * 4u32;
-        let val = (self.0 >> offs) & 0x01;
-        val != 0
-    }
-    pub fn set_level_low(&mut self, n: usize, val: bool) {
-        assert!(n < 8usize);
-        let offs = 0u32 + (n as u32) * 4u32;
-        self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
-    }
-}
-impl Default for Int {
-    fn default() -> Int {
-        Int(0)
     }
 }

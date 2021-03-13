@@ -33,7 +33,7 @@ transforms:
     from: uart0::(.*)
     to: uart::$1
 - Rename:
-    from: uart0::Uart0
+    from: uart::Uart0
     to: uart::Uart
 
 
@@ -42,7 +42,7 @@ transforms:
     from: spi0::(.*)
     to: spi::$1
 - Rename:
-    from: spi0::Spi0
+    from: spi::Spi0
     to: spi::Spi
 
 
@@ -51,7 +51,7 @@ transforms:
     from: i2c0::(.*)
     to: i2c::$1
 - Rename:
-    from: i2c0::I2c0
+    from: i2c::I2c0
     to: i2c::I2c
 
 

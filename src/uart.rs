@@ -1,9 +1,9 @@
 use crate::generic::*;
 #[derive(Copy, Clone)]
-pub struct Uart0(pub *mut u8);
-unsafe impl Send for Uart0 {}
-unsafe impl Sync for Uart0 {}
-impl Uart0 {
+pub struct Uart(pub *mut u8);
+unsafe impl Send for Uart {}
+unsafe impl Sync for Uart {}
+impl Uart {
     #[doc = "Data Register, UARTDR"]
     pub fn uartdr(self) -> Reg<regs::Uartdr, RW> {
         unsafe { Reg::from_ptr(self.0.add(0usize)) }

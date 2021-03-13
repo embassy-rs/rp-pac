@@ -1,4 +1,33 @@
 use crate::generic::*;
+#[doc = "Controls the startup delay"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Startup(pub u32);
+impl Startup {
+    #[doc = "Multiplies the startup_delay by 4. This is of little value to the user given that the delay can be programmed directly"]
+    pub const fn x4(&self) -> bool {
+        let val = (self.0 >> 20u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Multiplies the startup_delay by 4. This is of little value to the user given that the delay can be programmed directly"]
+    pub fn set_x4(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 20u32)) | (((val as u32) & 0x01) << 20u32);
+    }
+    #[doc = "in multiples of 256*xtal_period"]
+    pub const fn delay(&self) -> u16 {
+        let val = (self.0 >> 0u32) & 0x3fff;
+        val as u16
+    }
+    #[doc = "in multiples of 256*xtal_period"]
+    pub fn set_delay(&mut self, val: u16) {
+        self.0 = (self.0 & !(0x3fff << 0u32)) | (((val as u32) & 0x3fff) << 0u32);
+    }
+}
+impl Default for Startup {
+    fn default() -> Startup {
+        Startup(0)
+    }
+}
 #[doc = "A down counter running at the xosc frequency which counts to zero and stops. To start the counter write a non-zero value. Can be used for short software pauses when setting up time sensitive hardware."]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
@@ -62,35 +91,6 @@ impl Status {
 impl Default for Status {
     fn default() -> Status {
         Status(0)
-    }
-}
-#[doc = "Controls the startup delay"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Startup(pub u32);
-impl Startup {
-    #[doc = "Multiplies the startup_delay by 4. This is of little value to the user given that the delay can be programmed directly"]
-    pub const fn x4(&self) -> bool {
-        let val = (self.0 >> 20u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Multiplies the startup_delay by 4. This is of little value to the user given that the delay can be programmed directly"]
-    pub fn set_x4(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 20u32)) | (((val as u32) & 0x01) << 20u32);
-    }
-    #[doc = "in multiples of 256*xtal_period"]
-    pub const fn delay(&self) -> u16 {
-        let val = (self.0 >> 0u32) & 0x3fff;
-        val as u16
-    }
-    #[doc = "in multiples of 256*xtal_period"]
-    pub fn set_delay(&mut self, val: u16) {
-        self.0 = (self.0 & !(0x3fff << 0u32)) | (((val as u32) & 0x3fff) << 0u32);
-    }
-}
-impl Default for Startup {
-    fn default() -> Startup {
-        Startup(0)
     }
 }
 #[doc = "Crystal Oscillator Control"]

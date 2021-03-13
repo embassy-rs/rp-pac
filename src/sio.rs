@@ -1,20 +1,67 @@
 use crate::generic::*;
+#[doc = "Single-cycle IO block Provides core-local and inter-core hardware for the two processors, with single-cycle access."]
 #[derive(Copy, Clone)]
-pub struct Fifo(pub *mut u8);
-unsafe impl Send for Fifo {}
-unsafe impl Sync for Fifo {}
-impl Fifo {
-    #[doc = "Status register for inter-core FIFOs (mailboxes). There is one FIFO in the core 0 -> core 1 direction, and one core 1 -> core 0. Both are 32 bits wide and 8 words deep. Core 0 can see the read side of the 1->0 FIFO (RX), and the write side of 0->1 FIFO (TX). Core 1 can see the read side of the 0->1 FIFO (RX), and the write side of 1->0 FIFO (TX). The SIO IRQ for each core is the logical OR of the VLD, WOF and ROE fields of its FIFO_ST register."]
-    pub fn st(self) -> Reg<regs::FifoSt, RW> {
+pub struct Sio(pub *mut u8);
+unsafe impl Send for Sio {}
+unsafe impl Sync for Sio {}
+impl Sio {
+    #[doc = "Processor core identifier Value is 0 when read from processor core 0, and 1 when read from processor core 1."]
+    pub fn cpuid(self) -> Reg<u32, R> {
         unsafe { Reg::from_ptr(self.0.add(0usize)) }
     }
-    #[doc = "Write access to this core's TX FIFO"]
-    pub fn wr(self) -> Reg<u32, W> {
+    #[doc = "Spinlock state A bitmap containing the state of all 32 spinlocks (1=locked). Mainly intended for debugging."]
+    pub fn spinlock_st(self) -> Reg<u32, R> {
+        unsafe { Reg::from_ptr(self.0.add(92usize)) }
+    }
+    pub fn div(self) -> Div {
+        unsafe { Div(self.0.add(96usize)) }
+    }
+    pub fn fifo(self) -> Fifo {
+        unsafe { Fifo(self.0.add(80usize)) }
+    }
+    pub fn interp(self, n: usize) -> Interp {
+        assert!(n < 2usize);
+        unsafe { Interp(self.0.add(128usize + n * 64usize)) }
+    }
+    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
+    pub fn spinlock(self, n: usize) -> Reg<u32, R> {
+        assert!(n < 32usize);
+        unsafe { Reg::from_ptr(self.0.add(256usize + n * 4usize)) }
+    }
+    #[doc = "Input value for GPIO pins"]
+    pub fn gpio_in(self, n: usize) -> Reg<u32, RW> {
+        assert!(n < 2usize);
+        unsafe { Reg::from_ptr(self.0.add(4usize + n * 4usize)) }
+    }
+    pub fn gpio_out(self, n: usize) -> Gpio {
+        assert!(n < 2usize);
+        unsafe { Gpio(self.0.add(16usize + n * 32usize)) }
+    }
+    pub fn gpio_oe(self, n: usize) -> Gpio {
+        assert!(n < 2usize);
+        unsafe { Gpio(self.0.add(32usize + n * 32usize)) }
+    }
+}
+#[derive(Copy, Clone)]
+pub struct Gpio(pub *mut u8);
+unsafe impl Send for Gpio {}
+unsafe impl Sync for Gpio {}
+impl Gpio {
+    #[doc = "GPIO output value"]
+    pub fn value(self) -> Reg<u32, RW> {
+        unsafe { Reg::from_ptr(self.0.add(0usize)) }
+    }
+    #[doc = "GPIO output value set"]
+    pub fn value_set(self) -> Reg<u32, RW> {
         unsafe { Reg::from_ptr(self.0.add(4usize)) }
     }
-    #[doc = "Read access to this core's RX FIFO"]
-    pub fn rd(self) -> Reg<u32, R> {
+    #[doc = "GPIO output value clear"]
+    pub fn value_clr(self) -> Reg<u32, RW> {
         unsafe { Reg::from_ptr(self.0.add(8usize)) }
+    }
+    #[doc = "GPIO output value XOR"]
+    pub fn value_xor(self) -> Reg<u32, RW> {
+        unsafe { Reg::from_ptr(self.0.add(12usize)) }
     }
 }
 #[derive(Copy, Clone)]
@@ -52,68 +99,21 @@ impl Div {
     }
 }
 #[derive(Copy, Clone)]
-pub struct Gpio(pub *mut u8);
-unsafe impl Send for Gpio {}
-unsafe impl Sync for Gpio {}
-impl Gpio {
-    #[doc = "GPIO output value"]
-    pub fn value(self) -> Reg<u32, RW> {
+pub struct Fifo(pub *mut u8);
+unsafe impl Send for Fifo {}
+unsafe impl Sync for Fifo {}
+impl Fifo {
+    #[doc = "Status register for inter-core FIFOs (mailboxes). There is one FIFO in the core 0 -> core 1 direction, and one core 1 -> core 0. Both are 32 bits wide and 8 words deep. Core 0 can see the read side of the 1->0 FIFO (RX), and the write side of 0->1 FIFO (TX). Core 1 can see the read side of the 0->1 FIFO (RX), and the write side of 1->0 FIFO (TX). The SIO IRQ for each core is the logical OR of the VLD, WOF and ROE fields of its FIFO_ST register."]
+    pub fn st(self) -> Reg<regs::FifoSt, RW> {
         unsafe { Reg::from_ptr(self.0.add(0usize)) }
     }
-    #[doc = "GPIO output value set"]
-    pub fn value_set(self) -> Reg<u32, RW> {
+    #[doc = "Write access to this core's TX FIFO"]
+    pub fn wr(self) -> Reg<u32, W> {
         unsafe { Reg::from_ptr(self.0.add(4usize)) }
     }
-    #[doc = "GPIO output value clear"]
-    pub fn value_clr(self) -> Reg<u32, RW> {
+    #[doc = "Read access to this core's RX FIFO"]
+    pub fn rd(self) -> Reg<u32, R> {
         unsafe { Reg::from_ptr(self.0.add(8usize)) }
-    }
-    #[doc = "GPIO output value XOR"]
-    pub fn value_xor(self) -> Reg<u32, RW> {
-        unsafe { Reg::from_ptr(self.0.add(12usize)) }
-    }
-}
-#[doc = "Single-cycle IO block Provides core-local and inter-core hardware for the two processors, with single-cycle access."]
-#[derive(Copy, Clone)]
-pub struct Sio(pub *mut u8);
-unsafe impl Send for Sio {}
-unsafe impl Sync for Sio {}
-impl Sio {
-    #[doc = "Processor core identifier Value is 0 when read from processor core 0, and 1 when read from processor core 1."]
-    pub fn cpuid(self) -> Reg<u32, R> {
-        unsafe { Reg::from_ptr(self.0.add(0usize)) }
-    }
-    #[doc = "Spinlock state A bitmap containing the state of all 32 spinlocks (1=locked). Mainly intended for debugging."]
-    pub fn spinlock_st(self) -> Reg<u32, R> {
-        unsafe { Reg::from_ptr(self.0.add(92usize)) }
-    }
-    pub fn div(self) -> Div {
-        unsafe { Div(self.0.add(96usize)) }
-    }
-    pub fn fifo(self) -> Fifo {
-        unsafe { Fifo(self.0.add(80usize)) }
-    }
-    pub fn interp(self, n: usize) -> Interp {
-        assert!(n < 2usize);
-        unsafe { Interp(self.0.add(128usize + n * 64usize)) }
-    }
-    #[doc = "Reading from a spinlock address will: - Return 0 if lock is already locked - Otherwise return nonzero, and simultaneously claim the lock Writing (any value) releases the lock. If core 0 and core 1 attempt to claim the same lock simultaneously, core 0 wins. The value returned on success is 0x1 << lock number."]
-    pub fn spinlock(self, n: usize) -> Reg<u32, R> {
-        assert!(n < 32usize);
-        unsafe { Reg::from_ptr(self.0.add(256usize + n * 4usize)) }
-    }
-    pub fn gpio_out(self, n: usize) -> Gpio {
-        assert!(n < 2usize);
-        unsafe { Gpio(self.0.add(16usize + n * 32usize)) }
-    }
-    #[doc = "Input value for GPIO pins"]
-    pub fn gpio_in(self, n: usize) -> Reg<u32, RW> {
-        assert!(n < 2usize);
-        unsafe { Reg::from_ptr(self.0.add(4usize + n * 4usize)) }
-    }
-    pub fn gpio_oe(self, n: usize) -> Gpio {
-        assert!(n < 2usize);
-        unsafe { Gpio(self.0.add(32usize + n * 32usize)) }
     }
 }
 #[derive(Copy, Clone)]
