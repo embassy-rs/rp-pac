@@ -26,6 +26,20 @@ transforms:
     from: dma::regs::Ch\d+DbgCtdreq
     to: dma::regs::DbgCtdreq
     check: Layout
+- MakeBlock:
+    blocks: dma::Dma
+    from: ch(\d+)_(.*)
+    to_block: dma::Channel
+    to_outer: ch$1
+    to_inner: $2
+- MakeRegisterArray:
+    blocks: dma::Dma
+    from: ch\d+
+    to: ch
+- MakeRegisterArray:
+    blocks: dma::Dma
+    from: timer\d+
+    to: timer
 
 
 # =========== UART

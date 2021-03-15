@@ -37,35 +37,6 @@ impl Default for Cs {
         Cs(0)
     }
 }
-#[doc = "Controls the PLL post dividers for the primary output (note: this PLL does not have a secondary output) the primary output is driven from VCO divided by postdiv1*postdiv2"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Prim(pub u32);
-impl Prim {
-    #[doc = "divide by 1-7"]
-    pub const fn postdiv1(&self) -> u8 {
-        let val = (self.0 >> 16u32) & 0x07;
-        val as u8
-    }
-    #[doc = "divide by 1-7"]
-    pub fn set_postdiv1(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x07 << 16u32)) | (((val as u32) & 0x07) << 16u32);
-    }
-    #[doc = "divide by 1-7"]
-    pub const fn postdiv2(&self) -> u8 {
-        let val = (self.0 >> 12u32) & 0x07;
-        val as u8
-    }
-    #[doc = "divide by 1-7"]
-    pub fn set_postdiv2(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x07 << 12u32)) | (((val as u32) & 0x07) << 12u32);
-    }
-}
-impl Default for Prim {
-    fn default() -> Prim {
-        Prim(0)
-    }
-}
 #[doc = "Feedback divisor (note: this PLL does not support fractional division)"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
@@ -131,5 +102,34 @@ impl Pwr {
 impl Default for Pwr {
     fn default() -> Pwr {
         Pwr(0)
+    }
+}
+#[doc = "Controls the PLL post dividers for the primary output (note: this PLL does not have a secondary output) the primary output is driven from VCO divided by postdiv1*postdiv2"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Prim(pub u32);
+impl Prim {
+    #[doc = "divide by 1-7"]
+    pub const fn postdiv1(&self) -> u8 {
+        let val = (self.0 >> 16u32) & 0x07;
+        val as u8
+    }
+    #[doc = "divide by 1-7"]
+    pub fn set_postdiv1(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x07 << 16u32)) | (((val as u32) & 0x07) << 16u32);
+    }
+    #[doc = "divide by 1-7"]
+    pub const fn postdiv2(&self) -> u8 {
+        let val = (self.0 >> 12u32) & 0x07;
+        val as u8
+    }
+    #[doc = "divide by 1-7"]
+    pub fn set_postdiv2(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x07 << 12u32)) | (((val as u32) & 0x07) << 12u32);
+    }
+}
+impl Default for Prim {
+    fn default() -> Prim {
+        Prim(0)
     }
 }

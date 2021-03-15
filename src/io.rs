@@ -4,17 +4,17 @@ pub struct Int(pub *mut u8);
 unsafe impl Send for Int {}
 unsafe impl Sync for Int {}
 impl Int {
-    #[doc = "Interrupt Enable for proc1"]
+    #[doc = "Interrupt Enable for dormant_wake"]
     pub fn inte(self, n: usize) -> Reg<regs::Int, RW> {
         assert!(n < 4usize);
         unsafe { Reg::from_ptr(self.0.add(0usize + n * 4usize)) }
     }
-    #[doc = "Interrupt Force for proc1"]
+    #[doc = "Interrupt Force for dormant_wake"]
     pub fn intf(self, n: usize) -> Reg<regs::Int, RW> {
         assert!(n < 4usize);
         unsafe { Reg::from_ptr(self.0.add(16usize + n * 4usize)) }
     }
-    #[doc = "Interrupt status after masking & forcing for proc1"]
+    #[doc = "Interrupt status after masking & forcing for dormant_wake"]
     pub fn ints(self, n: usize) -> Reg<regs::Int, RW> {
         assert!(n < 4usize);
         unsafe { Reg::from_ptr(self.0.add(32usize + n * 4usize)) }

@@ -1,50 +1,50 @@
 use crate::generic::*;
 #[derive(Copy, Clone)]
+pub struct Irq(pub *mut u8);
+unsafe impl Send for Irq {}
+unsafe impl Sync for Irq {}
+impl Irq {
+    #[doc = "Interrupt Enable for irq1"]
+    pub fn inte(self) -> Reg<regs::Intr, RW> {
+        unsafe { Reg::from_ptr(self.0.add(0usize)) }
+    }
+    #[doc = "Interrupt Force for irq1"]
+    pub fn intf(self) -> Reg<regs::Intr, RW> {
+        unsafe { Reg::from_ptr(self.0.add(4usize)) }
+    }
+    #[doc = "Interrupt status after masking & forcing for irq1"]
+    pub fn ints(self) -> Reg<regs::Intr, RW> {
+        unsafe { Reg::from_ptr(self.0.add(8usize)) }
+    }
+}
+#[derive(Copy, Clone)]
 pub struct StateMachine(pub *mut u8);
 unsafe impl Send for StateMachine {}
 unsafe impl Sync for StateMachine {}
 impl StateMachine {
-    #[doc = "Clock divider register for state machine 2 Frequency = clock freq / (CLKDIV_INT + CLKDIV_FRAC / 256)"]
+    #[doc = "Clock divider register for state machine 1 Frequency = clock freq / (CLKDIV_INT + CLKDIV_FRAC / 256)"]
     pub fn clkdiv(self) -> Reg<regs::SmClkdiv, RW> {
         unsafe { Reg::from_ptr(self.0.add(0usize)) }
     }
-    #[doc = "Execution/behavioural settings for state machine 2"]
+    #[doc = "Execution/behavioural settings for state machine 1"]
     pub fn execctrl(self) -> Reg<regs::SmExecctrl, RW> {
         unsafe { Reg::from_ptr(self.0.add(4usize)) }
     }
-    #[doc = "Control behaviour of the input/output shift registers for state machine 2"]
+    #[doc = "Control behaviour of the input/output shift registers for state machine 1"]
     pub fn shiftctrl(self) -> Reg<regs::SmShiftctrl, RW> {
         unsafe { Reg::from_ptr(self.0.add(8usize)) }
     }
-    #[doc = "Current instruction address of state machine 2"]
+    #[doc = "Current instruction address of state machine 1"]
     pub fn addr(self) -> Reg<regs::SmAddr, RW> {
         unsafe { Reg::from_ptr(self.0.add(12usize)) }
     }
-    #[doc = "Instruction currently being executed by state machine 2 Write to execute an instruction immediately (including jumps) and then resume execution."]
+    #[doc = "Instruction currently being executed by state machine 1 Write to execute an instruction immediately (including jumps) and then resume execution."]
     pub fn instr(self) -> Reg<regs::SmInstr, RW> {
         unsafe { Reg::from_ptr(self.0.add(16usize)) }
     }
     #[doc = "State machine pin control"]
     pub fn pinctrl(self) -> Reg<regs::SmPinctrl, RW> {
         unsafe { Reg::from_ptr(self.0.add(20usize)) }
-    }
-}
-#[derive(Copy, Clone)]
-pub struct Irq(pub *mut u8);
-unsafe impl Send for Irq {}
-unsafe impl Sync for Irq {}
-impl Irq {
-    #[doc = "Interrupt Enable for irq0"]
-    pub fn inte(self) -> Reg<regs::Intr, RW> {
-        unsafe { Reg::from_ptr(self.0.add(0usize)) }
-    }
-    #[doc = "Interrupt Force for irq0"]
-    pub fn intf(self) -> Reg<regs::Intr, RW> {
-        unsafe { Reg::from_ptr(self.0.add(4usize)) }
-    }
-    #[doc = "Interrupt status after masking & forcing for irq0"]
-    pub fn ints(self) -> Reg<regs::Intr, RW> {
-        unsafe { Reg::from_ptr(self.0.add(8usize)) }
     }
 }
 #[doc = "Programmable IO block"]

@@ -1,18 +1,4 @@
 use crate::generic::*;
-#[doc = "SPI control"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct SpiCtrlr0InstL(pub u8);
-impl SpiCtrlr0InstL {
-    #[doc = "No instruction"]
-    pub const NONE: Self = Self(0);
-    #[doc = "4-bit instruction"]
-    pub const _4B: Self = Self(0x01);
-    #[doc = "8-bit instruction"]
-    pub const _8B: Self = Self(0x02);
-    #[doc = "16-bit instruction"]
-    pub const _16B: Self = Self(0x03);
-}
 #[doc = "Control register 0"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
@@ -26,6 +12,20 @@ impl Ctrlr0Tmod {
     pub const RX_ONLY: Self = Self(0x02);
     #[doc = "EEPROM read mode (TX then RX; RX starts after control data TX'd)"]
     pub const EEPROM_READ: Self = Self(0x03);
+}
+#[doc = "SPI control"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct SpiCtrlr0InstL(pub u8);
+impl SpiCtrlr0InstL {
+    #[doc = "No instruction"]
+    pub const NONE: Self = Self(0);
+    #[doc = "4-bit instruction"]
+    pub const _4B: Self = Self(0x01);
+    #[doc = "8-bit instruction"]
+    pub const _8B: Self = Self(0x02);
+    #[doc = "16-bit instruction"]
+    pub const _16B: Self = Self(0x03);
 }
 #[doc = "SPI control"]
 #[repr(transparent)]

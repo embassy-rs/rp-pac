@@ -1,9 +1,9 @@
 use crate::generic::*;
-#[doc = "Force into reset (i.e. power it off)"]
+#[doc = "Force block out of reset (i.e. power it on)"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct FrceOff(pub u32);
-impl FrceOff {
+pub struct FrceOn(pub u32);
+impl FrceOn {
     pub const fn proc1(&self) -> bool {
         let val = (self.0 >> 16u32) & 0x01;
         val != 0
@@ -124,9 +124,9 @@ impl FrceOff {
         self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
     }
 }
-impl Default for FrceOff {
-    fn default() -> FrceOff {
-        FrceOff(0)
+impl Default for FrceOn {
+    fn default() -> FrceOn {
+        FrceOn(0)
     }
 }
 #[doc = "Set to 1 if this peripheral should be reset when the watchdog fires."]
@@ -259,11 +259,11 @@ impl Default for Wdsel {
         Wdsel(0)
     }
 }
-#[doc = "Force block out of reset (i.e. power it on)"]
+#[doc = "Force into reset (i.e. power it off)"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct FrceOn(pub u32);
-impl FrceOn {
+pub struct FrceOff(pub u32);
+impl FrceOff {
     pub const fn proc1(&self) -> bool {
         let val = (self.0 >> 16u32) & 0x01;
         val != 0
@@ -384,9 +384,9 @@ impl FrceOn {
         self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
     }
 }
-impl Default for FrceOn {
-    fn default() -> FrceOn {
-        FrceOn(0)
+impl Default for FrceOff {
+    fn default() -> FrceOff {
+        FrceOff(0)
     }
 }
 #[doc = "Indicates the peripheral's registers are ready to access."]

@@ -1,14 +1,4 @@
 use crate::generic::*;
-#[doc = "Crystal Oscillator Control"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct CtrlFreqRange(pub u16);
-impl CtrlFreqRange {
-    pub const _1_15MHZ: Self = Self(0x0aa0);
-    pub const RESERVED_1: Self = Self(0x0aa1);
-    pub const RESERVED_2: Self = Self(0x0aa2);
-    pub const RESERVED_3: Self = Self(0x0aa3);
-}
 #[doc = "Crystal Oscillator Status"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
@@ -18,6 +8,16 @@ impl StatusFreqRange {
     pub const RESERVED_1: Self = Self(0x01);
     pub const RESERVED_2: Self = Self(0x02);
     pub const RESERVED_3: Self = Self(0x03);
+}
+#[doc = "Crystal Oscillator Control"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct CtrlFreqRange(pub u16);
+impl CtrlFreqRange {
+    pub const _1_15MHZ: Self = Self(0x0aa0);
+    pub const RESERVED_1: Self = Self(0x0aa1);
+    pub const RESERVED_2: Self = Self(0x0aa2);
+    pub const RESERVED_3: Self = Self(0x0aa3);
 }
 #[doc = "Crystal Oscillator Control"]
 #[repr(transparent)]

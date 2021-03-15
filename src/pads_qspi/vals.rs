@@ -12,16 +12,6 @@ impl VoltageSelect {
 #[doc = "Pad control register"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct GpioQspiSd0Drive(pub u8);
-impl GpioQspiSd0Drive {
-    pub const _2MA: Self = Self(0);
-    pub const _4MA: Self = Self(0x01);
-    pub const _8MA: Self = Self(0x02);
-    pub const _12MA: Self = Self(0x03);
-}
-#[doc = "Pad control register"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
 pub struct GpioQspiSd2Drive(pub u8);
 impl GpioQspiSd2Drive {
     pub const _2MA: Self = Self(0);
@@ -32,8 +22,8 @@ impl GpioQspiSd2Drive {
 #[doc = "Pad control register"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct GpioQspiSclkDrive(pub u8);
-impl GpioQspiSclkDrive {
+pub struct GpioQspiSd0Drive(pub u8);
+impl GpioQspiSd0Drive {
     pub const _2MA: Self = Self(0);
     pub const _4MA: Self = Self(0x01);
     pub const _8MA: Self = Self(0x02);
@@ -44,6 +34,16 @@ impl GpioQspiSclkDrive {
 #[derive(Copy, Clone)]
 pub struct GpioQspiSsDrive(pub u8);
 impl GpioQspiSsDrive {
+    pub const _2MA: Self = Self(0);
+    pub const _4MA: Self = Self(0x01);
+    pub const _8MA: Self = Self(0x02);
+    pub const _12MA: Self = Self(0x03);
+}
+#[doc = "Pad control register"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct GpioQspiSclkDrive(pub u8);
+impl GpioQspiSclkDrive {
     pub const _2MA: Self = Self(0);
     pub const _4MA: Self = Self(0x01);
     pub const _8MA: Self = Self(0x02);
