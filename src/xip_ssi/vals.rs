@@ -16,20 +16,6 @@ impl Ctrlr0Tmod {
 #[doc = "SPI control"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct SpiCtrlr0InstL(pub u8);
-impl SpiCtrlr0InstL {
-    #[doc = "No instruction"]
-    pub const NONE: Self = Self(0);
-    #[doc = "4-bit instruction"]
-    pub const _4B: Self = Self(0x01);
-    #[doc = "8-bit instruction"]
-    pub const _8B: Self = Self(0x02);
-    #[doc = "16-bit instruction"]
-    pub const _16B: Self = Self(0x03);
-}
-#[doc = "SPI control"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
 pub struct SpiCtrlr0TransType(pub u8);
 impl SpiCtrlr0TransType {
     #[doc = "Command and address both in standard SPI frame format"]
@@ -50,4 +36,18 @@ impl Ctrlr0SpiFrf {
     pub const DUAL: Self = Self(0x01);
     #[doc = "Quad-SPI frame format; four bits per SCK, half-duplex"]
     pub const QUAD: Self = Self(0x02);
+}
+#[doc = "SPI control"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct SpiCtrlr0InstL(pub u8);
+impl SpiCtrlr0InstL {
+    #[doc = "No instruction"]
+    pub const NONE: Self = Self(0);
+    #[doc = "4-bit instruction"]
+    pub const _4B: Self = Self(0x01);
+    #[doc = "8-bit instruction"]
+    pub const _8B: Self = Self(0x02);
+    #[doc = "16-bit instruction"]
+    pub const _16B: Self = Self(0x03);
 }

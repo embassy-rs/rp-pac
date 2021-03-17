@@ -2,8 +2,8 @@ use crate::generic::*;
 #[doc = "Pad control register"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct GpioQspiSd1(pub u32);
-impl GpioQspiSd1 {
+pub struct GpioQspiSd2(pub u32);
+impl GpioQspiSd2 {
     #[doc = "Output disable. Has priority over output enable from peripherals"]
     pub const fn od(&self) -> bool {
         let val = (self.0 >> 7u32) & 0x01;
@@ -23,12 +23,12 @@ impl GpioQspiSd1 {
         self.0 = (self.0 & !(0x01 << 6u32)) | (((val as u32) & 0x01) << 6u32);
     }
     #[doc = "Drive strength."]
-    pub const fn drive(&self) -> super::vals::GpioQspiSd1Drive {
+    pub const fn drive(&self) -> super::vals::GpioQspiSd2Drive {
         let val = (self.0 >> 4u32) & 0x03;
-        super::vals::GpioQspiSd1Drive(val as u8)
+        super::vals::GpioQspiSd2Drive(val as u8)
     }
     #[doc = "Drive strength."]
-    pub fn set_drive(&mut self, val: super::vals::GpioQspiSd1Drive) {
+    pub fn set_drive(&mut self, val: super::vals::GpioQspiSd2Drive) {
         self.0 = (self.0 & !(0x03 << 4u32)) | (((val.0 as u32) & 0x03) << 4u32);
     }
     #[doc = "Pull up enable"]
@@ -68,9 +68,9 @@ impl GpioQspiSd1 {
         self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
     }
 }
-impl Default for GpioQspiSd1 {
-    fn default() -> GpioQspiSd1 {
-        GpioQspiSd1(0)
+impl Default for GpioQspiSd2 {
+    fn default() -> GpioQspiSd2 {
+        GpioQspiSd2(0)
     }
 }
 #[doc = "Pad control register"]
@@ -150,8 +150,8 @@ impl Default for GpioQspiSd3 {
 #[doc = "Pad control register"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct GpioQspiSclk(pub u32);
-impl GpioQspiSclk {
+pub struct GpioQspiSd1(pub u32);
+impl GpioQspiSd1 {
     #[doc = "Output disable. Has priority over output enable from peripherals"]
     pub const fn od(&self) -> bool {
         let val = (self.0 >> 7u32) & 0x01;
@@ -171,12 +171,12 @@ impl GpioQspiSclk {
         self.0 = (self.0 & !(0x01 << 6u32)) | (((val as u32) & 0x01) << 6u32);
     }
     #[doc = "Drive strength."]
-    pub const fn drive(&self) -> super::vals::GpioQspiSclkDrive {
+    pub const fn drive(&self) -> super::vals::GpioQspiSd1Drive {
         let val = (self.0 >> 4u32) & 0x03;
-        super::vals::GpioQspiSclkDrive(val as u8)
+        super::vals::GpioQspiSd1Drive(val as u8)
     }
     #[doc = "Drive strength."]
-    pub fn set_drive(&mut self, val: super::vals::GpioQspiSclkDrive) {
+    pub fn set_drive(&mut self, val: super::vals::GpioQspiSd1Drive) {
         self.0 = (self.0 & !(0x03 << 4u32)) | (((val.0 as u32) & 0x03) << 4u32);
     }
     #[doc = "Pull up enable"]
@@ -216,9 +216,9 @@ impl GpioQspiSclk {
         self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
     }
 }
-impl Default for GpioQspiSclk {
-    fn default() -> GpioQspiSclk {
-        GpioQspiSclk(0)
+impl Default for GpioQspiSd1 {
+    fn default() -> GpioQspiSd1 {
+        GpioQspiSd1(0)
     }
 }
 #[doc = "Pad control register"]
@@ -295,11 +295,29 @@ impl Default for GpioQspiSd0 {
         GpioQspiSd0(0)
     }
 }
+#[doc = "Voltage select. Per bank control"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct VoltageSelect(pub u32);
+impl VoltageSelect {
+    pub const fn voltage_select(&self) -> super::vals::VoltageSelect {
+        let val = (self.0 >> 0u32) & 0x01;
+        super::vals::VoltageSelect(val as u8)
+    }
+    pub fn set_voltage_select(&mut self, val: super::vals::VoltageSelect) {
+        self.0 = (self.0 & !(0x01 << 0u32)) | (((val.0 as u32) & 0x01) << 0u32);
+    }
+}
+impl Default for VoltageSelect {
+    fn default() -> VoltageSelect {
+        VoltageSelect(0)
+    }
+}
 #[doc = "Pad control register"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct GpioQspiSd2(pub u32);
-impl GpioQspiSd2 {
+pub struct GpioQspiSclk(pub u32);
+impl GpioQspiSclk {
     #[doc = "Output disable. Has priority over output enable from peripherals"]
     pub const fn od(&self) -> bool {
         let val = (self.0 >> 7u32) & 0x01;
@@ -319,12 +337,12 @@ impl GpioQspiSd2 {
         self.0 = (self.0 & !(0x01 << 6u32)) | (((val as u32) & 0x01) << 6u32);
     }
     #[doc = "Drive strength."]
-    pub const fn drive(&self) -> super::vals::GpioQspiSd2Drive {
+    pub const fn drive(&self) -> super::vals::GpioQspiSclkDrive {
         let val = (self.0 >> 4u32) & 0x03;
-        super::vals::GpioQspiSd2Drive(val as u8)
+        super::vals::GpioQspiSclkDrive(val as u8)
     }
     #[doc = "Drive strength."]
-    pub fn set_drive(&mut self, val: super::vals::GpioQspiSd2Drive) {
+    pub fn set_drive(&mut self, val: super::vals::GpioQspiSclkDrive) {
         self.0 = (self.0 & !(0x03 << 4u32)) | (((val.0 as u32) & 0x03) << 4u32);
     }
     #[doc = "Pull up enable"]
@@ -364,9 +382,9 @@ impl GpioQspiSd2 {
         self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
     }
 }
-impl Default for GpioQspiSd2 {
-    fn default() -> GpioQspiSd2 {
-        GpioQspiSd2(0)
+impl Default for GpioQspiSclk {
+    fn default() -> GpioQspiSclk {
+        GpioQspiSclk(0)
     }
 }
 #[doc = "Pad control register"]
@@ -441,23 +459,5 @@ impl GpioQspiSs {
 impl Default for GpioQspiSs {
     fn default() -> GpioQspiSs {
         GpioQspiSs(0)
-    }
-}
-#[doc = "Voltage select. Per bank control"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct VoltageSelect(pub u32);
-impl VoltageSelect {
-    pub const fn voltage_select(&self) -> super::vals::VoltageSelect {
-        let val = (self.0 >> 0u32) & 0x01;
-        super::vals::VoltageSelect(val as u8)
-    }
-    pub fn set_voltage_select(&mut self, val: super::vals::VoltageSelect) {
-        self.0 = (self.0 & !(0x01 << 0u32)) | (((val.0 as u32) & 0x01) << 0u32);
-    }
-}
-impl Default for VoltageSelect {
-    fn default() -> VoltageSelect {
-        VoltageSelect(0)
     }
 }

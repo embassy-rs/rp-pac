@@ -1,42 +1,4 @@
 use crate::generic::*;
-#[doc = "Control and Status GENERAL CONSTRAINTS: Reference clock frequency min=5MHz, max=800MHz Feedback divider min=16, max=320 VCO frequency min=400MHz, max=1600MHz"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Cs(pub u32);
-impl Cs {
-    #[doc = "PLL is locked"]
-    pub const fn lock(&self) -> bool {
-        let val = (self.0 >> 31u32) & 0x01;
-        val != 0
-    }
-    #[doc = "PLL is locked"]
-    pub fn set_lock(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 31u32)) | (((val as u32) & 0x01) << 31u32);
-    }
-    #[doc = "Passes the reference clock to the output instead of the divided VCO. The VCO continues to run so the user can switch between the reference clock and the divided VCO but the output will glitch when doing so."]
-    pub const fn bypass(&self) -> bool {
-        let val = (self.0 >> 8u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Passes the reference clock to the output instead of the divided VCO. The VCO continues to run so the user can switch between the reference clock and the divided VCO but the output will glitch when doing so."]
-    pub fn set_bypass(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 8u32)) | (((val as u32) & 0x01) << 8u32);
-    }
-    #[doc = "Divides the PLL input reference clock. Behaviour is undefined for div=0. PLL output will be unpredictable during refdiv changes, wait for lock=1 before using it."]
-    pub const fn refdiv(&self) -> u8 {
-        let val = (self.0 >> 0u32) & 0x3f;
-        val as u8
-    }
-    #[doc = "Divides the PLL input reference clock. Behaviour is undefined for div=0. PLL output will be unpredictable during refdiv changes, wait for lock=1 before using it."]
-    pub fn set_refdiv(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x3f << 0u32)) | (((val as u32) & 0x3f) << 0u32);
-    }
-}
-impl Default for Cs {
-    fn default() -> Cs {
-        Cs(0)
-    }
-}
 #[doc = "Feedback divisor (note: this PLL does not support fractional division)"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
@@ -102,6 +64,44 @@ impl Pwr {
 impl Default for Pwr {
     fn default() -> Pwr {
         Pwr(0)
+    }
+}
+#[doc = "Control and Status GENERAL CONSTRAINTS: Reference clock frequency min=5MHz, max=800MHz Feedback divider min=16, max=320 VCO frequency min=400MHz, max=1600MHz"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Cs(pub u32);
+impl Cs {
+    #[doc = "PLL is locked"]
+    pub const fn lock(&self) -> bool {
+        let val = (self.0 >> 31u32) & 0x01;
+        val != 0
+    }
+    #[doc = "PLL is locked"]
+    pub fn set_lock(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 31u32)) | (((val as u32) & 0x01) << 31u32);
+    }
+    #[doc = "Passes the reference clock to the output instead of the divided VCO. The VCO continues to run so the user can switch between the reference clock and the divided VCO but the output will glitch when doing so."]
+    pub const fn bypass(&self) -> bool {
+        let val = (self.0 >> 8u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Passes the reference clock to the output instead of the divided VCO. The VCO continues to run so the user can switch between the reference clock and the divided VCO but the output will glitch when doing so."]
+    pub fn set_bypass(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 8u32)) | (((val as u32) & 0x01) << 8u32);
+    }
+    #[doc = "Divides the PLL input reference clock. Behaviour is undefined for div=0. PLL output will be unpredictable during refdiv changes, wait for lock=1 before using it."]
+    pub const fn refdiv(&self) -> u8 {
+        let val = (self.0 >> 0u32) & 0x3f;
+        val as u8
+    }
+    #[doc = "Divides the PLL input reference clock. Behaviour is undefined for div=0. PLL output will be unpredictable during refdiv changes, wait for lock=1 before using it."]
+    pub fn set_refdiv(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x3f << 0u32)) | (((val as u32) & 0x3f) << 0u32);
+    }
+}
+impl Default for Cs {
+    fn default() -> Cs {
+        Cs(0)
     }
 }
 #[doc = "Controls the PLL post dividers for the primary output (note: this PLL does not have a secondary output) the primary output is driven from VCO divided by postdiv1*postdiv2"]

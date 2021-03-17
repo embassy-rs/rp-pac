@@ -2,30 +2,6 @@
 #![doc = "Peripheral access API (generated using svd2rust v0.17.0 (8b3736c 2021-03-13))"]
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub enum Interrupt {
-    #[doc = "6 - XIP_IRQ"]
-    XIP_IRQ = 6,
-    #[doc = "17 - CLOCKS_IRQ"]
-    CLOCKS_IRQ = 17,
-    #[doc = "13 - IO_IRQ_BANK0"]
-    IO_IRQ_BANK0 = 13,
-    #[doc = "14 - IO_IRQ_QSPI"]
-    IO_IRQ_QSPI = 14,
-    #[doc = "20 - UART0_IRQ"]
-    UART0_IRQ = 20,
-    #[doc = "21 - UART1_IRQ"]
-    UART1_IRQ = 21,
-    #[doc = "18 - SPI0_IRQ"]
-    SPI0_IRQ = 18,
-    #[doc = "19 - SPI1_IRQ"]
-    SPI1_IRQ = 19,
-    #[doc = "23 - I2C0_IRQ"]
-    I2C0_IRQ = 23,
-    #[doc = "24 - I2C1_IRQ"]
-    I2C1_IRQ = 24,
-    #[doc = "22 - ADC_IRQ_FIFO"]
-    ADC_IRQ_FIFO = 22,
-    #[doc = "4 - PWM_IRQ_WRAP"]
-    PWM_IRQ_WRAP = 4,
     #[doc = "0 - TIMER_IRQ_0"]
     TIMER_IRQ_0 = 0,
     #[doc = "1 - TIMER_IRQ_1"]
@@ -34,14 +10,12 @@ pub enum Interrupt {
     TIMER_IRQ_2 = 2,
     #[doc = "3 - TIMER_IRQ_3"]
     TIMER_IRQ_3 = 3,
-    #[doc = "25 - RTC_IRQ"]
-    RTC_IRQ = 25,
-    #[doc = "11 - DMA_IRQ_0"]
-    DMA_IRQ_0 = 11,
-    #[doc = "12 - DMA_IRQ_1"]
-    DMA_IRQ_1 = 12,
+    #[doc = "4 - PWM_IRQ_WRAP"]
+    PWM_IRQ_WRAP = 4,
     #[doc = "5 - USBCTRL_IRQ"]
     USBCTRL_IRQ = 5,
+    #[doc = "6 - XIP_IRQ"]
+    XIP_IRQ = 6,
     #[doc = "7 - PIO0_IRQ_0"]
     PIO0_IRQ_0 = 7,
     #[doc = "8 - PIO0_IRQ_1"]
@@ -50,39 +24,65 @@ pub enum Interrupt {
     PIO1_IRQ_0 = 9,
     #[doc = "10 - PIO1_IRQ_1"]
     PIO1_IRQ_1 = 10,
+    #[doc = "11 - DMA_IRQ_0"]
+    DMA_IRQ_0 = 11,
+    #[doc = "12 - DMA_IRQ_1"]
+    DMA_IRQ_1 = 12,
+    #[doc = "13 - IO_IRQ_BANK0"]
+    IO_IRQ_BANK0 = 13,
+    #[doc = "14 - IO_IRQ_QSPI"]
+    IO_IRQ_QSPI = 14,
     #[doc = "15 - SIO_IRQ_PROC0"]
     SIO_IRQ_PROC0 = 15,
     #[doc = "16 - SIO_IRQ_PROC1"]
     SIO_IRQ_PROC1 = 16,
+    #[doc = "17 - CLOCKS_IRQ"]
+    CLOCKS_IRQ = 17,
+    #[doc = "18 - SPI0_IRQ"]
+    SPI0_IRQ = 18,
+    #[doc = "19 - SPI1_IRQ"]
+    SPI1_IRQ = 19,
+    #[doc = "20 - UART0_IRQ"]
+    UART0_IRQ = 20,
+    #[doc = "21 - UART1_IRQ"]
+    UART1_IRQ = 21,
+    #[doc = "22 - ADC_IRQ_FIFO"]
+    ADC_IRQ_FIFO = 22,
+    #[doc = "23 - I2C0_IRQ"]
+    I2C0_IRQ = 23,
+    #[doc = "24 - I2C1_IRQ"]
+    I2C1_IRQ = 24,
+    #[doc = "25 - RTC_IRQ"]
+    RTC_IRQ = 25,
 }
 #[cfg(feature = "rt")]
 extern "C" {
-    fn XIP_IRQ();
-    fn CLOCKS_IRQ();
-    fn IO_IRQ_BANK0();
-    fn IO_IRQ_QSPI();
-    fn UART0_IRQ();
-    fn UART1_IRQ();
-    fn SPI0_IRQ();
-    fn SPI1_IRQ();
-    fn I2C0_IRQ();
-    fn I2C1_IRQ();
-    fn ADC_IRQ_FIFO();
-    fn PWM_IRQ_WRAP();
     fn TIMER_IRQ_0();
     fn TIMER_IRQ_1();
     fn TIMER_IRQ_2();
     fn TIMER_IRQ_3();
-    fn RTC_IRQ();
-    fn DMA_IRQ_0();
-    fn DMA_IRQ_1();
+    fn PWM_IRQ_WRAP();
     fn USBCTRL_IRQ();
+    fn XIP_IRQ();
     fn PIO0_IRQ_0();
     fn PIO0_IRQ_1();
     fn PIO1_IRQ_0();
     fn PIO1_IRQ_1();
+    fn DMA_IRQ_0();
+    fn DMA_IRQ_1();
+    fn IO_IRQ_BANK0();
+    fn IO_IRQ_QSPI();
     fn SIO_IRQ_PROC0();
     fn SIO_IRQ_PROC1();
+    fn CLOCKS_IRQ();
+    fn SPI0_IRQ();
+    fn SPI1_IRQ();
+    fn UART0_IRQ();
+    fn UART1_IRQ();
+    fn ADC_IRQ_FIFO();
+    fn I2C0_IRQ();
+    fn I2C1_IRQ();
+    fn RTC_IRQ();
 }
 #[doc(hidden)]
 pub union Vector {
@@ -93,49 +93,7 @@ pub union Vector {
 #[doc(hidden)]
 #[link_section = ".vector_table.interrupts"]
 #[no_mangle]
-pub static __INTERRUPTS: [Vector; 42] = [
-    Vector { _reserved: 0 },
-    Vector { _reserved: 0 },
-    Vector { _reserved: 0 },
-    Vector { _reserved: 0 },
-    Vector { _reserved: 0 },
-    Vector { _reserved: 0 },
-    Vector { _handler: XIP_IRQ },
-    Vector { _reserved: 0 },
-    Vector { _reserved: 0 },
-    Vector { _reserved: 0 },
-    Vector { _reserved: 0 },
-    Vector { _reserved: 0 },
-    Vector { _reserved: 0 },
-    Vector { _reserved: 0 },
-    Vector { _reserved: 0 },
-    Vector { _reserved: 0 },
-    Vector { _reserved: 0 },
-    Vector {
-        _handler: CLOCKS_IRQ,
-    },
-    Vector {
-        _handler: IO_IRQ_BANK0,
-    },
-    Vector {
-        _handler: IO_IRQ_QSPI,
-    },
-    Vector {
-        _handler: UART0_IRQ,
-    },
-    Vector {
-        _handler: UART1_IRQ,
-    },
-    Vector { _handler: SPI0_IRQ },
-    Vector { _handler: SPI1_IRQ },
-    Vector { _handler: I2C0_IRQ },
-    Vector { _handler: I2C1_IRQ },
-    Vector {
-        _handler: ADC_IRQ_FIFO,
-    },
-    Vector {
-        _handler: PWM_IRQ_WRAP,
-    },
+pub static __INTERRUPTS: [Vector; 26] = [
     Vector {
         _handler: TIMER_IRQ_0,
     },
@@ -148,16 +106,13 @@ pub static __INTERRUPTS: [Vector; 42] = [
     Vector {
         _handler: TIMER_IRQ_3,
     },
-    Vector { _handler: RTC_IRQ },
     Vector {
-        _handler: DMA_IRQ_0,
-    },
-    Vector {
-        _handler: DMA_IRQ_1,
+        _handler: PWM_IRQ_WRAP,
     },
     Vector {
         _handler: USBCTRL_IRQ,
     },
+    Vector { _handler: XIP_IRQ },
     Vector {
         _handler: PIO0_IRQ_0,
     },
@@ -171,11 +126,40 @@ pub static __INTERRUPTS: [Vector; 42] = [
         _handler: PIO1_IRQ_1,
     },
     Vector {
+        _handler: DMA_IRQ_0,
+    },
+    Vector {
+        _handler: DMA_IRQ_1,
+    },
+    Vector {
+        _handler: IO_IRQ_BANK0,
+    },
+    Vector {
+        _handler: IO_IRQ_QSPI,
+    },
+    Vector {
         _handler: SIO_IRQ_PROC0,
     },
     Vector {
         _handler: SIO_IRQ_PROC1,
     },
+    Vector {
+        _handler: CLOCKS_IRQ,
+    },
+    Vector { _handler: SPI0_IRQ },
+    Vector { _handler: SPI1_IRQ },
+    Vector {
+        _handler: UART0_IRQ,
+    },
+    Vector {
+        _handler: UART1_IRQ,
+    },
+    Vector {
+        _handler: ADC_IRQ_FIFO,
+    },
+    Vector { _handler: I2C0_IRQ },
+    Vector { _handler: I2C1_IRQ },
+    Vector { _handler: RTC_IRQ },
 ];
 unsafe impl cortex_m::interrupt::InterruptNumber for Interrupt {
     #[inline(always)]

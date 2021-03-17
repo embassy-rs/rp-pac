@@ -1,22 +1,4 @@
 use crate::generic::*;
-#[doc = "Voltage select. Per bank control"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct VoltageSelect(pub u32);
-impl VoltageSelect {
-    pub const fn voltage_select(&self) -> super::vals::VoltageSelect {
-        let val = (self.0 >> 0u32) & 0x01;
-        super::vals::VoltageSelect(val as u8)
-    }
-    pub fn set_voltage_select(&mut self, val: super::vals::VoltageSelect) {
-        self.0 = (self.0 & !(0x01 << 0u32)) | (((val.0 as u32) & 0x01) << 0u32);
-    }
-}
-impl Default for VoltageSelect {
-    fn default() -> VoltageSelect {
-        VoltageSelect(0)
-    }
-}
 #[doc = "Pad control register"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
@@ -89,5 +71,23 @@ impl GpioCtrl {
 impl Default for GpioCtrl {
     fn default() -> GpioCtrl {
         GpioCtrl(0)
+    }
+}
+#[doc = "Voltage select. Per bank control"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct VoltageSelect(pub u32);
+impl VoltageSelect {
+    pub const fn voltage_select(&self) -> super::vals::VoltageSelect {
+        let val = (self.0 >> 0u32) & 0x01;
+        super::vals::VoltageSelect(val as u8)
+    }
+    pub fn set_voltage_select(&mut self, val: super::vals::VoltageSelect) {
+        self.0 = (self.0 & !(0x01 << 0u32)) | (((val.0 as u32) & 0x01) << 0u32);
+    }
+}
+impl Default for VoltageSelect {
+    fn default() -> VoltageSelect {
+        VoltageSelect(0)
     }
 }

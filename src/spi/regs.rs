@@ -1,98 +1,98 @@
 use crate::generic::*;
-#[doc = "Raw interrupt status register, SSPRIS on page 3-10"]
+#[doc = "Control register 1, SSPCR1 on page 3-5"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct Sspris(pub u32);
-impl Sspris {
-    #[doc = "Gives the raw interrupt state, prior to masking, of the SSPTXINTR interrupt"]
-    pub const fn txris(&self) -> bool {
+pub struct Sspcr1(pub u32);
+impl Sspcr1 {
+    #[doc = "Slave-mode output disable. This bit is relevant only in the slave mode, MS=1. In multiple-slave systems, it is possible for an PrimeCell SSP master to broadcast a message to all slaves in the system while ensuring that only one slave drives data onto its serial output line. In such systems the RXD lines from multiple slaves could be tied together. To operate in such systems, the SOD bit can be set if the PrimeCell SSP slave is not supposed to drive the SSPTXD line: 0 SSP can drive the SSPTXD output in slave mode. 1 SSP must not drive the SSPTXD output in slave mode."]
+    pub const fn sod(&self) -> bool {
         let val = (self.0 >> 3u32) & 0x01;
         val != 0
     }
-    #[doc = "Gives the raw interrupt state, prior to masking, of the SSPTXINTR interrupt"]
-    pub fn set_txris(&mut self, val: bool) {
+    #[doc = "Slave-mode output disable. This bit is relevant only in the slave mode, MS=1. In multiple-slave systems, it is possible for an PrimeCell SSP master to broadcast a message to all slaves in the system while ensuring that only one slave drives data onto its serial output line. In such systems the RXD lines from multiple slaves could be tied together. To operate in such systems, the SOD bit can be set if the PrimeCell SSP slave is not supposed to drive the SSPTXD line: 0 SSP can drive the SSPTXD output in slave mode. 1 SSP must not drive the SSPTXD output in slave mode."]
+    pub fn set_sod(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3u32)) | (((val as u32) & 0x01) << 3u32);
     }
-    #[doc = "Gives the raw interrupt state, prior to masking, of the SSPRXINTR interrupt"]
-    pub const fn rxris(&self) -> bool {
+    #[doc = "Master or slave mode select. This bit can be modified only when the PrimeCell SSP is disabled, SSE=0: 0 Device configured as master, default. 1 Device configured as slave."]
+    pub const fn ms(&self) -> bool {
         let val = (self.0 >> 2u32) & 0x01;
         val != 0
     }
-    #[doc = "Gives the raw interrupt state, prior to masking, of the SSPRXINTR interrupt"]
-    pub fn set_rxris(&mut self, val: bool) {
+    #[doc = "Master or slave mode select. This bit can be modified only when the PrimeCell SSP is disabled, SSE=0: 0 Device configured as master, default. 1 Device configured as slave."]
+    pub fn set_ms(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2u32)) | (((val as u32) & 0x01) << 2u32);
     }
-    #[doc = "Gives the raw interrupt state, prior to masking, of the SSPRTINTR interrupt"]
-    pub const fn rtris(&self) -> bool {
+    #[doc = "Synchronous serial port enable: 0 SSP operation disabled. 1 SSP operation enabled."]
+    pub const fn sse(&self) -> bool {
         let val = (self.0 >> 1u32) & 0x01;
         val != 0
     }
-    #[doc = "Gives the raw interrupt state, prior to masking, of the SSPRTINTR interrupt"]
-    pub fn set_rtris(&mut self, val: bool) {
+    #[doc = "Synchronous serial port enable: 0 SSP operation disabled. 1 SSP operation enabled."]
+    pub fn set_sse(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1u32)) | (((val as u32) & 0x01) << 1u32);
     }
-    #[doc = "Gives the raw interrupt state, prior to masking, of the SSPRORINTR interrupt"]
-    pub const fn rorris(&self) -> bool {
+    #[doc = "Loop back mode: 0 Normal serial port operation enabled. 1 Output of transmit serial shifter is connected to input of receive serial shifter internally."]
+    pub const fn lbm(&self) -> bool {
         let val = (self.0 >> 0u32) & 0x01;
         val != 0
     }
-    #[doc = "Gives the raw interrupt state, prior to masking, of the SSPRORINTR interrupt"]
-    pub fn set_rorris(&mut self, val: bool) {
+    #[doc = "Loop back mode: 0 Normal serial port operation enabled. 1 Output of transmit serial shifter is connected to input of receive serial shifter internally."]
+    pub fn set_lbm(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
     }
 }
-impl Default for Sspris {
-    fn default() -> Sspris {
-        Sspris(0)
+impl Default for Sspcr1 {
+    fn default() -> Sspcr1 {
+        Sspcr1(0)
+    }
+}
+#[doc = "PrimeCell identification registers, SSPPCellID0-3 on page 3-16"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Ssppcellid1(pub u32);
+impl Ssppcellid1 {
+    #[doc = "These bits read back as 0xF0"]
+    pub const fn ssppcellid1(&self) -> u8 {
+        let val = (self.0 >> 0u32) & 0xff;
+        val as u8
+    }
+    #[doc = "These bits read back as 0xF0"]
+    pub fn set_ssppcellid1(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0u32)) | (((val as u32) & 0xff) << 0u32);
+    }
+}
+impl Default for Ssppcellid1 {
+    fn default() -> Ssppcellid1 {
+        Ssppcellid1(0)
     }
 }
 #[doc = "Peripheral identification registers, SSPPeriphID0-3 on page 3-13"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct Sspperiphid0(pub u32);
-impl Sspperiphid0 {
-    #[doc = "These bits read back as 0x22"]
-    pub const fn partnumber0(&self) -> u8 {
-        let val = (self.0 >> 0u32) & 0xff;
+pub struct Sspperiphid1(pub u32);
+impl Sspperiphid1 {
+    #[doc = "These bits read back as 0x1"]
+    pub const fn designer0(&self) -> u8 {
+        let val = (self.0 >> 4u32) & 0x0f;
         val as u8
     }
-    #[doc = "These bits read back as 0x22"]
-    pub fn set_partnumber0(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0u32)) | (((val as u32) & 0xff) << 0u32);
+    #[doc = "These bits read back as 0x1"]
+    pub fn set_designer0(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x0f << 4u32)) | (((val as u32) & 0x0f) << 4u32);
+    }
+    #[doc = "These bits read back as 0x0"]
+    pub const fn partnumber1(&self) -> u8 {
+        let val = (self.0 >> 0u32) & 0x0f;
+        val as u8
+    }
+    #[doc = "These bits read back as 0x0"]
+    pub fn set_partnumber1(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x0f << 0u32)) | (((val as u32) & 0x0f) << 0u32);
     }
 }
-impl Default for Sspperiphid0 {
-    fn default() -> Sspperiphid0 {
-        Sspperiphid0(0)
-    }
-}
-#[doc = "Interrupt clear register, SSPICR on page 3-11"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Sspicr(pub u32);
-impl Sspicr {
-    #[doc = "Clears the SSPRTINTR interrupt"]
-    pub const fn rtic(&self) -> bool {
-        let val = (self.0 >> 1u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Clears the SSPRTINTR interrupt"]
-    pub fn set_rtic(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 1u32)) | (((val as u32) & 0x01) << 1u32);
-    }
-    #[doc = "Clears the SSPRORINTR interrupt"]
-    pub const fn roric(&self) -> bool {
-        let val = (self.0 >> 0u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Clears the SSPRORINTR interrupt"]
-    pub fn set_roric(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
-    }
-}
-impl Default for Sspicr {
-    fn default() -> Sspicr {
-        Sspicr(0)
+impl Default for Sspperiphid1 {
+    fn default() -> Sspperiphid1 {
+        Sspperiphid1(0)
     }
 }
 #[doc = "Control register 0, SSPCR0 on page 3-4"]
@@ -151,51 +151,71 @@ impl Default for Sspcr0 {
         Sspcr0(0)
     }
 }
-#[doc = "Control register 1, SSPCR1 on page 3-5"]
+#[doc = "PrimeCell identification registers, SSPPCellID0-3 on page 3-16"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct Sspcr1(pub u32);
-impl Sspcr1 {
-    #[doc = "Slave-mode output disable. This bit is relevant only in the slave mode, MS=1. In multiple-slave systems, it is possible for an PrimeCell SSP master to broadcast a message to all slaves in the system while ensuring that only one slave drives data onto its serial output line. In such systems the RXD lines from multiple slaves could be tied together. To operate in such systems, the SOD bit can be set if the PrimeCell SSP slave is not supposed to drive the SSPTXD line: 0 SSP can drive the SSPTXD output in slave mode. 1 SSP must not drive the SSPTXD output in slave mode."]
-    pub const fn sod(&self) -> bool {
+pub struct Ssppcellid3(pub u32);
+impl Ssppcellid3 {
+    #[doc = "These bits read back as 0xB1"]
+    pub const fn ssppcellid3(&self) -> u8 {
+        let val = (self.0 >> 0u32) & 0xff;
+        val as u8
+    }
+    #[doc = "These bits read back as 0xB1"]
+    pub fn set_ssppcellid3(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0u32)) | (((val as u32) & 0xff) << 0u32);
+    }
+}
+impl Default for Ssppcellid3 {
+    fn default() -> Ssppcellid3 {
+        Ssppcellid3(0)
+    }
+}
+#[doc = "Masked interrupt status register, SSPMIS on page 3-11"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Sspmis(pub u32);
+impl Sspmis {
+    #[doc = "Gives the transmit FIFO masked interrupt state, after masking, of the SSPTXINTR interrupt"]
+    pub const fn txmis(&self) -> bool {
         let val = (self.0 >> 3u32) & 0x01;
         val != 0
     }
-    #[doc = "Slave-mode output disable. This bit is relevant only in the slave mode, MS=1. In multiple-slave systems, it is possible for an PrimeCell SSP master to broadcast a message to all slaves in the system while ensuring that only one slave drives data onto its serial output line. In such systems the RXD lines from multiple slaves could be tied together. To operate in such systems, the SOD bit can be set if the PrimeCell SSP slave is not supposed to drive the SSPTXD line: 0 SSP can drive the SSPTXD output in slave mode. 1 SSP must not drive the SSPTXD output in slave mode."]
-    pub fn set_sod(&mut self, val: bool) {
+    #[doc = "Gives the transmit FIFO masked interrupt state, after masking, of the SSPTXINTR interrupt"]
+    pub fn set_txmis(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3u32)) | (((val as u32) & 0x01) << 3u32);
     }
-    #[doc = "Master or slave mode select. This bit can be modified only when the PrimeCell SSP is disabled, SSE=0: 0 Device configured as master, default. 1 Device configured as slave."]
-    pub const fn ms(&self) -> bool {
+    #[doc = "Gives the receive FIFO masked interrupt state, after masking, of the SSPRXINTR interrupt"]
+    pub const fn rxmis(&self) -> bool {
         let val = (self.0 >> 2u32) & 0x01;
         val != 0
     }
-    #[doc = "Master or slave mode select. This bit can be modified only when the PrimeCell SSP is disabled, SSE=0: 0 Device configured as master, default. 1 Device configured as slave."]
-    pub fn set_ms(&mut self, val: bool) {
+    #[doc = "Gives the receive FIFO masked interrupt state, after masking, of the SSPRXINTR interrupt"]
+    pub fn set_rxmis(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2u32)) | (((val as u32) & 0x01) << 2u32);
     }
-    #[doc = "Synchronous serial port enable: 0 SSP operation disabled. 1 SSP operation enabled."]
-    pub const fn sse(&self) -> bool {
+    #[doc = "Gives the receive timeout masked interrupt state, after masking, of the SSPRTINTR interrupt"]
+    pub const fn rtmis(&self) -> bool {
         let val = (self.0 >> 1u32) & 0x01;
         val != 0
     }
-    #[doc = "Synchronous serial port enable: 0 SSP operation disabled. 1 SSP operation enabled."]
-    pub fn set_sse(&mut self, val: bool) {
+    #[doc = "Gives the receive timeout masked interrupt state, after masking, of the SSPRTINTR interrupt"]
+    pub fn set_rtmis(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1u32)) | (((val as u32) & 0x01) << 1u32);
     }
-    #[doc = "Loop back mode: 0 Normal serial port operation enabled. 1 Output of transmit serial shifter is connected to input of receive serial shifter internally."]
-    pub const fn lbm(&self) -> bool {
+    #[doc = "Gives the receive over run masked interrupt status, after masking, of the SSPRORINTR interrupt"]
+    pub const fn rormis(&self) -> bool {
         let val = (self.0 >> 0u32) & 0x01;
         val != 0
     }
-    #[doc = "Loop back mode: 0 Normal serial port operation enabled. 1 Output of transmit serial shifter is connected to input of receive serial shifter internally."]
-    pub fn set_lbm(&mut self, val: bool) {
+    #[doc = "Gives the receive over run masked interrupt status, after masking, of the SSPRORINTR interrupt"]
+    pub fn set_rormis(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
     }
 }
-impl Default for Sspcr1 {
-    fn default() -> Sspcr1 {
-        Sspcr1(0)
+impl Default for Sspmis {
+    fn default() -> Sspmis {
+        Sspmis(0)
     }
 }
 #[doc = "DMA control register, SSPDMACR on page 3-12"]
@@ -227,6 +247,35 @@ impl Default for Sspdmacr {
         Sspdmacr(0)
     }
 }
+#[doc = "Interrupt clear register, SSPICR on page 3-11"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Sspicr(pub u32);
+impl Sspicr {
+    #[doc = "Clears the SSPRTINTR interrupt"]
+    pub const fn rtic(&self) -> bool {
+        let val = (self.0 >> 1u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Clears the SSPRTINTR interrupt"]
+    pub fn set_rtic(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 1u32)) | (((val as u32) & 0x01) << 1u32);
+    }
+    #[doc = "Clears the SSPRORINTR interrupt"]
+    pub const fn roric(&self) -> bool {
+        let val = (self.0 >> 0u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Clears the SSPRORINTR interrupt"]
+    pub fn set_roric(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
+    }
+}
+impl Default for Sspicr {
+    fn default() -> Sspicr {
+        Sspicr(0)
+    }
+}
 #[doc = "Peripheral identification registers, SSPPeriphID0-3 on page 3-13"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
@@ -256,133 +305,51 @@ impl Default for Sspperiphid2 {
         Sspperiphid2(0)
     }
 }
-#[doc = "PrimeCell identification registers, SSPPCellID0-3 on page 3-16"]
+#[doc = "Raw interrupt status register, SSPRIS on page 3-10"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct Ssppcellid2(pub u32);
-impl Ssppcellid2 {
-    #[doc = "These bits read back as 0x05"]
-    pub const fn ssppcellid2(&self) -> u8 {
-        let val = (self.0 >> 0u32) & 0xff;
-        val as u8
+pub struct Sspris(pub u32);
+impl Sspris {
+    #[doc = "Gives the raw interrupt state, prior to masking, of the SSPTXINTR interrupt"]
+    pub const fn txris(&self) -> bool {
+        let val = (self.0 >> 3u32) & 0x01;
+        val != 0
     }
-    #[doc = "These bits read back as 0x05"]
-    pub fn set_ssppcellid2(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0u32)) | (((val as u32) & 0xff) << 0u32);
+    #[doc = "Gives the raw interrupt state, prior to masking, of the SSPTXINTR interrupt"]
+    pub fn set_txris(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 3u32)) | (((val as u32) & 0x01) << 3u32);
     }
-}
-impl Default for Ssppcellid2 {
-    fn default() -> Ssppcellid2 {
-        Ssppcellid2(0)
+    #[doc = "Gives the raw interrupt state, prior to masking, of the SSPRXINTR interrupt"]
+    pub const fn rxris(&self) -> bool {
+        let val = (self.0 >> 2u32) & 0x01;
+        val != 0
     }
-}
-#[doc = "PrimeCell identification registers, SSPPCellID0-3 on page 3-16"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Ssppcellid0(pub u32);
-impl Ssppcellid0 {
-    #[doc = "These bits read back as 0x0D"]
-    pub const fn ssppcellid0(&self) -> u8 {
-        let val = (self.0 >> 0u32) & 0xff;
-        val as u8
+    #[doc = "Gives the raw interrupt state, prior to masking, of the SSPRXINTR interrupt"]
+    pub fn set_rxris(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 2u32)) | (((val as u32) & 0x01) << 2u32);
     }
-    #[doc = "These bits read back as 0x0D"]
-    pub fn set_ssppcellid0(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0u32)) | (((val as u32) & 0xff) << 0u32);
+    #[doc = "Gives the raw interrupt state, prior to masking, of the SSPRTINTR interrupt"]
+    pub const fn rtris(&self) -> bool {
+        let val = (self.0 >> 1u32) & 0x01;
+        val != 0
     }
-}
-impl Default for Ssppcellid0 {
-    fn default() -> Ssppcellid0 {
-        Ssppcellid0(0)
+    #[doc = "Gives the raw interrupt state, prior to masking, of the SSPRTINTR interrupt"]
+    pub fn set_rtris(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 1u32)) | (((val as u32) & 0x01) << 1u32);
     }
-}
-#[doc = "PrimeCell identification registers, SSPPCellID0-3 on page 3-16"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Ssppcellid3(pub u32);
-impl Ssppcellid3 {
-    #[doc = "These bits read back as 0xB1"]
-    pub const fn ssppcellid3(&self) -> u8 {
-        let val = (self.0 >> 0u32) & 0xff;
-        val as u8
+    #[doc = "Gives the raw interrupt state, prior to masking, of the SSPRORINTR interrupt"]
+    pub const fn rorris(&self) -> bool {
+        let val = (self.0 >> 0u32) & 0x01;
+        val != 0
     }
-    #[doc = "These bits read back as 0xB1"]
-    pub fn set_ssppcellid3(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0u32)) | (((val as u32) & 0xff) << 0u32);
+    #[doc = "Gives the raw interrupt state, prior to masking, of the SSPRORINTR interrupt"]
+    pub fn set_rorris(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
     }
 }
-impl Default for Ssppcellid3 {
-    fn default() -> Ssppcellid3 {
-        Ssppcellid3(0)
-    }
-}
-#[doc = "Peripheral identification registers, SSPPeriphID0-3 on page 3-13"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Sspperiphid1(pub u32);
-impl Sspperiphid1 {
-    #[doc = "These bits read back as 0x1"]
-    pub const fn designer0(&self) -> u8 {
-        let val = (self.0 >> 4u32) & 0x0f;
-        val as u8
-    }
-    #[doc = "These bits read back as 0x1"]
-    pub fn set_designer0(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x0f << 4u32)) | (((val as u32) & 0x0f) << 4u32);
-    }
-    #[doc = "These bits read back as 0x0"]
-    pub const fn partnumber1(&self) -> u8 {
-        let val = (self.0 >> 0u32) & 0x0f;
-        val as u8
-    }
-    #[doc = "These bits read back as 0x0"]
-    pub fn set_partnumber1(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x0f << 0u32)) | (((val as u32) & 0x0f) << 0u32);
-    }
-}
-impl Default for Sspperiphid1 {
-    fn default() -> Sspperiphid1 {
-        Sspperiphid1(0)
-    }
-}
-#[doc = "PrimeCell identification registers, SSPPCellID0-3 on page 3-16"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Ssppcellid1(pub u32);
-impl Ssppcellid1 {
-    #[doc = "These bits read back as 0xF0"]
-    pub const fn ssppcellid1(&self) -> u8 {
-        let val = (self.0 >> 0u32) & 0xff;
-        val as u8
-    }
-    #[doc = "These bits read back as 0xF0"]
-    pub fn set_ssppcellid1(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0u32)) | (((val as u32) & 0xff) << 0u32);
-    }
-}
-impl Default for Ssppcellid1 {
-    fn default() -> Ssppcellid1 {
-        Ssppcellid1(0)
-    }
-}
-#[doc = "Peripheral identification registers, SSPPeriphID0-3 on page 3-13"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Sspperiphid3(pub u32);
-impl Sspperiphid3 {
-    #[doc = "These bits read back as 0x00"]
-    pub const fn configuration(&self) -> u8 {
-        let val = (self.0 >> 0u32) & 0xff;
-        val as u8
-    }
-    #[doc = "These bits read back as 0x00"]
-    pub fn set_configuration(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0u32)) | (((val as u32) & 0xff) << 0u32);
-    }
-}
-impl Default for Sspperiphid3 {
-    fn default() -> Sspperiphid3 {
-        Sspperiphid3(0)
+impl Default for Sspris {
+    fn default() -> Sspris {
+        Sspris(0)
     }
 }
 #[doc = "Clock prescale register, SSPCPSR on page 3-8"]
@@ -405,6 +372,46 @@ impl Default for Sspcpsr {
         Sspcpsr(0)
     }
 }
+#[doc = "Peripheral identification registers, SSPPeriphID0-3 on page 3-13"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Sspperiphid3(pub u32);
+impl Sspperiphid3 {
+    #[doc = "These bits read back as 0x00"]
+    pub const fn configuration(&self) -> u8 {
+        let val = (self.0 >> 0u32) & 0xff;
+        val as u8
+    }
+    #[doc = "These bits read back as 0x00"]
+    pub fn set_configuration(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0u32)) | (((val as u32) & 0xff) << 0u32);
+    }
+}
+impl Default for Sspperiphid3 {
+    fn default() -> Sspperiphid3 {
+        Sspperiphid3(0)
+    }
+}
+#[doc = "PrimeCell identification registers, SSPPCellID0-3 on page 3-16"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Ssppcellid2(pub u32);
+impl Ssppcellid2 {
+    #[doc = "These bits read back as 0x05"]
+    pub const fn ssppcellid2(&self) -> u8 {
+        let val = (self.0 >> 0u32) & 0xff;
+        val as u8
+    }
+    #[doc = "These bits read back as 0x05"]
+    pub fn set_ssppcellid2(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0u32)) | (((val as u32) & 0xff) << 0u32);
+    }
+}
+impl Default for Ssppcellid2 {
+    fn default() -> Ssppcellid2 {
+        Ssppcellid2(0)
+    }
+}
 #[doc = "Data register, SSPDR on page 3-6"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
@@ -423,6 +430,26 @@ impl Sspdr {
 impl Default for Sspdr {
     fn default() -> Sspdr {
         Sspdr(0)
+    }
+}
+#[doc = "PrimeCell identification registers, SSPPCellID0-3 on page 3-16"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Ssppcellid0(pub u32);
+impl Ssppcellid0 {
+    #[doc = "These bits read back as 0x0D"]
+    pub const fn ssppcellid0(&self) -> u8 {
+        let val = (self.0 >> 0u32) & 0xff;
+        val as u8
+    }
+    #[doc = "These bits read back as 0x0D"]
+    pub fn set_ssppcellid0(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0u32)) | (((val as u32) & 0xff) << 0u32);
+    }
+}
+impl Default for Ssppcellid0 {
+    fn default() -> Ssppcellid0 {
+        Ssppcellid0(0)
     }
 }
 #[doc = "Status register, SSPSR on page 3-7"]
@@ -481,6 +508,26 @@ impl Default for Sspsr {
         Sspsr(0)
     }
 }
+#[doc = "Peripheral identification registers, SSPPeriphID0-3 on page 3-13"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Sspperiphid0(pub u32);
+impl Sspperiphid0 {
+    #[doc = "These bits read back as 0x22"]
+    pub const fn partnumber0(&self) -> u8 {
+        let val = (self.0 >> 0u32) & 0xff;
+        val as u8
+    }
+    #[doc = "These bits read back as 0x22"]
+    pub fn set_partnumber0(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0u32)) | (((val as u32) & 0xff) << 0u32);
+    }
+}
+impl Default for Sspperiphid0 {
+    fn default() -> Sspperiphid0 {
+        Sspperiphid0(0)
+    }
+}
 #[doc = "Interrupt mask set or clear register, SSPIMSC on page 3-9"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
@@ -526,52 +573,5 @@ impl Sspimsc {
 impl Default for Sspimsc {
     fn default() -> Sspimsc {
         Sspimsc(0)
-    }
-}
-#[doc = "Masked interrupt status register, SSPMIS on page 3-11"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Sspmis(pub u32);
-impl Sspmis {
-    #[doc = "Gives the transmit FIFO masked interrupt state, after masking, of the SSPTXINTR interrupt"]
-    pub const fn txmis(&self) -> bool {
-        let val = (self.0 >> 3u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Gives the transmit FIFO masked interrupt state, after masking, of the SSPTXINTR interrupt"]
-    pub fn set_txmis(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 3u32)) | (((val as u32) & 0x01) << 3u32);
-    }
-    #[doc = "Gives the receive FIFO masked interrupt state, after masking, of the SSPRXINTR interrupt"]
-    pub const fn rxmis(&self) -> bool {
-        let val = (self.0 >> 2u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Gives the receive FIFO masked interrupt state, after masking, of the SSPRXINTR interrupt"]
-    pub fn set_rxmis(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 2u32)) | (((val as u32) & 0x01) << 2u32);
-    }
-    #[doc = "Gives the receive timeout masked interrupt state, after masking, of the SSPRTINTR interrupt"]
-    pub const fn rtmis(&self) -> bool {
-        let val = (self.0 >> 1u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Gives the receive timeout masked interrupt state, after masking, of the SSPRTINTR interrupt"]
-    pub fn set_rtmis(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 1u32)) | (((val as u32) & 0x01) << 1u32);
-    }
-    #[doc = "Gives the receive over run masked interrupt status, after masking, of the SSPRORINTR interrupt"]
-    pub const fn rormis(&self) -> bool {
-        let val = (self.0 >> 0u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Gives the receive over run masked interrupt status, after masking, of the SSPRORINTR interrupt"]
-    pub fn set_rormis(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
-    }
-}
-impl Default for Sspmis {
-    fn default() -> Sspmis {
-        Sspmis(0)
     }
 }

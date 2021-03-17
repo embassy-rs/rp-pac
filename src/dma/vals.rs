@@ -1,5 +1,5 @@
 use crate::generic::*;
-#[doc = "DMA Channel 1 Control and Status"]
+#[doc = "DMA Channel 9 Control and Status"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
 pub struct TreqSel(pub u8);
@@ -33,7 +33,7 @@ impl SniffCtrlCalc {
     #[doc = "Calculate a simple 32-bit checksum (addition with a 32 bit accumulator)"]
     pub const SUM: Self = Self(0x0f);
 }
-#[doc = "DMA Channel 8 Control and Status"]
+#[doc = "DMA Channel 7 Control and Status"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
 pub struct DataSize(pub u8);

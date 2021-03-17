@@ -1,24 +1,4 @@
 use crate::generic::*;
-#[doc = "Bus fabric performance counter 3"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Perfctr3(pub u32);
-impl Perfctr3 {
-    #[doc = "Busfabric saturating performance counter 3 Count some event signal from the busfabric arbiters. Write any value to clear. Select an event to count using PERFSEL3"]
-    pub const fn perfctr3(&self) -> u32 {
-        let val = (self.0 >> 0u32) & 0x00ff_ffff;
-        val as u32
-    }
-    #[doc = "Busfabric saturating performance counter 3 Count some event signal from the busfabric arbiters. Write any value to clear. Select an event to count using PERFSEL3"]
-    pub fn set_perfctr3(&mut self, val: u32) {
-        self.0 = (self.0 & !(0x00ff_ffff << 0u32)) | (((val as u32) & 0x00ff_ffff) << 0u32);
-    }
-}
-impl Default for Perfctr3 {
-    fn default() -> Perfctr3 {
-        Perfctr3(0)
-    }
-}
 #[doc = "Bus fabric performance counter 2"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
@@ -59,24 +39,24 @@ impl Default for Perfctr0 {
         Perfctr0(0)
     }
 }
-#[doc = "Bus fabric performance event select for PERFCTR0"]
+#[doc = "Bus fabric performance event select for PERFCTR3"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct Perfsel0(pub u32);
-impl Perfsel0 {
-    #[doc = "Select a performance event for PERFCTR0"]
-    pub const fn perfsel0(&self) -> u8 {
+pub struct Perfsel3(pub u32);
+impl Perfsel3 {
+    #[doc = "Select a performance event for PERFCTR3"]
+    pub const fn perfsel3(&self) -> u8 {
         let val = (self.0 >> 0u32) & 0x1f;
         val as u8
     }
-    #[doc = "Select a performance event for PERFCTR0"]
-    pub fn set_perfsel0(&mut self, val: u8) {
+    #[doc = "Select a performance event for PERFCTR3"]
+    pub fn set_perfsel3(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 0u32)) | (((val as u32) & 0x1f) << 0u32);
     }
 }
-impl Default for Perfsel0 {
-    fn default() -> Perfsel0 {
-        Perfsel0(0)
+impl Default for Perfsel3 {
+    fn default() -> Perfsel3 {
+        Perfsel3(0)
     }
 }
 #[doc = "Bus fabric performance event select for PERFCTR2"]
@@ -119,26 +99,6 @@ impl Default for Perfctr1 {
         Perfctr1(0)
     }
 }
-#[doc = "Bus fabric performance event select for PERFCTR3"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Perfsel3(pub u32);
-impl Perfsel3 {
-    #[doc = "Select a performance event for PERFCTR3"]
-    pub const fn perfsel3(&self) -> u8 {
-        let val = (self.0 >> 0u32) & 0x1f;
-        val as u8
-    }
-    #[doc = "Select a performance event for PERFCTR3"]
-    pub fn set_perfsel3(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x1f << 0u32)) | (((val as u32) & 0x1f) << 0u32);
-    }
-}
-impl Default for Perfsel3 {
-    fn default() -> Perfsel3 {
-        Perfsel3(0)
-    }
-}
 #[doc = "Bus priority acknowledge"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
@@ -159,24 +119,24 @@ impl Default for BusPriorityAck {
         BusPriorityAck(0)
     }
 }
-#[doc = "Bus fabric performance event select for PERFCTR1"]
+#[doc = "Bus fabric performance event select for PERFCTR0"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct Perfsel1(pub u32);
-impl Perfsel1 {
-    #[doc = "Select a performance event for PERFCTR1"]
-    pub const fn perfsel1(&self) -> u8 {
+pub struct Perfsel0(pub u32);
+impl Perfsel0 {
+    #[doc = "Select a performance event for PERFCTR0"]
+    pub const fn perfsel0(&self) -> u8 {
         let val = (self.0 >> 0u32) & 0x1f;
         val as u8
     }
-    #[doc = "Select a performance event for PERFCTR1"]
-    pub fn set_perfsel1(&mut self, val: u8) {
+    #[doc = "Select a performance event for PERFCTR0"]
+    pub fn set_perfsel0(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 0u32)) | (((val as u32) & 0x1f) << 0u32);
     }
 }
-impl Default for Perfsel1 {
-    fn default() -> Perfsel1 {
-        Perfsel1(0)
+impl Default for Perfsel0 {
+    fn default() -> Perfsel0 {
+        Perfsel0(0)
     }
 }
 #[doc = "Set the priority of each master for bus arbitration."]
@@ -224,5 +184,45 @@ impl BusPriority {
 impl Default for BusPriority {
     fn default() -> BusPriority {
         BusPriority(0)
+    }
+}
+#[doc = "Bus fabric performance counter 3"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Perfctr3(pub u32);
+impl Perfctr3 {
+    #[doc = "Busfabric saturating performance counter 3 Count some event signal from the busfabric arbiters. Write any value to clear. Select an event to count using PERFSEL3"]
+    pub const fn perfctr3(&self) -> u32 {
+        let val = (self.0 >> 0u32) & 0x00ff_ffff;
+        val as u32
+    }
+    #[doc = "Busfabric saturating performance counter 3 Count some event signal from the busfabric arbiters. Write any value to clear. Select an event to count using PERFSEL3"]
+    pub fn set_perfctr3(&mut self, val: u32) {
+        self.0 = (self.0 & !(0x00ff_ffff << 0u32)) | (((val as u32) & 0x00ff_ffff) << 0u32);
+    }
+}
+impl Default for Perfctr3 {
+    fn default() -> Perfctr3 {
+        Perfctr3(0)
+    }
+}
+#[doc = "Bus fabric performance event select for PERFCTR1"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Perfsel1(pub u32);
+impl Perfsel1 {
+    #[doc = "Select a performance event for PERFCTR1"]
+    pub const fn perfsel1(&self) -> u8 {
+        let val = (self.0 >> 0u32) & 0x1f;
+        val as u8
+    }
+    #[doc = "Select a performance event for PERFCTR1"]
+    pub fn set_perfsel1(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x1f << 0u32)) | (((val as u32) & 0x1f) << 0u32);
+    }
+}
+impl Default for Perfsel1 {
+    fn default() -> Perfsel1 {
+        Perfsel1(0)
     }
 }

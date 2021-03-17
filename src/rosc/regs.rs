@@ -1,22 +1,123 @@
 use crate::generic::*;
-#[doc = "Controls the output divider"]
+#[doc = "For a detailed description see freqa register"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct Div(pub u32);
-impl Div {
-    #[doc = "set to 0xaa0 + div where div = 0 divides by 32 div = 1-31 divides by div any other value sets div=0 and therefore divides by 32 this register resets to div=16"]
-    pub const fn div(&self) -> super::vals::Div {
-        let val = (self.0 >> 0u32) & 0x0fff;
-        super::vals::Div(val as u16)
+pub struct Freqb(pub u32);
+impl Freqb {
+    #[doc = "Set to 0x9696 to apply the settings Any other value in this field will set all drive strengths to 0"]
+    pub const fn passwd(&self) -> super::vals::Passwd {
+        let val = (self.0 >> 16u32) & 0xffff;
+        super::vals::Passwd(val as u16)
     }
-    #[doc = "set to 0xaa0 + div where div = 0 divides by 32 div = 1-31 divides by div any other value sets div=0 and therefore divides by 32 this register resets to div=16"]
-    pub fn set_div(&mut self, val: super::vals::Div) {
-        self.0 = (self.0 & !(0x0fff << 0u32)) | (((val.0 as u32) & 0x0fff) << 0u32);
+    #[doc = "Set to 0x9696 to apply the settings Any other value in this field will set all drive strengths to 0"]
+    pub fn set_passwd(&mut self, val: super::vals::Passwd) {
+        self.0 = (self.0 & !(0xffff << 16u32)) | (((val.0 as u32) & 0xffff) << 16u32);
+    }
+    #[doc = "Stage 7 drive strength"]
+    pub const fn ds7(&self) -> u8 {
+        let val = (self.0 >> 12u32) & 0x07;
+        val as u8
+    }
+    #[doc = "Stage 7 drive strength"]
+    pub fn set_ds7(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x07 << 12u32)) | (((val as u32) & 0x07) << 12u32);
+    }
+    #[doc = "Stage 6 drive strength"]
+    pub const fn ds6(&self) -> u8 {
+        let val = (self.0 >> 8u32) & 0x07;
+        val as u8
+    }
+    #[doc = "Stage 6 drive strength"]
+    pub fn set_ds6(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x07 << 8u32)) | (((val as u32) & 0x07) << 8u32);
+    }
+    #[doc = "Stage 5 drive strength"]
+    pub const fn ds5(&self) -> u8 {
+        let val = (self.0 >> 4u32) & 0x07;
+        val as u8
+    }
+    #[doc = "Stage 5 drive strength"]
+    pub fn set_ds5(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x07 << 4u32)) | (((val as u32) & 0x07) << 4u32);
+    }
+    #[doc = "Stage 4 drive strength"]
+    pub const fn ds4(&self) -> u8 {
+        let val = (self.0 >> 0u32) & 0x07;
+        val as u8
+    }
+    #[doc = "Stage 4 drive strength"]
+    pub fn set_ds4(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x07 << 0u32)) | (((val as u32) & 0x07) << 0u32);
     }
 }
-impl Default for Div {
-    fn default() -> Div {
-        Div(0)
+impl Default for Freqb {
+    fn default() -> Freqb {
+        Freqb(0)
+    }
+}
+#[doc = "Ring Oscillator Status"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Status(pub u32);
+impl Status {
+    #[doc = "Oscillator is running and stable"]
+    pub const fn stable(&self) -> bool {
+        let val = (self.0 >> 31u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Oscillator is running and stable"]
+    pub fn set_stable(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 31u32)) | (((val as u32) & 0x01) << 31u32);
+    }
+    #[doc = "An invalid value has been written to CTRL_ENABLE or CTRL_FREQ_RANGE or FRFEQA or FREQB or DORMANT"]
+    pub const fn badwrite(&self) -> bool {
+        let val = (self.0 >> 24u32) & 0x01;
+        val != 0
+    }
+    #[doc = "An invalid value has been written to CTRL_ENABLE or CTRL_FREQ_RANGE or FRFEQA or FREQB or DORMANT"]
+    pub fn set_badwrite(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 24u32)) | (((val as u32) & 0x01) << 24u32);
+    }
+    #[doc = "post-divider is running this resets to 0 but transitions to 1 during chip startup"]
+    pub const fn div_running(&self) -> bool {
+        let val = (self.0 >> 16u32) & 0x01;
+        val != 0
+    }
+    #[doc = "post-divider is running this resets to 0 but transitions to 1 during chip startup"]
+    pub fn set_div_running(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 16u32)) | (((val as u32) & 0x01) << 16u32);
+    }
+    #[doc = "Oscillator is enabled but not necessarily running and stable this resets to 0 but transitions to 1 during chip startup"]
+    pub const fn enabled(&self) -> bool {
+        let val = (self.0 >> 12u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Oscillator is enabled but not necessarily running and stable this resets to 0 but transitions to 1 during chip startup"]
+    pub fn set_enabled(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 12u32)) | (((val as u32) & 0x01) << 12u32);
+    }
+}
+impl Default for Status {
+    fn default() -> Status {
+        Status(0)
+    }
+}
+#[doc = "This just reads the state of the oscillator output so randomness is compromised if the ring oscillator is stopped or run at a harmonic of the bus frequency"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Randombit(pub u32);
+impl Randombit {
+    pub const fn randombit(&self) -> bool {
+        let val = (self.0 >> 0u32) & 0x01;
+        val != 0
+    }
+    pub fn set_randombit(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
+    }
+}
+impl Default for Randombit {
+    fn default() -> Randombit {
+        Randombit(0)
     }
 }
 #[doc = "The FREQA & FREQB registers control the frequency by controlling the drive strength of each stage The drive strength has 4 levels determined by the number of bits set Increasing the number of bits set increases the drive strength and increases the oscillation frequency 0 bits set is the default drive strength 1 bit set doubles the drive strength 2 bits set triples drive strength 3 bits set quadruples drive strength"]
@@ -75,62 +176,6 @@ impl Default for Freqa {
         Freqa(0)
     }
 }
-#[doc = "For a detailed description see freqa register"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Freqb(pub u32);
-impl Freqb {
-    #[doc = "Set to 0x9696 to apply the settings Any other value in this field will set all drive strengths to 0"]
-    pub const fn passwd(&self) -> super::vals::Passwd {
-        let val = (self.0 >> 16u32) & 0xffff;
-        super::vals::Passwd(val as u16)
-    }
-    #[doc = "Set to 0x9696 to apply the settings Any other value in this field will set all drive strengths to 0"]
-    pub fn set_passwd(&mut self, val: super::vals::Passwd) {
-        self.0 = (self.0 & !(0xffff << 16u32)) | (((val.0 as u32) & 0xffff) << 16u32);
-    }
-    #[doc = "Stage 7 drive strength"]
-    pub const fn ds7(&self) -> u8 {
-        let val = (self.0 >> 12u32) & 0x07;
-        val as u8
-    }
-    #[doc = "Stage 7 drive strength"]
-    pub fn set_ds7(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x07 << 12u32)) | (((val as u32) & 0x07) << 12u32);
-    }
-    #[doc = "Stage 6 drive strength"]
-    pub const fn ds6(&self) -> u8 {
-        let val = (self.0 >> 8u32) & 0x07;
-        val as u8
-    }
-    #[doc = "Stage 6 drive strength"]
-    pub fn set_ds6(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x07 << 8u32)) | (((val as u32) & 0x07) << 8u32);
-    }
-    #[doc = "Stage 5 drive strength"]
-    pub const fn ds5(&self) -> u8 {
-        let val = (self.0 >> 4u32) & 0x07;
-        val as u8
-    }
-    #[doc = "Stage 5 drive strength"]
-    pub fn set_ds5(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x07 << 4u32)) | (((val as u32) & 0x07) << 4u32);
-    }
-    #[doc = "Stage 4 drive strength"]
-    pub const fn ds4(&self) -> u8 {
-        let val = (self.0 >> 0u32) & 0x07;
-        val as u8
-    }
-    #[doc = "Stage 4 drive strength"]
-    pub fn set_ds4(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x07 << 0u32)) | (((val as u32) & 0x07) << 0u32);
-    }
-}
-impl Default for Freqb {
-    fn default() -> Freqb {
-        Freqb(0)
-    }
-}
 #[doc = "Ring Oscillator control"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
@@ -176,53 +221,6 @@ impl Count {
 impl Default for Count {
     fn default() -> Count {
         Count(0)
-    }
-}
-#[doc = "Ring Oscillator Status"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Status(pub u32);
-impl Status {
-    #[doc = "Oscillator is running and stable"]
-    pub const fn stable(&self) -> bool {
-        let val = (self.0 >> 31u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Oscillator is running and stable"]
-    pub fn set_stable(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 31u32)) | (((val as u32) & 0x01) << 31u32);
-    }
-    #[doc = "An invalid value has been written to CTRL_ENABLE or CTRL_FREQ_RANGE or FRFEQA or FREQB or DORMANT"]
-    pub const fn badwrite(&self) -> bool {
-        let val = (self.0 >> 24u32) & 0x01;
-        val != 0
-    }
-    #[doc = "An invalid value has been written to CTRL_ENABLE or CTRL_FREQ_RANGE or FRFEQA or FREQB or DORMANT"]
-    pub fn set_badwrite(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 24u32)) | (((val as u32) & 0x01) << 24u32);
-    }
-    #[doc = "post-divider is running this resets to 0 but transitions to 1 during chip startup"]
-    pub const fn div_running(&self) -> bool {
-        let val = (self.0 >> 16u32) & 0x01;
-        val != 0
-    }
-    #[doc = "post-divider is running this resets to 0 but transitions to 1 during chip startup"]
-    pub fn set_div_running(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 16u32)) | (((val as u32) & 0x01) << 16u32);
-    }
-    #[doc = "Oscillator is enabled but not necessarily running and stable this resets to 0 but transitions to 1 during chip startup"]
-    pub const fn enabled(&self) -> bool {
-        let val = (self.0 >> 12u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Oscillator is enabled but not necessarily running and stable this resets to 0 but transitions to 1 during chip startup"]
-    pub fn set_enabled(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 12u32)) | (((val as u32) & 0x01) << 12u32);
-    }
-}
-impl Default for Status {
-    fn default() -> Status {
-        Status(0)
     }
 }
 #[doc = "Controls the phase shifted output"]
@@ -272,21 +270,23 @@ impl Default for Phase {
         Phase(0)
     }
 }
-#[doc = "This just reads the state of the oscillator output so randomness is compromised if the ring oscillator is stopped or run at a harmonic of the bus frequency"]
+#[doc = "Controls the output divider"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct Randombit(pub u32);
-impl Randombit {
-    pub const fn randombit(&self) -> bool {
-        let val = (self.0 >> 0u32) & 0x01;
-        val != 0
+pub struct Div(pub u32);
+impl Div {
+    #[doc = "set to 0xaa0 + div where div = 0 divides by 32 div = 1-31 divides by div any other value sets div=0 and therefore divides by 32 this register resets to div=16"]
+    pub const fn div(&self) -> super::vals::Div {
+        let val = (self.0 >> 0u32) & 0x0fff;
+        super::vals::Div(val as u16)
     }
-    pub fn set_randombit(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
+    #[doc = "set to 0xaa0 + div where div = 0 divides by 32 div = 1-31 divides by div any other value sets div=0 and therefore divides by 32 this register resets to div=16"]
+    pub fn set_div(&mut self, val: super::vals::Div) {
+        self.0 = (self.0 & !(0x0fff << 0u32)) | (((val.0 as u32) & 0x0fff) << 0u32);
     }
 }
-impl Default for Randombit {
-    fn default() -> Randombit {
-        Randombit(0)
+impl Default for Div {
+    fn default() -> Div {
+        Div(0)
     }
 }

@@ -77,26 +77,6 @@ impl Default for Stat {
         Stat(0)
     }
 }
-#[doc = "FIFO stream address"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct StreamAddr(pub u32);
-impl StreamAddr {
-    #[doc = "The address of the next word to be streamed from flash to the streaming FIFO. Increments automatically after each flash access. Write the initial access address here before starting a streaming read."]
-    pub const fn stream_addr(&self) -> u32 {
-        let val = (self.0 >> 2u32) & 0x3fff_ffff;
-        val as u32
-    }
-    #[doc = "The address of the next word to be streamed from flash to the streaming FIFO. Increments automatically after each flash access. Write the initial access address here before starting a streaming read."]
-    pub fn set_stream_addr(&mut self, val: u32) {
-        self.0 = (self.0 & !(0x3fff_ffff << 2u32)) | (((val as u32) & 0x3fff_ffff) << 2u32);
-    }
-}
-impl Default for StreamAddr {
-    fn default() -> StreamAddr {
-        StreamAddr(0)
-    }
-}
 #[doc = "Cache control"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
@@ -133,5 +113,25 @@ impl Ctrl {
 impl Default for Ctrl {
     fn default() -> Ctrl {
         Ctrl(0)
+    }
+}
+#[doc = "FIFO stream address"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct StreamAddr(pub u32);
+impl StreamAddr {
+    #[doc = "The address of the next word to be streamed from flash to the streaming FIFO. Increments automatically after each flash access. Write the initial access address here before starting a streaming read."]
+    pub const fn stream_addr(&self) -> u32 {
+        let val = (self.0 >> 2u32) & 0x3fff_ffff;
+        val as u32
+    }
+    #[doc = "The address of the next word to be streamed from flash to the streaming FIFO. Increments automatically after each flash access. Write the initial access address here before starting a streaming read."]
+    pub fn set_stream_addr(&mut self, val: u32) {
+        self.0 = (self.0 & !(0x3fff_ffff << 2u32)) | (((val as u32) & 0x3fff_ffff) << 2u32);
+    }
+}
+impl Default for StreamAddr {
+    fn default() -> StreamAddr {
+        StreamAddr(0)
     }
 }
