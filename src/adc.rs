@@ -26,19 +26,19 @@ impl Adc {
         unsafe { Reg::from_ptr(self.0.add(16usize)) }
     }
     #[doc = "Raw Interrupts"]
-    pub fn intr(self) -> Reg<regs::Intr, RW> {
+    pub fn intr(self) -> Reg<regs::Int, RW> {
         unsafe { Reg::from_ptr(self.0.add(20usize)) }
     }
     #[doc = "Interrupt Enable"]
-    pub fn inte(self) -> Reg<regs::Inte, RW> {
+    pub fn inte(self) -> Reg<regs::Int, RW> {
         unsafe { Reg::from_ptr(self.0.add(24usize)) }
     }
     #[doc = "Interrupt Force"]
-    pub fn intf(self) -> Reg<regs::Intf, RW> {
+    pub fn intf(self) -> Reg<regs::Int, RW> {
         unsafe { Reg::from_ptr(self.0.add(28usize)) }
     }
     #[doc = "Interrupt status after masking & forcing"]
-    pub fn ints(self) -> Reg<regs::Ints, RW> {
+    pub fn ints(self) -> Reg<regs::Int, RW> {
         unsafe { Reg::from_ptr(self.0.add(32usize)) }
     }
 }

@@ -1,22 +1,4 @@
 use crate::generic::*;
-#[derive(Copy, Clone)]
-pub struct Irq(pub *mut u8);
-unsafe impl Send for Irq {}
-unsafe impl Sync for Irq {}
-impl Irq {
-    #[doc = "Interrupt Enable for irq1"]
-    pub fn inte(self) -> Reg<regs::Intr, RW> {
-        unsafe { Reg::from_ptr(self.0.add(0usize)) }
-    }
-    #[doc = "Interrupt Force for irq1"]
-    pub fn intf(self) -> Reg<regs::Intr, RW> {
-        unsafe { Reg::from_ptr(self.0.add(4usize)) }
-    }
-    #[doc = "Interrupt status after masking & forcing for irq1"]
-    pub fn ints(self) -> Reg<regs::Intr, RW> {
-        unsafe { Reg::from_ptr(self.0.add(8usize)) }
-    }
-}
 #[doc = "Programmable IO block"]
 #[derive(Copy, Clone)]
 pub struct Pio(pub *mut u8);
@@ -67,20 +49,20 @@ impl Pio {
     pub fn intr(self) -> Reg<regs::Intr, RW> {
         unsafe { Reg::from_ptr(self.0.add(296usize)) }
     }
-    #[doc = "Direct write access to the TX FIFO for this state machine. Each write pushes one word to the FIFO."]
-    pub fn txf(self, n: usize) -> Reg<u32, W> {
+    #[doc = "Direct read access to the RX FIFO for this state machine. Each read pops one word from the FIFO."]
+    pub fn rxf(self, n: usize) -> Reg<u32, R> {
         assert!(n < 4usize);
-        unsafe { Reg::from_ptr(self.0.add(16usize + n * 4usize)) }
+        unsafe { Reg::from_ptr(self.0.add(32usize + n * 4usize)) }
     }
     #[doc = "Write-only access to instruction memory location 0"]
     pub fn instr_mem(self, n: usize) -> Reg<regs::InstrMem, RW> {
         assert!(n < 32usize);
         unsafe { Reg::from_ptr(self.0.add(72usize + n * 4usize)) }
     }
-    #[doc = "Direct read access to the RX FIFO for this state machine. Each read pops one word from the FIFO."]
-    pub fn rxf(self, n: usize) -> Reg<u32, R> {
+    #[doc = "Direct write access to the TX FIFO for this state machine. Each write pushes one word to the FIFO."]
+    pub fn txf(self, n: usize) -> Reg<u32, W> {
         assert!(n < 4usize);
-        unsafe { Reg::from_ptr(self.0.add(32usize + n * 4usize)) }
+        unsafe { Reg::from_ptr(self.0.add(16usize + n * 4usize)) }
     }
     pub fn sm(self, n: usize) -> StateMachine {
         assert!(n < 4usize);
@@ -119,6 +101,24 @@ impl StateMachine {
     #[doc = "State machine pin control"]
     pub fn pinctrl(self) -> Reg<regs::SmPinctrl, RW> {
         unsafe { Reg::from_ptr(self.0.add(20usize)) }
+    }
+}
+#[derive(Copy, Clone)]
+pub struct Irq(pub *mut u8);
+unsafe impl Send for Irq {}
+unsafe impl Sync for Irq {}
+impl Irq {
+    #[doc = "Interrupt Enable for irq1"]
+    pub fn inte(self) -> Reg<regs::Intr, RW> {
+        unsafe { Reg::from_ptr(self.0.add(0usize)) }
+    }
+    #[doc = "Interrupt Force for irq1"]
+    pub fn intf(self) -> Reg<regs::Intr, RW> {
+        unsafe { Reg::from_ptr(self.0.add(4usize)) }
+    }
+    #[doc = "Interrupt status after masking & forcing for irq1"]
+    pub fn ints(self) -> Reg<regs::Intr, RW> {
+        unsafe { Reg::from_ptr(self.0.add(8usize)) }
     }
 }
 pub mod regs;

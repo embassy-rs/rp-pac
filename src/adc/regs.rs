@@ -28,73 +28,6 @@ impl Default for Div {
         Div(0)
     }
 }
-#[doc = "Interrupt status after masking & forcing"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Ints(pub u32);
-impl Ints {
-    #[doc = "Triggered when the sample FIFO reaches a certain level. This level can be programmed via the FCS_THRESH field."]
-    pub const fn fifo(&self) -> bool {
-        let val = (self.0 >> 0u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Triggered when the sample FIFO reaches a certain level. This level can be programmed via the FCS_THRESH field."]
-    pub fn set_fifo(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
-    }
-}
-impl Default for Ints {
-    fn default() -> Ints {
-        Ints(0)
-    }
-}
-#[doc = "Interrupt Force"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Intf(pub u32);
-impl Intf {
-    #[doc = "Triggered when the sample FIFO reaches a certain level. This level can be programmed via the FCS_THRESH field."]
-    pub const fn fifo(&self) -> bool {
-        let val = (self.0 >> 0u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Triggered when the sample FIFO reaches a certain level. This level can be programmed via the FCS_THRESH field."]
-    pub fn set_fifo(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
-    }
-}
-impl Default for Intf {
-    fn default() -> Intf {
-        Intf(0)
-    }
-}
-#[doc = "Conversion result FIFO"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Fifo(pub u32);
-impl Fifo {
-    #[doc = "1 if this particular sample experienced a conversion error. Remains in the same location if the sample is shifted."]
-    pub const fn err(&self) -> bool {
-        let val = (self.0 >> 15u32) & 0x01;
-        val != 0
-    }
-    #[doc = "1 if this particular sample experienced a conversion error. Remains in the same location if the sample is shifted."]
-    pub fn set_err(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 15u32)) | (((val as u32) & 0x01) << 15u32);
-    }
-    pub const fn val(&self) -> u16 {
-        let val = (self.0 >> 0u32) & 0x0fff;
-        val as u16
-    }
-    pub fn set_val(&mut self, val: u16) {
-        self.0 = (self.0 & !(0x0fff << 0u32)) | (((val as u32) & 0x0fff) << 0u32);
-    }
-}
-impl Default for Fifo {
-    fn default() -> Fifo {
-        Fifo(0)
-    }
-}
 #[doc = "Result of most recent ADC conversion"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
@@ -111,6 +44,118 @@ impl Result {
 impl Default for Result {
     fn default() -> Result {
         Result(0)
+    }
+}
+#[doc = "ADC Control and Status"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Cs(pub u32);
+impl Cs {
+    #[doc = "Round-robin sampling. 1 bit per channel. Set all bits to 0 to disable. Otherwise, the ADC will cycle through each enabled channel in a round-robin fashion. The first channel to be sampled will be the one currently indicated by AINSEL. AINSEL will be updated after each conversion with the newly-selected channel."]
+    pub const fn rrobin(&self) -> u8 {
+        let val = (self.0 >> 16u32) & 0x1f;
+        val as u8
+    }
+    #[doc = "Round-robin sampling. 1 bit per channel. Set all bits to 0 to disable. Otherwise, the ADC will cycle through each enabled channel in a round-robin fashion. The first channel to be sampled will be the one currently indicated by AINSEL. AINSEL will be updated after each conversion with the newly-selected channel."]
+    pub fn set_rrobin(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x1f << 16u32)) | (((val as u32) & 0x1f) << 16u32);
+    }
+    #[doc = "Select analog mux input. Updated automatically in round-robin mode."]
+    pub const fn ainsel(&self) -> u8 {
+        let val = (self.0 >> 12u32) & 0x07;
+        val as u8
+    }
+    #[doc = "Select analog mux input. Updated automatically in round-robin mode."]
+    pub fn set_ainsel(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x07 << 12u32)) | (((val as u32) & 0x07) << 12u32);
+    }
+    #[doc = "Some past ADC conversion encountered an error. Write 1 to clear."]
+    pub const fn err_sticky(&self) -> bool {
+        let val = (self.0 >> 10u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Some past ADC conversion encountered an error. Write 1 to clear."]
+    pub fn set_err_sticky(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 10u32)) | (((val as u32) & 0x01) << 10u32);
+    }
+    #[doc = "The most recent ADC conversion encountered an error; result is undefined or noisy."]
+    pub const fn err(&self) -> bool {
+        let val = (self.0 >> 9u32) & 0x01;
+        val != 0
+    }
+    #[doc = "The most recent ADC conversion encountered an error; result is undefined or noisy."]
+    pub fn set_err(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 9u32)) | (((val as u32) & 0x01) << 9u32);
+    }
+    #[doc = "1 if the ADC is ready to start a new conversion. Implies any previous conversion has completed. 0 whilst conversion in progress."]
+    pub const fn ready(&self) -> bool {
+        let val = (self.0 >> 8u32) & 0x01;
+        val != 0
+    }
+    #[doc = "1 if the ADC is ready to start a new conversion. Implies any previous conversion has completed. 0 whilst conversion in progress."]
+    pub fn set_ready(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 8u32)) | (((val as u32) & 0x01) << 8u32);
+    }
+    #[doc = "Continuously perform conversions whilst this bit is 1. A new conversion will start immediately after the previous finishes."]
+    pub const fn start_many(&self) -> bool {
+        let val = (self.0 >> 3u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Continuously perform conversions whilst this bit is 1. A new conversion will start immediately after the previous finishes."]
+    pub fn set_start_many(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 3u32)) | (((val as u32) & 0x01) << 3u32);
+    }
+    #[doc = "Start a single conversion. Self-clearing. Ignored if start_many is asserted."]
+    pub const fn start_once(&self) -> bool {
+        let val = (self.0 >> 2u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Start a single conversion. Self-clearing. Ignored if start_many is asserted."]
+    pub fn set_start_once(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 2u32)) | (((val as u32) & 0x01) << 2u32);
+    }
+    #[doc = "Power on temperature sensor. 1 - enabled. 0 - disabled."]
+    pub const fn ts_en(&self) -> bool {
+        let val = (self.0 >> 1u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Power on temperature sensor. 1 - enabled. 0 - disabled."]
+    pub fn set_ts_en(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 1u32)) | (((val as u32) & 0x01) << 1u32);
+    }
+    #[doc = "Power on ADC and enable its clock. 1 - enabled. 0 - disabled."]
+    pub const fn en(&self) -> bool {
+        let val = (self.0 >> 0u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Power on ADC and enable its clock. 1 - enabled. 0 - disabled."]
+    pub fn set_en(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
+    }
+}
+impl Default for Cs {
+    fn default() -> Cs {
+        Cs(0)
+    }
+}
+#[doc = "Interrupt status after masking & forcing"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Int(pub u32);
+impl Int {
+    #[doc = "Triggered when the sample FIFO reaches a certain level. This level can be programmed via the FCS_THRESH field."]
+    pub const fn fifo(&self) -> bool {
+        let val = (self.0 >> 0u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Triggered when the sample FIFO reaches a certain level. This level can be programmed via the FCS_THRESH field."]
+    pub fn set_fifo(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
+    }
+}
+impl Default for Int {
+    fn default() -> Int {
+        Int(0)
     }
 }
 #[doc = "FIFO control and status"]
@@ -210,135 +255,30 @@ impl Default for Fcs {
         Fcs(0)
     }
 }
-#[doc = "ADC Control and Status"]
+#[doc = "Conversion result FIFO"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct Cs(pub u32);
-impl Cs {
-    #[doc = "Round-robin sampling. 1 bit per channel. Set all bits to 0 to disable. Otherwise, the ADC will cycle through each enabled channel in a round-robin fashion. The first channel to be sampled will be the one currently indicated by AINSEL. AINSEL will be updated after each conversion with the newly-selected channel."]
-    pub const fn rrobin(&self) -> u8 {
-        let val = (self.0 >> 16u32) & 0x1f;
-        val as u8
-    }
-    #[doc = "Round-robin sampling. 1 bit per channel. Set all bits to 0 to disable. Otherwise, the ADC will cycle through each enabled channel in a round-robin fashion. The first channel to be sampled will be the one currently indicated by AINSEL. AINSEL will be updated after each conversion with the newly-selected channel."]
-    pub fn set_rrobin(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x1f << 16u32)) | (((val as u32) & 0x1f) << 16u32);
-    }
-    #[doc = "Select analog mux input. Updated automatically in round-robin mode."]
-    pub const fn ainsel(&self) -> u8 {
-        let val = (self.0 >> 12u32) & 0x07;
-        val as u8
-    }
-    #[doc = "Select analog mux input. Updated automatically in round-robin mode."]
-    pub fn set_ainsel(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x07 << 12u32)) | (((val as u32) & 0x07) << 12u32);
-    }
-    #[doc = "Some past ADC conversion encountered an error. Write 1 to clear."]
-    pub const fn err_sticky(&self) -> bool {
-        let val = (self.0 >> 10u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Some past ADC conversion encountered an error. Write 1 to clear."]
-    pub fn set_err_sticky(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 10u32)) | (((val as u32) & 0x01) << 10u32);
-    }
-    #[doc = "The most recent ADC conversion encountered an error; result is undefined or noisy."]
+pub struct Fifo(pub u32);
+impl Fifo {
+    #[doc = "1 if this particular sample experienced a conversion error. Remains in the same location if the sample is shifted."]
     pub const fn err(&self) -> bool {
-        let val = (self.0 >> 9u32) & 0x01;
+        let val = (self.0 >> 15u32) & 0x01;
         val != 0
     }
-    #[doc = "The most recent ADC conversion encountered an error; result is undefined or noisy."]
+    #[doc = "1 if this particular sample experienced a conversion error. Remains in the same location if the sample is shifted."]
     pub fn set_err(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 9u32)) | (((val as u32) & 0x01) << 9u32);
+        self.0 = (self.0 & !(0x01 << 15u32)) | (((val as u32) & 0x01) << 15u32);
     }
-    #[doc = "1 if the ADC is ready to start a new conversion. Implies any previous conversion has completed. 0 whilst conversion in progress."]
-    pub const fn ready(&self) -> bool {
-        let val = (self.0 >> 8u32) & 0x01;
-        val != 0
+    pub const fn val(&self) -> u16 {
+        let val = (self.0 >> 0u32) & 0x0fff;
+        val as u16
     }
-    #[doc = "1 if the ADC is ready to start a new conversion. Implies any previous conversion has completed. 0 whilst conversion in progress."]
-    pub fn set_ready(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 8u32)) | (((val as u32) & 0x01) << 8u32);
-    }
-    #[doc = "Continuously perform conversions whilst this bit is 1. A new conversion will start immediately after the previous finishes."]
-    pub const fn start_many(&self) -> bool {
-        let val = (self.0 >> 3u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Continuously perform conversions whilst this bit is 1. A new conversion will start immediately after the previous finishes."]
-    pub fn set_start_many(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 3u32)) | (((val as u32) & 0x01) << 3u32);
-    }
-    #[doc = "Start a single conversion. Self-clearing. Ignored if start_many is asserted."]
-    pub const fn start_once(&self) -> bool {
-        let val = (self.0 >> 2u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Start a single conversion. Self-clearing. Ignored if start_many is asserted."]
-    pub fn set_start_once(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 2u32)) | (((val as u32) & 0x01) << 2u32);
-    }
-    #[doc = "Power on temperature sensor. 1 - enabled. 0 - disabled."]
-    pub const fn ts_en(&self) -> bool {
-        let val = (self.0 >> 1u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Power on temperature sensor. 1 - enabled. 0 - disabled."]
-    pub fn set_ts_en(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 1u32)) | (((val as u32) & 0x01) << 1u32);
-    }
-    #[doc = "Power on ADC and enable its clock. 1 - enabled. 0 - disabled."]
-    pub const fn en(&self) -> bool {
-        let val = (self.0 >> 0u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Power on ADC and enable its clock. 1 - enabled. 0 - disabled."]
-    pub fn set_en(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
+    pub fn set_val(&mut self, val: u16) {
+        self.0 = (self.0 & !(0x0fff << 0u32)) | (((val as u32) & 0x0fff) << 0u32);
     }
 }
-impl Default for Cs {
-    fn default() -> Cs {
-        Cs(0)
-    }
-}
-#[doc = "Raw Interrupts"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Intr(pub u32);
-impl Intr {
-    #[doc = "Triggered when the sample FIFO reaches a certain level. This level can be programmed via the FCS_THRESH field."]
-    pub const fn fifo(&self) -> bool {
-        let val = (self.0 >> 0u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Triggered when the sample FIFO reaches a certain level. This level can be programmed via the FCS_THRESH field."]
-    pub fn set_fifo(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
-    }
-}
-impl Default for Intr {
-    fn default() -> Intr {
-        Intr(0)
-    }
-}
-#[doc = "Interrupt Enable"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Inte(pub u32);
-impl Inte {
-    #[doc = "Triggered when the sample FIFO reaches a certain level. This level can be programmed via the FCS_THRESH field."]
-    pub const fn fifo(&self) -> bool {
-        let val = (self.0 >> 0u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Triggered when the sample FIFO reaches a certain level. This level can be programmed via the FCS_THRESH field."]
-    pub fn set_fifo(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
-    }
-}
-impl Default for Inte {
-    fn default() -> Inte {
-        Inte(0)
+impl Default for Fifo {
+    fn default() -> Fifo {
+        Fifo(0)
     }
 }

@@ -1,21 +1,4 @@
 use crate::generic::*;
-#[doc = "DMA Channel 9 Control and Status"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct TreqSel(pub u8);
-impl TreqSel {
-    #[doc = "Select Timer 0 as TREQ"]
-    pub const TIMER0: Self = Self(0x3b);
-    #[doc = "Select Timer 1 as TREQ"]
-    pub const TIMER1: Self = Self(0x3c);
-    #[doc = "Select Timer 2 as TREQ (Optional)"]
-    pub const TIMER2: Self = Self(0x3d);
-    #[doc = "Select Timer 3 as TREQ (Optional)"]
-    pub const TIMER3: Self = Self(0x3e);
-    #[doc = "Permanent request, for unpaced transfers."]
-    pub const PERMANENT: Self = Self(0x3f);
-}
-#[doc = "Sniffer Control"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
 pub struct SniffCtrlCalc(pub u8);
@@ -33,7 +16,21 @@ impl SniffCtrlCalc {
     #[doc = "Calculate a simple 32-bit checksum (addition with a 32 bit accumulator)"]
     pub const SUM: Self = Self(0x0f);
 }
-#[doc = "DMA Channel 7 Control and Status"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct TreqSel(pub u8);
+impl TreqSel {
+    #[doc = "Select Timer 0 as TREQ"]
+    pub const TIMER0: Self = Self(0x3b);
+    #[doc = "Select Timer 1 as TREQ"]
+    pub const TIMER1: Self = Self(0x3c);
+    #[doc = "Select Timer 2 as TREQ (Optional)"]
+    pub const TIMER2: Self = Self(0x3d);
+    #[doc = "Select Timer 3 as TREQ (Optional)"]
+    pub const TIMER3: Self = Self(0x3e);
+    #[doc = "Permanent request, for unpaced transfers."]
+    pub const PERMANENT: Self = Self(0x3f);
+}
 #[repr(transparent)]
 #[derive(Copy, Clone)]
 pub struct DataSize(pub u8);

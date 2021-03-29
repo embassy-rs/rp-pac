@@ -1,5 +1,5 @@
 #![no_std]
-#![doc = "Peripheral access API (generated using svd2rust v0.17.0 (8b3736c 2021-03-13))"]
+#![doc = "Peripheral access API (generated using svd2rust v0.17.0 (426f4c8 2021-03-17))"]
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub enum Interrupt {
     #[doc = "0 - TIMER_IRQ_0"]
@@ -212,14 +212,12 @@ pub const TBMAN: tbman::Tbman = tbman::Tbman(0x4006_c000 as u32 as _);
 #[doc = "DMA with separate read and write masters"]
 pub const DMA: dma::Dma = dma::Dma(0x5000_0000 as u32 as _);
 #[doc = "USB FS/LS controller device registers"]
-pub const USBCTRL_REGS: usbctrl_regs::UsbctrlRegs =
-    usbctrl_regs::UsbctrlRegs(0x5011_0000 as u32 as _);
+pub const USBCTRL_REGS: usb::Usb = usb::Usb(0x5011_0000 as u32 as _);
 #[doc = "Programmable IO block"]
 pub const PIO0: pio::Pio = pio::Pio(0x5020_0000 as u32 as _);
 pub const PIO1: pio::Pio = pio::Pio(0x5030_0000 as u32 as _);
 #[doc = "Single-cycle IO block Provides core-local and inter-core hardware for the two processors, with single-cycle access."]
 pub const SIO: sio::Sio = sio::Sio(0xd000_0000 as u32 as _);
-pub const PPB: ppb::Ppb = ppb::Ppb(0xe000_0000 as u32 as _);
 #[doc = r"Number available in the NVIC for configuring priority"]
 pub const NVIC_PRIO_BITS: u8 = 2;
 pub mod adc;
@@ -229,12 +227,9 @@ pub mod dma;
 pub mod generic;
 pub mod i2c;
 pub mod io;
-pub mod io_qspi;
 pub mod pads;
-pub mod pads_qspi;
 pub mod pio;
 pub mod pll;
-pub mod ppb;
 pub mod psm;
 pub mod pwm;
 pub mod resets;
@@ -247,7 +242,7 @@ pub mod sysinfo;
 pub mod tbman;
 pub mod timer;
 pub mod uart;
-pub mod usbctrl_regs;
+pub mod usb;
 pub mod vreg_and_chip_reset;
 pub mod watchdog;
 pub mod xip_ctrl;

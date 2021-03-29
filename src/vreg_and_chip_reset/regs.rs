@@ -1,51 +1,4 @@
 use crate::generic::*;
-#[doc = "Chip reset control and status"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct ChipReset(pub u32);
-impl ChipReset {
-    #[doc = "This is set by psm_restart from the debugger. Its purpose is to branch bootcode to a safe mode when the debugger has issued a psm_restart in order to recover from a boot lock-up. In the safe mode the debugger can repair the boot code, clear this flag then reboot the processor."]
-    pub const fn psm_restart_flag(&self) -> bool {
-        let val = (self.0 >> 24u32) & 0x01;
-        val != 0
-    }
-    #[doc = "This is set by psm_restart from the debugger. Its purpose is to branch bootcode to a safe mode when the debugger has issued a psm_restart in order to recover from a boot lock-up. In the safe mode the debugger can repair the boot code, clear this flag then reboot the processor."]
-    pub fn set_psm_restart_flag(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 24u32)) | (((val as u32) & 0x01) << 24u32);
-    }
-    #[doc = "Last reset was from the debug port"]
-    pub const fn had_psm_restart(&self) -> bool {
-        let val = (self.0 >> 20u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Last reset was from the debug port"]
-    pub fn set_had_psm_restart(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 20u32)) | (((val as u32) & 0x01) << 20u32);
-    }
-    #[doc = "Last reset was from the RUN pin"]
-    pub const fn had_run(&self) -> bool {
-        let val = (self.0 >> 16u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Last reset was from the RUN pin"]
-    pub fn set_had_run(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 16u32)) | (((val as u32) & 0x01) << 16u32);
-    }
-    #[doc = "Last reset was from the power-on reset or brown-out detection blocks"]
-    pub const fn had_por(&self) -> bool {
-        let val = (self.0 >> 8u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Last reset was from the power-on reset or brown-out detection blocks"]
-    pub fn set_had_por(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 8u32)) | (((val as u32) & 0x01) << 8u32);
-    }
-}
-impl Default for ChipReset {
-    fn default() -> ChipReset {
-        ChipReset(0)
-    }
-}
 #[doc = "Voltage regulator control and status"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
@@ -120,5 +73,52 @@ impl Bod {
 impl Default for Bod {
     fn default() -> Bod {
         Bod(0)
+    }
+}
+#[doc = "Chip reset control and status"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct ChipReset(pub u32);
+impl ChipReset {
+    #[doc = "This is set by psm_restart from the debugger. Its purpose is to branch bootcode to a safe mode when the debugger has issued a psm_restart in order to recover from a boot lock-up. In the safe mode the debugger can repair the boot code, clear this flag then reboot the processor."]
+    pub const fn psm_restart_flag(&self) -> bool {
+        let val = (self.0 >> 24u32) & 0x01;
+        val != 0
+    }
+    #[doc = "This is set by psm_restart from the debugger. Its purpose is to branch bootcode to a safe mode when the debugger has issued a psm_restart in order to recover from a boot lock-up. In the safe mode the debugger can repair the boot code, clear this flag then reboot the processor."]
+    pub fn set_psm_restart_flag(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 24u32)) | (((val as u32) & 0x01) << 24u32);
+    }
+    #[doc = "Last reset was from the debug port"]
+    pub const fn had_psm_restart(&self) -> bool {
+        let val = (self.0 >> 20u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Last reset was from the debug port"]
+    pub fn set_had_psm_restart(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 20u32)) | (((val as u32) & 0x01) << 20u32);
+    }
+    #[doc = "Last reset was from the RUN pin"]
+    pub const fn had_run(&self) -> bool {
+        let val = (self.0 >> 16u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Last reset was from the RUN pin"]
+    pub fn set_had_run(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 16u32)) | (((val as u32) & 0x01) << 16u32);
+    }
+    #[doc = "Last reset was from the power-on reset or brown-out detection blocks"]
+    pub const fn had_por(&self) -> bool {
+        let val = (self.0 >> 8u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Last reset was from the power-on reset or brown-out detection blocks"]
+    pub fn set_had_por(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 8u32)) | (((val as u32) & 0x01) << 8u32);
+    }
+}
+impl Default for ChipReset {
+    fn default() -> ChipReset {
+        ChipReset(0)
     }
 }

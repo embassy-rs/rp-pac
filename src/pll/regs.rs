@@ -1,24 +1,4 @@
 use crate::generic::*;
-#[doc = "Feedback divisor (note: this PLL does not support fractional division)"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct FbdivInt(pub u32);
-impl FbdivInt {
-    #[doc = "see ctrl reg description for constraints"]
-    pub const fn fbdiv_int(&self) -> u16 {
-        let val = (self.0 >> 0u32) & 0x0fff;
-        val as u16
-    }
-    #[doc = "see ctrl reg description for constraints"]
-    pub fn set_fbdiv_int(&mut self, val: u16) {
-        self.0 = (self.0 & !(0x0fff << 0u32)) | (((val as u32) & 0x0fff) << 0u32);
-    }
-}
-impl Default for FbdivInt {
-    fn default() -> FbdivInt {
-        FbdivInt(0)
-    }
-}
 #[doc = "Controls the PLL power modes."]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
@@ -131,5 +111,25 @@ impl Prim {
 impl Default for Prim {
     fn default() -> Prim {
         Prim(0)
+    }
+}
+#[doc = "Feedback divisor (note: this PLL does not support fractional division)"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct FbdivInt(pub u32);
+impl FbdivInt {
+    #[doc = "see ctrl reg description for constraints"]
+    pub const fn fbdiv_int(&self) -> u16 {
+        let val = (self.0 >> 0u32) & 0x0fff;
+        val as u16
+    }
+    #[doc = "see ctrl reg description for constraints"]
+    pub fn set_fbdiv_int(&mut self, val: u16) {
+        self.0 = (self.0 & !(0x0fff << 0u32)) | (((val as u32) & 0x0fff) << 0u32);
+    }
+}
+impl Default for FbdivInt {
+    fn default() -> FbdivInt {
+        FbdivInt(0)
     }
 }

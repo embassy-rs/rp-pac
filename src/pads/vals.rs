@@ -1,5 +1,4 @@
 use crate::generic::*;
-#[doc = "Voltage select. Per bank control"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
 pub struct VoltageSelect(pub u8);
@@ -9,7 +8,6 @@ impl VoltageSelect {
     #[doc = "Set voltage to 1.8V (DVDD <= 1V8)"]
     pub const _1V8: Self = Self(0x01);
 }
-#[doc = "Pad control register"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
 pub struct Drive(pub u8);

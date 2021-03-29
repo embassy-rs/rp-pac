@@ -176,35 +176,6 @@ impl Default for Freqa {
         Freqa(0)
     }
 }
-#[doc = "Ring Oscillator control"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Ctrl(pub u32);
-impl Ctrl {
-    #[doc = "On power-up this field is initialised to ENABLE The system clock must be switched to another source before setting this field to DISABLE otherwise the chip will lock up The 12-bit code is intended to give some protection against accidental writes. An invalid setting will enable the oscillator."]
-    pub const fn enable(&self) -> super::vals::CtrlEnable {
-        let val = (self.0 >> 12u32) & 0x0fff;
-        super::vals::CtrlEnable(val as u16)
-    }
-    #[doc = "On power-up this field is initialised to ENABLE The system clock must be switched to another source before setting this field to DISABLE otherwise the chip will lock up The 12-bit code is intended to give some protection against accidental writes. An invalid setting will enable the oscillator."]
-    pub fn set_enable(&mut self, val: super::vals::CtrlEnable) {
-        self.0 = (self.0 & !(0x0fff << 12u32)) | (((val.0 as u32) & 0x0fff) << 12u32);
-    }
-    #[doc = "Controls the number of delay stages in the ROSC ring LOW uses stages 0 to 7 MEDIUM uses stages 0 to 5 HIGH uses stages 0 to 3 TOOHIGH uses stages 0 to 1 and should not be used because its frequency exceeds design specifications The clock output will not glitch when changing the range up one step at a time The clock output will glitch when changing the range down Note: the values here are gray coded which is why HIGH comes before TOOHIGH"]
-    pub const fn freq_range(&self) -> super::vals::CtrlFreqRange {
-        let val = (self.0 >> 0u32) & 0x0fff;
-        super::vals::CtrlFreqRange(val as u16)
-    }
-    #[doc = "Controls the number of delay stages in the ROSC ring LOW uses stages 0 to 7 MEDIUM uses stages 0 to 5 HIGH uses stages 0 to 3 TOOHIGH uses stages 0 to 1 and should not be used because its frequency exceeds design specifications The clock output will not glitch when changing the range up one step at a time The clock output will glitch when changing the range down Note: the values here are gray coded which is why HIGH comes before TOOHIGH"]
-    pub fn set_freq_range(&mut self, val: super::vals::CtrlFreqRange) {
-        self.0 = (self.0 & !(0x0fff << 0u32)) | (((val.0 as u32) & 0x0fff) << 0u32);
-    }
-}
-impl Default for Ctrl {
-    fn default() -> Ctrl {
-        Ctrl(0)
-    }
-}
 #[doc = "A down counter running at the ROSC frequency which counts to zero and stops. To start the counter write a non-zero value. Can be used for short software pauses when setting up time sensitive hardware."]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
@@ -288,5 +259,34 @@ impl Div {
 impl Default for Div {
     fn default() -> Div {
         Div(0)
+    }
+}
+#[doc = "Ring Oscillator control"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Ctrl(pub u32);
+impl Ctrl {
+    #[doc = "On power-up this field is initialised to ENABLE The system clock must be switched to another source before setting this field to DISABLE otherwise the chip will lock up The 12-bit code is intended to give some protection against accidental writes. An invalid setting will enable the oscillator."]
+    pub const fn enable(&self) -> super::vals::CtrlEnable {
+        let val = (self.0 >> 12u32) & 0x0fff;
+        super::vals::CtrlEnable(val as u16)
+    }
+    #[doc = "On power-up this field is initialised to ENABLE The system clock must be switched to another source before setting this field to DISABLE otherwise the chip will lock up The 12-bit code is intended to give some protection against accidental writes. An invalid setting will enable the oscillator."]
+    pub fn set_enable(&mut self, val: super::vals::CtrlEnable) {
+        self.0 = (self.0 & !(0x0fff << 12u32)) | (((val.0 as u32) & 0x0fff) << 12u32);
+    }
+    #[doc = "Controls the number of delay stages in the ROSC ring LOW uses stages 0 to 7 MEDIUM uses stages 0 to 5 HIGH uses stages 0 to 3 TOOHIGH uses stages 0 to 1 and should not be used because its frequency exceeds design specifications The clock output will not glitch when changing the range up one step at a time The clock output will glitch when changing the range down Note: the values here are gray coded which is why HIGH comes before TOOHIGH"]
+    pub const fn freq_range(&self) -> super::vals::CtrlFreqRange {
+        let val = (self.0 >> 0u32) & 0x0fff;
+        super::vals::CtrlFreqRange(val as u16)
+    }
+    #[doc = "Controls the number of delay stages in the ROSC ring LOW uses stages 0 to 7 MEDIUM uses stages 0 to 5 HIGH uses stages 0 to 3 TOOHIGH uses stages 0 to 1 and should not be used because its frequency exceeds design specifications The clock output will not glitch when changing the range up one step at a time The clock output will glitch when changing the range down Note: the values here are gray coded which is why HIGH comes before TOOHIGH"]
+    pub fn set_freq_range(&mut self, val: super::vals::CtrlFreqRange) {
+        self.0 = (self.0 & !(0x0fff << 0u32)) | (((val.0 as u32) & 0x0fff) << 0u32);
+    }
+}
+impl Default for Ctrl {
+    fn default() -> Ctrl {
+        Ctrl(0)
     }
 }

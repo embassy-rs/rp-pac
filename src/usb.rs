@@ -1,72 +1,72 @@
 use crate::generic::*;
 #[doc = "USB FS/LS controller device registers"]
 #[derive(Copy, Clone)]
-pub struct UsbctrlRegs(pub *mut u8);
-unsafe impl Send for UsbctrlRegs {}
-unsafe impl Sync for UsbctrlRegs {}
-impl UsbctrlRegs {
+pub struct Usb(pub *mut u8);
+unsafe impl Send for Usb {}
+unsafe impl Sync for Usb {}
+impl Usb {
     #[doc = "Device address and endpoint control"]
     pub fn addr_endp(self) -> Reg<regs::AddrEndp, RW> {
         unsafe { Reg::from_ptr(self.0.add(0usize)) }
     }
     #[doc = "Interrupt endpoint 1. Only valid for HOST mode."]
-    pub fn addr_endp1(self) -> Reg<regs::AddrEndp1, RW> {
+    pub fn addr_endp1(self) -> Reg<regs::AddrEndpX, RW> {
         unsafe { Reg::from_ptr(self.0.add(4usize)) }
     }
     #[doc = "Interrupt endpoint 2. Only valid for HOST mode."]
-    pub fn addr_endp2(self) -> Reg<regs::AddrEndp2, RW> {
+    pub fn addr_endp2(self) -> Reg<regs::AddrEndpX, RW> {
         unsafe { Reg::from_ptr(self.0.add(8usize)) }
     }
     #[doc = "Interrupt endpoint 3. Only valid for HOST mode."]
-    pub fn addr_endp3(self) -> Reg<regs::AddrEndp3, RW> {
+    pub fn addr_endp3(self) -> Reg<regs::AddrEndpX, RW> {
         unsafe { Reg::from_ptr(self.0.add(12usize)) }
     }
     #[doc = "Interrupt endpoint 4. Only valid for HOST mode."]
-    pub fn addr_endp4(self) -> Reg<regs::AddrEndp4, RW> {
+    pub fn addr_endp4(self) -> Reg<regs::AddrEndpX, RW> {
         unsafe { Reg::from_ptr(self.0.add(16usize)) }
     }
     #[doc = "Interrupt endpoint 5. Only valid for HOST mode."]
-    pub fn addr_endp5(self) -> Reg<regs::AddrEndp5, RW> {
+    pub fn addr_endp5(self) -> Reg<regs::AddrEndpX, RW> {
         unsafe { Reg::from_ptr(self.0.add(20usize)) }
     }
     #[doc = "Interrupt endpoint 6. Only valid for HOST mode."]
-    pub fn addr_endp6(self) -> Reg<regs::AddrEndp6, RW> {
+    pub fn addr_endp6(self) -> Reg<regs::AddrEndpX, RW> {
         unsafe { Reg::from_ptr(self.0.add(24usize)) }
     }
     #[doc = "Interrupt endpoint 7. Only valid for HOST mode."]
-    pub fn addr_endp7(self) -> Reg<regs::AddrEndp7, RW> {
+    pub fn addr_endp7(self) -> Reg<regs::AddrEndpX, RW> {
         unsafe { Reg::from_ptr(self.0.add(28usize)) }
     }
     #[doc = "Interrupt endpoint 8. Only valid for HOST mode."]
-    pub fn addr_endp8(self) -> Reg<regs::AddrEndp8, RW> {
+    pub fn addr_endp8(self) -> Reg<regs::AddrEndpX, RW> {
         unsafe { Reg::from_ptr(self.0.add(32usize)) }
     }
     #[doc = "Interrupt endpoint 9. Only valid for HOST mode."]
-    pub fn addr_endp9(self) -> Reg<regs::AddrEndp9, RW> {
+    pub fn addr_endp9(self) -> Reg<regs::AddrEndpX, RW> {
         unsafe { Reg::from_ptr(self.0.add(36usize)) }
     }
     #[doc = "Interrupt endpoint 10. Only valid for HOST mode."]
-    pub fn addr_endp10(self) -> Reg<regs::AddrEndp10, RW> {
+    pub fn addr_endp10(self) -> Reg<regs::AddrEndpX, RW> {
         unsafe { Reg::from_ptr(self.0.add(40usize)) }
     }
     #[doc = "Interrupt endpoint 11. Only valid for HOST mode."]
-    pub fn addr_endp11(self) -> Reg<regs::AddrEndp11, RW> {
+    pub fn addr_endp11(self) -> Reg<regs::AddrEndpX, RW> {
         unsafe { Reg::from_ptr(self.0.add(44usize)) }
     }
     #[doc = "Interrupt endpoint 12. Only valid for HOST mode."]
-    pub fn addr_endp12(self) -> Reg<regs::AddrEndp12, RW> {
+    pub fn addr_endp12(self) -> Reg<regs::AddrEndpX, RW> {
         unsafe { Reg::from_ptr(self.0.add(48usize)) }
     }
     #[doc = "Interrupt endpoint 13. Only valid for HOST mode."]
-    pub fn addr_endp13(self) -> Reg<regs::AddrEndp13, RW> {
+    pub fn addr_endp13(self) -> Reg<regs::AddrEndpX, RW> {
         unsafe { Reg::from_ptr(self.0.add(52usize)) }
     }
     #[doc = "Interrupt endpoint 14. Only valid for HOST mode."]
-    pub fn addr_endp14(self) -> Reg<regs::AddrEndp14, RW> {
+    pub fn addr_endp14(self) -> Reg<regs::AddrEndpX, RW> {
         unsafe { Reg::from_ptr(self.0.add(56usize)) }
     }
     #[doc = "Interrupt endpoint 15. Only valid for HOST mode."]
-    pub fn addr_endp15(self) -> Reg<regs::AddrEndp15, RW> {
+    pub fn addr_endp15(self) -> Reg<regs::AddrEndpX, RW> {
         unsafe { Reg::from_ptr(self.0.add(60usize)) }
     }
     #[doc = "Main control register"]
@@ -142,19 +142,19 @@ impl UsbctrlRegs {
         unsafe { Reg::from_ptr(self.0.add(132usize)) }
     }
     #[doc = "Raw Interrupts"]
-    pub fn intr(self) -> Reg<regs::Intr, RW> {
+    pub fn intr(self) -> Reg<regs::Int, RW> {
         unsafe { Reg::from_ptr(self.0.add(140usize)) }
     }
     #[doc = "Interrupt Enable"]
-    pub fn inte(self) -> Reg<regs::Inte, RW> {
+    pub fn inte(self) -> Reg<regs::Int, RW> {
         unsafe { Reg::from_ptr(self.0.add(144usize)) }
     }
     #[doc = "Interrupt Force"]
-    pub fn intf(self) -> Reg<regs::Intf, RW> {
+    pub fn intf(self) -> Reg<regs::Int, RW> {
         unsafe { Reg::from_ptr(self.0.add(148usize)) }
     }
     #[doc = "Interrupt status after masking & forcing"]
-    pub fn ints(self) -> Reg<regs::Ints, RW> {
+    pub fn ints(self) -> Reg<regs::Int, RW> {
         unsafe { Reg::from_ptr(self.0.add(152usize)) }
     }
 }

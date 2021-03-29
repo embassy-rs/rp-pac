@@ -14,36 +14,14 @@ impl Busctrl {
         unsafe { Reg::from_ptr(self.0.add(4usize)) }
     }
     #[doc = "Bus fabric performance counter 0"]
-    pub fn perfctr0(self) -> Reg<regs::Perfctr0, RW> {
-        unsafe { Reg::from_ptr(self.0.add(8usize)) }
+    pub fn perfctr(self, n: usize) -> Reg<regs::Perfctr, RW> {
+        assert!(n < 4usize);
+        unsafe { Reg::from_ptr(self.0.add(8usize + n * 8usize)) }
     }
     #[doc = "Bus fabric performance event select for PERFCTR0"]
-    pub fn perfsel0(self) -> Reg<regs::Perfsel0, RW> {
-        unsafe { Reg::from_ptr(self.0.add(12usize)) }
-    }
-    #[doc = "Bus fabric performance counter 1"]
-    pub fn perfctr1(self) -> Reg<regs::Perfctr1, RW> {
-        unsafe { Reg::from_ptr(self.0.add(16usize)) }
-    }
-    #[doc = "Bus fabric performance event select for PERFCTR1"]
-    pub fn perfsel1(self) -> Reg<regs::Perfsel1, RW> {
-        unsafe { Reg::from_ptr(self.0.add(20usize)) }
-    }
-    #[doc = "Bus fabric performance counter 2"]
-    pub fn perfctr2(self) -> Reg<regs::Perfctr2, RW> {
-        unsafe { Reg::from_ptr(self.0.add(24usize)) }
-    }
-    #[doc = "Bus fabric performance event select for PERFCTR2"]
-    pub fn perfsel2(self) -> Reg<regs::Perfsel2, RW> {
-        unsafe { Reg::from_ptr(self.0.add(28usize)) }
-    }
-    #[doc = "Bus fabric performance counter 3"]
-    pub fn perfctr3(self) -> Reg<regs::Perfctr3, RW> {
-        unsafe { Reg::from_ptr(self.0.add(32usize)) }
-    }
-    #[doc = "Bus fabric performance event select for PERFCTR3"]
-    pub fn perfsel3(self) -> Reg<regs::Perfsel3, RW> {
-        unsafe { Reg::from_ptr(self.0.add(36usize)) }
+    pub fn perfsel(self, n: usize) -> Reg<regs::Perfsel, RW> {
+        assert!(n < 4usize);
+        unsafe { Reg::from_ptr(self.0.add(12usize + n * 8usize)) }
     }
 }
 pub mod regs;

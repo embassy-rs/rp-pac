@@ -1,5 +1,4 @@
 use crate::generic::*;
-#[doc = "Control and status register"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
 pub struct Divmode(pub u8);

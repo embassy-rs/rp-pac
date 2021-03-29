@@ -1,27 +1,20 @@
 use crate::generic::*;
-#[doc = "Logs the reason for the last reset. Both bits are zero for the case of a hardware reset."]
+#[doc = "Load the watchdog timer. The maximum setting is 0xffffff which corresponds to 0xffffff / 2 ticks before triggering a watchdog reset (see errata RP2040-E1)."]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct Reason(pub u32);
-impl Reason {
-    pub const fn force(&self) -> bool {
-        let val = (self.0 >> 1u32) & 0x01;
-        val != 0
+pub struct Load(pub u32);
+impl Load {
+    pub const fn load(&self) -> u32 {
+        let val = (self.0 >> 0u32) & 0x00ff_ffff;
+        val as u32
     }
-    pub fn set_force(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 1u32)) | (((val as u32) & 0x01) << 1u32);
-    }
-    pub const fn timer(&self) -> bool {
-        let val = (self.0 >> 0u32) & 0x01;
-        val != 0
-    }
-    pub fn set_timer(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
+    pub fn set_load(&mut self, val: u32) {
+        self.0 = (self.0 & !(0x00ff_ffff << 0u32)) | (((val as u32) & 0x00ff_ffff) << 0u32);
     }
 }
-impl Default for Reason {
-    fn default() -> Reason {
-        Reason(0)
+impl Default for Load {
+    fn default() -> Load {
+        Load(0)
     }
 }
 #[doc = "Watchdog control The rst_wdsel register determines which subsystems are reset when the watchdog is triggered. The watchdog can be triggered in software."]
@@ -89,24 +82,6 @@ impl Default for Ctrl {
         Ctrl(0)
     }
 }
-#[doc = "Load the watchdog timer. The maximum setting is 0xffffff which corresponds to 0xffffff / 2 ticks before triggering a watchdog reset (see errata RP2040-E1)."]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Load(pub u32);
-impl Load {
-    pub const fn load(&self) -> u32 {
-        let val = (self.0 >> 0u32) & 0x00ff_ffff;
-        val as u32
-    }
-    pub fn set_load(&mut self, val: u32) {
-        self.0 = (self.0 & !(0x00ff_ffff << 0u32)) | (((val as u32) & 0x00ff_ffff) << 0u32);
-    }
-}
-impl Default for Load {
-    fn default() -> Load {
-        Load(0)
-    }
-}
 #[doc = "Controls the tick generator"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
@@ -152,5 +127,30 @@ impl Tick {
 impl Default for Tick {
     fn default() -> Tick {
         Tick(0)
+    }
+}
+#[doc = "Logs the reason for the last reset. Both bits are zero for the case of a hardware reset."]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Reason(pub u32);
+impl Reason {
+    pub const fn force(&self) -> bool {
+        let val = (self.0 >> 1u32) & 0x01;
+        val != 0
+    }
+    pub fn set_force(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 1u32)) | (((val as u32) & 0x01) << 1u32);
+    }
+    pub const fn timer(&self) -> bool {
+        let val = (self.0 >> 0u32) & 0x01;
+        val != 0
+    }
+    pub fn set_timer(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
+    }
+}
+impl Default for Reason {
+    fn default() -> Reason {
+        Reason(0)
     }
 }

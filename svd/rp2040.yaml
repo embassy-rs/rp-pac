@@ -67,7 +67,9 @@ transforms:
 - Rename:
     from: i2c::I2c0
     to: i2c::I2c
-
+- DeleteEnums:
+    from: i2c::vals::.*
+    bit_size: 1
 
 # =========== PIO
 - Rename:
@@ -252,6 +254,47 @@ transforms:
     from: pll::PllSys
     to: pll::Pll
 
+# ========= RTC
+- MergeFieldsets:
+    from: rtc::regs::Int.
+    to: rtc::regs::Int
+
+# ========= ADC
+- MergeFieldsets:
+    from: adc::regs::Int.
+    to: adc::regs::Int
+
+# ========= BUSCTRL
+- RenameFields:
+    fieldset: busctrl::regs::(Perfctr|Perfsel)\d+
+    from: (perfctr|perfsel)\d
+    to: $1
+- MergeFieldsets:
+    from: busctrl::regs::(Perfctr|Perfsel)\d+
+    to: busctrl::regs::$1
+- MakeRegisterArray:
+    blocks: busctrl::Busctrl
+    from: (perfctr|perfsel)\d
+    to: $1
+
+# ========= CLOCKS
+- MergeFieldsets:
+    from: clocks::regs::Int.
+    to: clocks::regs::Int
+
+# ========= USB
+- Rename:
+    from: usbctrl_regs::(.*)
+    to: usb::$1
+- Rename:
+    from: usb::UsbctrlRegs
+    to: usb::Usb
+- MergeFieldsets:
+    from: usb::regs::Int.
+    to: usb::regs::Int
+- MergeFieldsets:
+    from: usb::regs::AddrEndp\d+
+    to: usb::regs::AddrEndpX
 
 # =========== Misc
 - MergeEnums:
@@ -263,3 +306,11 @@ transforms:
 - MergeFieldsets:
     from: resets::regs::(Reset|ResetDone)
     to: resets::regs::Peripherals
+
+# =========== Cleanup
+- Delete:
+    from: ppb::.* # We already get this from cortex_m crate
+- Delete:
+    from: io_qspi::.*
+- Delete:
+    from: pads_qspi::.*
