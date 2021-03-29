@@ -28,22 +28,31 @@ impl Default for Div {
         Div(0)
     }
 }
-#[doc = "Result of most recent ADC conversion"]
+#[doc = "Conversion result FIFO"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct Result(pub u32);
-impl Result {
-    pub const fn result(&self) -> u16 {
+pub struct Fifo(pub u32);
+impl Fifo {
+    #[doc = "1 if this particular sample experienced a conversion error. Remains in the same location if the sample is shifted."]
+    pub const fn err(&self) -> bool {
+        let val = (self.0 >> 15u32) & 0x01;
+        val != 0
+    }
+    #[doc = "1 if this particular sample experienced a conversion error. Remains in the same location if the sample is shifted."]
+    pub fn set_err(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 15u32)) | (((val as u32) & 0x01) << 15u32);
+    }
+    pub const fn val(&self) -> u16 {
         let val = (self.0 >> 0u32) & 0x0fff;
         val as u16
     }
-    pub fn set_result(&mut self, val: u16) {
+    pub fn set_val(&mut self, val: u16) {
         self.0 = (self.0 & !(0x0fff << 0u32)) | (((val as u32) & 0x0fff) << 0u32);
     }
 }
-impl Default for Result {
-    fn default() -> Result {
-        Result(0)
+impl Default for Fifo {
+    fn default() -> Fifo {
+        Fifo(0)
     }
 }
 #[doc = "ADC Control and Status"]
@@ -138,24 +147,22 @@ impl Default for Cs {
         Cs(0)
     }
 }
-#[doc = "Interrupt status after masking & forcing"]
+#[doc = "Result of most recent ADC conversion"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct Int(pub u32);
-impl Int {
-    #[doc = "Triggered when the sample FIFO reaches a certain level. This level can be programmed via the FCS_THRESH field."]
-    pub const fn fifo(&self) -> bool {
-        let val = (self.0 >> 0u32) & 0x01;
-        val != 0
+pub struct Result(pub u32);
+impl Result {
+    pub const fn result(&self) -> u16 {
+        let val = (self.0 >> 0u32) & 0x0fff;
+        val as u16
     }
-    #[doc = "Triggered when the sample FIFO reaches a certain level. This level can be programmed via the FCS_THRESH field."]
-    pub fn set_fifo(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
+    pub fn set_result(&mut self, val: u16) {
+        self.0 = (self.0 & !(0x0fff << 0u32)) | (((val as u32) & 0x0fff) << 0u32);
     }
 }
-impl Default for Int {
-    fn default() -> Int {
-        Int(0)
+impl Default for Result {
+    fn default() -> Result {
+        Result(0)
     }
 }
 #[doc = "FIFO control and status"]
@@ -255,30 +262,23 @@ impl Default for Fcs {
         Fcs(0)
     }
 }
-#[doc = "Conversion result FIFO"]
+#[doc = "Interrupt Force"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct Fifo(pub u32);
-impl Fifo {
-    #[doc = "1 if this particular sample experienced a conversion error. Remains in the same location if the sample is shifted."]
-    pub const fn err(&self) -> bool {
-        let val = (self.0 >> 15u32) & 0x01;
+pub struct Int(pub u32);
+impl Int {
+    #[doc = "Triggered when the sample FIFO reaches a certain level. This level can be programmed via the FCS_THRESH field."]
+    pub const fn fifo(&self) -> bool {
+        let val = (self.0 >> 0u32) & 0x01;
         val != 0
     }
-    #[doc = "1 if this particular sample experienced a conversion error. Remains in the same location if the sample is shifted."]
-    pub fn set_err(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 15u32)) | (((val as u32) & 0x01) << 15u32);
-    }
-    pub const fn val(&self) -> u16 {
-        let val = (self.0 >> 0u32) & 0x0fff;
-        val as u16
-    }
-    pub fn set_val(&mut self, val: u16) {
-        self.0 = (self.0 & !(0x0fff << 0u32)) | (((val as u32) & 0x0fff) << 0u32);
+    #[doc = "Triggered when the sample FIFO reaches a certain level. This level can be programmed via the FCS_THRESH field."]
+    pub fn set_fifo(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
     }
 }
-impl Default for Fifo {
-    fn default() -> Fifo {
-        Fifo(0)
+impl Default for Int {
+    fn default() -> Int {
+        Int(0)
     }
 }

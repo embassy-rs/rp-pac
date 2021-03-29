@@ -1,14 +1,16 @@
 use crate::generic::*;
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct Ctrlr0SpiFrf(pub u8);
-impl Ctrlr0SpiFrf {
-    #[doc = "Standard 1-bit SPI frame format; 1 bit per SCK, full-duplex"]
-    pub const STD: Self = Self(0);
-    #[doc = "Dual-SPI frame format; two bits per SCK, half-duplex"]
-    pub const DUAL: Self = Self(0x01);
-    #[doc = "Quad-SPI frame format; four bits per SCK, half-duplex"]
-    pub const QUAD: Self = Self(0x02);
+pub struct SpiCtrlr0InstL(pub u8);
+impl SpiCtrlr0InstL {
+    #[doc = "No instruction"]
+    pub const NONE: Self = Self(0);
+    #[doc = "4-bit instruction"]
+    pub const _4B: Self = Self(0x01);
+    #[doc = "8-bit instruction"]
+    pub const _8B: Self = Self(0x02);
+    #[doc = "16-bit instruction"]
+    pub const _16B: Self = Self(0x03);
 }
 #[repr(transparent)]
 #[derive(Copy, Clone)]
@@ -23,16 +25,14 @@ impl SpiCtrlr0TransType {
 }
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct SpiCtrlr0InstL(pub u8);
-impl SpiCtrlr0InstL {
-    #[doc = "No instruction"]
-    pub const NONE: Self = Self(0);
-    #[doc = "4-bit instruction"]
-    pub const _4B: Self = Self(0x01);
-    #[doc = "8-bit instruction"]
-    pub const _8B: Self = Self(0x02);
-    #[doc = "16-bit instruction"]
-    pub const _16B: Self = Self(0x03);
+pub struct Ctrlr0SpiFrf(pub u8);
+impl Ctrlr0SpiFrf {
+    #[doc = "Standard 1-bit SPI frame format; 1 bit per SCK, full-duplex"]
+    pub const STD: Self = Self(0);
+    #[doc = "Dual-SPI frame format; two bits per SCK, half-duplex"]
+    pub const DUAL: Self = Self(0x01);
+    #[doc = "Quad-SPI frame format; four bits per SCK, half-duplex"]
+    pub const QUAD: Self = Self(0x02);
 }
 #[repr(transparent)]
 #[derive(Copy, Clone)]

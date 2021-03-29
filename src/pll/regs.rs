@@ -1,51 +1,4 @@
 use crate::generic::*;
-#[doc = "Controls the PLL power modes."]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Pwr(pub u32);
-impl Pwr {
-    #[doc = "PLL VCO powerdown To save power set high when PLL output not required or bypass=1."]
-    pub const fn vcopd(&self) -> bool {
-        let val = (self.0 >> 5u32) & 0x01;
-        val != 0
-    }
-    #[doc = "PLL VCO powerdown To save power set high when PLL output not required or bypass=1."]
-    pub fn set_vcopd(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 5u32)) | (((val as u32) & 0x01) << 5u32);
-    }
-    #[doc = "PLL post divider powerdown To save power set high when PLL output not required or bypass=1."]
-    pub const fn postdivpd(&self) -> bool {
-        let val = (self.0 >> 3u32) & 0x01;
-        val != 0
-    }
-    #[doc = "PLL post divider powerdown To save power set high when PLL output not required or bypass=1."]
-    pub fn set_postdivpd(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 3u32)) | (((val as u32) & 0x01) << 3u32);
-    }
-    #[doc = "PLL DSM powerdown Nothing is achieved by setting this low."]
-    pub const fn dsmpd(&self) -> bool {
-        let val = (self.0 >> 2u32) & 0x01;
-        val != 0
-    }
-    #[doc = "PLL DSM powerdown Nothing is achieved by setting this low."]
-    pub fn set_dsmpd(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 2u32)) | (((val as u32) & 0x01) << 2u32);
-    }
-    #[doc = "PLL powerdown To save power set high when PLL output not required."]
-    pub const fn pd(&self) -> bool {
-        let val = (self.0 >> 0u32) & 0x01;
-        val != 0
-    }
-    #[doc = "PLL powerdown To save power set high when PLL output not required."]
-    pub fn set_pd(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
-    }
-}
-impl Default for Pwr {
-    fn default() -> Pwr {
-        Pwr(0)
-    }
-}
 #[doc = "Control and Status GENERAL CONSTRAINTS: Reference clock frequency min=5MHz, max=800MHz Feedback divider min=16, max=320 VCO frequency min=400MHz, max=1600MHz"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
@@ -131,5 +84,52 @@ impl FbdivInt {
 impl Default for FbdivInt {
     fn default() -> FbdivInt {
         FbdivInt(0)
+    }
+}
+#[doc = "Controls the PLL power modes."]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Pwr(pub u32);
+impl Pwr {
+    #[doc = "PLL VCO powerdown To save power set high when PLL output not required or bypass=1."]
+    pub const fn vcopd(&self) -> bool {
+        let val = (self.0 >> 5u32) & 0x01;
+        val != 0
+    }
+    #[doc = "PLL VCO powerdown To save power set high when PLL output not required or bypass=1."]
+    pub fn set_vcopd(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 5u32)) | (((val as u32) & 0x01) << 5u32);
+    }
+    #[doc = "PLL post divider powerdown To save power set high when PLL output not required or bypass=1."]
+    pub const fn postdivpd(&self) -> bool {
+        let val = (self.0 >> 3u32) & 0x01;
+        val != 0
+    }
+    #[doc = "PLL post divider powerdown To save power set high when PLL output not required or bypass=1."]
+    pub fn set_postdivpd(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 3u32)) | (((val as u32) & 0x01) << 3u32);
+    }
+    #[doc = "PLL DSM powerdown Nothing is achieved by setting this low."]
+    pub const fn dsmpd(&self) -> bool {
+        let val = (self.0 >> 2u32) & 0x01;
+        val != 0
+    }
+    #[doc = "PLL DSM powerdown Nothing is achieved by setting this low."]
+    pub fn set_dsmpd(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 2u32)) | (((val as u32) & 0x01) << 2u32);
+    }
+    #[doc = "PLL powerdown To save power set high when PLL output not required."]
+    pub const fn pd(&self) -> bool {
+        let val = (self.0 >> 0u32) & 0x01;
+        val != 0
+    }
+    #[doc = "PLL powerdown To save power set high when PLL output not required."]
+    pub fn set_pd(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
+    }
+}
+impl Default for Pwr {
+    fn default() -> Pwr {
+        Pwr(0)
     }
 }

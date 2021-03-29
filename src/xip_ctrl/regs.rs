@@ -37,24 +37,24 @@ impl Default for Ctrl {
         Ctrl(0)
     }
 }
-#[doc = "FIFO stream address"]
+#[doc = "FIFO stream control"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct StreamAddr(pub u32);
-impl StreamAddr {
-    #[doc = "The address of the next word to be streamed from flash to the streaming FIFO. Increments automatically after each flash access. Write the initial access address here before starting a streaming read."]
-    pub const fn stream_addr(&self) -> u32 {
-        let val = (self.0 >> 2u32) & 0x3fff_ffff;
+pub struct StreamCtr(pub u32);
+impl StreamCtr {
+    #[doc = "Write a nonzero value to start a streaming read. This will then progress in the background, using flash idle cycles to transfer a linear data block from flash to the streaming FIFO. Decrements automatically (1 at a time) as the stream progresses, and halts on reaching 0. Write 0 to halt an in-progress stream, and discard any in-flight read, so that a new stream can immediately be started (after draining the FIFO and reinitialising STREAM_ADDR)"]
+    pub const fn stream_ctr(&self) -> u32 {
+        let val = (self.0 >> 0u32) & 0x003f_ffff;
         val as u32
     }
-    #[doc = "The address of the next word to be streamed from flash to the streaming FIFO. Increments automatically after each flash access. Write the initial access address here before starting a streaming read."]
-    pub fn set_stream_addr(&mut self, val: u32) {
-        self.0 = (self.0 & !(0x3fff_ffff << 2u32)) | (((val as u32) & 0x3fff_ffff) << 2u32);
+    #[doc = "Write a nonzero value to start a streaming read. This will then progress in the background, using flash idle cycles to transfer a linear data block from flash to the streaming FIFO. Decrements automatically (1 at a time) as the stream progresses, and halts on reaching 0. Write 0 to halt an in-progress stream, and discard any in-flight read, so that a new stream can immediately be started (after draining the FIFO and reinitialising STREAM_ADDR)"]
+    pub fn set_stream_ctr(&mut self, val: u32) {
+        self.0 = (self.0 & !(0x003f_ffff << 0u32)) | (((val as u32) & 0x003f_ffff) << 0u32);
     }
 }
-impl Default for StreamAddr {
-    fn default() -> StreamAddr {
-        StreamAddr(0)
+impl Default for StreamCtr {
+    fn default() -> StreamCtr {
+        StreamCtr(0)
     }
 }
 #[doc = "Cache Flush control"]
@@ -77,24 +77,24 @@ impl Default for Flush {
         Flush(0)
     }
 }
-#[doc = "FIFO stream control"]
+#[doc = "FIFO stream address"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct StreamCtr(pub u32);
-impl StreamCtr {
-    #[doc = "Write a nonzero value to start a streaming read. This will then progress in the background, using flash idle cycles to transfer a linear data block from flash to the streaming FIFO. Decrements automatically (1 at a time) as the stream progresses, and halts on reaching 0. Write 0 to halt an in-progress stream, and discard any in-flight read, so that a new stream can immediately be started (after draining the FIFO and reinitialising STREAM_ADDR)"]
-    pub const fn stream_ctr(&self) -> u32 {
-        let val = (self.0 >> 0u32) & 0x003f_ffff;
+pub struct StreamAddr(pub u32);
+impl StreamAddr {
+    #[doc = "The address of the next word to be streamed from flash to the streaming FIFO. Increments automatically after each flash access. Write the initial access address here before starting a streaming read."]
+    pub const fn stream_addr(&self) -> u32 {
+        let val = (self.0 >> 2u32) & 0x3fff_ffff;
         val as u32
     }
-    #[doc = "Write a nonzero value to start a streaming read. This will then progress in the background, using flash idle cycles to transfer a linear data block from flash to the streaming FIFO. Decrements automatically (1 at a time) as the stream progresses, and halts on reaching 0. Write 0 to halt an in-progress stream, and discard any in-flight read, so that a new stream can immediately be started (after draining the FIFO and reinitialising STREAM_ADDR)"]
-    pub fn set_stream_ctr(&mut self, val: u32) {
-        self.0 = (self.0 & !(0x003f_ffff << 0u32)) | (((val as u32) & 0x003f_ffff) << 0u32);
+    #[doc = "The address of the next word to be streamed from flash to the streaming FIFO. Increments automatically after each flash access. Write the initial access address here before starting a streaming read."]
+    pub fn set_stream_addr(&mut self, val: u32) {
+        self.0 = (self.0 & !(0x3fff_ffff << 2u32)) | (((val as u32) & 0x3fff_ffff) << 2u32);
     }
 }
-impl Default for StreamCtr {
-    fn default() -> StreamCtr {
-        StreamCtr(0)
+impl Default for StreamAddr {
+    fn default() -> StreamAddr {
+        StreamAddr(0)
     }
 }
 #[doc = "Cache Status"]

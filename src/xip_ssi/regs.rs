@@ -1,124 +1,4 @@
 use crate::generic::*;
-#[doc = "Baud rate"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Baudr(pub u32);
-impl Baudr {
-    #[doc = "SSI clock divider"]
-    pub const fn sckdv(&self) -> u16 {
-        let val = (self.0 >> 0u32) & 0xffff;
-        val as u16
-    }
-    #[doc = "SSI clock divider"]
-    pub fn set_sckdv(&mut self, val: u16) {
-        self.0 = (self.0 & !(0xffff << 0u32)) | (((val as u32) & 0xffff) << 0u32);
-    }
-}
-impl Default for Baudr {
-    fn default() -> Baudr {
-        Baudr(0)
-    }
-}
-#[doc = "RX FIFO threshold level"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Rxftlr(pub u32);
-impl Rxftlr {
-    #[doc = "Receive FIFO threshold"]
-    pub const fn rft(&self) -> u8 {
-        let val = (self.0 >> 0u32) & 0xff;
-        val as u8
-    }
-    #[doc = "Receive FIFO threshold"]
-    pub fn set_rft(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0u32)) | (((val as u32) & 0xff) << 0u32);
-    }
-}
-impl Default for Rxftlr {
-    fn default() -> Rxftlr {
-        Rxftlr(0)
-    }
-}
-#[doc = "RX sample delay"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct RxSampleDly(pub u32);
-impl RxSampleDly {
-    #[doc = "RXD sample delay (in SCLK cycles)"]
-    pub const fn rsd(&self) -> u8 {
-        let val = (self.0 >> 0u32) & 0xff;
-        val as u8
-    }
-    #[doc = "RXD sample delay (in SCLK cycles)"]
-    pub fn set_rsd(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0u32)) | (((val as u32) & 0xff) << 0u32);
-    }
-}
-impl Default for RxSampleDly {
-    fn default() -> RxSampleDly {
-        RxSampleDly(0)
-    }
-}
-#[doc = "RX FIFO underflow interrupt clear"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Rxuicr(pub u32);
-impl Rxuicr {
-    #[doc = "Clear-on-read receive FIFO underflow interrupt"]
-    pub const fn rxuicr(&self) -> bool {
-        let val = (self.0 >> 0u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Clear-on-read receive FIFO underflow interrupt"]
-    pub fn set_rxuicr(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
-    }
-}
-impl Default for Rxuicr {
-    fn default() -> Rxuicr {
-        Rxuicr(0)
-    }
-}
-#[doc = "RX FIFO level"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Rxflr(pub u32);
-impl Rxflr {
-    #[doc = "Receive FIFO level"]
-    pub const fn rxtfl(&self) -> u8 {
-        let val = (self.0 >> 0u32) & 0xff;
-        val as u8
-    }
-    #[doc = "Receive FIFO level"]
-    pub fn set_rxtfl(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0u32)) | (((val as u32) & 0xff) << 0u32);
-    }
-}
-impl Default for Rxflr {
-    fn default() -> Rxflr {
-        Rxflr(0)
-    }
-}
-#[doc = "TX drive edge"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct TxdDriveEdge(pub u32);
-impl TxdDriveEdge {
-    #[doc = "TXD drive edge"]
-    pub const fn tde(&self) -> u8 {
-        let val = (self.0 >> 0u32) & 0xff;
-        val as u8
-    }
-    #[doc = "TXD drive edge"]
-    pub fn set_tde(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0u32)) | (((val as u32) & 0xff) << 0u32);
-    }
-}
-impl Default for TxdDriveEdge {
-    fn default() -> TxdDriveEdge {
-        TxdDriveEdge(0)
-    }
-}
 #[doc = "Master Control register 1"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
@@ -137,265 +17,6 @@ impl Ctrlr1 {
 impl Default for Ctrlr1 {
     fn default() -> Ctrlr1 {
         Ctrlr1(0)
-    }
-}
-#[doc = "TX FIFO threshold level"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Txftlr(pub u32);
-impl Txftlr {
-    #[doc = "Transmit FIFO threshold"]
-    pub const fn tft(&self) -> u8 {
-        let val = (self.0 >> 0u32) & 0xff;
-        val as u8
-    }
-    #[doc = "Transmit FIFO threshold"]
-    pub fn set_tft(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0u32)) | (((val as u32) & 0xff) << 0u32);
-    }
-}
-impl Default for Txftlr {
-    fn default() -> Txftlr {
-        Txftlr(0)
-    }
-}
-#[doc = "SSI Enable"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Ssienr(pub u32);
-impl Ssienr {
-    #[doc = "SSI enable"]
-    pub const fn ssi_en(&self) -> bool {
-        let val = (self.0 >> 0u32) & 0x01;
-        val != 0
-    }
-    #[doc = "SSI enable"]
-    pub fn set_ssi_en(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
-    }
-}
-impl Default for Ssienr {
-    fn default() -> Ssienr {
-        Ssienr(0)
-    }
-}
-#[doc = "TX FIFO level"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Txflr(pub u32);
-impl Txflr {
-    #[doc = "Transmit FIFO level"]
-    pub const fn tftfl(&self) -> u8 {
-        let val = (self.0 >> 0u32) & 0xff;
-        val as u8
-    }
-    #[doc = "Transmit FIFO level"]
-    pub fn set_tftfl(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0u32)) | (((val as u32) & 0xff) << 0u32);
-    }
-}
-impl Default for Txflr {
-    fn default() -> Txflr {
-        Txflr(0)
-    }
-}
-#[doc = "DMA TX data level"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Dmatdlr(pub u32);
-impl Dmatdlr {
-    #[doc = "Transmit data watermark level"]
-    pub const fn dmatdl(&self) -> u8 {
-        let val = (self.0 >> 0u32) & 0xff;
-        val as u8
-    }
-    #[doc = "Transmit data watermark level"]
-    pub fn set_dmatdl(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0u32)) | (((val as u32) & 0xff) << 0u32);
-    }
-}
-impl Default for Dmatdlr {
-    fn default() -> Dmatdlr {
-        Dmatdlr(0)
-    }
-}
-#[doc = "Raw interrupt status"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Risr(pub u32);
-impl Risr {
-    #[doc = "Multi-master contention raw interrupt status"]
-    pub const fn mstir(&self) -> bool {
-        let val = (self.0 >> 5u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Multi-master contention raw interrupt status"]
-    pub fn set_mstir(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 5u32)) | (((val as u32) & 0x01) << 5u32);
-    }
-    #[doc = "Receive FIFO full raw interrupt status"]
-    pub const fn rxfir(&self) -> bool {
-        let val = (self.0 >> 4u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Receive FIFO full raw interrupt status"]
-    pub fn set_rxfir(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 4u32)) | (((val as u32) & 0x01) << 4u32);
-    }
-    #[doc = "Receive FIFO overflow raw interrupt status"]
-    pub const fn rxoir(&self) -> bool {
-        let val = (self.0 >> 3u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Receive FIFO overflow raw interrupt status"]
-    pub fn set_rxoir(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 3u32)) | (((val as u32) & 0x01) << 3u32);
-    }
-    #[doc = "Receive FIFO underflow raw interrupt status"]
-    pub const fn rxuir(&self) -> bool {
-        let val = (self.0 >> 2u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Receive FIFO underflow raw interrupt status"]
-    pub fn set_rxuir(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 2u32)) | (((val as u32) & 0x01) << 2u32);
-    }
-    #[doc = "Transmit FIFO overflow raw interrupt status"]
-    pub const fn txoir(&self) -> bool {
-        let val = (self.0 >> 1u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Transmit FIFO overflow raw interrupt status"]
-    pub fn set_txoir(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 1u32)) | (((val as u32) & 0x01) << 1u32);
-    }
-    #[doc = "Transmit FIFO empty raw interrupt status"]
-    pub const fn txeir(&self) -> bool {
-        let val = (self.0 >> 0u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Transmit FIFO empty raw interrupt status"]
-    pub fn set_txeir(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
-    }
-}
-impl Default for Risr {
-    fn default() -> Risr {
-        Risr(0)
-    }
-}
-#[doc = "Interrupt clear"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Icr(pub u32);
-impl Icr {
-    #[doc = "Clear-on-read all active interrupts"]
-    pub const fn icr(&self) -> bool {
-        let val = (self.0 >> 0u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Clear-on-read all active interrupts"]
-    pub fn set_icr(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
-    }
-}
-impl Default for Icr {
-    fn default() -> Icr {
-        Icr(0)
-    }
-}
-#[doc = "Interrupt status"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Isr(pub u32);
-impl Isr {
-    #[doc = "Multi-master contention interrupt status"]
-    pub const fn mstis(&self) -> bool {
-        let val = (self.0 >> 5u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Multi-master contention interrupt status"]
-    pub fn set_mstis(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 5u32)) | (((val as u32) & 0x01) << 5u32);
-    }
-    #[doc = "Receive FIFO full interrupt status"]
-    pub const fn rxfis(&self) -> bool {
-        let val = (self.0 >> 4u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Receive FIFO full interrupt status"]
-    pub fn set_rxfis(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 4u32)) | (((val as u32) & 0x01) << 4u32);
-    }
-    #[doc = "Receive FIFO overflow interrupt status"]
-    pub const fn rxois(&self) -> bool {
-        let val = (self.0 >> 3u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Receive FIFO overflow interrupt status"]
-    pub fn set_rxois(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 3u32)) | (((val as u32) & 0x01) << 3u32);
-    }
-    #[doc = "Receive FIFO underflow interrupt status"]
-    pub const fn rxuis(&self) -> bool {
-        let val = (self.0 >> 2u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Receive FIFO underflow interrupt status"]
-    pub fn set_rxuis(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 2u32)) | (((val as u32) & 0x01) << 2u32);
-    }
-    #[doc = "Transmit FIFO overflow interrupt status"]
-    pub const fn txois(&self) -> bool {
-        let val = (self.0 >> 1u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Transmit FIFO overflow interrupt status"]
-    pub fn set_txois(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 1u32)) | (((val as u32) & 0x01) << 1u32);
-    }
-    #[doc = "Transmit FIFO empty interrupt status"]
-    pub const fn txeis(&self) -> bool {
-        let val = (self.0 >> 0u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Transmit FIFO empty interrupt status"]
-    pub fn set_txeis(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
-    }
-}
-impl Default for Isr {
-    fn default() -> Isr {
-        Isr(0)
-    }
-}
-#[doc = "DMA control"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Dmacr(pub u32);
-impl Dmacr {
-    #[doc = "Transmit DMA enable"]
-    pub const fn tdmae(&self) -> bool {
-        let val = (self.0 >> 1u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Transmit DMA enable"]
-    pub fn set_tdmae(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 1u32)) | (((val as u32) & 0x01) << 1u32);
-    }
-    #[doc = "Receive DMA enable"]
-    pub const fn rdmae(&self) -> bool {
-        let val = (self.0 >> 0u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Receive DMA enable"]
-    pub fn set_rdmae(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
-    }
-}
-impl Default for Dmacr {
-    fn default() -> Dmacr {
-        Dmacr(0)
     }
 }
 #[doc = "TX FIFO overflow interrupt clear"]
@@ -436,71 +57,6 @@ impl Dmardlr {
 impl Default for Dmardlr {
     fn default() -> Dmardlr {
         Dmardlr(0)
-    }
-}
-#[doc = "Interrupt mask"]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Imr(pub u32);
-impl Imr {
-    #[doc = "Multi-master contention interrupt mask"]
-    pub const fn mstim(&self) -> bool {
-        let val = (self.0 >> 5u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Multi-master contention interrupt mask"]
-    pub fn set_mstim(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 5u32)) | (((val as u32) & 0x01) << 5u32);
-    }
-    #[doc = "Receive FIFO full interrupt mask"]
-    pub const fn rxfim(&self) -> bool {
-        let val = (self.0 >> 4u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Receive FIFO full interrupt mask"]
-    pub fn set_rxfim(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 4u32)) | (((val as u32) & 0x01) << 4u32);
-    }
-    #[doc = "Receive FIFO overflow interrupt mask"]
-    pub const fn rxoim(&self) -> bool {
-        let val = (self.0 >> 3u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Receive FIFO overflow interrupt mask"]
-    pub fn set_rxoim(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 3u32)) | (((val as u32) & 0x01) << 3u32);
-    }
-    #[doc = "Receive FIFO underflow interrupt mask"]
-    pub const fn rxuim(&self) -> bool {
-        let val = (self.0 >> 2u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Receive FIFO underflow interrupt mask"]
-    pub fn set_rxuim(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 2u32)) | (((val as u32) & 0x01) << 2u32);
-    }
-    #[doc = "Transmit FIFO overflow interrupt mask"]
-    pub const fn txoim(&self) -> bool {
-        let val = (self.0 >> 1u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Transmit FIFO overflow interrupt mask"]
-    pub fn set_txoim(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 1u32)) | (((val as u32) & 0x01) << 1u32);
-    }
-    #[doc = "Transmit FIFO empty interrupt mask"]
-    pub const fn txeim(&self) -> bool {
-        let val = (self.0 >> 0u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Transmit FIFO empty interrupt mask"]
-    pub fn set_txeim(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
-    }
-}
-impl Default for Imr {
-    fn default() -> Imr {
-        Imr(0)
     }
 }
 #[doc = "Control register 0"]
@@ -613,62 +169,89 @@ impl Default for Ctrlr0 {
         Ctrlr0(0)
     }
 }
-#[doc = "Microwire Control"]
+#[doc = "Raw interrupt status"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct Mwcr(pub u32);
-impl Mwcr {
-    #[doc = "Microwire handshaking"]
-    pub const fn mhs(&self) -> bool {
+pub struct Risr(pub u32);
+impl Risr {
+    #[doc = "Multi-master contention raw interrupt status"]
+    pub const fn mstir(&self) -> bool {
+        let val = (self.0 >> 5u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Multi-master contention raw interrupt status"]
+    pub fn set_mstir(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 5u32)) | (((val as u32) & 0x01) << 5u32);
+    }
+    #[doc = "Receive FIFO full raw interrupt status"]
+    pub const fn rxfir(&self) -> bool {
+        let val = (self.0 >> 4u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Receive FIFO full raw interrupt status"]
+    pub fn set_rxfir(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 4u32)) | (((val as u32) & 0x01) << 4u32);
+    }
+    #[doc = "Receive FIFO overflow raw interrupt status"]
+    pub const fn rxoir(&self) -> bool {
+        let val = (self.0 >> 3u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Receive FIFO overflow raw interrupt status"]
+    pub fn set_rxoir(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 3u32)) | (((val as u32) & 0x01) << 3u32);
+    }
+    #[doc = "Receive FIFO underflow raw interrupt status"]
+    pub const fn rxuir(&self) -> bool {
         let val = (self.0 >> 2u32) & 0x01;
         val != 0
     }
-    #[doc = "Microwire handshaking"]
-    pub fn set_mhs(&mut self, val: bool) {
+    #[doc = "Receive FIFO underflow raw interrupt status"]
+    pub fn set_rxuir(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2u32)) | (((val as u32) & 0x01) << 2u32);
     }
-    #[doc = "Microwire control"]
-    pub const fn mdd(&self) -> bool {
+    #[doc = "Transmit FIFO overflow raw interrupt status"]
+    pub const fn txoir(&self) -> bool {
         let val = (self.0 >> 1u32) & 0x01;
         val != 0
     }
-    #[doc = "Microwire control"]
-    pub fn set_mdd(&mut self, val: bool) {
+    #[doc = "Transmit FIFO overflow raw interrupt status"]
+    pub fn set_txoir(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1u32)) | (((val as u32) & 0x01) << 1u32);
     }
-    #[doc = "Microwire transfer mode"]
-    pub const fn mwmod(&self) -> bool {
+    #[doc = "Transmit FIFO empty raw interrupt status"]
+    pub const fn txeir(&self) -> bool {
         let val = (self.0 >> 0u32) & 0x01;
         val != 0
     }
-    #[doc = "Microwire transfer mode"]
-    pub fn set_mwmod(&mut self, val: bool) {
+    #[doc = "Transmit FIFO empty raw interrupt status"]
+    pub fn set_txeir(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
     }
 }
-impl Default for Mwcr {
-    fn default() -> Mwcr {
-        Mwcr(0)
+impl Default for Risr {
+    fn default() -> Risr {
+        Risr(0)
     }
 }
-#[doc = "Multi-master interrupt clear"]
+#[doc = "Interrupt clear"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct Msticr(pub u32);
-impl Msticr {
-    #[doc = "Clear-on-read multi-master contention interrupt"]
-    pub const fn msticr(&self) -> bool {
+pub struct Icr(pub u32);
+impl Icr {
+    #[doc = "Clear-on-read all active interrupts"]
+    pub const fn icr(&self) -> bool {
         let val = (self.0 >> 0u32) & 0x01;
         val != 0
     }
-    #[doc = "Clear-on-read multi-master contention interrupt"]
-    pub fn set_msticr(&mut self, val: bool) {
+    #[doc = "Clear-on-read all active interrupts"]
+    pub fn set_icr(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
     }
 }
-impl Default for Msticr {
-    fn default() -> Msticr {
-        Msticr(0)
+impl Default for Icr {
+    fn default() -> Icr {
+        Icr(0)
     }
 }
 #[doc = "Slave enable"]
@@ -709,6 +292,164 @@ impl Rxoicr {
 impl Default for Rxoicr {
     fn default() -> Rxoicr {
         Rxoicr(0)
+    }
+}
+#[doc = "Microwire Control"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Mwcr(pub u32);
+impl Mwcr {
+    #[doc = "Microwire handshaking"]
+    pub const fn mhs(&self) -> bool {
+        let val = (self.0 >> 2u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Microwire handshaking"]
+    pub fn set_mhs(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 2u32)) | (((val as u32) & 0x01) << 2u32);
+    }
+    #[doc = "Microwire control"]
+    pub const fn mdd(&self) -> bool {
+        let val = (self.0 >> 1u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Microwire control"]
+    pub fn set_mdd(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 1u32)) | (((val as u32) & 0x01) << 1u32);
+    }
+    #[doc = "Microwire transfer mode"]
+    pub const fn mwmod(&self) -> bool {
+        let val = (self.0 >> 0u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Microwire transfer mode"]
+    pub fn set_mwmod(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
+    }
+}
+impl Default for Mwcr {
+    fn default() -> Mwcr {
+        Mwcr(0)
+    }
+}
+#[doc = "TX drive edge"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct TxdDriveEdge(pub u32);
+impl TxdDriveEdge {
+    #[doc = "TXD drive edge"]
+    pub const fn tde(&self) -> u8 {
+        let val = (self.0 >> 0u32) & 0xff;
+        val as u8
+    }
+    #[doc = "TXD drive edge"]
+    pub fn set_tde(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0u32)) | (((val as u32) & 0xff) << 0u32);
+    }
+}
+impl Default for TxdDriveEdge {
+    fn default() -> TxdDriveEdge {
+        TxdDriveEdge(0)
+    }
+}
+#[doc = "RX FIFO underflow interrupt clear"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Rxuicr(pub u32);
+impl Rxuicr {
+    #[doc = "Clear-on-read receive FIFO underflow interrupt"]
+    pub const fn rxuicr(&self) -> bool {
+        let val = (self.0 >> 0u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Clear-on-read receive FIFO underflow interrupt"]
+    pub fn set_rxuicr(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
+    }
+}
+impl Default for Rxuicr {
+    fn default() -> Rxuicr {
+        Rxuicr(0)
+    }
+}
+#[doc = "RX sample delay"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct RxSampleDly(pub u32);
+impl RxSampleDly {
+    #[doc = "RXD sample delay (in SCLK cycles)"]
+    pub const fn rsd(&self) -> u8 {
+        let val = (self.0 >> 0u32) & 0xff;
+        val as u8
+    }
+    #[doc = "RXD sample delay (in SCLK cycles)"]
+    pub fn set_rsd(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0u32)) | (((val as u32) & 0xff) << 0u32);
+    }
+}
+impl Default for RxSampleDly {
+    fn default() -> RxSampleDly {
+        RxSampleDly(0)
+    }
+}
+#[doc = "RX FIFO threshold level"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Rxftlr(pub u32);
+impl Rxftlr {
+    #[doc = "Receive FIFO threshold"]
+    pub const fn rft(&self) -> u8 {
+        let val = (self.0 >> 0u32) & 0xff;
+        val as u8
+    }
+    #[doc = "Receive FIFO threshold"]
+    pub fn set_rft(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0u32)) | (((val as u32) & 0xff) << 0u32);
+    }
+}
+impl Default for Rxftlr {
+    fn default() -> Rxftlr {
+        Rxftlr(0)
+    }
+}
+#[doc = "Multi-master interrupt clear"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Msticr(pub u32);
+impl Msticr {
+    #[doc = "Clear-on-read multi-master contention interrupt"]
+    pub const fn msticr(&self) -> bool {
+        let val = (self.0 >> 0u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Clear-on-read multi-master contention interrupt"]
+    pub fn set_msticr(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
+    }
+}
+impl Default for Msticr {
+    fn default() -> Msticr {
+        Msticr(0)
+    }
+}
+#[doc = "SSI Enable"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Ssienr(pub u32);
+impl Ssienr {
+    #[doc = "SSI enable"]
+    pub const fn ssi_en(&self) -> bool {
+        let val = (self.0 >> 0u32) & 0x01;
+        val != 0
+    }
+    #[doc = "SSI enable"]
+    pub fn set_ssi_en(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
+    }
+}
+impl Default for Ssienr {
+    fn default() -> Ssienr {
+        Ssienr(0)
     }
 }
 #[doc = "SPI control"]
@@ -794,6 +535,180 @@ impl Default for SpiCtrlr0 {
         SpiCtrlr0(0)
     }
 }
+#[doc = "Interrupt mask"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Imr(pub u32);
+impl Imr {
+    #[doc = "Multi-master contention interrupt mask"]
+    pub const fn mstim(&self) -> bool {
+        let val = (self.0 >> 5u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Multi-master contention interrupt mask"]
+    pub fn set_mstim(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 5u32)) | (((val as u32) & 0x01) << 5u32);
+    }
+    #[doc = "Receive FIFO full interrupt mask"]
+    pub const fn rxfim(&self) -> bool {
+        let val = (self.0 >> 4u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Receive FIFO full interrupt mask"]
+    pub fn set_rxfim(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 4u32)) | (((val as u32) & 0x01) << 4u32);
+    }
+    #[doc = "Receive FIFO overflow interrupt mask"]
+    pub const fn rxoim(&self) -> bool {
+        let val = (self.0 >> 3u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Receive FIFO overflow interrupt mask"]
+    pub fn set_rxoim(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 3u32)) | (((val as u32) & 0x01) << 3u32);
+    }
+    #[doc = "Receive FIFO underflow interrupt mask"]
+    pub const fn rxuim(&self) -> bool {
+        let val = (self.0 >> 2u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Receive FIFO underflow interrupt mask"]
+    pub fn set_rxuim(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 2u32)) | (((val as u32) & 0x01) << 2u32);
+    }
+    #[doc = "Transmit FIFO overflow interrupt mask"]
+    pub const fn txoim(&self) -> bool {
+        let val = (self.0 >> 1u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Transmit FIFO overflow interrupt mask"]
+    pub fn set_txoim(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 1u32)) | (((val as u32) & 0x01) << 1u32);
+    }
+    #[doc = "Transmit FIFO empty interrupt mask"]
+    pub const fn txeim(&self) -> bool {
+        let val = (self.0 >> 0u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Transmit FIFO empty interrupt mask"]
+    pub fn set_txeim(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
+    }
+}
+impl Default for Imr {
+    fn default() -> Imr {
+        Imr(0)
+    }
+}
+#[doc = "RX FIFO level"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Rxflr(pub u32);
+impl Rxflr {
+    #[doc = "Receive FIFO level"]
+    pub const fn rxtfl(&self) -> u8 {
+        let val = (self.0 >> 0u32) & 0xff;
+        val as u8
+    }
+    #[doc = "Receive FIFO level"]
+    pub fn set_rxtfl(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0u32)) | (((val as u32) & 0xff) << 0u32);
+    }
+}
+impl Default for Rxflr {
+    fn default() -> Rxflr {
+        Rxflr(0)
+    }
+}
+#[doc = "TX FIFO threshold level"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Txftlr(pub u32);
+impl Txftlr {
+    #[doc = "Transmit FIFO threshold"]
+    pub const fn tft(&self) -> u8 {
+        let val = (self.0 >> 0u32) & 0xff;
+        val as u8
+    }
+    #[doc = "Transmit FIFO threshold"]
+    pub fn set_tft(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0u32)) | (((val as u32) & 0xff) << 0u32);
+    }
+}
+impl Default for Txftlr {
+    fn default() -> Txftlr {
+        Txftlr(0)
+    }
+}
+#[doc = "Baud rate"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Baudr(pub u32);
+impl Baudr {
+    #[doc = "SSI clock divider"]
+    pub const fn sckdv(&self) -> u16 {
+        let val = (self.0 >> 0u32) & 0xffff;
+        val as u16
+    }
+    #[doc = "SSI clock divider"]
+    pub fn set_sckdv(&mut self, val: u16) {
+        self.0 = (self.0 & !(0xffff << 0u32)) | (((val as u32) & 0xffff) << 0u32);
+    }
+}
+impl Default for Baudr {
+    fn default() -> Baudr {
+        Baudr(0)
+    }
+}
+#[doc = "DMA control"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Dmacr(pub u32);
+impl Dmacr {
+    #[doc = "Transmit DMA enable"]
+    pub const fn tdmae(&self) -> bool {
+        let val = (self.0 >> 1u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Transmit DMA enable"]
+    pub fn set_tdmae(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 1u32)) | (((val as u32) & 0x01) << 1u32);
+    }
+    #[doc = "Receive DMA enable"]
+    pub const fn rdmae(&self) -> bool {
+        let val = (self.0 >> 0u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Receive DMA enable"]
+    pub fn set_rdmae(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
+    }
+}
+impl Default for Dmacr {
+    fn default() -> Dmacr {
+        Dmacr(0)
+    }
+}
+#[doc = "DMA TX data level"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Dmatdlr(pub u32);
+impl Dmatdlr {
+    #[doc = "Transmit data watermark level"]
+    pub const fn dmatdl(&self) -> u8 {
+        let val = (self.0 >> 0u32) & 0xff;
+        val as u8
+    }
+    #[doc = "Transmit data watermark level"]
+    pub fn set_dmatdl(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0u32)) | (((val as u32) & 0xff) << 0u32);
+    }
+}
+impl Default for Dmatdlr {
+    fn default() -> Dmatdlr {
+        Dmatdlr(0)
+    }
+}
 #[doc = "Status register"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
@@ -866,5 +781,90 @@ impl Sr {
 impl Default for Sr {
     fn default() -> Sr {
         Sr(0)
+    }
+}
+#[doc = "Interrupt status"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Isr(pub u32);
+impl Isr {
+    #[doc = "Multi-master contention interrupt status"]
+    pub const fn mstis(&self) -> bool {
+        let val = (self.0 >> 5u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Multi-master contention interrupt status"]
+    pub fn set_mstis(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 5u32)) | (((val as u32) & 0x01) << 5u32);
+    }
+    #[doc = "Receive FIFO full interrupt status"]
+    pub const fn rxfis(&self) -> bool {
+        let val = (self.0 >> 4u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Receive FIFO full interrupt status"]
+    pub fn set_rxfis(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 4u32)) | (((val as u32) & 0x01) << 4u32);
+    }
+    #[doc = "Receive FIFO overflow interrupt status"]
+    pub const fn rxois(&self) -> bool {
+        let val = (self.0 >> 3u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Receive FIFO overflow interrupt status"]
+    pub fn set_rxois(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 3u32)) | (((val as u32) & 0x01) << 3u32);
+    }
+    #[doc = "Receive FIFO underflow interrupt status"]
+    pub const fn rxuis(&self) -> bool {
+        let val = (self.0 >> 2u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Receive FIFO underflow interrupt status"]
+    pub fn set_rxuis(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 2u32)) | (((val as u32) & 0x01) << 2u32);
+    }
+    #[doc = "Transmit FIFO overflow interrupt status"]
+    pub const fn txois(&self) -> bool {
+        let val = (self.0 >> 1u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Transmit FIFO overflow interrupt status"]
+    pub fn set_txois(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 1u32)) | (((val as u32) & 0x01) << 1u32);
+    }
+    #[doc = "Transmit FIFO empty interrupt status"]
+    pub const fn txeis(&self) -> bool {
+        let val = (self.0 >> 0u32) & 0x01;
+        val != 0
+    }
+    #[doc = "Transmit FIFO empty interrupt status"]
+    pub fn set_txeis(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
+    }
+}
+impl Default for Isr {
+    fn default() -> Isr {
+        Isr(0)
+    }
+}
+#[doc = "TX FIFO level"]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Txflr(pub u32);
+impl Txflr {
+    #[doc = "Transmit FIFO level"]
+    pub const fn tftfl(&self) -> u8 {
+        let val = (self.0 >> 0u32) & 0xff;
+        val as u8
+    }
+    #[doc = "Transmit FIFO level"]
+    pub fn set_tftfl(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0u32)) | (((val as u32) & 0xff) << 0u32);
+    }
+}
+impl Default for Txflr {
+    fn default() -> Txflr {
+        Txflr(0)
     }
 }

@@ -1,4 +1,29 @@
 use crate::generic::*;
+#[doc = "Platform register. Allows software to know what environment it is running in."]
+#[repr(transparent)]
+#[derive(Copy, Clone)]
+pub struct Platform(pub u32);
+impl Platform {
+    pub const fn asic(&self) -> bool {
+        let val = (self.0 >> 1u32) & 0x01;
+        val != 0
+    }
+    pub fn set_asic(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 1u32)) | (((val as u32) & 0x01) << 1u32);
+    }
+    pub const fn fpga(&self) -> bool {
+        let val = (self.0 >> 0u32) & 0x01;
+        val != 0
+    }
+    pub fn set_fpga(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
+    }
+}
+impl Default for Platform {
+    fn default() -> Platform {
+        Platform(0)
+    }
+}
 #[doc = "JEDEC JEP-106 compliant chip identifier."]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
@@ -29,30 +54,5 @@ impl ChipId {
 impl Default for ChipId {
     fn default() -> ChipId {
         ChipId(0)
-    }
-}
-#[doc = "Platform register. Allows software to know what environment it is running in."]
-#[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct Platform(pub u32);
-impl Platform {
-    pub const fn asic(&self) -> bool {
-        let val = (self.0 >> 1u32) & 0x01;
-        val != 0
-    }
-    pub fn set_asic(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 1u32)) | (((val as u32) & 0x01) << 1u32);
-    }
-    pub const fn fpga(&self) -> bool {
-        let val = (self.0 >> 0u32) & 0x01;
-        val != 0
-    }
-    pub fn set_fpga(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
-    }
-}
-impl Default for Platform {
-    fn default() -> Platform {
-        Platform(0)
     }
 }

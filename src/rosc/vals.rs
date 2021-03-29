@@ -10,9 +10,10 @@ impl CtrlFreqRange {
 }
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct Div(pub u16);
-impl Div {
-    pub const PASS: Self = Self(0x0aa0);
+pub struct CtrlEnable(pub u16);
+impl CtrlEnable {
+    pub const DISABLE: Self = Self(0x0d1e);
+    pub const ENABLE: Self = Self(0x0fab);
 }
 #[repr(transparent)]
 #[derive(Copy, Clone)]
@@ -22,8 +23,7 @@ impl Passwd {
 }
 #[repr(transparent)]
 #[derive(Copy, Clone)]
-pub struct CtrlEnable(pub u16);
-impl CtrlEnable {
-    pub const DISABLE: Self = Self(0x0d1e);
-    pub const ENABLE: Self = Self(0x0fab);
+pub struct Div(pub u16);
+impl Div {
+    pub const PASS: Self = Self(0x0aa0);
 }

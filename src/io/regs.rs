@@ -82,20 +82,20 @@ impl Default for GpioStatus {
         GpioStatus(0)
     }
 }
-#[doc = "Interrupt Force for dormant_wake"]
+#[doc = "Interrupt Force for proc1"]
 #[repr(transparent)]
 #[derive(Copy, Clone)]
 pub struct Int(pub u32);
 impl Int {
-    pub fn edge_high(&self, n: usize) -> bool {
+    pub fn level_high(&self, n: usize) -> bool {
         assert!(n < 8usize);
-        let offs = 3u32 + (n as u32) * 4u32;
+        let offs = 1u32 + (n as u32) * 4u32;
         let val = (self.0 >> offs) & 0x01;
         val != 0
     }
-    pub fn set_edge_high(&mut self, n: usize, val: bool) {
+    pub fn set_level_high(&mut self, n: usize, val: bool) {
         assert!(n < 8usize);
-        let offs = 3u32 + (n as u32) * 4u32;
+        let offs = 1u32 + (n as u32) * 4u32;
         self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
     }
     pub fn edge_low(&self, n: usize) -> bool {
@@ -109,6 +109,17 @@ impl Int {
         let offs = 2u32 + (n as u32) * 4u32;
         self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
     }
+    pub fn edge_high(&self, n: usize) -> bool {
+        assert!(n < 8usize);
+        let offs = 3u32 + (n as u32) * 4u32;
+        let val = (self.0 >> offs) & 0x01;
+        val != 0
+    }
+    pub fn set_edge_high(&mut self, n: usize, val: bool) {
+        assert!(n < 8usize);
+        let offs = 3u32 + (n as u32) * 4u32;
+        self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
+    }
     pub fn level_low(&self, n: usize) -> bool {
         assert!(n < 8usize);
         let offs = 0u32 + (n as u32) * 4u32;
@@ -118,17 +129,6 @@ impl Int {
     pub fn set_level_low(&mut self, n: usize, val: bool) {
         assert!(n < 8usize);
         let offs = 0u32 + (n as u32) * 4u32;
-        self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
-    }
-    pub fn level_high(&self, n: usize) -> bool {
-        assert!(n < 8usize);
-        let offs = 1u32 + (n as u32) * 4u32;
-        let val = (self.0 >> offs) & 0x01;
-        val != 0
-    }
-    pub fn set_level_high(&mut self, n: usize, val: bool) {
-        assert!(n < 8usize);
-        let offs = 1u32 + (n as u32) * 4u32;
         self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
     }
 }

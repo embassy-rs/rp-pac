@@ -295,6 +295,10 @@ transforms:
 - MergeFieldsets:
     from: usb::regs::AddrEndp\d+
     to: usb::regs::AddrEndpX
+- MakeRegisterArray:
+    blocks: usb::Usb
+    from: addr_endp\d+
+    to: addr_endp_x
 
 # =========== Misc
 - MergeEnums:

@@ -1,4 +1,22 @@
 use crate::generic::*;
+#[derive(Copy, Clone)]
+pub struct Irq(pub *mut u8);
+unsafe impl Send for Irq {}
+unsafe impl Sync for Irq {}
+impl Irq {
+    #[doc = "Interrupt Enable for irq1"]
+    pub fn inte(self) -> Reg<regs::Intr, RW> {
+        unsafe { Reg::from_ptr(self.0.add(0usize)) }
+    }
+    #[doc = "Interrupt Force for irq1"]
+    pub fn intf(self) -> Reg<regs::Intr, RW> {
+        unsafe { Reg::from_ptr(self.0.add(4usize)) }
+    }
+    #[doc = "Interrupt status after masking & forcing for irq1"]
+    pub fn ints(self) -> Reg<regs::Intr, RW> {
+        unsafe { Reg::from_ptr(self.0.add(8usize)) }
+    }
+}
 #[doc = "Programmable IO block"]
 #[derive(Copy, Clone)]
 pub struct Pio(pub *mut u8);
@@ -49,20 +67,20 @@ impl Pio {
     pub fn intr(self) -> Reg<regs::Intr, RW> {
         unsafe { Reg::from_ptr(self.0.add(296usize)) }
     }
-    #[doc = "Direct read access to the RX FIFO for this state machine. Each read pops one word from the FIFO."]
-    pub fn rxf(self, n: usize) -> Reg<u32, R> {
+    #[doc = "Direct write access to the TX FIFO for this state machine. Each write pushes one word to the FIFO."]
+    pub fn txf(self, n: usize) -> Reg<u32, W> {
         assert!(n < 4usize);
-        unsafe { Reg::from_ptr(self.0.add(32usize + n * 4usize)) }
+        unsafe { Reg::from_ptr(self.0.add(16usize + n * 4usize)) }
     }
     #[doc = "Write-only access to instruction memory location 0"]
     pub fn instr_mem(self, n: usize) -> Reg<regs::InstrMem, RW> {
         assert!(n < 32usize);
         unsafe { Reg::from_ptr(self.0.add(72usize + n * 4usize)) }
     }
-    #[doc = "Direct write access to the TX FIFO for this state machine. Each write pushes one word to the FIFO."]
-    pub fn txf(self, n: usize) -> Reg<u32, W> {
+    #[doc = "Direct read access to the RX FIFO for this state machine. Each read pops one word from the FIFO."]
+    pub fn rxf(self, n: usize) -> Reg<u32, R> {
         assert!(n < 4usize);
-        unsafe { Reg::from_ptr(self.0.add(16usize + n * 4usize)) }
+        unsafe { Reg::from_ptr(self.0.add(32usize + n * 4usize)) }
     }
     pub fn sm(self, n: usize) -> StateMachine {
         assert!(n < 4usize);
@@ -78,47 +96,29 @@ pub struct StateMachine(pub *mut u8);
 unsafe impl Send for StateMachine {}
 unsafe impl Sync for StateMachine {}
 impl StateMachine {
-    #[doc = "Clock divider register for state machine 0 Frequency = clock freq / (CLKDIV_INT + CLKDIV_FRAC / 256)"]
+    #[doc = "Clock divider register for state machine 1 Frequency = clock freq / (CLKDIV_INT + CLKDIV_FRAC / 256)"]
     pub fn clkdiv(self) -> Reg<regs::SmClkdiv, RW> {
         unsafe { Reg::from_ptr(self.0.add(0usize)) }
     }
-    #[doc = "Execution/behavioural settings for state machine 0"]
+    #[doc = "Execution/behavioural settings for state machine 1"]
     pub fn execctrl(self) -> Reg<regs::SmExecctrl, RW> {
         unsafe { Reg::from_ptr(self.0.add(4usize)) }
     }
-    #[doc = "Control behaviour of the input/output shift registers for state machine 0"]
+    #[doc = "Control behaviour of the input/output shift registers for state machine 1"]
     pub fn shiftctrl(self) -> Reg<regs::SmShiftctrl, RW> {
         unsafe { Reg::from_ptr(self.0.add(8usize)) }
     }
-    #[doc = "Current instruction address of state machine 0"]
+    #[doc = "Current instruction address of state machine 1"]
     pub fn addr(self) -> Reg<regs::SmAddr, RW> {
         unsafe { Reg::from_ptr(self.0.add(12usize)) }
     }
-    #[doc = "Instruction currently being executed by state machine 0 Write to execute an instruction immediately (including jumps) and then resume execution."]
+    #[doc = "Instruction currently being executed by state machine 1 Write to execute an instruction immediately (including jumps) and then resume execution."]
     pub fn instr(self) -> Reg<regs::SmInstr, RW> {
         unsafe { Reg::from_ptr(self.0.add(16usize)) }
     }
     #[doc = "State machine pin control"]
     pub fn pinctrl(self) -> Reg<regs::SmPinctrl, RW> {
         unsafe { Reg::from_ptr(self.0.add(20usize)) }
-    }
-}
-#[derive(Copy, Clone)]
-pub struct Irq(pub *mut u8);
-unsafe impl Send for Irq {}
-unsafe impl Sync for Irq {}
-impl Irq {
-    #[doc = "Interrupt Enable for irq1"]
-    pub fn inte(self) -> Reg<regs::Intr, RW> {
-        unsafe { Reg::from_ptr(self.0.add(0usize)) }
-    }
-    #[doc = "Interrupt Force for irq1"]
-    pub fn intf(self) -> Reg<regs::Intr, RW> {
-        unsafe { Reg::from_ptr(self.0.add(4usize)) }
-    }
-    #[doc = "Interrupt status after masking & forcing for irq1"]
-    pub fn ints(self) -> Reg<regs::Intr, RW> {
-        unsafe { Reg::from_ptr(self.0.add(8usize)) }
     }
 }
 pub mod regs;
