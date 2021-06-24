@@ -1,0 +1,27 @@
+name: build gh-pages
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build_html:
+    name: Build docs
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          override: true
+      - name: Build docs
+        run: cargo doc
+      - name: Publish to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./target/doc
+          force_orphan: true

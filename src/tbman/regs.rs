@@ -1,26 +1,25 @@
-use crate::generic::*;
 #[doc = "Indicates the type of platform in use"]
 #[repr(transparent)]
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Platform(pub u32);
 impl Platform {
-    #[doc = "Indicates the platform is an FPGA"]
-    pub const fn fpga(&self) -> bool {
-        let val = (self.0 >> 1u32) & 0x01;
-        val != 0
-    }
-    #[doc = "Indicates the platform is an FPGA"]
-    pub fn set_fpga(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 1u32)) | (((val as u32) & 0x01) << 1u32);
-    }
     #[doc = "Indicates the platform is an ASIC"]
     pub const fn asic(&self) -> bool {
-        let val = (self.0 >> 0u32) & 0x01;
+        let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
     #[doc = "Indicates the platform is an ASIC"]
     pub fn set_asic(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0u32)) | (((val as u32) & 0x01) << 0u32);
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+    }
+    #[doc = "Indicates the platform is an FPGA"]
+    pub const fn fpga(&self) -> bool {
+        let val = (self.0 >> 1usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Indicates the platform is an FPGA"]
+    pub fn set_fpga(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
 }
 impl Default for Platform {

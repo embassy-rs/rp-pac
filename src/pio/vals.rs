@@ -1,6 +1,5 @@
-use crate::generic::*;
 #[repr(transparent)]
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub struct SmExecctrlStatusSel(pub u8);
 impl SmExecctrlStatusSel {
     #[doc = "All-ones if TX FIFO level < N, otherwise all-zeroes"]

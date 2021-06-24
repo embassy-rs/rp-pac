@@ -1,8 +1,7 @@
-use crate::generic::*;
 #[repr(transparent)]
-#[derive(Copy, Clone)]
-pub struct IcConSpeed(pub u8);
-impl IcConSpeed {
+#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+pub struct Speed(pub u8);
+impl Speed {
     #[doc = "Standard Speed mode of operation"]
     pub const STANDARD: Self = Self(0x01);
     #[doc = "Fast or Fast Plus mode of operation"]

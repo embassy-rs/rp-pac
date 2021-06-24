@@ -201,7 +201,7 @@ transforms:
     # io has only 30 gpios, so the last reg has only 6 instead of 8. 
     # homogenize this by picking the first reg and disabling checking.
     main: .*0  
-    check: None
+    check: NoCheck
 - MakeRegisterArray:
     blocks: io::Io
     from: (.*int.*)\d+
@@ -220,7 +220,7 @@ transforms:
     from: (io::Io|io_qspi::IoQspi)
     main: io::Io
     to: io::Io
-    check: None
+    check: NoCheck
 
 
 # =========== PADS
@@ -244,7 +244,7 @@ transforms:
     from: (pads::Pads|pads_qspi::PadsQspi)
     main: pads::Pads
     to: pads::Pads
-    check: None
+    check: NoCheck
 
 # ========= PLL
 - Rename:

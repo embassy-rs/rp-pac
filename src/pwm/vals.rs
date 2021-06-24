@@ -1,6 +1,5 @@
-use crate::generic::*;
 #[repr(transparent)]
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub struct Divmode(pub u8);
 impl Divmode {
     #[doc = "Free-running counting at rate dictated by fractional divider"]

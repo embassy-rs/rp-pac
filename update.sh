@@ -5,10 +5,12 @@ set -euxo pipefail
 rm -rf src
 mkdir src
 
-cargo run --manifest-path ../svd2rust/Cargo.toml -- -i svd/rp2040.svd -c svd/rp2040.yaml
+(cd ../../chiptool/; cargo build)
+RUST_LOG=info ../../chiptool/target/debug/chiptool generate --svd svd/rp2040.svd --transform svd/rp2040.yaml
 
 form -i lib.rs -o src
 rm lib.rs
+#mv lib.rs src
 
 cargo fmt
 cargo doc
