@@ -1,32 +1,3 @@
-#[doc = "Controls the PLL post dividers for the primary output (note: this PLL does not have a secondary output) the primary output is driven from VCO divided by postdiv1*postdiv2"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Prim(pub u32);
-impl Prim {
-    #[doc = "divide by 1-7"]
-    pub const fn postdiv2(&self) -> u8 {
-        let val = (self.0 >> 12usize) & 0x07;
-        val as u8
-    }
-    #[doc = "divide by 1-7"]
-    pub fn set_postdiv2(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x07 << 12usize)) | (((val as u32) & 0x07) << 12usize);
-    }
-    #[doc = "divide by 1-7"]
-    pub const fn postdiv1(&self) -> u8 {
-        let val = (self.0 >> 16usize) & 0x07;
-        val as u8
-    }
-    #[doc = "divide by 1-7"]
-    pub fn set_postdiv1(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x07 << 16usize)) | (((val as u32) & 0x07) << 16usize);
-    }
-}
-impl Default for Prim {
-    fn default() -> Prim {
-        Prim(0)
-    }
-}
 #[doc = "Control and Status GENERAL CONSTRAINTS: Reference clock frequency min=5MHz, max=800MHz Feedback divider min=16, max=320 VCO frequency min=400MHz, max=1600MHz"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -63,26 +34,6 @@ impl Cs {
 impl Default for Cs {
     fn default() -> Cs {
         Cs(0)
-    }
-}
-#[doc = "Feedback divisor (note: this PLL does not support fractional division)"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct FbdivInt(pub u32);
-impl FbdivInt {
-    #[doc = "see ctrl reg description for constraints"]
-    pub const fn fbdiv_int(&self) -> u16 {
-        let val = (self.0 >> 0usize) & 0x0fff;
-        val as u16
-    }
-    #[doc = "see ctrl reg description for constraints"]
-    pub fn set_fbdiv_int(&mut self, val: u16) {
-        self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
-    }
-}
-impl Default for FbdivInt {
-    fn default() -> FbdivInt {
-        FbdivInt(0)
     }
 }
 #[doc = "Controls the PLL power modes."]
@@ -130,5 +81,54 @@ impl Pwr {
 impl Default for Pwr {
     fn default() -> Pwr {
         Pwr(0)
+    }
+}
+#[doc = "Feedback divisor (note: this PLL does not support fractional division)"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct FbdivInt(pub u32);
+impl FbdivInt {
+    #[doc = "see ctrl reg description for constraints"]
+    pub const fn fbdiv_int(&self) -> u16 {
+        let val = (self.0 >> 0usize) & 0x0fff;
+        val as u16
+    }
+    #[doc = "see ctrl reg description for constraints"]
+    pub fn set_fbdiv_int(&mut self, val: u16) {
+        self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
+    }
+}
+impl Default for FbdivInt {
+    fn default() -> FbdivInt {
+        FbdivInt(0)
+    }
+}
+#[doc = "Controls the PLL post dividers for the primary output (note: this PLL does not have a secondary output) the primary output is driven from VCO divided by postdiv1*postdiv2"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Prim(pub u32);
+impl Prim {
+    #[doc = "divide by 1-7"]
+    pub const fn postdiv2(&self) -> u8 {
+        let val = (self.0 >> 12usize) & 0x07;
+        val as u8
+    }
+    #[doc = "divide by 1-7"]
+    pub fn set_postdiv2(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x07 << 12usize)) | (((val as u32) & 0x07) << 12usize);
+    }
+    #[doc = "divide by 1-7"]
+    pub const fn postdiv1(&self) -> u8 {
+        let val = (self.0 >> 16usize) & 0x07;
+        val as u8
+    }
+    #[doc = "divide by 1-7"]
+    pub fn set_postdiv1(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x07 << 16usize)) | (((val as u32) & 0x07) << 16usize);
+    }
+}
+impl Default for Prim {
+    fn default() -> Prim {
+        Prim(0)
     }
 }

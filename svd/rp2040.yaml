@@ -58,7 +58,13 @@ transforms:
 - Rename:
     from: spi::Spi0
     to: spi::Spi
-
+- RenameRegisters:
+    block: spi::Spi
+    from: ssp(.*)
+    to: $1
+- Rename:
+    from: spi::regs::Ssp(.*)
+    to: spi::regs::$1
 
 # =========== I2C
 - Rename:

@@ -13,6 +13,4 @@ rm lib.rs
 #mv lib.rs src
 
 cargo fmt
-cargo doc
-rm -rf docs
-mv target/doc docs
+cargo check

@@ -1,3 +1,23 @@
+#[doc = "FIFO stream address"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct StreamAddr(pub u32);
+impl StreamAddr {
+    #[doc = "The address of the next word to be streamed from flash to the streaming FIFO. Increments automatically after each flash access. Write the initial access address here before starting a streaming read."]
+    pub const fn stream_addr(&self) -> u32 {
+        let val = (self.0 >> 2usize) & 0x3fff_ffff;
+        val as u32
+    }
+    #[doc = "The address of the next word to be streamed from flash to the streaming FIFO. Increments automatically after each flash access. Write the initial access address here before starting a streaming read."]
+    pub fn set_stream_addr(&mut self, val: u32) {
+        self.0 = (self.0 & !(0x3fff_ffff << 2usize)) | (((val as u32) & 0x3fff_ffff) << 2usize);
+    }
+}
+impl Default for StreamAddr {
+    fn default() -> StreamAddr {
+        StreamAddr(0)
+    }
+}
 #[doc = "Cache Flush control"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -16,64 +36,6 @@ impl Flush {
 impl Default for Flush {
     fn default() -> Flush {
         Flush(0)
-    }
-}
-#[doc = "Cache Status"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Stat(pub u32);
-impl Stat {
-    #[doc = "Reads as 0 while a cache flush is in progress, and 1 otherwise. The cache is flushed whenever the XIP block is reset, and also when requested via the FLUSH register."]
-    pub const fn flush_ready(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Reads as 0 while a cache flush is in progress, and 1 otherwise. The cache is flushed whenever the XIP block is reset, and also when requested via the FLUSH register."]
-    pub fn set_flush_ready(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-    }
-    #[doc = "When 1, indicates the XIP streaming FIFO is completely empty."]
-    pub const fn fifo_empty(&self) -> bool {
-        let val = (self.0 >> 1usize) & 0x01;
-        val != 0
-    }
-    #[doc = "When 1, indicates the XIP streaming FIFO is completely empty."]
-    pub fn set_fifo_empty(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
-    }
-    #[doc = "When 1, indicates the XIP streaming FIFO is completely full. The streaming FIFO is 2 entries deep, so the full and empty flag allow its level to be ascertained."]
-    pub const fn fifo_full(&self) -> bool {
-        let val = (self.0 >> 2usize) & 0x01;
-        val != 0
-    }
-    #[doc = "When 1, indicates the XIP streaming FIFO is completely full. The streaming FIFO is 2 entries deep, so the full and empty flag allow its level to be ascertained."]
-    pub fn set_fifo_full(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
-    }
-}
-impl Default for Stat {
-    fn default() -> Stat {
-        Stat(0)
-    }
-}
-#[doc = "FIFO stream control"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct StreamCtr(pub u32);
-impl StreamCtr {
-    #[doc = "Write a nonzero value to start a streaming read. This will then progress in the background, using flash idle cycles to transfer a linear data block from flash to the streaming FIFO. Decrements automatically (1 at a time) as the stream progresses, and halts on reaching 0. Write 0 to halt an in-progress stream, and discard any in-flight read, so that a new stream can immediately be started (after draining the FIFO and reinitialising STREAM_ADDR)"]
-    pub const fn stream_ctr(&self) -> u32 {
-        let val = (self.0 >> 0usize) & 0x003f_ffff;
-        val as u32
-    }
-    #[doc = "Write a nonzero value to start a streaming read. This will then progress in the background, using flash idle cycles to transfer a linear data block from flash to the streaming FIFO. Decrements automatically (1 at a time) as the stream progresses, and halts on reaching 0. Write 0 to halt an in-progress stream, and discard any in-flight read, so that a new stream can immediately be started (after draining the FIFO and reinitialising STREAM_ADDR)"]
-    pub fn set_stream_ctr(&mut self, val: u32) {
-        self.0 = (self.0 & !(0x003f_ffff << 0usize)) | (((val as u32) & 0x003f_ffff) << 0usize);
-    }
-}
-impl Default for StreamCtr {
-    fn default() -> StreamCtr {
-        StreamCtr(0)
     }
 }
 #[doc = "Cache control"]
@@ -114,23 +76,61 @@ impl Default for Ctrl {
         Ctrl(0)
     }
 }
-#[doc = "FIFO stream address"]
+#[doc = "FIFO stream control"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct StreamAddr(pub u32);
-impl StreamAddr {
-    #[doc = "The address of the next word to be streamed from flash to the streaming FIFO. Increments automatically after each flash access. Write the initial access address here before starting a streaming read."]
-    pub const fn stream_addr(&self) -> u32 {
-        let val = (self.0 >> 2usize) & 0x3fff_ffff;
+pub struct StreamCtr(pub u32);
+impl StreamCtr {
+    #[doc = "Write a nonzero value to start a streaming read. This will then progress in the background, using flash idle cycles to transfer a linear data block from flash to the streaming FIFO. Decrements automatically (1 at a time) as the stream progresses, and halts on reaching 0. Write 0 to halt an in-progress stream, and discard any in-flight read, so that a new stream can immediately be started (after draining the FIFO and reinitialising STREAM_ADDR)"]
+    pub const fn stream_ctr(&self) -> u32 {
+        let val = (self.0 >> 0usize) & 0x003f_ffff;
         val as u32
     }
-    #[doc = "The address of the next word to be streamed from flash to the streaming FIFO. Increments automatically after each flash access. Write the initial access address here before starting a streaming read."]
-    pub fn set_stream_addr(&mut self, val: u32) {
-        self.0 = (self.0 & !(0x3fff_ffff << 2usize)) | (((val as u32) & 0x3fff_ffff) << 2usize);
+    #[doc = "Write a nonzero value to start a streaming read. This will then progress in the background, using flash idle cycles to transfer a linear data block from flash to the streaming FIFO. Decrements automatically (1 at a time) as the stream progresses, and halts on reaching 0. Write 0 to halt an in-progress stream, and discard any in-flight read, so that a new stream can immediately be started (after draining the FIFO and reinitialising STREAM_ADDR)"]
+    pub fn set_stream_ctr(&mut self, val: u32) {
+        self.0 = (self.0 & !(0x003f_ffff << 0usize)) | (((val as u32) & 0x003f_ffff) << 0usize);
     }
 }
-impl Default for StreamAddr {
-    fn default() -> StreamAddr {
-        StreamAddr(0)
+impl Default for StreamCtr {
+    fn default() -> StreamCtr {
+        StreamCtr(0)
+    }
+}
+#[doc = "Cache Status"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Stat(pub u32);
+impl Stat {
+    #[doc = "Reads as 0 while a cache flush is in progress, and 1 otherwise. The cache is flushed whenever the XIP block is reset, and also when requested via the FLUSH register."]
+    pub const fn flush_ready(&self) -> bool {
+        let val = (self.0 >> 0usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Reads as 0 while a cache flush is in progress, and 1 otherwise. The cache is flushed whenever the XIP block is reset, and also when requested via the FLUSH register."]
+    pub fn set_flush_ready(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+    }
+    #[doc = "When 1, indicates the XIP streaming FIFO is completely empty."]
+    pub const fn fifo_empty(&self) -> bool {
+        let val = (self.0 >> 1usize) & 0x01;
+        val != 0
+    }
+    #[doc = "When 1, indicates the XIP streaming FIFO is completely empty."]
+    pub fn set_fifo_empty(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
+    }
+    #[doc = "When 1, indicates the XIP streaming FIFO is completely full. The streaming FIFO is 2 entries deep, so the full and empty flag allow its level to be ascertained."]
+    pub const fn fifo_full(&self) -> bool {
+        let val = (self.0 >> 2usize) & 0x01;
+        val != 0
+    }
+    #[doc = "When 1, indicates the XIP streaming FIFO is completely full. The streaming FIFO is 2 entries deep, so the full and empty flag allow its level to be ascertained."]
+    pub fn set_fifo_full(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
+    }
+}
+impl Default for Stat {
+    fn default() -> Stat {
+        Stat(0)
     }
 }
