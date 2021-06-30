@@ -1,16 +1,5 @@
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-pub struct TransType(pub u8);
-impl TransType {
-    #[doc = "Command and address both in standard SPI frame format"]
-    pub const _1C1A: Self = Self(0);
-    #[doc = "Command in standard SPI format, address in format specified by FRF"]
-    pub const _1C2A: Self = Self(0x01);
-    #[doc = "Command and address both in format specified by FRF (e.g. Dual-SPI)"]
-    pub const _2C2A: Self = Self(0x02);
-}
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub struct Tmod(pub u8);
 impl Tmod {
     #[doc = "Both transmit and receive"]
@@ -45,4 +34,15 @@ impl InstL {
     pub const _8B: Self = Self(0x02);
     #[doc = "16-bit instruction"]
     pub const _16B: Self = Self(0x03);
+}
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+pub struct TransType(pub u8);
+impl TransType {
+    #[doc = "Command and address both in standard SPI frame format"]
+    pub const _1C1A: Self = Self(0);
+    #[doc = "Command in standard SPI format, address in format specified by FRF"]
+    pub const _1C2A: Self = Self(0x01);
+    #[doc = "Command and address both in format specified by FRF (e.g. Dual-SPI)"]
+    pub const _2C2A: Self = Self(0x02);
 }

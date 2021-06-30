@@ -1,4 +1,44 @@
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Gpio(pub *mut u8);
+unsafe impl Send for Gpio {}
+unsafe impl Sync for Gpio {}
+impl Gpio {
+    #[doc = "QSPI output value"]
+    pub fn value(self) -> crate::common::Reg<u32, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.0.add(0usize)) }
+    }
+    #[doc = "QSPI output value set"]
+    pub fn value_set(self) -> crate::common::Reg<u32, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.0.add(4usize)) }
+    }
+    #[doc = "QSPI output value clear"]
+    pub fn value_clr(self) -> crate::common::Reg<u32, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.0.add(8usize)) }
+    }
+    #[doc = "QSPI output value XOR"]
+    pub fn value_xor(self) -> crate::common::Reg<u32, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.0.add(12usize)) }
+    }
+}
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Fifo(pub *mut u8);
+unsafe impl Send for Fifo {}
+unsafe impl Sync for Fifo {}
+impl Fifo {
+    #[doc = "Status register for inter-core FIFOs (mailboxes). There is one FIFO in the core 0 -> core 1 direction, and one core 1 -> core 0. Both are 32 bits wide and 8 words deep. Core 0 can see the read side of the 1->0 FIFO (RX), and the write side of 0->1 FIFO (TX). Core 1 can see the read side of the 0->1 FIFO (RX), and the write side of 1->0 FIFO (TX). The SIO IRQ for each core is the logical OR of the VLD, WOF and ROE fields of its FIFO_ST register."]
+    pub fn st(self) -> crate::common::Reg<regs::FifoSt, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.0.add(0usize)) }
+    }
+    #[doc = "Write access to this core's TX FIFO"]
+    pub fn wr(self) -> crate::common::Reg<u32, crate::common::W> {
+        unsafe { crate::common::Reg::from_ptr(self.0.add(4usize)) }
+    }
+    #[doc = "Read access to this core's RX FIFO"]
+    pub fn rd(self) -> crate::common::Reg<u32, crate::common::R> {
+        unsafe { crate::common::Reg::from_ptr(self.0.add(8usize)) }
+    }
+}
+#[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Interp(pub *mut u8);
 unsafe impl Send for Interp {}
 unsafe impl Sync for Interp {}
@@ -48,19 +88,19 @@ impl Interp {
         unsafe { crate::common::Reg::from_ptr(self.0.add(40usize)) }
     }
     #[doc = "Control register for lane 0"]
-    pub fn ctrl_lane0(self) -> crate::common::Reg<regs::Interp1CtrlLane0, crate::common::RW> {
+    pub fn ctrl_lane0(self) -> crate::common::Reg<regs::Interp0CtrlLane0, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(44usize)) }
     }
     #[doc = "Control register for lane 1"]
-    pub fn ctrl_lane1(self) -> crate::common::Reg<regs::Interp1CtrlLane1, crate::common::RW> {
+    pub fn ctrl_lane1(self) -> crate::common::Reg<regs::Interp0CtrlLane1, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(48usize)) }
     }
     #[doc = "Values written here are atomically added to ACCUM0 Reading yields lane 0's raw shift and mask value (BASE0 not added)."]
-    pub fn accum0_add(self) -> crate::common::Reg<regs::Interp1Accum0Add, crate::common::RW> {
+    pub fn accum0_add(self) -> crate::common::Reg<regs::Interp0Accum0Add, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(52usize)) }
     }
     #[doc = "Values written here are atomically added to ACCUM1 Reading yields lane 1's raw shift and mask value (BASE1 not added)."]
-    pub fn accum1_add(self) -> crate::common::Reg<regs::Interp1Accum1Add, crate::common::RW> {
+    pub fn accum1_add(self) -> crate::common::Reg<regs::Interp0Accum1Add, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(56usize)) }
     }
     #[doc = "On write, the lower 16 bits go to BASE0, upper bits to BASE1 simultaneously. Each half is sign-extended to 32 bits if that lane's SIGNED flag is set."]
@@ -68,26 +108,8 @@ impl Interp {
         unsafe { crate::common::Reg::from_ptr(self.0.add(60usize)) }
     }
 }
-#[derive(Copy, Clone)]
-pub struct Fifo(pub *mut u8);
-unsafe impl Send for Fifo {}
-unsafe impl Sync for Fifo {}
-impl Fifo {
-    #[doc = "Status register for inter-core FIFOs (mailboxes). There is one FIFO in the core 0 -> core 1 direction, and one core 1 -> core 0. Both are 32 bits wide and 8 words deep. Core 0 can see the read side of the 1->0 FIFO (RX), and the write side of 0->1 FIFO (TX). Core 1 can see the read side of the 0->1 FIFO (RX), and the write side of 1->0 FIFO (TX). The SIO IRQ for each core is the logical OR of the VLD, WOF and ROE fields of its FIFO_ST register."]
-    pub fn st(self) -> crate::common::Reg<regs::FifoSt, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(0usize)) }
-    }
-    #[doc = "Write access to this core's TX FIFO"]
-    pub fn wr(self) -> crate::common::Reg<u32, crate::common::W> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(4usize)) }
-    }
-    #[doc = "Read access to this core's RX FIFO"]
-    pub fn rd(self) -> crate::common::Reg<u32, crate::common::R> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(8usize)) }
-    }
-}
 #[doc = "Single-cycle IO block Provides core-local and inter-core hardware for the two processors, with single-cycle access."]
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Sio(pub *mut u8);
 unsafe impl Send for Sio {}
 unsafe impl Sync for Sio {}
@@ -120,16 +142,16 @@ impl Sio {
         assert!(n < 2usize);
         unsafe { crate::common::Reg::from_ptr(self.0.add(4usize + n * 4usize)) }
     }
-    pub fn gpio_out(self, n: usize) -> Gpio {
-        assert!(n < 2usize);
-        unsafe { Gpio(self.0.add(16usize + n * 32usize)) }
-    }
     pub fn gpio_oe(self, n: usize) -> Gpio {
         assert!(n < 2usize);
         unsafe { Gpio(self.0.add(32usize + n * 32usize)) }
     }
+    pub fn gpio_out(self, n: usize) -> Gpio {
+        assert!(n < 2usize);
+        unsafe { Gpio(self.0.add(16usize + n * 32usize)) }
+    }
 }
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Div(pub *mut u8);
 unsafe impl Send for Div {}
 unsafe impl Sync for Div {}
@@ -161,28 +183,6 @@ impl Div {
     #[doc = "Control and status register for divider."]
     pub fn csr(self) -> crate::common::Reg<regs::DivCsr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(24usize)) }
-    }
-}
-#[derive(Copy, Clone)]
-pub struct Gpio(pub *mut u8);
-unsafe impl Send for Gpio {}
-unsafe impl Sync for Gpio {}
-impl Gpio {
-    #[doc = "QSPI output enable"]
-    pub fn value(self) -> crate::common::Reg<u32, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(0usize)) }
-    }
-    #[doc = "QSPI output enable set"]
-    pub fn value_set(self) -> crate::common::Reg<u32, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(4usize)) }
-    }
-    #[doc = "QSPI output enable clear"]
-    pub fn value_clr(self) -> crate::common::Reg<u32, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(8usize)) }
-    }
-    #[doc = "QSPI output enable XOR"]
-    pub fn value_xor(self) -> crate::common::Reg<u32, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(12usize)) }
     }
 }
 pub mod regs;

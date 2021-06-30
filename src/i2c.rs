@@ -1,5 +1,5 @@
 #[doc = "DW_apb_i2c address block"]
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Eq, PartialEq)]
 pub struct I2c(pub *mut u8);
 unsafe impl Send for I2c {}
 unsafe impl Sync for I2c {}

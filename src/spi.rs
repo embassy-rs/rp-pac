@@ -1,4 +1,4 @@
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Spi(pub *mut u8);
 unsafe impl Send for Spi {}
 unsafe impl Sync for Spi {}

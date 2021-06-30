@@ -1,5 +1,5 @@
 #[doc = "Register block for various chip control signals"]
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Syscfg(pub *mut u8);
 unsafe impl Send for Syscfg {}
 unsafe impl Sync for Syscfg {}

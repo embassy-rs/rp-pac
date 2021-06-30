@@ -1,4 +1,62 @@
-#[doc = "DMA Channel 11 Control and Status"]
+#[doc = "Read: get channel DREQ counter (i.e. how many accesses the DMA expects it can perform on the peripheral without overflow/underflow. Write any value: clears the counter, and cause channel to re-initiate DREQ handshake."]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct DbgCtdreq(pub u32);
+impl DbgCtdreq {
+    pub const fn ch11_dbg_ctdreq(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0x3f;
+        val as u8
+    }
+    pub fn set_ch11_dbg_ctdreq(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x3f << 0usize)) | (((val as u32) & 0x3f) << 0usize);
+    }
+}
+impl Default for DbgCtdreq {
+    fn default() -> DbgCtdreq {
+        DbgCtdreq(0)
+    }
+}
+#[doc = "Abort an in-progress transfer sequence on one or more channels"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct ChanAbort(pub u32);
+impl ChanAbort {
+    #[doc = "Each bit corresponds to a channel. Writing a 1 aborts whatever transfer sequence is in progress on that channel. The bit will remain high until any in-flight transfers have been flushed through the address and data FIFOs. After writing, this register must be polled until it returns all-zero. Until this point, it is unsafe to restart the channel."]
+    pub const fn chan_abort(&self) -> u16 {
+        let val = (self.0 >> 0usize) & 0xffff;
+        val as u16
+    }
+    #[doc = "Each bit corresponds to a channel. Writing a 1 aborts whatever transfer sequence is in progress on that channel. The bit will remain high until any in-flight transfers have been flushed through the address and data FIFOs. After writing, this register must be polled until it returns all-zero. Until this point, it is unsafe to restart the channel."]
+    pub fn set_chan_abort(&mut self, val: u16) {
+        self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
+    }
+}
+impl Default for ChanAbort {
+    fn default() -> ChanAbort {
+        ChanAbort(0)
+    }
+}
+#[doc = "Interrupt Status for IRQ 0"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Ints0(pub u32);
+impl Ints0 {
+    #[doc = "Indicates active channel interrupt requests which are currently causing IRQ 0 to be asserted. Channel interrupts can be cleared by writing a bit mask here."]
+    pub const fn ints0(&self) -> u16 {
+        let val = (self.0 >> 0usize) & 0xffff;
+        val as u16
+    }
+    #[doc = "Indicates active channel interrupt requests which are currently causing IRQ 0 to be asserted. Channel interrupts can be cleared by writing a bit mask here."]
+    pub fn set_ints0(&mut self, val: u16) {
+        self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
+    }
+}
+impl Default for Ints0 {
+    fn default() -> Ints0 {
+        Ints0(0)
+    }
+}
+#[doc = "DMA Channel 2 Control and Status"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct CtrlTrig(pub u32);
@@ -66,12 +124,12 @@ impl CtrlTrig {
     pub fn set_ring_sel(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
-    #[doc = "When this channel completes, it will trigger the channel indicated by CHAIN_TO. Disable by setting CHAIN_TO = _(this channel)_. Reset value is equal to channel number (11)."]
+    #[doc = "When this channel completes, it will trigger the channel indicated by CHAIN_TO. Disable by setting CHAIN_TO = _(this channel)_. Reset value is equal to channel number (2)."]
     pub const fn chain_to(&self) -> u8 {
         let val = (self.0 >> 11usize) & 0x0f;
         val as u8
     }
-    #[doc = "When this channel completes, it will trigger the channel indicated by CHAIN_TO. Disable by setting CHAIN_TO = _(this channel)_. Reset value is equal to channel number (11)."]
+    #[doc = "When this channel completes, it will trigger the channel indicated by CHAIN_TO. Disable by setting CHAIN_TO = _(this channel)_. Reset value is equal to channel number (2)."]
     pub fn set_chain_to(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 11usize)) | (((val as u32) & 0x0f) << 11usize);
     }
@@ -173,22 +231,24 @@ impl Default for Inte0 {
         Inte0(0)
     }
 }
-#[doc = "Read: get channel DREQ counter (i.e. how many accesses the DMA expects it can perform on the peripheral without overflow/underflow. Write any value: clears the counter, and cause channel to re-initiate DREQ handshake."]
+#[doc = "Force Interrupts for IRQ 1"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct DbgCtdreq(pub u32);
-impl DbgCtdreq {
-    pub const fn ch10_dbg_ctdreq(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0x3f;
-        val as u8
+pub struct Intf1(pub u32);
+impl Intf1 {
+    #[doc = "Write 1s to force the corresponding bits in INTE0. The interrupt remains asserted until INTF0 is cleared."]
+    pub const fn intf1(&self) -> u16 {
+        let val = (self.0 >> 0usize) & 0xffff;
+        val as u16
     }
-    pub fn set_ch10_dbg_ctdreq(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x3f << 0usize)) | (((val as u32) & 0x3f) << 0usize);
+    #[doc = "Write 1s to force the corresponding bits in INTE0. The interrupt remains asserted until INTF0 is cleared."]
+    pub fn set_intf1(&mut self, val: u16) {
+        self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
     }
 }
-impl Default for DbgCtdreq {
-    fn default() -> DbgCtdreq {
-        DbgCtdreq(0)
+impl Default for Intf1 {
+    fn default() -> Intf1 {
+        Intf1(0)
     }
 }
 #[doc = "Pacing (X/Y) Fractional Timer The pacing timer produces TREQ assertions at a rate set by ((X/Y) * sys_clk). This equation is evaluated every sys_clk cycles and therefore can only generate TREQs at a rate of 1 per sys_clk (i.e. permanent TREQ) or less."]
@@ -220,26 +280,6 @@ impl Default for Timer {
         Timer(0)
     }
 }
-#[doc = "Abort an in-progress transfer sequence on one or more channels"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct ChanAbort(pub u32);
-impl ChanAbort {
-    #[doc = "Each bit corresponds to a channel. Writing a 1 aborts whatever transfer sequence is in progress on that channel. The bit will remain high until any in-flight transfers have been flushed through the address and data FIFOs. After writing, this register must be polled until it returns all-zero. Until this point, it is unsafe to restart the channel."]
-    pub const fn chan_abort(&self) -> u16 {
-        let val = (self.0 >> 0usize) & 0xffff;
-        val as u16
-    }
-    #[doc = "Each bit corresponds to a channel. Writing a 1 aborts whatever transfer sequence is in progress on that channel. The bit will remain high until any in-flight transfers have been flushed through the address and data FIFOs. After writing, this register must be polled until it returns all-zero. Until this point, it is unsafe to restart the channel."]
-    pub fn set_chan_abort(&mut self, val: u16) {
-        self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
-    }
-}
-impl Default for ChanAbort {
-    fn default() -> ChanAbort {
-        ChanAbort(0)
-    }
-}
 #[doc = "Force Interrupts"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -260,6 +300,44 @@ impl Default for Intf0 {
         Intf0(0)
     }
 }
+#[doc = "Debug RAF, WAF, TDF levels"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct FifoLevels(pub u32);
+impl FifoLevels {
+    #[doc = "Current Transfer-Data-FIFO fill level"]
+    pub const fn tdf_lvl(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0xff;
+        val as u8
+    }
+    #[doc = "Current Transfer-Data-FIFO fill level"]
+    pub fn set_tdf_lvl(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
+    }
+    #[doc = "Current Write-Address-FIFO fill level"]
+    pub const fn waf_lvl(&self) -> u8 {
+        let val = (self.0 >> 8usize) & 0xff;
+        val as u8
+    }
+    #[doc = "Current Write-Address-FIFO fill level"]
+    pub fn set_waf_lvl(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 8usize)) | (((val as u32) & 0xff) << 8usize);
+    }
+    #[doc = "Current Read-Address-FIFO fill level"]
+    pub const fn raf_lvl(&self) -> u8 {
+        let val = (self.0 >> 16usize) & 0xff;
+        val as u8
+    }
+    #[doc = "Current Read-Address-FIFO fill level"]
+    pub fn set_raf_lvl(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 16usize)) | (((val as u32) & 0xff) << 16usize);
+    }
+}
+impl Default for FifoLevels {
+    fn default() -> FifoLevels {
+        FifoLevels(0)
+    }
+}
 #[doc = "The number of channels this DMA instance is equipped with. This DMA supports up to 16 hardware channels, but can be configured with as few as one, to minimise silicon area."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -276,66 +354,6 @@ impl NChannels {
 impl Default for NChannels {
     fn default() -> NChannels {
         NChannels(0)
-    }
-}
-#[doc = "Interrupt Status (masked) for IRQ 1"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Ints1(pub u32);
-impl Ints1 {
-    #[doc = "Indicates active channel interrupt requests which are currently causing IRQ 1 to be asserted. Channel interrupts can be cleared by writing a bit mask here."]
-    pub const fn ints1(&self) -> u16 {
-        let val = (self.0 >> 0usize) & 0xffff;
-        val as u16
-    }
-    #[doc = "Indicates active channel interrupt requests which are currently causing IRQ 1 to be asserted. Channel interrupts can be cleared by writing a bit mask here."]
-    pub fn set_ints1(&mut self, val: u16) {
-        self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
-    }
-}
-impl Default for Ints1 {
-    fn default() -> Ints1 {
-        Ints1(0)
-    }
-}
-#[doc = "Interrupt Status (raw)"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Intr(pub u32);
-impl Intr {
-    #[doc = "Raw interrupt status for DMA Channels 0..15. Bit n corresponds to channel n. Ignores any masking or forcing. Channel interrupts can be cleared by writing a bit mask to INTR, INTS0 or INTS1. Channel interrupts can be routed to either of two system-level IRQs based on INTE0 and INTE1. This can be used vector different channel interrupts to different ISRs: this might be done to allow NVIC IRQ preemption for more time-critical channels, or to spread IRQ load across different cores. It is also valid to ignore this behaviour and just use INTE0/INTS0/IRQ 0."]
-    pub const fn intr(&self) -> u16 {
-        let val = (self.0 >> 0usize) & 0xffff;
-        val as u16
-    }
-    #[doc = "Raw interrupt status for DMA Channels 0..15. Bit n corresponds to channel n. Ignores any masking or forcing. Channel interrupts can be cleared by writing a bit mask to INTR, INTS0 or INTS1. Channel interrupts can be routed to either of two system-level IRQs based on INTE0 and INTE1. This can be used vector different channel interrupts to different ISRs: this might be done to allow NVIC IRQ preemption for more time-critical channels, or to spread IRQ load across different cores. It is also valid to ignore this behaviour and just use INTE0/INTS0/IRQ 0."]
-    pub fn set_intr(&mut self, val: u16) {
-        self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
-    }
-}
-impl Default for Intr {
-    fn default() -> Intr {
-        Intr(0)
-    }
-}
-#[doc = "Trigger one or more channels simultaneously"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct MultiChanTrigger(pub u32);
-impl MultiChanTrigger {
-    #[doc = "Each bit in this register corresponds to a DMA channel. Writing a 1 to the relevant bit is the same as writing to that channel's trigger register; the channel will start if it is currently enabled and not already busy."]
-    pub const fn multi_chan_trigger(&self) -> u16 {
-        let val = (self.0 >> 0usize) & 0xffff;
-        val as u16
-    }
-    #[doc = "Each bit in this register corresponds to a DMA channel. Writing a 1 to the relevant bit is the same as writing to that channel's trigger register; the channel will start if it is currently enabled and not already busy."]
-    pub fn set_multi_chan_trigger(&mut self, val: u16) {
-        self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
-    }
-}
-impl Default for MultiChanTrigger {
-    fn default() -> MultiChanTrigger {
-        MultiChanTrigger(0)
     }
 }
 #[doc = "Sniffer Control"]
@@ -401,62 +419,44 @@ impl Default for SniffCtrl {
         SniffCtrl(0)
     }
 }
-#[doc = "Force Interrupts for IRQ 1"]
+#[doc = "Interrupt Status (masked) for IRQ 1"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Intf1(pub u32);
-impl Intf1 {
-    #[doc = "Write 1s to force the corresponding bits in INTE0. The interrupt remains asserted until INTF0 is cleared."]
-    pub const fn intf1(&self) -> u16 {
+pub struct Ints1(pub u32);
+impl Ints1 {
+    #[doc = "Indicates active channel interrupt requests which are currently causing IRQ 1 to be asserted. Channel interrupts can be cleared by writing a bit mask here."]
+    pub const fn ints1(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0xffff;
         val as u16
     }
-    #[doc = "Write 1s to force the corresponding bits in INTE0. The interrupt remains asserted until INTF0 is cleared."]
-    pub fn set_intf1(&mut self, val: u16) {
+    #[doc = "Indicates active channel interrupt requests which are currently causing IRQ 1 to be asserted. Channel interrupts can be cleared by writing a bit mask here."]
+    pub fn set_ints1(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
     }
 }
-impl Default for Intf1 {
-    fn default() -> Intf1 {
-        Intf1(0)
+impl Default for Ints1 {
+    fn default() -> Ints1 {
+        Ints1(0)
     }
 }
-#[doc = "Debug RAF, WAF, TDF levels"]
+#[doc = "Interrupt Status (raw)"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct FifoLevels(pub u32);
-impl FifoLevels {
-    #[doc = "Current Transfer-Data-FIFO fill level"]
-    pub const fn tdf_lvl(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0xff;
-        val as u8
+pub struct Intr(pub u32);
+impl Intr {
+    #[doc = "Raw interrupt status for DMA Channels 0..15. Bit n corresponds to channel n. Ignores any masking or forcing. Channel interrupts can be cleared by writing a bit mask to INTR, INTS0 or INTS1. Channel interrupts can be routed to either of two system-level IRQs based on INTE0 and INTE1. This can be used vector different channel interrupts to different ISRs: this might be done to allow NVIC IRQ preemption for more time-critical channels, or to spread IRQ load across different cores. It is also valid to ignore this behaviour and just use INTE0/INTS0/IRQ 0."]
+    pub const fn intr(&self) -> u16 {
+        let val = (self.0 >> 0usize) & 0xffff;
+        val as u16
     }
-    #[doc = "Current Transfer-Data-FIFO fill level"]
-    pub fn set_tdf_lvl(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
-    }
-    #[doc = "Current Write-Address-FIFO fill level"]
-    pub const fn waf_lvl(&self) -> u8 {
-        let val = (self.0 >> 8usize) & 0xff;
-        val as u8
-    }
-    #[doc = "Current Write-Address-FIFO fill level"]
-    pub fn set_waf_lvl(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 8usize)) | (((val as u32) & 0xff) << 8usize);
-    }
-    #[doc = "Current Read-Address-FIFO fill level"]
-    pub const fn raf_lvl(&self) -> u8 {
-        let val = (self.0 >> 16usize) & 0xff;
-        val as u8
-    }
-    #[doc = "Current Read-Address-FIFO fill level"]
-    pub fn set_raf_lvl(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 16usize)) | (((val as u32) & 0xff) << 16usize);
+    #[doc = "Raw interrupt status for DMA Channels 0..15. Bit n corresponds to channel n. Ignores any masking or forcing. Channel interrupts can be cleared by writing a bit mask to INTR, INTS0 or INTS1. Channel interrupts can be routed to either of two system-level IRQs based on INTE0 and INTE1. This can be used vector different channel interrupts to different ISRs: this might be done to allow NVIC IRQ preemption for more time-critical channels, or to spread IRQ load across different cores. It is also valid to ignore this behaviour and just use INTE0/INTS0/IRQ 0."]
+    pub fn set_intr(&mut self, val: u16) {
+        self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
     }
 }
-impl Default for FifoLevels {
-    fn default() -> FifoLevels {
-        FifoLevels(0)
+impl Default for Intr {
+    fn default() -> Intr {
+        Intr(0)
     }
 }
 #[doc = "Interrupt Enables for IRQ 1"]
@@ -479,23 +479,23 @@ impl Default for Inte1 {
         Inte1(0)
     }
 }
-#[doc = "Interrupt Status for IRQ 0"]
+#[doc = "Trigger one or more channels simultaneously"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Ints0(pub u32);
-impl Ints0 {
-    #[doc = "Indicates active channel interrupt requests which are currently causing IRQ 0 to be asserted. Channel interrupts can be cleared by writing a bit mask here."]
-    pub const fn ints0(&self) -> u16 {
+pub struct MultiChanTrigger(pub u32);
+impl MultiChanTrigger {
+    #[doc = "Each bit in this register corresponds to a DMA channel. Writing a 1 to the relevant bit is the same as writing to that channel's trigger register; the channel will start if it is currently enabled and not already busy."]
+    pub const fn multi_chan_trigger(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0xffff;
         val as u16
     }
-    #[doc = "Indicates active channel interrupt requests which are currently causing IRQ 0 to be asserted. Channel interrupts can be cleared by writing a bit mask here."]
-    pub fn set_ints0(&mut self, val: u16) {
+    #[doc = "Each bit in this register corresponds to a DMA channel. Writing a 1 to the relevant bit is the same as writing to that channel's trigger register; the channel will start if it is currently enabled and not already busy."]
+    pub fn set_multi_chan_trigger(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
     }
 }
-impl Default for Ints0 {
-    fn default() -> Ints0 {
-        Ints0(0)
+impl Default for MultiChanTrigger {
+    fn default() -> MultiChanTrigger {
+        MultiChanTrigger(0)
     }
 }

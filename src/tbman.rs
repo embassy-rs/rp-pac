@@ -1,5 +1,5 @@
 #[doc = "Testbench manager. Allows the programmer to know what platform their software is running on."]
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Tbman(pub *mut u8);
 unsafe impl Send for Tbman {}
 unsafe impl Sync for Tbman {}

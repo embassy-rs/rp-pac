@@ -1,5 +1,5 @@
 #[doc = "control and status for on-chip voltage regulator and chip level reset subsystem"]
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Eq, PartialEq)]
 pub struct VregAndChipReset(pub *mut u8);
 unsafe impl Send for VregAndChipReset {}
 unsafe impl Sync for VregAndChipReset {}

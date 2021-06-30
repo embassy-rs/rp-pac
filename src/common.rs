@@ -1,9 +1,9 @@
 use core::marker::PhantomData;
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, PartialEq, Eq)]
 pub struct RW;
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, PartialEq, Eq)]
 pub struct R;
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, PartialEq, Eq)]
 pub struct W;
 mod sealed;
 pub trait Access: sealed::Access + Copy {}
@@ -16,7 +16,7 @@ impl Read for R {}
 pub trait Write: Access {}
 impl Write for RW {}
 impl Write for W {}
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, PartialEq, Eq)]
 pub struct Reg<T: Copy, A: Access> {
     ptr: *mut u8,
     phantom: PhantomData<*mut (T, A)>,

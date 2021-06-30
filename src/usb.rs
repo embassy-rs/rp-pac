@@ -1,5 +1,5 @@
 #[doc = "USB FS/LS controller device registers"]
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Usb(pub *mut u8);
 unsafe impl Send for Usb {}
 unsafe impl Sync for Usb {}

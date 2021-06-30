@@ -1,4 +1,4 @@
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Clocks(pub *mut u8);
 unsafe impl Send for Clocks {}
 unsafe impl Sync for Clocks {}

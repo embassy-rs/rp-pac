@@ -1,4 +1,4 @@
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Watchdog(pub *mut u8);
 unsafe impl Send for Watchdog {}
 unsafe impl Sync for Watchdog {}

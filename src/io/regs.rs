@@ -1,8 +1,67 @@
-#[doc = "Interrupt status after masking & forcing for dormant_wake"]
+#[doc = "GPIO control including function select and overrides."]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct GpioCtrl(pub u32);
+impl GpioCtrl {
+    #[doc = "0-31 -> selects pin function according to the gpio table 31 == NULL"]
+    pub const fn funcsel(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0x1f;
+        val as u8
+    }
+    #[doc = "0-31 -> selects pin function according to the gpio table 31 == NULL"]
+    pub fn set_funcsel(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x1f << 0usize)) | (((val as u32) & 0x1f) << 0usize);
+    }
+    pub const fn outover(&self) -> super::vals::Outover {
+        let val = (self.0 >> 8usize) & 0x03;
+        super::vals::Outover(val as u8)
+    }
+    pub fn set_outover(&mut self, val: super::vals::Outover) {
+        self.0 = (self.0 & !(0x03 << 8usize)) | (((val.0 as u32) & 0x03) << 8usize);
+    }
+    pub const fn oeover(&self) -> super::vals::Oeover {
+        let val = (self.0 >> 12usize) & 0x03;
+        super::vals::Oeover(val as u8)
+    }
+    pub fn set_oeover(&mut self, val: super::vals::Oeover) {
+        self.0 = (self.0 & !(0x03 << 12usize)) | (((val.0 as u32) & 0x03) << 12usize);
+    }
+    pub const fn inover(&self) -> super::vals::Inover {
+        let val = (self.0 >> 16usize) & 0x03;
+        super::vals::Inover(val as u8)
+    }
+    pub fn set_inover(&mut self, val: super::vals::Inover) {
+        self.0 = (self.0 & !(0x03 << 16usize)) | (((val.0 as u32) & 0x03) << 16usize);
+    }
+    pub const fn irqover(&self) -> super::vals::Irqover {
+        let val = (self.0 >> 28usize) & 0x03;
+        super::vals::Irqover(val as u8)
+    }
+    pub fn set_irqover(&mut self, val: super::vals::Irqover) {
+        self.0 = (self.0 & !(0x03 << 28usize)) | (((val.0 as u32) & 0x03) << 28usize);
+    }
+}
+impl Default for GpioCtrl {
+    fn default() -> GpioCtrl {
+        GpioCtrl(0)
+    }
+}
+#[doc = "Interrupt Force for dormant_wake"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Int(pub u32);
 impl Int {
+    pub fn edge_high(&self, n: usize) -> bool {
+        assert!(n < 8usize);
+        let offs = 3usize + n * 4usize;
+        let val = (self.0 >> offs) & 0x01;
+        val != 0
+    }
+    pub fn set_edge_high(&mut self, n: usize, val: bool) {
+        assert!(n < 8usize);
+        let offs = 3usize + n * 4usize;
+        self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
+    }
     pub fn level_low(&self, n: usize) -> bool {
         assert!(n < 8usize);
         let offs = 0usize + n * 4usize;
@@ -34,17 +93,6 @@ impl Int {
     pub fn set_level_high(&mut self, n: usize, val: bool) {
         assert!(n < 8usize);
         let offs = 1usize + n * 4usize;
-        self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
-    }
-    pub fn edge_high(&self, n: usize) -> bool {
-        assert!(n < 8usize);
-        let offs = 3usize + n * 4usize;
-        let val = (self.0 >> offs) & 0x01;
-        val != 0
-    }
-    pub fn set_edge_high(&mut self, n: usize, val: bool) {
-        assert!(n < 8usize);
-        let offs = 3usize + n * 4usize;
         self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
     }
 }
@@ -134,53 +182,5 @@ impl GpioStatus {
 impl Default for GpioStatus {
     fn default() -> GpioStatus {
         GpioStatus(0)
-    }
-}
-#[doc = "GPIO control including function select and overrides."]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct GpioCtrl(pub u32);
-impl GpioCtrl {
-    #[doc = "0-31 -> selects pin function according to the gpio table 31 == NULL"]
-    pub const fn funcsel(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0x1f;
-        val as u8
-    }
-    #[doc = "0-31 -> selects pin function according to the gpio table 31 == NULL"]
-    pub fn set_funcsel(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x1f << 0usize)) | (((val as u32) & 0x1f) << 0usize);
-    }
-    pub const fn outover(&self) -> super::vals::Outover {
-        let val = (self.0 >> 8usize) & 0x03;
-        super::vals::Outover(val as u8)
-    }
-    pub fn set_outover(&mut self, val: super::vals::Outover) {
-        self.0 = (self.0 & !(0x03 << 8usize)) | (((val.0 as u32) & 0x03) << 8usize);
-    }
-    pub const fn oeover(&self) -> super::vals::Oeover {
-        let val = (self.0 >> 12usize) & 0x03;
-        super::vals::Oeover(val as u8)
-    }
-    pub fn set_oeover(&mut self, val: super::vals::Oeover) {
-        self.0 = (self.0 & !(0x03 << 12usize)) | (((val.0 as u32) & 0x03) << 12usize);
-    }
-    pub const fn inover(&self) -> super::vals::Inover {
-        let val = (self.0 >> 16usize) & 0x03;
-        super::vals::Inover(val as u8)
-    }
-    pub fn set_inover(&mut self, val: super::vals::Inover) {
-        self.0 = (self.0 & !(0x03 << 16usize)) | (((val.0 as u32) & 0x03) << 16usize);
-    }
-    pub const fn irqover(&self) -> super::vals::Irqover {
-        let val = (self.0 >> 28usize) & 0x03;
-        super::vals::Irqover(val as u8)
-    }
-    pub fn set_irqover(&mut self, val: super::vals::Irqover) {
-        self.0 = (self.0 & !(0x03 << 28usize)) | (((val.0 as u32) & 0x03) << 28usize);
-    }
-}
-impl Default for GpioCtrl {
-    fn default() -> GpioCtrl {
-        GpioCtrl(0)
     }
 }

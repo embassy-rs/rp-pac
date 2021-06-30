@@ -1,4 +1,4 @@
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Pll(pub *mut u8);
 unsafe impl Send for Pll {}
 unsafe impl Sync for Pll {}

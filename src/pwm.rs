@@ -1,5 +1,5 @@
 #[doc = "Simple PWM"]
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Pwm(pub *mut u8);
 unsafe impl Send for Pwm {}
 unsafe impl Sync for Pwm {}

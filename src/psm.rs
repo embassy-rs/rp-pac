@@ -1,4 +1,4 @@
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Psm(pub *mut u8);
 unsafe impl Send for Psm {}
 unsafe impl Sync for Psm {}

@@ -1,5 +1,5 @@
 #![no_std]
-#![doc = "Peripheral access API (generated using svd2rust v0.1.0 (8136b78 2021-06-23))"]
+#![doc = "Peripheral access API (generated using svd2rust v0.1.0 (c53af6b 2021-06-25))"]
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub enum Interrupt {
     #[doc = "0 - TIMER_IRQ_0"]

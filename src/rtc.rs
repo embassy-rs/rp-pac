@@ -1,5 +1,5 @@
 #[doc = "Register block to control RTC"]
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Rtc(pub *mut u8);
 unsafe impl Send for Rtc {}
 unsafe impl Sync for Rtc {}

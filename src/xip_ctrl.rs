@@ -1,5 +1,5 @@
 #[doc = "QSPI flash execute-in-place block"]
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Eq, PartialEq)]
 pub struct XipCtrl(pub *mut u8);
 unsafe impl Send for XipCtrl {}
 unsafe impl Sync for XipCtrl {}

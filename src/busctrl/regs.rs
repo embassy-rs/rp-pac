@@ -65,37 +65,17 @@ impl Default for BusPriorityAck {
         BusPriorityAck(0)
     }
 }
-#[doc = "Bus fabric performance event select for PERFCTR2"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Perfsel(pub u32);
-impl Perfsel {
-    #[doc = "Select a performance event for PERFCTR2"]
-    pub const fn perfsel(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0x1f;
-        val as u8
-    }
-    #[doc = "Select a performance event for PERFCTR2"]
-    pub fn set_perfsel(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x1f << 0usize)) | (((val as u32) & 0x1f) << 0usize);
-    }
-}
-impl Default for Perfsel {
-    fn default() -> Perfsel {
-        Perfsel(0)
-    }
-}
-#[doc = "Bus fabric performance counter 2"]
+#[doc = "Bus fabric performance counter 1"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Perfctr(pub u32);
 impl Perfctr {
-    #[doc = "Busfabric saturating performance counter 2 Count some event signal from the busfabric arbiters. Write any value to clear. Select an event to count using PERFSEL2"]
+    #[doc = "Busfabric saturating performance counter 1 Count some event signal from the busfabric arbiters. Write any value to clear. Select an event to count using PERFSEL1"]
     pub const fn perfctr(&self) -> u32 {
         let val = (self.0 >> 0usize) & 0x00ff_ffff;
         val as u32
     }
-    #[doc = "Busfabric saturating performance counter 2 Count some event signal from the busfabric arbiters. Write any value to clear. Select an event to count using PERFSEL2"]
+    #[doc = "Busfabric saturating performance counter 1 Count some event signal from the busfabric arbiters. Write any value to clear. Select an event to count using PERFSEL1"]
     pub fn set_perfctr(&mut self, val: u32) {
         self.0 = (self.0 & !(0x00ff_ffff << 0usize)) | (((val as u32) & 0x00ff_ffff) << 0usize);
     }
@@ -103,5 +83,25 @@ impl Perfctr {
 impl Default for Perfctr {
     fn default() -> Perfctr {
         Perfctr(0)
+    }
+}
+#[doc = "Bus fabric performance event select for PERFCTR1"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Perfsel(pub u32);
+impl Perfsel {
+    #[doc = "Select a performance event for PERFCTR1"]
+    pub const fn perfsel(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0x1f;
+        val as u8
+    }
+    #[doc = "Select a performance event for PERFCTR1"]
+    pub fn set_perfsel(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x1f << 0usize)) | (((val as u32) & 0x1f) << 0usize);
+    }
+}
+impl Default for Perfsel {
+    fn default() -> Perfsel {
+        Perfsel(0)
     }
 }

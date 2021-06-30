@@ -27,53 +27,6 @@ impl Default for Bod {
         Bod(0)
     }
 }
-#[doc = "Voltage regulator control and status"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Vreg(pub u32);
-impl Vreg {
-    #[doc = "enable 0=not enabled, 1=enabled"]
-    pub const fn en(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
-        val != 0
-    }
-    #[doc = "enable 0=not enabled, 1=enabled"]
-    pub fn set_en(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-    }
-    #[doc = "high impedance mode select 0=not in high impedance mode, 1=in high impedance mode"]
-    pub const fn hiz(&self) -> bool {
-        let val = (self.0 >> 1usize) & 0x01;
-        val != 0
-    }
-    #[doc = "high impedance mode select 0=not in high impedance mode, 1=in high impedance mode"]
-    pub fn set_hiz(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
-    }
-    #[doc = "output voltage select 0000 to 0101 - 0.80V 0110 - 0.85V 0111 - 0.90V 1000 - 0.95V 1001 - 1.00V 1010 - 1.05V 1011 - 1.10V (default) 1100 - 1.15V 1101 - 1.20V 1110 - 1.25V 1111 - 1.30V"]
-    pub const fn vsel(&self) -> u8 {
-        let val = (self.0 >> 4usize) & 0x0f;
-        val as u8
-    }
-    #[doc = "output voltage select 0000 to 0101 - 0.80V 0110 - 0.85V 0111 - 0.90V 1000 - 0.95V 1001 - 1.00V 1010 - 1.05V 1011 - 1.10V (default) 1100 - 1.15V 1101 - 1.20V 1110 - 1.25V 1111 - 1.30V"]
-    pub fn set_vsel(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x0f << 4usize)) | (((val as u32) & 0x0f) << 4usize);
-    }
-    #[doc = "regulation status 0=not in regulation, 1=in regulation"]
-    pub const fn rok(&self) -> bool {
-        let val = (self.0 >> 12usize) & 0x01;
-        val != 0
-    }
-    #[doc = "regulation status 0=not in regulation, 1=in regulation"]
-    pub fn set_rok(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
-    }
-}
-impl Default for Vreg {
-    fn default() -> Vreg {
-        Vreg(0)
-    }
-}
 #[doc = "Chip reset control and status"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -119,5 +72,52 @@ impl ChipReset {
 impl Default for ChipReset {
     fn default() -> ChipReset {
         ChipReset(0)
+    }
+}
+#[doc = "Voltage regulator control and status"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Vreg(pub u32);
+impl Vreg {
+    #[doc = "enable 0=not enabled, 1=enabled"]
+    pub const fn en(&self) -> bool {
+        let val = (self.0 >> 0usize) & 0x01;
+        val != 0
+    }
+    #[doc = "enable 0=not enabled, 1=enabled"]
+    pub fn set_en(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+    }
+    #[doc = "high impedance mode select 0=not in high impedance mode, 1=in high impedance mode"]
+    pub const fn hiz(&self) -> bool {
+        let val = (self.0 >> 1usize) & 0x01;
+        val != 0
+    }
+    #[doc = "high impedance mode select 0=not in high impedance mode, 1=in high impedance mode"]
+    pub fn set_hiz(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
+    }
+    #[doc = "output voltage select 0000 to 0101 - 0.80V 0110 - 0.85V 0111 - 0.90V 1000 - 0.95V 1001 - 1.00V 1010 - 1.05V 1011 - 1.10V (default) 1100 - 1.15V 1101 - 1.20V 1110 - 1.25V 1111 - 1.30V"]
+    pub const fn vsel(&self) -> u8 {
+        let val = (self.0 >> 4usize) & 0x0f;
+        val as u8
+    }
+    #[doc = "output voltage select 0000 to 0101 - 0.80V 0110 - 0.85V 0111 - 0.90V 1000 - 0.95V 1001 - 1.00V 1010 - 1.05V 1011 - 1.10V (default) 1100 - 1.15V 1101 - 1.20V 1110 - 1.25V 1111 - 1.30V"]
+    pub fn set_vsel(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x0f << 4usize)) | (((val as u32) & 0x0f) << 4usize);
+    }
+    #[doc = "regulation status 0=not in regulation, 1=in regulation"]
+    pub const fn rok(&self) -> bool {
+        let val = (self.0 >> 12usize) & 0x01;
+        val != 0
+    }
+    #[doc = "regulation status 0=not in regulation, 1=in regulation"]
+    pub fn set_rok(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
+    }
+}
+impl Default for Vreg {
+    fn default() -> Vreg {
+        Vreg(0)
     }
 }

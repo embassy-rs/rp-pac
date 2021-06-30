@@ -1,21 +1,3 @@
-#[doc = "Result of most recent ADC conversion"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Result(pub u32);
-impl Result {
-    pub const fn result(&self) -> u16 {
-        let val = (self.0 >> 0usize) & 0x0fff;
-        val as u16
-    }
-    pub fn set_result(&mut self, val: u16) {
-        self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
-    }
-}
-impl Default for Result {
-    fn default() -> Result {
-        Result(0)
-    }
-}
 #[doc = "ADC Control and Status"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -128,6 +110,35 @@ impl Default for Int {
         Int(0)
     }
 }
+#[doc = "Clock divider. If non-zero, CS_START_MANY will start conversions at regular intervals rather than back-to-back. The divider is reset when either of these fields are written. Total period is 1 + INT + FRAC / 256"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Div(pub u32);
+impl Div {
+    #[doc = "Fractional part of clock divisor. First-order delta-sigma."]
+    pub const fn frac(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0xff;
+        val as u8
+    }
+    #[doc = "Fractional part of clock divisor. First-order delta-sigma."]
+    pub fn set_frac(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
+    }
+    #[doc = "Integer part of clock divisor."]
+    pub const fn int(&self) -> u16 {
+        let val = (self.0 >> 8usize) & 0xffff;
+        val as u16
+    }
+    #[doc = "Integer part of clock divisor."]
+    pub fn set_int(&mut self, val: u16) {
+        self.0 = (self.0 & !(0xffff << 8usize)) | (((val as u32) & 0xffff) << 8usize);
+    }
+}
+impl Default for Div {
+    fn default() -> Div {
+        Div(0)
+    }
+}
 #[doc = "Conversion result FIFO"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -153,6 +164,24 @@ impl Fifo {
 impl Default for Fifo {
     fn default() -> Fifo {
         Fifo(0)
+    }
+}
+#[doc = "Result of most recent ADC conversion"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Result(pub u32);
+impl Result {
+    pub const fn result(&self) -> u16 {
+        let val = (self.0 >> 0usize) & 0x0fff;
+        val as u16
+    }
+    pub fn set_result(&mut self, val: u16) {
+        self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
+    }
+}
+impl Default for Result {
+    fn default() -> Result {
+        Result(0)
     }
 }
 #[doc = "FIFO control and status"]
@@ -250,34 +279,5 @@ impl Fcs {
 impl Default for Fcs {
     fn default() -> Fcs {
         Fcs(0)
-    }
-}
-#[doc = "Clock divider. If non-zero, CS_START_MANY will start conversions at regular intervals rather than back-to-back. The divider is reset when either of these fields are written. Total period is 1 + INT + FRAC / 256"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Div(pub u32);
-impl Div {
-    #[doc = "Fractional part of clock divisor. First-order delta-sigma."]
-    pub const fn frac(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0xff;
-        val as u8
-    }
-    #[doc = "Fractional part of clock divisor. First-order delta-sigma."]
-    pub fn set_frac(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
-    }
-    #[doc = "Integer part of clock divisor."]
-    pub const fn int(&self) -> u16 {
-        let val = (self.0 >> 8usize) & 0xffff;
-        val as u16
-    }
-    #[doc = "Integer part of clock divisor."]
-    pub fn set_int(&mut self, val: u16) {
-        self.0 = (self.0 & !(0xffff << 8usize)) | (((val as u32) & 0xffff) << 8usize);
-    }
-}
-impl Default for Div {
-    fn default() -> Div {
-        Div(0)
     }
 }

@@ -1,4 +1,4 @@
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Resets(pub *mut u8);
 unsafe impl Send for Resets {}
 unsafe impl Sync for Resets {}

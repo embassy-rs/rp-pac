@@ -1,5 +1,5 @@
 #[doc = "Controls the crystal oscillator"]
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Xosc(pub *mut u8);
 unsafe impl Send for Xosc {}
 unsafe impl Sync for Xosc {}

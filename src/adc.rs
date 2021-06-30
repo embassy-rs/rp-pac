@@ -1,5 +1,5 @@
 #[doc = "Control and data interface to SAR ADC"]
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Adc(pub *mut u8);
 unsafe impl Send for Adc {}
 unsafe impl Sync for Adc {}

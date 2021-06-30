@@ -15,6 +15,14 @@ impl TreqSel {
 }
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+pub struct DataSize(pub u8);
+impl DataSize {
+    pub const SIZE_BYTE: Self = Self(0);
+    pub const SIZE_HALFWORD: Self = Self(0x01);
+    pub const SIZE_WORD: Self = Self(0x02);
+}
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub struct Calc(pub u8);
 impl Calc {
     #[doc = "Calculate a CRC-32 (IEEE802.3 polynomial)"]
@@ -29,12 +37,4 @@ impl Calc {
     pub const EVEN: Self = Self(0x0e);
     #[doc = "Calculate a simple 32-bit checksum (addition with a 32 bit accumulator)"]
     pub const SUM: Self = Self(0x0f);
-}
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-pub struct DataSize(pub u8);
-impl DataSize {
-    pub const SIZE_BYTE: Self = Self(0);
-    pub const SIZE_HALFWORD: Self = Self(0x01);
-    pub const SIZE_WORD: Self = Self(0x02);
 }

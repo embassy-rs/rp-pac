@@ -18,26 +18,6 @@ impl Default for StreamAddr {
         StreamAddr(0)
     }
 }
-#[doc = "Cache Flush control"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Flush(pub u32);
-impl Flush {
-    #[doc = "Write 1 to flush the cache. This clears the tag memory, but the data memory retains its contents. (This means cache-as-SRAM contents is not affected by flush or reset.) Reading will hold the bus (stall the processor) until the flush completes. Alternatively STAT can be polled until completion."]
-    pub const fn flush(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Write 1 to flush the cache. This clears the tag memory, but the data memory retains its contents. (This means cache-as-SRAM contents is not affected by flush or reset.) Reading will hold the bus (stall the processor) until the flush completes. Alternatively STAT can be polled until completion."]
-    pub fn set_flush(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-    }
-}
-impl Default for Flush {
-    fn default() -> Flush {
-        Flush(0)
-    }
-}
 #[doc = "Cache control"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -76,24 +56,24 @@ impl Default for Ctrl {
         Ctrl(0)
     }
 }
-#[doc = "FIFO stream control"]
+#[doc = "Cache Flush control"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct StreamCtr(pub u32);
-impl StreamCtr {
-    #[doc = "Write a nonzero value to start a streaming read. This will then progress in the background, using flash idle cycles to transfer a linear data block from flash to the streaming FIFO. Decrements automatically (1 at a time) as the stream progresses, and halts on reaching 0. Write 0 to halt an in-progress stream, and discard any in-flight read, so that a new stream can immediately be started (after draining the FIFO and reinitialising STREAM_ADDR)"]
-    pub const fn stream_ctr(&self) -> u32 {
-        let val = (self.0 >> 0usize) & 0x003f_ffff;
-        val as u32
+pub struct Flush(pub u32);
+impl Flush {
+    #[doc = "Write 1 to flush the cache. This clears the tag memory, but the data memory retains its contents. (This means cache-as-SRAM contents is not affected by flush or reset.) Reading will hold the bus (stall the processor) until the flush completes. Alternatively STAT can be polled until completion."]
+    pub const fn flush(&self) -> bool {
+        let val = (self.0 >> 0usize) & 0x01;
+        val != 0
     }
-    #[doc = "Write a nonzero value to start a streaming read. This will then progress in the background, using flash idle cycles to transfer a linear data block from flash to the streaming FIFO. Decrements automatically (1 at a time) as the stream progresses, and halts on reaching 0. Write 0 to halt an in-progress stream, and discard any in-flight read, so that a new stream can immediately be started (after draining the FIFO and reinitialising STREAM_ADDR)"]
-    pub fn set_stream_ctr(&mut self, val: u32) {
-        self.0 = (self.0 & !(0x003f_ffff << 0usize)) | (((val as u32) & 0x003f_ffff) << 0usize);
+    #[doc = "Write 1 to flush the cache. This clears the tag memory, but the data memory retains its contents. (This means cache-as-SRAM contents is not affected by flush or reset.) Reading will hold the bus (stall the processor) until the flush completes. Alternatively STAT can be polled until completion."]
+    pub fn set_flush(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
 }
-impl Default for StreamCtr {
-    fn default() -> StreamCtr {
-        StreamCtr(0)
+impl Default for Flush {
+    fn default() -> Flush {
+        Flush(0)
     }
 }
 #[doc = "Cache Status"]
@@ -132,5 +112,25 @@ impl Stat {
 impl Default for Stat {
     fn default() -> Stat {
         Stat(0)
+    }
+}
+#[doc = "FIFO stream control"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct StreamCtr(pub u32);
+impl StreamCtr {
+    #[doc = "Write a nonzero value to start a streaming read. This will then progress in the background, using flash idle cycles to transfer a linear data block from flash to the streaming FIFO. Decrements automatically (1 at a time) as the stream progresses, and halts on reaching 0. Write 0 to halt an in-progress stream, and discard any in-flight read, so that a new stream can immediately be started (after draining the FIFO and reinitialising STREAM_ADDR)"]
+    pub const fn stream_ctr(&self) -> u32 {
+        let val = (self.0 >> 0usize) & 0x003f_ffff;
+        val as u32
+    }
+    #[doc = "Write a nonzero value to start a streaming read. This will then progress in the background, using flash idle cycles to transfer a linear data block from flash to the streaming FIFO. Decrements automatically (1 at a time) as the stream progresses, and halts on reaching 0. Write 0 to halt an in-progress stream, and discard any in-flight read, so that a new stream can immediately be started (after draining the FIFO and reinitialising STREAM_ADDR)"]
+    pub fn set_stream_ctr(&mut self, val: u32) {
+        self.0 = (self.0 & !(0x003f_ffff << 0usize)) | (((val as u32) & 0x003f_ffff) << 0usize);
+    }
+}
+impl Default for StreamCtr {
+    fn default() -> StreamCtr {
+        StreamCtr(0)
     }
 }

@@ -1,3 +1,68 @@
+#[doc = "Configuration for processors"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct ProcConfig(pub u32);
+impl ProcConfig {
+    #[doc = "Indication that proc0 has halted"]
+    pub const fn proc0_halted(&self) -> bool {
+        let val = (self.0 >> 0usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Indication that proc0 has halted"]
+    pub fn set_proc0_halted(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+    }
+    #[doc = "Indication that proc1 has halted"]
+    pub const fn proc1_halted(&self) -> bool {
+        let val = (self.0 >> 1usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Indication that proc1 has halted"]
+    pub fn set_proc1_halted(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
+    }
+    #[doc = "Configure proc0 DAP instance ID. Recommend that this is NOT changed until you require debug access in multi-chip environment WARNING: do not set to 15 as this is reserved for RescueDP"]
+    pub const fn proc0_dap_instid(&self) -> u8 {
+        let val = (self.0 >> 24usize) & 0x0f;
+        val as u8
+    }
+    #[doc = "Configure proc0 DAP instance ID. Recommend that this is NOT changed until you require debug access in multi-chip environment WARNING: do not set to 15 as this is reserved for RescueDP"]
+    pub fn set_proc0_dap_instid(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x0f << 24usize)) | (((val as u32) & 0x0f) << 24usize);
+    }
+    #[doc = "Configure proc1 DAP instance ID. Recommend that this is NOT changed until you require debug access in multi-chip environment WARNING: do not set to 15 as this is reserved for RescueDP"]
+    pub const fn proc1_dap_instid(&self) -> u8 {
+        let val = (self.0 >> 28usize) & 0x0f;
+        val as u8
+    }
+    #[doc = "Configure proc1 DAP instance ID. Recommend that this is NOT changed until you require debug access in multi-chip environment WARNING: do not set to 15 as this is reserved for RescueDP"]
+    pub fn set_proc1_dap_instid(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x0f << 28usize)) | (((val as u32) & 0x0f) << 28usize);
+    }
+}
+impl Default for ProcConfig {
+    fn default() -> ProcConfig {
+        ProcConfig(0)
+    }
+}
+#[doc = "For each bit, if 1, bypass the input synchronizer between that GPIO and the GPIO input register in the SIO. The input synchronizers should generally be unbypassed, to avoid injecting metastabilities into processors. If you're feeling brave, you can bypass to save two cycles of input latency. This register applies to GPIO 30...35 (the QSPI IOs)."]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct ProcInSyncBypassHi(pub u32);
+impl ProcInSyncBypassHi {
+    pub const fn proc_in_sync_bypass_hi(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0x3f;
+        val as u8
+    }
+    pub fn set_proc_in_sync_bypass_hi(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x3f << 0usize)) | (((val as u32) & 0x3f) << 0usize);
+    }
+}
+impl Default for ProcInSyncBypassHi {
+    fn default() -> ProcInSyncBypassHi {
+        ProcInSyncBypassHi(0)
+    }
+}
 #[doc = "Directly control the SWD debug port of either processor"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -148,53 +213,6 @@ impl Default for Mempowerdown {
         Mempowerdown(0)
     }
 }
-#[doc = "Configuration for processors"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct ProcConfig(pub u32);
-impl ProcConfig {
-    #[doc = "Indication that proc0 has halted"]
-    pub const fn proc0_halted(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Indication that proc0 has halted"]
-    pub fn set_proc0_halted(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-    }
-    #[doc = "Indication that proc1 has halted"]
-    pub const fn proc1_halted(&self) -> bool {
-        let val = (self.0 >> 1usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Indication that proc1 has halted"]
-    pub fn set_proc1_halted(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
-    }
-    #[doc = "Configure proc0 DAP instance ID. Recommend that this is NOT changed until you require debug access in multi-chip environment WARNING: do not set to 15 as this is reserved for RescueDP"]
-    pub const fn proc0_dap_instid(&self) -> u8 {
-        let val = (self.0 >> 24usize) & 0x0f;
-        val as u8
-    }
-    #[doc = "Configure proc0 DAP instance ID. Recommend that this is NOT changed until you require debug access in multi-chip environment WARNING: do not set to 15 as this is reserved for RescueDP"]
-    pub fn set_proc0_dap_instid(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x0f << 24usize)) | (((val as u32) & 0x0f) << 24usize);
-    }
-    #[doc = "Configure proc1 DAP instance ID. Recommend that this is NOT changed until you require debug access in multi-chip environment WARNING: do not set to 15 as this is reserved for RescueDP"]
-    pub const fn proc1_dap_instid(&self) -> u8 {
-        let val = (self.0 >> 28usize) & 0x0f;
-        val as u8
-    }
-    #[doc = "Configure proc1 DAP instance ID. Recommend that this is NOT changed until you require debug access in multi-chip environment WARNING: do not set to 15 as this is reserved for RescueDP"]
-    pub fn set_proc1_dap_instid(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x0f << 28usize)) | (((val as u32) & 0x0f) << 28usize);
-    }
-}
-impl Default for ProcConfig {
-    fn default() -> ProcConfig {
-        ProcConfig(0)
-    }
-}
 #[doc = "For each bit, if 1, bypass the input synchronizer between that GPIO and the GPIO input register in the SIO. The input synchronizers should generally be unbypassed, to avoid injecting metastabilities into processors. If you're feeling brave, you can bypass to save two cycles of input latency. This register applies to GPIO 0...29."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -211,23 +229,5 @@ impl ProcInSyncBypass {
 impl Default for ProcInSyncBypass {
     fn default() -> ProcInSyncBypass {
         ProcInSyncBypass(0)
-    }
-}
-#[doc = "For each bit, if 1, bypass the input synchronizer between that GPIO and the GPIO input register in the SIO. The input synchronizers should generally be unbypassed, to avoid injecting metastabilities into processors. If you're feeling brave, you can bypass to save two cycles of input latency. This register applies to GPIO 30...35 (the QSPI IOs)."]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct ProcInSyncBypassHi(pub u32);
-impl ProcInSyncBypassHi {
-    pub const fn proc_in_sync_bypass_hi(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0x3f;
-        val as u8
-    }
-    pub fn set_proc_in_sync_bypass_hi(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x3f << 0usize)) | (((val as u32) & 0x3f) << 0usize);
-    }
-}
-impl Default for ProcInSyncBypassHi {
-    fn default() -> ProcInSyncBypassHi {
-        ProcInSyncBypassHi(0)
     }
 }

@@ -1,5 +1,5 @@
 #[doc = "Register block for busfabric control signals and performance counters"]
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Busctrl(pub *mut u8);
 unsafe impl Send for Busctrl {}
 unsafe impl Sync for Busctrl {}

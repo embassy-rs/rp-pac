@@ -1,4 +1,4 @@
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Pads(pub *mut u8);
 unsafe impl Send for Pads {}
 unsafe impl Sync for Pads {}
