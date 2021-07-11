@@ -41,6 +41,11 @@ transforms:
     from: timer\d+
     to: timer
 
+# =========== TIMER
+- MakeRegisterArray:
+    blocks: timer::Timer
+    from: alarm\d+
+    to: alarm
 
 # =========== UART
 - Rename:

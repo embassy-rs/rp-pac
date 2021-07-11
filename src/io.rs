@@ -21,20 +21,6 @@ impl Io {
     }
 }
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Gpio(pub *mut u8);
-unsafe impl Send for Gpio {}
-unsafe impl Sync for Gpio {}
-impl Gpio {
-    #[doc = "GPIO status"]
-    pub fn status(self) -> crate::common::Reg<regs::GpioStatus, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(0usize)) }
-    }
-    #[doc = "GPIO control including function select and overrides."]
-    pub fn ctrl(self) -> crate::common::Reg<regs::GpioCtrl, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(4usize)) }
-    }
-}
-#[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Int(pub *mut u8);
 unsafe impl Send for Int {}
 unsafe impl Sync for Int {}
@@ -53,6 +39,20 @@ impl Int {
     pub fn ints(self, n: usize) -> crate::common::Reg<regs::Int, crate::common::RW> {
         assert!(n < 4usize);
         unsafe { crate::common::Reg::from_ptr(self.0.add(32usize + n * 4usize)) }
+    }
+}
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Gpio(pub *mut u8);
+unsafe impl Send for Gpio {}
+unsafe impl Sync for Gpio {}
+impl Gpio {
+    #[doc = "GPIO status"]
+    pub fn status(self) -> crate::common::Reg<regs::GpioStatus, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.0.add(0usize)) }
+    }
+    #[doc = "GPIO control including function select and overrides."]
+    pub fn ctrl(self) -> crate::common::Reg<regs::GpioCtrl, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.0.add(4usize)) }
     }
 }
 pub mod regs;

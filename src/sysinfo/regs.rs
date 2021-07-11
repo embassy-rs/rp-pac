@@ -1,28 +1,3 @@
-#[doc = "Platform register. Allows software to know what environment it is running in."]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Platform(pub u32);
-impl Platform {
-    pub const fn fpga(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
-        val != 0
-    }
-    pub fn set_fpga(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-    }
-    pub const fn asic(&self) -> bool {
-        let val = (self.0 >> 1usize) & 0x01;
-        val != 0
-    }
-    pub fn set_asic(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
-    }
-}
-impl Default for Platform {
-    fn default() -> Platform {
-        Platform(0)
-    }
-}
 #[doc = "JEDEC JEP-106 compliant chip identifier."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -53,5 +28,30 @@ impl ChipId {
 impl Default for ChipId {
     fn default() -> ChipId {
         ChipId(0)
+    }
+}
+#[doc = "Platform register. Allows software to know what environment it is running in."]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Platform(pub u32);
+impl Platform {
+    pub const fn fpga(&self) -> bool {
+        let val = (self.0 >> 0usize) & 0x01;
+        val != 0
+    }
+    pub fn set_fpga(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+    }
+    pub const fn asic(&self) -> bool {
+        let val = (self.0 >> 1usize) & 0x01;
+        val != 0
+    }
+    pub fn set_asic(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
+    }
+}
+impl Default for Platform {
+    fn default() -> Platform {
+        Platform(0)
     }
 }

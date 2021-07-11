@@ -20,22 +20,6 @@ impl Timer {
     pub fn timelr(self) -> crate::common::Reg<u32, crate::common::R> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(12usize)) }
     }
-    #[doc = "Arm alarm 0, and configure the time it will fire. Once armed, the alarm fires when TIMER_ALARM0 == TIMELR. The alarm will disarm itself once it fires, and can be disarmed early using the ARMED status register."]
-    pub fn alarm0(self) -> crate::common::Reg<u32, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(16usize)) }
-    }
-    #[doc = "Arm alarm 1, and configure the time it will fire. Once armed, the alarm fires when TIMER_ALARM1 == TIMELR. The alarm will disarm itself once it fires, and can be disarmed early using the ARMED status register."]
-    pub fn alarm1(self) -> crate::common::Reg<u32, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(20usize)) }
-    }
-    #[doc = "Arm alarm 2, and configure the time it will fire. Once armed, the alarm fires when TIMER_ALARM2 == TIMELR. The alarm will disarm itself once it fires, and can be disarmed early using the ARMED status register."]
-    pub fn alarm2(self) -> crate::common::Reg<u32, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(24usize)) }
-    }
-    #[doc = "Arm alarm 3, and configure the time it will fire. Once armed, the alarm fires when TIMER_ALARM3 == TIMELR. The alarm will disarm itself once it fires, and can be disarmed early using the ARMED status register."]
-    pub fn alarm3(self) -> crate::common::Reg<u32, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(28usize)) }
-    }
     #[doc = "Indicates the armed/disarmed status of each alarm. A write to the corresponding ALARMx register arms the alarm. Alarms automatically disarm upon firing, but writing ones here will disarm immediately without waiting to fire."]
     pub fn armed(self) -> crate::common::Reg<regs::Armed, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(32usize)) }
@@ -71,6 +55,11 @@ impl Timer {
     #[doc = "Interrupt status after masking & forcing"]
     pub fn ints(self) -> crate::common::Reg<regs::Ints, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(64usize)) }
+    }
+    #[doc = "Arm alarm 0, and configure the time it will fire. Once armed, the alarm fires when TIMER_ALARM0 == TIMELR. The alarm will disarm itself once it fires, and can be disarmed early using the ARMED status register."]
+    pub fn alarm(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
+        assert!(n < 4usize);
+        unsafe { crate::common::Reg::from_ptr(self.0.add(16usize + n * 4usize)) }
     }
 }
 pub mod regs;
