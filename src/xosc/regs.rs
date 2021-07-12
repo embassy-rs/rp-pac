@@ -1,79 +1,3 @@
-#[doc = "A down counter running at the xosc frequency which counts to zero and stops. To start the counter write a non-zero value. Can be used for short software pauses when setting up time sensitive hardware."]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Count(pub u32);
-impl Count {
-    pub const fn count(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0xff;
-        val as u8
-    }
-    pub fn set_count(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
-    }
-}
-impl Default for Count {
-    fn default() -> Count {
-        Count(0)
-    }
-}
-#[doc = "Controls the startup delay"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Startup(pub u32);
-impl Startup {
-    #[doc = "in multiples of 256*xtal_period"]
-    pub const fn delay(&self) -> u16 {
-        let val = (self.0 >> 0usize) & 0x3fff;
-        val as u16
-    }
-    #[doc = "in multiples of 256*xtal_period"]
-    pub fn set_delay(&mut self, val: u16) {
-        self.0 = (self.0 & !(0x3fff << 0usize)) | (((val as u32) & 0x3fff) << 0usize);
-    }
-    #[doc = "Multiplies the startup_delay by 4. This is of little value to the user given that the delay can be programmed directly"]
-    pub const fn x4(&self) -> bool {
-        let val = (self.0 >> 20usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Multiplies the startup_delay by 4. This is of little value to the user given that the delay can be programmed directly"]
-    pub fn set_x4(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
-    }
-}
-impl Default for Startup {
-    fn default() -> Startup {
-        Startup(0)
-    }
-}
-#[doc = "Crystal Oscillator Control"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Ctrl(pub u32);
-impl Ctrl {
-    #[doc = "Frequency range. This resets to 0xAA0 and cannot be changed."]
-    pub const fn freq_range(&self) -> super::vals::CtrlFreqRange {
-        let val = (self.0 >> 0usize) & 0x0fff;
-        super::vals::CtrlFreqRange(val as u16)
-    }
-    #[doc = "Frequency range. This resets to 0xAA0 and cannot be changed."]
-    pub fn set_freq_range(&mut self, val: super::vals::CtrlFreqRange) {
-        self.0 = (self.0 & !(0x0fff << 0usize)) | (((val.0 as u32) & 0x0fff) << 0usize);
-    }
-    #[doc = "On power-up this field is initialised to DISABLE and the chip runs from the ROSC. If the chip has subsequently been programmed to run from the XOSC then setting this field to DISABLE may lock-up the chip. If this is a concern then run the clk_ref from the ROSC and enable the clk_sys RESUS feature. The 12-bit code is intended to give some protection against accidental writes. An invalid setting will enable the oscillator."]
-    pub const fn enable(&self) -> super::vals::Enable {
-        let val = (self.0 >> 12usize) & 0x0fff;
-        super::vals::Enable(val as u16)
-    }
-    #[doc = "On power-up this field is initialised to DISABLE and the chip runs from the ROSC. If the chip has subsequently been programmed to run from the XOSC then setting this field to DISABLE may lock-up the chip. If this is a concern then run the clk_ref from the ROSC and enable the clk_sys RESUS feature. The 12-bit code is intended to give some protection against accidental writes. An invalid setting will enable the oscillator."]
-    pub fn set_enable(&mut self, val: super::vals::Enable) {
-        self.0 = (self.0 & !(0x0fff << 12usize)) | (((val.0 as u32) & 0x0fff) << 12usize);
-    }
-}
-impl Default for Ctrl {
-    fn default() -> Ctrl {
-        Ctrl(0)
-    }
-}
 #[doc = "Crystal Oscillator Status"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -119,5 +43,81 @@ impl Status {
 impl Default for Status {
     fn default() -> Status {
         Status(0)
+    }
+}
+#[doc = "Crystal Oscillator Control"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Ctrl(pub u32);
+impl Ctrl {
+    #[doc = "Frequency range. This resets to 0xAA0 and cannot be changed."]
+    pub const fn freq_range(&self) -> super::vals::CtrlFreqRange {
+        let val = (self.0 >> 0usize) & 0x0fff;
+        super::vals::CtrlFreqRange(val as u16)
+    }
+    #[doc = "Frequency range. This resets to 0xAA0 and cannot be changed."]
+    pub fn set_freq_range(&mut self, val: super::vals::CtrlFreqRange) {
+        self.0 = (self.0 & !(0x0fff << 0usize)) | (((val.0 as u32) & 0x0fff) << 0usize);
+    }
+    #[doc = "On power-up this field is initialised to DISABLE and the chip runs from the ROSC. If the chip has subsequently been programmed to run from the XOSC then setting this field to DISABLE may lock-up the chip. If this is a concern then run the clk_ref from the ROSC and enable the clk_sys RESUS feature. The 12-bit code is intended to give some protection against accidental writes. An invalid setting will enable the oscillator."]
+    pub const fn enable(&self) -> super::vals::Enable {
+        let val = (self.0 >> 12usize) & 0x0fff;
+        super::vals::Enable(val as u16)
+    }
+    #[doc = "On power-up this field is initialised to DISABLE and the chip runs from the ROSC. If the chip has subsequently been programmed to run from the XOSC then setting this field to DISABLE may lock-up the chip. If this is a concern then run the clk_ref from the ROSC and enable the clk_sys RESUS feature. The 12-bit code is intended to give some protection against accidental writes. An invalid setting will enable the oscillator."]
+    pub fn set_enable(&mut self, val: super::vals::Enable) {
+        self.0 = (self.0 & !(0x0fff << 12usize)) | (((val.0 as u32) & 0x0fff) << 12usize);
+    }
+}
+impl Default for Ctrl {
+    fn default() -> Ctrl {
+        Ctrl(0)
+    }
+}
+#[doc = "Controls the startup delay"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Startup(pub u32);
+impl Startup {
+    #[doc = "in multiples of 256*xtal_period"]
+    pub const fn delay(&self) -> u16 {
+        let val = (self.0 >> 0usize) & 0x3fff;
+        val as u16
+    }
+    #[doc = "in multiples of 256*xtal_period"]
+    pub fn set_delay(&mut self, val: u16) {
+        self.0 = (self.0 & !(0x3fff << 0usize)) | (((val as u32) & 0x3fff) << 0usize);
+    }
+    #[doc = "Multiplies the startup_delay by 4. This is of little value to the user given that the delay can be programmed directly"]
+    pub const fn x4(&self) -> bool {
+        let val = (self.0 >> 20usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Multiplies the startup_delay by 4. This is of little value to the user given that the delay can be programmed directly"]
+    pub fn set_x4(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
+    }
+}
+impl Default for Startup {
+    fn default() -> Startup {
+        Startup(0)
+    }
+}
+#[doc = "A down counter running at the xosc frequency which counts to zero and stops. To start the counter write a non-zero value. Can be used for short software pauses when setting up time sensitive hardware."]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Count(pub u32);
+impl Count {
+    pub const fn count(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0xff;
+        val as u8
+    }
+    pub fn set_count(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
+    }
+}
+impl Default for Count {
+    fn default() -> Count {
+        Count(0)
     }
 }

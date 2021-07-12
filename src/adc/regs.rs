@@ -1,3 +1,30 @@
+#[doc = "Conversion result FIFO"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Fifo(pub u32);
+impl Fifo {
+    pub const fn val(&self) -> u16 {
+        let val = (self.0 >> 0usize) & 0x0fff;
+        val as u16
+    }
+    pub fn set_val(&mut self, val: u16) {
+        self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
+    }
+    #[doc = "1 if this particular sample experienced a conversion error. Remains in the same location if the sample is shifted."]
+    pub const fn err(&self) -> bool {
+        let val = (self.0 >> 15usize) & 0x01;
+        val != 0
+    }
+    #[doc = "1 if this particular sample experienced a conversion error. Remains in the same location if the sample is shifted."]
+    pub fn set_err(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
+    }
+}
+impl Default for Fifo {
+    fn default() -> Fifo {
+        Fifo(0)
+    }
+}
 #[doc = "Clock divider. If non-zero, CS_START_MANY will start conversions at regular intervals rather than back-to-back. The divider is reset when either of these fields are written. Total period is 1 + INT + FRAC / 256"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -27,24 +54,22 @@ impl Default for Div {
         Div(0)
     }
 }
-#[doc = "Interrupt Enable"]
+#[doc = "Result of most recent ADC conversion"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Int(pub u32);
-impl Int {
-    #[doc = "Triggered when the sample FIFO reaches a certain level. This level can be programmed via the FCS_THRESH field."]
-    pub const fn fifo(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
-        val != 0
+pub struct Result(pub u32);
+impl Result {
+    pub const fn result(&self) -> u16 {
+        let val = (self.0 >> 0usize) & 0x0fff;
+        val as u16
     }
-    #[doc = "Triggered when the sample FIFO reaches a certain level. This level can be programmed via the FCS_THRESH field."]
-    pub fn set_fifo(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+    pub fn set_result(&mut self, val: u16) {
+        self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
     }
 }
-impl Default for Int {
-    fn default() -> Int {
-        Int(0)
+impl Default for Result {
+    fn default() -> Result {
+        Result(0)
     }
 }
 #[doc = "FIFO control and status"]
@@ -236,48 +261,23 @@ impl Default for Cs {
         Cs(0)
     }
 }
-#[doc = "Conversion result FIFO"]
+#[doc = "Interrupt Force"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Fifo(pub u32);
-impl Fifo {
-    pub const fn val(&self) -> u16 {
-        let val = (self.0 >> 0usize) & 0x0fff;
-        val as u16
-    }
-    pub fn set_val(&mut self, val: u16) {
-        self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
-    }
-    #[doc = "1 if this particular sample experienced a conversion error. Remains in the same location if the sample is shifted."]
-    pub const fn err(&self) -> bool {
-        let val = (self.0 >> 15usize) & 0x01;
+pub struct Int(pub u32);
+impl Int {
+    #[doc = "Triggered when the sample FIFO reaches a certain level. This level can be programmed via the FCS_THRESH field."]
+    pub const fn fifo(&self) -> bool {
+        let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "1 if this particular sample experienced a conversion error. Remains in the same location if the sample is shifted."]
-    pub fn set_err(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
+    #[doc = "Triggered when the sample FIFO reaches a certain level. This level can be programmed via the FCS_THRESH field."]
+    pub fn set_fifo(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
 }
-impl Default for Fifo {
-    fn default() -> Fifo {
-        Fifo(0)
-    }
-}
-#[doc = "Result of most recent ADC conversion"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Result(pub u32);
-impl Result {
-    pub const fn result(&self) -> u16 {
-        let val = (self.0 >> 0usize) & 0x0fff;
-        val as u16
-    }
-    pub fn set_result(&mut self, val: u16) {
-        self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
-    }
-}
-impl Default for Result {
-    fn default() -> Result {
-        Result(0)
+impl Default for Int {
+    fn default() -> Int {
+        Int(0)
     }
 }

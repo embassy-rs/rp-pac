@@ -41,19 +41,19 @@ impl Timer {
         unsafe { crate::common::Reg::from_ptr(self.0.add(48usize)) }
     }
     #[doc = "Raw Interrupts"]
-    pub fn intr(self) -> crate::common::Reg<regs::Intr, crate::common::RW> {
+    pub fn intr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(52usize)) }
     }
     #[doc = "Interrupt Enable"]
-    pub fn inte(self) -> crate::common::Reg<regs::Inte, crate::common::RW> {
+    pub fn inte(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(56usize)) }
     }
     #[doc = "Interrupt Force"]
-    pub fn intf(self) -> crate::common::Reg<regs::Intf, crate::common::RW> {
+    pub fn intf(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(60usize)) }
     }
     #[doc = "Interrupt status after masking & forcing"]
-    pub fn ints(self) -> crate::common::Reg<regs::Ints, crate::common::RW> {
+    pub fn ints(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(64usize)) }
     }
     #[doc = "Arm alarm 0, and configure the time it will fire. Once armed, the alarm fires when TIMER_ALARM0 == TIMELR. The alarm will disarm itself once it fires, and can be disarmed early using the ARMED status register."]

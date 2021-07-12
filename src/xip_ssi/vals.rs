@@ -11,16 +11,14 @@ impl SpiFrf {
 }
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-pub struct InstL(pub u8);
-impl InstL {
-    #[doc = "No instruction"]
-    pub const NONE: Self = Self(0);
-    #[doc = "4-bit instruction"]
-    pub const _4B: Self = Self(0x01);
-    #[doc = "8-bit instruction"]
-    pub const _8B: Self = Self(0x02);
-    #[doc = "16-bit instruction"]
-    pub const _16B: Self = Self(0x03);
+pub struct TransType(pub u8);
+impl TransType {
+    #[doc = "Command and address both in standard SPI frame format"]
+    pub const _1C1A: Self = Self(0);
+    #[doc = "Command in standard SPI format, address in format specified by FRF"]
+    pub const _1C2A: Self = Self(0x01);
+    #[doc = "Command and address both in format specified by FRF (e.g. Dual-SPI)"]
+    pub const _2C2A: Self = Self(0x02);
 }
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
@@ -37,12 +35,14 @@ impl Tmod {
 }
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-pub struct TransType(pub u8);
-impl TransType {
-    #[doc = "Command and address both in standard SPI frame format"]
-    pub const _1C1A: Self = Self(0);
-    #[doc = "Command in standard SPI format, address in format specified by FRF"]
-    pub const _1C2A: Self = Self(0x01);
-    #[doc = "Command and address both in format specified by FRF (e.g. Dual-SPI)"]
-    pub const _2C2A: Self = Self(0x02);
+pub struct InstL(pub u8);
+impl InstL {
+    #[doc = "No instruction"]
+    pub const NONE: Self = Self(0);
+    #[doc = "4-bit instruction"]
+    pub const _4B: Self = Self(0x01);
+    #[doc = "8-bit instruction"]
+    pub const _8B: Self = Self(0x02);
+    #[doc = "16-bit instruction"]
+    pub const _16B: Self = Self(0x03);
 }

@@ -1,21 +1,3 @@
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Irq(pub *mut u8);
-unsafe impl Send for Irq {}
-unsafe impl Sync for Irq {}
-impl Irq {
-    #[doc = "Interrupt Enable for irq0"]
-    pub fn inte(self) -> crate::common::Reg<regs::Intr, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(0usize)) }
-    }
-    #[doc = "Interrupt Force for irq0"]
-    pub fn intf(self) -> crate::common::Reg<regs::Intr, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(4usize)) }
-    }
-    #[doc = "Interrupt status after masking & forcing for irq0"]
-    pub fn ints(self) -> crate::common::Reg<regs::Intr, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(8usize)) }
-    }
-}
 #[doc = "Programmable IO block"]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Pio(pub *mut u8);
@@ -66,15 +48,15 @@ impl Pio {
     pub fn intr(self) -> crate::common::Reg<regs::Intr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(296usize)) }
     }
-    #[doc = "Write-only access to instruction memory location 0"]
-    pub fn instr_mem(self, n: usize) -> crate::common::Reg<regs::InstrMem, crate::common::RW> {
-        assert!(n < 32usize);
-        unsafe { crate::common::Reg::from_ptr(self.0.add(72usize + n * 4usize)) }
-    }
     #[doc = "Direct write access to the TX FIFO for this state machine. Each write pushes one word to the FIFO."]
     pub fn txf(self, n: usize) -> crate::common::Reg<u32, crate::common::W> {
         assert!(n < 4usize);
         unsafe { crate::common::Reg::from_ptr(self.0.add(16usize + n * 4usize)) }
+    }
+    #[doc = "Write-only access to instruction memory location 0"]
+    pub fn instr_mem(self, n: usize) -> crate::common::Reg<regs::InstrMem, crate::common::RW> {
+        assert!(n < 32usize);
+        unsafe { crate::common::Reg::from_ptr(self.0.add(72usize + n * 4usize)) }
     }
     #[doc = "Direct read access to the RX FIFO for this state machine. Each read pops one word from the FIFO."]
     pub fn rxf(self, n: usize) -> crate::common::Reg<u32, crate::common::R> {
@@ -91,27 +73,45 @@ impl Pio {
     }
 }
 #[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Irq(pub *mut u8);
+unsafe impl Send for Irq {}
+unsafe impl Sync for Irq {}
+impl Irq {
+    #[doc = "Interrupt Enable for irq1"]
+    pub fn inte(self) -> crate::common::Reg<regs::Intr, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.0.add(0usize)) }
+    }
+    #[doc = "Interrupt Force for irq1"]
+    pub fn intf(self) -> crate::common::Reg<regs::Intr, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.0.add(4usize)) }
+    }
+    #[doc = "Interrupt status after masking & forcing for irq1"]
+    pub fn ints(self) -> crate::common::Reg<regs::Intr, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.0.add(8usize)) }
+    }
+}
+#[derive(Copy, Clone, Eq, PartialEq)]
 pub struct StateMachine(pub *mut u8);
 unsafe impl Send for StateMachine {}
 unsafe impl Sync for StateMachine {}
 impl StateMachine {
-    #[doc = "Clock divider register for state machine 2 Frequency = clock freq / (CLKDIV_INT + CLKDIV_FRAC / 256)"]
+    #[doc = "Clock divider register for state machine 1 Frequency = clock freq / (CLKDIV_INT + CLKDIV_FRAC / 256)"]
     pub fn clkdiv(self) -> crate::common::Reg<regs::SmClkdiv, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(0usize)) }
     }
-    #[doc = "Execution/behavioural settings for state machine 2"]
+    #[doc = "Execution/behavioural settings for state machine 1"]
     pub fn execctrl(self) -> crate::common::Reg<regs::SmExecctrl, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(4usize)) }
     }
-    #[doc = "Control behaviour of the input/output shift registers for state machine 2"]
+    #[doc = "Control behaviour of the input/output shift registers for state machine 1"]
     pub fn shiftctrl(self) -> crate::common::Reg<regs::SmShiftctrl, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(8usize)) }
     }
-    #[doc = "Current instruction address of state machine 2"]
+    #[doc = "Current instruction address of state machine 1"]
     pub fn addr(self) -> crate::common::Reg<regs::SmAddr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(12usize)) }
     }
-    #[doc = "Instruction currently being executed by state machine 2 Write to execute an instruction immediately (including jumps) and then resume execution."]
+    #[doc = "Instruction currently being executed by state machine 1 Write to execute an instruction immediately (including jumps) and then resume execution."]
     pub fn instr(self) -> crate::common::Reg<regs::SmInstr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(16usize)) }
     }

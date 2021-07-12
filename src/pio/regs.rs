@@ -1,4 +1,289 @@
-#[doc = "Instruction currently being executed by state machine 1 Write to execute an instruction immediately (including jumps) and then resume execution."]
+#[doc = "FIFO levels"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Flevel(pub u32);
+impl Flevel {
+    pub const fn tx0(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0x0f;
+        val as u8
+    }
+    pub fn set_tx0(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x0f << 0usize)) | (((val as u32) & 0x0f) << 0usize);
+    }
+    pub const fn rx0(&self) -> u8 {
+        let val = (self.0 >> 4usize) & 0x0f;
+        val as u8
+    }
+    pub fn set_rx0(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x0f << 4usize)) | (((val as u32) & 0x0f) << 4usize);
+    }
+    pub const fn tx1(&self) -> u8 {
+        let val = (self.0 >> 8usize) & 0x0f;
+        val as u8
+    }
+    pub fn set_tx1(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x0f << 8usize)) | (((val as u32) & 0x0f) << 8usize);
+    }
+    pub const fn rx1(&self) -> u8 {
+        let val = (self.0 >> 12usize) & 0x0f;
+        val as u8
+    }
+    pub fn set_rx1(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x0f << 12usize)) | (((val as u32) & 0x0f) << 12usize);
+    }
+    pub const fn tx2(&self) -> u8 {
+        let val = (self.0 >> 16usize) & 0x0f;
+        val as u8
+    }
+    pub fn set_tx2(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x0f << 16usize)) | (((val as u32) & 0x0f) << 16usize);
+    }
+    pub const fn rx2(&self) -> u8 {
+        let val = (self.0 >> 20usize) & 0x0f;
+        val as u8
+    }
+    pub fn set_rx2(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x0f << 20usize)) | (((val as u32) & 0x0f) << 20usize);
+    }
+    pub const fn tx3(&self) -> u8 {
+        let val = (self.0 >> 24usize) & 0x0f;
+        val as u8
+    }
+    pub fn set_tx3(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x0f << 24usize)) | (((val as u32) & 0x0f) << 24usize);
+    }
+    pub const fn rx3(&self) -> u8 {
+        let val = (self.0 >> 28usize) & 0x0f;
+        val as u8
+    }
+    pub fn set_rx3(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x0f << 28usize)) | (((val as u32) & 0x0f) << 28usize);
+    }
+}
+impl Default for Flevel {
+    fn default() -> Flevel {
+        Flevel(0)
+    }
+}
+#[doc = "FIFO status register"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Fstat(pub u32);
+impl Fstat {
+    #[doc = "State machine RX FIFO is full"]
+    pub const fn rxfull(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0x0f;
+        val as u8
+    }
+    #[doc = "State machine RX FIFO is full"]
+    pub fn set_rxfull(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x0f << 0usize)) | (((val as u32) & 0x0f) << 0usize);
+    }
+    #[doc = "State machine RX FIFO is empty"]
+    pub const fn rxempty(&self) -> u8 {
+        let val = (self.0 >> 8usize) & 0x0f;
+        val as u8
+    }
+    #[doc = "State machine RX FIFO is empty"]
+    pub fn set_rxempty(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x0f << 8usize)) | (((val as u32) & 0x0f) << 8usize);
+    }
+    #[doc = "State machine TX FIFO is full"]
+    pub const fn txfull(&self) -> u8 {
+        let val = (self.0 >> 16usize) & 0x0f;
+        val as u8
+    }
+    #[doc = "State machine TX FIFO is full"]
+    pub fn set_txfull(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x0f << 16usize)) | (((val as u32) & 0x0f) << 16usize);
+    }
+    #[doc = "State machine TX FIFO is empty"]
+    pub const fn txempty(&self) -> u8 {
+        let val = (self.0 >> 24usize) & 0x0f;
+        val as u8
+    }
+    #[doc = "State machine TX FIFO is empty"]
+    pub fn set_txempty(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x0f << 24usize)) | (((val as u32) & 0x0f) << 24usize);
+    }
+}
+impl Default for Fstat {
+    fn default() -> Fstat {
+        Fstat(0)
+    }
+}
+#[doc = "Interrupt Enable for irq0"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Intr(pub u32);
+impl Intr {
+    pub const fn sm0_rxnempty(&self) -> bool {
+        let val = (self.0 >> 0usize) & 0x01;
+        val != 0
+    }
+    pub fn set_sm0_rxnempty(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+    }
+    pub const fn sm1_rxnempty(&self) -> bool {
+        let val = (self.0 >> 1usize) & 0x01;
+        val != 0
+    }
+    pub fn set_sm1_rxnempty(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
+    }
+    pub const fn sm2_rxnempty(&self) -> bool {
+        let val = (self.0 >> 2usize) & 0x01;
+        val != 0
+    }
+    pub fn set_sm2_rxnempty(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
+    }
+    pub const fn sm3_rxnempty(&self) -> bool {
+        let val = (self.0 >> 3usize) & 0x01;
+        val != 0
+    }
+    pub fn set_sm3_rxnempty(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
+    }
+    pub const fn sm0_txnfull(&self) -> bool {
+        let val = (self.0 >> 4usize) & 0x01;
+        val != 0
+    }
+    pub fn set_sm0_txnfull(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
+    }
+    pub const fn sm1_txnfull(&self) -> bool {
+        let val = (self.0 >> 5usize) & 0x01;
+        val != 0
+    }
+    pub fn set_sm1_txnfull(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
+    }
+    pub const fn sm2_txnfull(&self) -> bool {
+        let val = (self.0 >> 6usize) & 0x01;
+        val != 0
+    }
+    pub fn set_sm2_txnfull(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
+    }
+    pub const fn sm3_txnfull(&self) -> bool {
+        let val = (self.0 >> 7usize) & 0x01;
+        val != 0
+    }
+    pub fn set_sm3_txnfull(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
+    }
+    pub const fn sm0(&self) -> bool {
+        let val = (self.0 >> 8usize) & 0x01;
+        val != 0
+    }
+    pub fn set_sm0(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
+    }
+    pub const fn sm1(&self) -> bool {
+        let val = (self.0 >> 9usize) & 0x01;
+        val != 0
+    }
+    pub fn set_sm1(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
+    }
+    pub const fn sm2(&self) -> bool {
+        let val = (self.0 >> 10usize) & 0x01;
+        val != 0
+    }
+    pub fn set_sm2(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
+    }
+    pub const fn sm3(&self) -> bool {
+        let val = (self.0 >> 11usize) & 0x01;
+        val != 0
+    }
+    pub fn set_sm3(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
+    }
+}
+impl Default for Intr {
+    fn default() -> Intr {
+        Intr(0)
+    }
+}
+#[doc = "Clock divider register for state machine 1 Frequency = clock freq / (CLKDIV_INT + CLKDIV_FRAC / 256)"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct SmClkdiv(pub u32);
+impl SmClkdiv {
+    #[doc = "Fractional part of clock divider"]
+    pub const fn frac(&self) -> u8 {
+        let val = (self.0 >> 8usize) & 0xff;
+        val as u8
+    }
+    #[doc = "Fractional part of clock divider"]
+    pub fn set_frac(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 8usize)) | (((val as u32) & 0xff) << 8usize);
+    }
+    #[doc = "Effective frequency is sysclk/int. Value of 0 is interpreted as max possible value"]
+    pub const fn int(&self) -> u16 {
+        let val = (self.0 >> 16usize) & 0xffff;
+        val as u16
+    }
+    #[doc = "Effective frequency is sysclk/int. Value of 0 is interpreted as max possible value"]
+    pub fn set_int(&mut self, val: u16) {
+        self.0 = (self.0 & !(0xffff << 16usize)) | (((val as u32) & 0xffff) << 16usize);
+    }
+}
+impl Default for SmClkdiv {
+    fn default() -> SmClkdiv {
+        SmClkdiv(0)
+    }
+}
+#[doc = "FIFO debug register"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Fdebug(pub u32);
+impl Fdebug {
+    #[doc = "State machine has stalled on full RX FIFO. Write 1 to clear."]
+    pub const fn rxstall(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0x0f;
+        val as u8
+    }
+    #[doc = "State machine has stalled on full RX FIFO. Write 1 to clear."]
+    pub fn set_rxstall(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x0f << 0usize)) | (((val as u32) & 0x0f) << 0usize);
+    }
+    #[doc = "RX FIFO underflow has occurred. Write 1 to clear."]
+    pub const fn rxunder(&self) -> u8 {
+        let val = (self.0 >> 8usize) & 0x0f;
+        val as u8
+    }
+    #[doc = "RX FIFO underflow has occurred. Write 1 to clear."]
+    pub fn set_rxunder(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x0f << 8usize)) | (((val as u32) & 0x0f) << 8usize);
+    }
+    #[doc = "TX FIFO overflow has occurred. Write 1 to clear."]
+    pub const fn txover(&self) -> u8 {
+        let val = (self.0 >> 16usize) & 0x0f;
+        val as u8
+    }
+    #[doc = "TX FIFO overflow has occurred. Write 1 to clear."]
+    pub fn set_txover(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x0f << 16usize)) | (((val as u32) & 0x0f) << 16usize);
+    }
+    #[doc = "State machine has stalled on empty TX FIFO. Write 1 to clear."]
+    pub const fn txstall(&self) -> u8 {
+        let val = (self.0 >> 24usize) & 0x0f;
+        val as u8
+    }
+    #[doc = "State machine has stalled on empty TX FIFO. Write 1 to clear."]
+    pub fn set_txstall(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x0f << 24usize)) | (((val as u32) & 0x0f) << 24usize);
+    }
+}
+impl Default for Fdebug {
+    fn default() -> Fdebug {
+        Fdebug(0)
+    }
+}
+#[doc = "Instruction currently being executed by state machine 0 Write to execute an instruction immediately (including jumps) and then resume execution."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SmInstr(pub u32);
@@ -14,6 +299,118 @@ impl SmInstr {
 impl Default for SmInstr {
     fn default() -> SmInstr {
         SmInstr(0)
+    }
+}
+#[doc = "The PIO hardware has some free parameters that may vary between chip products. These should be provided in the chip datasheet, but are also exposed here."]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct DbgCfginfo(pub u32);
+impl DbgCfginfo {
+    #[doc = "The depth of the state machine TX/RX FIFOs, measured in words. Joining fifos via SHIFTCTRL_FJOIN gives one FIFO with double this depth."]
+    pub const fn fifo_depth(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0x3f;
+        val as u8
+    }
+    #[doc = "The depth of the state machine TX/RX FIFOs, measured in words. Joining fifos via SHIFTCTRL_FJOIN gives one FIFO with double this depth."]
+    pub fn set_fifo_depth(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x3f << 0usize)) | (((val as u32) & 0x3f) << 0usize);
+    }
+    #[doc = "The number of state machines this PIO instance is equipped with."]
+    pub const fn sm_count(&self) -> u8 {
+        let val = (self.0 >> 8usize) & 0x0f;
+        val as u8
+    }
+    #[doc = "The number of state machines this PIO instance is equipped with."]
+    pub fn set_sm_count(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x0f << 8usize)) | (((val as u32) & 0x0f) << 8usize);
+    }
+    #[doc = "The size of the instruction memory, measured in units of one instruction"]
+    pub const fn imem_size(&self) -> u8 {
+        let val = (self.0 >> 16usize) & 0x3f;
+        val as u8
+    }
+    #[doc = "The size of the instruction memory, measured in units of one instruction"]
+    pub fn set_imem_size(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x3f << 16usize)) | (((val as u32) & 0x3f) << 16usize);
+    }
+}
+impl Default for DbgCfginfo {
+    fn default() -> DbgCfginfo {
+        DbgCfginfo(0)
+    }
+}
+#[doc = "Current instruction address of state machine 0"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct SmAddr(pub u32);
+impl SmAddr {
+    pub const fn addr(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0x1f;
+        val as u8
+    }
+    pub fn set_addr(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x1f << 0usize)) | (((val as u32) & 0x1f) << 0usize);
+    }
+}
+impl Default for SmAddr {
+    fn default() -> SmAddr {
+        SmAddr(0)
+    }
+}
+#[doc = "PIO control register"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Ctrl(pub u32);
+impl Ctrl {
+    #[doc = "Enable state machine"]
+    pub const fn sm_enable(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0x0f;
+        val as u8
+    }
+    #[doc = "Enable state machine"]
+    pub fn set_sm_enable(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x0f << 0usize)) | (((val as u32) & 0x0f) << 0usize);
+    }
+    #[doc = "Clear internal SM state which is otherwise difficult to access (e.g. shift counters). Self-clearing."]
+    pub const fn sm_restart(&self) -> u8 {
+        let val = (self.0 >> 4usize) & 0x0f;
+        val as u8
+    }
+    #[doc = "Clear internal SM state which is otherwise difficult to access (e.g. shift counters). Self-clearing."]
+    pub fn set_sm_restart(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x0f << 4usize)) | (((val as u32) & 0x0f) << 4usize);
+    }
+    #[doc = "Force clock dividers to restart their count and clear fractional accumulators. Restart multiple dividers to synchronise them."]
+    pub const fn clkdiv_restart(&self) -> u8 {
+        let val = (self.0 >> 8usize) & 0x0f;
+        val as u8
+    }
+    #[doc = "Force clock dividers to restart their count and clear fractional accumulators. Restart multiple dividers to synchronise them."]
+    pub fn set_clkdiv_restart(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x0f << 8usize)) | (((val as u32) & 0x0f) << 8usize);
+    }
+}
+impl Default for Ctrl {
+    fn default() -> Ctrl {
+        Ctrl(0)
+    }
+}
+#[doc = "Writing a 1 to each of these bits will forcibly assert the corresponding IRQ. Note this is different to the INTF register: writing here affects PIO internal state. INTF just asserts the processor-facing IRQ signal for testing ISRs, and is not visible to the state machines."]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct IrqForce(pub u32);
+impl IrqForce {
+    pub const fn irq_force(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0xff;
+        val as u8
+    }
+    pub fn set_irq_force(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
+    }
+}
+impl Default for IrqForce {
+    fn default() -> IrqForce {
+        IrqForce(0)
     }
 }
 #[doc = "State machine pin control"]
@@ -88,6 +485,24 @@ impl SmPinctrl {
 impl Default for SmPinctrl {
     fn default() -> SmPinctrl {
         SmPinctrl(0)
+    }
+}
+#[doc = "Write-only access to instruction memory location 10"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct InstrMem(pub u32);
+impl InstrMem {
+    pub const fn instr_mem(&self) -> u16 {
+        let val = (self.0 >> 0usize) & 0xffff;
+        val as u16
+    }
+    pub fn set_instr_mem(&mut self, val: u16) {
+        self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
+    }
+}
+impl Default for InstrMem {
+    fn default() -> InstrMem {
+        InstrMem(0)
     }
 }
 #[doc = "Execution/behavioural settings for state machine 2"]
@@ -200,383 +615,6 @@ impl Default for SmExecctrl {
         SmExecctrl(0)
     }
 }
-#[doc = "FIFO levels"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Flevel(pub u32);
-impl Flevel {
-    pub const fn tx0(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0x0f;
-        val as u8
-    }
-    pub fn set_tx0(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x0f << 0usize)) | (((val as u32) & 0x0f) << 0usize);
-    }
-    pub const fn rx0(&self) -> u8 {
-        let val = (self.0 >> 4usize) & 0x0f;
-        val as u8
-    }
-    pub fn set_rx0(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x0f << 4usize)) | (((val as u32) & 0x0f) << 4usize);
-    }
-    pub const fn tx1(&self) -> u8 {
-        let val = (self.0 >> 8usize) & 0x0f;
-        val as u8
-    }
-    pub fn set_tx1(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x0f << 8usize)) | (((val as u32) & 0x0f) << 8usize);
-    }
-    pub const fn rx1(&self) -> u8 {
-        let val = (self.0 >> 12usize) & 0x0f;
-        val as u8
-    }
-    pub fn set_rx1(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x0f << 12usize)) | (((val as u32) & 0x0f) << 12usize);
-    }
-    pub const fn tx2(&self) -> u8 {
-        let val = (self.0 >> 16usize) & 0x0f;
-        val as u8
-    }
-    pub fn set_tx2(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x0f << 16usize)) | (((val as u32) & 0x0f) << 16usize);
-    }
-    pub const fn rx2(&self) -> u8 {
-        let val = (self.0 >> 20usize) & 0x0f;
-        val as u8
-    }
-    pub fn set_rx2(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x0f << 20usize)) | (((val as u32) & 0x0f) << 20usize);
-    }
-    pub const fn tx3(&self) -> u8 {
-        let val = (self.0 >> 24usize) & 0x0f;
-        val as u8
-    }
-    pub fn set_tx3(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x0f << 24usize)) | (((val as u32) & 0x0f) << 24usize);
-    }
-    pub const fn rx3(&self) -> u8 {
-        let val = (self.0 >> 28usize) & 0x0f;
-        val as u8
-    }
-    pub fn set_rx3(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x0f << 28usize)) | (((val as u32) & 0x0f) << 28usize);
-    }
-}
-impl Default for Flevel {
-    fn default() -> Flevel {
-        Flevel(0)
-    }
-}
-#[doc = "Write-only access to instruction memory location 3"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct InstrMem(pub u32);
-impl InstrMem {
-    pub const fn instr_mem(&self) -> u16 {
-        let val = (self.0 >> 0usize) & 0xffff;
-        val as u16
-    }
-    pub fn set_instr_mem(&mut self, val: u16) {
-        self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
-    }
-}
-impl Default for InstrMem {
-    fn default() -> InstrMem {
-        InstrMem(0)
-    }
-}
-#[doc = "Interrupt Force for irq1"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Intr(pub u32);
-impl Intr {
-    pub const fn sm0_rxnempty(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
-        val != 0
-    }
-    pub fn set_sm0_rxnempty(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-    }
-    pub const fn sm1_rxnempty(&self) -> bool {
-        let val = (self.0 >> 1usize) & 0x01;
-        val != 0
-    }
-    pub fn set_sm1_rxnempty(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
-    }
-    pub const fn sm2_rxnempty(&self) -> bool {
-        let val = (self.0 >> 2usize) & 0x01;
-        val != 0
-    }
-    pub fn set_sm2_rxnempty(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
-    }
-    pub const fn sm3_rxnempty(&self) -> bool {
-        let val = (self.0 >> 3usize) & 0x01;
-        val != 0
-    }
-    pub fn set_sm3_rxnempty(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
-    }
-    pub const fn sm0_txnfull(&self) -> bool {
-        let val = (self.0 >> 4usize) & 0x01;
-        val != 0
-    }
-    pub fn set_sm0_txnfull(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
-    }
-    pub const fn sm1_txnfull(&self) -> bool {
-        let val = (self.0 >> 5usize) & 0x01;
-        val != 0
-    }
-    pub fn set_sm1_txnfull(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
-    }
-    pub const fn sm2_txnfull(&self) -> bool {
-        let val = (self.0 >> 6usize) & 0x01;
-        val != 0
-    }
-    pub fn set_sm2_txnfull(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
-    }
-    pub const fn sm3_txnfull(&self) -> bool {
-        let val = (self.0 >> 7usize) & 0x01;
-        val != 0
-    }
-    pub fn set_sm3_txnfull(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
-    }
-    pub const fn sm0(&self) -> bool {
-        let val = (self.0 >> 8usize) & 0x01;
-        val != 0
-    }
-    pub fn set_sm0(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
-    }
-    pub const fn sm1(&self) -> bool {
-        let val = (self.0 >> 9usize) & 0x01;
-        val != 0
-    }
-    pub fn set_sm1(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
-    }
-    pub const fn sm2(&self) -> bool {
-        let val = (self.0 >> 10usize) & 0x01;
-        val != 0
-    }
-    pub fn set_sm2(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
-    }
-    pub const fn sm3(&self) -> bool {
-        let val = (self.0 >> 11usize) & 0x01;
-        val != 0
-    }
-    pub fn set_sm3(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
-    }
-}
-impl Default for Intr {
-    fn default() -> Intr {
-        Intr(0)
-    }
-}
-#[doc = "FIFO status register"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Fstat(pub u32);
-impl Fstat {
-    #[doc = "State machine RX FIFO is full"]
-    pub const fn rxfull(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0x0f;
-        val as u8
-    }
-    #[doc = "State machine RX FIFO is full"]
-    pub fn set_rxfull(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x0f << 0usize)) | (((val as u32) & 0x0f) << 0usize);
-    }
-    #[doc = "State machine RX FIFO is empty"]
-    pub const fn rxempty(&self) -> u8 {
-        let val = (self.0 >> 8usize) & 0x0f;
-        val as u8
-    }
-    #[doc = "State machine RX FIFO is empty"]
-    pub fn set_rxempty(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x0f << 8usize)) | (((val as u32) & 0x0f) << 8usize);
-    }
-    #[doc = "State machine TX FIFO is full"]
-    pub const fn txfull(&self) -> u8 {
-        let val = (self.0 >> 16usize) & 0x0f;
-        val as u8
-    }
-    #[doc = "State machine TX FIFO is full"]
-    pub fn set_txfull(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x0f << 16usize)) | (((val as u32) & 0x0f) << 16usize);
-    }
-    #[doc = "State machine TX FIFO is empty"]
-    pub const fn txempty(&self) -> u8 {
-        let val = (self.0 >> 24usize) & 0x0f;
-        val as u8
-    }
-    #[doc = "State machine TX FIFO is empty"]
-    pub fn set_txempty(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x0f << 24usize)) | (((val as u32) & 0x0f) << 24usize);
-    }
-}
-impl Default for Fstat {
-    fn default() -> Fstat {
-        Fstat(0)
-    }
-}
-#[doc = "Interrupt request register. Write 1 to clear"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Irq(pub u32);
-impl Irq {
-    pub const fn irq(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0xff;
-        val as u8
-    }
-    pub fn set_irq(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
-    }
-}
-impl Default for Irq {
-    fn default() -> Irq {
-        Irq(0)
-    }
-}
-#[doc = "The PIO hardware has some free parameters that may vary between chip products. These should be provided in the chip datasheet, but are also exposed here."]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct DbgCfginfo(pub u32);
-impl DbgCfginfo {
-    #[doc = "The depth of the state machine TX/RX FIFOs, measured in words. Joining fifos via SHIFTCTRL_FJOIN gives one FIFO with double this depth."]
-    pub const fn fifo_depth(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0x3f;
-        val as u8
-    }
-    #[doc = "The depth of the state machine TX/RX FIFOs, measured in words. Joining fifos via SHIFTCTRL_FJOIN gives one FIFO with double this depth."]
-    pub fn set_fifo_depth(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x3f << 0usize)) | (((val as u32) & 0x3f) << 0usize);
-    }
-    #[doc = "The number of state machines this PIO instance is equipped with."]
-    pub const fn sm_count(&self) -> u8 {
-        let val = (self.0 >> 8usize) & 0x0f;
-        val as u8
-    }
-    #[doc = "The number of state machines this PIO instance is equipped with."]
-    pub fn set_sm_count(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x0f << 8usize)) | (((val as u32) & 0x0f) << 8usize);
-    }
-    #[doc = "The size of the instruction memory, measured in units of one instruction"]
-    pub const fn imem_size(&self) -> u8 {
-        let val = (self.0 >> 16usize) & 0x3f;
-        val as u8
-    }
-    #[doc = "The size of the instruction memory, measured in units of one instruction"]
-    pub fn set_imem_size(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x3f << 16usize)) | (((val as u32) & 0x3f) << 16usize);
-    }
-}
-impl Default for DbgCfginfo {
-    fn default() -> DbgCfginfo {
-        DbgCfginfo(0)
-    }
-}
-#[doc = "Clock divider register for state machine 0 Frequency = clock freq / (CLKDIV_INT + CLKDIV_FRAC / 256)"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct SmClkdiv(pub u32);
-impl SmClkdiv {
-    #[doc = "Fractional part of clock divider"]
-    pub const fn frac(&self) -> u8 {
-        let val = (self.0 >> 8usize) & 0xff;
-        val as u8
-    }
-    #[doc = "Fractional part of clock divider"]
-    pub fn set_frac(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 8usize)) | (((val as u32) & 0xff) << 8usize);
-    }
-    #[doc = "Effective frequency is sysclk/int. Value of 0 is interpreted as max possible value"]
-    pub const fn int(&self) -> u16 {
-        let val = (self.0 >> 16usize) & 0xffff;
-        val as u16
-    }
-    #[doc = "Effective frequency is sysclk/int. Value of 0 is interpreted as max possible value"]
-    pub fn set_int(&mut self, val: u16) {
-        self.0 = (self.0 & !(0xffff << 16usize)) | (((val as u32) & 0xffff) << 16usize);
-    }
-}
-impl Default for SmClkdiv {
-    fn default() -> SmClkdiv {
-        SmClkdiv(0)
-    }
-}
-#[doc = "FIFO debug register"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Fdebug(pub u32);
-impl Fdebug {
-    #[doc = "State machine has stalled on full RX FIFO. Write 1 to clear."]
-    pub const fn rxstall(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0x0f;
-        val as u8
-    }
-    #[doc = "State machine has stalled on full RX FIFO. Write 1 to clear."]
-    pub fn set_rxstall(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x0f << 0usize)) | (((val as u32) & 0x0f) << 0usize);
-    }
-    #[doc = "RX FIFO underflow has occurred. Write 1 to clear."]
-    pub const fn rxunder(&self) -> u8 {
-        let val = (self.0 >> 8usize) & 0x0f;
-        val as u8
-    }
-    #[doc = "RX FIFO underflow has occurred. Write 1 to clear."]
-    pub fn set_rxunder(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x0f << 8usize)) | (((val as u32) & 0x0f) << 8usize);
-    }
-    #[doc = "TX FIFO overflow has occurred. Write 1 to clear."]
-    pub const fn txover(&self) -> u8 {
-        let val = (self.0 >> 16usize) & 0x0f;
-        val as u8
-    }
-    #[doc = "TX FIFO overflow has occurred. Write 1 to clear."]
-    pub fn set_txover(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x0f << 16usize)) | (((val as u32) & 0x0f) << 16usize);
-    }
-    #[doc = "State machine has stalled on empty TX FIFO. Write 1 to clear."]
-    pub const fn txstall(&self) -> u8 {
-        let val = (self.0 >> 24usize) & 0x0f;
-        val as u8
-    }
-    #[doc = "State machine has stalled on empty TX FIFO. Write 1 to clear."]
-    pub fn set_txstall(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x0f << 24usize)) | (((val as u32) & 0x0f) << 24usize);
-    }
-}
-impl Default for Fdebug {
-    fn default() -> Fdebug {
-        Fdebug(0)
-    }
-}
-#[doc = "Writing a 1 to each of these bits will forcibly assert the corresponding IRQ. Note this is different to the INTF register: writing here affects PIO internal state. INTF just asserts the processor-facing IRQ signal for testing ISRs, and is not visible to the state machines."]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct IrqForce(pub u32);
-impl IrqForce {
-    pub const fn irq_force(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0xff;
-        val as u8
-    }
-    pub fn set_irq_force(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
-    }
-}
-impl Default for IrqForce {
-    fn default() -> IrqForce {
-        IrqForce(0)
-    }
-}
 #[doc = "Control behaviour of the input/output shift registers for state machine 3"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -660,59 +698,21 @@ impl Default for SmShiftctrl {
         SmShiftctrl(0)
     }
 }
-#[doc = "PIO control register"]
+#[doc = "Interrupt request register. Write 1 to clear"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Ctrl(pub u32);
-impl Ctrl {
-    #[doc = "Enable state machine"]
-    pub const fn sm_enable(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0x0f;
+pub struct Irq(pub u32);
+impl Irq {
+    pub const fn irq(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0xff;
         val as u8
     }
-    #[doc = "Enable state machine"]
-    pub fn set_sm_enable(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x0f << 0usize)) | (((val as u32) & 0x0f) << 0usize);
-    }
-    #[doc = "Clear internal SM state which is otherwise difficult to access (e.g. shift counters). Self-clearing."]
-    pub const fn sm_restart(&self) -> u8 {
-        let val = (self.0 >> 4usize) & 0x0f;
-        val as u8
-    }
-    #[doc = "Clear internal SM state which is otherwise difficult to access (e.g. shift counters). Self-clearing."]
-    pub fn set_sm_restart(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x0f << 4usize)) | (((val as u32) & 0x0f) << 4usize);
-    }
-    #[doc = "Force clock dividers to restart their count and clear fractional accumulators. Restart multiple dividers to synchronise them."]
-    pub const fn clkdiv_restart(&self) -> u8 {
-        let val = (self.0 >> 8usize) & 0x0f;
-        val as u8
-    }
-    #[doc = "Force clock dividers to restart their count and clear fractional accumulators. Restart multiple dividers to synchronise them."]
-    pub fn set_clkdiv_restart(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x0f << 8usize)) | (((val as u32) & 0x0f) << 8usize);
+    pub fn set_irq(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
     }
 }
-impl Default for Ctrl {
-    fn default() -> Ctrl {
-        Ctrl(0)
-    }
-}
-#[doc = "Current instruction address of state machine 2"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct SmAddr(pub u32);
-impl SmAddr {
-    pub const fn addr(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0x1f;
-        val as u8
-    }
-    pub fn set_addr(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x1f << 0usize)) | (((val as u32) & 0x1f) << 0usize);
-    }
-}
-impl Default for SmAddr {
-    fn default() -> SmAddr {
-        SmAddr(0)
+impl Default for Irq {
+    fn default() -> Irq {
+        Irq(0)
     }
 }

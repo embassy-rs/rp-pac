@@ -1,5 +1,13 @@
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+pub struct DataSize(pub u8);
+impl DataSize {
+    pub const SIZE_BYTE: Self = Self(0);
+    pub const SIZE_HALFWORD: Self = Self(0x01);
+    pub const SIZE_WORD: Self = Self(0x02);
+}
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub struct Calc(pub u8);
 impl Calc {
     #[doc = "Calculate a CRC-32 (IEEE802.3 polynomial)"]
@@ -29,12 +37,4 @@ impl TreqSel {
     pub const TIMER3: Self = Self(0x3e);
     #[doc = "Permanent request, for unpaced transfers."]
     pub const PERMANENT: Self = Self(0x3f);
-}
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-pub struct DataSize(pub u8);
-impl DataSize {
-    pub const SIZE_BYTE: Self = Self(0);
-    pub const SIZE_HALFWORD: Self = Self(0x01);
-    pub const SIZE_WORD: Self = Self(0x02);
 }
