@@ -5,114 +5,142 @@ unsafe impl Send for XipSsi {}
 unsafe impl Sync for XipSsi {}
 impl XipSsi {
     #[doc = "Control register 0"]
+    #[inline(always)]
     pub fn ctrlr0(self) -> crate::common::Reg<regs::Ctrlr0, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(0usize)) }
     }
     #[doc = "Master Control register 1"]
+    #[inline(always)]
     pub fn ctrlr1(self) -> crate::common::Reg<regs::Ctrlr1, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(4usize)) }
     }
     #[doc = "SSI Enable"]
+    #[inline(always)]
     pub fn ssienr(self) -> crate::common::Reg<regs::Ssienr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(8usize)) }
     }
     #[doc = "Microwire Control"]
+    #[inline(always)]
     pub fn mwcr(self) -> crate::common::Reg<regs::Mwcr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(12usize)) }
     }
     #[doc = "Slave enable"]
+    #[inline(always)]
     pub fn ser(self) -> crate::common::Reg<regs::Ser, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(16usize)) }
     }
     #[doc = "Baud rate"]
+    #[inline(always)]
     pub fn baudr(self) -> crate::common::Reg<regs::Baudr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(20usize)) }
     }
     #[doc = "TX FIFO threshold level"]
+    #[inline(always)]
     pub fn txftlr(self) -> crate::common::Reg<regs::Txftlr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(24usize)) }
     }
     #[doc = "RX FIFO threshold level"]
+    #[inline(always)]
     pub fn rxftlr(self) -> crate::common::Reg<regs::Rxftlr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(28usize)) }
     }
     #[doc = "TX FIFO level"]
+    #[inline(always)]
     pub fn txflr(self) -> crate::common::Reg<regs::Txflr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(32usize)) }
     }
     #[doc = "RX FIFO level"]
+    #[inline(always)]
     pub fn rxflr(self) -> crate::common::Reg<regs::Rxflr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(36usize)) }
     }
     #[doc = "Status register"]
+    #[inline(always)]
     pub fn sr(self) -> crate::common::Reg<regs::Sr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(40usize)) }
     }
     #[doc = "Interrupt mask"]
+    #[inline(always)]
     pub fn imr(self) -> crate::common::Reg<regs::Imr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(44usize)) }
     }
     #[doc = "Interrupt status"]
+    #[inline(always)]
     pub fn isr(self) -> crate::common::Reg<regs::Isr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(48usize)) }
     }
     #[doc = "Raw interrupt status"]
+    #[inline(always)]
     pub fn risr(self) -> crate::common::Reg<regs::Risr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(52usize)) }
     }
     #[doc = "TX FIFO overflow interrupt clear"]
+    #[inline(always)]
     pub fn txoicr(self) -> crate::common::Reg<regs::Txoicr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(56usize)) }
     }
     #[doc = "RX FIFO overflow interrupt clear"]
+    #[inline(always)]
     pub fn rxoicr(self) -> crate::common::Reg<regs::Rxoicr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(60usize)) }
     }
     #[doc = "RX FIFO underflow interrupt clear"]
+    #[inline(always)]
     pub fn rxuicr(self) -> crate::common::Reg<regs::Rxuicr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(64usize)) }
     }
     #[doc = "Multi-master interrupt clear"]
+    #[inline(always)]
     pub fn msticr(self) -> crate::common::Reg<regs::Msticr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(68usize)) }
     }
     #[doc = "Interrupt clear"]
+    #[inline(always)]
     pub fn icr(self) -> crate::common::Reg<regs::Icr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(72usize)) }
     }
     #[doc = "DMA control"]
+    #[inline(always)]
     pub fn dmacr(self) -> crate::common::Reg<regs::Dmacr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(76usize)) }
     }
     #[doc = "DMA TX data level"]
+    #[inline(always)]
     pub fn dmatdlr(self) -> crate::common::Reg<regs::Dmatdlr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(80usize)) }
     }
     #[doc = "DMA RX data level"]
+    #[inline(always)]
     pub fn dmardlr(self) -> crate::common::Reg<regs::Dmardlr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(84usize)) }
     }
     #[doc = "Identification register"]
+    #[inline(always)]
     pub fn idr(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(88usize)) }
     }
     #[doc = "Version ID"]
+    #[inline(always)]
     pub fn ssi_version_id(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(92usize)) }
     }
     #[doc = "Data Register 0 (of 36)"]
+    #[inline(always)]
     pub fn dr0(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(96usize)) }
     }
     #[doc = "RX sample delay"]
+    #[inline(always)]
     pub fn rx_sample_dly(self) -> crate::common::Reg<regs::RxSampleDly, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(240usize)) }
     }
     #[doc = "SPI control"]
+    #[inline(always)]
     pub fn spi_ctrlr0(self) -> crate::common::Reg<regs::SpiCtrlr0, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(244usize)) }
     }
     #[doc = "TX drive edge"]
+    #[inline(always)]
     pub fn txd_drive_edge(self) -> crate::common::Reg<regs::TxdDriveEdge, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(248usize)) }
     }

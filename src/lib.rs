@@ -1,5 +1,5 @@
 #![no_std]
-#![doc = "Peripheral access API (generated using svd2rust v0.1.0 (c53af6b 2021-06-25))"]
+#![doc = "Peripheral access API (generated using chiptool v0.1.0 (28ffa8a 2022-06-06))"]
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub enum Interrupt {
     #[doc = "0 - TIMER_IRQ_0"]
@@ -87,7 +87,7 @@ pub const UART0: uart::Uart = uart::Uart(0x4003_4000 as u32 as _);
 pub const UART1: uart::Uart = uart::Uart(0x4003_8000 as u32 as _);
 pub const SPI0: spi::Spi = spi::Spi(0x4003_c000 as u32 as _);
 pub const SPI1: spi::Spi = spi::Spi(0x4004_0000 as u32 as _);
-#[doc = "DW_apb_i2c address block"]
+#[doc = "DW_apb_i2c address block List of configuration constants for the Synopsys I2C hardware (you may see references to these in I2C register header; these are *fixed* values, set at hardware design time): IC_ULTRA_FAST_MODE ................ 0x0 IC_UFM_TBUF_CNT_DEFAULT ........... 0x8 IC_UFM_SCL_LOW_COUNT .............. 0x0008 IC_UFM_SCL_HIGH_COUNT ............. 0x0006 IC_TX_TL .......................... 0x0 IC_TX_CMD_BLOCK ................... 0x1 IC_HAS_DMA ........................ 0x1 IC_HAS_ASYNC_FIFO ................. 0x0 IC_SMBUS_ARP ...................... 0x0 IC_FIRST_DATA_BYTE_STATUS ......... 0x1 IC_INTR_IO ........................ 0x1 IC_MASTER_MODE .................... 0x1 IC_DEFAULT_ACK_GENERAL_CALL ....... 0x1 IC_INTR_POL ....................... 0x1 IC_OPTIONAL_SAR ................... 0x0 IC_DEFAULT_TAR_SLAVE_ADDR ......... 0x055 IC_DEFAULT_SLAVE_ADDR ............. 0x055 IC_DEFAULT_HS_SPKLEN .............. 0x1 IC_FS_SCL_HIGH_COUNT .............. 0x0006 IC_HS_SCL_LOW_COUNT ............... 0x0008 IC_DEVICE_ID_VALUE ................ 0x0 IC_10BITADDR_MASTER ............... 0x0 IC_CLK_FREQ_OPTIMIZATION .......... 0x0 IC_DEFAULT_FS_SPKLEN .............. 0x7 IC_ADD_ENCODED_PARAMS ............. 0x0 IC_DEFAULT_SDA_HOLD ............... 0x000001 IC_DEFAULT_SDA_SETUP .............. 0x64 IC_AVOID_RX_FIFO_FLUSH_ON_TX_ABRT . 0x0 IC_CLOCK_PERIOD ................... 100 IC_EMPTYFIFO_HOLD_MASTER_EN ....... 1 IC_RESTART_EN ..................... 0x1 IC_TX_CMD_BLOCK_DEFAULT ........... 0x0 IC_BUS_CLEAR_FEATURE .............. 0x0 IC_CAP_LOADING .................... 100 IC_FS_SCL_LOW_COUNT ............... 0x000d APB_DATA_WIDTH .................... 32 IC_SDA_STUCK_TIMEOUT_DEFAULT ...... 0xffffffff IC_SLV_DATA_NACK_ONLY ............. 0x1 IC_10BITADDR_SLAVE ................ 0x0 IC_CLK_TYPE ....................... 0x0 IC_SMBUS_UDID_MSB ................. 0x0 IC_SMBUS_SUSPEND_ALERT ............ 0x0 IC_HS_SCL_HIGH_COUNT .............. 0x0006 IC_SLV_RESTART_DET_EN ............. 0x1 IC_SMBUS .......................... 0x0 IC_OPTIONAL_SAR_DEFAULT ........... 0x0 IC_PERSISTANT_SLV_ADDR_DEFAULT .... 0x0 IC_USE_COUNTS ..................... 0x0 IC_RX_BUFFER_DEPTH ................ 16 IC_SCL_STUCK_TIMEOUT_DEFAULT ...... 0xffffffff IC_RX_FULL_HLD_BUS_EN ............. 0x1 IC_SLAVE_DISABLE .................. 0x1 IC_RX_TL .......................... 0x0 IC_DEVICE_ID ...................... 0x0 IC_HC_COUNT_VALUES ................ 0x0 I2C_DYNAMIC_TAR_UPDATE ............ 0 IC_SMBUS_CLK_LOW_MEXT_DEFAULT ..... 0xffffffff IC_SMBUS_CLK_LOW_SEXT_DEFAULT ..... 0xffffffff IC_HS_MASTER_CODE ................. 0x1 IC_SMBUS_RST_IDLE_CNT_DEFAULT ..... 0xffff IC_SMBUS_UDID_LSB_DEFAULT ......... 0xffffffff IC_SS_SCL_HIGH_COUNT .............. 0x0028 IC_SS_SCL_LOW_COUNT ............... 0x002f IC_MAX_SPEED_MODE ................. 0x2 IC_STAT_FOR_CLK_STRETCH ........... 0x0 IC_STOP_DET_IF_MASTER_ACTIVE ...... 0x0 IC_DEFAULT_UFM_SPKLEN ............. 0x1 IC_TX_BUFFER_DEPTH ................ 16"]
 pub const I2C0: i2c::I2c = i2c::I2c(0x4004_4000 as u32 as _);
 pub const I2C1: i2c::I2c = i2c::I2c(0x4004_8000 as u32 as _);
 #[doc = "Control and data interface to SAR ADC"]
@@ -107,6 +107,8 @@ pub const VREG_AND_CHIP_RESET: vreg_and_chip_reset::VregAndChipReset =
 pub const TBMAN: tbman::Tbman = tbman::Tbman(0x4006_c000 as u32 as _);
 #[doc = "DMA with separate read and write masters"]
 pub const DMA: dma::Dma = dma::Dma(0x5000_0000 as u32 as _);
+#[doc = "DPRAM layout for USB device."]
+pub const USBCTRL_DPRAM: usb_dpram::UsbDpram = usb_dpram::UsbDpram(0x5010_0000 as u32 as _);
 #[doc = "USB FS/LS controller device registers"]
 pub const USBCTRL_REGS: usb::Usb = usb::Usb(0x5011_0000 as u32 as _);
 #[doc = "Programmable IO block"]
@@ -137,6 +139,7 @@ pub mod tbman;
 pub mod timer;
 pub mod uart;
 pub mod usb;
+pub mod usb_dpram;
 pub mod vreg_and_chip_reset;
 pub mod watchdog;
 pub mod xip_ctrl;

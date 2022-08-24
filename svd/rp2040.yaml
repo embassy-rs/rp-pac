@@ -282,6 +282,9 @@ transforms:
       fieldset: busctrl::regs::(Perfctr|Perfsel)\d+
       from: (perfctr|perfsel)\d
       to: $1
+  - MergeEnums:
+      from: busctrl::vals::Perfsel\d+
+      to: busctrl::vals::Perfsel
   - MergeFieldsets:
       from: busctrl::regs::(Perfctr|Perfsel)\d+
       to: busctrl::regs::$1
@@ -312,6 +315,32 @@ transforms:
       blocks: usb::Usb
       from: addr_endp\d+
       to: addr_endp_x
+  - MakeFieldArray:
+      fieldsets: usb::regs::(BuffStatus|BuffCpuShouldHandle|EpAbort|EpAbortDone|EpStatusStallNak)
+      from: ep\d+_(.*)
+      to: ep_$1
+
+  - Rename:
+      from: usbctrl_dpram::(.*)
+      to: usb_dpram::$1
+  - MergeEnums:
+      from: usb_dpram::vals::Ep\d+(In|Out)(.*)
+      to: usb_dpram::vals::Ep$2
+  - MergeFieldsets:
+      from: usb_dpram::regs::Ep\d+(In|Out)(.*)
+      to: usb_dpram::regs::Ep$2
+  - Rename:
+      from: usb_dpram::UsbctrlDpram
+      to: usb_dpram::UsbDpram
+  - MakeRegisterArray:
+      blocks: usb_dpram::UsbDpram
+      from: ep\d+(.*)
+      to: ep$1
+  - MakeFieldArray:
+      fieldsets: usb_dpram::regs::.*BufferControl
+      from: (.*)_[01]
+      to: $1
+
 
   # =========== Misc
   - MergeEnums:
@@ -331,3 +360,4 @@ transforms:
       from: io_qspi::.*
   - Delete:
       from: pads_qspi::.*
+  - Sanitize: {}

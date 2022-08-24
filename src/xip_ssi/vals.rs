@@ -1,16 +1,5 @@
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-pub struct SpiFrf(pub u8);
-impl SpiFrf {
-    #[doc = "Standard 1-bit SPI frame format; 1 bit per SCK, full-duplex"]
-    pub const STD: Self = Self(0);
-    #[doc = "Dual-SPI frame format; two bits per SCK, half-duplex"]
-    pub const DUAL: Self = Self(0x01);
-    #[doc = "Quad-SPI frame format; four bits per SCK, half-duplex"]
-    pub const QUAD: Self = Self(0x02);
-}
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub struct TransType(pub u8);
 impl TransType {
     #[doc = "Command and address both in standard SPI frame format"]
@@ -45,4 +34,15 @@ impl InstL {
     pub const _8B: Self = Self(0x02);
     #[doc = "16-bit instruction"]
     pub const _16B: Self = Self(0x03);
+}
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+pub struct SpiFrf(pub u8);
+impl SpiFrf {
+    #[doc = "Standard 1-bit SPI frame format; 1 bit per SCK, full-duplex"]
+    pub const STD: Self = Self(0);
+    #[doc = "Dual-SPI frame format; two bits per SCK, half-duplex"]
+    pub const DUAL: Self = Self(0x01);
+    #[doc = "Quad-SPI frame format; four bits per SCK, half-duplex"]
+    pub const QUAD: Self = Self(0x02);
 }
