@@ -1,22 +1,22 @@
-#[doc = "For each bit, if 1, bypass the input synchronizer between that GPIO and the GPIO input register in the SIO. The input synchronizers should generally be unbypassed, to avoid injecting metastabilities into processors. If you're feeling brave, you can bypass to save two cycles of input latency. This register applies to GPIO 30...35 (the QSPI IOs)."]
+#[doc = "For each bit, if 1, bypass the input synchronizer between that GPIO and the GPIO input register in the SIO. The input synchronizers should generally be unbypassed, to avoid injecting metastabilities into processors. If you're feeling brave, you can bypass to save two cycles of input latency. This register applies to GPIO 0...29."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct ProcInSyncBypassHi(pub u32);
-impl ProcInSyncBypassHi {
+pub struct ProcInSyncBypass(pub u32);
+impl ProcInSyncBypass {
     #[inline(always)]
-    pub const fn proc_in_sync_bypass_hi(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0x3f;
-        val as u8
+    pub const fn proc_in_sync_bypass(&self) -> u32 {
+        let val = (self.0 >> 0usize) & 0x3fff_ffff;
+        val as u32
     }
     #[inline(always)]
-    pub fn set_proc_in_sync_bypass_hi(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x3f << 0usize)) | (((val as u32) & 0x3f) << 0usize);
+    pub fn set_proc_in_sync_bypass(&mut self, val: u32) {
+        self.0 = (self.0 & !(0x3fff_ffff << 0usize)) | (((val as u32) & 0x3fff_ffff) << 0usize);
     }
 }
-impl Default for ProcInSyncBypassHi {
+impl Default for ProcInSyncBypass {
     #[inline(always)]
-    fn default() -> ProcInSyncBypassHi {
-        ProcInSyncBypassHi(0)
+    fn default() -> ProcInSyncBypass {
+        ProcInSyncBypass(0)
     }
 }
 #[doc = "Configuration for processors"]
@@ -73,6 +73,27 @@ impl Default for ProcConfig {
     #[inline(always)]
     fn default() -> ProcConfig {
         ProcConfig(0)
+    }
+}
+#[doc = "For each bit, if 1, bypass the input synchronizer between that GPIO and the GPIO input register in the SIO. The input synchronizers should generally be unbypassed, to avoid injecting metastabilities into processors. If you're feeling brave, you can bypass to save two cycles of input latency. This register applies to GPIO 30...35 (the QSPI IOs)."]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct ProcInSyncBypassHi(pub u32);
+impl ProcInSyncBypassHi {
+    #[inline(always)]
+    pub const fn proc_in_sync_bypass_hi(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0x3f;
+        val as u8
+    }
+    #[inline(always)]
+    pub fn set_proc_in_sync_bypass_hi(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x3f << 0usize)) | (((val as u32) & 0x3f) << 0usize);
+    }
+}
+impl Default for ProcInSyncBypassHi {
+    #[inline(always)]
+    fn default() -> ProcInSyncBypassHi {
+        ProcInSyncBypassHi(0)
     }
 }
 #[doc = "Control power downs to memories. Set high to power down memories. Use with extreme caution"]
@@ -257,26 +278,5 @@ impl Default for Dbgforce {
     #[inline(always)]
     fn default() -> Dbgforce {
         Dbgforce(0)
-    }
-}
-#[doc = "For each bit, if 1, bypass the input synchronizer between that GPIO and the GPIO input register in the SIO. The input synchronizers should generally be unbypassed, to avoid injecting metastabilities into processors. If you're feeling brave, you can bypass to save two cycles of input latency. This register applies to GPIO 0...29."]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct ProcInSyncBypass(pub u32);
-impl ProcInSyncBypass {
-    #[inline(always)]
-    pub const fn proc_in_sync_bypass(&self) -> u32 {
-        let val = (self.0 >> 0usize) & 0x3fff_ffff;
-        val as u32
-    }
-    #[inline(always)]
-    pub fn set_proc_in_sync_bypass(&mut self, val: u32) {
-        self.0 = (self.0 & !(0x3fff_ffff << 0usize)) | (((val as u32) & 0x3fff_ffff) << 0usize);
-    }
-}
-impl Default for ProcInSyncBypass {
-    #[inline(always)]
-    fn default() -> ProcInSyncBypass {
-        ProcInSyncBypass(0)
     }
 }

@@ -1,4 +1,30 @@
 #[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Gpio(pub *mut u8);
+unsafe impl Send for Gpio {}
+unsafe impl Sync for Gpio {}
+impl Gpio {
+    #[doc = "QSPI output value"]
+    #[inline(always)]
+    pub fn value(self) -> crate::common::Reg<u32, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.0.add(0usize)) }
+    }
+    #[doc = "QSPI output value set"]
+    #[inline(always)]
+    pub fn value_set(self) -> crate::common::Reg<u32, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.0.add(4usize)) }
+    }
+    #[doc = "QSPI output value clear"]
+    #[inline(always)]
+    pub fn value_clr(self) -> crate::common::Reg<u32, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.0.add(8usize)) }
+    }
+    #[doc = "QSPI output value XOR"]
+    #[inline(always)]
+    pub fn value_xor(self) -> crate::common::Reg<u32, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.0.add(12usize)) }
+    }
+}
+#[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Interp(pub *mut u8);
 unsafe impl Send for Interp {}
 unsafe impl Sync for Interp {}
@@ -126,40 +152,35 @@ impl Sio {
         unsafe { crate::common::Reg::from_ptr(self.0.add(4usize + n * 4usize)) }
     }
     #[inline(always)]
-    pub fn gpio_oe(self, n: usize) -> Gpio {
-        assert!(n < 2usize);
-        unsafe { Gpio(self.0.add(32usize + n * 32usize)) }
-    }
-    #[inline(always)]
     pub fn gpio_out(self, n: usize) -> Gpio {
         assert!(n < 2usize);
         unsafe { Gpio(self.0.add(16usize + n * 32usize)) }
     }
+    #[inline(always)]
+    pub fn gpio_oe(self, n: usize) -> Gpio {
+        assert!(n < 2usize);
+        unsafe { Gpio(self.0.add(32usize + n * 32usize)) }
+    }
 }
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Gpio(pub *mut u8);
-unsafe impl Send for Gpio {}
-unsafe impl Sync for Gpio {}
-impl Gpio {
-    #[doc = "GPIO output value"]
+pub struct Fifo(pub *mut u8);
+unsafe impl Send for Fifo {}
+unsafe impl Sync for Fifo {}
+impl Fifo {
+    #[doc = "Status register for inter-core FIFOs (mailboxes). There is one FIFO in the core 0 -> core 1 direction, and one core 1 -> core 0. Both are 32 bits wide and 8 words deep. Core 0 can see the read side of the 1->0 FIFO (RX), and the write side of 0->1 FIFO (TX). Core 1 can see the read side of the 0->1 FIFO (RX), and the write side of 1->0 FIFO (TX). The SIO IRQ for each core is the logical OR of the VLD, WOF and ROE fields of its FIFO_ST register."]
     #[inline(always)]
-    pub fn value(self) -> crate::common::Reg<u32, crate::common::RW> {
+    pub fn st(self) -> crate::common::Reg<regs::FifoSt, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(0usize)) }
     }
-    #[doc = "GPIO output value set"]
+    #[doc = "Write access to this core's TX FIFO"]
     #[inline(always)]
-    pub fn value_set(self) -> crate::common::Reg<u32, crate::common::RW> {
+    pub fn wr(self) -> crate::common::Reg<u32, crate::common::W> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(4usize)) }
     }
-    #[doc = "GPIO output value clear"]
+    #[doc = "Read access to this core's RX FIFO"]
     #[inline(always)]
-    pub fn value_clr(self) -> crate::common::Reg<u32, crate::common::RW> {
+    pub fn rd(self) -> crate::common::Reg<u32, crate::common::R> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(8usize)) }
-    }
-    #[doc = "GPIO output value XOR"]
-    #[inline(always)]
-    pub fn value_xor(self) -> crate::common::Reg<u32, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(12usize)) }
     }
 }
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -201,27 +222,6 @@ impl Div {
     #[inline(always)]
     pub fn csr(self) -> crate::common::Reg<regs::DivCsr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(24usize)) }
-    }
-}
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Fifo(pub *mut u8);
-unsafe impl Send for Fifo {}
-unsafe impl Sync for Fifo {}
-impl Fifo {
-    #[doc = "Status register for inter-core FIFOs (mailboxes). There is one FIFO in the core 0 -> core 1 direction, and one core 1 -> core 0. Both are 32 bits wide and 8 words deep. Core 0 can see the read side of the 1->0 FIFO (RX), and the write side of 0->1 FIFO (TX). Core 1 can see the read side of the 0->1 FIFO (RX), and the write side of 1->0 FIFO (TX). The SIO IRQ for each core is the logical OR of the VLD, WOF and ROE fields of its FIFO_ST register."]
-    #[inline(always)]
-    pub fn st(self) -> crate::common::Reg<regs::FifoSt, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(0usize)) }
-    }
-    #[doc = "Write access to this core's TX FIFO"]
-    #[inline(always)]
-    pub fn wr(self) -> crate::common::Reg<u32, crate::common::W> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(4usize)) }
-    }
-    #[doc = "Read access to this core's RX FIFO"]
-    #[inline(always)]
-    pub fn rd(self) -> crate::common::Reg<u32, crate::common::R> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(8usize)) }
     }
 }
 pub mod regs;

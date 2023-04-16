@@ -1,48 +1,3 @@
-#[doc = "Cache Status"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Stat(pub u32);
-impl Stat {
-    #[doc = "Reads as 0 while a cache flush is in progress, and 1 otherwise. The cache is flushed whenever the XIP block is reset, and also when requested via the FLUSH register."]
-    #[inline(always)]
-    pub const fn flush_ready(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Reads as 0 while a cache flush is in progress, and 1 otherwise. The cache is flushed whenever the XIP block is reset, and also when requested via the FLUSH register."]
-    #[inline(always)]
-    pub fn set_flush_ready(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-    }
-    #[doc = "When 1, indicates the XIP streaming FIFO is completely empty."]
-    #[inline(always)]
-    pub const fn fifo_empty(&self) -> bool {
-        let val = (self.0 >> 1usize) & 0x01;
-        val != 0
-    }
-    #[doc = "When 1, indicates the XIP streaming FIFO is completely empty."]
-    #[inline(always)]
-    pub fn set_fifo_empty(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
-    }
-    #[doc = "When 1, indicates the XIP streaming FIFO is completely full. The streaming FIFO is 2 entries deep, so the full and empty flag allow its level to be ascertained."]
-    #[inline(always)]
-    pub const fn fifo_full(&self) -> bool {
-        let val = (self.0 >> 2usize) & 0x01;
-        val != 0
-    }
-    #[doc = "When 1, indicates the XIP streaming FIFO is completely full. The streaming FIFO is 2 entries deep, so the full and empty flag allow its level to be ascertained."]
-    #[inline(always)]
-    pub fn set_fifo_full(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
-    }
-}
-impl Default for Stat {
-    #[inline(always)]
-    fn default() -> Stat {
-        Stat(0)
-    }
-}
 #[doc = "FIFO stream control"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -155,5 +110,50 @@ impl Default for Ctrl {
     #[inline(always)]
     fn default() -> Ctrl {
         Ctrl(0)
+    }
+}
+#[doc = "Cache Status"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Stat(pub u32);
+impl Stat {
+    #[doc = "Reads as 0 while a cache flush is in progress, and 1 otherwise. The cache is flushed whenever the XIP block is reset, and also when requested via the FLUSH register."]
+    #[inline(always)]
+    pub const fn flush_ready(&self) -> bool {
+        let val = (self.0 >> 0usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Reads as 0 while a cache flush is in progress, and 1 otherwise. The cache is flushed whenever the XIP block is reset, and also when requested via the FLUSH register."]
+    #[inline(always)]
+    pub fn set_flush_ready(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+    }
+    #[doc = "When 1, indicates the XIP streaming FIFO is completely empty."]
+    #[inline(always)]
+    pub const fn fifo_empty(&self) -> bool {
+        let val = (self.0 >> 1usize) & 0x01;
+        val != 0
+    }
+    #[doc = "When 1, indicates the XIP streaming FIFO is completely empty."]
+    #[inline(always)]
+    pub fn set_fifo_empty(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
+    }
+    #[doc = "When 1, indicates the XIP streaming FIFO is completely full. The streaming FIFO is 2 entries deep, so the full and empty flag allow its level to be ascertained."]
+    #[inline(always)]
+    pub const fn fifo_full(&self) -> bool {
+        let val = (self.0 >> 2usize) & 0x01;
+        val != 0
+    }
+    #[doc = "When 1, indicates the XIP streaming FIFO is completely full. The streaming FIFO is 2 entries deep, so the full and empty flag allow its level to be ascertained."]
+    #[inline(always)]
+    pub fn set_fifo_full(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
+    }
+}
+impl Default for Stat {
+    #[inline(always)]
+    fn default() -> Stat {
+        Stat(0)
     }
 }

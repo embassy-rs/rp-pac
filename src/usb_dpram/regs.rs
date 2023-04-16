@@ -1,72 +1,3 @@
-#[doc = "Bytes 0-3 of the SETUP packet from the host."]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct SetupPacketLow(pub u32);
-impl SetupPacketLow {
-    #[inline(always)]
-    pub const fn bmrequesttype(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0xff;
-        val as u8
-    }
-    #[inline(always)]
-    pub fn set_bmrequesttype(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
-    }
-    #[inline(always)]
-    pub const fn brequest(&self) -> u8 {
-        let val = (self.0 >> 8usize) & 0xff;
-        val as u8
-    }
-    #[inline(always)]
-    pub fn set_brequest(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 8usize)) | (((val as u32) & 0xff) << 8usize);
-    }
-    #[inline(always)]
-    pub const fn wvalue(&self) -> u16 {
-        let val = (self.0 >> 16usize) & 0xffff;
-        val as u16
-    }
-    #[inline(always)]
-    pub fn set_wvalue(&mut self, val: u16) {
-        self.0 = (self.0 & !(0xffff << 16usize)) | (((val as u32) & 0xffff) << 16usize);
-    }
-}
-impl Default for SetupPacketLow {
-    #[inline(always)]
-    fn default() -> SetupPacketLow {
-        SetupPacketLow(0)
-    }
-}
-#[doc = "Bytes 4-7 of the setup packet from the host."]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct SetupPacketHigh(pub u32);
-impl SetupPacketHigh {
-    #[inline(always)]
-    pub const fn windex(&self) -> u16 {
-        let val = (self.0 >> 0usize) & 0xffff;
-        val as u16
-    }
-    #[inline(always)]
-    pub fn set_windex(&mut self, val: u16) {
-        self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
-    }
-    #[inline(always)]
-    pub const fn wlength(&self) -> u16 {
-        let val = (self.0 >> 16usize) & 0xffff;
-        val as u16
-    }
-    #[inline(always)]
-    pub fn set_wlength(&mut self, val: u16) {
-        self.0 = (self.0 & !(0xffff << 16usize)) | (((val as u32) & 0xffff) << 16usize);
-    }
-}
-impl Default for SetupPacketHigh {
-    #[inline(always)]
-    fn default() -> SetupPacketHigh {
-        SetupPacketHigh(0)
-    }
-}
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct EpControl(pub u32);
@@ -207,19 +138,19 @@ impl EpBufferControl {
     ) {
         self.0 = (self.0 & !(0x03 << 27usize)) | (((val.0 as u32) & 0x03) << 27usize);
     }
-    #[doc = "The data pid of buffer 0."]
+    #[doc = "Buffer 0 is the last buffer of the transfer."]
     #[inline(always)]
-    pub fn pid(&self, n: usize) -> bool {
+    pub fn last(&self, n: usize) -> bool {
         assert!(n < 2usize);
-        let offs = 13usize + n * 16usize;
+        let offs = 14usize + n * 16usize;
         let val = (self.0 >> offs) & 0x01;
         val != 0
     }
-    #[doc = "The data pid of buffer 0."]
+    #[doc = "Buffer 0 is the last buffer of the transfer."]
     #[inline(always)]
-    pub fn set_pid(&mut self, n: usize, val: bool) {
+    pub fn set_last(&mut self, n: usize, val: bool) {
         assert!(n < 2usize);
-        let offs = 13usize + n * 16usize;
+        let offs = 14usize + n * 16usize;
         self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
     }
     #[doc = "Buffer 0 is full. For an IN transfer (TX to the host) the bit is set to indicate the data is valid. For an OUT transfer (RX from the host) this bit should be left as a 0. The host will set it when it has filled the buffer with data."]
@@ -252,19 +183,19 @@ impl EpBufferControl {
         let offs = 0usize + n * 16usize;
         self.0 = (self.0 & !(0x03ff << offs)) | (((val as u32) & 0x03ff) << offs);
     }
-    #[doc = "Buffer 0 is the last buffer of the transfer."]
+    #[doc = "The data pid of buffer 0."]
     #[inline(always)]
-    pub fn last(&self, n: usize) -> bool {
+    pub fn pid(&self, n: usize) -> bool {
         assert!(n < 2usize);
-        let offs = 14usize + n * 16usize;
+        let offs = 13usize + n * 16usize;
         let val = (self.0 >> offs) & 0x01;
         val != 0
     }
-    #[doc = "Buffer 0 is the last buffer of the transfer."]
+    #[doc = "The data pid of buffer 0."]
     #[inline(always)]
-    pub fn set_last(&mut self, n: usize, val: bool) {
+    pub fn set_pid(&mut self, n: usize, val: bool) {
         assert!(n < 2usize);
-        let offs = 14usize + n * 16usize;
+        let offs = 13usize + n * 16usize;
         self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
     }
     #[doc = "Buffer 0 is available. This bit is set to indicate the buffer can be used by the controller. The controller clears the available bit when writing the status back."]
@@ -287,5 +218,74 @@ impl Default for EpBufferControl {
     #[inline(always)]
     fn default() -> EpBufferControl {
         EpBufferControl(0)
+    }
+}
+#[doc = "Bytes 4-7 of the setup packet from the host."]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct SetupPacketHigh(pub u32);
+impl SetupPacketHigh {
+    #[inline(always)]
+    pub const fn windex(&self) -> u16 {
+        let val = (self.0 >> 0usize) & 0xffff;
+        val as u16
+    }
+    #[inline(always)]
+    pub fn set_windex(&mut self, val: u16) {
+        self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
+    }
+    #[inline(always)]
+    pub const fn wlength(&self) -> u16 {
+        let val = (self.0 >> 16usize) & 0xffff;
+        val as u16
+    }
+    #[inline(always)]
+    pub fn set_wlength(&mut self, val: u16) {
+        self.0 = (self.0 & !(0xffff << 16usize)) | (((val as u32) & 0xffff) << 16usize);
+    }
+}
+impl Default for SetupPacketHigh {
+    #[inline(always)]
+    fn default() -> SetupPacketHigh {
+        SetupPacketHigh(0)
+    }
+}
+#[doc = "Bytes 0-3 of the SETUP packet from the host."]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct SetupPacketLow(pub u32);
+impl SetupPacketLow {
+    #[inline(always)]
+    pub const fn bmrequesttype(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0xff;
+        val as u8
+    }
+    #[inline(always)]
+    pub fn set_bmrequesttype(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
+    }
+    #[inline(always)]
+    pub const fn brequest(&self) -> u8 {
+        let val = (self.0 >> 8usize) & 0xff;
+        val as u8
+    }
+    #[inline(always)]
+    pub fn set_brequest(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 8usize)) | (((val as u32) & 0xff) << 8usize);
+    }
+    #[inline(always)]
+    pub const fn wvalue(&self) -> u16 {
+        let val = (self.0 >> 16usize) & 0xffff;
+        val as u16
+    }
+    #[inline(always)]
+    pub fn set_wvalue(&mut self, val: u16) {
+        self.0 = (self.0 & !(0xffff << 16usize)) | (((val as u32) & 0xffff) << 16usize);
+    }
+}
+impl Default for SetupPacketLow {
+    #[inline(always)]
+    fn default() -> SetupPacketLow {
+        SetupPacketLow(0)
     }
 }

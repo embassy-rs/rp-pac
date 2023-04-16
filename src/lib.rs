@@ -1,5 +1,6 @@
 #![no_std]
-#![doc = "Peripheral access API (generated using chiptool v0.1.0 (28ffa8a 2022-06-06))"]
+#![doc = include_str!("../README.md")]
+#![allow(non_camel_case_types)]
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub enum Interrupt {
     #[doc = "0 - TIMER_IRQ_0"]
