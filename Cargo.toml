@@ -1,7 +1,10 @@
 [package]
-name = "rp2040-pac2"
-version = "0.1.0"
-edition = "2018"
+name = "rp-pac"
+version = "1.0.0"
+edition = "2021"
+license = "BSD-3-Clause"
+repository = "https://github.com/embassy-rs/rp-pac"
+description = "Peripheral Access Crate (PAC) for Raspberry Pi Silicon chips."
 
 [dependencies]
 cortex-m = "0.7.1"
