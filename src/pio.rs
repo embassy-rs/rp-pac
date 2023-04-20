@@ -1,3 +1,39 @@
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct StateMachine(pub *mut u8);
+unsafe impl Send for StateMachine {}
+unsafe impl Sync for StateMachine {}
+impl StateMachine {
+    #[doc = "Clock divisor register for state machine 3 Frequency = clock freq / (CLKDIV_INT + CLKDIV_FRAC / 256)"]
+    #[inline(always)]
+    pub fn clkdiv(self) -> crate::common::Reg<regs::SmClkdiv, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.0.add(0usize)) }
+    }
+    #[doc = "Execution/behavioural settings for state machine 3"]
+    #[inline(always)]
+    pub fn execctrl(self) -> crate::common::Reg<regs::SmExecctrl, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.0.add(4usize)) }
+    }
+    #[doc = "Control behaviour of the input/output shift registers for state machine 3"]
+    #[inline(always)]
+    pub fn shiftctrl(self) -> crate::common::Reg<regs::SmShiftctrl, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.0.add(8usize)) }
+    }
+    #[doc = "Current instruction address of state machine 3"]
+    #[inline(always)]
+    pub fn addr(self) -> crate::common::Reg<regs::SmAddr, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.0.add(12usize)) }
+    }
+    #[doc = "Read to see the instruction currently addressed by state machine 3's program counter Write to execute an instruction immediately (including jumps) and then resume execution."]
+    #[inline(always)]
+    pub fn instr(self) -> crate::common::Reg<regs::SmInstr, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.0.add(16usize)) }
+    }
+    #[doc = "State machine pin control"]
+    #[inline(always)]
+    pub fn pinctrl(self) -> crate::common::Reg<regs::SmPinctrl, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.0.add(20usize)) }
+    }
+}
 #[doc = "Programmable IO block"]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Pio(pub *mut u8);
@@ -59,12 +95,6 @@ impl Pio {
     pub fn intr(self) -> crate::common::Reg<regs::Intr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(296usize)) }
     }
-    #[doc = "Write-only access to instruction memory location 0"]
-    #[inline(always)]
-    pub fn instr_mem(self, n: usize) -> crate::common::Reg<regs::InstrMem, crate::common::RW> {
-        assert!(n < 32usize);
-        unsafe { crate::common::Reg::from_ptr(self.0.add(72usize + n * 4usize)) }
-    }
     #[doc = "Direct write access to the TX FIFO for this state machine. Each write pushes one word to the FIFO. Attempting to write to a full FIFO has no effect on the FIFO state or contents, and sets the sticky FDEBUG_TXOVER error flag for this FIFO."]
     #[inline(always)]
     pub fn txf(self, n: usize) -> crate::common::Reg<u32, crate::common::W> {
@@ -76,6 +106,12 @@ impl Pio {
     pub fn rxf(self, n: usize) -> crate::common::Reg<u32, crate::common::R> {
         assert!(n < 4usize);
         unsafe { crate::common::Reg::from_ptr(self.0.add(32usize + n * 4usize)) }
+    }
+    #[doc = "Write-only access to instruction memory location 0"]
+    #[inline(always)]
+    pub fn instr_mem(self, n: usize) -> crate::common::Reg<regs::InstrMem, crate::common::RW> {
+        assert!(n < 32usize);
+        unsafe { crate::common::Reg::from_ptr(self.0.add(72usize + n * 4usize)) }
     }
     #[inline(always)]
     pub fn sm(self, n: usize) -> StateMachine {
@@ -107,42 +143,6 @@ impl Irq {
     #[inline(always)]
     pub fn ints(self) -> crate::common::Reg<regs::Intr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(8usize)) }
-    }
-}
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct StateMachine(pub *mut u8);
-unsafe impl Send for StateMachine {}
-unsafe impl Sync for StateMachine {}
-impl StateMachine {
-    #[doc = "Clock divisor register for state machine 3 Frequency = clock freq / (CLKDIV_INT + CLKDIV_FRAC / 256)"]
-    #[inline(always)]
-    pub fn clkdiv(self) -> crate::common::Reg<regs::SmClkdiv, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(0usize)) }
-    }
-    #[doc = "Execution/behavioural settings for state machine 3"]
-    #[inline(always)]
-    pub fn execctrl(self) -> crate::common::Reg<regs::SmExecctrl, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(4usize)) }
-    }
-    #[doc = "Control behaviour of the input/output shift registers for state machine 3"]
-    #[inline(always)]
-    pub fn shiftctrl(self) -> crate::common::Reg<regs::SmShiftctrl, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(8usize)) }
-    }
-    #[doc = "Current instruction address of state machine 3"]
-    #[inline(always)]
-    pub fn addr(self) -> crate::common::Reg<regs::SmAddr, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(12usize)) }
-    }
-    #[doc = "Read to see the instruction currently addressed by state machine 3's program counter Write to execute an instruction immediately (including jumps) and then resume execution."]
-    #[inline(always)]
-    pub fn instr(self) -> crate::common::Reg<regs::SmInstr, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(16usize)) }
-    }
-    #[doc = "State machine pin control"]
-    #[inline(always)]
-    pub fn pinctrl(self) -> crate::common::Reg<regs::SmPinctrl, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(20usize)) }
     }
 }
 pub mod regs;

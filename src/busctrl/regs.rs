@@ -1,24 +1,24 @@
-#[doc = "Bus fabric performance counter 2"]
+#[doc = "Bus priority acknowledge"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Perfctr(pub u32);
-impl Perfctr {
-    #[doc = "Busfabric saturating performance counter 2 Count some event signal from the busfabric arbiters. Write any value to clear. Select an event to count using PERFSEL2"]
+pub struct BusPriorityAck(pub u32);
+impl BusPriorityAck {
+    #[doc = "Goes to 1 once all arbiters have registered the new global priority levels. Arbiters update their local priority when servicing a new nonsequential access. In normal circumstances this will happen almost immediately."]
     #[inline(always)]
-    pub const fn perfctr(&self) -> u32 {
-        let val = (self.0 >> 0usize) & 0x00ff_ffff;
-        val as u32
+    pub const fn bus_priority_ack(&self) -> bool {
+        let val = (self.0 >> 0usize) & 0x01;
+        val != 0
     }
-    #[doc = "Busfabric saturating performance counter 2 Count some event signal from the busfabric arbiters. Write any value to clear. Select an event to count using PERFSEL2"]
+    #[doc = "Goes to 1 once all arbiters have registered the new global priority levels. Arbiters update their local priority when servicing a new nonsequential access. In normal circumstances this will happen almost immediately."]
     #[inline(always)]
-    pub fn set_perfctr(&mut self, val: u32) {
-        self.0 = (self.0 & !(0x00ff_ffff << 0usize)) | (((val as u32) & 0x00ff_ffff) << 0usize);
+    pub fn set_bus_priority_ack(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
 }
-impl Default for Perfctr {
+impl Default for BusPriorityAck {
     #[inline(always)]
-    fn default() -> Perfctr {
-        Perfctr(0)
+    fn default() -> BusPriorityAck {
+        BusPriorityAck(0)
     }
 }
 #[doc = "Set the priority of each master for bus arbitration."]
@@ -100,26 +100,26 @@ impl Default for Perfsel {
         Perfsel(0)
     }
 }
-#[doc = "Bus priority acknowledge"]
+#[doc = "Bus fabric performance counter 0"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct BusPriorityAck(pub u32);
-impl BusPriorityAck {
-    #[doc = "Goes to 1 once all arbiters have registered the new global priority levels. Arbiters update their local priority when servicing a new nonsequential access. In normal circumstances this will happen almost immediately."]
+pub struct Perfctr(pub u32);
+impl Perfctr {
+    #[doc = "Busfabric saturating performance counter 0 Count some event signal from the busfabric arbiters. Write any value to clear. Select an event to count using PERFSEL0"]
     #[inline(always)]
-    pub const fn bus_priority_ack(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
-        val != 0
+    pub const fn perfctr(&self) -> u32 {
+        let val = (self.0 >> 0usize) & 0x00ff_ffff;
+        val as u32
     }
-    #[doc = "Goes to 1 once all arbiters have registered the new global priority levels. Arbiters update their local priority when servicing a new nonsequential access. In normal circumstances this will happen almost immediately."]
+    #[doc = "Busfabric saturating performance counter 0 Count some event signal from the busfabric arbiters. Write any value to clear. Select an event to count using PERFSEL0"]
     #[inline(always)]
-    pub fn set_bus_priority_ack(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+    pub fn set_perfctr(&mut self, val: u32) {
+        self.0 = (self.0 & !(0x00ff_ffff << 0usize)) | (((val as u32) & 0x00ff_ffff) << 0usize);
     }
 }
-impl Default for BusPriorityAck {
+impl Default for Perfctr {
     #[inline(always)]
-    fn default() -> BusPriorityAck {
-        BusPriorityAck(0)
+    fn default() -> Perfctr {
+        Perfctr(0)
     }
 }

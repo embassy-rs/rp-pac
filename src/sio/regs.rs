@@ -1,3 +1,58 @@
+#[doc = "Values written here are atomically added to ACCUM1 Reading yields lane 1's raw shift and mask value (BASE1 not added)."]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Interp1accum1add(pub u32);
+impl Interp1accum1add {
+    #[inline(always)]
+    pub const fn interp1_accum1_add(&self) -> u32 {
+        let val = (self.0 >> 0usize) & 0x00ff_ffff;
+        val as u32
+    }
+    #[inline(always)]
+    pub fn set_interp1_accum1_add(&mut self, val: u32) {
+        self.0 = (self.0 & !(0x00ff_ffff << 0usize)) | (((val as u32) & 0x00ff_ffff) << 0usize);
+    }
+}
+impl Default for Interp1accum1add {
+    #[inline(always)]
+    fn default() -> Interp1accum1add {
+        Interp1accum1add(0)
+    }
+}
+#[doc = "Control and status register for divider."]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct DivCsr(pub u32);
+impl DivCsr {
+    #[doc = "Reads as 0 when a calculation is in progress, 1 otherwise. Writing an operand (xDIVIDEND, xDIVISOR) will immediately start a new calculation, no matter if one is already in progress. Writing to a result register will immediately terminate any in-progress calculation and set the READY and DIRTY flags."]
+    #[inline(always)]
+    pub const fn ready(&self) -> bool {
+        let val = (self.0 >> 0usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Reads as 0 when a calculation is in progress, 1 otherwise. Writing an operand (xDIVIDEND, xDIVISOR) will immediately start a new calculation, no matter if one is already in progress. Writing to a result register will immediately terminate any in-progress calculation and set the READY and DIRTY flags."]
+    #[inline(always)]
+    pub fn set_ready(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+    }
+    #[doc = "Changes to 1 when any register is written, and back to 0 when QUOTIENT is read. Software can use this flag to make save/restore more efficient (skip if not DIRTY). If the flag is used in this way, it's recommended to either read QUOTIENT only, or REMAINDER and then QUOTIENT, to prevent data loss on context switch."]
+    #[inline(always)]
+    pub const fn dirty(&self) -> bool {
+        let val = (self.0 >> 1usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Changes to 1 when any register is written, and back to 0 when QUOTIENT is read. Software can use this flag to make save/restore more efficient (skip if not DIRTY). If the flag is used in this way, it's recommended to either read QUOTIENT only, or REMAINDER and then QUOTIENT, to prevent data loss on context switch."]
+    #[inline(always)]
+    pub fn set_dirty(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
+    }
+}
+impl Default for DivCsr {
+    #[inline(always)]
+    fn default() -> DivCsr {
+        DivCsr(0)
+    }
+}
 #[doc = "Control register for lane 0"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -140,69 +195,6 @@ impl Default for Interp1ctrlLane0 {
     #[inline(always)]
     fn default() -> Interp1ctrlLane0 {
         Interp1ctrlLane0(0)
-    }
-}
-#[doc = "Values written here are atomically added to ACCUM1 Reading yields lane 1's raw shift and mask value (BASE1 not added)."]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Interp1accum1add(pub u32);
-impl Interp1accum1add {
-    #[inline(always)]
-    pub const fn interp1_accum1_add(&self) -> u32 {
-        let val = (self.0 >> 0usize) & 0x00ff_ffff;
-        val as u32
-    }
-    #[inline(always)]
-    pub fn set_interp1_accum1_add(&mut self, val: u32) {
-        self.0 = (self.0 & !(0x00ff_ffff << 0usize)) | (((val as u32) & 0x00ff_ffff) << 0usize);
-    }
-}
-impl Default for Interp1accum1add {
-    #[inline(always)]
-    fn default() -> Interp1accum1add {
-        Interp1accum1add(0)
-    }
-}
-#[doc = "Values written here are atomically added to ACCUM1 Reading yields lane 1's raw shift and mask value (BASE1 not added)."]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Interp0accum1add(pub u32);
-impl Interp0accum1add {
-    #[inline(always)]
-    pub const fn interp0_accum1_add(&self) -> u32 {
-        let val = (self.0 >> 0usize) & 0x00ff_ffff;
-        val as u32
-    }
-    #[inline(always)]
-    pub fn set_interp0_accum1_add(&mut self, val: u32) {
-        self.0 = (self.0 & !(0x00ff_ffff << 0usize)) | (((val as u32) & 0x00ff_ffff) << 0usize);
-    }
-}
-impl Default for Interp0accum1add {
-    #[inline(always)]
-    fn default() -> Interp0accum1add {
-        Interp0accum1add(0)
-    }
-}
-#[doc = "Values written here are atomically added to ACCUM0 Reading yields lane 0's raw shift and mask value (BASE0 not added)."]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Interp0accum0add(pub u32);
-impl Interp0accum0add {
-    #[inline(always)]
-    pub const fn interp0_accum0_add(&self) -> u32 {
-        let val = (self.0 >> 0usize) & 0x00ff_ffff;
-        val as u32
-    }
-    #[inline(always)]
-    pub fn set_interp0_accum0_add(&mut self, val: u32) {
-        self.0 = (self.0 & !(0x00ff_ffff << 0usize)) | (((val as u32) & 0x00ff_ffff) << 0usize);
-    }
-}
-impl Default for Interp0accum0add {
-    #[inline(always)]
-    fn default() -> Interp0accum0add {
-        Interp0accum0add(0)
     }
 }
 #[doc = "Status register for inter-core FIFOs (mailboxes). There is one FIFO in the core 0 -> core 1 direction, and one core 1 -> core 0. Both are 32 bits wide and 8 words deep. Core 0 can see the read side of the 1->0 FIFO (RX), and the write side of 0->1 FIFO (TX). Core 1 can see the read side of the 0->1 FIFO (RX), and the write side of 1->0 FIFO (TX). The SIO IRQ for each core is the logical OR of the VLD, WOF and ROE fields of its FIFO_ST register."]
@@ -359,106 +351,6 @@ impl Default for Interp1ctrlLane1 {
     #[inline(always)]
     fn default() -> Interp1ctrlLane1 {
         Interp1ctrlLane1(0)
-    }
-}
-#[doc = "Control register for lane 1"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Interp0ctrlLane1(pub u32);
-impl Interp0ctrlLane1 {
-    #[doc = "Logical right-shift applied to accumulator before masking"]
-    #[inline(always)]
-    pub const fn shift(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0x1f;
-        val as u8
-    }
-    #[doc = "Logical right-shift applied to accumulator before masking"]
-    #[inline(always)]
-    pub fn set_shift(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x1f << 0usize)) | (((val as u32) & 0x1f) << 0usize);
-    }
-    #[doc = "The least-significant bit allowed to pass by the mask (inclusive)"]
-    #[inline(always)]
-    pub const fn mask_lsb(&self) -> u8 {
-        let val = (self.0 >> 5usize) & 0x1f;
-        val as u8
-    }
-    #[doc = "The least-significant bit allowed to pass by the mask (inclusive)"]
-    #[inline(always)]
-    pub fn set_mask_lsb(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x1f << 5usize)) | (((val as u32) & 0x1f) << 5usize);
-    }
-    #[doc = "The most-significant bit allowed to pass by the mask (inclusive) Setting MSB < LSB may cause chip to turn inside-out"]
-    #[inline(always)]
-    pub const fn mask_msb(&self) -> u8 {
-        let val = (self.0 >> 10usize) & 0x1f;
-        val as u8
-    }
-    #[doc = "The most-significant bit allowed to pass by the mask (inclusive) Setting MSB < LSB may cause chip to turn inside-out"]
-    #[inline(always)]
-    pub fn set_mask_msb(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x1f << 10usize)) | (((val as u32) & 0x1f) << 10usize);
-    }
-    #[doc = "If SIGNED is set, the shifted and masked accumulator value is sign-extended to 32 bits before adding to BASE1, and LANE1 PEEK/POP appear extended to 32 bits when read by processor."]
-    #[inline(always)]
-    pub const fn signed(&self) -> bool {
-        let val = (self.0 >> 15usize) & 0x01;
-        val != 0
-    }
-    #[doc = "If SIGNED is set, the shifted and masked accumulator value is sign-extended to 32 bits before adding to BASE1, and LANE1 PEEK/POP appear extended to 32 bits when read by processor."]
-    #[inline(always)]
-    pub fn set_signed(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
-    }
-    #[doc = "If 1, feed the opposite lane's accumulator into this lane's shift + mask hardware. Takes effect even if ADD_RAW is set (the CROSS_INPUT mux is before the shift+mask bypass)"]
-    #[inline(always)]
-    pub const fn cross_input(&self) -> bool {
-        let val = (self.0 >> 16usize) & 0x01;
-        val != 0
-    }
-    #[doc = "If 1, feed the opposite lane's accumulator into this lane's shift + mask hardware. Takes effect even if ADD_RAW is set (the CROSS_INPUT mux is before the shift+mask bypass)"]
-    #[inline(always)]
-    pub fn set_cross_input(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
-    }
-    #[doc = "If 1, feed the opposite lane's result into this lane's accumulator on POP."]
-    #[inline(always)]
-    pub const fn cross_result(&self) -> bool {
-        let val = (self.0 >> 17usize) & 0x01;
-        val != 0
-    }
-    #[doc = "If 1, feed the opposite lane's result into this lane's accumulator on POP."]
-    #[inline(always)]
-    pub fn set_cross_result(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
-    }
-    #[doc = "If 1, mask + shift is bypassed for LANE1 result. This does not affect FULL result."]
-    #[inline(always)]
-    pub const fn add_raw(&self) -> bool {
-        let val = (self.0 >> 18usize) & 0x01;
-        val != 0
-    }
-    #[doc = "If 1, mask + shift is bypassed for LANE1 result. This does not affect FULL result."]
-    #[inline(always)]
-    pub fn set_add_raw(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
-    }
-    #[doc = "ORed into bits 29:28 of the lane result presented to the processor on the bus. No effect on the internal 32-bit datapath. Handy for using a lane to generate sequence of pointers into flash or SRAM."]
-    #[inline(always)]
-    pub const fn force_msb(&self) -> u8 {
-        let val = (self.0 >> 19usize) & 0x03;
-        val as u8
-    }
-    #[doc = "ORed into bits 29:28 of the lane result presented to the processor on the bus. No effect on the internal 32-bit datapath. Handy for using a lane to generate sequence of pointers into flash or SRAM."]
-    #[inline(always)]
-    pub fn set_force_msb(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x03 << 19usize)) | (((val as u32) & 0x03) << 19usize);
-    }
-}
-impl Default for Interp0ctrlLane1 {
-    #[inline(always)]
-    fn default() -> Interp0ctrlLane1 {
-        Interp0ctrlLane1(0)
     }
 }
 #[doc = "Control register for lane 0"]
@@ -626,37 +518,145 @@ impl Default for Interp1accum0add {
         Interp1accum0add(0)
     }
 }
-#[doc = "Control and status register for divider."]
+#[doc = "Control register for lane 1"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct DivCsr(pub u32);
-impl DivCsr {
-    #[doc = "Reads as 0 when a calculation is in progress, 1 otherwise. Writing an operand (xDIVIDEND, xDIVISOR) will immediately start a new calculation, no matter if one is already in progress. Writing to a result register will immediately terminate any in-progress calculation and set the READY and DIRTY flags."]
+pub struct Interp0ctrlLane1(pub u32);
+impl Interp0ctrlLane1 {
+    #[doc = "Logical right-shift applied to accumulator before masking"]
     #[inline(always)]
-    pub const fn ready(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
+    pub const fn shift(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0x1f;
+        val as u8
+    }
+    #[doc = "Logical right-shift applied to accumulator before masking"]
+    #[inline(always)]
+    pub fn set_shift(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x1f << 0usize)) | (((val as u32) & 0x1f) << 0usize);
+    }
+    #[doc = "The least-significant bit allowed to pass by the mask (inclusive)"]
+    #[inline(always)]
+    pub const fn mask_lsb(&self) -> u8 {
+        let val = (self.0 >> 5usize) & 0x1f;
+        val as u8
+    }
+    #[doc = "The least-significant bit allowed to pass by the mask (inclusive)"]
+    #[inline(always)]
+    pub fn set_mask_lsb(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x1f << 5usize)) | (((val as u32) & 0x1f) << 5usize);
+    }
+    #[doc = "The most-significant bit allowed to pass by the mask (inclusive) Setting MSB < LSB may cause chip to turn inside-out"]
+    #[inline(always)]
+    pub const fn mask_msb(&self) -> u8 {
+        let val = (self.0 >> 10usize) & 0x1f;
+        val as u8
+    }
+    #[doc = "The most-significant bit allowed to pass by the mask (inclusive) Setting MSB < LSB may cause chip to turn inside-out"]
+    #[inline(always)]
+    pub fn set_mask_msb(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x1f << 10usize)) | (((val as u32) & 0x1f) << 10usize);
+    }
+    #[doc = "If SIGNED is set, the shifted and masked accumulator value is sign-extended to 32 bits before adding to BASE1, and LANE1 PEEK/POP appear extended to 32 bits when read by processor."]
+    #[inline(always)]
+    pub const fn signed(&self) -> bool {
+        let val = (self.0 >> 15usize) & 0x01;
         val != 0
     }
-    #[doc = "Reads as 0 when a calculation is in progress, 1 otherwise. Writing an operand (xDIVIDEND, xDIVISOR) will immediately start a new calculation, no matter if one is already in progress. Writing to a result register will immediately terminate any in-progress calculation and set the READY and DIRTY flags."]
+    #[doc = "If SIGNED is set, the shifted and masked accumulator value is sign-extended to 32 bits before adding to BASE1, and LANE1 PEEK/POP appear extended to 32 bits when read by processor."]
     #[inline(always)]
-    pub fn set_ready(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+    pub fn set_signed(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
     }
-    #[doc = "Changes to 1 when any register is written, and back to 0 when QUOTIENT is read. Software can use this flag to make save/restore more efficient (skip if not DIRTY). If the flag is used in this way, it's recommended to either read QUOTIENT only, or REMAINDER and then QUOTIENT, to prevent data loss on context switch."]
+    #[doc = "If 1, feed the opposite lane's accumulator into this lane's shift + mask hardware. Takes effect even if ADD_RAW is set (the CROSS_INPUT mux is before the shift+mask bypass)"]
     #[inline(always)]
-    pub const fn dirty(&self) -> bool {
-        let val = (self.0 >> 1usize) & 0x01;
+    pub const fn cross_input(&self) -> bool {
+        let val = (self.0 >> 16usize) & 0x01;
         val != 0
     }
-    #[doc = "Changes to 1 when any register is written, and back to 0 when QUOTIENT is read. Software can use this flag to make save/restore more efficient (skip if not DIRTY). If the flag is used in this way, it's recommended to either read QUOTIENT only, or REMAINDER and then QUOTIENT, to prevent data loss on context switch."]
+    #[doc = "If 1, feed the opposite lane's accumulator into this lane's shift + mask hardware. Takes effect even if ADD_RAW is set (the CROSS_INPUT mux is before the shift+mask bypass)"]
     #[inline(always)]
-    pub fn set_dirty(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
+    pub fn set_cross_input(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
+    }
+    #[doc = "If 1, feed the opposite lane's result into this lane's accumulator on POP."]
+    #[inline(always)]
+    pub const fn cross_result(&self) -> bool {
+        let val = (self.0 >> 17usize) & 0x01;
+        val != 0
+    }
+    #[doc = "If 1, feed the opposite lane's result into this lane's accumulator on POP."]
+    #[inline(always)]
+    pub fn set_cross_result(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
+    }
+    #[doc = "If 1, mask + shift is bypassed for LANE1 result. This does not affect FULL result."]
+    #[inline(always)]
+    pub const fn add_raw(&self) -> bool {
+        let val = (self.0 >> 18usize) & 0x01;
+        val != 0
+    }
+    #[doc = "If 1, mask + shift is bypassed for LANE1 result. This does not affect FULL result."]
+    #[inline(always)]
+    pub fn set_add_raw(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
+    }
+    #[doc = "ORed into bits 29:28 of the lane result presented to the processor on the bus. No effect on the internal 32-bit datapath. Handy for using a lane to generate sequence of pointers into flash or SRAM."]
+    #[inline(always)]
+    pub const fn force_msb(&self) -> u8 {
+        let val = (self.0 >> 19usize) & 0x03;
+        val as u8
+    }
+    #[doc = "ORed into bits 29:28 of the lane result presented to the processor on the bus. No effect on the internal 32-bit datapath. Handy for using a lane to generate sequence of pointers into flash or SRAM."]
+    #[inline(always)]
+    pub fn set_force_msb(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x03 << 19usize)) | (((val as u32) & 0x03) << 19usize);
     }
 }
-impl Default for DivCsr {
+impl Default for Interp0ctrlLane1 {
     #[inline(always)]
-    fn default() -> DivCsr {
-        DivCsr(0)
+    fn default() -> Interp0ctrlLane1 {
+        Interp0ctrlLane1(0)
+    }
+}
+#[doc = "Values written here are atomically added to ACCUM1 Reading yields lane 1's raw shift and mask value (BASE1 not added)."]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Interp0accum1add(pub u32);
+impl Interp0accum1add {
+    #[inline(always)]
+    pub const fn interp0_accum1_add(&self) -> u32 {
+        let val = (self.0 >> 0usize) & 0x00ff_ffff;
+        val as u32
+    }
+    #[inline(always)]
+    pub fn set_interp0_accum1_add(&mut self, val: u32) {
+        self.0 = (self.0 & !(0x00ff_ffff << 0usize)) | (((val as u32) & 0x00ff_ffff) << 0usize);
+    }
+}
+impl Default for Interp0accum1add {
+    #[inline(always)]
+    fn default() -> Interp0accum1add {
+        Interp0accum1add(0)
+    }
+}
+#[doc = "Values written here are atomically added to ACCUM0 Reading yields lane 0's raw shift and mask value (BASE0 not added)."]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Interp0accum0add(pub u32);
+impl Interp0accum0add {
+    #[inline(always)]
+    pub const fn interp0_accum0_add(&self) -> u32 {
+        let val = (self.0 >> 0usize) & 0x00ff_ffff;
+        val as u32
+    }
+    #[inline(always)]
+    pub fn set_interp0_accum0_add(&mut self, val: u32) {
+        self.0 = (self.0 & !(0x00ff_ffff << 0usize)) | (((val as u32) & 0x00ff_ffff) << 0usize);
+    }
+}
+impl Default for Interp0accum0add {
+    #[inline(always)]
+    fn default() -> Interp0accum0add {
+        Interp0accum0add(0)
     }
 }

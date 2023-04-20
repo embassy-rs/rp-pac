@@ -1,3 +1,101 @@
+#[doc = "This just reads the state of the oscillator output so randomness is compromised if the ring oscillator is stopped or run at a harmonic of the bus frequency"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Randombit(pub u32);
+impl Randombit {
+    #[inline(always)]
+    pub const fn randombit(&self) -> bool {
+        let val = (self.0 >> 0usize) & 0x01;
+        val != 0
+    }
+    #[inline(always)]
+    pub fn set_randombit(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+    }
+}
+impl Default for Randombit {
+    #[inline(always)]
+    fn default() -> Randombit {
+        Randombit(0)
+    }
+}
+#[doc = "A down counter running at the ROSC frequency which counts to zero and stops. To start the counter write a non-zero value. Can be used for short software pauses when setting up time sensitive hardware."]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Count(pub u32);
+impl Count {
+    #[inline(always)]
+    pub const fn count(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0xff;
+        val as u8
+    }
+    #[inline(always)]
+    pub fn set_count(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
+    }
+}
+impl Default for Count {
+    #[inline(always)]
+    fn default() -> Count {
+        Count(0)
+    }
+}
+#[doc = "Controls the phase shifted output"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Phase(pub u32);
+impl Phase {
+    #[doc = "phase shift the phase-shifted output by SHIFT input clocks this can be changed on-the-fly must be set to 0 before setting div=1"]
+    #[inline(always)]
+    pub const fn shift(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0x03;
+        val as u8
+    }
+    #[doc = "phase shift the phase-shifted output by SHIFT input clocks this can be changed on-the-fly must be set to 0 before setting div=1"]
+    #[inline(always)]
+    pub fn set_shift(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x03 << 0usize)) | (((val as u32) & 0x03) << 0usize);
+    }
+    #[doc = "invert the phase-shifted output this is ignored when div=1"]
+    #[inline(always)]
+    pub const fn flip(&self) -> bool {
+        let val = (self.0 >> 2usize) & 0x01;
+        val != 0
+    }
+    #[doc = "invert the phase-shifted output this is ignored when div=1"]
+    #[inline(always)]
+    pub fn set_flip(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
+    }
+    #[doc = "enable the phase-shifted output this can be changed on-the-fly"]
+    #[inline(always)]
+    pub const fn enable(&self) -> bool {
+        let val = (self.0 >> 3usize) & 0x01;
+        val != 0
+    }
+    #[doc = "enable the phase-shifted output this can be changed on-the-fly"]
+    #[inline(always)]
+    pub fn set_enable(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
+    }
+    #[doc = "set to 0xaa any other value enables the output with shift=0"]
+    #[inline(always)]
+    pub const fn passwd(&self) -> u8 {
+        let val = (self.0 >> 4usize) & 0xff;
+        val as u8
+    }
+    #[doc = "set to 0xaa any other value enables the output with shift=0"]
+    #[inline(always)]
+    pub fn set_passwd(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 4usize)) | (((val as u32) & 0xff) << 4usize);
+    }
+}
+impl Default for Phase {
+    #[inline(always)]
+    fn default() -> Phase {
+        Phase(0)
+    }
+}
 #[doc = "Ring Oscillator Status"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -52,71 +150,6 @@ impl Default for Status {
     #[inline(always)]
     fn default() -> Status {
         Status(0)
-    }
-}
-#[doc = "This just reads the state of the oscillator output so randomness is compromised if the ring oscillator is stopped or run at a harmonic of the bus frequency"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Randombit(pub u32);
-impl Randombit {
-    #[inline(always)]
-    pub const fn randombit(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_randombit(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-    }
-}
-impl Default for Randombit {
-    #[inline(always)]
-    fn default() -> Randombit {
-        Randombit(0)
-    }
-}
-#[doc = "Controls the output divider"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Div(pub u32);
-impl Div {
-    #[doc = "set to 0xaa0 + div where div = 0 divides by 32 div = 1-31 divides by div any other value sets div=31 this register resets to div=16"]
-    #[inline(always)]
-    pub const fn div(&self) -> super::vals::Div {
-        let val = (self.0 >> 0usize) & 0x0fff;
-        super::vals::Div(val as u16)
-    }
-    #[doc = "set to 0xaa0 + div where div = 0 divides by 32 div = 1-31 divides by div any other value sets div=31 this register resets to div=16"]
-    #[inline(always)]
-    pub fn set_div(&mut self, val: super::vals::Div) {
-        self.0 = (self.0 & !(0x0fff << 0usize)) | (((val.0 as u32) & 0x0fff) << 0usize);
-    }
-}
-impl Default for Div {
-    #[inline(always)]
-    fn default() -> Div {
-        Div(0)
-    }
-}
-#[doc = "A down counter running at the ROSC frequency which counts to zero and stops. To start the counter write a non-zero value. Can be used for short software pauses when setting up time sensitive hardware."]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Count(pub u32);
-impl Count {
-    #[inline(always)]
-    pub const fn count(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0xff;
-        val as u8
-    }
-    #[inline(always)]
-    pub fn set_count(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
-    }
-}
-impl Default for Count {
-    #[inline(always)]
-    fn default() -> Count {
-        Count(0)
     }
 }
 #[doc = "For a detailed description see freqa register"]
@@ -253,60 +286,27 @@ impl Default for Freqa {
         Freqa(0)
     }
 }
-#[doc = "Controls the phase shifted output"]
+#[doc = "Controls the output divider"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Phase(pub u32);
-impl Phase {
-    #[doc = "phase shift the phase-shifted output by SHIFT input clocks this can be changed on-the-fly must be set to 0 before setting div=1"]
+pub struct Div(pub u32);
+impl Div {
+    #[doc = "set to 0xaa0 + div where div = 0 divides by 32 div = 1-31 divides by div any other value sets div=31 this register resets to div=16"]
     #[inline(always)]
-    pub const fn shift(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0x03;
-        val as u8
+    pub const fn div(&self) -> super::vals::Div {
+        let val = (self.0 >> 0usize) & 0x0fff;
+        super::vals::Div(val as u16)
     }
-    #[doc = "phase shift the phase-shifted output by SHIFT input clocks this can be changed on-the-fly must be set to 0 before setting div=1"]
+    #[doc = "set to 0xaa0 + div where div = 0 divides by 32 div = 1-31 divides by div any other value sets div=31 this register resets to div=16"]
     #[inline(always)]
-    pub fn set_shift(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x03 << 0usize)) | (((val as u32) & 0x03) << 0usize);
-    }
-    #[doc = "invert the phase-shifted output this is ignored when div=1"]
-    #[inline(always)]
-    pub const fn flip(&self) -> bool {
-        let val = (self.0 >> 2usize) & 0x01;
-        val != 0
-    }
-    #[doc = "invert the phase-shifted output this is ignored when div=1"]
-    #[inline(always)]
-    pub fn set_flip(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
-    }
-    #[doc = "enable the phase-shifted output this can be changed on-the-fly"]
-    #[inline(always)]
-    pub const fn enable(&self) -> bool {
-        let val = (self.0 >> 3usize) & 0x01;
-        val != 0
-    }
-    #[doc = "enable the phase-shifted output this can be changed on-the-fly"]
-    #[inline(always)]
-    pub fn set_enable(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
-    }
-    #[doc = "set to 0xaa any other value enables the output with shift=0"]
-    #[inline(always)]
-    pub const fn passwd(&self) -> u8 {
-        let val = (self.0 >> 4usize) & 0xff;
-        val as u8
-    }
-    #[doc = "set to 0xaa any other value enables the output with shift=0"]
-    #[inline(always)]
-    pub fn set_passwd(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 4usize)) | (((val as u32) & 0xff) << 4usize);
+    pub fn set_div(&mut self, val: super::vals::Div) {
+        self.0 = (self.0 & !(0x0fff << 0usize)) | (((val.0 as u32) & 0x0fff) << 0usize);
     }
 }
-impl Default for Phase {
+impl Default for Div {
     #[inline(always)]
-    fn default() -> Phase {
-        Phase(0)
+    fn default() -> Div {
+        Div(0)
     }
 }
 #[doc = "Ring Oscillator control"]
