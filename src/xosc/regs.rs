@@ -32,40 +32,6 @@ impl Default for Ctrl {
         Ctrl(0)
     }
 }
-#[doc = "Controls the startup delay"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Startup(pub u32);
-impl Startup {
-    #[doc = "in multiples of 256*xtal_period. The reset value of 0xc4 corresponds to approx 50 000 cycles."]
-    #[inline(always)]
-    pub const fn delay(&self) -> u16 {
-        let val = (self.0 >> 0usize) & 0x3fff;
-        val as u16
-    }
-    #[doc = "in multiples of 256*xtal_period. The reset value of 0xc4 corresponds to approx 50 000 cycles."]
-    #[inline(always)]
-    pub fn set_delay(&mut self, val: u16) {
-        self.0 = (self.0 & !(0x3fff << 0usize)) | (((val as u32) & 0x3fff) << 0usize);
-    }
-    #[doc = "Multiplies the startup_delay by 4. This is of little value to the user given that the delay can be programmed directly."]
-    #[inline(always)]
-    pub const fn x4(&self) -> bool {
-        let val = (self.0 >> 20usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Multiplies the startup_delay by 4. This is of little value to the user given that the delay can be programmed directly."]
-    #[inline(always)]
-    pub fn set_x4(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
-    }
-}
-impl Default for Startup {
-    #[inline(always)]
-    fn default() -> Startup {
-        Startup(0)
-    }
-}
 #[doc = "Crystal Oscillator Status"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -141,5 +107,39 @@ impl Default for Count {
     #[inline(always)]
     fn default() -> Count {
         Count(0)
+    }
+}
+#[doc = "Controls the startup delay"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Startup(pub u32);
+impl Startup {
+    #[doc = "in multiples of 256*xtal_period. The reset value of 0xc4 corresponds to approx 50 000 cycles."]
+    #[inline(always)]
+    pub const fn delay(&self) -> u16 {
+        let val = (self.0 >> 0usize) & 0x3fff;
+        val as u16
+    }
+    #[doc = "in multiples of 256*xtal_period. The reset value of 0xc4 corresponds to approx 50 000 cycles."]
+    #[inline(always)]
+    pub fn set_delay(&mut self, val: u16) {
+        self.0 = (self.0 & !(0x3fff << 0usize)) | (((val as u32) & 0x3fff) << 0usize);
+    }
+    #[doc = "Multiplies the startup_delay by 4. This is of little value to the user given that the delay can be programmed directly."]
+    #[inline(always)]
+    pub const fn x4(&self) -> bool {
+        let val = (self.0 >> 20usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Multiplies the startup_delay by 4. This is of little value to the user given that the delay can be programmed directly."]
+    #[inline(always)]
+    pub fn set_x4(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
+    }
+}
+impl Default for Startup {
+    #[inline(always)]
+    fn default() -> Startup {
+        Startup(0)
     }
 }

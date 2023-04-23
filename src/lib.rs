@@ -117,6 +117,13 @@ pub const PIO0: pio::Pio = pio::Pio(0x5020_0000 as u32 as _);
 pub const PIO1: pio::Pio = pio::Pio(0x5030_0000 as u32 as _);
 #[doc = "Single-cycle IO block Provides core-local and inter-core hardware for the two processors, with single-cycle access."]
 pub const SIO: sio::Sio = sio::Sio(0xd000_0000 as u32 as _);
+#[doc = r" Number available in the NVIC for configuring priority"]
+#[cfg(feature = "rt")]
+pub const NVIC_PRIO_BITS: u8 = 2;
+#[cfg(feature = "rt")]
+pub use cortex_m_rt::interrupt;
+#[cfg(feature = "rt")]
+pub use Interrupt as interrupt;
 pub mod adc;
 pub mod busctrl;
 pub mod clocks;

@@ -341,11 +341,31 @@ transforms:
       from: (.*)_[01]
       to: $1
 
-
-  # =========== Misc
+  # =========== PWM
+  - MergeFieldsets:
+      from: pwm::regs::Ch\d+(.+)
+      to: pwm::regs::Ch$1
+      check: NoCheck
+  - RenameFields:
+      fieldset: pwm::regs::Ch.+
+      from: ch\d+_(.+)
+      to: $1
   - MergeEnums:
       from: pwm::vals::Ch\dCsrDivmode
       to: pwm::vals::Divmode
+  - MakeBlock:
+      blocks: pwm::Pwm
+      from: ch(\d+)_(.+)
+      to_block: pwm::Channel
+      to_outer: ch$1
+      to_inner: $2
+  - MakeRegisterArray:
+      blocks: pwm::Pwm
+      from: ch\d+
+      to: ch
+
+
+  # =========== Misc
   - MergeEnums:
       from: rosc::vals::.+Passwd
       to: rosc::vals::Passwd

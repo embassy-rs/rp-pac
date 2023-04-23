@@ -21,107 +21,6 @@ impl Default for Rxuicr {
         Rxuicr(0)
     }
 }
-#[doc = "Interrupt status"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Isr(pub u32);
-impl Isr {
-    #[doc = "Transmit FIFO empty interrupt status"]
-    #[inline(always)]
-    pub const fn txeis(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Transmit FIFO empty interrupt status"]
-    #[inline(always)]
-    pub fn set_txeis(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-    }
-    #[doc = "Transmit FIFO overflow interrupt status"]
-    #[inline(always)]
-    pub const fn txois(&self) -> bool {
-        let val = (self.0 >> 1usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Transmit FIFO overflow interrupt status"]
-    #[inline(always)]
-    pub fn set_txois(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
-    }
-    #[doc = "Receive FIFO underflow interrupt status"]
-    #[inline(always)]
-    pub const fn rxuis(&self) -> bool {
-        let val = (self.0 >> 2usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Receive FIFO underflow interrupt status"]
-    #[inline(always)]
-    pub fn set_rxuis(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
-    }
-    #[doc = "Receive FIFO overflow interrupt status"]
-    #[inline(always)]
-    pub const fn rxois(&self) -> bool {
-        let val = (self.0 >> 3usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Receive FIFO overflow interrupt status"]
-    #[inline(always)]
-    pub fn set_rxois(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
-    }
-    #[doc = "Receive FIFO full interrupt status"]
-    #[inline(always)]
-    pub const fn rxfis(&self) -> bool {
-        let val = (self.0 >> 4usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Receive FIFO full interrupt status"]
-    #[inline(always)]
-    pub fn set_rxfis(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
-    }
-    #[doc = "Multi-master contention interrupt status"]
-    #[inline(always)]
-    pub const fn mstis(&self) -> bool {
-        let val = (self.0 >> 5usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Multi-master contention interrupt status"]
-    #[inline(always)]
-    pub fn set_mstis(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
-    }
-}
-impl Default for Isr {
-    #[inline(always)]
-    fn default() -> Isr {
-        Isr(0)
-    }
-}
-#[doc = "DMA RX data level"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Dmardlr(pub u32);
-impl Dmardlr {
-    #[doc = "Receive data watermark level (DMARDLR+1)"]
-    #[inline(always)]
-    pub const fn dmardl(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0xff;
-        val as u8
-    }
-    #[doc = "Receive data watermark level (DMARDLR+1)"]
-    #[inline(always)]
-    pub fn set_dmardl(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
-    }
-}
-impl Default for Dmardlr {
-    #[inline(always)]
-    fn default() -> Dmardlr {
-        Dmardlr(0)
-    }
-}
 #[doc = "SPI control"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -222,6 +121,84 @@ impl Default for SpiCtrlr0 {
         SpiCtrlr0(0)
     }
 }
+#[doc = "Interrupt mask"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Imr(pub u32);
+impl Imr {
+    #[doc = "Transmit FIFO empty interrupt mask"]
+    #[inline(always)]
+    pub const fn txeim(&self) -> bool {
+        let val = (self.0 >> 0usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Transmit FIFO empty interrupt mask"]
+    #[inline(always)]
+    pub fn set_txeim(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+    }
+    #[doc = "Transmit FIFO overflow interrupt mask"]
+    #[inline(always)]
+    pub const fn txoim(&self) -> bool {
+        let val = (self.0 >> 1usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Transmit FIFO overflow interrupt mask"]
+    #[inline(always)]
+    pub fn set_txoim(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
+    }
+    #[doc = "Receive FIFO underflow interrupt mask"]
+    #[inline(always)]
+    pub const fn rxuim(&self) -> bool {
+        let val = (self.0 >> 2usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Receive FIFO underflow interrupt mask"]
+    #[inline(always)]
+    pub fn set_rxuim(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
+    }
+    #[doc = "Receive FIFO overflow interrupt mask"]
+    #[inline(always)]
+    pub const fn rxoim(&self) -> bool {
+        let val = (self.0 >> 3usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Receive FIFO overflow interrupt mask"]
+    #[inline(always)]
+    pub fn set_rxoim(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
+    }
+    #[doc = "Receive FIFO full interrupt mask"]
+    #[inline(always)]
+    pub const fn rxfim(&self) -> bool {
+        let val = (self.0 >> 4usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Receive FIFO full interrupt mask"]
+    #[inline(always)]
+    pub fn set_rxfim(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
+    }
+    #[doc = "Multi-master contention interrupt mask"]
+    #[inline(always)]
+    pub const fn mstim(&self) -> bool {
+        let val = (self.0 >> 5usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Multi-master contention interrupt mask"]
+    #[inline(always)]
+    pub fn set_mstim(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
+    }
+}
+impl Default for Imr {
+    #[inline(always)]
+    fn default() -> Imr {
+        Imr(0)
+    }
+}
 #[doc = "Multi-master interrupt clear"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -245,50 +222,49 @@ impl Default for Msticr {
         Msticr(0)
     }
 }
-#[doc = "DMA TX data level"]
+#[doc = "Microwire Control"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Dmatdlr(pub u32);
-impl Dmatdlr {
-    #[doc = "Transmit data watermark level"]
+pub struct Mwcr(pub u32);
+impl Mwcr {
+    #[doc = "Microwire transfer mode"]
     #[inline(always)]
-    pub const fn dmatdl(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0xff;
-        val as u8
-    }
-    #[doc = "Transmit data watermark level"]
-    #[inline(always)]
-    pub fn set_dmatdl(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
-    }
-}
-impl Default for Dmatdlr {
-    #[inline(always)]
-    fn default() -> Dmatdlr {
-        Dmatdlr(0)
-    }
-}
-#[doc = "Slave enable"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Ser(pub u32);
-impl Ser {
-    #[doc = "For each bit: 0 -> slave not selected 1 -> slave selected"]
-    #[inline(always)]
-    pub const fn ser(&self) -> bool {
+    pub const fn mwmod(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "For each bit: 0 -> slave not selected 1 -> slave selected"]
+    #[doc = "Microwire transfer mode"]
     #[inline(always)]
-    pub fn set_ser(&mut self, val: bool) {
+    pub fn set_mwmod(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-}
-impl Default for Ser {
+    #[doc = "Microwire control"]
     #[inline(always)]
-    fn default() -> Ser {
-        Ser(0)
+    pub const fn mdd(&self) -> bool {
+        let val = (self.0 >> 1usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Microwire control"]
+    #[inline(always)]
+    pub fn set_mdd(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
+    }
+    #[doc = "Microwire handshaking"]
+    #[inline(always)]
+    pub const fn mhs(&self) -> bool {
+        let val = (self.0 >> 2usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Microwire handshaking"]
+    #[inline(always)]
+    pub fn set_mhs(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
+    }
+}
+impl Default for Mwcr {
+    #[inline(always)]
+    fn default() -> Mwcr {
+        Mwcr(0)
     }
 }
 #[doc = "Control register 0"]
@@ -424,162 +400,96 @@ impl Default for Ctrlr0 {
         Ctrlr0(0)
     }
 }
-#[doc = "Raw interrupt status"]
+#[doc = "RX FIFO level"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Risr(pub u32);
-impl Risr {
-    #[doc = "Transmit FIFO empty raw interrupt status"]
+pub struct Rxflr(pub u32);
+impl Rxflr {
+    #[doc = "Receive FIFO level"]
     #[inline(always)]
-    pub const fn txeir(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Transmit FIFO empty raw interrupt status"]
-    #[inline(always)]
-    pub fn set_txeir(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-    }
-    #[doc = "Transmit FIFO overflow raw interrupt status"]
-    #[inline(always)]
-    pub const fn txoir(&self) -> bool {
-        let val = (self.0 >> 1usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Transmit FIFO overflow raw interrupt status"]
-    #[inline(always)]
-    pub fn set_txoir(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
-    }
-    #[doc = "Receive FIFO underflow raw interrupt status"]
-    #[inline(always)]
-    pub const fn rxuir(&self) -> bool {
-        let val = (self.0 >> 2usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Receive FIFO underflow raw interrupt status"]
-    #[inline(always)]
-    pub fn set_rxuir(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
-    }
-    #[doc = "Receive FIFO overflow raw interrupt status"]
-    #[inline(always)]
-    pub const fn rxoir(&self) -> bool {
-        let val = (self.0 >> 3usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Receive FIFO overflow raw interrupt status"]
-    #[inline(always)]
-    pub fn set_rxoir(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
-    }
-    #[doc = "Receive FIFO full raw interrupt status"]
-    #[inline(always)]
-    pub const fn rxfir(&self) -> bool {
-        let val = (self.0 >> 4usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Receive FIFO full raw interrupt status"]
-    #[inline(always)]
-    pub fn set_rxfir(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
-    }
-    #[doc = "Multi-master contention raw interrupt status"]
-    #[inline(always)]
-    pub const fn mstir(&self) -> bool {
-        let val = (self.0 >> 5usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Multi-master contention raw interrupt status"]
-    #[inline(always)]
-    pub fn set_mstir(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
-    }
-}
-impl Default for Risr {
-    #[inline(always)]
-    fn default() -> Risr {
-        Risr(0)
-    }
-}
-#[doc = "RX sample delay"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct RxSampleDly(pub u32);
-impl RxSampleDly {
-    #[doc = "RXD sample delay (in SCLK cycles)"]
-    #[inline(always)]
-    pub const fn rsd(&self) -> u8 {
+    pub const fn rxtfl(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0xff;
         val as u8
     }
-    #[doc = "RXD sample delay (in SCLK cycles)"]
+    #[doc = "Receive FIFO level"]
     #[inline(always)]
-    pub fn set_rsd(&mut self, val: u8) {
+    pub fn set_rxtfl(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
     }
 }
-impl Default for RxSampleDly {
+impl Default for Rxflr {
     #[inline(always)]
-    fn default() -> RxSampleDly {
-        RxSampleDly(0)
+    fn default() -> Rxflr {
+        Rxflr(0)
     }
 }
-#[doc = "Master Control register 1"]
+#[doc = "TX FIFO threshold level"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Ctrlr1(pub u32);
-impl Ctrlr1 {
-    #[doc = "Number of data frames"]
+pub struct Txftlr(pub u32);
+impl Txftlr {
+    #[doc = "Transmit FIFO threshold"]
     #[inline(always)]
-    pub const fn ndf(&self) -> u16 {
-        let val = (self.0 >> 0usize) & 0xffff;
-        val as u16
+    pub const fn tft(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0xff;
+        val as u8
     }
-    #[doc = "Number of data frames"]
+    #[doc = "Transmit FIFO threshold"]
     #[inline(always)]
-    pub fn set_ndf(&mut self, val: u16) {
-        self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
-    }
-}
-impl Default for Ctrlr1 {
-    #[inline(always)]
-    fn default() -> Ctrlr1 {
-        Ctrlr1(0)
+    pub fn set_tft(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
     }
 }
-#[doc = "DMA control"]
+impl Default for Txftlr {
+    #[inline(always)]
+    fn default() -> Txftlr {
+        Txftlr(0)
+    }
+}
+#[doc = "DMA RX data level"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Dmacr(pub u32);
-impl Dmacr {
-    #[doc = "Receive DMA enable"]
+pub struct Dmardlr(pub u32);
+impl Dmardlr {
+    #[doc = "Receive data watermark level (DMARDLR+1)"]
     #[inline(always)]
-    pub const fn rdmae(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
-        val != 0
+    pub const fn dmardl(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0xff;
+        val as u8
     }
-    #[doc = "Receive DMA enable"]
+    #[doc = "Receive data watermark level (DMARDLR+1)"]
     #[inline(always)]
-    pub fn set_rdmae(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-    }
-    #[doc = "Transmit DMA enable"]
-    #[inline(always)]
-    pub const fn tdmae(&self) -> bool {
-        let val = (self.0 >> 1usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Transmit DMA enable"]
-    #[inline(always)]
-    pub fn set_tdmae(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
+    pub fn set_dmardl(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
     }
 }
-impl Default for Dmacr {
+impl Default for Dmardlr {
     #[inline(always)]
-    fn default() -> Dmacr {
-        Dmacr(0)
+    fn default() -> Dmardlr {
+        Dmardlr(0)
+    }
+}
+#[doc = "TX drive edge"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct TxdDriveEdge(pub u32);
+impl TxdDriveEdge {
+    #[doc = "TXD drive edge"]
+    #[inline(always)]
+    pub const fn tde(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0xff;
+        val as u8
+    }
+    #[doc = "TXD drive edge"]
+    #[inline(always)]
+    pub fn set_tde(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
+    }
+}
+impl Default for TxdDriveEdge {
+    #[inline(always)]
+    fn default() -> TxdDriveEdge {
+        TxdDriveEdge(0)
     }
 }
 #[doc = "Status register"]
@@ -671,233 +581,27 @@ impl Default for Sr {
         Sr(0)
     }
 }
-#[doc = "Microwire Control"]
+#[doc = "Master Control register 1"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Mwcr(pub u32);
-impl Mwcr {
-    #[doc = "Microwire transfer mode"]
+pub struct Ctrlr1(pub u32);
+impl Ctrlr1 {
+    #[doc = "Number of data frames"]
     #[inline(always)]
-    pub const fn mwmod(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
-        val != 0
+    pub const fn ndf(&self) -> u16 {
+        let val = (self.0 >> 0usize) & 0xffff;
+        val as u16
     }
-    #[doc = "Microwire transfer mode"]
+    #[doc = "Number of data frames"]
     #[inline(always)]
-    pub fn set_mwmod(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-    }
-    #[doc = "Microwire control"]
-    #[inline(always)]
-    pub const fn mdd(&self) -> bool {
-        let val = (self.0 >> 1usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Microwire control"]
-    #[inline(always)]
-    pub fn set_mdd(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
-    }
-    #[doc = "Microwire handshaking"]
-    #[inline(always)]
-    pub const fn mhs(&self) -> bool {
-        let val = (self.0 >> 2usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Microwire handshaking"]
-    #[inline(always)]
-    pub fn set_mhs(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
+    pub fn set_ndf(&mut self, val: u16) {
+        self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
     }
 }
-impl Default for Mwcr {
+impl Default for Ctrlr1 {
     #[inline(always)]
-    fn default() -> Mwcr {
-        Mwcr(0)
-    }
-}
-#[doc = "TX FIFO threshold level"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Txftlr(pub u32);
-impl Txftlr {
-    #[doc = "Transmit FIFO threshold"]
-    #[inline(always)]
-    pub const fn tft(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0xff;
-        val as u8
-    }
-    #[doc = "Transmit FIFO threshold"]
-    #[inline(always)]
-    pub fn set_tft(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
-    }
-}
-impl Default for Txftlr {
-    #[inline(always)]
-    fn default() -> Txftlr {
-        Txftlr(0)
-    }
-}
-#[doc = "TX drive edge"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct TxdDriveEdge(pub u32);
-impl TxdDriveEdge {
-    #[doc = "TXD drive edge"]
-    #[inline(always)]
-    pub const fn tde(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0xff;
-        val as u8
-    }
-    #[doc = "TXD drive edge"]
-    #[inline(always)]
-    pub fn set_tde(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
-    }
-}
-impl Default for TxdDriveEdge {
-    #[inline(always)]
-    fn default() -> TxdDriveEdge {
-        TxdDriveEdge(0)
-    }
-}
-#[doc = "RX FIFO level"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Rxflr(pub u32);
-impl Rxflr {
-    #[doc = "Receive FIFO level"]
-    #[inline(always)]
-    pub const fn rxtfl(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0xff;
-        val as u8
-    }
-    #[doc = "Receive FIFO level"]
-    #[inline(always)]
-    pub fn set_rxtfl(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
-    }
-}
-impl Default for Rxflr {
-    #[inline(always)]
-    fn default() -> Rxflr {
-        Rxflr(0)
-    }
-}
-#[doc = "TX FIFO level"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Txflr(pub u32);
-impl Txflr {
-    #[doc = "Transmit FIFO level"]
-    #[inline(always)]
-    pub const fn tftfl(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0xff;
-        val as u8
-    }
-    #[doc = "Transmit FIFO level"]
-    #[inline(always)]
-    pub fn set_tftfl(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
-    }
-}
-impl Default for Txflr {
-    #[inline(always)]
-    fn default() -> Txflr {
-        Txflr(0)
-    }
-}
-#[doc = "TX FIFO overflow interrupt clear"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Txoicr(pub u32);
-impl Txoicr {
-    #[doc = "Clear-on-read transmit FIFO overflow interrupt"]
-    #[inline(always)]
-    pub const fn txoicr(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Clear-on-read transmit FIFO overflow interrupt"]
-    #[inline(always)]
-    pub fn set_txoicr(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-    }
-}
-impl Default for Txoicr {
-    #[inline(always)]
-    fn default() -> Txoicr {
-        Txoicr(0)
-    }
-}
-#[doc = "RX FIFO overflow interrupt clear"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Rxoicr(pub u32);
-impl Rxoicr {
-    #[doc = "Clear-on-read receive FIFO overflow interrupt"]
-    #[inline(always)]
-    pub const fn rxoicr(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Clear-on-read receive FIFO overflow interrupt"]
-    #[inline(always)]
-    pub fn set_rxoicr(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-    }
-}
-impl Default for Rxoicr {
-    #[inline(always)]
-    fn default() -> Rxoicr {
-        Rxoicr(0)
-    }
-}
-#[doc = "RX FIFO threshold level"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Rxftlr(pub u32);
-impl Rxftlr {
-    #[doc = "Receive FIFO threshold"]
-    #[inline(always)]
-    pub const fn rft(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0xff;
-        val as u8
-    }
-    #[doc = "Receive FIFO threshold"]
-    #[inline(always)]
-    pub fn set_rft(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
-    }
-}
-impl Default for Rxftlr {
-    #[inline(always)]
-    fn default() -> Rxftlr {
-        Rxftlr(0)
-    }
-}
-#[doc = "SSI Enable"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Ssienr(pub u32);
-impl Ssienr {
-    #[doc = "SSI enable"]
-    #[inline(always)]
-    pub const fn ssi_en(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
-        val != 0
-    }
-    #[doc = "SSI enable"]
-    #[inline(always)]
-    pub fn set_ssi_en(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-    }
-}
-impl Default for Ssienr {
-    #[inline(always)]
-    fn default() -> Ssienr {
-        Ssienr(0)
+    fn default() -> Ctrlr1 {
+        Ctrlr1(0)
     }
 }
 #[doc = "Interrupt clear"]
@@ -923,82 +627,277 @@ impl Default for Icr {
         Icr(0)
     }
 }
-#[doc = "Interrupt mask"]
+#[doc = "Slave enable"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Imr(pub u32);
-impl Imr {
-    #[doc = "Transmit FIFO empty interrupt mask"]
+pub struct Ser(pub u32);
+impl Ser {
+    #[doc = "For each bit: 0 -> slave not selected 1 -> slave selected"]
     #[inline(always)]
-    pub const fn txeim(&self) -> bool {
+    pub const fn ser(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "Transmit FIFO empty interrupt mask"]
+    #[doc = "For each bit: 0 -> slave not selected 1 -> slave selected"]
     #[inline(always)]
-    pub fn set_txeim(&mut self, val: bool) {
+    pub fn set_ser(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "Transmit FIFO overflow interrupt mask"]
+}
+impl Default for Ser {
     #[inline(always)]
-    pub const fn txoim(&self) -> bool {
+    fn default() -> Ser {
+        Ser(0)
+    }
+}
+#[doc = "DMA TX data level"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Dmatdlr(pub u32);
+impl Dmatdlr {
+    #[doc = "Transmit data watermark level"]
+    #[inline(always)]
+    pub const fn dmatdl(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0xff;
+        val as u8
+    }
+    #[doc = "Transmit data watermark level"]
+    #[inline(always)]
+    pub fn set_dmatdl(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
+    }
+}
+impl Default for Dmatdlr {
+    #[inline(always)]
+    fn default() -> Dmatdlr {
+        Dmatdlr(0)
+    }
+}
+#[doc = "RX sample delay"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct RxSampleDly(pub u32);
+impl RxSampleDly {
+    #[doc = "RXD sample delay (in SCLK cycles)"]
+    #[inline(always)]
+    pub const fn rsd(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0xff;
+        val as u8
+    }
+    #[doc = "RXD sample delay (in SCLK cycles)"]
+    #[inline(always)]
+    pub fn set_rsd(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
+    }
+}
+impl Default for RxSampleDly {
+    #[inline(always)]
+    fn default() -> RxSampleDly {
+        RxSampleDly(0)
+    }
+}
+#[doc = "RX FIFO overflow interrupt clear"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Rxoicr(pub u32);
+impl Rxoicr {
+    #[doc = "Clear-on-read receive FIFO overflow interrupt"]
+    #[inline(always)]
+    pub const fn rxoicr(&self) -> bool {
+        let val = (self.0 >> 0usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Clear-on-read receive FIFO overflow interrupt"]
+    #[inline(always)]
+    pub fn set_rxoicr(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+    }
+}
+impl Default for Rxoicr {
+    #[inline(always)]
+    fn default() -> Rxoicr {
+        Rxoicr(0)
+    }
+}
+#[doc = "TX FIFO level"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Txflr(pub u32);
+impl Txflr {
+    #[doc = "Transmit FIFO level"]
+    #[inline(always)]
+    pub const fn tftfl(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0xff;
+        val as u8
+    }
+    #[doc = "Transmit FIFO level"]
+    #[inline(always)]
+    pub fn set_tftfl(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
+    }
+}
+impl Default for Txflr {
+    #[inline(always)]
+    fn default() -> Txflr {
+        Txflr(0)
+    }
+}
+#[doc = "RX FIFO threshold level"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Rxftlr(pub u32);
+impl Rxftlr {
+    #[doc = "Receive FIFO threshold"]
+    #[inline(always)]
+    pub const fn rft(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0xff;
+        val as u8
+    }
+    #[doc = "Receive FIFO threshold"]
+    #[inline(always)]
+    pub fn set_rft(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
+    }
+}
+impl Default for Rxftlr {
+    #[inline(always)]
+    fn default() -> Rxftlr {
+        Rxftlr(0)
+    }
+}
+#[doc = "DMA control"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Dmacr(pub u32);
+impl Dmacr {
+    #[doc = "Receive DMA enable"]
+    #[inline(always)]
+    pub const fn rdmae(&self) -> bool {
+        let val = (self.0 >> 0usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Receive DMA enable"]
+    #[inline(always)]
+    pub fn set_rdmae(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+    }
+    #[doc = "Transmit DMA enable"]
+    #[inline(always)]
+    pub const fn tdmae(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "Transmit FIFO overflow interrupt mask"]
+    #[doc = "Transmit DMA enable"]
     #[inline(always)]
-    pub fn set_txoim(&mut self, val: bool) {
+    pub fn set_tdmae(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
-    #[doc = "Receive FIFO underflow interrupt mask"]
+}
+impl Default for Dmacr {
     #[inline(always)]
-    pub const fn rxuim(&self) -> bool {
+    fn default() -> Dmacr {
+        Dmacr(0)
+    }
+}
+#[doc = "Interrupt status"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Isr(pub u32);
+impl Isr {
+    #[doc = "Transmit FIFO empty interrupt status"]
+    #[inline(always)]
+    pub const fn txeis(&self) -> bool {
+        let val = (self.0 >> 0usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Transmit FIFO empty interrupt status"]
+    #[inline(always)]
+    pub fn set_txeis(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+    }
+    #[doc = "Transmit FIFO overflow interrupt status"]
+    #[inline(always)]
+    pub const fn txois(&self) -> bool {
+        let val = (self.0 >> 1usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Transmit FIFO overflow interrupt status"]
+    #[inline(always)]
+    pub fn set_txois(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
+    }
+    #[doc = "Receive FIFO underflow interrupt status"]
+    #[inline(always)]
+    pub const fn rxuis(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
-    #[doc = "Receive FIFO underflow interrupt mask"]
+    #[doc = "Receive FIFO underflow interrupt status"]
     #[inline(always)]
-    pub fn set_rxuim(&mut self, val: bool) {
+    pub fn set_rxuis(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
-    #[doc = "Receive FIFO overflow interrupt mask"]
+    #[doc = "Receive FIFO overflow interrupt status"]
     #[inline(always)]
-    pub const fn rxoim(&self) -> bool {
+    pub const fn rxois(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
         val != 0
     }
-    #[doc = "Receive FIFO overflow interrupt mask"]
+    #[doc = "Receive FIFO overflow interrupt status"]
     #[inline(always)]
-    pub fn set_rxoim(&mut self, val: bool) {
+    pub fn set_rxois(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
-    #[doc = "Receive FIFO full interrupt mask"]
+    #[doc = "Receive FIFO full interrupt status"]
     #[inline(always)]
-    pub const fn rxfim(&self) -> bool {
+    pub const fn rxfis(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
-    #[doc = "Receive FIFO full interrupt mask"]
+    #[doc = "Receive FIFO full interrupt status"]
     #[inline(always)]
-    pub fn set_rxfim(&mut self, val: bool) {
+    pub fn set_rxfis(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
-    #[doc = "Multi-master contention interrupt mask"]
+    #[doc = "Multi-master contention interrupt status"]
     #[inline(always)]
-    pub const fn mstim(&self) -> bool {
+    pub const fn mstis(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
         val != 0
     }
-    #[doc = "Multi-master contention interrupt mask"]
+    #[doc = "Multi-master contention interrupt status"]
     #[inline(always)]
-    pub fn set_mstim(&mut self, val: bool) {
+    pub fn set_mstis(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
 }
-impl Default for Imr {
+impl Default for Isr {
     #[inline(always)]
-    fn default() -> Imr {
-        Imr(0)
+    fn default() -> Isr {
+        Isr(0)
+    }
+}
+#[doc = "TX FIFO overflow interrupt clear"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Txoicr(pub u32);
+impl Txoicr {
+    #[doc = "Clear-on-read transmit FIFO overflow interrupt"]
+    #[inline(always)]
+    pub const fn txoicr(&self) -> bool {
+        let val = (self.0 >> 0usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Clear-on-read transmit FIFO overflow interrupt"]
+    #[inline(always)]
+    pub fn set_txoicr(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+    }
+}
+impl Default for Txoicr {
+    #[inline(always)]
+    fn default() -> Txoicr {
+        Txoicr(0)
     }
 }
 #[doc = "Baud rate"]
@@ -1022,5 +921,106 @@ impl Default for Baudr {
     #[inline(always)]
     fn default() -> Baudr {
         Baudr(0)
+    }
+}
+#[doc = "Raw interrupt status"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Risr(pub u32);
+impl Risr {
+    #[doc = "Transmit FIFO empty raw interrupt status"]
+    #[inline(always)]
+    pub const fn txeir(&self) -> bool {
+        let val = (self.0 >> 0usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Transmit FIFO empty raw interrupt status"]
+    #[inline(always)]
+    pub fn set_txeir(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+    }
+    #[doc = "Transmit FIFO overflow raw interrupt status"]
+    #[inline(always)]
+    pub const fn txoir(&self) -> bool {
+        let val = (self.0 >> 1usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Transmit FIFO overflow raw interrupt status"]
+    #[inline(always)]
+    pub fn set_txoir(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
+    }
+    #[doc = "Receive FIFO underflow raw interrupt status"]
+    #[inline(always)]
+    pub const fn rxuir(&self) -> bool {
+        let val = (self.0 >> 2usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Receive FIFO underflow raw interrupt status"]
+    #[inline(always)]
+    pub fn set_rxuir(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
+    }
+    #[doc = "Receive FIFO overflow raw interrupt status"]
+    #[inline(always)]
+    pub const fn rxoir(&self) -> bool {
+        let val = (self.0 >> 3usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Receive FIFO overflow raw interrupt status"]
+    #[inline(always)]
+    pub fn set_rxoir(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
+    }
+    #[doc = "Receive FIFO full raw interrupt status"]
+    #[inline(always)]
+    pub const fn rxfir(&self) -> bool {
+        let val = (self.0 >> 4usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Receive FIFO full raw interrupt status"]
+    #[inline(always)]
+    pub fn set_rxfir(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
+    }
+    #[doc = "Multi-master contention raw interrupt status"]
+    #[inline(always)]
+    pub const fn mstir(&self) -> bool {
+        let val = (self.0 >> 5usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Multi-master contention raw interrupt status"]
+    #[inline(always)]
+    pub fn set_mstir(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
+    }
+}
+impl Default for Risr {
+    #[inline(always)]
+    fn default() -> Risr {
+        Risr(0)
+    }
+}
+#[doc = "SSI Enable"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Ssienr(pub u32);
+impl Ssienr {
+    #[doc = "SSI enable"]
+    #[inline(always)]
+    pub const fn ssi_en(&self) -> bool {
+        let val = (self.0 >> 0usize) & 0x01;
+        val != 0
+    }
+    #[doc = "SSI enable"]
+    #[inline(always)]
+    pub fn set_ssi_en(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+    }
+}
+impl Default for Ssienr {
+    #[inline(always)]
+    fn default() -> Ssienr {
+        Ssienr(0)
     }
 }

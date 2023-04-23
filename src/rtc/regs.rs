@@ -1,4 +1,116 @@
-#[doc = "Raw Interrupts"]
+#[doc = "RTC register 0 Read this before RTC 1!"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Rtc0(pub u32);
+impl Rtc0 {
+    #[doc = "Seconds"]
+    #[inline(always)]
+    pub const fn sec(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0x3f;
+        val as u8
+    }
+    #[doc = "Seconds"]
+    #[inline(always)]
+    pub fn set_sec(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x3f << 0usize)) | (((val as u32) & 0x3f) << 0usize);
+    }
+    #[doc = "Minutes"]
+    #[inline(always)]
+    pub const fn min(&self) -> u8 {
+        let val = (self.0 >> 8usize) & 0x3f;
+        val as u8
+    }
+    #[doc = "Minutes"]
+    #[inline(always)]
+    pub fn set_min(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x3f << 8usize)) | (((val as u32) & 0x3f) << 8usize);
+    }
+    #[doc = "Hours"]
+    #[inline(always)]
+    pub const fn hour(&self) -> u8 {
+        let val = (self.0 >> 16usize) & 0x1f;
+        val as u8
+    }
+    #[doc = "Hours"]
+    #[inline(always)]
+    pub fn set_hour(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x1f << 16usize)) | (((val as u32) & 0x1f) << 16usize);
+    }
+    #[doc = "Day of the week"]
+    #[inline(always)]
+    pub const fn dotw(&self) -> u8 {
+        let val = (self.0 >> 24usize) & 0x07;
+        val as u8
+    }
+    #[doc = "Day of the week"]
+    #[inline(always)]
+    pub fn set_dotw(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x07 << 24usize)) | (((val as u32) & 0x07) << 24usize);
+    }
+}
+impl Default for Rtc0 {
+    #[inline(always)]
+    fn default() -> Rtc0 {
+        Rtc0(0)
+    }
+}
+#[doc = "RTC Control and status"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Ctrl(pub u32);
+impl Ctrl {
+    #[doc = "Enable RTC"]
+    #[inline(always)]
+    pub const fn rtc_enable(&self) -> bool {
+        let val = (self.0 >> 0usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Enable RTC"]
+    #[inline(always)]
+    pub fn set_rtc_enable(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+    }
+    #[doc = "RTC enabled (running)"]
+    #[inline(always)]
+    pub const fn rtc_active(&self) -> bool {
+        let val = (self.0 >> 1usize) & 0x01;
+        val != 0
+    }
+    #[doc = "RTC enabled (running)"]
+    #[inline(always)]
+    pub fn set_rtc_active(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
+    }
+    #[doc = "Load RTC"]
+    #[inline(always)]
+    pub const fn load(&self) -> bool {
+        let val = (self.0 >> 4usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Load RTC"]
+    #[inline(always)]
+    pub fn set_load(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
+    }
+    #[doc = "If set, leapyear is forced off. Useful for years divisible by 100 but not by 400"]
+    #[inline(always)]
+    pub const fn force_notleapyear(&self) -> bool {
+        let val = (self.0 >> 8usize) & 0x01;
+        val != 0
+    }
+    #[doc = "If set, leapyear is forced off. Useful for years divisible by 100 but not by 400"]
+    #[inline(always)]
+    pub fn set_force_notleapyear(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
+    }
+}
+impl Default for Ctrl {
+    #[inline(always)]
+    fn default() -> Ctrl {
+        Ctrl(0)
+    }
+}
+#[doc = "Interrupt Enable"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Int(pub u32);
@@ -17,6 +129,51 @@ impl Default for Int {
     #[inline(always)]
     fn default() -> Int {
         Int(0)
+    }
+}
+#[doc = "RTC setup register 0"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Setup0(pub u32);
+impl Setup0 {
+    #[doc = "Day of the month (1..31)"]
+    #[inline(always)]
+    pub const fn day(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0x1f;
+        val as u8
+    }
+    #[doc = "Day of the month (1..31)"]
+    #[inline(always)]
+    pub fn set_day(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x1f << 0usize)) | (((val as u32) & 0x1f) << 0usize);
+    }
+    #[doc = "Month (1..12)"]
+    #[inline(always)]
+    pub const fn month(&self) -> u8 {
+        let val = (self.0 >> 8usize) & 0x0f;
+        val as u8
+    }
+    #[doc = "Month (1..12)"]
+    #[inline(always)]
+    pub fn set_month(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x0f << 8usize)) | (((val as u32) & 0x0f) << 8usize);
+    }
+    #[doc = "Year"]
+    #[inline(always)]
+    pub const fn year(&self) -> u16 {
+        let val = (self.0 >> 12usize) & 0x0fff;
+        val as u16
+    }
+    #[doc = "Year"]
+    #[inline(always)]
+    pub fn set_year(&mut self, val: u16) {
+        self.0 = (self.0 & !(0x0fff << 12usize)) | (((val as u32) & 0x0fff) << 12usize);
+    }
+}
+impl Default for Setup0 {
+    #[inline(always)]
+    fn default() -> Setup0 {
+        Setup0(0)
     }
 }
 #[doc = "RTC register 1."]
@@ -141,62 +298,6 @@ impl Default for ClkdivM1 {
         ClkdivM1(0)
     }
 }
-#[doc = "RTC register 0 Read this before RTC 1!"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Rtc0(pub u32);
-impl Rtc0 {
-    #[doc = "Seconds"]
-    #[inline(always)]
-    pub const fn sec(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0x3f;
-        val as u8
-    }
-    #[doc = "Seconds"]
-    #[inline(always)]
-    pub fn set_sec(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x3f << 0usize)) | (((val as u32) & 0x3f) << 0usize);
-    }
-    #[doc = "Minutes"]
-    #[inline(always)]
-    pub const fn min(&self) -> u8 {
-        let val = (self.0 >> 8usize) & 0x3f;
-        val as u8
-    }
-    #[doc = "Minutes"]
-    #[inline(always)]
-    pub fn set_min(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x3f << 8usize)) | (((val as u32) & 0x3f) << 8usize);
-    }
-    #[doc = "Hours"]
-    #[inline(always)]
-    pub const fn hour(&self) -> u8 {
-        let val = (self.0 >> 16usize) & 0x1f;
-        val as u8
-    }
-    #[doc = "Hours"]
-    #[inline(always)]
-    pub fn set_hour(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x1f << 16usize)) | (((val as u32) & 0x1f) << 16usize);
-    }
-    #[doc = "Day of the week"]
-    #[inline(always)]
-    pub const fn dotw(&self) -> u8 {
-        let val = (self.0 >> 24usize) & 0x07;
-        val as u8
-    }
-    #[doc = "Day of the week"]
-    #[inline(always)]
-    pub fn set_dotw(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x07 << 24usize)) | (((val as u32) & 0x07) << 24usize);
-    }
-}
-impl Default for Rtc0 {
-    #[inline(always)]
-    fn default() -> Rtc0 {
-        Rtc0(0)
-    }
-}
 #[doc = "Interrupt setup register 0"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -293,107 +394,6 @@ impl Default for IrqSetup0 {
     #[inline(always)]
     fn default() -> IrqSetup0 {
         IrqSetup0(0)
-    }
-}
-#[doc = "RTC Control and status"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Ctrl(pub u32);
-impl Ctrl {
-    #[doc = "Enable RTC"]
-    #[inline(always)]
-    pub const fn rtc_enable(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Enable RTC"]
-    #[inline(always)]
-    pub fn set_rtc_enable(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-    }
-    #[doc = "RTC enabled (running)"]
-    #[inline(always)]
-    pub const fn rtc_active(&self) -> bool {
-        let val = (self.0 >> 1usize) & 0x01;
-        val != 0
-    }
-    #[doc = "RTC enabled (running)"]
-    #[inline(always)]
-    pub fn set_rtc_active(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
-    }
-    #[doc = "Load RTC"]
-    #[inline(always)]
-    pub const fn load(&self) -> bool {
-        let val = (self.0 >> 4usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Load RTC"]
-    #[inline(always)]
-    pub fn set_load(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
-    }
-    #[doc = "If set, leapyear is forced off. Useful for years divisible by 100 but not by 400"]
-    #[inline(always)]
-    pub const fn force_notleapyear(&self) -> bool {
-        let val = (self.0 >> 8usize) & 0x01;
-        val != 0
-    }
-    #[doc = "If set, leapyear is forced off. Useful for years divisible by 100 but not by 400"]
-    #[inline(always)]
-    pub fn set_force_notleapyear(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
-    }
-}
-impl Default for Ctrl {
-    #[inline(always)]
-    fn default() -> Ctrl {
-        Ctrl(0)
-    }
-}
-#[doc = "RTC setup register 0"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Setup0(pub u32);
-impl Setup0 {
-    #[doc = "Day of the month (1..31)"]
-    #[inline(always)]
-    pub const fn day(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0x1f;
-        val as u8
-    }
-    #[doc = "Day of the month (1..31)"]
-    #[inline(always)]
-    pub fn set_day(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x1f << 0usize)) | (((val as u32) & 0x1f) << 0usize);
-    }
-    #[doc = "Month (1..12)"]
-    #[inline(always)]
-    pub const fn month(&self) -> u8 {
-        let val = (self.0 >> 8usize) & 0x0f;
-        val as u8
-    }
-    #[doc = "Month (1..12)"]
-    #[inline(always)]
-    pub fn set_month(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x0f << 8usize)) | (((val as u32) & 0x0f) << 8usize);
-    }
-    #[doc = "Year"]
-    #[inline(always)]
-    pub const fn year(&self) -> u16 {
-        let val = (self.0 >> 12usize) & 0x0fff;
-        val as u16
-    }
-    #[doc = "Year"]
-    #[inline(always)]
-    pub fn set_year(&mut self, val: u16) {
-        self.0 = (self.0 & !(0x0fff << 12usize)) | (((val as u32) & 0x0fff) << 12usize);
-    }
-}
-impl Default for Setup0 {
-    #[inline(always)]
-    fn default() -> Setup0 {
-        Setup0(0)
     }
 }
 #[doc = "Interrupt setup register 1"]

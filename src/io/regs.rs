@@ -1,67 +1,3 @@
-#[doc = "Interrupt Enable for proc0"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Int(pub u32);
-impl Int {
-    #[inline(always)]
-    pub fn edge_high(&self, n: usize) -> bool {
-        assert!(n < 8usize);
-        let offs = 3usize + n * 4usize;
-        let val = (self.0 >> offs) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_edge_high(&mut self, n: usize, val: bool) {
-        assert!(n < 8usize);
-        let offs = 3usize + n * 4usize;
-        self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
-    }
-    #[inline(always)]
-    pub fn edge_low(&self, n: usize) -> bool {
-        assert!(n < 8usize);
-        let offs = 2usize + n * 4usize;
-        let val = (self.0 >> offs) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_edge_low(&mut self, n: usize, val: bool) {
-        assert!(n < 8usize);
-        let offs = 2usize + n * 4usize;
-        self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
-    }
-    #[inline(always)]
-    pub fn level_low(&self, n: usize) -> bool {
-        assert!(n < 8usize);
-        let offs = 0usize + n * 4usize;
-        let val = (self.0 >> offs) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_level_low(&mut self, n: usize, val: bool) {
-        assert!(n < 8usize);
-        let offs = 0usize + n * 4usize;
-        self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
-    }
-    #[inline(always)]
-    pub fn level_high(&self, n: usize) -> bool {
-        assert!(n < 8usize);
-        let offs = 1usize + n * 4usize;
-        let val = (self.0 >> offs) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_level_high(&mut self, n: usize, val: bool) {
-        assert!(n < 8usize);
-        let offs = 1usize + n * 4usize;
-        self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
-    }
-}
-impl Default for Int {
-    #[inline(always)]
-    fn default() -> Int {
-        Int(0)
-    }
-}
 #[doc = "GPIO status"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -219,5 +155,69 @@ impl Default for GpioCtrl {
     #[inline(always)]
     fn default() -> GpioCtrl {
         GpioCtrl(0)
+    }
+}
+#[doc = "Interrupt Force for proc0"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Int(pub u32);
+impl Int {
+    #[inline(always)]
+    pub fn level_high(&self, n: usize) -> bool {
+        assert!(n < 8usize);
+        let offs = 1usize + n * 4usize;
+        let val = (self.0 >> offs) & 0x01;
+        val != 0
+    }
+    #[inline(always)]
+    pub fn set_level_high(&mut self, n: usize, val: bool) {
+        assert!(n < 8usize);
+        let offs = 1usize + n * 4usize;
+        self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
+    }
+    #[inline(always)]
+    pub fn edge_low(&self, n: usize) -> bool {
+        assert!(n < 8usize);
+        let offs = 2usize + n * 4usize;
+        let val = (self.0 >> offs) & 0x01;
+        val != 0
+    }
+    #[inline(always)]
+    pub fn set_edge_low(&mut self, n: usize, val: bool) {
+        assert!(n < 8usize);
+        let offs = 2usize + n * 4usize;
+        self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
+    }
+    #[inline(always)]
+    pub fn level_low(&self, n: usize) -> bool {
+        assert!(n < 8usize);
+        let offs = 0usize + n * 4usize;
+        let val = (self.0 >> offs) & 0x01;
+        val != 0
+    }
+    #[inline(always)]
+    pub fn set_level_low(&mut self, n: usize, val: bool) {
+        assert!(n < 8usize);
+        let offs = 0usize + n * 4usize;
+        self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
+    }
+    #[inline(always)]
+    pub fn edge_high(&self, n: usize) -> bool {
+        assert!(n < 8usize);
+        let offs = 3usize + n * 4usize;
+        let val = (self.0 >> offs) & 0x01;
+        val != 0
+    }
+    #[inline(always)]
+    pub fn set_edge_high(&mut self, n: usize, val: bool) {
+        assert!(n < 8usize);
+        let offs = 3usize + n * 4usize;
+        self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
+    }
+}
+impl Default for Int {
+    #[inline(always)]
+    fn default() -> Int {
+        Int(0)
     }
 }
