@@ -12,3 +12,10 @@ cortex-m-rt = { version = ">=0.6.15,<0.8", optional = true }
 
 [features]
 rt = ["cortex-m-rt/device"]
+
+
+[package.metadata.embassy_docs]
+src_base = "https://github.com/embassy-rs/rp-pac/blob/v$VERSION/src/"
+src_base_git = "https://github.com/embassy-rs/rp-pac/blob/$COMMIT/src/"
+features = []
+target = "x86_64-unknown-linux-gnu"
