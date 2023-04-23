@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["AddrEndp","AddrEndpX","BuffCpuShouldHandle","BuffStatus","EpAbort","EpAbortDone","EpStallArm","EpStatusStallNak","Int","IntEpCtrl","MainCtrl","NakPoll","SieCtrl","SieStatus","SofRd","SofWr","UsbMuxing","UsbPwr","UsbphyDirect","UsbphyDirectOverride","UsbphyTrim"]};

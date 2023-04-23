@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["InstL","SpiFrf","Tmod","TransType"]};

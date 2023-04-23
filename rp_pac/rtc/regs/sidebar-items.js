@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["ClkdivM1","Ctrl","Int","IrqSetup0","IrqSetup1","Rtc0","Rtc1","Setup0","Setup1"]};
