@@ -43,6 +43,29 @@ impl Default for Ctrl {
         Ctrl(0)
     }
 }
+#[doc = "Cache Flush control"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Flush(pub u32);
+impl Flush {
+    #[doc = "Write 1 to flush the cache. This clears the tag memory, but the data memory retains its contents. (This means cache-as-SRAM contents is not affected by flush or reset.) Reading will hold the bus (stall the processor) until the flush completes. Alternatively STAT can be polled until completion."]
+    #[inline(always)]
+    pub const fn flush(&self) -> bool {
+        let val = (self.0 >> 0usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Write 1 to flush the cache. This clears the tag memory, but the data memory retains its contents. (This means cache-as-SRAM contents is not affected by flush or reset.) Reading will hold the bus (stall the processor) until the flush completes. Alternatively STAT can be polled until completion."]
+    #[inline(always)]
+    pub fn set_flush(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+    }
+}
+impl Default for Flush {
+    #[inline(always)]
+    fn default() -> Flush {
+        Flush(0)
+    }
+}
 #[doc = "Cache Status"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -86,29 +109,6 @@ impl Default for Stat {
     #[inline(always)]
     fn default() -> Stat {
         Stat(0)
-    }
-}
-#[doc = "Cache Flush control"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Flush(pub u32);
-impl Flush {
-    #[doc = "Write 1 to flush the cache. This clears the tag memory, but the data memory retains its contents. (This means cache-as-SRAM contents is not affected by flush or reset.) Reading will hold the bus (stall the processor) until the flush completes. Alternatively STAT can be polled until completion."]
-    #[inline(always)]
-    pub const fn flush(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Write 1 to flush the cache. This clears the tag memory, but the data memory retains its contents. (This means cache-as-SRAM contents is not affected by flush or reset.) Reading will hold the bus (stall the processor) until the flush completes. Alternatively STAT can be polled until completion."]
-    #[inline(always)]
-    pub fn set_flush(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-    }
-}
-impl Default for Flush {
-    #[inline(always)]
-    fn default() -> Flush {
-        Flush(0)
     }
 }
 #[doc = "FIFO stream address"]

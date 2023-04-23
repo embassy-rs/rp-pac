@@ -9,6 +9,12 @@ impl Usb {
     pub fn addr_endp(self) -> crate::common::Reg<regs::AddrEndp, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(0usize)) }
     }
+    #[doc = "Interrupt endpoint 1. Only valid for HOST mode."]
+    #[inline(always)]
+    pub fn addr_endp_x(self, n: usize) -> crate::common::Reg<regs::AddrEndpX, crate::common::RW> {
+        assert!(n < 15usize);
+        unsafe { crate::common::Reg::from_ptr(self.0.add(4usize + n * 4usize)) }
+    }
     #[doc = "Main control register"]
     #[inline(always)]
     pub fn main_ctrl(self) -> crate::common::Reg<regs::MainCtrl, crate::common::RW> {
@@ -124,12 +130,6 @@ impl Usb {
     #[inline(always)]
     pub fn ints(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(152usize)) }
-    }
-    #[doc = "Interrupt endpoint 1. Only valid for HOST mode."]
-    #[inline(always)]
-    pub fn addr_endp_x(self, n: usize) -> crate::common::Reg<regs::AddrEndpX, crate::common::RW> {
-        assert!(n < 15usize);
-        unsafe { crate::common::Reg::from_ptr(self.0.add(4usize + n * 4usize)) }
     }
 }
 pub mod regs;

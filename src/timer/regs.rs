@@ -1,3 +1,24 @@
+#[doc = "Indicates the armed/disarmed status of each alarm. A write to the corresponding ALARMx register arms the alarm. Alarms automatically disarm upon firing, but writing ones here will disarm immediately without waiting to fire."]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Armed(pub u32);
+impl Armed {
+    #[inline(always)]
+    pub const fn armed(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0x0f;
+        val as u8
+    }
+    #[inline(always)]
+    pub fn set_armed(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x0f << 0usize)) | (((val as u32) & 0x0f) << 0usize);
+    }
+}
+impl Default for Armed {
+    #[inline(always)]
+    fn default() -> Armed {
+        Armed(0)
+    }
+}
 #[doc = "Set bits high to enable pause when the corresponding debug ports are active"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -32,7 +53,7 @@ impl Default for Dbgpause {
         Dbgpause(0)
     }
 }
-#[doc = "Interrupt Force"]
+#[doc = "Interrupt Enable"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Int(pub u32);
@@ -76,26 +97,5 @@ impl Default for Pause {
     #[inline(always)]
     fn default() -> Pause {
         Pause(0)
-    }
-}
-#[doc = "Indicates the armed/disarmed status of each alarm. A write to the corresponding ALARMx register arms the alarm. Alarms automatically disarm upon firing, but writing ones here will disarm immediately without waiting to fire."]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Armed(pub u32);
-impl Armed {
-    #[inline(always)]
-    pub const fn armed(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0x0f;
-        val as u8
-    }
-    #[inline(always)]
-    pub fn set_armed(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x0f << 0usize)) | (((val as u32) & 0x0f) << 0usize);
-    }
-}
-impl Default for Armed {
-    #[inline(always)]
-    fn default() -> Armed {
-        Armed(0)
     }
 }

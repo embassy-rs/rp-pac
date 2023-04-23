@@ -14,17 +14,17 @@ impl Busctrl {
     pub fn bus_priority_ack(self) -> crate::common::Reg<regs::BusPriorityAck, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.0.add(4usize)) }
     }
-    #[doc = "Bus fabric performance event select for PERFCTR0"]
-    #[inline(always)]
-    pub fn perfsel(self, n: usize) -> crate::common::Reg<regs::Perfsel, crate::common::RW> {
-        assert!(n < 4usize);
-        unsafe { crate::common::Reg::from_ptr(self.0.add(12usize + n * 8usize)) }
-    }
     #[doc = "Bus fabric performance counter 0"]
     #[inline(always)]
     pub fn perfctr(self, n: usize) -> crate::common::Reg<regs::Perfctr, crate::common::RW> {
         assert!(n < 4usize);
         unsafe { crate::common::Reg::from_ptr(self.0.add(8usize + n * 8usize)) }
+    }
+    #[doc = "Bus fabric performance event select for PERFCTR0"]
+    #[inline(always)]
+    pub fn perfsel(self, n: usize) -> crate::common::Reg<regs::Perfsel, crate::common::RW> {
+        assert!(n < 4usize);
+        unsafe { crate::common::Reg::from_ptr(self.0.add(12usize + n * 8usize)) }
     }
 }
 pub mod regs;

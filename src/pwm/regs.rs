@@ -1,3 +1,33 @@
+#[doc = "Counter compare values"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct ChCc(pub u32);
+impl ChCc {
+    #[inline(always)]
+    pub const fn a(&self) -> u16 {
+        let val = (self.0 >> 0usize) & 0xffff;
+        val as u16
+    }
+    #[inline(always)]
+    pub fn set_a(&mut self, val: u16) {
+        self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
+    }
+    #[inline(always)]
+    pub const fn b(&self) -> u16 {
+        let val = (self.0 >> 16usize) & 0xffff;
+        val as u16
+    }
+    #[inline(always)]
+    pub fn set_b(&mut self, val: u16) {
+        self.0 = (self.0 & !(0xffff << 16usize)) | (((val as u32) & 0xffff) << 16usize);
+    }
+}
+impl Default for ChCc {
+    #[inline(always)]
+    fn default() -> ChCc {
+        ChCc(0)
+    }
+}
 #[doc = "Control and status register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -85,6 +115,27 @@ impl Default for ChCsr {
         ChCsr(0)
     }
 }
+#[doc = "Direct access to the PWM counter"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct ChCtr(pub u32);
+impl ChCtr {
+    #[inline(always)]
+    pub const fn ctr(&self) -> u16 {
+        let val = (self.0 >> 0usize) & 0xffff;
+        val as u16
+    }
+    #[inline(always)]
+    pub fn set_ctr(&mut self, val: u16) {
+        self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
+    }
+}
+impl Default for ChCtr {
+    #[inline(always)]
+    fn default() -> ChCtr {
+        ChCtr(0)
+    }
+}
 #[doc = "INT and FRAC form a fixed-point fractional number. Counting rate is system clock frequency divided by this number. Fractional division uses simple 1st-order sigma-delta."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -115,118 +166,25 @@ impl Default for ChDiv {
         ChDiv(0)
     }
 }
-#[doc = "Counter compare values"]
+#[doc = "Counter wrap value"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct ChCc(pub u32);
-impl ChCc {
+pub struct ChTop(pub u32);
+impl ChTop {
     #[inline(always)]
-    pub const fn a(&self) -> u16 {
+    pub const fn top(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0xffff;
         val as u16
     }
     #[inline(always)]
-    pub fn set_a(&mut self, val: u16) {
+    pub fn set_top(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
     }
-    #[inline(always)]
-    pub const fn b(&self) -> u16 {
-        let val = (self.0 >> 16usize) & 0xffff;
-        val as u16
-    }
-    #[inline(always)]
-    pub fn set_b(&mut self, val: u16) {
-        self.0 = (self.0 & !(0xffff << 16usize)) | (((val as u32) & 0xffff) << 16usize);
-    }
 }
-impl Default for ChCc {
+impl Default for ChTop {
     #[inline(always)]
-    fn default() -> ChCc {
-        ChCc(0)
-    }
-}
-#[doc = "Interrupt Force"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Intf(pub u32);
-impl Intf {
-    #[inline(always)]
-    pub const fn ch0(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_ch0(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-    }
-    #[inline(always)]
-    pub const fn ch1(&self) -> bool {
-        let val = (self.0 >> 1usize) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_ch1(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
-    }
-    #[inline(always)]
-    pub const fn ch2(&self) -> bool {
-        let val = (self.0 >> 2usize) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_ch2(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
-    }
-    #[inline(always)]
-    pub const fn ch3(&self) -> bool {
-        let val = (self.0 >> 3usize) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_ch3(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
-    }
-    #[inline(always)]
-    pub const fn ch4(&self) -> bool {
-        let val = (self.0 >> 4usize) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_ch4(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
-    }
-    #[inline(always)]
-    pub const fn ch5(&self) -> bool {
-        let val = (self.0 >> 5usize) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_ch5(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
-    }
-    #[inline(always)]
-    pub const fn ch6(&self) -> bool {
-        let val = (self.0 >> 6usize) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_ch6(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
-    }
-    #[inline(always)]
-    pub const fn ch7(&self) -> bool {
-        let val = (self.0 >> 7usize) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_ch7(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
-    }
-}
-impl Default for Intf {
-    #[inline(always)]
-    fn default() -> Intf {
-        Intf(0)
+    fn default() -> ChTop {
+        ChTop(0)
     }
 }
 #[doc = "This register aliases the CSR_EN bits for all channels. Writing to this register allows multiple channels to be enabled or disabled simultaneously, so they can run in perfect sync. For each channel, there is only one physical EN register bit, which can be accessed through here or CHx_CSR."]
@@ -313,46 +271,172 @@ impl Default for En {
         En(0)
     }
 }
-#[doc = "Direct access to the PWM counter"]
+#[doc = "Interrupt Enable"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct ChCtr(pub u32);
-impl ChCtr {
+pub struct Inte(pub u32);
+impl Inte {
     #[inline(always)]
-    pub const fn ctr(&self) -> u16 {
-        let val = (self.0 >> 0usize) & 0xffff;
-        val as u16
+    pub const fn ch0(&self) -> bool {
+        let val = (self.0 >> 0usize) & 0x01;
+        val != 0
     }
     #[inline(always)]
-    pub fn set_ctr(&mut self, val: u16) {
-        self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
+    pub fn set_ch0(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+    }
+    #[inline(always)]
+    pub const fn ch1(&self) -> bool {
+        let val = (self.0 >> 1usize) & 0x01;
+        val != 0
+    }
+    #[inline(always)]
+    pub fn set_ch1(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
+    }
+    #[inline(always)]
+    pub const fn ch2(&self) -> bool {
+        let val = (self.0 >> 2usize) & 0x01;
+        val != 0
+    }
+    #[inline(always)]
+    pub fn set_ch2(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
+    }
+    #[inline(always)]
+    pub const fn ch3(&self) -> bool {
+        let val = (self.0 >> 3usize) & 0x01;
+        val != 0
+    }
+    #[inline(always)]
+    pub fn set_ch3(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
+    }
+    #[inline(always)]
+    pub const fn ch4(&self) -> bool {
+        let val = (self.0 >> 4usize) & 0x01;
+        val != 0
+    }
+    #[inline(always)]
+    pub fn set_ch4(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
+    }
+    #[inline(always)]
+    pub const fn ch5(&self) -> bool {
+        let val = (self.0 >> 5usize) & 0x01;
+        val != 0
+    }
+    #[inline(always)]
+    pub fn set_ch5(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
+    }
+    #[inline(always)]
+    pub const fn ch6(&self) -> bool {
+        let val = (self.0 >> 6usize) & 0x01;
+        val != 0
+    }
+    #[inline(always)]
+    pub fn set_ch6(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
+    }
+    #[inline(always)]
+    pub const fn ch7(&self) -> bool {
+        let val = (self.0 >> 7usize) & 0x01;
+        val != 0
+    }
+    #[inline(always)]
+    pub fn set_ch7(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
 }
-impl Default for ChCtr {
+impl Default for Inte {
     #[inline(always)]
-    fn default() -> ChCtr {
-        ChCtr(0)
+    fn default() -> Inte {
+        Inte(0)
     }
 }
-#[doc = "Counter wrap value"]
+#[doc = "Interrupt Force"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct ChTop(pub u32);
-impl ChTop {
+pub struct Intf(pub u32);
+impl Intf {
     #[inline(always)]
-    pub const fn top(&self) -> u16 {
-        let val = (self.0 >> 0usize) & 0xffff;
-        val as u16
+    pub const fn ch0(&self) -> bool {
+        let val = (self.0 >> 0usize) & 0x01;
+        val != 0
     }
     #[inline(always)]
-    pub fn set_top(&mut self, val: u16) {
-        self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
+    pub fn set_ch0(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+    }
+    #[inline(always)]
+    pub const fn ch1(&self) -> bool {
+        let val = (self.0 >> 1usize) & 0x01;
+        val != 0
+    }
+    #[inline(always)]
+    pub fn set_ch1(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
+    }
+    #[inline(always)]
+    pub const fn ch2(&self) -> bool {
+        let val = (self.0 >> 2usize) & 0x01;
+        val != 0
+    }
+    #[inline(always)]
+    pub fn set_ch2(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
+    }
+    #[inline(always)]
+    pub const fn ch3(&self) -> bool {
+        let val = (self.0 >> 3usize) & 0x01;
+        val != 0
+    }
+    #[inline(always)]
+    pub fn set_ch3(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
+    }
+    #[inline(always)]
+    pub const fn ch4(&self) -> bool {
+        let val = (self.0 >> 4usize) & 0x01;
+        val != 0
+    }
+    #[inline(always)]
+    pub fn set_ch4(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
+    }
+    #[inline(always)]
+    pub const fn ch5(&self) -> bool {
+        let val = (self.0 >> 5usize) & 0x01;
+        val != 0
+    }
+    #[inline(always)]
+    pub fn set_ch5(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
+    }
+    #[inline(always)]
+    pub const fn ch6(&self) -> bool {
+        let val = (self.0 >> 6usize) & 0x01;
+        val != 0
+    }
+    #[inline(always)]
+    pub fn set_ch6(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
+    }
+    #[inline(always)]
+    pub const fn ch7(&self) -> bool {
+        let val = (self.0 >> 7usize) & 0x01;
+        val != 0
+    }
+    #[inline(always)]
+    pub fn set_ch7(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
 }
-impl Default for ChTop {
+impl Default for Intf {
     #[inline(always)]
-    fn default() -> ChTop {
-        ChTop(0)
+    fn default() -> Intf {
+        Intf(0)
     }
 }
 #[doc = "Raw Interrupts"]
@@ -437,90 +521,6 @@ impl Default for Intr {
     #[inline(always)]
     fn default() -> Intr {
         Intr(0)
-    }
-}
-#[doc = "Interrupt Enable"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Inte(pub u32);
-impl Inte {
-    #[inline(always)]
-    pub const fn ch0(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_ch0(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-    }
-    #[inline(always)]
-    pub const fn ch1(&self) -> bool {
-        let val = (self.0 >> 1usize) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_ch1(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
-    }
-    #[inline(always)]
-    pub const fn ch2(&self) -> bool {
-        let val = (self.0 >> 2usize) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_ch2(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
-    }
-    #[inline(always)]
-    pub const fn ch3(&self) -> bool {
-        let val = (self.0 >> 3usize) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_ch3(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
-    }
-    #[inline(always)]
-    pub const fn ch4(&self) -> bool {
-        let val = (self.0 >> 4usize) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_ch4(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
-    }
-    #[inline(always)]
-    pub const fn ch5(&self) -> bool {
-        let val = (self.0 >> 5usize) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_ch5(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
-    }
-    #[inline(always)]
-    pub const fn ch6(&self) -> bool {
-        let val = (self.0 >> 6usize) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_ch6(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
-    }
-    #[inline(always)]
-    pub const fn ch7(&self) -> bool {
-        let val = (self.0 >> 7usize) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_ch7(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
-    }
-}
-impl Default for Inte {
-    #[inline(always)]
-    fn default() -> Inte {
-        Inte(0)
     }
 }
 #[doc = "Interrupt status after masking & forcing"]
