@@ -25,6 +25,12 @@ extern "C" {
     fn I2C0_IRQ();
     fn I2C1_IRQ();
     fn RTC_IRQ();
+    fn SWI_IRQ_0();
+    fn SWI_IRQ_1();
+    fn SWI_IRQ_2();
+    fn SWI_IRQ_3();
+    fn SWI_IRQ_4();
+    fn SWI_IRQ_5();
 }
 pub union Vector {
     _handler: unsafe extern "C" fn(),
@@ -32,7 +38,7 @@ pub union Vector {
 }
 #[link_section = ".vector_table.interrupts"]
 #[no_mangle]
-pub static __INTERRUPTS: [Vector; 26] = [
+pub static __INTERRUPTS: [Vector; 32] = [
     Vector {
         _handler: TIMER_IRQ_0,
     },
@@ -99,4 +105,22 @@ pub static __INTERRUPTS: [Vector; 26] = [
     Vector { _handler: I2C0_IRQ },
     Vector { _handler: I2C1_IRQ },
     Vector { _handler: RTC_IRQ },
+    Vector {
+        _handler: SWI_IRQ_0,
+    },
+    Vector {
+        _handler: SWI_IRQ_1,
+    },
+    Vector {
+        _handler: SWI_IRQ_2,
+    },
+    Vector {
+        _handler: SWI_IRQ_3,
+    },
+    Vector {
+        _handler: SWI_IRQ_4,
+    },
+    Vector {
+        _handler: SWI_IRQ_5,
+    },
 ];

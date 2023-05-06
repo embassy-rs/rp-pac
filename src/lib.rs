@@ -55,6 +55,18 @@ pub enum Interrupt {
     I2C1_IRQ = 24,
     #[doc = "25 - RTC_IRQ"]
     RTC_IRQ = 25,
+    #[doc = "26 - SWI_IRQ_0"]
+    SWI_IRQ_0 = 26,
+    #[doc = "27 - SWI_IRQ_1"]
+    SWI_IRQ_1 = 27,
+    #[doc = "28 - SWI_IRQ_2"]
+    SWI_IRQ_2 = 28,
+    #[doc = "29 - SWI_IRQ_3"]
+    SWI_IRQ_3 = 29,
+    #[doc = "30 - SWI_IRQ_4"]
+    SWI_IRQ_4 = 30,
+    #[doc = "31 - SWI_IRQ_5"]
+    SWI_IRQ_5 = 31,
 }
 unsafe impl cortex_m::interrupt::InterruptNumber for Interrupt {
     #[inline(always)]

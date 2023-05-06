@@ -24,4 +24,9 @@ PROVIDE(ADC_IRQ_FIFO = DefaultHandler);
 PROVIDE(I2C0_IRQ = DefaultHandler);
 PROVIDE(I2C1_IRQ = DefaultHandler);
 PROVIDE(RTC_IRQ = DefaultHandler);
-
+PROVIDE(SWI_IRQ_0 = DefaultHandler);
+PROVIDE(SWI_IRQ_1 = DefaultHandler);
+PROVIDE(SWI_IRQ_2 = DefaultHandler);
+PROVIDE(SWI_IRQ_3 = DefaultHandler);
+PROVIDE(SWI_IRQ_4 = DefaultHandler);
+PROVIDE(SWI_IRQ_5 = DefaultHandler);
