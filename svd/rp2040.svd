@@ -46383,5 +46383,35 @@
       <size>32</size>
       <version>1</version>
     </peripheral>
+    <peripheral>
+      <name>SWI_IRQ</name>
+      <description>Virtual Peripheral to access unused NVIC software interrupts</description>
+      <baseAddress>0</baseAddress>
+      <registers></registers>
+      <interrupt>
+        <name>SWI_IRQ_0</name>
+        <value>26</value>
+      </interrupt>
+      <interrupt>
+        <name>SWI_IRQ_1</name>
+        <value>27</value>
+      </interrupt>
+      <interrupt>
+        <name>SWI_IRQ_2</name>
+        <value>28</value>
+      </interrupt>
+      <interrupt>
+        <name>SWI_IRQ_3</name>
+        <value>29</value>
+      </interrupt>
+      <interrupt>
+        <name>SWI_IRQ_4</name>
+        <value>30</value>
+      </interrupt>
+      <interrupt>
+        <name>SWI_IRQ_5</name>
+        <value>31</value>
+      </interrupt>
+    </peripheral>
   </peripherals>
 </device>

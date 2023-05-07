@@ -379,5 +379,7 @@ transforms:
   - Delete:
       from: io_qspi::.*
   - Delete:
+      from: swi_irq::.*
+  - Delete:
       from: pads_qspi::.*
   - Sanitize: {}
