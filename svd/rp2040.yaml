@@ -297,6 +297,17 @@ transforms:
   - MergeFieldsets:
       from: clocks::regs::Int.
       to: clocks::regs::Int
+  - MergeEnums:
+      from: clocks::vals::ClkGpout\dCtrlAuxsrc
+      to: clocks::vals::ClkGpoutCtrlAuxsrc
+      check: NoCheck
+  - MergeFieldsets:
+      from: clocks::regs::ClkGpout\d(Ctrl|Div)
+      to: clocks::regs::ClkGpout$1
+  - MakeRegisterArray:
+      blocks: clocks::Clocks
+      from: clk_gpout\d_(ctrl|div|selected)
+      to: clk_gpout_$1
 
   # ========= USB
   - Rename:
