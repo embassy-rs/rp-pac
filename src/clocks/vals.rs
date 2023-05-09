@@ -11,61 +11,13 @@ impl ClkAdcCtrlAuxsrc {
 }
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-pub struct ClkGpout0ctrlAuxsrc(pub u8);
-impl ClkGpout0ctrlAuxsrc {
+pub struct ClkGpoutCtrlAuxsrc(pub u8);
+impl ClkGpoutCtrlAuxsrc {
     pub const CLKSRC_PLL_SYS: Self = Self(0);
     pub const CLKSRC_GPIN0: Self = Self(0x01);
     pub const CLKSRC_GPIN1: Self = Self(0x02);
     pub const CLKSRC_PLL_USB: Self = Self(0x03);
     pub const ROSC_CLKSRC: Self = Self(0x04);
-    pub const XOSC_CLKSRC: Self = Self(0x05);
-    pub const CLK_SYS: Self = Self(0x06);
-    pub const CLK_USB: Self = Self(0x07);
-    pub const CLK_ADC: Self = Self(0x08);
-    pub const CLK_RTC: Self = Self(0x09);
-    pub const CLK_REF: Self = Self(0x0a);
-}
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-pub struct ClkGpout1ctrlAuxsrc(pub u8);
-impl ClkGpout1ctrlAuxsrc {
-    pub const CLKSRC_PLL_SYS: Self = Self(0);
-    pub const CLKSRC_GPIN0: Self = Self(0x01);
-    pub const CLKSRC_GPIN1: Self = Self(0x02);
-    pub const CLKSRC_PLL_USB: Self = Self(0x03);
-    pub const ROSC_CLKSRC: Self = Self(0x04);
-    pub const XOSC_CLKSRC: Self = Self(0x05);
-    pub const CLK_SYS: Self = Self(0x06);
-    pub const CLK_USB: Self = Self(0x07);
-    pub const CLK_ADC: Self = Self(0x08);
-    pub const CLK_RTC: Self = Self(0x09);
-    pub const CLK_REF: Self = Self(0x0a);
-}
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-pub struct ClkGpout2ctrlAuxsrc(pub u8);
-impl ClkGpout2ctrlAuxsrc {
-    pub const CLKSRC_PLL_SYS: Self = Self(0);
-    pub const CLKSRC_GPIN0: Self = Self(0x01);
-    pub const CLKSRC_GPIN1: Self = Self(0x02);
-    pub const CLKSRC_PLL_USB: Self = Self(0x03);
-    pub const ROSC_CLKSRC_PH: Self = Self(0x04);
-    pub const XOSC_CLKSRC: Self = Self(0x05);
-    pub const CLK_SYS: Self = Self(0x06);
-    pub const CLK_USB: Self = Self(0x07);
-    pub const CLK_ADC: Self = Self(0x08);
-    pub const CLK_RTC: Self = Self(0x09);
-    pub const CLK_REF: Self = Self(0x0a);
-}
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-pub struct ClkGpout3ctrlAuxsrc(pub u8);
-impl ClkGpout3ctrlAuxsrc {
-    pub const CLKSRC_PLL_SYS: Self = Self(0);
-    pub const CLKSRC_GPIN0: Self = Self(0x01);
-    pub const CLKSRC_GPIN1: Self = Self(0x02);
-    pub const CLKSRC_PLL_USB: Self = Self(0x03);
-    pub const ROSC_CLKSRC_PH: Self = Self(0x04);
     pub const XOSC_CLKSRC: Self = Self(0x05);
     pub const CLK_SYS: Self = Self(0x06);
     pub const CLK_USB: Self = Self(0x07);

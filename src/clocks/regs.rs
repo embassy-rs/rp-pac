@@ -91,17 +91,17 @@ impl Default for ClkAdcDiv {
 #[doc = "Clock control, can be changed on-the-fly (except for auxsrc)"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct ClkGpout0ctrl(pub u32);
-impl ClkGpout0ctrl {
+pub struct ClkGpoutCtrl(pub u32);
+impl ClkGpoutCtrl {
     #[doc = "Selects the auxiliary clock source, will glitch when switching"]
     #[inline(always)]
-    pub const fn auxsrc(&self) -> super::vals::ClkGpout0ctrlAuxsrc {
+    pub const fn auxsrc(&self) -> super::vals::ClkGpoutCtrlAuxsrc {
         let val = (self.0 >> 5usize) & 0x0f;
-        super::vals::ClkGpout0ctrlAuxsrc(val as u8)
+        super::vals::ClkGpoutCtrlAuxsrc(val as u8)
     }
     #[doc = "Selects the auxiliary clock source, will glitch when switching"]
     #[inline(always)]
-    pub fn set_auxsrc(&mut self, val: super::vals::ClkGpout0ctrlAuxsrc) {
+    pub fn set_auxsrc(&mut self, val: super::vals::ClkGpoutCtrlAuxsrc) {
         self.0 = (self.0 & !(0x0f << 5usize)) | (((val.0 as u32) & 0x0f) << 5usize);
     }
     #[doc = "Asynchronously kills the clock generator"]
@@ -160,17 +160,17 @@ impl ClkGpout0ctrl {
         self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
     }
 }
-impl Default for ClkGpout0ctrl {
+impl Default for ClkGpoutCtrl {
     #[inline(always)]
-    fn default() -> ClkGpout0ctrl {
-        ClkGpout0ctrl(0)
+    fn default() -> ClkGpoutCtrl {
+        ClkGpoutCtrl(0)
     }
 }
 #[doc = "Clock divisor, can be changed on-the-fly"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct ClkGpout0div(pub u32);
-impl ClkGpout0div {
+pub struct ClkGpoutDiv(pub u32);
+impl ClkGpoutDiv {
     #[doc = "Fractional component of the divisor"]
     #[inline(always)]
     pub const fn frac(&self) -> u8 {
@@ -194,346 +194,10 @@ impl ClkGpout0div {
         self.0 = (self.0 & !(0x00ff_ffff << 8usize)) | (((val as u32) & 0x00ff_ffff) << 8usize);
     }
 }
-impl Default for ClkGpout0div {
+impl Default for ClkGpoutDiv {
     #[inline(always)]
-    fn default() -> ClkGpout0div {
-        ClkGpout0div(0)
-    }
-}
-#[doc = "Clock control, can be changed on-the-fly (except for auxsrc)"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct ClkGpout1ctrl(pub u32);
-impl ClkGpout1ctrl {
-    #[doc = "Selects the auxiliary clock source, will glitch when switching"]
-    #[inline(always)]
-    pub const fn auxsrc(&self) -> super::vals::ClkGpout1ctrlAuxsrc {
-        let val = (self.0 >> 5usize) & 0x0f;
-        super::vals::ClkGpout1ctrlAuxsrc(val as u8)
-    }
-    #[doc = "Selects the auxiliary clock source, will glitch when switching"]
-    #[inline(always)]
-    pub fn set_auxsrc(&mut self, val: super::vals::ClkGpout1ctrlAuxsrc) {
-        self.0 = (self.0 & !(0x0f << 5usize)) | (((val.0 as u32) & 0x0f) << 5usize);
-    }
-    #[doc = "Asynchronously kills the clock generator"]
-    #[inline(always)]
-    pub const fn kill(&self) -> bool {
-        let val = (self.0 >> 10usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Asynchronously kills the clock generator"]
-    #[inline(always)]
-    pub fn set_kill(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
-    }
-    #[doc = "Starts and stops the clock generator cleanly"]
-    #[inline(always)]
-    pub const fn enable(&self) -> bool {
-        let val = (self.0 >> 11usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Starts and stops the clock generator cleanly"]
-    #[inline(always)]
-    pub fn set_enable(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
-    }
-    #[doc = "Enables duty cycle correction for odd divisors"]
-    #[inline(always)]
-    pub const fn dc50(&self) -> bool {
-        let val = (self.0 >> 12usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Enables duty cycle correction for odd divisors"]
-    #[inline(always)]
-    pub fn set_dc50(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
-    }
-    #[doc = "This delays the enable signal by up to 3 cycles of the input clock This must be set before the clock is enabled to have any effect"]
-    #[inline(always)]
-    pub const fn phase(&self) -> u8 {
-        let val = (self.0 >> 16usize) & 0x03;
-        val as u8
-    }
-    #[doc = "This delays the enable signal by up to 3 cycles of the input clock This must be set before the clock is enabled to have any effect"]
-    #[inline(always)]
-    pub fn set_phase(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x03 << 16usize)) | (((val as u32) & 0x03) << 16usize);
-    }
-    #[doc = "An edge on this signal shifts the phase of the output by 1 cycle of the input clock This can be done at any time"]
-    #[inline(always)]
-    pub const fn nudge(&self) -> bool {
-        let val = (self.0 >> 20usize) & 0x01;
-        val != 0
-    }
-    #[doc = "An edge on this signal shifts the phase of the output by 1 cycle of the input clock This can be done at any time"]
-    #[inline(always)]
-    pub fn set_nudge(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
-    }
-}
-impl Default for ClkGpout1ctrl {
-    #[inline(always)]
-    fn default() -> ClkGpout1ctrl {
-        ClkGpout1ctrl(0)
-    }
-}
-#[doc = "Clock divisor, can be changed on-the-fly"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct ClkGpout1div(pub u32);
-impl ClkGpout1div {
-    #[doc = "Fractional component of the divisor"]
-    #[inline(always)]
-    pub const fn frac(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0xff;
-        val as u8
-    }
-    #[doc = "Fractional component of the divisor"]
-    #[inline(always)]
-    pub fn set_frac(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
-    }
-    #[doc = "Integer component of the divisor, 0 -> divide by 2^16"]
-    #[inline(always)]
-    pub const fn int(&self) -> u32 {
-        let val = (self.0 >> 8usize) & 0x00ff_ffff;
-        val as u32
-    }
-    #[doc = "Integer component of the divisor, 0 -> divide by 2^16"]
-    #[inline(always)]
-    pub fn set_int(&mut self, val: u32) {
-        self.0 = (self.0 & !(0x00ff_ffff << 8usize)) | (((val as u32) & 0x00ff_ffff) << 8usize);
-    }
-}
-impl Default for ClkGpout1div {
-    #[inline(always)]
-    fn default() -> ClkGpout1div {
-        ClkGpout1div(0)
-    }
-}
-#[doc = "Clock control, can be changed on-the-fly (except for auxsrc)"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct ClkGpout2ctrl(pub u32);
-impl ClkGpout2ctrl {
-    #[doc = "Selects the auxiliary clock source, will glitch when switching"]
-    #[inline(always)]
-    pub const fn auxsrc(&self) -> super::vals::ClkGpout2ctrlAuxsrc {
-        let val = (self.0 >> 5usize) & 0x0f;
-        super::vals::ClkGpout2ctrlAuxsrc(val as u8)
-    }
-    #[doc = "Selects the auxiliary clock source, will glitch when switching"]
-    #[inline(always)]
-    pub fn set_auxsrc(&mut self, val: super::vals::ClkGpout2ctrlAuxsrc) {
-        self.0 = (self.0 & !(0x0f << 5usize)) | (((val.0 as u32) & 0x0f) << 5usize);
-    }
-    #[doc = "Asynchronously kills the clock generator"]
-    #[inline(always)]
-    pub const fn kill(&self) -> bool {
-        let val = (self.0 >> 10usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Asynchronously kills the clock generator"]
-    #[inline(always)]
-    pub fn set_kill(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
-    }
-    #[doc = "Starts and stops the clock generator cleanly"]
-    #[inline(always)]
-    pub const fn enable(&self) -> bool {
-        let val = (self.0 >> 11usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Starts and stops the clock generator cleanly"]
-    #[inline(always)]
-    pub fn set_enable(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
-    }
-    #[doc = "Enables duty cycle correction for odd divisors"]
-    #[inline(always)]
-    pub const fn dc50(&self) -> bool {
-        let val = (self.0 >> 12usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Enables duty cycle correction for odd divisors"]
-    #[inline(always)]
-    pub fn set_dc50(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
-    }
-    #[doc = "This delays the enable signal by up to 3 cycles of the input clock This must be set before the clock is enabled to have any effect"]
-    #[inline(always)]
-    pub const fn phase(&self) -> u8 {
-        let val = (self.0 >> 16usize) & 0x03;
-        val as u8
-    }
-    #[doc = "This delays the enable signal by up to 3 cycles of the input clock This must be set before the clock is enabled to have any effect"]
-    #[inline(always)]
-    pub fn set_phase(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x03 << 16usize)) | (((val as u32) & 0x03) << 16usize);
-    }
-    #[doc = "An edge on this signal shifts the phase of the output by 1 cycle of the input clock This can be done at any time"]
-    #[inline(always)]
-    pub const fn nudge(&self) -> bool {
-        let val = (self.0 >> 20usize) & 0x01;
-        val != 0
-    }
-    #[doc = "An edge on this signal shifts the phase of the output by 1 cycle of the input clock This can be done at any time"]
-    #[inline(always)]
-    pub fn set_nudge(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
-    }
-}
-impl Default for ClkGpout2ctrl {
-    #[inline(always)]
-    fn default() -> ClkGpout2ctrl {
-        ClkGpout2ctrl(0)
-    }
-}
-#[doc = "Clock divisor, can be changed on-the-fly"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct ClkGpout2div(pub u32);
-impl ClkGpout2div {
-    #[doc = "Fractional component of the divisor"]
-    #[inline(always)]
-    pub const fn frac(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0xff;
-        val as u8
-    }
-    #[doc = "Fractional component of the divisor"]
-    #[inline(always)]
-    pub fn set_frac(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
-    }
-    #[doc = "Integer component of the divisor, 0 -> divide by 2^16"]
-    #[inline(always)]
-    pub const fn int(&self) -> u32 {
-        let val = (self.0 >> 8usize) & 0x00ff_ffff;
-        val as u32
-    }
-    #[doc = "Integer component of the divisor, 0 -> divide by 2^16"]
-    #[inline(always)]
-    pub fn set_int(&mut self, val: u32) {
-        self.0 = (self.0 & !(0x00ff_ffff << 8usize)) | (((val as u32) & 0x00ff_ffff) << 8usize);
-    }
-}
-impl Default for ClkGpout2div {
-    #[inline(always)]
-    fn default() -> ClkGpout2div {
-        ClkGpout2div(0)
-    }
-}
-#[doc = "Clock control, can be changed on-the-fly (except for auxsrc)"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct ClkGpout3ctrl(pub u32);
-impl ClkGpout3ctrl {
-    #[doc = "Selects the auxiliary clock source, will glitch when switching"]
-    #[inline(always)]
-    pub const fn auxsrc(&self) -> super::vals::ClkGpout3ctrlAuxsrc {
-        let val = (self.0 >> 5usize) & 0x0f;
-        super::vals::ClkGpout3ctrlAuxsrc(val as u8)
-    }
-    #[doc = "Selects the auxiliary clock source, will glitch when switching"]
-    #[inline(always)]
-    pub fn set_auxsrc(&mut self, val: super::vals::ClkGpout3ctrlAuxsrc) {
-        self.0 = (self.0 & !(0x0f << 5usize)) | (((val.0 as u32) & 0x0f) << 5usize);
-    }
-    #[doc = "Asynchronously kills the clock generator"]
-    #[inline(always)]
-    pub const fn kill(&self) -> bool {
-        let val = (self.0 >> 10usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Asynchronously kills the clock generator"]
-    #[inline(always)]
-    pub fn set_kill(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
-    }
-    #[doc = "Starts and stops the clock generator cleanly"]
-    #[inline(always)]
-    pub const fn enable(&self) -> bool {
-        let val = (self.0 >> 11usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Starts and stops the clock generator cleanly"]
-    #[inline(always)]
-    pub fn set_enable(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
-    }
-    #[doc = "Enables duty cycle correction for odd divisors"]
-    #[inline(always)]
-    pub const fn dc50(&self) -> bool {
-        let val = (self.0 >> 12usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Enables duty cycle correction for odd divisors"]
-    #[inline(always)]
-    pub fn set_dc50(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
-    }
-    #[doc = "This delays the enable signal by up to 3 cycles of the input clock This must be set before the clock is enabled to have any effect"]
-    #[inline(always)]
-    pub const fn phase(&self) -> u8 {
-        let val = (self.0 >> 16usize) & 0x03;
-        val as u8
-    }
-    #[doc = "This delays the enable signal by up to 3 cycles of the input clock This must be set before the clock is enabled to have any effect"]
-    #[inline(always)]
-    pub fn set_phase(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x03 << 16usize)) | (((val as u32) & 0x03) << 16usize);
-    }
-    #[doc = "An edge on this signal shifts the phase of the output by 1 cycle of the input clock This can be done at any time"]
-    #[inline(always)]
-    pub const fn nudge(&self) -> bool {
-        let val = (self.0 >> 20usize) & 0x01;
-        val != 0
-    }
-    #[doc = "An edge on this signal shifts the phase of the output by 1 cycle of the input clock This can be done at any time"]
-    #[inline(always)]
-    pub fn set_nudge(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
-    }
-}
-impl Default for ClkGpout3ctrl {
-    #[inline(always)]
-    fn default() -> ClkGpout3ctrl {
-        ClkGpout3ctrl(0)
-    }
-}
-#[doc = "Clock divisor, can be changed on-the-fly"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct ClkGpout3div(pub u32);
-impl ClkGpout3div {
-    #[doc = "Fractional component of the divisor"]
-    #[inline(always)]
-    pub const fn frac(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0xff;
-        val as u8
-    }
-    #[doc = "Fractional component of the divisor"]
-    #[inline(always)]
-    pub fn set_frac(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
-    }
-    #[doc = "Integer component of the divisor, 0 -> divide by 2^16"]
-    #[inline(always)]
-    pub const fn int(&self) -> u32 {
-        let val = (self.0 >> 8usize) & 0x00ff_ffff;
-        val as u32
-    }
-    #[doc = "Integer component of the divisor, 0 -> divide by 2^16"]
-    #[inline(always)]
-    pub fn set_int(&mut self, val: u32) {
-        self.0 = (self.0 & !(0x00ff_ffff << 8usize)) | (((val as u32) & 0x00ff_ffff) << 8usize);
-    }
-}
-impl Default for ClkGpout3div {
-    #[inline(always)]
-    fn default() -> ClkGpout3div {
-        ClkGpout3div(0)
+    fn default() -> ClkGpoutDiv {
+        ClkGpoutDiv(0)
     }
 }
 #[doc = "Clock control, can be changed on-the-fly (except for auxsrc)"]

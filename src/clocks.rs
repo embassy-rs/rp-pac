@@ -5,63 +5,27 @@ unsafe impl Sync for Clocks {}
 impl Clocks {
     #[doc = "Clock control, can be changed on-the-fly (except for auxsrc)"]
     #[inline(always)]
-    pub fn clk_gpout0_ctrl(self) -> crate::common::Reg<regs::ClkGpout0ctrl, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(0usize)) }
+    pub fn clk_gpout_ctrl(
+        self,
+        n: usize,
+    ) -> crate::common::Reg<regs::ClkGpoutCtrl, crate::common::RW> {
+        assert!(n < 4usize);
+        unsafe { crate::common::Reg::from_ptr(self.0.add(0usize + n * 12usize)) }
     }
     #[doc = "Clock divisor, can be changed on-the-fly"]
     #[inline(always)]
-    pub fn clk_gpout0_div(self) -> crate::common::Reg<regs::ClkGpout0div, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(4usize)) }
+    pub fn clk_gpout_div(
+        self,
+        n: usize,
+    ) -> crate::common::Reg<regs::ClkGpoutDiv, crate::common::RW> {
+        assert!(n < 4usize);
+        unsafe { crate::common::Reg::from_ptr(self.0.add(4usize + n * 12usize)) }
     }
     #[doc = "Indicates which SRC is currently selected by the glitchless mux (one-hot). This slice does not have a glitchless mux (only the AUX_SRC field is present, not SRC) so this register is hardwired to 0x1."]
     #[inline(always)]
-    pub fn clk_gpout0_selected(self) -> crate::common::Reg<u32, crate::common::R> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(8usize)) }
-    }
-    #[doc = "Clock control, can be changed on-the-fly (except for auxsrc)"]
-    #[inline(always)]
-    pub fn clk_gpout1_ctrl(self) -> crate::common::Reg<regs::ClkGpout1ctrl, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(12usize)) }
-    }
-    #[doc = "Clock divisor, can be changed on-the-fly"]
-    #[inline(always)]
-    pub fn clk_gpout1_div(self) -> crate::common::Reg<regs::ClkGpout1div, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(16usize)) }
-    }
-    #[doc = "Indicates which SRC is currently selected by the glitchless mux (one-hot). This slice does not have a glitchless mux (only the AUX_SRC field is present, not SRC) so this register is hardwired to 0x1."]
-    #[inline(always)]
-    pub fn clk_gpout1_selected(self) -> crate::common::Reg<u32, crate::common::R> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(20usize)) }
-    }
-    #[doc = "Clock control, can be changed on-the-fly (except for auxsrc)"]
-    #[inline(always)]
-    pub fn clk_gpout2_ctrl(self) -> crate::common::Reg<regs::ClkGpout2ctrl, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(24usize)) }
-    }
-    #[doc = "Clock divisor, can be changed on-the-fly"]
-    #[inline(always)]
-    pub fn clk_gpout2_div(self) -> crate::common::Reg<regs::ClkGpout2div, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(28usize)) }
-    }
-    #[doc = "Indicates which SRC is currently selected by the glitchless mux (one-hot). This slice does not have a glitchless mux (only the AUX_SRC field is present, not SRC) so this register is hardwired to 0x1."]
-    #[inline(always)]
-    pub fn clk_gpout2_selected(self) -> crate::common::Reg<u32, crate::common::R> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(32usize)) }
-    }
-    #[doc = "Clock control, can be changed on-the-fly (except for auxsrc)"]
-    #[inline(always)]
-    pub fn clk_gpout3_ctrl(self) -> crate::common::Reg<regs::ClkGpout3ctrl, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(36usize)) }
-    }
-    #[doc = "Clock divisor, can be changed on-the-fly"]
-    #[inline(always)]
-    pub fn clk_gpout3_div(self) -> crate::common::Reg<regs::ClkGpout3div, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(40usize)) }
-    }
-    #[doc = "Indicates which SRC is currently selected by the glitchless mux (one-hot). This slice does not have a glitchless mux (only the AUX_SRC field is present, not SRC) so this register is hardwired to 0x1."]
-    #[inline(always)]
-    pub fn clk_gpout3_selected(self) -> crate::common::Reg<u32, crate::common::R> {
-        unsafe { crate::common::Reg::from_ptr(self.0.add(44usize)) }
+    pub fn clk_gpout_selected(self, n: usize) -> crate::common::Reg<u32, crate::common::R> {
+        assert!(n < 4usize);
+        unsafe { crate::common::Reg::from_ptr(self.0.add(8usize + n * 12usize)) }
     }
     #[doc = "Clock control, can be changed on-the-fly (except for auxsrc)"]
     #[inline(always)]
