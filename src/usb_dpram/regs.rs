@@ -5,7 +5,7 @@ pub struct EpBufferControl(pub u32);
 impl EpBufferControl {
     #[doc = "The length of the data in buffer 0."]
     #[inline(always)]
-    pub fn length(&self, n: usize) -> u16 {
+    pub const fn length(&self, n: usize) -> u16 {
         assert!(n < 2usize);
         let offs = 0usize + n * 16usize;
         let val = (self.0 >> offs) & 0x03ff;
@@ -20,7 +20,7 @@ impl EpBufferControl {
     }
     #[doc = "Buffer 0 is available. This bit is set to indicate the buffer can be used by the controller. The controller clears the available bit when writing the status back."]
     #[inline(always)]
-    pub fn available(&self, n: usize) -> bool {
+    pub const fn available(&self, n: usize) -> bool {
         assert!(n < 2usize);
         let offs = 10usize + n * 16usize;
         let val = (self.0 >> offs) & 0x01;
@@ -57,7 +57,7 @@ impl EpBufferControl {
     }
     #[doc = "The data pid of buffer 0."]
     #[inline(always)]
-    pub fn pid(&self, n: usize) -> bool {
+    pub const fn pid(&self, n: usize) -> bool {
         assert!(n < 2usize);
         let offs = 13usize + n * 16usize;
         let val = (self.0 >> offs) & 0x01;
@@ -72,7 +72,7 @@ impl EpBufferControl {
     }
     #[doc = "Buffer 0 is the last buffer of the transfer."]
     #[inline(always)]
-    pub fn last(&self, n: usize) -> bool {
+    pub const fn last(&self, n: usize) -> bool {
         assert!(n < 2usize);
         let offs = 14usize + n * 16usize;
         let val = (self.0 >> offs) & 0x01;
@@ -87,7 +87,7 @@ impl EpBufferControl {
     }
     #[doc = "Buffer 0 is full. For an IN transfer (TX to the host) the bit is set to indicate the data is valid. For an OUT transfer (RX from the host) this bit should be left as a 0. The host will set it when it has filled the buffer with data."]
     #[inline(always)]
-    pub fn full(&self, n: usize) -> bool {
+    pub const fn full(&self, n: usize) -> bool {
         assert!(n < 2usize);
         let offs = 15usize + n * 16usize;
         let val = (self.0 >> offs) & 0x01;

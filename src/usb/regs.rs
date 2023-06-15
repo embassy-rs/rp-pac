@@ -32,7 +32,7 @@ impl Default for AddrEndp {
         AddrEndp(0)
     }
 }
-#[doc = "Interrupt endpoint 1. Only valid for HOST mode."]
+#[doc = "Interrupt endpoint 8. Only valid for HOST mode."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct AddrEndpX(pub u32);
@@ -94,7 +94,7 @@ impl Default for AddrEndpX {
 pub struct BuffCpuShouldHandle(pub u32);
 impl BuffCpuShouldHandle {
     #[inline(always)]
-    pub fn ep_in(&self, n: usize) -> bool {
+    pub const fn ep_in(&self, n: usize) -> bool {
         assert!(n < 16usize);
         let offs = 0usize + n * 2usize;
         let val = (self.0 >> offs) & 0x01;
@@ -107,7 +107,7 @@ impl BuffCpuShouldHandle {
         self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
     }
     #[inline(always)]
-    pub fn ep_out(&self, n: usize) -> bool {
+    pub const fn ep_out(&self, n: usize) -> bool {
         assert!(n < 16usize);
         let offs = 1usize + n * 2usize;
         let val = (self.0 >> offs) & 0x01;
@@ -132,7 +132,7 @@ impl Default for BuffCpuShouldHandle {
 pub struct BuffStatus(pub u32);
 impl BuffStatus {
     #[inline(always)]
-    pub fn ep_in(&self, n: usize) -> bool {
+    pub const fn ep_in(&self, n: usize) -> bool {
         assert!(n < 16usize);
         let offs = 0usize + n * 2usize;
         let val = (self.0 >> offs) & 0x01;
@@ -145,7 +145,7 @@ impl BuffStatus {
         self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
     }
     #[inline(always)]
-    pub fn ep_out(&self, n: usize) -> bool {
+    pub const fn ep_out(&self, n: usize) -> bool {
         assert!(n < 16usize);
         let offs = 1usize + n * 2usize;
         let val = (self.0 >> offs) & 0x01;
@@ -170,7 +170,7 @@ impl Default for BuffStatus {
 pub struct EpAbort(pub u32);
 impl EpAbort {
     #[inline(always)]
-    pub fn ep_in(&self, n: usize) -> bool {
+    pub const fn ep_in(&self, n: usize) -> bool {
         assert!(n < 16usize);
         let offs = 0usize + n * 2usize;
         let val = (self.0 >> offs) & 0x01;
@@ -183,7 +183,7 @@ impl EpAbort {
         self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
     }
     #[inline(always)]
-    pub fn ep_out(&self, n: usize) -> bool {
+    pub const fn ep_out(&self, n: usize) -> bool {
         assert!(n < 16usize);
         let offs = 1usize + n * 2usize;
         let val = (self.0 >> offs) & 0x01;
@@ -208,7 +208,7 @@ impl Default for EpAbort {
 pub struct EpAbortDone(pub u32);
 impl EpAbortDone {
     #[inline(always)]
-    pub fn ep_in(&self, n: usize) -> bool {
+    pub const fn ep_in(&self, n: usize) -> bool {
         assert!(n < 16usize);
         let offs = 0usize + n * 2usize;
         let val = (self.0 >> offs) & 0x01;
@@ -221,7 +221,7 @@ impl EpAbortDone {
         self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
     }
     #[inline(always)]
-    pub fn ep_out(&self, n: usize) -> bool {
+    pub const fn ep_out(&self, n: usize) -> bool {
         assert!(n < 16usize);
         let offs = 1usize + n * 2usize;
         let val = (self.0 >> offs) & 0x01;
@@ -276,7 +276,7 @@ impl Default for EpStallArm {
 pub struct EpStatusStallNak(pub u32);
 impl EpStatusStallNak {
     #[inline(always)]
-    pub fn ep_in(&self, n: usize) -> bool {
+    pub const fn ep_in(&self, n: usize) -> bool {
         assert!(n < 16usize);
         let offs = 0usize + n * 2usize;
         let val = (self.0 >> offs) & 0x01;
@@ -289,7 +289,7 @@ impl EpStatusStallNak {
         self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
     }
     #[inline(always)]
-    pub fn ep_out(&self, n: usize) -> bool {
+    pub const fn ep_out(&self, n: usize) -> bool {
         assert!(n < 16usize);
         let offs = 1usize + n * 2usize;
         let val = (self.0 >> offs) & 0x01;
@@ -308,7 +308,7 @@ impl Default for EpStatusStallNak {
         EpStatusStallNak(0)
     }
 }
-#[doc = "Interrupt status after masking & forcing"]
+#[doc = "Interrupt Enable"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Int(pub u32);

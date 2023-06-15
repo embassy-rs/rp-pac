@@ -21,7 +21,7 @@ impl Default for ChanAbort {
         ChanAbort(0)
     }
 }
-#[doc = "DMA Channel 1 Control and Status"]
+#[doc = "DMA Channel 4 Control and Status"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct CtrlTrig(pub u32);
@@ -215,12 +215,12 @@ impl Default for CtrlTrig {
 pub struct DbgCtdreq(pub u32);
 impl DbgCtdreq {
     #[inline(always)]
-    pub const fn ch11_dbg_ctdreq(&self) -> u8 {
+    pub const fn ch8_dbg_ctdreq(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x3f;
         val as u8
     }
     #[inline(always)]
-    pub fn set_ch11_dbg_ctdreq(&mut self, val: u8) {
+    pub fn set_ch8_dbg_ctdreq(&mut self, val: u8) {
         self.0 = (self.0 & !(0x3f << 0usize)) | (((val as u32) & 0x3f) << 0usize);
     }
 }

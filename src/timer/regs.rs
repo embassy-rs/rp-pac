@@ -53,13 +53,13 @@ impl Default for Dbgpause {
         Dbgpause(0)
     }
 }
-#[doc = "Interrupt Enable"]
+#[doc = "Interrupt Force"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Int(pub u32);
 impl Int {
     #[inline(always)]
-    pub fn alarm(&self, n: usize) -> bool {
+    pub const fn alarm(&self, n: usize) -> bool {
         assert!(n < 4usize);
         let offs = 0usize + n * 1usize;
         let val = (self.0 >> offs) & 0x01;

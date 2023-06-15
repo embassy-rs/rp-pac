@@ -157,13 +157,13 @@ impl Default for GpioStatus {
         GpioStatus(0)
     }
 }
-#[doc = "Interrupt Enable for proc0"]
+#[doc = "Interrupt Force for dormant_wake"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Int(pub u32);
 impl Int {
     #[inline(always)]
-    pub fn level_low(&self, n: usize) -> bool {
+    pub const fn level_low(&self, n: usize) -> bool {
         assert!(n < 8usize);
         let offs = 0usize + n * 4usize;
         let val = (self.0 >> offs) & 0x01;
@@ -176,7 +176,7 @@ impl Int {
         self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
     }
     #[inline(always)]
-    pub fn level_high(&self, n: usize) -> bool {
+    pub const fn level_high(&self, n: usize) -> bool {
         assert!(n < 8usize);
         let offs = 1usize + n * 4usize;
         let val = (self.0 >> offs) & 0x01;
@@ -189,7 +189,7 @@ impl Int {
         self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
     }
     #[inline(always)]
-    pub fn edge_low(&self, n: usize) -> bool {
+    pub const fn edge_low(&self, n: usize) -> bool {
         assert!(n < 8usize);
         let offs = 2usize + n * 4usize;
         let val = (self.0 >> offs) & 0x01;
@@ -202,7 +202,7 @@ impl Int {
         self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
     }
     #[inline(always)]
-    pub fn edge_high(&self, n: usize) -> bool {
+    pub const fn edge_high(&self, n: usize) -> bool {
         assert!(n < 8usize);
         let offs = 3usize + n * 4usize;
         let val = (self.0 >> offs) & 0x01;

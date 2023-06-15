@@ -77,58 +77,64 @@ unsafe impl cortex_m::interrupt::InterruptNumber for Interrupt {
 #[cfg(feature = "rt")]
 mod _vectors;
 #[doc = "QSPI flash execute-in-place block"]
-pub const XIP_CTRL: xip_ctrl::XipCtrl = xip_ctrl::XipCtrl(0x1400_0000 as u32 as _);
+pub const XIP_CTRL: xip_ctrl::XipCtrl =
+    unsafe { xip_ctrl::XipCtrl::from_ptr(0x1400_0000 as usize as _) };
 #[doc = "DW_apb_ssi has the following features: * APB interface – Allows for easy integration into a DesignWare Synthesizable Components for AMBA 2 implementation. * APB3 and APB4 protocol support. * Scalable APB data bus width – Supports APB data bus widths of 8, 16, and 32 bits. * Serial-master or serial-slave operation – Enables serial communication with serial-master or serial-slave peripheral devices. * Programmable Dual/Quad/Octal SPI support in Master Mode. * Dual Data Rate (DDR) and Read Data Strobe (RDS) Support - Enables the DW_apb_ssi master to perform operations with the device in DDR and RDS modes when working in Dual/Quad/Octal mode of operation. * Data Mask Support - Enables the DW_apb_ssi to selectively update the bytes in the device. This feature is applicable only in enhanced SPI modes. * eXecute-In-Place (XIP) support - Enables the DW_apb_ssi master to behave as a memory mapped I/O and fetches the data from the device based on the APB read request. This feature is applicable only in enhanced SPI modes. * DMA Controller Interface – Enables the DW_apb_ssi to interface to a DMA controller over the bus using a handshaking interface for transfer requests. * Independent masking of interrupts – Master collision, transmit FIFO overflow, transmit FIFO empty, receive FIFO full, receive FIFO underflow, and receive FIFO overflow interrupts can all be masked independently. * Multi-master contention detection – Informs the processor of multiple serial-master accesses on the serial bus. * Bypass of meta-stability flip-flops for synchronous clocks – When the APB clock (pclk) and the DW_apb_ssi serial clock (ssi_clk) are synchronous, meta-stable flip-flops are not used when transferring control signals across these clock domains. * Programmable delay on the sample time of the received serial data bit (rxd); enables programmable control of routing delays resulting in higher serial data-bit rates. * Programmable features: - Serial interface operation – Choice of Motorola SPI, Texas Instruments Synchronous Serial Protocol or National Semiconductor Microwire. - Clock bit-rate – Dynamic control of the serial bit rate of the data transfer; used in only serial-master mode of operation. - Data Item size (4 to 32 bits) – Item size of each data transfer under the control of the programmer. * Configured features: - FIFO depth – 16 words deep. The FIFO width is fixed at 32 bits. - 1 slave select output. - Hardware slave-select – Dedicated hardware slave-select line. - Combined interrupt line - one combined interrupt line from the DW_apb_ssi to the interrupt controller. - Interrupt polarity – active high interrupt lines. - Serial clock polarity – low serial-clock polarity directly after reset. - Serial clock phase – capture on first edge of serial-clock directly after reset."]
-pub const XIP_SSI: xip_ssi::XipSsi = xip_ssi::XipSsi(0x1800_0000 as u32 as _);
-pub const SYSINFO: sysinfo::Sysinfo = sysinfo::Sysinfo(0x4000_0000 as u32 as _);
+pub const XIP_SSI: xip_ssi::XipSsi =
+    unsafe { xip_ssi::XipSsi::from_ptr(0x1800_0000 as usize as _) };
+pub const SYSINFO: sysinfo::Sysinfo =
+    unsafe { sysinfo::Sysinfo::from_ptr(0x4000_0000 as usize as _) };
 #[doc = "Register block for various chip control signals"]
-pub const SYSCFG: syscfg::Syscfg = syscfg::Syscfg(0x4000_4000 as u32 as _);
-pub const CLOCKS: clocks::Clocks = clocks::Clocks(0x4000_8000 as u32 as _);
-pub const RESETS: resets::Resets = resets::Resets(0x4000_c000 as u32 as _);
-pub const PSM: psm::Psm = psm::Psm(0x4001_0000 as u32 as _);
-pub const IO_BANK0: io::Io = io::Io(0x4001_4000 as u32 as _);
-pub const IO_QSPI: io::Io = io::Io(0x4001_8000 as u32 as _);
-pub const PADS_BANK0: pads::Pads = pads::Pads(0x4001_c000 as u32 as _);
-pub const PADS_QSPI: pads::Pads = pads::Pads(0x4002_0000 as u32 as _);
+pub const SYSCFG: syscfg::Syscfg = unsafe { syscfg::Syscfg::from_ptr(0x4000_4000 as usize as _) };
+pub const CLOCKS: clocks::Clocks = unsafe { clocks::Clocks::from_ptr(0x4000_8000 as usize as _) };
+pub const RESETS: resets::Resets = unsafe { resets::Resets::from_ptr(0x4000_c000 as usize as _) };
+pub const PSM: psm::Psm = unsafe { psm::Psm::from_ptr(0x4001_0000 as usize as _) };
+pub const IO_BANK0: io::Io = unsafe { io::Io::from_ptr(0x4001_4000 as usize as _) };
+pub const IO_QSPI: io::Io = unsafe { io::Io::from_ptr(0x4001_8000 as usize as _) };
+pub const PADS_BANK0: pads::Pads = unsafe { pads::Pads::from_ptr(0x4001_c000 as usize as _) };
+pub const PADS_QSPI: pads::Pads = unsafe { pads::Pads::from_ptr(0x4002_0000 as usize as _) };
 #[doc = "Controls the crystal oscillator"]
-pub const XOSC: xosc::Xosc = xosc::Xosc(0x4002_4000 as u32 as _);
-pub const PLL_SYS: pll::Pll = pll::Pll(0x4002_8000 as u32 as _);
-pub const PLL_USB: pll::Pll = pll::Pll(0x4002_c000 as u32 as _);
+pub const XOSC: xosc::Xosc = unsafe { xosc::Xosc::from_ptr(0x4002_4000 as usize as _) };
+pub const PLL_SYS: pll::Pll = unsafe { pll::Pll::from_ptr(0x4002_8000 as usize as _) };
+pub const PLL_USB: pll::Pll = unsafe { pll::Pll::from_ptr(0x4002_c000 as usize as _) };
 #[doc = "Register block for busfabric control signals and performance counters"]
-pub const BUSCTRL: busctrl::Busctrl = busctrl::Busctrl(0x4003_0000 as u32 as _);
-pub const UART0: uart::Uart = uart::Uart(0x4003_4000 as u32 as _);
-pub const UART1: uart::Uart = uart::Uart(0x4003_8000 as u32 as _);
-pub const SPI0: spi::Spi = spi::Spi(0x4003_c000 as u32 as _);
-pub const SPI1: spi::Spi = spi::Spi(0x4004_0000 as u32 as _);
+pub const BUSCTRL: busctrl::Busctrl =
+    unsafe { busctrl::Busctrl::from_ptr(0x4003_0000 as usize as _) };
+pub const UART0: uart::Uart = unsafe { uart::Uart::from_ptr(0x4003_4000 as usize as _) };
+pub const UART1: uart::Uart = unsafe { uart::Uart::from_ptr(0x4003_8000 as usize as _) };
+pub const SPI0: spi::Spi = unsafe { spi::Spi::from_ptr(0x4003_c000 as usize as _) };
+pub const SPI1: spi::Spi = unsafe { spi::Spi::from_ptr(0x4004_0000 as usize as _) };
 #[doc = "DW_apb_i2c address block List of configuration constants for the Synopsys I2C hardware (you may see references to these in I2C register header; these are *fixed* values, set at hardware design time): IC_ULTRA_FAST_MODE ................ 0x0 IC_UFM_TBUF_CNT_DEFAULT ........... 0x8 IC_UFM_SCL_LOW_COUNT .............. 0x0008 IC_UFM_SCL_HIGH_COUNT ............. 0x0006 IC_TX_TL .......................... 0x0 IC_TX_CMD_BLOCK ................... 0x1 IC_HAS_DMA ........................ 0x1 IC_HAS_ASYNC_FIFO ................. 0x0 IC_SMBUS_ARP ...................... 0x0 IC_FIRST_DATA_BYTE_STATUS ......... 0x1 IC_INTR_IO ........................ 0x1 IC_MASTER_MODE .................... 0x1 IC_DEFAULT_ACK_GENERAL_CALL ....... 0x1 IC_INTR_POL ....................... 0x1 IC_OPTIONAL_SAR ................... 0x0 IC_DEFAULT_TAR_SLAVE_ADDR ......... 0x055 IC_DEFAULT_SLAVE_ADDR ............. 0x055 IC_DEFAULT_HS_SPKLEN .............. 0x1 IC_FS_SCL_HIGH_COUNT .............. 0x0006 IC_HS_SCL_LOW_COUNT ............... 0x0008 IC_DEVICE_ID_VALUE ................ 0x0 IC_10BITADDR_MASTER ............... 0x0 IC_CLK_FREQ_OPTIMIZATION .......... 0x0 IC_DEFAULT_FS_SPKLEN .............. 0x7 IC_ADD_ENCODED_PARAMS ............. 0x0 IC_DEFAULT_SDA_HOLD ............... 0x000001 IC_DEFAULT_SDA_SETUP .............. 0x64 IC_AVOID_RX_FIFO_FLUSH_ON_TX_ABRT . 0x0 IC_CLOCK_PERIOD ................... 100 IC_EMPTYFIFO_HOLD_MASTER_EN ....... 1 IC_RESTART_EN ..................... 0x1 IC_TX_CMD_BLOCK_DEFAULT ........... 0x0 IC_BUS_CLEAR_FEATURE .............. 0x0 IC_CAP_LOADING .................... 100 IC_FS_SCL_LOW_COUNT ............... 0x000d APB_DATA_WIDTH .................... 32 IC_SDA_STUCK_TIMEOUT_DEFAULT ...... 0xffffffff IC_SLV_DATA_NACK_ONLY ............. 0x1 IC_10BITADDR_SLAVE ................ 0x0 IC_CLK_TYPE ....................... 0x0 IC_SMBUS_UDID_MSB ................. 0x0 IC_SMBUS_SUSPEND_ALERT ............ 0x0 IC_HS_SCL_HIGH_COUNT .............. 0x0006 IC_SLV_RESTART_DET_EN ............. 0x1 IC_SMBUS .......................... 0x0 IC_OPTIONAL_SAR_DEFAULT ........... 0x0 IC_PERSISTANT_SLV_ADDR_DEFAULT .... 0x0 IC_USE_COUNTS ..................... 0x0 IC_RX_BUFFER_DEPTH ................ 16 IC_SCL_STUCK_TIMEOUT_DEFAULT ...... 0xffffffff IC_RX_FULL_HLD_BUS_EN ............. 0x1 IC_SLAVE_DISABLE .................. 0x1 IC_RX_TL .......................... 0x0 IC_DEVICE_ID ...................... 0x0 IC_HC_COUNT_VALUES ................ 0x0 I2C_DYNAMIC_TAR_UPDATE ............ 0 IC_SMBUS_CLK_LOW_MEXT_DEFAULT ..... 0xffffffff IC_SMBUS_CLK_LOW_SEXT_DEFAULT ..... 0xffffffff IC_HS_MASTER_CODE ................. 0x1 IC_SMBUS_RST_IDLE_CNT_DEFAULT ..... 0xffff IC_SMBUS_UDID_LSB_DEFAULT ......... 0xffffffff IC_SS_SCL_HIGH_COUNT .............. 0x0028 IC_SS_SCL_LOW_COUNT ............... 0x002f IC_MAX_SPEED_MODE ................. 0x2 IC_STAT_FOR_CLK_STRETCH ........... 0x0 IC_STOP_DET_IF_MASTER_ACTIVE ...... 0x0 IC_DEFAULT_UFM_SPKLEN ............. 0x1 IC_TX_BUFFER_DEPTH ................ 16"]
-pub const I2C0: i2c::I2c = i2c::I2c(0x4004_4000 as u32 as _);
-pub const I2C1: i2c::I2c = i2c::I2c(0x4004_8000 as u32 as _);
+pub const I2C0: i2c::I2c = unsafe { i2c::I2c::from_ptr(0x4004_4000 as usize as _) };
+pub const I2C1: i2c::I2c = unsafe { i2c::I2c::from_ptr(0x4004_8000 as usize as _) };
 #[doc = "Control and data interface to SAR ADC"]
-pub const ADC: adc::Adc = adc::Adc(0x4004_c000 as u32 as _);
+pub const ADC: adc::Adc = unsafe { adc::Adc::from_ptr(0x4004_c000 as usize as _) };
 #[doc = "Simple PWM"]
-pub const PWM: pwm::Pwm = pwm::Pwm(0x4005_0000 as u32 as _);
+pub const PWM: pwm::Pwm = unsafe { pwm::Pwm::from_ptr(0x4005_0000 as usize as _) };
 #[doc = "Controls time and alarms time is a 64 bit value indicating the time in usec since power-on timeh is the top 32 bits of time & timel is the bottom 32 bits to change time write to timelw before timehw to read time read from timelr before timehr An alarm is set by setting alarm_enable and writing to the corresponding alarm register When an alarm is pending, the corresponding alarm_running signal will be high An alarm can be cancelled before it has finished by clearing the alarm_enable When an alarm fires, the corresponding alarm_irq is set and alarm_running is cleared To clear the interrupt write a 1 to the corresponding alarm_irq"]
-pub const TIMER: timer::Timer = timer::Timer(0x4005_4000 as u32 as _);
-pub const WATCHDOG: watchdog::Watchdog = watchdog::Watchdog(0x4005_8000 as u32 as _);
+pub const TIMER: timer::Timer = unsafe { timer::Timer::from_ptr(0x4005_4000 as usize as _) };
+pub const WATCHDOG: watchdog::Watchdog =
+    unsafe { watchdog::Watchdog::from_ptr(0x4005_8000 as usize as _) };
 #[doc = "Register block to control RTC"]
-pub const RTC: rtc::Rtc = rtc::Rtc(0x4005_c000 as u32 as _);
-pub const ROSC: rosc::Rosc = rosc::Rosc(0x4006_0000 as u32 as _);
+pub const RTC: rtc::Rtc = unsafe { rtc::Rtc::from_ptr(0x4005_c000 as usize as _) };
+pub const ROSC: rosc::Rosc = unsafe { rosc::Rosc::from_ptr(0x4006_0000 as usize as _) };
 #[doc = "control and status for on-chip voltage regulator and chip level reset subsystem"]
 pub const VREG_AND_CHIP_RESET: vreg_and_chip_reset::VregAndChipReset =
-    vreg_and_chip_reset::VregAndChipReset(0x4006_4000 as u32 as _);
+    unsafe { vreg_and_chip_reset::VregAndChipReset::from_ptr(0x4006_4000 as usize as _) };
 #[doc = "Testbench manager. Allows the programmer to know what platform their software is running on."]
-pub const TBMAN: tbman::Tbman = tbman::Tbman(0x4006_c000 as u32 as _);
+pub const TBMAN: tbman::Tbman = unsafe { tbman::Tbman::from_ptr(0x4006_c000 as usize as _) };
 #[doc = "DMA with separate read and write masters"]
-pub const DMA: dma::Dma = dma::Dma(0x5000_0000 as u32 as _);
+pub const DMA: dma::Dma = unsafe { dma::Dma::from_ptr(0x5000_0000 as usize as _) };
 #[doc = "DPRAM layout for USB device."]
-pub const USBCTRL_DPRAM: usb_dpram::UsbDpram = usb_dpram::UsbDpram(0x5010_0000 as u32 as _);
+pub const USBCTRL_DPRAM: usb_dpram::UsbDpram =
+    unsafe { usb_dpram::UsbDpram::from_ptr(0x5010_0000 as usize as _) };
 #[doc = "USB FS/LS controller device registers"]
-pub const USBCTRL_REGS: usb::Usb = usb::Usb(0x5011_0000 as u32 as _);
+pub const USBCTRL_REGS: usb::Usb = unsafe { usb::Usb::from_ptr(0x5011_0000 as usize as _) };
 #[doc = "Programmable IO block"]
-pub const PIO0: pio::Pio = pio::Pio(0x5020_0000 as u32 as _);
-pub const PIO1: pio::Pio = pio::Pio(0x5030_0000 as u32 as _);
+pub const PIO0: pio::Pio = unsafe { pio::Pio::from_ptr(0x5020_0000 as usize as _) };
+pub const PIO1: pio::Pio = unsafe { pio::Pio::from_ptr(0x5030_0000 as usize as _) };
 #[doc = "Single-cycle IO block Provides core-local and inter-core hardware for the two processors, with single-cycle access."]
-pub const SIO: sio::Sio = sio::Sio(0xd000_0000 as u32 as _);
+pub const SIO: sio::Sio = unsafe { sio::Sio::from_ptr(0xd000_0000 as usize as _) };
 #[doc = r" Number available in the NVIC for configuring priority"]
 #[cfg(feature = "rt")]
 pub const NVIC_PRIO_BITS: u8 = 2;
