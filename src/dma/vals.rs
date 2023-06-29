@@ -1,27 +1,80 @@
-#[repr(transparent)]
+#[repr(u8)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-pub struct Calc(pub u8);
-impl Calc {
+pub enum Calc {
     #[doc = "Calculate a CRC-32 (IEEE802.3 polynomial)"]
-    pub const CRC32: Self = Self(0);
+    CRC32 = 0,
     #[doc = "Calculate a CRC-32 (IEEE802.3 polynomial) with bit reversed data"]
-    pub const CRC32R: Self = Self(0x01);
+    CRC32R = 0x01,
     #[doc = "Calculate a CRC-16-CCITT"]
-    pub const CRC16: Self = Self(0x02);
+    CRC16 = 0x02,
     #[doc = "Calculate a CRC-16-CCITT with bit reversed data"]
-    pub const CRC16R: Self = Self(0x03);
+    CRC16R = 0x03,
+    _RESERVED_4 = 0x04,
+    _RESERVED_5 = 0x05,
+    _RESERVED_6 = 0x06,
+    _RESERVED_7 = 0x07,
+    _RESERVED_8 = 0x08,
+    _RESERVED_9 = 0x09,
+    _RESERVED_a = 0x0a,
+    _RESERVED_b = 0x0b,
+    _RESERVED_c = 0x0c,
+    _RESERVED_d = 0x0d,
     #[doc = "XOR reduction over all data. == 1 if the total 1 population count is odd."]
-    pub const EVEN: Self = Self(0x0e);
+    EVEN = 0x0e,
     #[doc = "Calculate a simple 32-bit checksum (addition with a 32 bit accumulator)"]
-    pub const SUM: Self = Self(0x0f);
+    SUM = 0x0f,
 }
-#[repr(transparent)]
+impl Calc {
+    #[inline(always)]
+    pub const fn from_bits(val: u8) -> Calc {
+        unsafe { core::mem::transmute(val & 0x0f) }
+    }
+    #[inline(always)]
+    pub const fn to_bits(self) -> u8 {
+        unsafe { core::mem::transmute(self) }
+    }
+}
+impl From<u8> for Calc {
+    #[inline(always)]
+    fn from(val: u8) -> Calc {
+        Calc::from_bits(val)
+    }
+}
+impl From<Calc> for u8 {
+    #[inline(always)]
+    fn from(val: Calc) -> u8 {
+        Calc::to_bits(val)
+    }
+}
+#[repr(u8)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-pub struct DataSize(pub u8);
+pub enum DataSize {
+    SIZE_BYTE = 0,
+    SIZE_HALFWORD = 0x01,
+    SIZE_WORD = 0x02,
+    _RESERVED_3 = 0x03,
+}
 impl DataSize {
-    pub const SIZE_BYTE: Self = Self(0);
-    pub const SIZE_HALFWORD: Self = Self(0x01);
-    pub const SIZE_WORD: Self = Self(0x02);
+    #[inline(always)]
+    pub const fn from_bits(val: u8) -> DataSize {
+        unsafe { core::mem::transmute(val & 0x03) }
+    }
+    #[inline(always)]
+    pub const fn to_bits(self) -> u8 {
+        unsafe { core::mem::transmute(self) }
+    }
+}
+impl From<u8> for DataSize {
+    #[inline(always)]
+    fn from(val: u8) -> DataSize {
+        DataSize::from_bits(val)
+    }
+}
+impl From<DataSize> for u8 {
+    #[inline(always)]
+    fn from(val: DataSize) -> u8 {
+        DataSize::to_bits(val)
+    }
 }
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
@@ -37,4 +90,24 @@ impl TreqSel {
     pub const TIMER3: Self = Self(0x3e);
     #[doc = "Permanent request, for unpaced transfers."]
     pub const PERMANENT: Self = Self(0x3f);
+}
+impl TreqSel {
+    pub const fn from_bits(val: u8) -> TreqSel {
+        Self(val & 0x3f)
+    }
+    pub const fn to_bits(self) -> u8 {
+        self.0
+    }
+}
+impl From<u8> for TreqSel {
+    #[inline(always)]
+    fn from(val: u8) -> TreqSel {
+        TreqSel::from_bits(val)
+    }
+}
+impl From<TreqSel> for u8 {
+    #[inline(always)]
+    fn from(val: TreqSel) -> u8 {
+        TreqSel::to_bits(val)
+    }
 }

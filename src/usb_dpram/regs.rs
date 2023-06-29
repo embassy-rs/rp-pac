@@ -106,7 +106,7 @@ impl EpBufferControl {
         &self,
     ) -> super::vals::EpBufferControlDoubleBufferIsoOffset {
         let val = (self.0 >> 27usize) & 0x03;
-        super::vals::EpBufferControlDoubleBufferIsoOffset(val as u8)
+        super::vals::EpBufferControlDoubleBufferIsoOffset::from_bits(val as u8)
     }
     #[doc = "The number of bytes buffer 1 is offset from buffer 0 in Isochronous mode. Only valid in double buffered mode for an Isochronous endpoint. For a non Isochronous endpoint the offset is always 64 bytes."]
     #[inline(always)]
@@ -114,7 +114,7 @@ impl EpBufferControl {
         &mut self,
         val: super::vals::EpBufferControlDoubleBufferIsoOffset,
     ) {
-        self.0 = (self.0 & !(0x03 << 27usize)) | (((val.0 as u32) & 0x03) << 27usize);
+        self.0 = (self.0 & !(0x03 << 27usize)) | (((val.to_bits() as u32) & 0x03) << 27usize);
     }
 }
 impl Default for EpBufferControl {
@@ -163,11 +163,11 @@ impl EpControl {
     #[inline(always)]
     pub const fn endpoint_type(&self) -> super::vals::EpControlEndpointType {
         let val = (self.0 >> 26usize) & 0x03;
-        super::vals::EpControlEndpointType(val as u8)
+        super::vals::EpControlEndpointType::from_bits(val as u8)
     }
     #[inline(always)]
     pub fn set_endpoint_type(&mut self, val: super::vals::EpControlEndpointType) {
-        self.0 = (self.0 & !(0x03 << 26usize)) | (((val.0 as u32) & 0x03) << 26usize);
+        self.0 = (self.0 & !(0x03 << 26usize)) | (((val.to_bits() as u32) & 0x03) << 26usize);
     }
     #[doc = "Trigger an interrupt each time both buffers are done. Only valid in double buffered mode."]
     #[inline(always)]

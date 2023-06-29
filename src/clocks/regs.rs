@@ -7,12 +7,12 @@ impl ClkAdcCtrl {
     #[inline(always)]
     pub const fn auxsrc(&self) -> super::vals::ClkAdcCtrlAuxsrc {
         let val = (self.0 >> 5usize) & 0x07;
-        super::vals::ClkAdcCtrlAuxsrc(val as u8)
+        super::vals::ClkAdcCtrlAuxsrc::from_bits(val as u8)
     }
     #[doc = "Selects the auxiliary clock source, will glitch when switching"]
     #[inline(always)]
     pub fn set_auxsrc(&mut self, val: super::vals::ClkAdcCtrlAuxsrc) {
-        self.0 = (self.0 & !(0x07 << 5usize)) | (((val.0 as u32) & 0x07) << 5usize);
+        self.0 = (self.0 & !(0x07 << 5usize)) | (((val.to_bits() as u32) & 0x07) << 5usize);
     }
     #[doc = "Asynchronously kills the clock generator"]
     #[inline(always)]
@@ -97,12 +97,12 @@ impl ClkGpoutCtrl {
     #[inline(always)]
     pub const fn auxsrc(&self) -> super::vals::ClkGpoutCtrlAuxsrc {
         let val = (self.0 >> 5usize) & 0x0f;
-        super::vals::ClkGpoutCtrlAuxsrc(val as u8)
+        super::vals::ClkGpoutCtrlAuxsrc::from_bits(val as u8)
     }
     #[doc = "Selects the auxiliary clock source, will glitch when switching"]
     #[inline(always)]
     pub fn set_auxsrc(&mut self, val: super::vals::ClkGpoutCtrlAuxsrc) {
-        self.0 = (self.0 & !(0x0f << 5usize)) | (((val.0 as u32) & 0x0f) << 5usize);
+        self.0 = (self.0 & !(0x0f << 5usize)) | (((val.to_bits() as u32) & 0x0f) << 5usize);
     }
     #[doc = "Asynchronously kills the clock generator"]
     #[inline(always)]
@@ -209,12 +209,12 @@ impl ClkPeriCtrl {
     #[inline(always)]
     pub const fn auxsrc(&self) -> super::vals::ClkPeriCtrlAuxsrc {
         let val = (self.0 >> 5usize) & 0x07;
-        super::vals::ClkPeriCtrlAuxsrc(val as u8)
+        super::vals::ClkPeriCtrlAuxsrc::from_bits(val as u8)
     }
     #[doc = "Selects the auxiliary clock source, will glitch when switching"]
     #[inline(always)]
     pub fn set_auxsrc(&mut self, val: super::vals::ClkPeriCtrlAuxsrc) {
-        self.0 = (self.0 & !(0x07 << 5usize)) | (((val.0 as u32) & 0x07) << 5usize);
+        self.0 = (self.0 & !(0x07 << 5usize)) | (((val.to_bits() as u32) & 0x07) << 5usize);
     }
     #[doc = "Asynchronously kills the clock generator"]
     #[inline(always)]
@@ -254,23 +254,23 @@ impl ClkRefCtrl {
     #[inline(always)]
     pub const fn src(&self) -> super::vals::ClkRefCtrlSrc {
         let val = (self.0 >> 0usize) & 0x03;
-        super::vals::ClkRefCtrlSrc(val as u8)
+        super::vals::ClkRefCtrlSrc::from_bits(val as u8)
     }
     #[doc = "Selects the clock source glitchlessly, can be changed on-the-fly"]
     #[inline(always)]
     pub fn set_src(&mut self, val: super::vals::ClkRefCtrlSrc) {
-        self.0 = (self.0 & !(0x03 << 0usize)) | (((val.0 as u32) & 0x03) << 0usize);
+        self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
     }
     #[doc = "Selects the auxiliary clock source, will glitch when switching"]
     #[inline(always)]
     pub const fn auxsrc(&self) -> super::vals::ClkRefCtrlAuxsrc {
         let val = (self.0 >> 5usize) & 0x03;
-        super::vals::ClkRefCtrlAuxsrc(val as u8)
+        super::vals::ClkRefCtrlAuxsrc::from_bits(val as u8)
     }
     #[doc = "Selects the auxiliary clock source, will glitch when switching"]
     #[inline(always)]
     pub fn set_auxsrc(&mut self, val: super::vals::ClkRefCtrlAuxsrc) {
-        self.0 = (self.0 & !(0x03 << 5usize)) | (((val.0 as u32) & 0x03) << 5usize);
+        self.0 = (self.0 & !(0x03 << 5usize)) | (((val.to_bits() as u32) & 0x03) << 5usize);
     }
 }
 impl Default for ClkRefCtrl {
@@ -311,12 +311,12 @@ impl ClkRtcCtrl {
     #[inline(always)]
     pub const fn auxsrc(&self) -> super::vals::ClkRtcCtrlAuxsrc {
         let val = (self.0 >> 5usize) & 0x07;
-        super::vals::ClkRtcCtrlAuxsrc(val as u8)
+        super::vals::ClkRtcCtrlAuxsrc::from_bits(val as u8)
     }
     #[doc = "Selects the auxiliary clock source, will glitch when switching"]
     #[inline(always)]
     pub fn set_auxsrc(&mut self, val: super::vals::ClkRtcCtrlAuxsrc) {
-        self.0 = (self.0 & !(0x07 << 5usize)) | (((val.0 as u32) & 0x07) << 5usize);
+        self.0 = (self.0 & !(0x07 << 5usize)) | (((val.to_bits() as u32) & 0x07) << 5usize);
     }
     #[doc = "Asynchronously kills the clock generator"]
     #[inline(always)]
@@ -412,23 +412,23 @@ impl ClkSysCtrl {
     #[inline(always)]
     pub const fn src(&self) -> super::vals::ClkSysCtrlSrc {
         let val = (self.0 >> 0usize) & 0x01;
-        super::vals::ClkSysCtrlSrc(val as u8)
+        super::vals::ClkSysCtrlSrc::from_bits(val as u8)
     }
     #[doc = "Selects the clock source glitchlessly, can be changed on-the-fly"]
     #[inline(always)]
     pub fn set_src(&mut self, val: super::vals::ClkSysCtrlSrc) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val.0 as u32) & 0x01) << 0usize);
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
     }
     #[doc = "Selects the auxiliary clock source, will glitch when switching"]
     #[inline(always)]
     pub const fn auxsrc(&self) -> super::vals::ClkSysCtrlAuxsrc {
         let val = (self.0 >> 5usize) & 0x07;
-        super::vals::ClkSysCtrlAuxsrc(val as u8)
+        super::vals::ClkSysCtrlAuxsrc::from_bits(val as u8)
     }
     #[doc = "Selects the auxiliary clock source, will glitch when switching"]
     #[inline(always)]
     pub fn set_auxsrc(&mut self, val: super::vals::ClkSysCtrlAuxsrc) {
-        self.0 = (self.0 & !(0x07 << 5usize)) | (((val.0 as u32) & 0x07) << 5usize);
+        self.0 = (self.0 & !(0x07 << 5usize)) | (((val.to_bits() as u32) & 0x07) << 5usize);
     }
 }
 impl Default for ClkSysCtrl {
@@ -557,12 +557,12 @@ impl ClkUsbCtrl {
     #[inline(always)]
     pub const fn auxsrc(&self) -> super::vals::ClkUsbCtrlAuxsrc {
         let val = (self.0 >> 5usize) & 0x07;
-        super::vals::ClkUsbCtrlAuxsrc(val as u8)
+        super::vals::ClkUsbCtrlAuxsrc::from_bits(val as u8)
     }
     #[doc = "Selects the auxiliary clock source, will glitch when switching"]
     #[inline(always)]
     pub fn set_auxsrc(&mut self, val: super::vals::ClkUsbCtrlAuxsrc) {
-        self.0 = (self.0 & !(0x07 << 5usize)) | (((val.0 as u32) & 0x07) << 5usize);
+        self.0 = (self.0 & !(0x07 << 5usize)) | (((val.to_bits() as u32) & 0x07) << 5usize);
     }
     #[doc = "Asynchronously kills the clock generator"]
     #[inline(always)]
@@ -1228,11 +1228,11 @@ impl Fc0src {
     #[inline(always)]
     pub const fn fc0_src(&self) -> super::vals::Fc0src {
         let val = (self.0 >> 0usize) & 0xff;
-        super::vals::Fc0src(val as u8)
+        super::vals::Fc0src::from_bits(val as u8)
     }
     #[inline(always)]
     pub fn set_fc0_src(&mut self, val: super::vals::Fc0src) {
-        self.0 = (self.0 & !(0xff << 0usize)) | (((val.0 as u32) & 0xff) << 0usize);
+        self.0 = (self.0 & !(0xff << 0usize)) | (((val.to_bits() as u32) & 0xff) << 0usize);
     }
 }
 impl Default for Fc0src {
@@ -1341,7 +1341,7 @@ impl Default for Fc0status {
         Fc0status(0)
     }
 }
-#[doc = "Interrupt status after masking & forcing"]
+#[doc = "Interrupt Force"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Int(pub u32);

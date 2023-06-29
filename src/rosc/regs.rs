@@ -28,23 +28,23 @@ impl Ctrl {
     #[inline(always)]
     pub const fn freq_range(&self) -> super::vals::FreqRange {
         let val = (self.0 >> 0usize) & 0x0fff;
-        super::vals::FreqRange(val as u16)
+        super::vals::FreqRange::from_bits(val as u16)
     }
     #[doc = "Controls the number of delay stages in the ROSC ring LOW uses stages 0 to 7 MEDIUM uses stages 0 to 5 HIGH uses stages 0 to 3 TOOHIGH uses stages 0 to 1 and should not be used because its frequency exceeds design specifications The clock output will not glitch when changing the range up one step at a time The clock output will glitch when changing the range down Note: the values here are gray coded which is why HIGH comes before TOOHIGH"]
     #[inline(always)]
     pub fn set_freq_range(&mut self, val: super::vals::FreqRange) {
-        self.0 = (self.0 & !(0x0fff << 0usize)) | (((val.0 as u32) & 0x0fff) << 0usize);
+        self.0 = (self.0 & !(0x0fff << 0usize)) | (((val.to_bits() as u32) & 0x0fff) << 0usize);
     }
     #[doc = "On power-up this field is initialised to ENABLE The system clock must be switched to another source before setting this field to DISABLE otherwise the chip will lock up The 12-bit code is intended to give some protection against accidental writes. An invalid setting will enable the oscillator."]
     #[inline(always)]
     pub const fn enable(&self) -> super::vals::Enable {
         let val = (self.0 >> 12usize) & 0x0fff;
-        super::vals::Enable(val as u16)
+        super::vals::Enable::from_bits(val as u16)
     }
     #[doc = "On power-up this field is initialised to ENABLE The system clock must be switched to another source before setting this field to DISABLE otherwise the chip will lock up The 12-bit code is intended to give some protection against accidental writes. An invalid setting will enable the oscillator."]
     #[inline(always)]
     pub fn set_enable(&mut self, val: super::vals::Enable) {
-        self.0 = (self.0 & !(0x0fff << 12usize)) | (((val.0 as u32) & 0x0fff) << 12usize);
+        self.0 = (self.0 & !(0x0fff << 12usize)) | (((val.to_bits() as u32) & 0x0fff) << 12usize);
     }
 }
 impl Default for Ctrl {
@@ -62,12 +62,12 @@ impl Div {
     #[inline(always)]
     pub const fn div(&self) -> super::vals::Div {
         let val = (self.0 >> 0usize) & 0x0fff;
-        super::vals::Div(val as u16)
+        super::vals::Div::from_bits(val as u16)
     }
     #[doc = "set to 0xaa0 + div where div = 0 divides by 32 div = 1-31 divides by div any other value sets div=31 this register resets to div=16"]
     #[inline(always)]
     pub fn set_div(&mut self, val: super::vals::Div) {
-        self.0 = (self.0 & !(0x0fff << 0usize)) | (((val.0 as u32) & 0x0fff) << 0usize);
+        self.0 = (self.0 & !(0x0fff << 0usize)) | (((val.to_bits() as u32) & 0x0fff) << 0usize);
     }
 }
 impl Default for Div {
@@ -129,12 +129,12 @@ impl Freqa {
     #[inline(always)]
     pub const fn passwd(&self) -> super::vals::Passwd {
         let val = (self.0 >> 16usize) & 0xffff;
-        super::vals::Passwd(val as u16)
+        super::vals::Passwd::from_bits(val as u16)
     }
     #[doc = "Set to 0x9696 to apply the settings Any other value in this field will set all drive strengths to 0"]
     #[inline(always)]
     pub fn set_passwd(&mut self, val: super::vals::Passwd) {
-        self.0 = (self.0 & !(0xffff << 16usize)) | (((val.0 as u32) & 0xffff) << 16usize);
+        self.0 = (self.0 & !(0xffff << 16usize)) | (((val.to_bits() as u32) & 0xffff) << 16usize);
     }
 }
 impl Default for Freqa {
@@ -196,12 +196,12 @@ impl Freqb {
     #[inline(always)]
     pub const fn passwd(&self) -> super::vals::Passwd {
         let val = (self.0 >> 16usize) & 0xffff;
-        super::vals::Passwd(val as u16)
+        super::vals::Passwd::from_bits(val as u16)
     }
     #[doc = "Set to 0x9696 to apply the settings Any other value in this field will set all drive strengths to 0"]
     #[inline(always)]
     pub fn set_passwd(&mut self, val: super::vals::Passwd) {
-        self.0 = (self.0 & !(0xffff << 16usize)) | (((val.0 as u32) & 0xffff) << 16usize);
+        self.0 = (self.0 & !(0xffff << 16usize)) | (((val.to_bits() as u32) & 0xffff) << 16usize);
     }
 }
 impl Default for Freqb {

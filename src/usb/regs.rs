@@ -32,7 +32,7 @@ impl Default for AddrEndp {
         AddrEndp(0)
     }
 }
-#[doc = "Interrupt endpoint 8. Only valid for HOST mode."]
+#[doc = "Interrupt endpoint 10. Only valid for HOST mode."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct AddrEndpX(pub u32);

@@ -13,17 +13,17 @@ impl Irq {
     pub const fn as_ptr(&self) -> *mut () {
         self.ptr as _
     }
-    #[doc = "Interrupt Enable for irq1"]
+    #[doc = "Interrupt Enable for irq0"]
     #[inline(always)]
     pub const fn inte(self) -> crate::common::Reg<regs::Intr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0usize) as _) }
     }
-    #[doc = "Interrupt Force for irq1"]
+    #[doc = "Interrupt Force for irq0"]
     #[inline(always)]
     pub const fn intf(self) -> crate::common::Reg<regs::Intr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(4usize) as _) }
     }
-    #[doc = "Interrupt status after masking & forcing for irq1"]
+    #[doc = "Interrupt status after masking & forcing for irq0"]
     #[inline(always)]
     pub const fn ints(self) -> crate::common::Reg<regs::Intr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(8usize) as _) }
@@ -147,27 +147,27 @@ impl StateMachine {
     pub const fn as_ptr(&self) -> *mut () {
         self.ptr as _
     }
-    #[doc = "Clock divisor register for state machine 1 Frequency = clock freq / (CLKDIV_INT + CLKDIV_FRAC / 256)"]
+    #[doc = "Clock divisor register for state machine 0 Frequency = clock freq / (CLKDIV_INT + CLKDIV_FRAC / 256)"]
     #[inline(always)]
     pub const fn clkdiv(self) -> crate::common::Reg<regs::SmClkdiv, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0usize) as _) }
     }
-    #[doc = "Execution/behavioural settings for state machine 1"]
+    #[doc = "Execution/behavioural settings for state machine 0"]
     #[inline(always)]
     pub const fn execctrl(self) -> crate::common::Reg<regs::SmExecctrl, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(4usize) as _) }
     }
-    #[doc = "Control behaviour of the input/output shift registers for state machine 1"]
+    #[doc = "Control behaviour of the input/output shift registers for state machine 0"]
     #[inline(always)]
     pub const fn shiftctrl(self) -> crate::common::Reg<regs::SmShiftctrl, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(8usize) as _) }
     }
-    #[doc = "Current instruction address of state machine 1"]
+    #[doc = "Current instruction address of state machine 0"]
     #[inline(always)]
     pub const fn addr(self) -> crate::common::Reg<regs::SmAddr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(12usize) as _) }
     }
-    #[doc = "Read to see the instruction currently addressed by state machine 1's program counter Write to execute an instruction immediately (including jumps) and then resume execution."]
+    #[doc = "Read to see the instruction currently addressed by state machine 0's program counter Write to execute an instruction immediately (including jumps) and then resume execution."]
     #[inline(always)]
     pub const fn instr(self) -> crate::common::Reg<regs::SmInstr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(16usize) as _) }

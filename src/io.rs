@@ -39,19 +39,19 @@ impl Int {
     pub const fn as_ptr(&self) -> *mut () {
         self.ptr as _
     }
-    #[doc = "Interrupt Enable for dormant_wake"]
+    #[doc = "Interrupt Enable for proc0"]
     #[inline(always)]
     pub const fn inte(self, n: usize) -> crate::common::Reg<regs::Int, crate::common::RW> {
         assert!(n < 4usize);
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0usize + n * 4usize) as _) }
     }
-    #[doc = "Interrupt Force for dormant_wake"]
+    #[doc = "Interrupt Force for proc0"]
     #[inline(always)]
     pub const fn intf(self, n: usize) -> crate::common::Reg<regs::Int, crate::common::RW> {
         assert!(n < 4usize);
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(16usize + n * 4usize) as _) }
     }
-    #[doc = "Interrupt status after masking & forcing for dormant_wake"]
+    #[doc = "Interrupt status after masking & forcing for proc0"]
     #[inline(always)]
     pub const fn ints(self, n: usize) -> crate::common::Reg<regs::Int, crate::common::RW> {
         assert!(n < 4usize);

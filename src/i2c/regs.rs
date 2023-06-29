@@ -417,12 +417,12 @@ impl IcCon {
     #[inline(always)]
     pub const fn speed(&self) -> super::vals::Speed {
         let val = (self.0 >> 1usize) & 0x03;
-        super::vals::Speed(val as u8)
+        super::vals::Speed::from_bits(val as u8)
     }
     #[doc = "These bits control at which speed the DW_apb_i2c operates; its setting is relevant only if one is operating the DW_apb_i2c in master mode. Hardware protects against illegal values being programmed by software. These bits must be programmed appropriately for slave mode also, as it is used to capture correct value of spike filter as per the speed mode. This register should be programmed only with a value in the range of 1 to IC_MAX_SPEED_MODE; otherwise, hardware updates this register with the value of IC_MAX_SPEED_MODE. 1: standard mode (100 kbit/s) 2: fast mode (<=400 kbit/s) or fast mode plus (<=1000Kbit/s) 3: high speed mode (3.4 Mbit/s) Note: This field is not applicable when IC_ULTRA_FAST_MODE=1"]
     #[inline(always)]
     pub fn set_speed(&mut self, val: super::vals::Speed) {
-        self.0 = (self.0 & !(0x03 << 1usize)) | (((val.0 as u32) & 0x03) << 1usize);
+        self.0 = (self.0 & !(0x03 << 1usize)) | (((val.to_bits() as u32) & 0x03) << 1usize);
     }
     #[doc = "When acting as a slave, this bit controls whether the DW_apb_i2c responds to 7- or 10-bit addresses. - 0: 7-bit addressing. The DW_apb_i2c ignores transactions that involve 10-bit addressing; for 7-bit addressing, only the lower 7 bits of the IC_SAR register are compared. - 1: 10-bit addressing. The DW_apb_i2c responds to only 10-bit addressing transfers that match the full 10 bits of the IC_SAR register."]
     #[inline(always)]

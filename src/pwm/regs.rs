@@ -80,11 +80,11 @@ impl ChCsr {
     #[inline(always)]
     pub const fn divmode(&self) -> super::vals::Divmode {
         let val = (self.0 >> 4usize) & 0x03;
-        super::vals::Divmode(val as u8)
+        super::vals::Divmode::from_bits(val as u8)
     }
     #[inline(always)]
     pub fn set_divmode(&mut self, val: super::vals::Divmode) {
-        self.0 = (self.0 & !(0x03 << 4usize)) | (((val.0 as u32) & 0x03) << 4usize);
+        self.0 = (self.0 & !(0x03 << 4usize)) | (((val.to_bits() as u32) & 0x03) << 4usize);
     }
     #[doc = "Retard the phase of the counter by 1 count, while it is running. Self-clearing. Write a 1, and poll until low. Counter must be running."]
     #[inline(always)]

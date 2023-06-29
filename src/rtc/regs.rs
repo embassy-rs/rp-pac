@@ -75,7 +75,7 @@ impl Default for Ctrl {
         Ctrl(0)
     }
 }
-#[doc = "Interrupt status after masking & forcing"]
+#[doc = "Interrupt Force"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Int(pub u32);

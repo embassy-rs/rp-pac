@@ -293,7 +293,7 @@ impl Default for Fifo {
         Fifo(0)
     }
 }
-#[doc = "Interrupt Force"]
+#[doc = "Interrupt Enable"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Int(pub u32);

@@ -74,12 +74,12 @@ impl Ctrlr0 {
     #[inline(always)]
     pub const fn tmod(&self) -> super::vals::Tmod {
         let val = (self.0 >> 8usize) & 0x03;
-        super::vals::Tmod(val as u8)
+        super::vals::Tmod::from_bits(val as u8)
     }
     #[doc = "Transfer mode"]
     #[inline(always)]
     pub fn set_tmod(&mut self, val: super::vals::Tmod) {
-        self.0 = (self.0 & !(0x03 << 8usize)) | (((val.0 as u32) & 0x03) << 8usize);
+        self.0 = (self.0 & !(0x03 << 8usize)) | (((val.to_bits() as u32) & 0x03) << 8usize);
     }
     #[doc = "Slave output enable"]
     #[inline(always)]
@@ -129,12 +129,12 @@ impl Ctrlr0 {
     #[inline(always)]
     pub const fn spi_frf(&self) -> super::vals::SpiFrf {
         let val = (self.0 >> 21usize) & 0x03;
-        super::vals::SpiFrf(val as u8)
+        super::vals::SpiFrf::from_bits(val as u8)
     }
     #[doc = "SPI frame format"]
     #[inline(always)]
     pub fn set_spi_frf(&mut self, val: super::vals::SpiFrf) {
-        self.0 = (self.0 & !(0x03 << 21usize)) | (((val.0 as u32) & 0x03) << 21usize);
+        self.0 = (self.0 & !(0x03 << 21usize)) | (((val.to_bits() as u32) & 0x03) << 21usize);
     }
     #[doc = "Slave select toggle enable"]
     #[inline(always)]
@@ -729,12 +729,12 @@ impl SpiCtrlr0 {
     #[inline(always)]
     pub const fn trans_type(&self) -> super::vals::TransType {
         let val = (self.0 >> 0usize) & 0x03;
-        super::vals::TransType(val as u8)
+        super::vals::TransType::from_bits(val as u8)
     }
     #[doc = "Address and instruction transfer format"]
     #[inline(always)]
     pub fn set_trans_type(&mut self, val: super::vals::TransType) {
-        self.0 = (self.0 & !(0x03 << 0usize)) | (((val.0 as u32) & 0x03) << 0usize);
+        self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
     }
     #[doc = "Address length (0b-60b in 4b increments)"]
     #[inline(always)]
@@ -751,12 +751,12 @@ impl SpiCtrlr0 {
     #[inline(always)]
     pub const fn inst_l(&self) -> super::vals::InstL {
         let val = (self.0 >> 8usize) & 0x03;
-        super::vals::InstL(val as u8)
+        super::vals::InstL::from_bits(val as u8)
     }
     #[doc = "Instruction length (0/4/8/16b)"]
     #[inline(always)]
     pub fn set_inst_l(&mut self, val: super::vals::InstL) {
-        self.0 = (self.0 & !(0x03 << 8usize)) | (((val.0 as u32) & 0x03) << 8usize);
+        self.0 = (self.0 & !(0x03 << 8usize)) | (((val.to_bits() as u32) & 0x03) << 8usize);
     }
     #[doc = "Wait cycles between control frame transmit and data reception (in SCLK cycles)"]
     #[inline(always)]

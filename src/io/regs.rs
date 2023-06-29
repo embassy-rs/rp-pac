@@ -17,38 +17,38 @@ impl GpioCtrl {
     #[inline(always)]
     pub const fn outover(&self) -> super::vals::Outover {
         let val = (self.0 >> 8usize) & 0x03;
-        super::vals::Outover(val as u8)
+        super::vals::Outover::from_bits(val as u8)
     }
     #[inline(always)]
     pub fn set_outover(&mut self, val: super::vals::Outover) {
-        self.0 = (self.0 & !(0x03 << 8usize)) | (((val.0 as u32) & 0x03) << 8usize);
+        self.0 = (self.0 & !(0x03 << 8usize)) | (((val.to_bits() as u32) & 0x03) << 8usize);
     }
     #[inline(always)]
     pub const fn oeover(&self) -> super::vals::Oeover {
         let val = (self.0 >> 12usize) & 0x03;
-        super::vals::Oeover(val as u8)
+        super::vals::Oeover::from_bits(val as u8)
     }
     #[inline(always)]
     pub fn set_oeover(&mut self, val: super::vals::Oeover) {
-        self.0 = (self.0 & !(0x03 << 12usize)) | (((val.0 as u32) & 0x03) << 12usize);
+        self.0 = (self.0 & !(0x03 << 12usize)) | (((val.to_bits() as u32) & 0x03) << 12usize);
     }
     #[inline(always)]
     pub const fn inover(&self) -> super::vals::Inover {
         let val = (self.0 >> 16usize) & 0x03;
-        super::vals::Inover(val as u8)
+        super::vals::Inover::from_bits(val as u8)
     }
     #[inline(always)]
     pub fn set_inover(&mut self, val: super::vals::Inover) {
-        self.0 = (self.0 & !(0x03 << 16usize)) | (((val.0 as u32) & 0x03) << 16usize);
+        self.0 = (self.0 & !(0x03 << 16usize)) | (((val.to_bits() as u32) & 0x03) << 16usize);
     }
     #[inline(always)]
     pub const fn irqover(&self) -> super::vals::Irqover {
         let val = (self.0 >> 28usize) & 0x03;
-        super::vals::Irqover(val as u8)
+        super::vals::Irqover::from_bits(val as u8)
     }
     #[inline(always)]
     pub fn set_irqover(&mut self, val: super::vals::Irqover) {
-        self.0 = (self.0 & !(0x03 << 28usize)) | (((val.0 as u32) & 0x03) << 28usize);
+        self.0 = (self.0 & !(0x03 << 28usize)) | (((val.to_bits() as u32) & 0x03) << 28usize);
     }
 }
 impl Default for GpioCtrl {
@@ -157,7 +157,7 @@ impl Default for GpioStatus {
         GpioStatus(0)
     }
 }
-#[doc = "Interrupt Force for dormant_wake"]
+#[doc = "Interrupt status after masking & forcing for dormant_wake"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Int(pub u32);

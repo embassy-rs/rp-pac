@@ -284,7 +284,7 @@ impl Default for Fstat {
         Fstat(0)
     }
 }
-#[doc = "Write-only access to instruction memory location 2"]
+#[doc = "Write-only access to instruction memory location 14"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct InstrMem(pub u32);
@@ -305,7 +305,7 @@ impl Default for InstrMem {
         InstrMem(0)
     }
 }
-#[doc = "Interrupt Force for irq0"]
+#[doc = "Raw Interrupts"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Intr(pub u32);
@@ -522,7 +522,7 @@ impl Default for SmClkdiv {
         SmClkdiv(0)
     }
 }
-#[doc = "Execution/behavioural settings for state machine 0"]
+#[doc = "Execution/behavioural settings for state machine 2"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SmExecctrl(pub u32);
@@ -542,12 +542,12 @@ impl SmExecctrl {
     #[inline(always)]
     pub const fn status_sel(&self) -> super::vals::SmExecctrlStatusSel {
         let val = (self.0 >> 4usize) & 0x01;
-        super::vals::SmExecctrlStatusSel(val as u8)
+        super::vals::SmExecctrlStatusSel::from_bits(val as u8)
     }
     #[doc = "Comparison used for the MOV x, STATUS instruction."]
     #[inline(always)]
     pub fn set_status_sel(&mut self, val: super::vals::SmExecctrlStatusSel) {
-        self.0 = (self.0 & !(0x01 << 4usize)) | (((val.0 as u32) & 0x01) << 4usize);
+        self.0 = (self.0 & !(0x01 << 4usize)) | (((val.to_bits() as u32) & 0x01) << 4usize);
     }
     #[doc = "After reaching wrap_top, execution is wrapped to this address."]
     #[inline(always)]
@@ -655,7 +655,7 @@ impl Default for SmExecctrl {
         SmExecctrl(0)
     }
 }
-#[doc = "Read to see the instruction currently addressed by state machine 1's program counter Write to execute an instruction immediately (including jumps) and then resume execution."]
+#[doc = "Read to see the instruction currently addressed by state machine 0's program counter Write to execute an instruction immediately (including jumps) and then resume execution."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SmInstr(pub u32);

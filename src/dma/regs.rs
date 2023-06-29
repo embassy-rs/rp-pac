@@ -21,7 +21,7 @@ impl Default for ChanAbort {
         ChanAbort(0)
     }
 }
-#[doc = "DMA Channel 4 Control and Status"]
+#[doc = "DMA Channel 6 Control and Status"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct CtrlTrig(pub u32);
@@ -52,12 +52,12 @@ impl CtrlTrig {
     #[inline(always)]
     pub const fn data_size(&self) -> super::vals::DataSize {
         let val = (self.0 >> 2usize) & 0x03;
-        super::vals::DataSize(val as u8)
+        super::vals::DataSize::from_bits(val as u8)
     }
     #[doc = "Set the size of each bus transfer (byte/halfword/word). READ_ADDR and WRITE_ADDR advance by this amount (1/2/4 bytes) with each transfer."]
     #[inline(always)]
     pub fn set_data_size(&mut self, val: super::vals::DataSize) {
-        self.0 = (self.0 & !(0x03 << 2usize)) | (((val.0 as u32) & 0x03) << 2usize);
+        self.0 = (self.0 & !(0x03 << 2usize)) | (((val.to_bits() as u32) & 0x03) << 2usize);
     }
     #[doc = "If 1, the read address increments with each transfer. If 0, each read is directed to the same, initial address. Generally this should be disabled for peripheral-to-memory transfers."]
     #[inline(always)]
@@ -118,12 +118,12 @@ impl CtrlTrig {
     #[inline(always)]
     pub const fn treq_sel(&self) -> super::vals::TreqSel {
         let val = (self.0 >> 15usize) & 0x3f;
-        super::vals::TreqSel(val as u8)
+        super::vals::TreqSel::from_bits(val as u8)
     }
     #[doc = "Select a Transfer Request signal. The channel uses the transfer request signal to pace its data transfer rate. Sources for TREQ signals are internal (TIMERS) or external (DREQ, a Data Request from the system). 0x0 to 0x3a -> select DREQ n as TREQ"]
     #[inline(always)]
     pub fn set_treq_sel(&mut self, val: super::vals::TreqSel) {
-        self.0 = (self.0 & !(0x3f << 15usize)) | (((val.0 as u32) & 0x3f) << 15usize);
+        self.0 = (self.0 & !(0x3f << 15usize)) | (((val.to_bits() as u32) & 0x3f) << 15usize);
     }
     #[doc = "In QUIET mode, the channel does not generate IRQs at the end of every transfer block. Instead, an IRQ is raised when NULL is written to a trigger register, indicating the end of a control block chain. This reduces the number of interrupts to be serviced by the CPU when transferring a DMA chain of many small control blocks."]
     #[inline(always)]
@@ -215,12 +215,12 @@ impl Default for CtrlTrig {
 pub struct DbgCtdreq(pub u32);
 impl DbgCtdreq {
     #[inline(always)]
-    pub const fn ch8_dbg_ctdreq(&self) -> u8 {
+    pub const fn dbg_ctdreq(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x3f;
         val as u8
     }
     #[inline(always)]
-    pub fn set_ch8_dbg_ctdreq(&mut self, val: u8) {
+    pub fn set_dbg_ctdreq(&mut self, val: u8) {
         self.0 = (self.0 & !(0x3f << 0usize)) | (((val as u32) & 0x3f) << 0usize);
     }
 }
@@ -510,11 +510,11 @@ impl SniffCtrl {
     #[inline(always)]
     pub const fn calc(&self) -> super::vals::Calc {
         let val = (self.0 >> 5usize) & 0x0f;
-        super::vals::Calc(val as u8)
+        super::vals::Calc::from_bits(val as u8)
     }
     #[inline(always)]
     pub fn set_calc(&mut self, val: super::vals::Calc) {
-        self.0 = (self.0 & !(0x0f << 5usize)) | (((val.0 as u32) & 0x0f) << 5usize);
+        self.0 = (self.0 & !(0x0f << 5usize)) | (((val.to_bits() as u32) & 0x0f) << 5usize);
     }
     #[doc = "Locally perform a byte reverse on the sniffed data, before feeding into checksum. Note that the sniff hardware is downstream of the DMA channel byteswap performed in the read master: if channel CTRL_BSWAP and SNIFF_CTRL_BSWAP are both enabled, their effects cancel from the sniffer's point of view."]
     #[inline(always)]

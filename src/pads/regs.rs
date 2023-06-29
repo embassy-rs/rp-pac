@@ -51,12 +51,12 @@ impl GpioCtrl {
     #[inline(always)]
     pub const fn drive(&self) -> super::vals::Drive {
         let val = (self.0 >> 4usize) & 0x03;
-        super::vals::Drive(val as u8)
+        super::vals::Drive::from_bits(val as u8)
     }
     #[doc = "Drive strength."]
     #[inline(always)]
     pub fn set_drive(&mut self, val: super::vals::Drive) {
-        self.0 = (self.0 & !(0x03 << 4usize)) | (((val.0 as u32) & 0x03) << 4usize);
+        self.0 = (self.0 & !(0x03 << 4usize)) | (((val.to_bits() as u32) & 0x03) << 4usize);
     }
     #[doc = "Input enable"]
     #[inline(always)]
@@ -95,11 +95,11 @@ impl VoltageSelect {
     #[inline(always)]
     pub const fn voltage_select(&self) -> super::vals::VoltageSelect {
         let val = (self.0 >> 0usize) & 0x01;
-        super::vals::VoltageSelect(val as u8)
+        super::vals::VoltageSelect::from_bits(val as u8)
     }
     #[inline(always)]
     pub fn set_voltage_select(&mut self, val: super::vals::VoltageSelect) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val.0 as u32) & 0x01) << 0usize);
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
     }
 }
 impl Default for VoltageSelect {

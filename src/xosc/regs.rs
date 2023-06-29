@@ -28,23 +28,23 @@ impl Ctrl {
     #[inline(always)]
     pub const fn freq_range(&self) -> super::vals::CtrlFreqRange {
         let val = (self.0 >> 0usize) & 0x0fff;
-        super::vals::CtrlFreqRange(val as u16)
+        super::vals::CtrlFreqRange::from_bits(val as u16)
     }
     #[doc = "Frequency range. This resets to 0xAA0 and cannot be changed."]
     #[inline(always)]
     pub fn set_freq_range(&mut self, val: super::vals::CtrlFreqRange) {
-        self.0 = (self.0 & !(0x0fff << 0usize)) | (((val.0 as u32) & 0x0fff) << 0usize);
+        self.0 = (self.0 & !(0x0fff << 0usize)) | (((val.to_bits() as u32) & 0x0fff) << 0usize);
     }
     #[doc = "On power-up this field is initialised to DISABLE and the chip runs from the ROSC. If the chip has subsequently been programmed to run from the XOSC then setting this field to DISABLE may lock-up the chip. If this is a concern then run the clk_ref from the ROSC and enable the clk_sys RESUS feature. The 12-bit code is intended to give some protection against accidental writes. An invalid setting will enable the oscillator."]
     #[inline(always)]
     pub const fn enable(&self) -> super::vals::Enable {
         let val = (self.0 >> 12usize) & 0x0fff;
-        super::vals::Enable(val as u16)
+        super::vals::Enable::from_bits(val as u16)
     }
     #[doc = "On power-up this field is initialised to DISABLE and the chip runs from the ROSC. If the chip has subsequently been programmed to run from the XOSC then setting this field to DISABLE may lock-up the chip. If this is a concern then run the clk_ref from the ROSC and enable the clk_sys RESUS feature. The 12-bit code is intended to give some protection against accidental writes. An invalid setting will enable the oscillator."]
     #[inline(always)]
     pub fn set_enable(&mut self, val: super::vals::Enable) {
-        self.0 = (self.0 & !(0x0fff << 12usize)) | (((val.0 as u32) & 0x0fff) << 12usize);
+        self.0 = (self.0 & !(0x0fff << 12usize)) | (((val.to_bits() as u32) & 0x0fff) << 12usize);
     }
 }
 impl Default for Ctrl {
@@ -96,12 +96,12 @@ impl Status {
     #[inline(always)]
     pub const fn freq_range(&self) -> super::vals::StatusFreqRange {
         let val = (self.0 >> 0usize) & 0x03;
-        super::vals::StatusFreqRange(val as u8)
+        super::vals::StatusFreqRange::from_bits(val as u8)
     }
     #[doc = "The current frequency range setting, always reads 0"]
     #[inline(always)]
     pub fn set_freq_range(&mut self, val: super::vals::StatusFreqRange) {
-        self.0 = (self.0 & !(0x03 << 0usize)) | (((val.0 as u32) & 0x03) << 0usize);
+        self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
     }
     #[doc = "Oscillator is enabled but not necessarily running and stable, resets to 0"]
     #[inline(always)]
