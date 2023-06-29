@@ -1,6 +1,6 @@
 [package]
 name = "rp-pac"
-version = "5.0.0"
+version = "6.0.0"
 edition = "2021"
 license = "BSD-3-Clause"
 repository = "https://github.com/embassy-rs/rp-pac"
