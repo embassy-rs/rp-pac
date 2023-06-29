@@ -21,10 +21,13 @@ transforms:
   - MergeFieldsets:
       from: dma::regs::Ch\d+CtrlTrig
       to: dma::regs::CtrlTrig
+  - RenameFields:
+      fieldset: dma::regs::Ch\d+DbgCtdreq
+      from: ch\d+_(.*)
+      to: $1
   - MergeFieldsets:
       from: dma::regs::Ch\d+DbgCtdreq
       to: dma::regs::DbgCtdreq
-      check: Layout
   - MakeBlock:
       blocks: dma::Dma
       from: ch(\d+)_(.*)
@@ -297,10 +300,13 @@ transforms:
   - MergeFieldsets:
       from: clocks::regs::Int.
       to: clocks::regs::Int
+  - RenameEnumVariants:
+      enum: clocks::vals::ClkGpout\dCtrlAuxsrc
+      from: ROSC_CLKSRC_PH
+      to: ROSC_CLKSRC
   - MergeEnums:
       from: clocks::vals::ClkGpout\dCtrlAuxsrc
       to: clocks::vals::ClkGpoutCtrlAuxsrc
-      check: NoCheck
   - MergeFieldsets:
       from: clocks::regs::ClkGpout\d(Ctrl|Div)
       to: clocks::regs::ClkGpout$1
