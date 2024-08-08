@@ -53,7 +53,7 @@ impl Default for Dbgpause {
         Dbgpause(0)
     }
 }
-#[doc = "Interrupt Enable"]
+#[doc = "Raw Interrupts"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Int(pub u32);

@@ -29,6 +29,33 @@ impl From<CtrlFreqRange> for u16 {
 }
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+pub struct Dormant(pub u32);
+impl Dormant {
+    pub const DORMANT: Self = Self(0x636f_6d61);
+    pub const WAKE: Self = Self(0x7761_6b65);
+}
+impl Dormant {
+    pub const fn from_bits(val: u32) -> Dormant {
+        Self(val & 0xffff_ffff)
+    }
+    pub const fn to_bits(self) -> u32 {
+        self.0
+    }
+}
+impl From<u32> for Dormant {
+    #[inline(always)]
+    fn from(val: u32) -> Dormant {
+        Dormant::from_bits(val)
+    }
+}
+impl From<Dormant> for u32 {
+    #[inline(always)]
+    fn from(val: Dormant) -> u32 {
+        Dormant::to_bits(val)
+    }
+}
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub struct Enable(pub u16);
 impl Enable {
     pub const DISABLE: Self = Self(0x0d1e);

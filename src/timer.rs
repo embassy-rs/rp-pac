@@ -16,22 +16,22 @@ impl Timer {
     }
     #[doc = "Write to bits 63:32 of time always write timelw before timehw"]
     #[inline(always)]
-    pub const fn timehw(self) -> crate::common::Reg<u32, crate::common::W> {
+    pub const fn timehw(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0usize) as _) }
     }
     #[doc = "Write to bits 31:0 of time writes do not get copied to time until timehw is written"]
     #[inline(always)]
-    pub const fn timelw(self) -> crate::common::Reg<u32, crate::common::W> {
+    pub const fn timelw(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(4usize) as _) }
     }
     #[doc = "Read from bits 63:32 of time always read timelr before timehr"]
     #[inline(always)]
-    pub const fn timehr(self) -> crate::common::Reg<u32, crate::common::R> {
+    pub const fn timehr(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(8usize) as _) }
     }
     #[doc = "Read from bits 31:0 of time"]
     #[inline(always)]
-    pub const fn timelr(self) -> crate::common::Reg<u32, crate::common::R> {
+    pub const fn timelr(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(12usize) as _) }
     }
     #[doc = "Arm alarm 0, and configure the time it will fire. Once armed, the alarm fires when TIMER_ALARM0 == TIMELR. The alarm will disarm itself once it fires, and can be disarmed early using the ARMED status register."]
@@ -47,12 +47,12 @@ impl Timer {
     }
     #[doc = "Raw read from bits 63:32 of time (no side effects)"]
     #[inline(always)]
-    pub const fn timerawh(self) -> crate::common::Reg<u32, crate::common::R> {
+    pub const fn timerawh(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(36usize) as _) }
     }
     #[doc = "Raw read from bits 31:0 of time (no side effects)"]
     #[inline(always)]
-    pub const fn timerawl(self) -> crate::common::Reg<u32, crate::common::R> {
+    pub const fn timerawl(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(40usize) as _) }
     }
     #[doc = "Set bits high to enable pause when the corresponding debug ports are active"]

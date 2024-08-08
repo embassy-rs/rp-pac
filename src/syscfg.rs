@@ -14,12 +14,12 @@ impl Syscfg {
     pub const fn as_ptr(&self) -> *mut () {
         self.ptr as _
     }
-    #[doc = "Processor core 0 NMI source mask Set a bit high to enable NMI from that IRQ"]
+    #[doc = "Processor core 0 NMI source mask"]
     #[inline(always)]
     pub const fn proc0_nmi_mask(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0usize) as _) }
     }
-    #[doc = "Processor core 1 NMI source mask Set a bit high to enable NMI from that IRQ"]
+    #[doc = "Processor core 1 NMI source mask"]
     #[inline(always)]
     pub const fn proc1_nmi_mask(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(4usize) as _) }

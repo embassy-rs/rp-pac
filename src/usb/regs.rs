@@ -32,7 +32,7 @@ impl Default for AddrEndp {
         AddrEndp(0)
     }
 }
-#[doc = "Interrupt endpoint 10. Only valid for HOST mode."]
+#[doc = "Interrupt endpoint 8. Only valid for HOST mode."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct AddrEndpX(pub u32);
@@ -308,7 +308,7 @@ impl Default for EpStatusStallNak {
         EpStatusStallNak(0)
     }
 }
-#[doc = "Interrupt Enable"]
+#[doc = "Raw Interrupts"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Int(pub u32);
@@ -324,13 +324,13 @@ impl Int {
     pub fn set_host_conn_dis(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "Host: raised when a device wakes up the host. Cleared by writing to SIE_STATUS.RESUME"]
+    #[doc = "Host: raised when a device wakes up the host. Cleared by writing to SIE_STATUS.RESUME_REMOTE"]
     #[inline(always)]
     pub const fn host_resume(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "Host: raised when a device wakes up the host. Cleared by writing to SIE_STATUS.RESUME"]
+    #[doc = "Host: raised when a device wakes up the host. Cleared by writing to SIE_STATUS.RESUME_REMOTE"]
     #[inline(always)]
     pub fn set_host_resume(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
@@ -434,13 +434,13 @@ impl Int {
     pub fn set_stall(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
-    #[doc = "Source: SIE_STATUS.VBUS_DETECTED"]
+    #[doc = "Source: SIE_STATUS.VBUS_DETECT"]
     #[inline(always)]
     pub const fn vbus_detect(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
         val != 0
     }
-    #[doc = "Source: SIE_STATUS.VBUS_DETECTED"]
+    #[doc = "Source: SIE_STATUS.VBUS_DETECT"]
     #[inline(always)]
     pub fn set_vbus_detect(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
@@ -478,13 +478,13 @@ impl Int {
     pub fn set_dev_suspend(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 14usize)) | (((val as u32) & 0x01) << 14usize);
     }
-    #[doc = "Set when the device receives a resume from the host. Cleared by writing to SIE_STATUS.RESUME"]
+    #[doc = "Set when the device receives a resume from the host. Cleared by writing to SIE_STATUS.RESUME_REMOTE"]
     #[inline(always)]
     pub const fn dev_resume_from_host(&self) -> bool {
         let val = (self.0 >> 15usize) & 0x01;
         val != 0
     }
-    #[doc = "Set when the device receives a resume from the host. Cleared by writing to SIE_STATUS.RESUME"]
+    #[doc = "Set when the device receives a resume from the host. Cleared by writing to SIE_STATUS.RESUME_REMOTE"]
     #[inline(always)]
     pub fn set_dev_resume_from_host(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
@@ -545,13 +545,13 @@ impl Default for Int {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct IntEpCtrl(pub u32);
 impl IntEpCtrl {
-    #[doc = "Host: Enable interrupt endpoint 1 -> 15"]
+    #[doc = "Host: Enable interrupt endpoint 1 => 15"]
     #[inline(always)]
     pub const fn int_ep_active(&self) -> u16 {
         let val = (self.0 >> 1usize) & 0x7fff;
         val as u16
     }
-    #[doc = "Host: Enable interrupt endpoint 1 -> 15"]
+    #[doc = "Host: Enable interrupt endpoint 1 => 15"]
     #[inline(always)]
     pub fn set_int_ep_active(&mut self, val: u16) {
         self.0 = (self.0 & !(0x7fff << 1usize)) | (((val as u32) & 0x7fff) << 1usize);
@@ -1218,7 +1218,7 @@ impl Default for UsbMuxing {
         UsbMuxing(0)
     }
 }
-#[doc = "Overrides for the power signals in the event that the VBUS signals are not hooked up to GPIO. Set the value of the override and then the override enable to switch over to the override value."]
+#[doc = "Overrides for the power signals in the event that the VBUS signals are not hooked up to GPIO. Set the value of the override and then the override enable so switch over to the override value."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct UsbPwr(pub u32);
@@ -1284,238 +1284,230 @@ impl Default for UsbPwr {
         UsbPwr(0)
     }
 }
-#[doc = "This register allows for direct control of the USB phy. Use in conjunction with usbphy_direct_override register to enable each override bit."]
+#[doc = "Note that most functions are driven directly from usb_fsls controller. This register allows more detailed control/status from the USB PHY. Useful for debug but not expected to be used in normal operation Use in conjunction with usbphy_direct_override register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct UsbphyDirect(pub u32);
 impl UsbphyDirect {
-    #[doc = "Enable the second DP pull up resistor. 0 - Pull = Rpu2; 1 - Pull = Rpu1 + Rpu2"]
+    #[doc = "when dp_pullup_en is set high, this enables second resistor. 0 - Pull = Rpu2; 1 - Pull = Rpu1 + Rpu2"]
     #[inline(always)]
     pub const fn dp_pullup_hisel(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "Enable the second DP pull up resistor. 0 - Pull = Rpu2; 1 - Pull = Rpu1 + Rpu2"]
+    #[doc = "when dp_pullup_en is set high, this enables second resistor. 0 - Pull = Rpu2; 1 - Pull = Rpu1 + Rpu2"]
     #[inline(always)]
     pub fn set_dp_pullup_hisel(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "DP pull up enable"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller"]
     #[inline(always)]
     pub const fn dp_pullup_en(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "DP pull up enable"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller"]
     #[inline(always)]
     pub fn set_dp_pullup_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
-    #[doc = "DP pull down enable"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller 1 - Enable Rpd on DPP"]
     #[inline(always)]
     pub const fn dp_pulldn_en(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
-    #[doc = "DP pull down enable"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller 1 - Enable Rpd on DPP"]
     #[inline(always)]
     pub fn set_dp_pulldn_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
-    #[doc = "Enable the second DM pull up resistor. 0 - Pull = Rpu2; 1 - Pull = Rpu1 + Rpu2"]
+    #[doc = "when dm_pullup_en is set high, this enables second resistor. 0 - Pull = Rpu2; 1 - Pull = Rpu1 + Rpu2"]
     #[inline(always)]
     pub const fn dm_pullup_hisel(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
-    #[doc = "Enable the second DM pull up resistor. 0 - Pull = Rpu2; 1 - Pull = Rpu1 + Rpu2"]
+    #[doc = "when dm_pullup_en is set high, this enables second resistor. 0 - Pull = Rpu2; 1 - Pull = Rpu1 + Rpu2"]
     #[inline(always)]
     pub fn set_dm_pullup_hisel(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
-    #[doc = "DM pull up enable"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller 1 - Enable Rpu on DPM"]
     #[inline(always)]
     pub const fn dm_pullup_en(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
         val != 0
     }
-    #[doc = "DM pull up enable"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller 1 - Enable Rpu on DPM"]
     #[inline(always)]
     pub fn set_dm_pullup_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
-    #[doc = "DM pull down enable"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller 1 - Enable Rpd on DPM"]
     #[inline(always)]
     pub const fn dm_pulldn_en(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
         val != 0
     }
-    #[doc = "DM pull down enable"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller 1 - Enable Rpd on DPM"]
     #[inline(always)]
     pub fn set_dm_pulldn_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
-    #[doc = "Output enable. If TX_DIFFMODE=1, OE for DPP/DPM diff pair. 0 - DPP/DPM in Hi-Z state; 1 - DPP/DPM driving If TX_DIFFMODE=0, OE for DPP only. 0 - DPP in Hi-Z state; 1 - DPP driving"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, OE for DPP/DPM diff pair. 0 - DPP/DPM in Hi-Z state; 1 - DPP/DPM driving TX_SEMODE=1, OE for DPP only. 0 - DPP in Hi-Z state; 1 - DPP driving"]
     #[inline(always)]
     pub const fn tx_dp_oe(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
-    #[doc = "Output enable. If TX_DIFFMODE=1, OE for DPP/DPM diff pair. 0 - DPP/DPM in Hi-Z state; 1 - DPP/DPM driving If TX_DIFFMODE=0, OE for DPP only. 0 - DPP in Hi-Z state; 1 - DPP driving"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, OE for DPP/DPM diff pair. 0 - DPP/DPM in Hi-Z state; 1 - DPP/DPM driving TX_SEMODE=1, OE for DPP only. 0 - DPP in Hi-Z state; 1 - DPP driving"]
     #[inline(always)]
     pub fn set_tx_dp_oe(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
-    #[doc = "Output enable. If TX_DIFFMODE=1, Ignored. If TX_DIFFMODE=0, OE for DPM only. 0 - DPM in Hi-Z state; 1 - DPM driving"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, Ignored. TX_SEMODE=1, OE for DPM only. 0 - DPM in Hi-Z state; 1 - DPM driving"]
     #[inline(always)]
     pub const fn tx_dm_oe(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
         val != 0
     }
-    #[doc = "Output enable. If TX_DIFFMODE=1, Ignored. If TX_DIFFMODE=0, OE for DPM only. 0 - DPM in Hi-Z state; 1 - DPM driving"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, Ignored. TX_SEMODE=1, OE for DPM only. 0 - DPM in Hi-Z state; 1 - DPM driving"]
     #[inline(always)]
     pub fn set_tx_dm_oe(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
-    #[doc = "Output data. If TX_DIFFMODE=1, Drives DPP/DPM diff pair. TX_DP_OE=1 to enable drive. DPP=TX_DP, DPM=~TX_DP If TX_DIFFMODE=0, Drives DPP only. TX_DP_OE=1 to enable drive. DPP=TX_DP"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, Drives DPP/DPM diff pair. TX_DP_OE=1 to enable drive. DPP=TX_DP, DPM=~TX_DP TX_SEMODE=1, Drives DPP only. TX_DP_OE=1 to enable drive. DPP=TX_DP"]
     #[inline(always)]
     pub const fn tx_dp(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
         val != 0
     }
-    #[doc = "Output data. If TX_DIFFMODE=1, Drives DPP/DPM diff pair. TX_DP_OE=1 to enable drive. DPP=TX_DP, DPM=~TX_DP If TX_DIFFMODE=0, Drives DPP only. TX_DP_OE=1 to enable drive. DPP=TX_DP"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, Drives DPP/DPM diff pair. TX_DP_OE=1 to enable drive. DPP=TX_DP, DPM=~TX_DP TX_SEMODE=1, Drives DPP only. TX_DP_OE=1 to enable drive. DPP=TX_DP"]
     #[inline(always)]
     pub fn set_tx_dp(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
-    #[doc = "Output data. TX_DIFFMODE=1, Ignored TX_DIFFMODE=0, Drives DPM only. TX_DM_OE=1 to enable drive. DPM=TX_DM"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, Ignored TX_SEMODE=1, Drives DPM only. TX_DM_OE=1 to enable drive. DPM=TX_DM"]
     #[inline(always)]
     pub const fn tx_dm(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
         val != 0
     }
-    #[doc = "Output data. TX_DIFFMODE=1, Ignored TX_DIFFMODE=0, Drives DPM only. TX_DM_OE=1 to enable drive. DPM=TX_DM"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, Ignored TX_SEMODE=1, Drives DPM only. TX_DM_OE=1 to enable drive. DPM=TX_DM"]
     #[inline(always)]
     pub fn set_tx_dm(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
-    #[doc = "RX power down override (if override enable is set). 1 = powered down."]
     #[inline(always)]
     pub const fn rx_pd(&self) -> bool {
         let val = (self.0 >> 12usize) & 0x01;
         val != 0
     }
-    #[doc = "RX power down override (if override enable is set). 1 = powered down."]
     #[inline(always)]
     pub fn set_rx_pd(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
     }
-    #[doc = "TX power down override (if override enable is set). 1 = powered down."]
     #[inline(always)]
     pub const fn tx_pd(&self) -> bool {
         let val = (self.0 >> 13usize) & 0x01;
         val != 0
     }
-    #[doc = "TX power down override (if override enable is set). 1 = powered down."]
     #[inline(always)]
     pub fn set_tx_pd(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u32) & 0x01) << 13usize);
     }
-    #[doc = "TX_FSSLEW=0: Low speed slew rate TX_FSSLEW=1: Full speed slew rate"]
     #[inline(always)]
     pub const fn tx_fsslew(&self) -> bool {
         let val = (self.0 >> 14usize) & 0x01;
         val != 0
     }
-    #[doc = "TX_FSSLEW=0: Low speed slew rate TX_FSSLEW=1: Full speed slew rate"]
     #[inline(always)]
     pub fn set_tx_fsslew(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 14usize)) | (((val as u32) & 0x01) << 14usize);
     }
-    #[doc = "TX_DIFFMODE=0: Single ended mode TX_DIFFMODE=1: Differential drive mode (TX_DM, TX_DM_OE ignored)"]
     #[inline(always)]
     pub const fn tx_diffmode(&self) -> bool {
         let val = (self.0 >> 15usize) & 0x01;
         val != 0
     }
-    #[doc = "TX_DIFFMODE=0: Single ended mode TX_DIFFMODE=1: Differential drive mode (TX_DM, TX_DM_OE ignored)"]
     #[inline(always)]
     pub fn set_tx_diffmode(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
     }
-    #[doc = "Differential RX"]
+    #[doc = "Status bit from USB PHY RX Diff data"]
     #[inline(always)]
     pub const fn rx_dd(&self) -> bool {
         let val = (self.0 >> 16usize) & 0x01;
         val != 0
     }
-    #[doc = "Differential RX"]
+    #[doc = "Status bit from USB PHY RX Diff data"]
     #[inline(always)]
     pub fn set_rx_dd(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
     }
-    #[doc = "DPP pin state"]
+    #[doc = "Status bit from USB PHY DPP pin state"]
     #[inline(always)]
     pub const fn rx_dp(&self) -> bool {
         let val = (self.0 >> 17usize) & 0x01;
         val != 0
     }
-    #[doc = "DPP pin state"]
+    #[doc = "Status bit from USB PHY DPP pin state"]
     #[inline(always)]
     pub fn set_rx_dp(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
     }
-    #[doc = "DPM pin state"]
+    #[doc = "Status bit from USB PHY DPM pin state"]
     #[inline(always)]
     pub const fn rx_dm(&self) -> bool {
         let val = (self.0 >> 18usize) & 0x01;
         val != 0
     }
-    #[doc = "DPM pin state"]
+    #[doc = "Status bit from USB PHY DPM pin state"]
     #[inline(always)]
     pub fn set_rx_dm(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
     }
-    #[doc = "DP overcurrent"]
+    #[doc = "Status bit from USB PHY"]
     #[inline(always)]
     pub const fn dp_ovcn(&self) -> bool {
         let val = (self.0 >> 19usize) & 0x01;
         val != 0
     }
-    #[doc = "DP overcurrent"]
+    #[doc = "Status bit from USB PHY"]
     #[inline(always)]
     pub fn set_dp_ovcn(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
     }
-    #[doc = "DM overcurrent"]
+    #[doc = "Status bit from USB PHY"]
     #[inline(always)]
     pub const fn dm_ovcn(&self) -> bool {
         let val = (self.0 >> 20usize) & 0x01;
         val != 0
     }
-    #[doc = "DM overcurrent"]
+    #[doc = "Status bit from USB PHY"]
     #[inline(always)]
     pub fn set_dm_ovcn(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
     }
-    #[doc = "DP over voltage"]
+    #[doc = "Status bit from USB PHY"]
     #[inline(always)]
     pub const fn dp_ovv(&self) -> bool {
         let val = (self.0 >> 21usize) & 0x01;
         val != 0
     }
-    #[doc = "DP over voltage"]
+    #[doc = "Status bit from USB PHY"]
     #[inline(always)]
     pub fn set_dp_ovv(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 21usize)) | (((val as u32) & 0x01) << 21usize);
     }
-    #[doc = "DM over voltage"]
+    #[doc = "Status bit from USB PHY"]
     #[inline(always)]
     pub const fn dm_ovv(&self) -> bool {
         let val = (self.0 >> 22usize) & 0x01;
         val != 0
     }
-    #[doc = "DM over voltage"]
+    #[doc = "Status bit from USB PHY"]
     #[inline(always)]
     pub fn set_dm_ovv(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 22usize)) | (((val as u32) & 0x01) << 22usize);
@@ -1527,7 +1519,6 @@ impl Default for UsbphyDirect {
         UsbphyDirect(0)
     }
 }
-#[doc = "Override enable for each control in usbphy_direct"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct UsbphyDirectOverride(pub u32);
@@ -1550,65 +1541,79 @@ impl UsbphyDirectOverride {
     pub fn set_dm_pullup_hisel_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
+    #[doc = "Override default value or value driven from USB Controller to PHY"]
     #[inline(always)]
     pub const fn dp_pullup_en_override_en(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
+    #[doc = "Override default value or value driven from USB Controller to PHY"]
     #[inline(always)]
     pub fn set_dp_pullup_en_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
+    #[doc = "Override default value or value driven from USB Controller to PHY"]
     #[inline(always)]
     pub const fn dp_pulldn_en_override_en(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
         val != 0
     }
+    #[doc = "Override default value or value driven from USB Controller to PHY"]
     #[inline(always)]
     pub fn set_dp_pulldn_en_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
+    #[doc = "Override default value or value driven from USB Controller to PHY"]
     #[inline(always)]
     pub const fn dm_pulldn_en_override_en(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
+    #[doc = "Override default value or value driven from USB Controller to PHY"]
     #[inline(always)]
     pub fn set_dm_pulldn_en_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
+    #[doc = "Override default value or value driven from USB Controller to PHY"]
     #[inline(always)]
     pub const fn tx_dp_oe_override_en(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
         val != 0
     }
+    #[doc = "Override default value or value driven from USB Controller to PHY"]
     #[inline(always)]
     pub fn set_tx_dp_oe_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
+    #[doc = "Override default value or value driven from USB Controller to PHY"]
     #[inline(always)]
     pub const fn tx_dm_oe_override_en(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
         val != 0
     }
+    #[doc = "Override default value or value driven from USB Controller to PHY"]
     #[inline(always)]
     pub fn set_tx_dm_oe_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
+    #[doc = "Override default value or value driven from USB Controller to PHY"]
     #[inline(always)]
     pub const fn tx_dp_override_en(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
         val != 0
     }
+    #[doc = "Override default value or value driven from USB Controller to PHY"]
     #[inline(always)]
     pub fn set_tx_dp_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
+    #[doc = "Override default value or value driven from USB Controller to PHY"]
     #[inline(always)]
     pub const fn tx_dm_override_en(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
+    #[doc = "Override default value or value driven from USB Controller to PHY"]
     #[inline(always)]
     pub fn set_tx_dm_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
@@ -1665,7 +1670,7 @@ impl Default for UsbphyDirectOverride {
         UsbphyDirectOverride(0)
     }
 }
-#[doc = "Used to adjust trim values of USB phy pull down resistors."]
+#[doc = "Note that most functions are driven directly from usb_fsls controller. This register allows more detailed control/status from the USB PHY. Useful for debug but not expected to be used in normal operation"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct UsbphyTrim(pub u32);

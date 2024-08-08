@@ -24,13 +24,13 @@ impl Default for Count {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Ctrl(pub u32);
 impl Ctrl {
-    #[doc = "Controls the number of delay stages in the ROSC ring LOW uses stages 0 to 7 MEDIUM uses stages 0 to 5 HIGH uses stages 0 to 3 TOOHIGH uses stages 0 to 1 and should not be used because its frequency exceeds design specifications The clock output will not glitch when changing the range up one step at a time The clock output will glitch when changing the range down Note: the values here are gray coded which is why HIGH comes before TOOHIGH"]
+    #[doc = "Controls the number of delay stages in the ROSC ring LOW uses stages 0 to 7 MEDIUM uses stages 2 to 7 HIGH uses stages 4 to 7 TOOHIGH uses stages 6 to 7 and should not be used because its frequency exceeds design specifications The clock output will not glitch when changing the range up one step at a time The clock output will glitch when changing the range down Note: the values here are gray coded which is why HIGH comes before TOOHIGH"]
     #[inline(always)]
     pub const fn freq_range(&self) -> super::vals::FreqRange {
         let val = (self.0 >> 0usize) & 0x0fff;
         super::vals::FreqRange::from_bits(val as u16)
     }
-    #[doc = "Controls the number of delay stages in the ROSC ring LOW uses stages 0 to 7 MEDIUM uses stages 0 to 5 HIGH uses stages 0 to 3 TOOHIGH uses stages 0 to 1 and should not be used because its frequency exceeds design specifications The clock output will not glitch when changing the range up one step at a time The clock output will glitch when changing the range down Note: the values here are gray coded which is why HIGH comes before TOOHIGH"]
+    #[doc = "Controls the number of delay stages in the ROSC ring LOW uses stages 0 to 7 MEDIUM uses stages 2 to 7 HIGH uses stages 4 to 7 TOOHIGH uses stages 6 to 7 and should not be used because its frequency exceeds design specifications The clock output will not glitch when changing the range up one step at a time The clock output will glitch when changing the range down Note: the values here are gray coded which is why HIGH comes before TOOHIGH"]
     #[inline(always)]
     pub fn set_freq_range(&mut self, val: super::vals::FreqRange) {
         self.0 = (self.0 & !(0x0fff << 0usize)) | (((val.to_bits() as u32) & 0x0fff) << 0usize);
@@ -74,6 +74,30 @@ impl Default for Div {
     #[inline(always)]
     fn default() -> Div {
         Div(0)
+    }
+}
+#[doc = "Ring Oscillator pause control"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Dormant(pub u32);
+impl Dormant {
+    #[doc = "This is used to save power by pausing the ROSC On power-up this field is initialised to WAKE An invalid write will also select WAKE Warning: setup the irq before selecting dormant mode"]
+    #[inline(always)]
+    pub const fn dormant(&self) -> super::vals::Dormant {
+        let val = (self.0 >> 0usize) & 0xffff_ffff;
+        super::vals::Dormant::from_bits(val as u32)
+    }
+    #[doc = "This is used to save power by pausing the ROSC On power-up this field is initialised to WAKE An invalid write will also select WAKE Warning: setup the irq before selecting dormant mode"]
+    #[inline(always)]
+    pub fn set_dormant(&mut self, val: super::vals::Dormant) {
+        self.0 = (self.0 & !(0xffff_ffff << 0usize))
+            | (((val.to_bits() as u32) & 0xffff_ffff) << 0usize);
+    }
+}
+impl Default for Dormant {
+    #[inline(always)]
+    fn default() -> Dormant {
+        Dormant(0)
     }
 }
 #[doc = "The FREQA & FREQB registers control the frequency by controlling the drive strength of each stage The drive strength has 4 levels determined by the number of bits set Increasing the number of bits set increases the drive strength and increases the oscillation frequency 0 bits set is the default drive strength 1 bit set doubles the drive strength 2 bits set triples drive strength 3 bits set quadruples drive strength"]

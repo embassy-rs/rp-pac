@@ -102,24 +102,23 @@ impl Usb {
     pub const fn usb_muxing(self) -> crate::common::Reg<regs::UsbMuxing, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(116usize) as _) }
     }
-    #[doc = "Overrides for the power signals in the event that the VBUS signals are not hooked up to GPIO. Set the value of the override and then the override enable to switch over to the override value."]
+    #[doc = "Overrides for the power signals in the event that the VBUS signals are not hooked up to GPIO. Set the value of the override and then the override enable so switch over to the override value."]
     #[inline(always)]
     pub const fn usb_pwr(self) -> crate::common::Reg<regs::UsbPwr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(120usize) as _) }
     }
-    #[doc = "This register allows for direct control of the USB phy. Use in conjunction with usbphy_direct_override register to enable each override bit."]
+    #[doc = "Note that most functions are driven directly from usb_fsls controller. This register allows more detailed control/status from the USB PHY. Useful for debug but not expected to be used in normal operation Use in conjunction with usbphy_direct_override register"]
     #[inline(always)]
     pub const fn usbphy_direct(self) -> crate::common::Reg<regs::UsbphyDirect, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(124usize) as _) }
     }
-    #[doc = "Override enable for each control in usbphy_direct"]
     #[inline(always)]
     pub const fn usbphy_direct_override(
         self,
     ) -> crate::common::Reg<regs::UsbphyDirectOverride, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(128usize) as _) }
     }
-    #[doc = "Used to adjust trim values of USB phy pull down resistors."]
+    #[doc = "Note that most functions are driven directly from usb_fsls controller. This register allows more detailed control/status from the USB PHY. Useful for debug but not expected to be used in normal operation"]
     #[inline(always)]
     pub const fn usbphy_trim(self) -> crate::common::Reg<regs::UsbphyTrim, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(132usize) as _) }

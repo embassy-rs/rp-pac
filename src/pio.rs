@@ -13,17 +13,17 @@ impl Irq {
     pub const fn as_ptr(&self) -> *mut () {
         self.ptr as _
     }
-    #[doc = "Interrupt Enable for irq0"]
+    #[doc = "Interrupt Enable for irq1"]
     #[inline(always)]
     pub const fn inte(self) -> crate::common::Reg<regs::Intr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0usize) as _) }
     }
-    #[doc = "Interrupt Force for irq0"]
+    #[doc = "Interrupt Force for irq1"]
     #[inline(always)]
     pub const fn intf(self) -> crate::common::Reg<regs::Intr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(4usize) as _) }
     }
-    #[doc = "Interrupt status after masking & forcing for irq0"]
+    #[doc = "Interrupt status after masking & forcing for irq1"]
     #[inline(always)]
     pub const fn ints(self) -> crate::common::Reg<regs::Intr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(8usize) as _) }
@@ -67,13 +67,13 @@ impl Pio {
     }
     #[doc = "Direct write access to the TX FIFO for this state machine. Each write pushes one word to the FIFO. Attempting to write to a full FIFO has no effect on the FIFO state or contents, and sets the sticky FDEBUG_TXOVER error flag for this FIFO."]
     #[inline(always)]
-    pub const fn txf(self, n: usize) -> crate::common::Reg<u32, crate::common::W> {
+    pub const fn txf(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
         assert!(n < 4usize);
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(16usize + n * 4usize) as _) }
     }
     #[doc = "Direct read access to the RX FIFO for this state machine. Each read pops one word from the FIFO. Attempting to read from an empty FIFO has no effect on the FIFO state, and sets the sticky FDEBUG_RXUNDER error flag for this FIFO. The data returned to the system on a read from an empty FIFO is undefined."]
     #[inline(always)]
-    pub const fn rxf(self, n: usize) -> crate::common::Reg<u32, crate::common::R> {
+    pub const fn rxf(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
         assert!(n < 4usize);
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(32usize + n * 4usize) as _) }
     }
@@ -94,12 +94,12 @@ impl Pio {
     }
     #[doc = "Read to sample the pad output values PIO is currently driving to the GPIOs. On RP2040 there are 30 GPIOs, so the two most significant bits are hardwired to 0."]
     #[inline(always)]
-    pub const fn dbg_padout(self) -> crate::common::Reg<u32, crate::common::R> {
+    pub const fn dbg_padout(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(60usize) as _) }
     }
     #[doc = "Read to sample the pad output enables (direction) PIO is currently driving to the GPIOs. On RP2040 there are 30 GPIOs, so the two most significant bits are hardwired to 0."]
     #[inline(always)]
-    pub const fn dbg_padoe(self) -> crate::common::Reg<u32, crate::common::R> {
+    pub const fn dbg_padoe(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(64usize) as _) }
     }
     #[doc = "The PIO hardware has some free parameters that may vary between chip products. These should be provided in the chip datasheet, but are also exposed here."]
@@ -147,27 +147,27 @@ impl StateMachine {
     pub const fn as_ptr(&self) -> *mut () {
         self.ptr as _
     }
-    #[doc = "Clock divisor register for state machine 0 Frequency = clock freq / (CLKDIV_INT + CLKDIV_FRAC / 256)"]
+    #[doc = "Clock divisor register for state machine 2 Frequency = clock freq / (CLKDIV_INT + CLKDIV_FRAC / 256)"]
     #[inline(always)]
     pub const fn clkdiv(self) -> crate::common::Reg<regs::SmClkdiv, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0usize) as _) }
     }
-    #[doc = "Execution/behavioural settings for state machine 0"]
+    #[doc = "Execution/behavioural settings for state machine 2"]
     #[inline(always)]
     pub const fn execctrl(self) -> crate::common::Reg<regs::SmExecctrl, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(4usize) as _) }
     }
-    #[doc = "Control behaviour of the input/output shift registers for state machine 0"]
+    #[doc = "Control behaviour of the input/output shift registers for state machine 2"]
     #[inline(always)]
     pub const fn shiftctrl(self) -> crate::common::Reg<regs::SmShiftctrl, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(8usize) as _) }
     }
-    #[doc = "Current instruction address of state machine 0"]
+    #[doc = "Current instruction address of state machine 2"]
     #[inline(always)]
     pub const fn addr(self) -> crate::common::Reg<regs::SmAddr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(12usize) as _) }
     }
-    #[doc = "Read to see the instruction currently addressed by state machine 0's program counter Write to execute an instruction immediately (including jumps) and then resume execution."]
+    #[doc = "Read to see the instruction currently addressed by state machine 2's program counter Write to execute an instruction immediately (including jumps) and then resume execution."]
     #[inline(always)]
     pub const fn instr(self) -> crate::common::Reg<regs::SmInstr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(16usize) as _) }

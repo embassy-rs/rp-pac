@@ -284,7 +284,7 @@ impl Default for Fstat {
         Fstat(0)
     }
 }
-#[doc = "Write-only access to instruction memory location 14"]
+#[doc = "Write-only access to instruction memory location 31"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct InstrMem(pub u32);
@@ -305,7 +305,7 @@ impl Default for InstrMem {
         InstrMem(0)
     }
 }
-#[doc = "Raw Interrupts"]
+#[doc = "Interrupt status after masking & forcing for irq0"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Intr(pub u32);
@@ -467,7 +467,7 @@ impl Default for IrqForce {
         IrqForce(0)
     }
 }
-#[doc = "Current instruction address of state machine 0"]
+#[doc = "Current instruction address of state machine 1"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SmAddr(pub u32);
@@ -488,7 +488,7 @@ impl Default for SmAddr {
         SmAddr(0)
     }
 }
-#[doc = "Clock divisor register for state machine 2 Frequency = clock freq / (CLKDIV_INT + CLKDIV_FRAC / 256)"]
+#[doc = "Clock divisor register for state machine 3 Frequency = clock freq / (CLKDIV_INT + CLKDIV_FRAC / 256)"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SmClkdiv(pub u32);
@@ -522,7 +522,7 @@ impl Default for SmClkdiv {
         SmClkdiv(0)
     }
 }
-#[doc = "Execution/behavioural settings for state machine 2"]
+#[doc = "Execution/behavioural settings for state machine 1"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SmExecctrl(pub u32);
@@ -655,7 +655,7 @@ impl Default for SmExecctrl {
         SmExecctrl(0)
     }
 }
-#[doc = "Read to see the instruction currently addressed by state machine 0's program counter Write to execute an instruction immediately (including jumps) and then resume execution."]
+#[doc = "Read to see the instruction currently addressed by state machine 3's program counter Write to execute an instruction immediately (including jumps) and then resume execution."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SmInstr(pub u32);
@@ -765,7 +765,7 @@ impl Default for SmPinctrl {
         SmPinctrl(0)
     }
 }
-#[doc = "Control behaviour of the input/output shift registers for state machine 3"]
+#[doc = "Control behaviour of the input/output shift registers for state machine 2"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SmShiftctrl(pub u32);

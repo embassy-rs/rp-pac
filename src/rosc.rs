@@ -28,9 +28,9 @@ impl Rosc {
     pub const fn freqb(self) -> crate::common::Reg<regs::Freqb, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(8usize) as _) }
     }
-    #[doc = "Ring Oscillator pause control This is used to save power by pausing the ROSC On power-up this field is initialised to WAKE An invalid write will also select WAKE Warning: setup the irq before selecting dormant mode"]
+    #[doc = "Ring Oscillator pause control"]
     #[inline(always)]
-    pub const fn dormant(self) -> crate::common::Reg<u32, crate::common::RW> {
+    pub const fn dormant(self) -> crate::common::Reg<regs::Dormant, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(12usize) as _) }
     }
     #[doc = "Controls the output divider"]

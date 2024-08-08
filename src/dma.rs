@@ -13,82 +13,82 @@ impl Channel {
     pub const fn as_ptr(&self) -> *mut () {
         self.ptr as _
     }
-    #[doc = "DMA Channel 11 Read Address pointer This register updates automatically each time a read completes. The current value is the next address to be read by this channel."]
+    #[doc = "DMA Channel 9 Read Address pointer"]
     #[inline(always)]
     pub const fn read_addr(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0usize) as _) }
     }
-    #[doc = "DMA Channel 11 Write Address pointer This register updates automatically each time a write completes. The current value is the next address to be written by this channel."]
+    #[doc = "DMA Channel 9 Write Address pointer"]
     #[inline(always)]
     pub const fn write_addr(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(4usize) as _) }
     }
-    #[doc = "DMA Channel 11 Transfer Count Program the number of bus transfers a channel will perform before halting. Note that, if transfers are larger than one byte in size, this is not equal to the number of bytes transferred (see CTRL_DATA_SIZE). When the channel is active, reading this register shows the number of transfers remaining, updating automatically each time a write transfer completes. Writing this register sets the RELOAD value for the transfer counter. Each time this channel is triggered, the RELOAD value is copied into the live transfer counter. The channel can be started multiple times, and will perform the same number of transfers each time, as programmed by most recent write. The RELOAD value can be observed at CHx_DBG_TCR. If TRANS_COUNT is used as a trigger, the written value is used immediately as the length of the new transfer sequence, as well as being written to RELOAD."]
+    #[doc = "DMA Channel 9 Transfer Count"]
     #[inline(always)]
     pub const fn trans_count(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(8usize) as _) }
     }
-    #[doc = "DMA Channel 11 Control and Status"]
+    #[doc = "DMA Channel 9 Control and Status"]
     #[inline(always)]
     pub const fn ctrl_trig(self) -> crate::common::Reg<regs::CtrlTrig, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(12usize) as _) }
     }
-    #[doc = "Alias for channel 11 CTRL register"]
+    #[doc = "Alias for channel 9 CTRL register"]
     #[inline(always)]
     pub const fn al1_ctrl(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(16usize) as _) }
     }
-    #[doc = "Alias for channel 11 READ_ADDR register"]
+    #[doc = "Alias for channel 9 READ_ADDR register"]
     #[inline(always)]
     pub const fn al1_read_addr(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(20usize) as _) }
     }
-    #[doc = "Alias for channel 11 WRITE_ADDR register"]
+    #[doc = "Alias for channel 9 WRITE_ADDR register"]
     #[inline(always)]
     pub const fn al1_write_addr(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(24usize) as _) }
     }
-    #[doc = "Alias for channel 11 TRANS_COUNT register This is a trigger register (0xc). Writing a nonzero value will reload the channel counter and start the channel."]
+    #[doc = "Alias for channel 9 TRANS_COUNT register This is a trigger register (0xc). Writing a nonzero value will reload the channel counter and start the channel."]
     #[inline(always)]
     pub const fn al1_trans_count_trig(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(28usize) as _) }
     }
-    #[doc = "Alias for channel 11 CTRL register"]
+    #[doc = "Alias for channel 9 CTRL register"]
     #[inline(always)]
     pub const fn al2_ctrl(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(32usize) as _) }
     }
-    #[doc = "Alias for channel 11 TRANS_COUNT register"]
+    #[doc = "Alias for channel 9 TRANS_COUNT register"]
     #[inline(always)]
     pub const fn al2_trans_count(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(36usize) as _) }
     }
-    #[doc = "Alias for channel 11 READ_ADDR register"]
+    #[doc = "Alias for channel 9 READ_ADDR register"]
     #[inline(always)]
     pub const fn al2_read_addr(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(40usize) as _) }
     }
-    #[doc = "Alias for channel 11 WRITE_ADDR register This is a trigger register (0xc). Writing a nonzero value will reload the channel counter and start the channel."]
+    #[doc = "Alias for channel 9 WRITE_ADDR register This is a trigger register (0xc). Writing a nonzero value will reload the channel counter and start the channel."]
     #[inline(always)]
     pub const fn al2_write_addr_trig(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(44usize) as _) }
     }
-    #[doc = "Alias for channel 11 CTRL register"]
+    #[doc = "Alias for channel 9 CTRL register"]
     #[inline(always)]
     pub const fn al3_ctrl(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(48usize) as _) }
     }
-    #[doc = "Alias for channel 11 WRITE_ADDR register"]
+    #[doc = "Alias for channel 9 WRITE_ADDR register"]
     #[inline(always)]
     pub const fn al3_write_addr(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(52usize) as _) }
     }
-    #[doc = "Alias for channel 11 TRANS_COUNT register"]
+    #[doc = "Alias for channel 9 TRANS_COUNT register"]
     #[inline(always)]
     pub const fn al3_trans_count(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(56usize) as _) }
     }
-    #[doc = "Alias for channel 11 READ_ADDR register This is a trigger register (0xc). Writing a nonzero value will reload the channel counter and start the channel."]
+    #[doc = "Alias for channel 9 READ_ADDR register This is a trigger register (0xc). Writing a nonzero value will reload the channel counter and start the channel."]
     #[inline(always)]
     pub const fn al3_read_addr_trig(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(60usize) as _) }
@@ -100,7 +100,7 @@ impl Channel {
     }
     #[doc = "Read to get channel TRANS_COUNT reload value, i.e. the length of the next transfer"]
     #[inline(always)]
-    pub const fn dbg_tcr(self) -> crate::common::Reg<u32, crate::common::R> {
+    pub const fn dbg_tcr(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(2052usize) as _) }
     }
 }
@@ -145,6 +145,11 @@ impl Dma {
     pub const fn ints0(self) -> crate::common::Reg<regs::Ints0, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(1036usize) as _) }
     }
+    #[doc = "Interrupt Status (raw)"]
+    #[inline(always)]
+    pub const fn intr1(self) -> crate::common::Reg<regs::Intr1, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.add(1040usize) as _) }
+    }
     #[doc = "Interrupt Enables for IRQ 1"]
     #[inline(always)]
     pub const fn inte1(self) -> crate::common::Reg<regs::Inte1, crate::common::RW> {
@@ -178,7 +183,7 @@ impl Dma {
     pub const fn sniff_ctrl(self) -> crate::common::Reg<regs::SniffCtrl, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(1076usize) as _) }
     }
-    #[doc = "Data accumulator for sniff hardware Write an initial seed value here before starting a DMA transfer on the channel indicated by SNIFF_CTRL_DMACH. The hardware will update this register each time it observes a read from the indicated channel. Once the channel completes, the final result can be read from this register."]
+    #[doc = "Data accumulator for sniff hardware"]
     #[inline(always)]
     pub const fn sniff_data(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(1080usize) as _) }

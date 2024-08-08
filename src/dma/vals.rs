@@ -76,27 +76,127 @@ impl From<DataSize> for u8 {
         DataSize::to_bits(val)
     }
 }
-#[repr(transparent)]
+#[repr(u8)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-pub struct TreqSel(pub u8);
-impl TreqSel {
+pub enum TreqSel {
+    #[doc = "Select PIO0's TX FIFO 0 as TREQ"]
+    PIO0_TX0 = 0,
+    #[doc = "Select PIO0's TX FIFO 1 as TREQ"]
+    PIO0_TX1 = 0x01,
+    #[doc = "Select PIO0's TX FIFO 2 as TREQ"]
+    PIO0_TX2 = 0x02,
+    #[doc = "Select PIO0's TX FIFO 3 as TREQ"]
+    PIO0_TX3 = 0x03,
+    #[doc = "Select PIO0's RX FIFO 0 as TREQ"]
+    PIO0_RX0 = 0x04,
+    #[doc = "Select PIO0's RX FIFO 1 as TREQ"]
+    PIO0_RX1 = 0x05,
+    #[doc = "Select PIO0's RX FIFO 2 as TREQ"]
+    PIO0_RX2 = 0x06,
+    #[doc = "Select PIO0's RX FIFO 3 as TREQ"]
+    PIO0_RX3 = 0x07,
+    #[doc = "Select PIO1's TX FIFO 0 as TREQ"]
+    PIO1_TX0 = 0x08,
+    #[doc = "Select PIO1's TX FIFO 1 as TREQ"]
+    PIO1_TX1 = 0x09,
+    #[doc = "Select PIO1's TX FIFO 2 as TREQ"]
+    PIO1_TX2 = 0x0a,
+    #[doc = "Select PIO1's TX FIFO 3 as TREQ"]
+    PIO1_TX3 = 0x0b,
+    #[doc = "Select PIO1's RX FIFO 0 as TREQ"]
+    PIO1_RX0 = 0x0c,
+    #[doc = "Select PIO1's RX FIFO 1 as TREQ"]
+    PIO1_RX1 = 0x0d,
+    #[doc = "Select PIO1's RX FIFO 2 as TREQ"]
+    PIO1_RX2 = 0x0e,
+    #[doc = "Select PIO1's RX FIFO 3 as TREQ"]
+    PIO1_RX3 = 0x0f,
+    #[doc = "Select SPI0's TX FIFO as TREQ"]
+    SPI0_TX = 0x10,
+    #[doc = "Select SPI0's RX FIFO as TREQ"]
+    SPI0_RX = 0x11,
+    #[doc = "Select SPI1's TX FIFO as TREQ"]
+    SPI1_TX = 0x12,
+    #[doc = "Select SPI1's RX FIFO as TREQ"]
+    SPI1_RX = 0x13,
+    #[doc = "Select UART0's TX FIFO as TREQ"]
+    UART0_TX = 0x14,
+    #[doc = "Select UART0's RX FIFO as TREQ"]
+    UART0_RX = 0x15,
+    #[doc = "Select UART1's TX FIFO as TREQ"]
+    UART1_TX = 0x16,
+    #[doc = "Select UART1's RX FIFO as TREQ"]
+    UART1_RX = 0x17,
+    #[doc = "Select PWM Counter 0's Wrap Value as TREQ"]
+    PWM_WRAP0 = 0x18,
+    #[doc = "Select PWM Counter 1's Wrap Value as TREQ"]
+    PWM_WRAP1 = 0x19,
+    #[doc = "Select PWM Counter 2's Wrap Value as TREQ"]
+    PWM_WRAP2 = 0x1a,
+    #[doc = "Select PWM Counter 3's Wrap Value as TREQ"]
+    PWM_WRAP3 = 0x1b,
+    #[doc = "Select PWM Counter 4's Wrap Value as TREQ"]
+    PWM_WRAP4 = 0x1c,
+    #[doc = "Select PWM Counter 5's Wrap Value as TREQ"]
+    PWM_WRAP5 = 0x1d,
+    #[doc = "Select PWM Counter 6's Wrap Value as TREQ"]
+    PWM_WRAP6 = 0x1e,
+    #[doc = "Select PWM Counter 7's Wrap Value as TREQ"]
+    PWM_WRAP7 = 0x1f,
+    #[doc = "Select I2C0's TX FIFO as TREQ"]
+    I2C0_TX = 0x20,
+    #[doc = "Select I2C0's RX FIFO as TREQ"]
+    I2C0_RX = 0x21,
+    #[doc = "Select I2C1's TX FIFO as TREQ"]
+    I2C1_TX = 0x22,
+    #[doc = "Select I2C1's RX FIFO as TREQ"]
+    I2C1_RX = 0x23,
+    #[doc = "Select the ADC as TREQ"]
+    ADC = 0x24,
+    #[doc = "Select the XIP Streaming FIFO as TREQ"]
+    XIP_STREAM = 0x25,
+    #[doc = "Select the XIP SSI TX FIFO as TREQ"]
+    XIP_SSITX = 0x26,
+    #[doc = "Select the XIP SSI RX FIFO as TREQ"]
+    XIP_SSIRX = 0x27,
+    _RESERVED_28 = 0x28,
+    _RESERVED_29 = 0x29,
+    _RESERVED_2a = 0x2a,
+    _RESERVED_2b = 0x2b,
+    _RESERVED_2c = 0x2c,
+    _RESERVED_2d = 0x2d,
+    _RESERVED_2e = 0x2e,
+    _RESERVED_2f = 0x2f,
+    _RESERVED_30 = 0x30,
+    _RESERVED_31 = 0x31,
+    _RESERVED_32 = 0x32,
+    _RESERVED_33 = 0x33,
+    _RESERVED_34 = 0x34,
+    _RESERVED_35 = 0x35,
+    _RESERVED_36 = 0x36,
+    _RESERVED_37 = 0x37,
+    _RESERVED_38 = 0x38,
+    _RESERVED_39 = 0x39,
+    _RESERVED_3a = 0x3a,
     #[doc = "Select Timer 0 as TREQ"]
-    pub const TIMER0: Self = Self(0x3b);
+    TIMER0 = 0x3b,
     #[doc = "Select Timer 1 as TREQ"]
-    pub const TIMER1: Self = Self(0x3c);
+    TIMER1 = 0x3c,
     #[doc = "Select Timer 2 as TREQ (Optional)"]
-    pub const TIMER2: Self = Self(0x3d);
+    TIMER2 = 0x3d,
     #[doc = "Select Timer 3 as TREQ (Optional)"]
-    pub const TIMER3: Self = Self(0x3e);
+    TIMER3 = 0x3e,
     #[doc = "Permanent request, for unpaced transfers."]
-    pub const PERMANENT: Self = Self(0x3f);
+    PERMANENT = 0x3f,
 }
 impl TreqSel {
+    #[inline(always)]
     pub const fn from_bits(val: u8) -> TreqSel {
-        Self(val & 0x3f)
+        unsafe { core::mem::transmute(val & 0x3f) }
     }
+    #[inline(always)]
     pub const fn to_bits(self) -> u8 {
-        self.0
+        unsafe { core::mem::transmute(self) }
     }
 }
 impl From<u8> for TreqSel {

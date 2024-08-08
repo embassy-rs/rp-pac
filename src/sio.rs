@@ -71,12 +71,12 @@ impl Fifo {
     }
     #[doc = "Write access to this core's TX FIFO"]
     #[inline(always)]
-    pub const fn wr(self) -> crate::common::Reg<u32, crate::common::W> {
+    pub const fn wr(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(4usize) as _) }
     }
     #[doc = "Read access to this core's RX FIFO"]
     #[inline(always)]
-    pub const fn rd(self) -> crate::common::Reg<u32, crate::common::R> {
+    pub const fn rd(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(8usize) as _) }
     }
 }
@@ -95,22 +95,22 @@ impl Gpio {
     pub const fn as_ptr(&self) -> *mut () {
         self.ptr as _
     }
-    #[doc = "QSPI output value"]
+    #[doc = "GPIO output value"]
     #[inline(always)]
     pub const fn value(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0usize) as _) }
     }
-    #[doc = "QSPI output value set"]
+    #[doc = "GPIO output value set"]
     #[inline(always)]
     pub const fn value_set(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(4usize) as _) }
     }
-    #[doc = "QSPI output value clear"]
+    #[doc = "GPIO output value clear"]
     #[inline(always)]
     pub const fn value_clr(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(8usize) as _) }
     }
-    #[doc = "QSPI output value XOR"]
+    #[doc = "GPIO output value XOR"]
     #[inline(always)]
     pub const fn value_xor(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(12usize) as _) }
@@ -158,57 +158,57 @@ impl Interp {
     }
     #[doc = "Read LANE0 result, and simultaneously write lane results to both accumulators (POP)."]
     #[inline(always)]
-    pub const fn pop_lane0(self) -> crate::common::Reg<u32, crate::common::R> {
+    pub const fn pop_lane0(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(20usize) as _) }
     }
     #[doc = "Read LANE1 result, and simultaneously write lane results to both accumulators (POP)."]
     #[inline(always)]
-    pub const fn pop_lane1(self) -> crate::common::Reg<u32, crate::common::R> {
+    pub const fn pop_lane1(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(24usize) as _) }
     }
     #[doc = "Read FULL result, and simultaneously write lane results to both accumulators (POP)."]
     #[inline(always)]
-    pub const fn pop_full(self) -> crate::common::Reg<u32, crate::common::R> {
+    pub const fn pop_full(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(28usize) as _) }
     }
     #[doc = "Read LANE0 result, without altering any internal state (PEEK)."]
     #[inline(always)]
-    pub const fn peek_lane0(self) -> crate::common::Reg<u32, crate::common::R> {
+    pub const fn peek_lane0(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(32usize) as _) }
     }
     #[doc = "Read LANE1 result, without altering any internal state (PEEK)."]
     #[inline(always)]
-    pub const fn peek_lane1(self) -> crate::common::Reg<u32, crate::common::R> {
+    pub const fn peek_lane1(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(36usize) as _) }
     }
     #[doc = "Read FULL result, without altering any internal state (PEEK)."]
     #[inline(always)]
-    pub const fn peek_full(self) -> crate::common::Reg<u32, crate::common::R> {
+    pub const fn peek_full(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(40usize) as _) }
     }
     #[doc = "Control register for lane 0"]
     #[inline(always)]
-    pub const fn ctrl_lane0(self) -> crate::common::Reg<regs::Interp1ctrlLane0, crate::common::RW> {
+    pub const fn ctrl_lane0(self) -> crate::common::Reg<regs::Interp0ctrlLane0, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(44usize) as _) }
     }
     #[doc = "Control register for lane 1"]
     #[inline(always)]
-    pub const fn ctrl_lane1(self) -> crate::common::Reg<regs::Interp1ctrlLane1, crate::common::RW> {
+    pub const fn ctrl_lane1(self) -> crate::common::Reg<regs::Interp0ctrlLane1, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(48usize) as _) }
     }
     #[doc = "Values written here are atomically added to ACCUM0 Reading yields lane 0's raw shift and mask value (BASE0 not added)."]
     #[inline(always)]
-    pub const fn accum0_add(self) -> crate::common::Reg<regs::Interp1accum0add, crate::common::RW> {
+    pub const fn accum0_add(self) -> crate::common::Reg<regs::Interp0accum0add, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(52usize) as _) }
     }
     #[doc = "Values written here are atomically added to ACCUM1 Reading yields lane 1's raw shift and mask value (BASE1 not added)."]
     #[inline(always)]
-    pub const fn accum1_add(self) -> crate::common::Reg<regs::Interp1accum1add, crate::common::RW> {
+    pub const fn accum1_add(self) -> crate::common::Reg<regs::Interp0accum1add, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(56usize) as _) }
     }
     #[doc = "On write, the lower 16 bits go to BASE0, upper bits to BASE1 simultaneously. Each half is sign-extended to 32 bits if that lane's SIGNED flag is set."]
     #[inline(always)]
-    pub const fn base_1and0(self) -> crate::common::Reg<u32, crate::common::W> {
+    pub const fn base_1and0(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(60usize) as _) }
     }
 }
@@ -228,9 +228,9 @@ impl Sio {
     pub const fn as_ptr(&self) -> *mut () {
         self.ptr as _
     }
-    #[doc = "Processor core identifier Value is 0 when read from processor core 0, and 1 when read from processor core 1."]
+    #[doc = "Processor core identifier"]
     #[inline(always)]
-    pub const fn cpuid(self) -> crate::common::Reg<u32, crate::common::R> {
+    pub const fn cpuid(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0usize) as _) }
     }
     #[doc = "Input value for GPIO pins"]
@@ -255,7 +255,7 @@ impl Sio {
     }
     #[doc = "Spinlock state A bitmap containing the state of all 32 spinlocks (1=locked). Mainly intended for debugging."]
     #[inline(always)]
-    pub const fn spinlock_st(self) -> crate::common::Reg<u32, crate::common::R> {
+    pub const fn spinlock_st(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(92usize) as _) }
     }
     #[inline(always)]

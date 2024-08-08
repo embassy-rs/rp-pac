@@ -24,9 +24,9 @@ impl Xosc {
     pub const fn status(self) -> crate::common::Reg<regs::Status, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(4usize) as _) }
     }
-    #[doc = "Crystal Oscillator pause control This is used to save power by pausing the XOSC On power-up this field is initialised to WAKE An invalid write will also select WAKE WARNING: stop the PLLs before selecting dormant mode WARNING: setup the irq before selecting dormant mode"]
+    #[doc = "Crystal Oscillator pause control"]
     #[inline(always)]
-    pub const fn dormant(self) -> crate::common::Reg<u32, crate::common::RW> {
+    pub const fn dormant(self) -> crate::common::Reg<regs::Dormant, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(8usize) as _) }
     }
     #[doc = "Controls the startup delay"]

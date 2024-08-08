@@ -31,9 +31,9 @@ impl Clocks {
         assert!(n < 4usize);
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(4usize + n * 12usize) as _) }
     }
-    #[doc = "Indicates which SRC is currently selected by the glitchless mux (one-hot). This slice does not have a glitchless mux (only the AUX_SRC field is present, not SRC) so this register is hardwired to 0x1."]
+    #[doc = "Indicates which SRC is currently selected by the glitchless mux (one-hot)."]
     #[inline(always)]
-    pub const fn clk_gpout_selected(self, n: usize) -> crate::common::Reg<u32, crate::common::R> {
+    pub const fn clk_gpout_selected(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
         assert!(n < 4usize);
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(8usize + n * 12usize) as _) }
     }
@@ -47,9 +47,9 @@ impl Clocks {
     pub const fn clk_ref_div(self) -> crate::common::Reg<regs::ClkRefDiv, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(52usize) as _) }
     }
-    #[doc = "Indicates which SRC is currently selected by the glitchless mux (one-hot). The glitchless multiplexer does not switch instantaneously (to avoid glitches), so software should poll this register to wait for the switch to complete. This register contains one decoded bit for each of the clock sources enumerated in the CTRL SRC field. At most one of these bits will be set at any time, indicating that clock is currently present at the output of the glitchless mux. Whilst switching is in progress, this register may briefly show all-0s."]
+    #[doc = "Indicates which SRC is currently selected by the glitchless mux (one-hot)."]
     #[inline(always)]
-    pub const fn clk_ref_selected(self) -> crate::common::Reg<u32, crate::common::R> {
+    pub const fn clk_ref_selected(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(56usize) as _) }
     }
     #[doc = "Clock control, can be changed on-the-fly (except for auxsrc)"]
@@ -62,9 +62,9 @@ impl Clocks {
     pub const fn clk_sys_div(self) -> crate::common::Reg<regs::ClkSysDiv, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(64usize) as _) }
     }
-    #[doc = "Indicates which SRC is currently selected by the glitchless mux (one-hot). The glitchless multiplexer does not switch instantaneously (to avoid glitches), so software should poll this register to wait for the switch to complete. This register contains one decoded bit for each of the clock sources enumerated in the CTRL SRC field. At most one of these bits will be set at any time, indicating that clock is currently present at the output of the glitchless mux. Whilst switching is in progress, this register may briefly show all-0s."]
+    #[doc = "Indicates which SRC is currently selected by the glitchless mux (one-hot)."]
     #[inline(always)]
-    pub const fn clk_sys_selected(self) -> crate::common::Reg<u32, crate::common::R> {
+    pub const fn clk_sys_selected(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(68usize) as _) }
     }
     #[doc = "Clock control, can be changed on-the-fly (except for auxsrc)"]
@@ -72,9 +72,14 @@ impl Clocks {
     pub const fn clk_peri_ctrl(self) -> crate::common::Reg<regs::ClkPeriCtrl, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(72usize) as _) }
     }
-    #[doc = "Indicates which SRC is currently selected by the glitchless mux (one-hot). This slice does not have a glitchless mux (only the AUX_SRC field is present, not SRC) so this register is hardwired to 0x1."]
+    #[doc = "Clock divisor, can be changed on-the-fly"]
     #[inline(always)]
-    pub const fn clk_peri_selected(self) -> crate::common::Reg<u32, crate::common::R> {
+    pub const fn clk_peri_div(self) -> crate::common::Reg<regs::ClkPeriDiv, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.add(76usize) as _) }
+    }
+    #[doc = "Indicates which SRC is currently selected by the glitchless mux (one-hot)."]
+    #[inline(always)]
+    pub const fn clk_peri_selected(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(80usize) as _) }
     }
     #[doc = "Clock control, can be changed on-the-fly (except for auxsrc)"]
@@ -87,9 +92,9 @@ impl Clocks {
     pub const fn clk_usb_div(self) -> crate::common::Reg<regs::ClkUsbDiv, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(88usize) as _) }
     }
-    #[doc = "Indicates which SRC is currently selected by the glitchless mux (one-hot). This slice does not have a glitchless mux (only the AUX_SRC field is present, not SRC) so this register is hardwired to 0x1."]
+    #[doc = "Indicates which SRC is currently selected by the glitchless mux (one-hot)."]
     #[inline(always)]
-    pub const fn clk_usb_selected(self) -> crate::common::Reg<u32, crate::common::R> {
+    pub const fn clk_usb_selected(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(92usize) as _) }
     }
     #[doc = "Clock control, can be changed on-the-fly (except for auxsrc)"]
@@ -102,9 +107,9 @@ impl Clocks {
     pub const fn clk_adc_div(self) -> crate::common::Reg<regs::ClkAdcDiv, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(100usize) as _) }
     }
-    #[doc = "Indicates which SRC is currently selected by the glitchless mux (one-hot). This slice does not have a glitchless mux (only the AUX_SRC field is present, not SRC) so this register is hardwired to 0x1."]
+    #[doc = "Indicates which SRC is currently selected by the glitchless mux (one-hot)."]
     #[inline(always)]
-    pub const fn clk_adc_selected(self) -> crate::common::Reg<u32, crate::common::R> {
+    pub const fn clk_adc_selected(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(104usize) as _) }
     }
     #[doc = "Clock control, can be changed on-the-fly (except for auxsrc)"]
@@ -117,9 +122,9 @@ impl Clocks {
     pub const fn clk_rtc_div(self) -> crate::common::Reg<regs::ClkRtcDiv, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(112usize) as _) }
     }
-    #[doc = "Indicates which SRC is currently selected by the glitchless mux (one-hot). This slice does not have a glitchless mux (only the AUX_SRC field is present, not SRC) so this register is hardwired to 0x1."]
+    #[doc = "Indicates which SRC is currently selected by the glitchless mux (one-hot)."]
     #[inline(always)]
-    pub const fn clk_rtc_selected(self) -> crate::common::Reg<u32, crate::common::R> {
+    pub const fn clk_rtc_selected(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(116usize) as _) }
     }
     #[inline(always)]

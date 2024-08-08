@@ -157,7 +157,7 @@ impl Default for GpioStatus {
         GpioStatus(0)
     }
 }
-#[doc = "Interrupt status after masking & forcing for dormant_wake"]
+#[doc = "Interrupt status after masking & forcing for proc0"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Int(pub u32);

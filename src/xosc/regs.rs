@@ -24,24 +24,24 @@ impl Default for Count {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Ctrl(pub u32);
 impl Ctrl {
-    #[doc = "Frequency range. This resets to 0xAA0 and cannot be changed."]
+    #[doc = "Frequency range. An invalid setting will retain the previous value. The actual value being used can be read from STATUS_FREQ_RANGE. This resets to 0xAA0 and cannot be changed."]
     #[inline(always)]
     pub const fn freq_range(&self) -> super::vals::CtrlFreqRange {
         let val = (self.0 >> 0usize) & 0x0fff;
         super::vals::CtrlFreqRange::from_bits(val as u16)
     }
-    #[doc = "Frequency range. This resets to 0xAA0 and cannot be changed."]
+    #[doc = "Frequency range. An invalid setting will retain the previous value. The actual value being used can be read from STATUS_FREQ_RANGE. This resets to 0xAA0 and cannot be changed."]
     #[inline(always)]
     pub fn set_freq_range(&mut self, val: super::vals::CtrlFreqRange) {
         self.0 = (self.0 & !(0x0fff << 0usize)) | (((val.to_bits() as u32) & 0x0fff) << 0usize);
     }
-    #[doc = "On power-up this field is initialised to DISABLE and the chip runs from the ROSC. If the chip has subsequently been programmed to run from the XOSC then setting this field to DISABLE may lock-up the chip. If this is a concern then run the clk_ref from the ROSC and enable the clk_sys RESUS feature. The 12-bit code is intended to give some protection against accidental writes. An invalid setting will enable the oscillator."]
+    #[doc = "On power-up this field is initialised to DISABLE and the chip runs from the ROSC. If the chip has subsequently been programmed to run from the XOSC then DISABLE may lock-up the chip. If this is a concern then run the clk_ref from the ROSC and enable the clk_sys RESUS feature. The 12-bit code is intended to give some protection against accidental writes. An invalid setting will enable the oscillator."]
     #[inline(always)]
     pub const fn enable(&self) -> super::vals::Enable {
         let val = (self.0 >> 12usize) & 0x0fff;
         super::vals::Enable::from_bits(val as u16)
     }
-    #[doc = "On power-up this field is initialised to DISABLE and the chip runs from the ROSC. If the chip has subsequently been programmed to run from the XOSC then setting this field to DISABLE may lock-up the chip. If this is a concern then run the clk_ref from the ROSC and enable the clk_sys RESUS feature. The 12-bit code is intended to give some protection against accidental writes. An invalid setting will enable the oscillator."]
+    #[doc = "On power-up this field is initialised to DISABLE and the chip runs from the ROSC. If the chip has subsequently been programmed to run from the XOSC then DISABLE may lock-up the chip. If this is a concern then run the clk_ref from the ROSC and enable the clk_sys RESUS feature. The 12-bit code is intended to give some protection against accidental writes. An invalid setting will enable the oscillator."]
     #[inline(always)]
     pub fn set_enable(&mut self, val: super::vals::Enable) {
         self.0 = (self.0 & !(0x0fff << 12usize)) | (((val.to_bits() as u32) & 0x0fff) << 12usize);
@@ -51,6 +51,30 @@ impl Default for Ctrl {
     #[inline(always)]
     fn default() -> Ctrl {
         Ctrl(0)
+    }
+}
+#[doc = "Crystal Oscillator pause control"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Dormant(pub u32);
+impl Dormant {
+    #[doc = "This is used to save power by pausing the XOSC On power-up this field is initialised to WAKE An invalid write will also select WAKE Warning: stop the PLLs before selecting dormant mode Warning: setup the irq before selecting dormant mode"]
+    #[inline(always)]
+    pub const fn dormant(&self) -> super::vals::Dormant {
+        let val = (self.0 >> 0usize) & 0xffff_ffff;
+        super::vals::Dormant::from_bits(val as u32)
+    }
+    #[doc = "This is used to save power by pausing the XOSC On power-up this field is initialised to WAKE An invalid write will also select WAKE Warning: stop the PLLs before selecting dormant mode Warning: setup the irq before selecting dormant mode"]
+    #[inline(always)]
+    pub fn set_dormant(&mut self, val: super::vals::Dormant) {
+        self.0 = (self.0 & !(0xffff_ffff << 0usize))
+            | (((val.to_bits() as u32) & 0xffff_ffff) << 0usize);
+    }
+}
+impl Default for Dormant {
+    #[inline(always)]
+    fn default() -> Dormant {
+        Dormant(0)
     }
 }
 #[doc = "Controls the startup delay"]

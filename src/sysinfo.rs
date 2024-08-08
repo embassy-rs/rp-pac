@@ -25,8 +25,8 @@ impl Sysinfo {
     }
     #[doc = "Git hash of the chip source. Used to identify chip version."]
     #[inline(always)]
-    pub const fn gitref_rp2040(self) -> crate::common::Reg<u32, crate::common::R> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(64usize) as _) }
+    pub const fn gitref_rp2040(self) -> crate::common::Reg<u32, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.add(16usize) as _) }
     }
 }
 pub mod regs;

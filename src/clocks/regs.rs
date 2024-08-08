@@ -245,6 +245,40 @@ impl Default for ClkPeriCtrl {
         ClkPeriCtrl(0)
     }
 }
+#[doc = "Clock divisor, can be changed on-the-fly"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct ClkPeriDiv(pub u32);
+impl ClkPeriDiv {
+    #[doc = "Fractional component of the divisor"]
+    #[inline(always)]
+    pub const fn frac(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0xff;
+        val as u8
+    }
+    #[doc = "Fractional component of the divisor"]
+    #[inline(always)]
+    pub fn set_frac(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
+    }
+    #[doc = "Integer component of the divisor, 0 -> divide by 2^16"]
+    #[inline(always)]
+    pub const fn int(&self) -> u32 {
+        let val = (self.0 >> 8usize) & 0x00ff_ffff;
+        val as u32
+    }
+    #[doc = "Integer component of the divisor, 0 -> divide by 2^16"]
+    #[inline(always)]
+    pub fn set_int(&mut self, val: u32) {
+        self.0 = (self.0 & !(0x00ff_ffff << 8usize)) | (((val as u32) & 0x00ff_ffff) << 8usize);
+    }
+}
+impl Default for ClkPeriDiv {
+    #[inline(always)]
+    fn default() -> ClkPeriDiv {
+        ClkPeriDiv(0)
+    }
+}
 #[doc = "Clock control, can be changed on-the-fly (except for auxsrc)"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
