@@ -11,8 +11,10 @@ cortex-m = "0.7.1"
 cortex-m-rt = { version = ">=0.6.15,<0.8", optional = true }
 
 [features]
+default = []
 rt = ["cortex-m-rt/device"]
-
+rp2040 = []
+rp235x = []
 
 [package.metadata.embassy_docs]
 src_base = "https://github.com/embassy-rs/rp-pac/blob/v$VERSION/src/"

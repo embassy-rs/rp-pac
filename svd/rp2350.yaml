@@ -1,0 +1,411 @@
+transforms:
+  #- DeleteEnums:
+  #    from: .*
+  #    bit_size: 1
+  - DeleteFieldsets:
+      from: .*
+      useless: true
+
+  # =========== DMA
+  - MergeEnums:
+      from: dma::vals::Ch\d+CtrlTrigTreqSel
+      to: dma::vals::TreqSel
+  - MergeEnums:
+      from: dma::vals::Ch\d+CtrlTrigDataSize
+      to: dma::vals::DataSize
+  - DeleteEnums:
+      from: dma::vals::Ch\d+CtrlTrigRingSize
+  - MergeFieldsets:
+      from: dma::regs::Timer\d+
+      to: dma::regs::Timer
+  - MergeFieldsets:
+      from: dma::regs::Ch\d+CtrlTrig
+      to: dma::regs::CtrlTrig
+  - RenameFields:
+      fieldset: dma::regs::Ch\d+DbgCtdreq
+      from: ch\d+_(.*)
+      to: $1
+  - MergeFieldsets:
+      from: dma::regs::Ch\d+DbgCtdreq
+      to: dma::regs::DbgCtdreq
+  - MakeBlock:
+      blocks: dma::Dma
+      from: ch(\d+)_(.*)
+      to_block: dma::Channel
+      to_outer: ch$1
+      to_inner: $2
+  - MakeRegisterArray:
+      blocks: dma::Dma
+      from: ch\d+
+      to: ch
+  - MakeRegisterArray:
+      blocks: dma::Dma
+      from: timer\d+
+      to: timer
+
+  # =========== TIMER
+  - MakeRegisterArray:
+      blocks: timer0::Timer0
+      from: alarm\d+
+      to: alarm
+  - MergeFieldsets:
+      from: timer0::regs::Int[efrs]
+      to: timer0::regs::Int
+  - MakeFieldArray:
+      fieldsets: timer0::regs::Int
+      from: alarm_\d+
+      to: alarm
+  - Rename:
+      from: timer0::(.*)
+      to: timer::$1
+  - Rename:
+      from: timer::Timer0
+      to: timer::Timer
+
+  # =========== UART
+  - Rename:
+      from: uart0::(.*)
+      to: uart::$1
+  - Rename:
+      from: uart::Uart0
+      to: uart::Uart
+
+  # =========== SPI
+  - Rename:
+      from: spi0::(.*)
+      to: spi::$1
+  - Rename:
+      from: spi::Spi0
+      to: spi::Spi
+  - RenameRegisters:
+      block: spi::Spi
+      from: ssp(.*)
+      to: $1
+  - Rename:
+      from: spi::regs::Ssp(.*)
+      to: spi::regs::$1
+
+  # =========== I2C
+  - Rename:
+      from: i2c0::(.*)
+      to: i2c::$1
+  - Rename:
+      from: i2c::I2c0
+      to: i2c::I2c
+  - DeleteEnums:
+      from: i2c::vals::.*
+      bit_size: 1
+
+  # =========== PIO
+  - Rename:
+      from: pio0::(.*)
+      to: pio::$1
+  - Rename:
+      from: pio::Pio0
+      to: pio::Pio
+  - MergeEnums:
+      from: pio::vals::Sm\d+(ExecctrlStatusSel|ExecctrlStatusN)
+      to: pio::vals::$1
+  - RenameFields:
+      fieldset: pio::regs::Sm\d+(Pinctrl|Shiftctrl|Clkdiv|Execctrl|Addr|Instr)
+      from: sm\d+_(.*)
+      to: $1
+  - MergeFieldsets:
+      from: pio::regs::Sm\d+(Pinctrl|Shiftctrl|Clkdiv|Execctrl|Addr|Instr)
+      to: pio::regs::Sm$1
+  - RenameFields:
+      fieldset: pio::regs::InstrMem\d+
+      from: instr_mem\d+
+      to: instr_mem
+  - MergeFieldsets:
+      from: pio::regs::InstrMem\d+
+      to: pio::regs::InstrMem
+  - MergeFieldsets:
+      from: pio::regs::(Irq\dInt.|Intr)
+      to: pio::regs::Intr
+  - MakeRegisterArray:
+      blocks: pio::Pio
+      from: (instr_mem|txf|rxf)\d+
+      to: $1
+  - MakeBlock:
+      blocks: pio::Pio
+      from: sm(\d+)_(.+)
+      to_outer: sm$1
+      to_inner: $2
+      to_block: pio::StateMachine
+  - MakeRegisterArray:
+      blocks: pio::Pio
+      from: sm\d+
+      to: sm
+  - MakeBlock:
+      blocks: pio::Pio
+      from: irq(\d+)_(.+)
+      to_outer: irq$1
+      to_inner: $2
+      to_block: pio::Irq
+  - MakeRegisterArray:
+      blocks: pio::Pio
+      from: irq\d+
+      to: irqs
+
+  # ========= SIO
+  - MakeBlock:
+      blocks: sio::Sio
+      from: interp(\d+)_(.*)
+      to_block: sio::Interp
+      to_outer: interp$1
+      to_inner: $2
+  - MakeBlock:
+      blocks: sio::Sio
+      from: div_(.*)
+      to_block: sio::Div
+      to_outer: div
+      to_inner: $1
+  - MakeBlock:
+      blocks: sio::Sio
+      from: fifo_(.*)
+      to_block: sio::Fifo
+      to_outer: fifo
+      to_inner: $1
+  - MakeRegisterArray:
+      blocks: sio::Sio
+      from: interp(\d+)
+      to: interp
+  - MakeRegisterArray:
+      blocks: sio::Sio
+      from: spinlock(\d+)
+      to: spinlock
+  - DeleteFieldsets:
+      from: sio::regs::Gpio.*
+  - MakeBlock:
+      blocks: sio::Sio
+      from: gpio_(hi_)?(out|oe)(|_set|_clr|_xor)
+      to_block: sio::Gpio
+      to_outer: gpio_$1$2
+      to_inner: value$3
+  - MakeRegisterArray:
+      blocks: sio::Sio
+      from: gpio_(hi_)?(in|out|oe)
+      to: gpio_$2
+
+  # ========= IO
+  - Rename:
+      from: io_bank0::(.*)
+      to: io::$1
+  - Rename:
+      from: io::IoBank0
+      to: io::Io
+  - MergeEnums:
+      from: io::vals::Gpio.+Ctrl(.+)over
+      to: io::vals::${1}over
+  - DeleteEnums:
+      from: io::vals::Gpio\d+CtrlFuncsel
+      soft: true
+  - MergeFieldsets:
+      from: io::regs::Gpio\d+(Status|Ctrl)
+      to: io::regs::Gpio$1
+  - MakeBlock:
+      blocks: io::Io
+      from: gpio(\d+)_(.*)
+      to_block: io::Gpio
+      to_outer: gpio$1
+      to_inner: $2
+  - MakeRegisterArray:
+      blocks: io::Io
+      from: gpio\d+
+      to: gpio
+  - MakeFieldArray:
+      fieldsets: io::regs::.*Int.*
+      from: gpio\d+_(.*)
+      to: $1
+  - MergeFieldsets:
+      from: io::regs::.*Int.*
+      to: io::regs::Int
+      # io has only 30 gpios, so the last reg has only 6 instead of 8.
+      # homogenize this by picking the first reg and disabling checking.
+      main: .*0
+      check: NoCheck
+  - MakeRegisterArray:
+      blocks: io::Io
+      from: (.*int.*)\d+
+      to: $1
+  - MakeBlock:
+      blocks: io::Io
+      from: (.*)_(int[sfre])
+      to_block: io::Int
+      to_outer: int_$1
+      to_inner: $2
+  - MakeRegisterArray:
+      blocks: io::Io
+      from: int_proc\d
+      to: int_proc
+  - MergeBlocks:
+      from: (io::Io|io_qspi::IoQspi)
+      main: io::Io
+      to: io::Io
+      check: NoCheck
+
+  # =========== PADS
+  - Rename:
+      from: pads_bank0::(.*)
+      to: pads::$1
+  - Rename:
+      from: pads::PadsBank0
+      to: pads::Pads
+  - MergeEnums:
+      from: pads::vals::.*Drive
+      to: pads::vals::Drive
+  - MergeFieldsets:
+      from: pads::regs::(Gpio\d+|Swclk|Swd)
+      to: pads::regs::GpioCtrl
+  - MakeRegisterArray:
+      blocks: pads::Pads
+      from: (gpio\d+|swclk|swd)
+      to: gpio
+  - MergeBlocks:
+      from: (pads::Pads|pads_qspi::PadsQspi)
+      main: pads::Pads
+      to: pads::Pads
+      check: NoCheck
+
+  # ========= PLL
+  - Rename:
+      from: pll_sys::(.*)
+      to: pll::$1
+  - Rename:
+      from: pll::PllSys
+      to: pll::Pll
+
+  # ========= RTC
+  - MergeFieldsets:
+      from: rtc::regs::Int.
+      to: rtc::regs::Int
+
+  # ========= ADC
+  - MergeFieldsets:
+      from: adc::regs::Int.
+      to: adc::regs::Int
+
+  # ========= BUSCTRL
+  - RenameFields:
+      fieldset: busctrl::regs::(Perfctr|Perfsel)\d+
+      from: (perfctr|perfsel)\d
+      to: $1
+  - MergeEnums:
+      from: busctrl::vals::Perfsel\d+
+      to: busctrl::vals::Perfsel
+  - MergeFieldsets:
+      from: busctrl::regs::(Perfctr|Perfsel)\d+
+      to: busctrl::regs::$1
+  - MakeRegisterArray:
+      blocks: busctrl::Busctrl
+      from: (perfctr|perfsel)\d
+      to: $1
+
+  # ========= CLOCKS
+  - MergeFieldsets:
+      from: clocks::regs::Int.
+      to: clocks::regs::Int
+  - RenameEnumVariants:
+      enum: clocks::vals::ClkGpout\dCtrlAuxsrc
+      from: ROSC_CLKSRC_PH
+      to: ROSC_CLKSRC
+  - MergeEnums:
+      from: clocks::vals::ClkGpout\dCtrlAuxsrc
+      to: clocks::vals::ClkGpoutCtrlAuxsrc
+  - MergeFieldsets:
+      from: clocks::regs::ClkGpout\d(Ctrl|Div)
+      to: clocks::regs::ClkGpout$1
+  - MakeRegisterArray:
+      blocks: clocks::Clocks
+      from: clk_gpout\d_(ctrl|div|selected)
+      to: clk_gpout_$1
+
+  # ========= USB
+  - Rename:
+      from: usbctrl_regs::(.*)
+      to: usb::$1
+  - Rename:
+      from: usb::UsbctrlRegs
+      to: usb::Usb
+  - MergeFieldsets:
+      from: usb::regs::Int.
+      to: usb::regs::Int
+  - MergeFieldsets:
+      from: usb::regs::AddrEndp\d+
+      to: usb::regs::AddrEndpX
+  - MakeRegisterArray:
+      blocks: usb::Usb
+      from: addr_endp\d+
+      to: addr_endp_x
+  - MakeFieldArray:
+      fieldsets: usb::regs::(BuffStatus|BuffCpuShouldHandle|EpAbort|EpAbortDone|EpStatusStallNak)
+      from: ep\d+_(.*)
+      to: ep_$1
+
+  - Rename:
+      from: usbctrl_dpram::(.*)
+      to: usb_dpram::$1
+  - MergeEnums:
+      from: usb_dpram::vals::Ep\d+(In|Out)(.*)
+      to: usb_dpram::vals::Ep$2
+  - MergeFieldsets:
+      from: usb_dpram::regs::Ep\d+(In|Out)(.*)
+      to: usb_dpram::regs::Ep$2
+  - Rename:
+      from: usb_dpram::UsbctrlDpram
+      to: usb_dpram::UsbDpram
+  - MakeRegisterArray:
+      blocks: usb_dpram::UsbDpram
+      from: ep\d+(.*)
+      to: ep$1
+  - MakeFieldArray:
+      fieldsets: usb_dpram::regs::.*BufferControl
+      from: (.*)_[01]
+      to: $1
+
+  # =========== PWM
+  - MergeFieldsets:
+      from: pwm::regs::Ch\d+(.+)
+      to: pwm::regs::Ch$1
+      check: NoCheck
+  - RenameFields:
+      fieldset: pwm::regs::Ch.+
+      from: ch\d+_(.+)
+      to: $1
+  - MergeEnums:
+      from: pwm::vals::Ch\dCsrDivmode
+      to: pwm::vals::Divmode
+  - MakeBlock:
+      blocks: pwm::Pwm
+      from: ch(\d+)_(.+)
+      to_block: pwm::Channel
+      to_outer: ch$1
+      to_inner: $2
+  - MakeRegisterArray:
+      blocks: pwm::Pwm
+      from: ch\d+
+      to: ch
+
+
+  # =========== Misc
+  - MergeEnums:
+      from: rosc::vals::.+Passwd
+      to: rosc::vals::Passwd
+  - MergeFieldsets:
+      from: resets::regs::(Reset|ResetDone)
+      to: resets::regs::Peripherals
+  - Rename:
+      from: xip_ctrl
+      to: xip
+
+  # =========== Cleanup
+  - Delete:
+      from: ppb::.* # We already get this from cortex_m crate
+  - Delete:
+      from: io_qspi::.*
+  - Delete:
+      from: swi_irq::.*
+  - Delete:
+      from: pads_qspi::.*
+  - Sanitize: {}

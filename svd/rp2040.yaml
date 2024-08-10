@@ -98,7 +98,7 @@ transforms:
       from: pio::Pio0
       to: pio::Pio
   - MergeEnums:
-      from: pio::vals::Sm\d+ExecctrlStatusSel
+      from: pio::vals::Sm\d+(ExecctrlStatusSel|ExecctrlStatusN)
       to: pio::vals::SmExecctrlStatusSel
   - RenameFields:
       fieldset: pio::regs::Sm\d+(Pinctrl|Shiftctrl|Clkdiv|Execctrl|Addr|Instr)
@@ -337,9 +337,6 @@ transforms:
       from: ep\d+_(.*)
       to: ep_$1
 
-  - Rename:
-      from: usbctrl_dpram::(.*)
-      to: usb_dpram::$1
   - MergeEnums:
       from: usb_dpram::vals::Ep\d+(In|Out)(.*)
       to: usb_dpram::vals::Ep$2
