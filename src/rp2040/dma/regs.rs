@@ -21,7 +21,7 @@ impl Default for ChanAbort {
         ChanAbort(0)
     }
 }
-#[doc = "DMA Channel 11 Control and Status"]
+#[doc = "DMA Channel 10 Control and Status"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct CtrlTrig(pub u32);

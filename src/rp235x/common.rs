@@ -24,6 +24,7 @@ pub struct Reg<T: Copy, A: Access> {
 unsafe impl<T: Copy, A: Access> Send for Reg<T, A> {}
 unsafe impl<T: Copy, A: Access> Sync for Reg<T, A> {}
 impl<T: Copy, A: Access> Reg<T, A> {
+    #[allow(clippy::missing_safety_doc)]
     #[inline(always)]
     pub const unsafe fn from_ptr(ptr: *mut T) -> Self {
         Self {

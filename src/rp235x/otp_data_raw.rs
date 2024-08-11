@@ -16,87 +16,87 @@ impl OtpDataRaw {
     }
     #[doc = "Bits 15:0 of public device ID. (ECC) The CHIPID0..3 rows contain a 64-bit random identifier for this chip, which can be read from the USB bootloader PICOBOOT interface or from the get_sys_info ROM API. The number of random bits makes the occurrence of twins exceedingly unlikely: for example, a fleet of a hundred million devices has a 99.97% probability of no twinned IDs. This is estimated to be lower than the occurrence of process errors in the assignment of sequential random IDs, and for practical purposes CHIPID may be treated as unique."]
     #[inline(always)]
-    pub const fn chipid0(self) -> crate::common::Reg<regs::Chipid0, crate::common::RW> {
+    pub const fn chipid0(self) -> crate::common::Reg<super::Chipid0, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0usize) as _) }
     }
     #[doc = "Bits 31:16 of public device ID (ECC)"]
     #[inline(always)]
-    pub const fn chipid1(self) -> crate::common::Reg<regs::Chipid1, crate::common::RW> {
+    pub const fn chipid1(self) -> crate::common::Reg<super::Chipid1, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(4usize) as _) }
     }
     #[doc = "Bits 47:32 of public device ID (ECC)"]
     #[inline(always)]
-    pub const fn chipid2(self) -> crate::common::Reg<regs::Chipid2, crate::common::RW> {
+    pub const fn chipid2(self) -> crate::common::Reg<super::Chipid2, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(8usize) as _) }
     }
     #[doc = "Bits 63:48 of public device ID (ECC)"]
     #[inline(always)]
-    pub const fn chipid3(self) -> crate::common::Reg<regs::Chipid3, crate::common::RW> {
+    pub const fn chipid3(self) -> crate::common::Reg<super::Chipid3, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(12usize) as _) }
     }
     #[doc = "Bits 15:0 of private per-device random number (ECC) The RANDID0..7 rows form a 128-bit random number generated during device test. This ID is not exposed through the USB PICOBOOT GET_INFO command or the ROM `get_sys_info()` API. However note that the USB PICOBOOT OTP access point can read the entirety of page 0, so this value is not meaningfully private unless the USB PICOBOOT interface is disabled via the DISABLE_BOOTSEL_USB_PICOBOOT_IFC flag in BOOT_FLAGS0."]
     #[inline(always)]
-    pub const fn randid0(self) -> crate::common::Reg<regs::Randid0, crate::common::RW> {
+    pub const fn randid0(self) -> crate::common::Reg<super::Randid0, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(16usize) as _) }
     }
     #[doc = "Bits 31:16 of private per-device random number (ECC)"]
     #[inline(always)]
-    pub const fn randid1(self) -> crate::common::Reg<regs::Randid1, crate::common::RW> {
+    pub const fn randid1(self) -> crate::common::Reg<super::Randid1, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(20usize) as _) }
     }
     #[doc = "Bits 47:32 of private per-device random number (ECC)"]
     #[inline(always)]
-    pub const fn randid2(self) -> crate::common::Reg<regs::Randid2, crate::common::RW> {
+    pub const fn randid2(self) -> crate::common::Reg<super::Randid2, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(24usize) as _) }
     }
     #[doc = "Bits 63:48 of private per-device random number (ECC)"]
     #[inline(always)]
-    pub const fn randid3(self) -> crate::common::Reg<regs::Randid3, crate::common::RW> {
+    pub const fn randid3(self) -> crate::common::Reg<super::Randid3, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(28usize) as _) }
     }
     #[doc = "Bits 79:64 of private per-device random number (ECC)"]
     #[inline(always)]
-    pub const fn randid4(self) -> crate::common::Reg<regs::Randid4, crate::common::RW> {
+    pub const fn randid4(self) -> crate::common::Reg<super::Randid4, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(32usize) as _) }
     }
     #[doc = "Bits 95:80 of private per-device random number (ECC)"]
     #[inline(always)]
-    pub const fn randid5(self) -> crate::common::Reg<regs::Randid5, crate::common::RW> {
+    pub const fn randid5(self) -> crate::common::Reg<super::Randid5, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(36usize) as _) }
     }
     #[doc = "Bits 111:96 of private per-device random number (ECC)"]
     #[inline(always)]
-    pub const fn randid6(self) -> crate::common::Reg<regs::Randid6, crate::common::RW> {
+    pub const fn randid6(self) -> crate::common::Reg<super::Randid6, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(40usize) as _) }
     }
     #[doc = "Bits 127:112 of private per-device random number (ECC)"]
     #[inline(always)]
-    pub const fn randid7(self) -> crate::common::Reg<regs::Randid7, crate::common::RW> {
+    pub const fn randid7(self) -> crate::common::Reg<super::Randid7, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(44usize) as _) }
     }
     #[doc = "Ring oscillator frequency in kHz, measured during manufacturing (ECC) This is measured at 1.1 V, at room temperature, with the ROSC configuration registers in their reset state."]
     #[inline(always)]
-    pub const fn rosc_calib(self) -> crate::common::Reg<regs::RoscCalib, crate::common::RW> {
+    pub const fn rosc_calib(self) -> crate::common::Reg<super::RoscCalib, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(64usize) as _) }
     }
     #[doc = "Low-power oscillator frequency in Hz, measured during manufacturing (ECC) This is measured at 1.1V, at room temperature, with the LPOSC trim register in its reset state."]
     #[inline(always)]
-    pub const fn lposc_calib(self) -> crate::common::Reg<regs::LposcCalib, crate::common::RW> {
+    pub const fn lposc_calib(self) -> crate::common::Reg<super::LposcCalib, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(68usize) as _) }
     }
     #[doc = "The number of main user GPIOs (bank 0). Should read 48 in the QFN80 package, and 30 in the QFN60 package. (ECC)"]
     #[inline(always)]
-    pub const fn num_gpios(self) -> crate::common::Reg<regs::NumGpios, crate::common::RW> {
+    pub const fn num_gpios(self) -> crate::common::Reg<super::NumGpios, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(96usize) as _) }
     }
     #[doc = "Lower 16 bits of CRC32 of OTP addresses 0x00 through 0x6b (polynomial 0x4c11db7, input reflected, output reflected, seed all-ones, final XOR all-ones) (ECC)"]
     #[inline(always)]
-    pub const fn info_crc0(self) -> crate::common::Reg<regs::InfoCrc0, crate::common::RW> {
+    pub const fn info_crc0(self) -> crate::common::Reg<super::InfoCrc0, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(216usize) as _) }
     }
     #[doc = "Upper 16 bits of CRC32 of OTP addresses 0x00 through 0x6b (ECC)"]
     #[inline(always)]
-    pub const fn info_crc1(self) -> crate::common::Reg<regs::InfoCrc1, crate::common::RW> {
+    pub const fn info_crc1(self) -> crate::common::Reg<super::InfoCrc1, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(220usize) as _) }
     }
     #[doc = "Page 0 critical boot flags (RBIT-8)"]
@@ -106,37 +106,37 @@ impl OtpDataRaw {
     }
     #[doc = "Redundant copy of CRIT0"]
     #[inline(always)]
-    pub const fn crit0_r1(self) -> crate::common::Reg<regs::Crit0r1, crate::common::RW> {
+    pub const fn crit0_r1(self) -> crate::common::Reg<super::Crit0R1, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(228usize) as _) }
     }
     #[doc = "Redundant copy of CRIT0"]
     #[inline(always)]
-    pub const fn crit0_r2(self) -> crate::common::Reg<regs::Crit0r2, crate::common::RW> {
+    pub const fn crit0_r2(self) -> crate::common::Reg<super::Crit0R2, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(232usize) as _) }
     }
     #[doc = "Redundant copy of CRIT0"]
     #[inline(always)]
-    pub const fn crit0_r3(self) -> crate::common::Reg<regs::Crit0r3, crate::common::RW> {
+    pub const fn crit0_r3(self) -> crate::common::Reg<super::Crit0R3, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(236usize) as _) }
     }
     #[doc = "Redundant copy of CRIT0"]
     #[inline(always)]
-    pub const fn crit0_r4(self) -> crate::common::Reg<regs::Crit0r4, crate::common::RW> {
+    pub const fn crit0_r4(self) -> crate::common::Reg<super::Crit0R4, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(240usize) as _) }
     }
     #[doc = "Redundant copy of CRIT0"]
     #[inline(always)]
-    pub const fn crit0_r5(self) -> crate::common::Reg<regs::Crit0r5, crate::common::RW> {
+    pub const fn crit0_r5(self) -> crate::common::Reg<super::Crit0R5, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(244usize) as _) }
     }
     #[doc = "Redundant copy of CRIT0"]
     #[inline(always)]
-    pub const fn crit0_r6(self) -> crate::common::Reg<regs::Crit0r6, crate::common::RW> {
+    pub const fn crit0_r6(self) -> crate::common::Reg<super::Crit0R6, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(248usize) as _) }
     }
     #[doc = "Redundant copy of CRIT0"]
     #[inline(always)]
-    pub const fn crit0_r7(self) -> crate::common::Reg<regs::Crit0r7, crate::common::RW> {
+    pub const fn crit0_r7(self) -> crate::common::Reg<super::Crit0R7, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(252usize) as _) }
     }
     #[doc = "Page 1 critical boot flags (RBIT-8)"]
@@ -146,37 +146,37 @@ impl OtpDataRaw {
     }
     #[doc = "Redundant copy of CRIT1"]
     #[inline(always)]
-    pub const fn crit1_r1(self) -> crate::common::Reg<regs::Crit1r1, crate::common::RW> {
+    pub const fn crit1_r1(self) -> crate::common::Reg<super::Crit1R1, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(260usize) as _) }
     }
     #[doc = "Redundant copy of CRIT1"]
     #[inline(always)]
-    pub const fn crit1_r2(self) -> crate::common::Reg<regs::Crit1r2, crate::common::RW> {
+    pub const fn crit1_r2(self) -> crate::common::Reg<super::Crit1R2, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(264usize) as _) }
     }
     #[doc = "Redundant copy of CRIT1"]
     #[inline(always)]
-    pub const fn crit1_r3(self) -> crate::common::Reg<regs::Crit1r3, crate::common::RW> {
+    pub const fn crit1_r3(self) -> crate::common::Reg<super::Crit1R3, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(268usize) as _) }
     }
     #[doc = "Redundant copy of CRIT1"]
     #[inline(always)]
-    pub const fn crit1_r4(self) -> crate::common::Reg<regs::Crit1r4, crate::common::RW> {
+    pub const fn crit1_r4(self) -> crate::common::Reg<super::Crit1R4, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(272usize) as _) }
     }
     #[doc = "Redundant copy of CRIT1"]
     #[inline(always)]
-    pub const fn crit1_r5(self) -> crate::common::Reg<regs::Crit1r5, crate::common::RW> {
+    pub const fn crit1_r5(self) -> crate::common::Reg<super::Crit1R5, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(276usize) as _) }
     }
     #[doc = "Redundant copy of CRIT1"]
     #[inline(always)]
-    pub const fn crit1_r6(self) -> crate::common::Reg<regs::Crit1r6, crate::common::RW> {
+    pub const fn crit1_r6(self) -> crate::common::Reg<super::Crit1R6, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(280usize) as _) }
     }
     #[doc = "Redundant copy of CRIT1"]
     #[inline(always)]
-    pub const fn crit1_r7(self) -> crate::common::Reg<regs::Crit1r7, crate::common::RW> {
+    pub const fn crit1_r7(self) -> crate::common::Reg<super::Crit1R7, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(284usize) as _) }
     }
     #[doc = "Disable/Enable boot paths/features in the RP2350 mask ROM. Disables always supersede enables. Enables are provided where there are other configurations in OTP that must be valid. (RBIT-3)"]
@@ -186,12 +186,16 @@ impl OtpDataRaw {
     }
     #[doc = "Redundant copy of BOOT_FLAGS0"]
     #[inline(always)]
-    pub const fn boot_flags0_r1(self) -> crate::common::Reg<regs::BootFlags0r1, crate::common::RW> {
+    pub const fn boot_flags0_r1(
+        self,
+    ) -> crate::common::Reg<super::BootFlags0R1, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(292usize) as _) }
     }
     #[doc = "Redundant copy of BOOT_FLAGS0"]
     #[inline(always)]
-    pub const fn boot_flags0_r2(self) -> crate::common::Reg<regs::BootFlags0r2, crate::common::RW> {
+    pub const fn boot_flags0_r2(
+        self,
+    ) -> crate::common::Reg<super::BootFlags0R2, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(296usize) as _) }
     }
     #[doc = "Disable/Enable boot paths/features in the RP2350 mask ROM. Disables always supersede enables. Enables are provided where there are other configurations in OTP that must be valid. (RBIT-3)"]
@@ -201,54 +205,58 @@ impl OtpDataRaw {
     }
     #[doc = "Redundant copy of BOOT_FLAGS1"]
     #[inline(always)]
-    pub const fn boot_flags1_r1(self) -> crate::common::Reg<regs::BootFlags1r1, crate::common::RW> {
+    pub const fn boot_flags1_r1(
+        self,
+    ) -> crate::common::Reg<super::BootFlags1R1, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(304usize) as _) }
     }
     #[doc = "Redundant copy of BOOT_FLAGS1"]
     #[inline(always)]
-    pub const fn boot_flags1_r2(self) -> crate::common::Reg<regs::BootFlags1r2, crate::common::RW> {
+    pub const fn boot_flags1_r2(
+        self,
+    ) -> crate::common::Reg<super::BootFlags1R2, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(308usize) as _) }
     }
     #[doc = "Default boot version thermometer counter, bits 23:0 (RBIT-3)"]
     #[inline(always)]
     pub const fn default_boot_version0(
         self,
-    ) -> crate::common::Reg<regs::DefaultBootVersion0, crate::common::RW> {
+    ) -> crate::common::Reg<super::DefaultBootVersion0, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(312usize) as _) }
     }
     #[doc = "Redundant copy of DEFAULT_BOOT_VERSION0"]
     #[inline(always)]
     pub const fn default_boot_version0_r1(
         self,
-    ) -> crate::common::Reg<regs::DefaultBootVersion0r1, crate::common::RW> {
+    ) -> crate::common::Reg<super::DefaultBootVersion0R1, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(316usize) as _) }
     }
     #[doc = "Redundant copy of DEFAULT_BOOT_VERSION0"]
     #[inline(always)]
     pub const fn default_boot_version0_r2(
         self,
-    ) -> crate::common::Reg<regs::DefaultBootVersion0r2, crate::common::RW> {
+    ) -> crate::common::Reg<super::DefaultBootVersion0R2, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(320usize) as _) }
     }
     #[doc = "Default boot version thermometer counter, bits 47:24 (RBIT-3)"]
     #[inline(always)]
     pub const fn default_boot_version1(
         self,
-    ) -> crate::common::Reg<regs::DefaultBootVersion1, crate::common::RW> {
+    ) -> crate::common::Reg<super::DefaultBootVersion1, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(324usize) as _) }
     }
     #[doc = "Redundant copy of DEFAULT_BOOT_VERSION1"]
     #[inline(always)]
     pub const fn default_boot_version1_r1(
         self,
-    ) -> crate::common::Reg<regs::DefaultBootVersion1r1, crate::common::RW> {
+    ) -> crate::common::Reg<super::DefaultBootVersion1R1, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(328usize) as _) }
     }
     #[doc = "Redundant copy of DEFAULT_BOOT_VERSION1"]
     #[inline(always)]
     pub const fn default_boot_version1_r2(
         self,
-    ) -> crate::common::Reg<regs::DefaultBootVersion1r2, crate::common::RW> {
+    ) -> crate::common::Reg<super::DefaultBootVersion1R2, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(332usize) as _) }
     }
     #[doc = "Stores information about external flash device(s). (ECC) Assumed to be valid if BOOT_FLAGS0_FLASH_DEVINFO_ENABLE is set."]
@@ -260,7 +268,7 @@ impl OtpDataRaw {
     #[inline(always)]
     pub const fn flash_partition_slot_size(
         self,
-    ) -> crate::common::Reg<regs::FlashPartitionSlotSize, crate::common::RW> {
+    ) -> crate::common::Reg<super::FlashPartitionSlotSize, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(340usize) as _) }
     }
     #[doc = "Pin configuration for LED status, used by USB bootloader. (ECC) Must be valid if BOOT_FLAGS0_ENABLE_BOOTSEL_LED is set."]
@@ -293,14 +301,14 @@ impl OtpDataRaw {
     #[inline(always)]
     pub const fn usb_boot_flags_r1(
         self,
-    ) -> crate::common::Reg<regs::UsbBootFlagsR1, crate::common::RW> {
+    ) -> crate::common::Reg<super::UsbBootFlagsR1, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(360usize) as _) }
     }
     #[doc = "Redundant copy of USB_BOOT_FLAGS"]
     #[inline(always)]
     pub const fn usb_boot_flags_r2(
         self,
-    ) -> crate::common::Reg<regs::UsbBootFlagsR2, crate::common::RW> {
+    ) -> crate::common::Reg<super::UsbBootFlagsR2, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(364usize) as _) }
     }
     #[doc = "Row index of the USB_WHITE_LABEL structure within OTP (ECC) The table has 16 rows, each of which are also ECC and marked valid by the corresponding valid bit in USB_BOOT_FLAGS (ECC). The entries are either _VALUEs where the 16 bit value is used as is, or _STRDEFs which acts as a pointers to a string value. The value stored in a _STRDEF is two separate bytes: The low seven bits of the first (LSB) byte indicates the number of characters in the string, and the top bit of the first (LSB) byte if set to indicate that each character in the string is two bytes (Unicode) versus one byte if unset. The second (MSB) byte represents the location of the string data, and is encoded as the number of rows from this USB_WHITE_LABEL_ADDR; i.e. the row of the start of the string is USB_WHITE_LABEL_ADDR value + msb_byte. In each case, the corresponding valid bit enables replacing the default value for the corresponding item provided by the boot rom. Note that Unicode _STRDEFs are only supported for USB_DEVICE_PRODUCT_STRDEF, USB_DEVICE_SERIAL_NUMBER_STRDEF and USB_DEVICE_MANUFACTURER_STRDEF. Unicode values will be ignored if specified for other fields, and non-unicode values for these three items will be converted to Unicode characters by setting the upper 8 bits to zero. Note that if the USB_WHITE_LABEL structure or the corresponding strings are not readable by BOOTSEL mode based on OTP permissions, or if alignment requirements are not met, then the corresponding default values are used. The index values indicate where each field is located (row USB_WHITE_LABEL_ADDR value + index):"]
@@ -312,582 +320,582 @@ impl OtpDataRaw {
     }
     #[doc = "OTP start row for the OTP boot image. (ECC) If OTP boot is enabled, the bootrom will load from this location into SRAM and then directly enter the loaded image. Note that the image must be signed if SECURE_BOOT_ENABLE is set. The image itself is assumed to be ECC-protected. This must be an even number. Equivalently, the OTP boot image must start at a word-aligned location in the ECC read data address window."]
     #[inline(always)]
-    pub const fn otpboot_src(self) -> crate::common::Reg<regs::OtpbootSrc, crate::common::RW> {
+    pub const fn otpboot_src(self) -> crate::common::Reg<super::OtpbootSrc, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(376usize) as _) }
     }
     #[doc = "Length in rows of the OTP boot image. (ECC) OTPBOOT_LEN must be even. The total image size must be a multiple of 4 bytes (32 bits)."]
     #[inline(always)]
-    pub const fn otpboot_len(self) -> crate::common::Reg<regs::OtpbootLen, crate::common::RW> {
+    pub const fn otpboot_len(self) -> crate::common::Reg<super::OtpbootLen, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(380usize) as _) }
     }
     #[doc = "Bits 15:0 of the OTP boot image load destination (and entry point). (ECC) This must be a location in main SRAM (main SRAM is addresses 0x20000000 through 0x20082000) and must be word-aligned."]
     #[inline(always)]
-    pub const fn otpboot_dst0(self) -> crate::common::Reg<regs::OtpbootDst0, crate::common::RW> {
+    pub const fn otpboot_dst0(self) -> crate::common::Reg<super::OtpbootDst0, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(384usize) as _) }
     }
     #[doc = "Bits 31:16 of the OTP boot image load destination (and entry point). (ECC) This must be a location in main SRAM (main SRAM is addresses 0x20000000 through 0x20082000) and must be word-aligned."]
     #[inline(always)]
-    pub const fn otpboot_dst1(self) -> crate::common::Reg<regs::OtpbootDst1, crate::common::RW> {
+    pub const fn otpboot_dst1(self) -> crate::common::Reg<super::OtpbootDst1, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(388usize) as _) }
     }
     #[doc = "Bits 15:0 of SHA-256 hash of boot key 0 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey0_0(self) -> crate::common::Reg<regs::Bootkey00, crate::common::RW> {
+    pub const fn bootkey0_0(self) -> crate::common::Reg<super::Bootkey00, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(512usize) as _) }
     }
     #[doc = "Bits 31:16 of SHA-256 hash of boot key 0 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey0_1(self) -> crate::common::Reg<regs::Bootkey01, crate::common::RW> {
+    pub const fn bootkey0_1(self) -> crate::common::Reg<super::Bootkey01, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(516usize) as _) }
     }
     #[doc = "Bits 47:32 of SHA-256 hash of boot key 0 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey0_2(self) -> crate::common::Reg<regs::Bootkey02, crate::common::RW> {
+    pub const fn bootkey0_2(self) -> crate::common::Reg<super::Bootkey02, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(520usize) as _) }
     }
     #[doc = "Bits 63:48 of SHA-256 hash of boot key 0 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey0_3(self) -> crate::common::Reg<regs::Bootkey03, crate::common::RW> {
+    pub const fn bootkey0_3(self) -> crate::common::Reg<super::Bootkey03, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(524usize) as _) }
     }
     #[doc = "Bits 79:64 of SHA-256 hash of boot key 0 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey0_4(self) -> crate::common::Reg<regs::Bootkey04, crate::common::RW> {
+    pub const fn bootkey0_4(self) -> crate::common::Reg<super::Bootkey04, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(528usize) as _) }
     }
     #[doc = "Bits 95:80 of SHA-256 hash of boot key 0 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey0_5(self) -> crate::common::Reg<regs::Bootkey05, crate::common::RW> {
+    pub const fn bootkey0_5(self) -> crate::common::Reg<super::Bootkey05, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(532usize) as _) }
     }
     #[doc = "Bits 111:96 of SHA-256 hash of boot key 0 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey0_6(self) -> crate::common::Reg<regs::Bootkey06, crate::common::RW> {
+    pub const fn bootkey0_6(self) -> crate::common::Reg<super::Bootkey06, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(536usize) as _) }
     }
     #[doc = "Bits 127:112 of SHA-256 hash of boot key 0 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey0_7(self) -> crate::common::Reg<regs::Bootkey07, crate::common::RW> {
+    pub const fn bootkey0_7(self) -> crate::common::Reg<super::Bootkey07, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(540usize) as _) }
     }
     #[doc = "Bits 143:128 of SHA-256 hash of boot key 0 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey0_8(self) -> crate::common::Reg<regs::Bootkey08, crate::common::RW> {
+    pub const fn bootkey0_8(self) -> crate::common::Reg<super::Bootkey08, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(544usize) as _) }
     }
     #[doc = "Bits 159:144 of SHA-256 hash of boot key 0 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey0_9(self) -> crate::common::Reg<regs::Bootkey09, crate::common::RW> {
+    pub const fn bootkey0_9(self) -> crate::common::Reg<super::Bootkey09, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(548usize) as _) }
     }
     #[doc = "Bits 175:160 of SHA-256 hash of boot key 0 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey0_10(self) -> crate::common::Reg<regs::Bootkey010, crate::common::RW> {
+    pub const fn bootkey0_10(self) -> crate::common::Reg<super::Bootkey010, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(552usize) as _) }
     }
     #[doc = "Bits 191:176 of SHA-256 hash of boot key 0 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey0_11(self) -> crate::common::Reg<regs::Bootkey011, crate::common::RW> {
+    pub const fn bootkey0_11(self) -> crate::common::Reg<super::Bootkey011, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(556usize) as _) }
     }
     #[doc = "Bits 207:192 of SHA-256 hash of boot key 0 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey0_12(self) -> crate::common::Reg<regs::Bootkey012, crate::common::RW> {
+    pub const fn bootkey0_12(self) -> crate::common::Reg<super::Bootkey012, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(560usize) as _) }
     }
     #[doc = "Bits 223:208 of SHA-256 hash of boot key 0 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey0_13(self) -> crate::common::Reg<regs::Bootkey013, crate::common::RW> {
+    pub const fn bootkey0_13(self) -> crate::common::Reg<super::Bootkey013, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(564usize) as _) }
     }
     #[doc = "Bits 239:224 of SHA-256 hash of boot key 0 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey0_14(self) -> crate::common::Reg<regs::Bootkey014, crate::common::RW> {
+    pub const fn bootkey0_14(self) -> crate::common::Reg<super::Bootkey014, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(568usize) as _) }
     }
     #[doc = "Bits 255:240 of SHA-256 hash of boot key 0 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey0_15(self) -> crate::common::Reg<regs::Bootkey015, crate::common::RW> {
+    pub const fn bootkey0_15(self) -> crate::common::Reg<super::Bootkey015, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(572usize) as _) }
     }
     #[doc = "Bits 15:0 of SHA-256 hash of boot key 1 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey1_0(self) -> crate::common::Reg<regs::Bootkey10, crate::common::RW> {
+    pub const fn bootkey1_0(self) -> crate::common::Reg<super::Bootkey10, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(576usize) as _) }
     }
     #[doc = "Bits 31:16 of SHA-256 hash of boot key 1 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey1_1(self) -> crate::common::Reg<regs::Bootkey11, crate::common::RW> {
+    pub const fn bootkey1_1(self) -> crate::common::Reg<super::Bootkey11, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(580usize) as _) }
     }
     #[doc = "Bits 47:32 of SHA-256 hash of boot key 1 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey1_2(self) -> crate::common::Reg<regs::Bootkey12, crate::common::RW> {
+    pub const fn bootkey1_2(self) -> crate::common::Reg<super::Bootkey12, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(584usize) as _) }
     }
     #[doc = "Bits 63:48 of SHA-256 hash of boot key 1 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey1_3(self) -> crate::common::Reg<regs::Bootkey13, crate::common::RW> {
+    pub const fn bootkey1_3(self) -> crate::common::Reg<super::Bootkey13, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(588usize) as _) }
     }
     #[doc = "Bits 79:64 of SHA-256 hash of boot key 1 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey1_4(self) -> crate::common::Reg<regs::Bootkey14, crate::common::RW> {
+    pub const fn bootkey1_4(self) -> crate::common::Reg<super::Bootkey14, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(592usize) as _) }
     }
     #[doc = "Bits 95:80 of SHA-256 hash of boot key 1 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey1_5(self) -> crate::common::Reg<regs::Bootkey15, crate::common::RW> {
+    pub const fn bootkey1_5(self) -> crate::common::Reg<super::Bootkey15, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(596usize) as _) }
     }
     #[doc = "Bits 111:96 of SHA-256 hash of boot key 1 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey1_6(self) -> crate::common::Reg<regs::Bootkey16, crate::common::RW> {
+    pub const fn bootkey1_6(self) -> crate::common::Reg<super::Bootkey16, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(600usize) as _) }
     }
     #[doc = "Bits 127:112 of SHA-256 hash of boot key 1 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey1_7(self) -> crate::common::Reg<regs::Bootkey17, crate::common::RW> {
+    pub const fn bootkey1_7(self) -> crate::common::Reg<super::Bootkey17, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(604usize) as _) }
     }
     #[doc = "Bits 143:128 of SHA-256 hash of boot key 1 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey1_8(self) -> crate::common::Reg<regs::Bootkey18, crate::common::RW> {
+    pub const fn bootkey1_8(self) -> crate::common::Reg<super::Bootkey18, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(608usize) as _) }
     }
     #[doc = "Bits 159:144 of SHA-256 hash of boot key 1 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey1_9(self) -> crate::common::Reg<regs::Bootkey19, crate::common::RW> {
+    pub const fn bootkey1_9(self) -> crate::common::Reg<super::Bootkey19, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(612usize) as _) }
     }
     #[doc = "Bits 175:160 of SHA-256 hash of boot key 1 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey1_10(self) -> crate::common::Reg<regs::Bootkey110, crate::common::RW> {
+    pub const fn bootkey1_10(self) -> crate::common::Reg<super::Bootkey110, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(616usize) as _) }
     }
     #[doc = "Bits 191:176 of SHA-256 hash of boot key 1 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey1_11(self) -> crate::common::Reg<regs::Bootkey111, crate::common::RW> {
+    pub const fn bootkey1_11(self) -> crate::common::Reg<super::Bootkey111, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(620usize) as _) }
     }
     #[doc = "Bits 207:192 of SHA-256 hash of boot key 1 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey1_12(self) -> crate::common::Reg<regs::Bootkey112, crate::common::RW> {
+    pub const fn bootkey1_12(self) -> crate::common::Reg<super::Bootkey112, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(624usize) as _) }
     }
     #[doc = "Bits 223:208 of SHA-256 hash of boot key 1 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey1_13(self) -> crate::common::Reg<regs::Bootkey113, crate::common::RW> {
+    pub const fn bootkey1_13(self) -> crate::common::Reg<super::Bootkey113, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(628usize) as _) }
     }
     #[doc = "Bits 239:224 of SHA-256 hash of boot key 1 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey1_14(self) -> crate::common::Reg<regs::Bootkey114, crate::common::RW> {
+    pub const fn bootkey1_14(self) -> crate::common::Reg<super::Bootkey114, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(632usize) as _) }
     }
     #[doc = "Bits 255:240 of SHA-256 hash of boot key 1 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey1_15(self) -> crate::common::Reg<regs::Bootkey115, crate::common::RW> {
+    pub const fn bootkey1_15(self) -> crate::common::Reg<super::Bootkey115, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(636usize) as _) }
     }
     #[doc = "Bits 15:0 of SHA-256 hash of boot key 2 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey2_0(self) -> crate::common::Reg<regs::Bootkey20, crate::common::RW> {
+    pub const fn bootkey2_0(self) -> crate::common::Reg<super::Bootkey20, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(640usize) as _) }
     }
     #[doc = "Bits 31:16 of SHA-256 hash of boot key 2 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey2_1(self) -> crate::common::Reg<regs::Bootkey21, crate::common::RW> {
+    pub const fn bootkey2_1(self) -> crate::common::Reg<super::Bootkey21, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(644usize) as _) }
     }
     #[doc = "Bits 47:32 of SHA-256 hash of boot key 2 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey2_2(self) -> crate::common::Reg<regs::Bootkey22, crate::common::RW> {
+    pub const fn bootkey2_2(self) -> crate::common::Reg<super::Bootkey22, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(648usize) as _) }
     }
     #[doc = "Bits 63:48 of SHA-256 hash of boot key 2 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey2_3(self) -> crate::common::Reg<regs::Bootkey23, crate::common::RW> {
+    pub const fn bootkey2_3(self) -> crate::common::Reg<super::Bootkey23, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(652usize) as _) }
     }
     #[doc = "Bits 79:64 of SHA-256 hash of boot key 2 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey2_4(self) -> crate::common::Reg<regs::Bootkey24, crate::common::RW> {
+    pub const fn bootkey2_4(self) -> crate::common::Reg<super::Bootkey24, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(656usize) as _) }
     }
     #[doc = "Bits 95:80 of SHA-256 hash of boot key 2 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey2_5(self) -> crate::common::Reg<regs::Bootkey25, crate::common::RW> {
+    pub const fn bootkey2_5(self) -> crate::common::Reg<super::Bootkey25, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(660usize) as _) }
     }
     #[doc = "Bits 111:96 of SHA-256 hash of boot key 2 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey2_6(self) -> crate::common::Reg<regs::Bootkey26, crate::common::RW> {
+    pub const fn bootkey2_6(self) -> crate::common::Reg<super::Bootkey26, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(664usize) as _) }
     }
     #[doc = "Bits 127:112 of SHA-256 hash of boot key 2 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey2_7(self) -> crate::common::Reg<regs::Bootkey27, crate::common::RW> {
+    pub const fn bootkey2_7(self) -> crate::common::Reg<super::Bootkey27, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(668usize) as _) }
     }
     #[doc = "Bits 143:128 of SHA-256 hash of boot key 2 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey2_8(self) -> crate::common::Reg<regs::Bootkey28, crate::common::RW> {
+    pub const fn bootkey2_8(self) -> crate::common::Reg<super::Bootkey28, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(672usize) as _) }
     }
     #[doc = "Bits 159:144 of SHA-256 hash of boot key 2 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey2_9(self) -> crate::common::Reg<regs::Bootkey29, crate::common::RW> {
+    pub const fn bootkey2_9(self) -> crate::common::Reg<super::Bootkey29, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(676usize) as _) }
     }
     #[doc = "Bits 175:160 of SHA-256 hash of boot key 2 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey2_10(self) -> crate::common::Reg<regs::Bootkey210, crate::common::RW> {
+    pub const fn bootkey2_10(self) -> crate::common::Reg<super::Bootkey210, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(680usize) as _) }
     }
     #[doc = "Bits 191:176 of SHA-256 hash of boot key 2 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey2_11(self) -> crate::common::Reg<regs::Bootkey211, crate::common::RW> {
+    pub const fn bootkey2_11(self) -> crate::common::Reg<super::Bootkey211, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(684usize) as _) }
     }
     #[doc = "Bits 207:192 of SHA-256 hash of boot key 2 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey2_12(self) -> crate::common::Reg<regs::Bootkey212, crate::common::RW> {
+    pub const fn bootkey2_12(self) -> crate::common::Reg<super::Bootkey212, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(688usize) as _) }
     }
     #[doc = "Bits 223:208 of SHA-256 hash of boot key 2 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey2_13(self) -> crate::common::Reg<regs::Bootkey213, crate::common::RW> {
+    pub const fn bootkey2_13(self) -> crate::common::Reg<super::Bootkey213, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(692usize) as _) }
     }
     #[doc = "Bits 239:224 of SHA-256 hash of boot key 2 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey2_14(self) -> crate::common::Reg<regs::Bootkey214, crate::common::RW> {
+    pub const fn bootkey2_14(self) -> crate::common::Reg<super::Bootkey214, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(696usize) as _) }
     }
     #[doc = "Bits 255:240 of SHA-256 hash of boot key 2 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey2_15(self) -> crate::common::Reg<regs::Bootkey215, crate::common::RW> {
+    pub const fn bootkey2_15(self) -> crate::common::Reg<super::Bootkey215, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(700usize) as _) }
     }
     #[doc = "Bits 15:0 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey3_0(self) -> crate::common::Reg<regs::Bootkey30, crate::common::RW> {
+    pub const fn bootkey3_0(self) -> crate::common::Reg<super::Bootkey30, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(704usize) as _) }
     }
     #[doc = "Bits 31:16 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey3_1(self) -> crate::common::Reg<regs::Bootkey31, crate::common::RW> {
+    pub const fn bootkey3_1(self) -> crate::common::Reg<super::Bootkey31, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(708usize) as _) }
     }
     #[doc = "Bits 47:32 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey3_2(self) -> crate::common::Reg<regs::Bootkey32, crate::common::RW> {
+    pub const fn bootkey3_2(self) -> crate::common::Reg<super::Bootkey32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(712usize) as _) }
     }
     #[doc = "Bits 63:48 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey3_3(self) -> crate::common::Reg<regs::Bootkey33, crate::common::RW> {
+    pub const fn bootkey3_3(self) -> crate::common::Reg<super::Bootkey33, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(716usize) as _) }
     }
     #[doc = "Bits 79:64 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey3_4(self) -> crate::common::Reg<regs::Bootkey34, crate::common::RW> {
+    pub const fn bootkey3_4(self) -> crate::common::Reg<super::Bootkey34, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(720usize) as _) }
     }
     #[doc = "Bits 95:80 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey3_5(self) -> crate::common::Reg<regs::Bootkey35, crate::common::RW> {
+    pub const fn bootkey3_5(self) -> crate::common::Reg<super::Bootkey35, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(724usize) as _) }
     }
     #[doc = "Bits 111:96 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey3_6(self) -> crate::common::Reg<regs::Bootkey36, crate::common::RW> {
+    pub const fn bootkey3_6(self) -> crate::common::Reg<super::Bootkey36, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(728usize) as _) }
     }
     #[doc = "Bits 127:112 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey3_7(self) -> crate::common::Reg<regs::Bootkey37, crate::common::RW> {
+    pub const fn bootkey3_7(self) -> crate::common::Reg<super::Bootkey37, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(732usize) as _) }
     }
     #[doc = "Bits 143:128 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey3_8(self) -> crate::common::Reg<regs::Bootkey38, crate::common::RW> {
+    pub const fn bootkey3_8(self) -> crate::common::Reg<super::Bootkey38, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(736usize) as _) }
     }
     #[doc = "Bits 159:144 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey3_9(self) -> crate::common::Reg<regs::Bootkey39, crate::common::RW> {
+    pub const fn bootkey3_9(self) -> crate::common::Reg<super::Bootkey39, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(740usize) as _) }
     }
     #[doc = "Bits 175:160 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey3_10(self) -> crate::common::Reg<regs::Bootkey310, crate::common::RW> {
+    pub const fn bootkey3_10(self) -> crate::common::Reg<super::Bootkey310, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(744usize) as _) }
     }
     #[doc = "Bits 191:176 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey3_11(self) -> crate::common::Reg<regs::Bootkey311, crate::common::RW> {
+    pub const fn bootkey3_11(self) -> crate::common::Reg<super::Bootkey311, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(748usize) as _) }
     }
     #[doc = "Bits 207:192 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey3_12(self) -> crate::common::Reg<regs::Bootkey312, crate::common::RW> {
+    pub const fn bootkey3_12(self) -> crate::common::Reg<super::Bootkey312, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(752usize) as _) }
     }
     #[doc = "Bits 223:208 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey3_13(self) -> crate::common::Reg<regs::Bootkey313, crate::common::RW> {
+    pub const fn bootkey3_13(self) -> crate::common::Reg<super::Bootkey313, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(756usize) as _) }
     }
     #[doc = "Bits 239:224 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey3_14(self) -> crate::common::Reg<regs::Bootkey314, crate::common::RW> {
+    pub const fn bootkey3_14(self) -> crate::common::Reg<super::Bootkey314, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(760usize) as _) }
     }
     #[doc = "Bits 255:240 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
-    pub const fn bootkey3_15(self) -> crate::common::Reg<regs::Bootkey315, crate::common::RW> {
+    pub const fn bootkey3_15(self) -> crate::common::Reg<super::Bootkey315, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(764usize) as _) }
     }
     #[doc = "Bits 15:0 of OTP access key 1 (ECC)"]
     #[inline(always)]
-    pub const fn key1_0(self) -> crate::common::Reg<regs::Key10, crate::common::RW> {
+    pub const fn key1_0(self) -> crate::common::Reg<super::Key10, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15648usize) as _) }
     }
     #[doc = "Bits 31:16 of OTP access key 1 (ECC)"]
     #[inline(always)]
-    pub const fn key1_1(self) -> crate::common::Reg<regs::Key11, crate::common::RW> {
+    pub const fn key1_1(self) -> crate::common::Reg<super::Key11, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15652usize) as _) }
     }
     #[doc = "Bits 47:32 of OTP access key 1 (ECC)"]
     #[inline(always)]
-    pub const fn key1_2(self) -> crate::common::Reg<regs::Key12, crate::common::RW> {
+    pub const fn key1_2(self) -> crate::common::Reg<super::Key12, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15656usize) as _) }
     }
     #[doc = "Bits 63:48 of OTP access key 1 (ECC)"]
     #[inline(always)]
-    pub const fn key1_3(self) -> crate::common::Reg<regs::Key13, crate::common::RW> {
+    pub const fn key1_3(self) -> crate::common::Reg<super::Key13, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15660usize) as _) }
     }
     #[doc = "Bits 79:64 of OTP access key 1 (ECC)"]
     #[inline(always)]
-    pub const fn key1_4(self) -> crate::common::Reg<regs::Key14, crate::common::RW> {
+    pub const fn key1_4(self) -> crate::common::Reg<super::Key14, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15664usize) as _) }
     }
     #[doc = "Bits 95:80 of OTP access key 1 (ECC)"]
     #[inline(always)]
-    pub const fn key1_5(self) -> crate::common::Reg<regs::Key15, crate::common::RW> {
+    pub const fn key1_5(self) -> crate::common::Reg<super::Key15, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15668usize) as _) }
     }
     #[doc = "Bits 111:96 of OTP access key 1 (ECC)"]
     #[inline(always)]
-    pub const fn key1_6(self) -> crate::common::Reg<regs::Key16, crate::common::RW> {
+    pub const fn key1_6(self) -> crate::common::Reg<super::Key16, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15672usize) as _) }
     }
     #[doc = "Bits 127:112 of OTP access key 1 (ECC)"]
     #[inline(always)]
-    pub const fn key1_7(self) -> crate::common::Reg<regs::Key17, crate::common::RW> {
+    pub const fn key1_7(self) -> crate::common::Reg<super::Key17, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15676usize) as _) }
     }
     #[doc = "Bits 15:0 of OTP access key 2 (ECC)"]
     #[inline(always)]
-    pub const fn key2_0(self) -> crate::common::Reg<regs::Key20, crate::common::RW> {
+    pub const fn key2_0(self) -> crate::common::Reg<super::Key20, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15680usize) as _) }
     }
     #[doc = "Bits 31:16 of OTP access key 2 (ECC)"]
     #[inline(always)]
-    pub const fn key2_1(self) -> crate::common::Reg<regs::Key21, crate::common::RW> {
+    pub const fn key2_1(self) -> crate::common::Reg<super::Key21, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15684usize) as _) }
     }
     #[doc = "Bits 47:32 of OTP access key 2 (ECC)"]
     #[inline(always)]
-    pub const fn key2_2(self) -> crate::common::Reg<regs::Key22, crate::common::RW> {
+    pub const fn key2_2(self) -> crate::common::Reg<super::Key22, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15688usize) as _) }
     }
     #[doc = "Bits 63:48 of OTP access key 2 (ECC)"]
     #[inline(always)]
-    pub const fn key2_3(self) -> crate::common::Reg<regs::Key23, crate::common::RW> {
+    pub const fn key2_3(self) -> crate::common::Reg<super::Key23, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15692usize) as _) }
     }
     #[doc = "Bits 79:64 of OTP access key 2 (ECC)"]
     #[inline(always)]
-    pub const fn key2_4(self) -> crate::common::Reg<regs::Key24, crate::common::RW> {
+    pub const fn key2_4(self) -> crate::common::Reg<super::Key24, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15696usize) as _) }
     }
     #[doc = "Bits 95:80 of OTP access key 2 (ECC)"]
     #[inline(always)]
-    pub const fn key2_5(self) -> crate::common::Reg<regs::Key25, crate::common::RW> {
+    pub const fn key2_5(self) -> crate::common::Reg<super::Key25, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15700usize) as _) }
     }
     #[doc = "Bits 111:96 of OTP access key 2 (ECC)"]
     #[inline(always)]
-    pub const fn key2_6(self) -> crate::common::Reg<regs::Key26, crate::common::RW> {
+    pub const fn key2_6(self) -> crate::common::Reg<super::Key26, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15704usize) as _) }
     }
     #[doc = "Bits 127:112 of OTP access key 2 (ECC)"]
     #[inline(always)]
-    pub const fn key2_7(self) -> crate::common::Reg<regs::Key27, crate::common::RW> {
+    pub const fn key2_7(self) -> crate::common::Reg<super::Key27, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15708usize) as _) }
     }
     #[doc = "Bits 15:0 of OTP access key 3 (ECC)"]
     #[inline(always)]
-    pub const fn key3_0(self) -> crate::common::Reg<regs::Key30, crate::common::RW> {
+    pub const fn key3_0(self) -> crate::common::Reg<super::Key30, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15712usize) as _) }
     }
     #[doc = "Bits 31:16 of OTP access key 3 (ECC)"]
     #[inline(always)]
-    pub const fn key3_1(self) -> crate::common::Reg<regs::Key31, crate::common::RW> {
+    pub const fn key3_1(self) -> crate::common::Reg<super::Key31, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15716usize) as _) }
     }
     #[doc = "Bits 47:32 of OTP access key 3 (ECC)"]
     #[inline(always)]
-    pub const fn key3_2(self) -> crate::common::Reg<regs::Key32, crate::common::RW> {
+    pub const fn key3_2(self) -> crate::common::Reg<super::Key32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15720usize) as _) }
     }
     #[doc = "Bits 63:48 of OTP access key 3 (ECC)"]
     #[inline(always)]
-    pub const fn key3_3(self) -> crate::common::Reg<regs::Key33, crate::common::RW> {
+    pub const fn key3_3(self) -> crate::common::Reg<super::Key33, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15724usize) as _) }
     }
     #[doc = "Bits 79:64 of OTP access key 3 (ECC)"]
     #[inline(always)]
-    pub const fn key3_4(self) -> crate::common::Reg<regs::Key34, crate::common::RW> {
+    pub const fn key3_4(self) -> crate::common::Reg<super::Key34, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15728usize) as _) }
     }
     #[doc = "Bits 95:80 of OTP access key 3 (ECC)"]
     #[inline(always)]
-    pub const fn key3_5(self) -> crate::common::Reg<regs::Key35, crate::common::RW> {
+    pub const fn key3_5(self) -> crate::common::Reg<super::Key35, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15732usize) as _) }
     }
     #[doc = "Bits 111:96 of OTP access key 3 (ECC)"]
     #[inline(always)]
-    pub const fn key3_6(self) -> crate::common::Reg<regs::Key36, crate::common::RW> {
+    pub const fn key3_6(self) -> crate::common::Reg<super::Key36, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15736usize) as _) }
     }
     #[doc = "Bits 127:112 of OTP access key 3 (ECC)"]
     #[inline(always)]
-    pub const fn key3_7(self) -> crate::common::Reg<regs::Key37, crate::common::RW> {
+    pub const fn key3_7(self) -> crate::common::Reg<super::Key37, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15740usize) as _) }
     }
     #[doc = "Bits 15:0 of OTP access key 4 (ECC)"]
     #[inline(always)]
-    pub const fn key4_0(self) -> crate::common::Reg<regs::Key40, crate::common::RW> {
+    pub const fn key4_0(self) -> crate::common::Reg<super::Key40, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15744usize) as _) }
     }
     #[doc = "Bits 31:16 of OTP access key 4 (ECC)"]
     #[inline(always)]
-    pub const fn key4_1(self) -> crate::common::Reg<regs::Key41, crate::common::RW> {
+    pub const fn key4_1(self) -> crate::common::Reg<super::Key41, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15748usize) as _) }
     }
     #[doc = "Bits 47:32 of OTP access key 4 (ECC)"]
     #[inline(always)]
-    pub const fn key4_2(self) -> crate::common::Reg<regs::Key42, crate::common::RW> {
+    pub const fn key4_2(self) -> crate::common::Reg<super::Key42, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15752usize) as _) }
     }
     #[doc = "Bits 63:48 of OTP access key 4 (ECC)"]
     #[inline(always)]
-    pub const fn key4_3(self) -> crate::common::Reg<regs::Key43, crate::common::RW> {
+    pub const fn key4_3(self) -> crate::common::Reg<super::Key43, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15756usize) as _) }
     }
     #[doc = "Bits 79:64 of OTP access key 4 (ECC)"]
     #[inline(always)]
-    pub const fn key4_4(self) -> crate::common::Reg<regs::Key44, crate::common::RW> {
+    pub const fn key4_4(self) -> crate::common::Reg<super::Key44, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15760usize) as _) }
     }
     #[doc = "Bits 95:80 of OTP access key 4 (ECC)"]
     #[inline(always)]
-    pub const fn key4_5(self) -> crate::common::Reg<regs::Key45, crate::common::RW> {
+    pub const fn key4_5(self) -> crate::common::Reg<super::Key45, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15764usize) as _) }
     }
     #[doc = "Bits 111:96 of OTP access key 4 (ECC)"]
     #[inline(always)]
-    pub const fn key4_6(self) -> crate::common::Reg<regs::Key46, crate::common::RW> {
+    pub const fn key4_6(self) -> crate::common::Reg<super::Key46, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15768usize) as _) }
     }
     #[doc = "Bits 127:112 of OTP access key 4 (ECC)"]
     #[inline(always)]
-    pub const fn key4_7(self) -> crate::common::Reg<regs::Key47, crate::common::RW> {
+    pub const fn key4_7(self) -> crate::common::Reg<super::Key47, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15772usize) as _) }
     }
     #[doc = "Bits 15:0 of OTP access key 5 (ECC)"]
     #[inline(always)]
-    pub const fn key5_0(self) -> crate::common::Reg<regs::Key50, crate::common::RW> {
+    pub const fn key5_0(self) -> crate::common::Reg<super::Key50, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15776usize) as _) }
     }
     #[doc = "Bits 31:16 of OTP access key 5 (ECC)"]
     #[inline(always)]
-    pub const fn key5_1(self) -> crate::common::Reg<regs::Key51, crate::common::RW> {
+    pub const fn key5_1(self) -> crate::common::Reg<super::Key51, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15780usize) as _) }
     }
     #[doc = "Bits 47:32 of OTP access key 5 (ECC)"]
     #[inline(always)]
-    pub const fn key5_2(self) -> crate::common::Reg<regs::Key52, crate::common::RW> {
+    pub const fn key5_2(self) -> crate::common::Reg<super::Key52, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15784usize) as _) }
     }
     #[doc = "Bits 63:48 of OTP access key 5 (ECC)"]
     #[inline(always)]
-    pub const fn key5_3(self) -> crate::common::Reg<regs::Key53, crate::common::RW> {
+    pub const fn key5_3(self) -> crate::common::Reg<super::Key53, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15788usize) as _) }
     }
     #[doc = "Bits 79:64 of OTP access key 5 (ECC)"]
     #[inline(always)]
-    pub const fn key5_4(self) -> crate::common::Reg<regs::Key54, crate::common::RW> {
+    pub const fn key5_4(self) -> crate::common::Reg<super::Key54, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15792usize) as _) }
     }
     #[doc = "Bits 95:80 of OTP access key 5 (ECC)"]
     #[inline(always)]
-    pub const fn key5_5(self) -> crate::common::Reg<regs::Key55, crate::common::RW> {
+    pub const fn key5_5(self) -> crate::common::Reg<super::Key55, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15796usize) as _) }
     }
     #[doc = "Bits 111:96 of OTP access key 5 (ECC)"]
     #[inline(always)]
-    pub const fn key5_6(self) -> crate::common::Reg<regs::Key56, crate::common::RW> {
+    pub const fn key5_6(self) -> crate::common::Reg<super::Key56, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15800usize) as _) }
     }
     #[doc = "Bits 127:112 of OTP access key 5 (ECC)"]
     #[inline(always)]
-    pub const fn key5_7(self) -> crate::common::Reg<regs::Key57, crate::common::RW> {
+    pub const fn key5_7(self) -> crate::common::Reg<super::Key57, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15804usize) as _) }
     }
     #[doc = "Bits 15:0 of OTP access key 6 (ECC)"]
     #[inline(always)]
-    pub const fn key6_0(self) -> crate::common::Reg<regs::Key60, crate::common::RW> {
+    pub const fn key6_0(self) -> crate::common::Reg<super::Key60, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15808usize) as _) }
     }
     #[doc = "Bits 31:16 of OTP access key 6 (ECC)"]
     #[inline(always)]
-    pub const fn key6_1(self) -> crate::common::Reg<regs::Key61, crate::common::RW> {
+    pub const fn key6_1(self) -> crate::common::Reg<super::Key61, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15812usize) as _) }
     }
     #[doc = "Bits 47:32 of OTP access key 6 (ECC)"]
     #[inline(always)]
-    pub const fn key6_2(self) -> crate::common::Reg<regs::Key62, crate::common::RW> {
+    pub const fn key6_2(self) -> crate::common::Reg<super::Key62, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15816usize) as _) }
     }
     #[doc = "Bits 63:48 of OTP access key 6 (ECC)"]
     #[inline(always)]
-    pub const fn key6_3(self) -> crate::common::Reg<regs::Key63, crate::common::RW> {
+    pub const fn key6_3(self) -> crate::common::Reg<super::Key63, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15820usize) as _) }
     }
     #[doc = "Bits 79:64 of OTP access key 6 (ECC)"]
     #[inline(always)]
-    pub const fn key6_4(self) -> crate::common::Reg<regs::Key64, crate::common::RW> {
+    pub const fn key6_4(self) -> crate::common::Reg<super::Key64, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15824usize) as _) }
     }
     #[doc = "Bits 95:80 of OTP access key 6 (ECC)"]
     #[inline(always)]
-    pub const fn key6_5(self) -> crate::common::Reg<regs::Key65, crate::common::RW> {
+    pub const fn key6_5(self) -> crate::common::Reg<super::Key65, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15828usize) as _) }
     }
     #[doc = "Bits 111:96 of OTP access key 6 (ECC)"]
     #[inline(always)]
-    pub const fn key6_6(self) -> crate::common::Reg<regs::Key66, crate::common::RW> {
+    pub const fn key6_6(self) -> crate::common::Reg<super::Key66, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15832usize) as _) }
     }
     #[doc = "Bits 127:112 of OTP access key 6 (ECC)"]
     #[inline(always)]
-    pub const fn key6_7(self) -> crate::common::Reg<regs::Key67, crate::common::RW> {
+    pub const fn key6_7(self) -> crate::common::Reg<super::Key67, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(15836usize) as _) }
     }
     #[doc = "Valid flag for key 1. Once the valid flag is set, the key can no longer be read or written, and becomes a valid fixed key for protecting OTP pages."]

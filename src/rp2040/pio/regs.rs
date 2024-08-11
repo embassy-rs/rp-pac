@@ -284,7 +284,7 @@ impl Default for Fstat {
         Fstat(0)
     }
 }
-#[doc = "Write-only access to instruction memory location 2"]
+#[doc = "Write-only access to instruction memory location 23"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct InstrMem(pub u32);
@@ -305,7 +305,7 @@ impl Default for InstrMem {
         InstrMem(0)
     }
 }
-#[doc = "Raw Interrupts"]
+#[doc = "Interrupt status after masking & forcing for irq1"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Intr(pub u32);
@@ -488,7 +488,7 @@ impl Default for SmAddr {
         SmAddr(0)
     }
 }
-#[doc = "Clock divisor register for state machine 1 Frequency = clock freq / (CLKDIV_INT + CLKDIV_FRAC / 256)"]
+#[doc = "Clock divisor register for state machine 2 Frequency = clock freq / (CLKDIV_INT + CLKDIV_FRAC / 256)"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SmClkdiv(pub u32);
@@ -765,7 +765,7 @@ impl Default for SmPinctrl {
         SmPinctrl(0)
     }
 }
-#[doc = "Control behaviour of the input/output shift registers for state machine 3"]
+#[doc = "Control behaviour of the input/output shift registers for state machine 1"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SmShiftctrl(pub u32);

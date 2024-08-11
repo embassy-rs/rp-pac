@@ -1,25 +1,34 @@
 #!/usr/bin/env bash
 
+if ! command -v chiptool &> /dev/null; then
+    echo "chiptool could not be found. Install it with the following command:"
+    echo ""
+    echo "    cargo install --git https://github.com/embassy-rs/chiptool --locked"
+    echo ""
+    exit 1
+fi
+
+if ! command -v form &> /dev/null; then
+    echo "form could not be found. Install it with the following command:"
+    echo ""
+    echo "    cargo install form"
+    echo ""
+    exit 1
+fi
+
 set -euxo pipefail
 
-rm -rf src
-mkdir src
+rm -rf src/rp*
 
-#(cd ../chiptool/; cargo build)
-#RUST_LOG=info ../chiptool/target/debug/chiptool generate --svd svd/RP2040.svd --transform svd/rp2040.yaml
-chiptool generate --svd svd/RP2040.svd --transform svd/rp2040.yaml
-
-# cargo install form
-form -i lib.rs -o src/rp2040
-rm lib.rs
-
-chiptool generate --svd svd/RP2350.svd --transform svd/rp2350.yaml
-
-# cargo install form
-form -i lib.rs -o src/rp2350
-rm lib.rs
+for chip in rp2040 rp235x; do 
+    chiptool generate --svd svd/$chip.svd --transform svd/$chip.yaml
+    rustfmt lib.rs
+    sed -i '/#!\[no_std]/d' lib.rs
+    form -i lib.rs -o src/$chip
+    mv src/$chip/lib.rs src/$chip/mod.rs
+    rm lib.rs
+done
 
 cargo fmt
-sed -i '/#!\[doc =/c\#![doc = include_str!("../README.md")]\n#![allow(non_camel_case_types)]' src/lib.rs
-
-cargo check
+cargo check --features rp2040
+cargo check --features rp235x
