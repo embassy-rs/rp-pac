@@ -11,6 +11,7 @@ This crate is used for the [`embassy-rp`](github.com/embassy-rs/embassy/) Rust H
 ## Supported chips
 
 - **RP2040**: [Datasheet](https://datasheets.raspberrypi.org/rp2040/rp2040_datasheet.pdf)
+- **RP2350**: [Datasheet](https://datasheets.raspberrypi.com/rp2350/rp2350-datasheet.pdf)
 
 ## License
 
