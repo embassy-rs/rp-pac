@@ -2,7 +2,7 @@
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub enum PixShift {
     #[doc = "Do not shift the colour data register."]
-    _0 = 0,
+    _0 = 0x0,
     #[doc = "Shift the colour data register by 1 bit"]
     _1 = 0x01,
     #[doc = "Shift the colour data register by 2 bits"]

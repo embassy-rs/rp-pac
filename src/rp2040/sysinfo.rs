@@ -16,17 +16,17 @@ impl Sysinfo {
     #[doc = "JEDEC JEP-106 compliant chip identifier."]
     #[inline(always)]
     pub const fn chip_id(self) -> crate::common::Reg<regs::ChipId, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
     }
     #[doc = "Platform register. Allows software to know what environment it is running in."]
     #[inline(always)]
     pub const fn platform(self) -> crate::common::Reg<regs::Platform, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(4usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
     }
     #[doc = "Git hash of the chip source. Used to identify chip version."]
     #[inline(always)]
     pub const fn gitref_rp2040(self) -> crate::common::Reg<u32, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(16usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x10usize) as _) }
     }
 }
 pub mod regs;

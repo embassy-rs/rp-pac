@@ -1835,7 +1835,7 @@ impl Default for Fc0status {
         Fc0status(0)
     }
 }
-#[doc = "Interrupt Force"]
+#[doc = "Interrupt status after masking & forcing"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Int(pub u32);

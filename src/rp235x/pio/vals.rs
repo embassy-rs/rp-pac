@@ -3,7 +3,7 @@
 pub struct ExecctrlStatusN(pub u8);
 impl ExecctrlStatusN {
     #[doc = "Index 0-7 of an IRQ flag in this PIO block"]
-    pub const IRQ: Self = Self(0);
+    pub const IRQ: Self = Self(0x0);
     #[doc = "Index 0-7 of an IRQ flag in the next lower-numbered PIO block"]
     pub const IRQ_PREVPIO: Self = Self(0x08);
     #[doc = "Index 0-7 of an IRQ flag in the next higher-numbered PIO block"]
@@ -33,7 +33,7 @@ impl From<ExecctrlStatusN> for u8 {
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub enum ExecctrlStatusSel {
     #[doc = "All-ones if TX FIFO level < N, otherwise all-zeroes"]
-    TXLEVEL = 0,
+    TXLEVEL = 0x0,
     #[doc = "All-ones if RX FIFO level < N, otherwise all-zeroes"]
     RXLEVEL = 0x01,
     #[doc = "All-ones if the indexed IRQ flag is raised, otherwise all-zeroes"]
@@ -66,7 +66,7 @@ impl From<ExecctrlStatusSel> for u8 {
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub enum Version {
     #[doc = "Version 0 (RP2040)"]
-    V0 = 0,
+    V0 = 0x0,
     #[doc = "Version 1 (RP2350)"]
     V1 = 0x01,
     _RESERVED_2 = 0x02,

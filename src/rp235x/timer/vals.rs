@@ -1,7 +1,7 @@
 #[repr(u8)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub enum ClkSys {
-    TICK = 0,
+    TICK = 0x0,
     CLK_SYS = 0x01,
 }
 impl ClkSys {

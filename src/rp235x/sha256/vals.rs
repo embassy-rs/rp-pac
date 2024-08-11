@@ -1,7 +1,7 @@
 #[repr(u8)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub enum DmaSize {
-    _8BIT = 0,
+    _8BIT = 0x0,
     _16BIT = 0x01,
     _32BIT = 0x02,
     _RESERVED_3 = 0x03,

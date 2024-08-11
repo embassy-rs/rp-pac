@@ -17,12 +17,12 @@ impl CoresightTrace {
     #[doc = "Control and status register"]
     #[inline(always)]
     pub const fn ctrl_status(self) -> crate::common::Reg<regs::CtrlStatus, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
     }
     #[doc = "FIFO for trace data captured from the TPIU"]
     #[inline(always)]
     pub const fn trace_capture_fifo(self) -> crate::common::Reg<u32, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(4usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
     }
 }
 pub mod regs;

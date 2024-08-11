@@ -371,7 +371,7 @@ impl Default for Gpiobase {
         Gpiobase(0)
     }
 }
-#[doc = "Write-only access to instruction memory location 2"]
+#[doc = "Write-only access to instruction memory location 24"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct InstrMem(pub u32);
@@ -392,7 +392,7 @@ impl Default for InstrMem {
         InstrMem(0)
     }
 }
-#[doc = "Interrupt Force for irq0"]
+#[doc = "Raw Interrupts"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Intr(pub u32);
@@ -590,7 +590,7 @@ impl Default for IrqForce {
         IrqForce(0)
     }
 }
-#[doc = "Current instruction address of state machine 2"]
+#[doc = "Current instruction address of state machine 1"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SmAddr(pub u32);
@@ -645,7 +645,7 @@ impl Default for SmClkdiv {
         SmClkdiv(0)
     }
 }
-#[doc = "Execution/behavioural settings for state machine 2"]
+#[doc = "Execution/behavioural settings for state machine 0"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SmExecctrl(pub u32);
@@ -778,7 +778,7 @@ impl Default for SmExecctrl {
         SmExecctrl(0)
     }
 }
-#[doc = "Read to see the instruction currently addressed by state machine 1's program counter Write to execute an instruction immediately (including jumps) and then resume execution."]
+#[doc = "Read to see the instruction currently addressed by state machine 2's program counter Write to execute an instruction immediately (including jumps) and then resume execution."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SmInstr(pub u32);
@@ -888,7 +888,7 @@ impl Default for SmPinctrl {
         SmPinctrl(0)
     }
 }
-#[doc = "Control behaviour of the input/output shift registers for state machine 3"]
+#[doc = "Control behaviour of the input/output shift registers for state machine 0"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SmShiftctrl(pub u32);

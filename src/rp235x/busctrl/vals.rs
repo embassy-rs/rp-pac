@@ -1,7 +1,7 @@
 #[repr(u8)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub enum Perfsel {
-    SIOB_PROC1_STALL_UPSTREAM = 0,
+    SIOB_PROC1_STALL_UPSTREAM = 0x0,
     SIOB_PROC1_STALL_DOWNSTREAM = 0x01,
     SIOB_PROC1_ACCESS_CONTESTED = 0x02,
     SIOB_PROC1_ACCESS = 0x03,

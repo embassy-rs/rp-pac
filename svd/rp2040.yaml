@@ -7,14 +7,22 @@ transforms:
       useless: true
 
   # =========== DMA
+  - !DeleteFieldsets
+      from: dma::regs::Int[refs]\d*
   - !MergeEnums
       from: dma::vals::Ch\d+CtrlTrigTreqSel
       to: dma::vals::TreqSel
   - !MergeEnums
       from: dma::vals::Ch\d+CtrlTrigDataSize
       to: dma::vals::DataSize
+  - !MergeEnums
+      from: dma::vals::Ch\d+TransCountMode
+      to: dma::vals::TransCountMode
   - !DeleteEnums
       from: dma::vals::Ch\d+CtrlTrigRingSize
+  - !MergeFieldsets
+      from: dma::regs::Ch\d+TransCount
+      to: dma::regs::ChTransCount
   - !MergeFieldsets
       from: dma::regs::Timer\d+
       to: dma::regs::Timer
@@ -42,6 +50,10 @@ transforms:
       blocks: dma::Dma
       from: timer\d+
       to: timer
+  - !MakeRegisterArray
+      blocks: dma::Dma
+      from: (int[refs])\d*
+      to: $1
 
   # =========== TIMER
   - !MakeRegisterArray

@@ -17,26 +17,26 @@ impl Busctrl {
     #[doc = "Set the priority of each master for bus arbitration."]
     #[inline(always)]
     pub const fn bus_priority(self) -> crate::common::Reg<regs::BusPriority, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
     }
     #[doc = "Bus priority acknowledge"]
     #[inline(always)]
     pub const fn bus_priority_ack(
         self,
     ) -> crate::common::Reg<regs::BusPriorityAck, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(4usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
     }
     #[doc = "Bus fabric performance counter 0"]
     #[inline(always)]
     pub const fn perfctr(self, n: usize) -> crate::common::Reg<regs::Perfctr, crate::common::RW> {
         assert!(n < 4usize);
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(8usize + n * 8usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize + n * 8usize) as _) }
     }
     #[doc = "Bus fabric performance event select for PERFCTR0"]
     #[inline(always)]
     pub const fn perfsel(self, n: usize) -> crate::common::Reg<regs::Perfsel, crate::common::RW> {
         assert!(n < 4usize);
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(12usize + n * 8usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize + n * 8usize) as _) }
     }
 }
 pub mod regs;

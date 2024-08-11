@@ -2,7 +2,7 @@
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub enum Iwidth {
     #[doc = "Single width"]
-    S = 0,
+    S = 0x0,
     #[doc = "Dual width"]
     D = 0x01,
     #[doc = "Quad width"]

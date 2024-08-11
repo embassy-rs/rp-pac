@@ -84,7 +84,7 @@ impl From<Enable> for u16 {
 #[repr(u8)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub enum StatusFreqRange {
-    _1_15MHZ = 0,
+    _1_15MHZ = 0x0,
     _10_30MHZ = 0x01,
     _25_60MHZ = 0x02,
     _40_100MHZ = 0x03,

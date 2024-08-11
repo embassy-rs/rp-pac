@@ -16,12 +16,12 @@ impl Gpio {
     #[doc = "GPIO status"]
     #[inline(always)]
     pub const fn status(self) -> crate::common::Reg<regs::GpioStatus, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
     }
     #[doc = "GPIO control including function select and overrides."]
     #[inline(always)]
     pub const fn ctrl(self) -> crate::common::Reg<regs::GpioCtrl, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(4usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
     }
 }
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -39,23 +39,23 @@ impl Int {
     pub const fn as_ptr(&self) -> *mut () {
         self.ptr as _
     }
-    #[doc = "Interrupt Enable for proc0"]
+    #[doc = "Interrupt Enable for proc1"]
     #[inline(always)]
     pub const fn inte(self, n: usize) -> crate::common::Reg<regs::Int, crate::common::RW> {
         assert!(n < 4usize);
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0usize + n * 4usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize + n * 4usize) as _) }
     }
-    #[doc = "Interrupt Force for proc0"]
+    #[doc = "Interrupt Force for proc1"]
     #[inline(always)]
     pub const fn intf(self, n: usize) -> crate::common::Reg<regs::Int, crate::common::RW> {
         assert!(n < 4usize);
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(16usize + n * 4usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x10usize + n * 4usize) as _) }
     }
-    #[doc = "Interrupt status after masking & forcing for proc0"]
+    #[doc = "Interrupt status after masking & forcing for proc1"]
     #[inline(always)]
     pub const fn ints(self, n: usize) -> crate::common::Reg<regs::Int, crate::common::RW> {
         assert!(n < 4usize);
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(32usize + n * 4usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x20usize + n * 4usize) as _) }
     }
 }
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -76,22 +76,22 @@ impl Io {
     #[inline(always)]
     pub const fn gpio(self, n: usize) -> Gpio {
         assert!(n < 30usize);
-        unsafe { Gpio::from_ptr(self.ptr.add(0usize + n * 8usize) as _) }
+        unsafe { Gpio::from_ptr(self.ptr.add(0x0usize + n * 8usize) as _) }
     }
     #[doc = "Raw Interrupts"]
     #[inline(always)]
     pub const fn intr(self, n: usize) -> crate::common::Reg<regs::Int, crate::common::RW> {
         assert!(n < 4usize);
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(240usize + n * 4usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xf0usize + n * 4usize) as _) }
     }
     #[inline(always)]
     pub const fn int_proc(self, n: usize) -> Int {
         assert!(n < 2usize);
-        unsafe { Int::from_ptr(self.ptr.add(256usize + n * 48usize) as _) }
+        unsafe { Int::from_ptr(self.ptr.add(0x0100usize + n * 48usize) as _) }
     }
     #[inline(always)]
     pub const fn int_dormant_wake(self) -> Int {
-        unsafe { Int::from_ptr(self.ptr.add(352usize) as _) }
+        unsafe { Int::from_ptr(self.ptr.add(0x0160usize) as _) }
     }
 }
 pub mod regs;

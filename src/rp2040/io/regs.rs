@@ -157,7 +157,7 @@ impl Default for GpioStatus {
         GpioStatus(0)
     }
 }
-#[doc = "Interrupt Force for proc0"]
+#[doc = "Interrupt status after masking & forcing for proc1"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Int(pub u32);

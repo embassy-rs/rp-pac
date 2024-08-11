@@ -17,17 +17,17 @@ impl VregAndChipReset {
     #[doc = "Voltage regulator control and status"]
     #[inline(always)]
     pub const fn vreg(self) -> crate::common::Reg<regs::Vreg, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
     }
     #[doc = "brown-out detection control"]
     #[inline(always)]
     pub const fn bod(self) -> crate::common::Reg<regs::Bod, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(4usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
     }
     #[doc = "Chip reset control and status"]
     #[inline(always)]
     pub const fn chip_reset(self) -> crate::common::Reg<regs::ChipReset, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(8usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
     }
 }
 pub mod regs;

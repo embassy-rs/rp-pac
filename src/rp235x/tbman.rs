@@ -17,7 +17,7 @@ impl Tbman {
     #[doc = "Indicates the type of platform in use"]
     #[inline(always)]
     pub const fn platform(self) -> crate::common::Reg<regs::Platform, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
     }
 }
 pub mod regs;

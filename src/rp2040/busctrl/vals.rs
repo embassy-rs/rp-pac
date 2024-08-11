@@ -1,7 +1,7 @@
 #[repr(u8)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub enum Perfsel {
-    APB_CONTESTED = 0,
+    APB_CONTESTED = 0x0,
     APB = 0x01,
     FASTPERI_CONTESTED = 0x02,
     FASTPERI = 0x03,

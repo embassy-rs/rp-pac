@@ -1,7 +1,7 @@
 #[repr(u8)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub enum Drive {
-    _2MA = 0,
+    _2MA = 0x0,
     _4MA = 0x01,
     _8MA = 0x02,
     _12MA = 0x03,
@@ -32,7 +32,7 @@ impl From<Drive> for u8 {
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub enum VoltageSelect {
     #[doc = "Set voltage to 3.3V (DVDD >= 2V5)"]
-    _3V3 = 0,
+    _3V3 = 0x0,
     #[doc = "Set voltage to 1.8V (DVDD <= 1V8)"]
     _1V8 = 0x01,
 }

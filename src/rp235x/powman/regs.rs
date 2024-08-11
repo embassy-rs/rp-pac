@@ -500,8 +500,8 @@ impl Default for Dbgconfig {
 #[doc = "Configures a gpio as a power mode aware control output"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct ExtCtrl0(pub u32);
-impl ExtCtrl0 {
+pub struct ExtCtrl(pub u32);
+impl ExtCtrl {
     #[doc = "selects from gpio 0->30 set to 31 to disable this feature"]
     #[inline(always)]
     pub const fn gpio_select(&self) -> u8 {
@@ -554,73 +554,10 @@ impl ExtCtrl0 {
         self.0 = (self.0 & !(0x01 << 14usize)) | (((val as u32) & 0x01) << 14usize);
     }
 }
-impl Default for ExtCtrl0 {
+impl Default for ExtCtrl {
     #[inline(always)]
-    fn default() -> ExtCtrl0 {
-        ExtCtrl0(0)
-    }
-}
-#[doc = "Configures a gpio as a power mode aware control output"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct ExtCtrl1(pub u32);
-impl ExtCtrl1 {
-    #[doc = "selects from gpio 0->30 set to 31 to disable this feature"]
-    #[inline(always)]
-    pub const fn gpio_select(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0x3f;
-        val as u8
-    }
-    #[doc = "selects from gpio 0->30 set to 31 to disable this feature"]
-    #[inline(always)]
-    pub fn set_gpio_select(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x3f << 0usize)) | (((val as u32) & 0x3f) << 0usize);
-    }
-    #[inline(always)]
-    pub const fn init(&self) -> bool {
-        let val = (self.0 >> 8usize) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_init(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
-    }
-    #[inline(always)]
-    pub const fn init_state(&self) -> bool {
-        let val = (self.0 >> 12usize) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_init_state(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
-    }
-    #[doc = "output level when entering the low power state"]
-    #[inline(always)]
-    pub const fn lp_entry_state(&self) -> bool {
-        let val = (self.0 >> 13usize) & 0x01;
-        val != 0
-    }
-    #[doc = "output level when entering the low power state"]
-    #[inline(always)]
-    pub fn set_lp_entry_state(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u32) & 0x01) << 13usize);
-    }
-    #[doc = "output level when exiting the low power state"]
-    #[inline(always)]
-    pub const fn lp_exit_state(&self) -> bool {
-        let val = (self.0 >> 14usize) & 0x01;
-        val != 0
-    }
-    #[doc = "output level when exiting the low power state"]
-    #[inline(always)]
-    pub fn set_lp_exit_state(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 14usize)) | (((val as u32) & 0x01) << 14usize);
-    }
-}
-impl Default for ExtCtrl1 {
-    #[inline(always)]
-    fn default() -> ExtCtrl1 {
-        ExtCtrl1(0)
+    fn default() -> ExtCtrl {
+        ExtCtrl(0)
     }
 }
 #[doc = "Select a GPIO to use as a time reference, the source can be used to drive the low power clock at 32kHz, or to provide a 1ms tick to the timer, or provide a 1Hz tick to the timer. The tick selection is controlled by the POWMAN_TIMER register."]
@@ -660,8 +597,8 @@ impl Default for ExtTimeRef {
 #[doc = "Interrupt Enable"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Inte(pub u32);
-impl Inte {
+pub struct Int(pub u32);
+impl Int {
     #[inline(always)]
     pub const fn vreg_output_low(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -703,166 +640,10 @@ impl Inte {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
 }
-impl Default for Inte {
+impl Default for Int {
     #[inline(always)]
-    fn default() -> Inte {
-        Inte(0)
-    }
-}
-#[doc = "Interrupt Force"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Intf(pub u32);
-impl Intf {
-    #[inline(always)]
-    pub const fn vreg_output_low(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_vreg_output_low(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-    }
-    #[inline(always)]
-    pub const fn timer(&self) -> bool {
-        let val = (self.0 >> 1usize) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_timer(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
-    }
-    #[doc = "Source is state.req_ignored"]
-    #[inline(always)]
-    pub const fn state_req_ignored(&self) -> bool {
-        let val = (self.0 >> 2usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Source is state.req_ignored"]
-    #[inline(always)]
-    pub fn set_state_req_ignored(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
-    }
-    #[doc = "Source is state.pwrup_while_waiting"]
-    #[inline(always)]
-    pub const fn pwrup_while_waiting(&self) -> bool {
-        let val = (self.0 >> 3usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Source is state.pwrup_while_waiting"]
-    #[inline(always)]
-    pub fn set_pwrup_while_waiting(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
-    }
-}
-impl Default for Intf {
-    #[inline(always)]
-    fn default() -> Intf {
-        Intf(0)
-    }
-}
-#[doc = "Raw Interrupts"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Intr(pub u32);
-impl Intr {
-    #[inline(always)]
-    pub const fn vreg_output_low(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_vreg_output_low(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-    }
-    #[inline(always)]
-    pub const fn timer(&self) -> bool {
-        let val = (self.0 >> 1usize) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_timer(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
-    }
-    #[doc = "Source is state.req_ignored"]
-    #[inline(always)]
-    pub const fn state_req_ignored(&self) -> bool {
-        let val = (self.0 >> 2usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Source is state.req_ignored"]
-    #[inline(always)]
-    pub fn set_state_req_ignored(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
-    }
-    #[doc = "Source is state.pwrup_while_waiting"]
-    #[inline(always)]
-    pub const fn pwrup_while_waiting(&self) -> bool {
-        let val = (self.0 >> 3usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Source is state.pwrup_while_waiting"]
-    #[inline(always)]
-    pub fn set_pwrup_while_waiting(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
-    }
-}
-impl Default for Intr {
-    #[inline(always)]
-    fn default() -> Intr {
-        Intr(0)
-    }
-}
-#[doc = "Interrupt status after masking & forcing"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Ints(pub u32);
-impl Ints {
-    #[inline(always)]
-    pub const fn vreg_output_low(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_vreg_output_low(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-    }
-    #[inline(always)]
-    pub const fn timer(&self) -> bool {
-        let val = (self.0 >> 1usize) & 0x01;
-        val != 0
-    }
-    #[inline(always)]
-    pub fn set_timer(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
-    }
-    #[doc = "Source is state.req_ignored"]
-    #[inline(always)]
-    pub const fn state_req_ignored(&self) -> bool {
-        let val = (self.0 >> 2usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Source is state.req_ignored"]
-    #[inline(always)]
-    pub fn set_state_req_ignored(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
-    }
-    #[doc = "Source is state.pwrup_while_waiting"]
-    #[inline(always)]
-    pub const fn pwrup_while_waiting(&self) -> bool {
-        let val = (self.0 >> 3usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Source is state.pwrup_while_waiting"]
-    #[inline(always)]
-    pub fn set_pwrup_while_waiting(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
-    }
-}
-impl Default for Ints {
-    #[inline(always)]
-    fn default() -> Ints {
-        Ints(0)
+    fn default() -> Int {
+        Int(0)
     }
 }
 #[doc = "Indicates which pwrup source triggered the last switched-core power up 0 = chip reset, for the source of the last reset see POWMAN_CHIP_RESET 1 = pwrup0 2 = pwrup1 3 = pwrup2 4 = pwrup3 5 = coresight_pwrup 6 = alarm_pwrup"]
@@ -1036,8 +817,8 @@ impl Default for PowFastdiv {
 #[doc = "4 GPIO powerup events can be configured to wake the chip up from a low power state. The pwrups are level/edge sensitive and can be set to trigger on a high/rising or low/falling event The number of gpios available depends on the package option. An invalid selection will be ignored source = 0 selects gpio0 . . source = 47 selects gpio47 source = 48 selects qspi_ss source = 49 selects qspi_sd0 source = 50 selects qspi_sd1 source = 51 selects qspi_sd2 source = 52 selects qspi_sd3 source = 53 selects qspi_sclk level = 0 triggers the pwrup when the source is low level = 1 triggers the pwrup when the source is high"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Pwrup0(pub u32);
-impl Pwrup0 {
+pub struct Pwrup(pub u32);
+impl Pwrup {
     #[inline(always)]
     pub const fn source(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x3f;
@@ -1059,23 +840,23 @@ impl Pwrup0 {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
     #[inline(always)]
-    pub const fn direction(&self) -> super::vals::Pwrup0direction {
+    pub const fn direction(&self) -> super::vals::Direction {
         let val = (self.0 >> 7usize) & 0x01;
-        super::vals::Pwrup0direction::from_bits(val as u8)
+        super::vals::Direction::from_bits(val as u8)
     }
     #[inline(always)]
-    pub fn set_direction(&mut self, val: super::vals::Pwrup0direction) {
+    pub fn set_direction(&mut self, val: super::vals::Direction) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val.to_bits() as u32) & 0x01) << 7usize);
     }
     #[doc = "Edge or level detect. Edge will detect a 0 to 1 transition (or 1 to 0 transition). Level will detect a 1 or 0. Both types of event get latched into the current_pwrup_req register."]
     #[inline(always)]
-    pub const fn mode(&self) -> super::vals::Pwrup0mode {
+    pub const fn mode(&self) -> super::vals::Mode {
         let val = (self.0 >> 8usize) & 0x01;
-        super::vals::Pwrup0mode::from_bits(val as u8)
+        super::vals::Mode::from_bits(val as u8)
     }
     #[doc = "Edge or level detect. Edge will detect a 0 to 1 transition (or 1 to 0 transition). Level will detect a 1 or 0. Both types of event get latched into the current_pwrup_req register."]
     #[inline(always)]
-    pub fn set_mode(&mut self, val: super::vals::Pwrup0mode) {
+    pub fn set_mode(&mut self, val: super::vals::Mode) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val.to_bits() as u32) & 0x01) << 8usize);
     }
     #[doc = "Status of gpio wakeup. Write to 1 to clear a latched edge detect."]
@@ -1101,232 +882,10 @@ impl Pwrup0 {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
 }
-impl Default for Pwrup0 {
+impl Default for Pwrup {
     #[inline(always)]
-    fn default() -> Pwrup0 {
-        Pwrup0(0)
-    }
-}
-#[doc = "4 GPIO powerup events can be configured to wake the chip up from a low power state. The pwrups are level/edge sensitive and can be set to trigger on a high/rising or low/falling event The number of gpios available depends on the package option. An invalid selection will be ignored source = 0 selects gpio0 . . source = 47 selects gpio47 source = 48 selects qspi_ss source = 49 selects qspi_sd0 source = 50 selects qspi_sd1 source = 51 selects qspi_sd2 source = 52 selects qspi_sd3 source = 53 selects qspi_sclk level = 0 triggers the pwrup when the source is low level = 1 triggers the pwrup when the source is high"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Pwrup1(pub u32);
-impl Pwrup1 {
-    #[inline(always)]
-    pub const fn source(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0x3f;
-        val as u8
-    }
-    #[inline(always)]
-    pub fn set_source(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x3f << 0usize)) | (((val as u32) & 0x3f) << 0usize);
-    }
-    #[doc = "Set to 1 to enable the wakeup source. Set to 0 to disable the wakeup source and clear a pending wakeup event. If using edge detect a latched edge needs to be cleared by writing 1 to the status register also."]
-    #[inline(always)]
-    pub const fn enable(&self) -> bool {
-        let val = (self.0 >> 6usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Set to 1 to enable the wakeup source. Set to 0 to disable the wakeup source and clear a pending wakeup event. If using edge detect a latched edge needs to be cleared by writing 1 to the status register also."]
-    #[inline(always)]
-    pub fn set_enable(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
-    }
-    #[inline(always)]
-    pub const fn direction(&self) -> super::vals::Pwrup1direction {
-        let val = (self.0 >> 7usize) & 0x01;
-        super::vals::Pwrup1direction::from_bits(val as u8)
-    }
-    #[inline(always)]
-    pub fn set_direction(&mut self, val: super::vals::Pwrup1direction) {
-        self.0 = (self.0 & !(0x01 << 7usize)) | (((val.to_bits() as u32) & 0x01) << 7usize);
-    }
-    #[doc = "Edge or level detect. Edge will detect a 0 to 1 transition (or 1 to 0 transition). Level will detect a 1 or 0. Both types of event get latched into the current_pwrup_req register."]
-    #[inline(always)]
-    pub const fn mode(&self) -> super::vals::Pwrup1mode {
-        let val = (self.0 >> 8usize) & 0x01;
-        super::vals::Pwrup1mode::from_bits(val as u8)
-    }
-    #[doc = "Edge or level detect. Edge will detect a 0 to 1 transition (or 1 to 0 transition). Level will detect a 1 or 0. Both types of event get latched into the current_pwrup_req register."]
-    #[inline(always)]
-    pub fn set_mode(&mut self, val: super::vals::Pwrup1mode) {
-        self.0 = (self.0 & !(0x01 << 8usize)) | (((val.to_bits() as u32) & 0x01) << 8usize);
-    }
-    #[doc = "Status of gpio wakeup. Write to 1 to clear a latched edge detect."]
-    #[inline(always)]
-    pub const fn status(&self) -> bool {
-        let val = (self.0 >> 9usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Status of gpio wakeup. Write to 1 to clear a latched edge detect."]
-    #[inline(always)]
-    pub fn set_status(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
-    }
-    #[doc = "Value of selected gpio pin (only if enable == 1)"]
-    #[inline(always)]
-    pub const fn raw_status(&self) -> bool {
-        let val = (self.0 >> 10usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Value of selected gpio pin (only if enable == 1)"]
-    #[inline(always)]
-    pub fn set_raw_status(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
-    }
-}
-impl Default for Pwrup1 {
-    #[inline(always)]
-    fn default() -> Pwrup1 {
-        Pwrup1(0)
-    }
-}
-#[doc = "4 GPIO powerup events can be configured to wake the chip up from a low power state. The pwrups are level/edge sensitive and can be set to trigger on a high/rising or low/falling event The number of gpios available depends on the package option. An invalid selection will be ignored source = 0 selects gpio0 . . source = 47 selects gpio47 source = 48 selects qspi_ss source = 49 selects qspi_sd0 source = 50 selects qspi_sd1 source = 51 selects qspi_sd2 source = 52 selects qspi_sd3 source = 53 selects qspi_sclk level = 0 triggers the pwrup when the source is low level = 1 triggers the pwrup when the source is high"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Pwrup2(pub u32);
-impl Pwrup2 {
-    #[inline(always)]
-    pub const fn source(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0x3f;
-        val as u8
-    }
-    #[inline(always)]
-    pub fn set_source(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x3f << 0usize)) | (((val as u32) & 0x3f) << 0usize);
-    }
-    #[doc = "Set to 1 to enable the wakeup source. Set to 0 to disable the wakeup source and clear a pending wakeup event. If using edge detect a latched edge needs to be cleared by writing 1 to the status register also."]
-    #[inline(always)]
-    pub const fn enable(&self) -> bool {
-        let val = (self.0 >> 6usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Set to 1 to enable the wakeup source. Set to 0 to disable the wakeup source and clear a pending wakeup event. If using edge detect a latched edge needs to be cleared by writing 1 to the status register also."]
-    #[inline(always)]
-    pub fn set_enable(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
-    }
-    #[inline(always)]
-    pub const fn direction(&self) -> super::vals::Pwrup2direction {
-        let val = (self.0 >> 7usize) & 0x01;
-        super::vals::Pwrup2direction::from_bits(val as u8)
-    }
-    #[inline(always)]
-    pub fn set_direction(&mut self, val: super::vals::Pwrup2direction) {
-        self.0 = (self.0 & !(0x01 << 7usize)) | (((val.to_bits() as u32) & 0x01) << 7usize);
-    }
-    #[doc = "Edge or level detect. Edge will detect a 0 to 1 transition (or 1 to 0 transition). Level will detect a 1 or 0. Both types of event get latched into the current_pwrup_req register."]
-    #[inline(always)]
-    pub const fn mode(&self) -> super::vals::Pwrup2mode {
-        let val = (self.0 >> 8usize) & 0x01;
-        super::vals::Pwrup2mode::from_bits(val as u8)
-    }
-    #[doc = "Edge or level detect. Edge will detect a 0 to 1 transition (or 1 to 0 transition). Level will detect a 1 or 0. Both types of event get latched into the current_pwrup_req register."]
-    #[inline(always)]
-    pub fn set_mode(&mut self, val: super::vals::Pwrup2mode) {
-        self.0 = (self.0 & !(0x01 << 8usize)) | (((val.to_bits() as u32) & 0x01) << 8usize);
-    }
-    #[doc = "Status of gpio wakeup. Write to 1 to clear a latched edge detect."]
-    #[inline(always)]
-    pub const fn status(&self) -> bool {
-        let val = (self.0 >> 9usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Status of gpio wakeup. Write to 1 to clear a latched edge detect."]
-    #[inline(always)]
-    pub fn set_status(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
-    }
-    #[doc = "Value of selected gpio pin (only if enable == 1)"]
-    #[inline(always)]
-    pub const fn raw_status(&self) -> bool {
-        let val = (self.0 >> 10usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Value of selected gpio pin (only if enable == 1)"]
-    #[inline(always)]
-    pub fn set_raw_status(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
-    }
-}
-impl Default for Pwrup2 {
-    #[inline(always)]
-    fn default() -> Pwrup2 {
-        Pwrup2(0)
-    }
-}
-#[doc = "4 GPIO powerup events can be configured to wake the chip up from a low power state. The pwrups are level/edge sensitive and can be set to trigger on a high/rising or low/falling event The number of gpios available depends on the package option. An invalid selection will be ignored source = 0 selects gpio0 . . source = 47 selects gpio47 source = 48 selects qspi_ss source = 49 selects qspi_sd0 source = 50 selects qspi_sd1 source = 51 selects qspi_sd2 source = 52 selects qspi_sd3 source = 53 selects qspi_sclk level = 0 triggers the pwrup when the source is low level = 1 triggers the pwrup when the source is high"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Pwrup3(pub u32);
-impl Pwrup3 {
-    #[inline(always)]
-    pub const fn source(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0x3f;
-        val as u8
-    }
-    #[inline(always)]
-    pub fn set_source(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x3f << 0usize)) | (((val as u32) & 0x3f) << 0usize);
-    }
-    #[doc = "Set to 1 to enable the wakeup source. Set to 0 to disable the wakeup source and clear a pending wakeup event. If using edge detect a latched edge needs to be cleared by writing 1 to the status register also."]
-    #[inline(always)]
-    pub const fn enable(&self) -> bool {
-        let val = (self.0 >> 6usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Set to 1 to enable the wakeup source. Set to 0 to disable the wakeup source and clear a pending wakeup event. If using edge detect a latched edge needs to be cleared by writing 1 to the status register also."]
-    #[inline(always)]
-    pub fn set_enable(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
-    }
-    #[inline(always)]
-    pub const fn direction(&self) -> super::vals::Pwrup3direction {
-        let val = (self.0 >> 7usize) & 0x01;
-        super::vals::Pwrup3direction::from_bits(val as u8)
-    }
-    #[inline(always)]
-    pub fn set_direction(&mut self, val: super::vals::Pwrup3direction) {
-        self.0 = (self.0 & !(0x01 << 7usize)) | (((val.to_bits() as u32) & 0x01) << 7usize);
-    }
-    #[doc = "Edge or level detect. Edge will detect a 0 to 1 transition (or 1 to 0 transition). Level will detect a 1 or 0. Both types of event get latched into the current_pwrup_req register."]
-    #[inline(always)]
-    pub const fn mode(&self) -> super::vals::Pwrup3mode {
-        let val = (self.0 >> 8usize) & 0x01;
-        super::vals::Pwrup3mode::from_bits(val as u8)
-    }
-    #[doc = "Edge or level detect. Edge will detect a 0 to 1 transition (or 1 to 0 transition). Level will detect a 1 or 0. Both types of event get latched into the current_pwrup_req register."]
-    #[inline(always)]
-    pub fn set_mode(&mut self, val: super::vals::Pwrup3mode) {
-        self.0 = (self.0 & !(0x01 << 8usize)) | (((val.to_bits() as u32) & 0x01) << 8usize);
-    }
-    #[doc = "Status of gpio wakeup. Write to 1 to clear a latched edge detect."]
-    #[inline(always)]
-    pub const fn status(&self) -> bool {
-        let val = (self.0 >> 9usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Status of gpio wakeup. Write to 1 to clear a latched edge detect."]
-    #[inline(always)]
-    pub fn set_status(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
-    }
-    #[doc = "Value of selected gpio pin (only if enable == 1)"]
-    #[inline(always)]
-    pub const fn raw_status(&self) -> bool {
-        let val = (self.0 >> 10usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Value of selected gpio pin (only if enable == 1)"]
-    #[inline(always)]
-    pub fn set_raw_status(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
-    }
-}
-impl Default for Pwrup3 {
-    #[inline(always)]
-    fn default() -> Pwrup3 {
-        Pwrup3(0)
+    fn default() -> Pwrup {
+        Pwrup(0)
     }
 }
 #[doc = "For configuration of the power sequencer Writes are ignored while POWMAN_STATE_CHANGING=1"]

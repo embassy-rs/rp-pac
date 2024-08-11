@@ -3,7 +3,7 @@
 pub struct Arm(pub u16);
 impl Arm {
     #[doc = "Force the glitch detectors to be armed. (Any value other than ARM_NO counts as YES)"]
-    pub const YES: Self = Self(0);
+    pub const YES: Self = Self(0x0);
     #[doc = "Do not force the glitch detectors to be armed"]
     pub const NO: Self = Self(0x5bad);
 }
@@ -32,7 +32,7 @@ impl From<Arm> for u16 {
 pub struct Default(pub u8);
 impl Default {
     #[doc = "Use the default sensitivity configured in OTP for all detectors. (Any value other than DEFAULT_NO counts as YES)"]
-    pub const YES: Self = Self(0);
+    pub const YES: Self = Self(0x0);
     #[doc = "Do not use the default sensitivity configured in OTP. Instead use the value from this register."]
     pub const NO: Self = Self(0xde);
 }
@@ -61,7 +61,7 @@ impl From<Default> for u8 {
 pub struct Disarm(pub u16);
 impl Disarm {
     #[doc = "Do not disarm the glitch detectors. (Any value other than DISARM_YES counts as NO)"]
-    pub const NO: Self = Self(0);
+    pub const NO: Self = Self(0x0);
     #[doc = "Disarm the glitch detectors"]
     pub const YES: Self = Self(0xdcaf);
 }

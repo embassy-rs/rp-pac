@@ -7,14 +7,22 @@ transforms:
       useless: true
 
   # =========== DMA
+  - !DeleteFieldsets
+      from: dma::regs::Int[refs]\d*
   - !MergeEnums
       from: dma::vals::Ch\d+CtrlTrigTreqSel
       to: dma::vals::TreqSel
   - !MergeEnums
       from: dma::vals::Ch\d+CtrlTrigDataSize
       to: dma::vals::DataSize
+  - !MergeEnums
+      from: dma::vals::Ch\d+TransCountMode
+      to: dma::vals::TransCountMode
   - !DeleteEnums
       from: dma::vals::Ch\d+CtrlTrigRingSize
+  - !MergeFieldsets
+      from: dma::regs::Ch\d+TransCount
+      to: dma::regs::ChTransCount
   - !MergeFieldsets
       from: dma::regs::Timer\d+
       to: dma::regs::Timer
@@ -42,25 +50,46 @@ transforms:
       blocks: dma::Dma
       from: timer\d+
       to: timer
+  - !MakeRegisterArray
+      blocks: dma::Dma
+      from: (int[refs])\d*
+      to: $1
+  - !MergeFieldsets
+      from: dma::regs::Seccfg(Irq|Ch)\d+
+      to: dma::regs::Seccfg$1
+  - !MakeRegisterArray
+      blocks: dma::Dma
+      from: seccfg_(ch|irq)\d*
+      to: seccfg_$1
+  - !DeleteFieldsets
+      from: dma::regs::Mpu[LB]ar\d+
+  - !MakeRegisterArray
+      blocks: dma::Dma
+      from: (mpu_[lb]ar)\d+
+      to: $1
+  - !MakeFieldArray
+      fieldsets: dma::regs::SeccfgMisc
+      from: timer\d+_(.+)
+      to: timer_$1
 
   # =========== TIMER
-  - !MakeRegisterArray
-      blocks: timer0::Timer0
-      from: alarm\d+
-      to: alarm
-  - !MergeFieldsets
-      from: timer0::regs::Int[efrs]
-      to: timer0::regs::Int
-  - !MakeFieldArray
-      fieldsets: timer0::regs::Int
-      from: alarm_\d+
-      to: alarm
   - !Rename
       from: timer0::(.*)
       to: timer::$1
   - !Rename
       from: timer::Timer0
       to: timer::Timer
+  - !MakeRegisterArray
+      blocks: timer::Timer
+      from: alarm\d+
+      to: alarm
+  - !MergeFieldsets
+      from: timer::regs::Int[efrs]
+      to: timer::regs::Int
+  - !MakeFieldArray
+      fieldsets: timer::regs::Int
+      from: alarm_\d+
+      to: alarm
 
   # =========== UART
   - !Rename
@@ -147,6 +176,20 @@ transforms:
       blocks: pio::Pio
       from: irq\d+
       to: irqs
+  - !MakeBlock
+      blocks: pio::Pio
+      from: rxf(\d+)_putget(\d+)
+      to_outer: rxf${1}_putget
+      to_inner: putget$2
+      to_block: pio::RxfPutGet
+  - !MakeRegisterArray
+      blocks: pio::Pio
+      from: rxf\d+_putget
+      to: rxf_putget
+  - !MakeRegisterArray
+      blocks: pio::RxfPutGet
+      from: putget\d+
+      to: putget
 
   # ========= SIO
   - !MakeBlock
@@ -244,6 +287,12 @@ transforms:
       main: io::Io
       to: io::Io
       check: NoCheck
+  - !DeleteFieldsets
+      from: io::regs::Irqsummary.*
+  - !MakeRegisterArray
+      blocks: io::Io
+      from: (irqsummary_.*)[01]
+      to: $1
 
   # =========== PADS
   - !Rename
@@ -387,6 +436,153 @@ transforms:
       from: ch\d+
       to: ch
 
+  # =========== ACCESSCTRL
+  - !MergeFieldsets
+      from: accessctrl::regs::(Adc\d+|Busctrl|Clocks|CoresightPeriph|CoresightTrace|Dma|Hstx|I2c\d+|IoBank\d+|Otp|PadsBank\d+|PadsQspi|Pio\d+|PllSys|PllUsb|Powman|Pwm|Resets|Rom|Rosc|Rsm|Sha256|Spi\d+|Sram\d+|Syscfg|Sysinfo|Tbman|Ticks|Timer\d+|Trng|Uart\d+|Usbctrl|Watchdog|XipAux|XipCtrl|XipMain|XipQmi|Xosc)
+      to: accessctrl::regs::Access
+  - !MakeRegisterArray
+      blocks: accessctrl::Accessctrl
+      from: sram\d+
+      to: sram
+
+  # =========== BOOTRAM
+  - !MakeRegisterArray
+      blocks: bootram::Bootram
+      from: bootlock\d+
+      to: bootlock
+
+  # =========== HSTX
+  - !MergeFieldsets
+      from: hstx_ctrl::regs::Bit\d+
+      to: hstx_ctrl::regs::Bit
+  - !MakeRegisterArray
+      blocks: hstx_ctrl::HstxCtrl
+      from: bit\d+
+      to: bit
+
+  # =========== OTP
+  - !MergeEnums
+      from: otp::vals::SwLock\d+(.*)
+      to: otp::vals::SwLock$1
+  - !MergeFieldsets
+      from: otp::regs::SwLock\d+
+      to: otp::regs::SwLock
+  - !MergeFieldsets
+      from: otp::regs::Int[erfs]
+      to: otp::regs::Int
+  - !MakeRegisterArray
+      blocks: otp::Otp
+      from: sw_lock\d+
+      to: sw_lock
+  - !MakeRegisterArray
+      blocks: otp::Otp
+      from: crt_key_w\d+
+      to: crt_key
+  - !MakeRegisterArray
+      blocks: otp::Otp
+      from: (sbpi_[rw]data)_\d+
+      to: $1
+
+  # =========== OTP_DATA_RAW
+  - !MergeEnums
+      from: otp_data_raw::vals::Page\d+Lock1Lock.*
+      to: otp_data_raw::vals::PageLock
+  - !MergeEnums
+      from: otp_data_raw::vals::Page\d+Lock0NoKeyState
+      to: otp_data_raw::vals::PageLockNoKeyState
+  - !MergeFieldsets
+      from: otp_data_raw::regs::Page\d+Lock0
+      to: otp_data_raw::regs::PageLock0
+      main: otp_data_raw::regs::Page63Lock0
+      check: NoCheck
+  - !MergeFieldsets
+      from: otp_data_raw::regs::Page\d+Lock1
+      to: otp_data_raw::regs::PageLock1
+      main: otp_data_raw::regs::Page63Lock1
+      check: NoCheck
+  - !MergeFieldsets
+      from: otp_data_raw::regs::Key\d+Valid
+      to: otp_data_raw::regs::KeyValid
+  - !MakeRegisterArray
+      blocks: otp_data_raw::OtpDataRaw
+      from: key\d+_valid
+      to: key_valid
+  - !DeleteFieldsets
+      from: otp_data_raw::regs::(BootKey|Key)\d+
+  - !MakeBlock
+      blocks: otp_data_raw::OtpDataRaw
+      from: page(\d+)_lock(\d+)
+      to_outer: page${1}_lock
+      to_inner: lock$2
+      to_block: otp_data_raw::PageLock
+  - !MakeRegisterArray
+      blocks: otp_data_raw::OtpDataRaw
+      from: page\d+_lock
+      to: page_lock
+  - !MakeBlock
+      blocks: otp_data_raw::OtpDataRaw
+      from: key(\d+)_(\d+)
+      to_outer: key${1}
+      to_inner: part$2
+      to_block: otp_data_raw::Key
+  - !MakeRegisterArray
+      blocks: otp_data_raw::OtpDataRaw
+      from: key\d+
+      to: key
+  - !MakeBlock
+      blocks: otp_data_raw::OtpDataRaw
+      from: bootkey(\d+)_(\d+)
+      to_outer: bootkey${1}
+      to_inner: part$2
+      to_block: otp_data_raw::BootKey
+  - !MakeRegisterArray
+      blocks: otp_data_raw::OtpDataRaw
+      from: bootkey\d+
+      to: bootkey
+
+
+  # =========== QMI
+  - !MergeEnums
+      from: qmi::vals::M\d+([RW]fmt|Timing)(.*)
+      to: qmi::vals::$2
+  - !MergeFieldsets
+      from: qmi::regs::Atrans\d+
+      to: qmi::regs::Atrans
+  - !MergeFieldsets
+      from: qmi::regs::M\d+(.*)
+      to: qmi::regs::$1
+  - !MakeRegisterArray
+      blocks: qmi::Qmi
+      from: atrans\d+
+      to: atrans
+  - !MakeBlock
+      blocks: qmi::Qmi
+      from: m(\d+)_(.*)
+      to_outer: mem${1}
+      to_inner: $2
+      to_block: qmi::Mem
+  - !MakeRegisterArray
+      blocks: qmi::Qmi
+      from: mem\d+
+      to: mem
+
+  # =========== POWMAN
+  - !MergeEnums
+      from: powman::vals::Pwrup\d+(.*)
+      to: powman::vals::$1
+  - !MergeFieldsets
+      from: powman::regs::ExtCtrl\d+
+      to: powman::regs::ExtCtrl
+  - !MergeFieldsets
+      from: powman::regs::Pwrup\d+
+      to: powman::regs::Pwrup
+  - !MergeFieldsets
+      from: powman::regs::Int[fers]
+      to: powman::regs::Int
+  - !MakeRegisterArray
+      blocks: powman::Powman
+      from: (pwrup|scratch|boot)\d+
+      to: $1
 
   # =========== Misc
   - !MergeEnums
@@ -408,5 +604,6 @@ transforms:
       from: swi_irq::.*
   - !Delete
       from: pads_qspi::.*
-  - !FixRegisterBitSizes # There's some 24-bit regs. This changes them to 32-bit with a 24-bit field.
+  - !FixRegisterBitSizes # There's some 24-bit regs. This changes them to 32-bit.
+      create_fieldsets: false
   - !Sanitize

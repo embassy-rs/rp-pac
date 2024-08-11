@@ -1,7 +1,7 @@
 #[repr(u8)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub enum EpBufferControlDoubleBufferIsoOffset {
-    _128 = 0,
+    _128 = 0x0,
     _256 = 0x01,
     _512 = 0x02,
     _1024 = 0x03,
@@ -31,7 +31,7 @@ impl From<EpBufferControlDoubleBufferIsoOffset> for u8 {
 #[repr(u8)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub enum EpControlEndpointType {
-    CONTROL = 0,
+    CONTROL = 0x0,
     ISOCHRONOUS = 0x01,
     BULK = 0x02,
     INTERRUPT = 0x03,

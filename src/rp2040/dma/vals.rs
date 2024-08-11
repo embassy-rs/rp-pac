@@ -2,7 +2,7 @@
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub enum Calc {
     #[doc = "Calculate a CRC-32 (IEEE802.3 polynomial)"]
-    CRC32 = 0,
+    CRC32 = 0x0,
     #[doc = "Calculate a CRC-32 (IEEE802.3 polynomial) with bit reversed data"]
     CRC32R = 0x01,
     #[doc = "Calculate a CRC-16-CCITT"]
@@ -49,7 +49,7 @@ impl From<Calc> for u8 {
 #[repr(u8)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub enum DataSize {
-    SIZE_BYTE = 0,
+    SIZE_BYTE = 0x0,
     SIZE_HALFWORD = 0x01,
     SIZE_WORD = 0x02,
     _RESERVED_3 = 0x03,
@@ -80,7 +80,7 @@ impl From<DataSize> for u8 {
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub enum TreqSel {
     #[doc = "Select PIO0's TX FIFO 0 as TREQ"]
-    PIO0_TX0 = 0,
+    PIO0_TX0 = 0x0,
     #[doc = "Select PIO0's TX FIFO 1 as TREQ"]
     PIO0_TX1 = 0x01,
     #[doc = "Select PIO0's TX FIFO 2 as TREQ"]

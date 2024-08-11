@@ -1,144 +1,8 @@
-#[doc = "Configure address translation for XIP virtual addresses 0x000000 through 0x3fffff (a 4 MiB window starting at +0 MiB). Address translation allows a program image to be executed in place at multiple physical flash addresses (for example, a double-buffered flash image for over-the-air updates), without the overhead of position-independent code. At reset, the address translation registers are initialised to an identity mapping, so that they can be ignored if address translation is not required. Note that the XIP cache is fully virtually addressed, so a cache flush is required after changing the address translation."]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Atrans0(pub u32);
-impl Atrans0 {
-    #[doc = "Physical address base for this virtual address range, in units of 4 kiB (one flash sector). Taking a 24-bit virtual address, firstly bits 23:22 (the two MSBs) are masked to zero, and then BASE is added to bits 23:12 (the upper 12 bits) to form the physical address. Translation wraps on a 16 MiB boundary."]
-    #[inline(always)]
-    pub const fn base(&self) -> u16 {
-        let val = (self.0 >> 0usize) & 0x0fff;
-        val as u16
-    }
-    #[doc = "Physical address base for this virtual address range, in units of 4 kiB (one flash sector). Taking a 24-bit virtual address, firstly bits 23:22 (the two MSBs) are masked to zero, and then BASE is added to bits 23:12 (the upper 12 bits) to form the physical address. Translation wraps on a 16 MiB boundary."]
-    #[inline(always)]
-    pub fn set_base(&mut self, val: u16) {
-        self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
-    }
-    #[doc = "Translation aperture size for this virtual address range, in units of 4 kiB (one flash sector). Bits 21:12 of the virtual address are compared to SIZE. Offsets greater than SIZE return a bus error, and do not cause a QSPI access."]
-    #[inline(always)]
-    pub const fn size(&self) -> u16 {
-        let val = (self.0 >> 16usize) & 0x07ff;
-        val as u16
-    }
-    #[doc = "Translation aperture size for this virtual address range, in units of 4 kiB (one flash sector). Bits 21:12 of the virtual address are compared to SIZE. Offsets greater than SIZE return a bus error, and do not cause a QSPI access."]
-    #[inline(always)]
-    pub fn set_size(&mut self, val: u16) {
-        self.0 = (self.0 & !(0x07ff << 16usize)) | (((val as u32) & 0x07ff) << 16usize);
-    }
-}
-impl Default for Atrans0 {
-    #[inline(always)]
-    fn default() -> Atrans0 {
-        Atrans0(0)
-    }
-}
-#[doc = "Configure address translation for XIP virtual addresses 0x400000 through 0x7fffff (a 4 MiB window starting at +4 MiB). Address translation allows a program image to be executed in place at multiple physical flash addresses (for example, a double-buffered flash image for over-the-air updates), without the overhead of position-independent code. At reset, the address translation registers are initialised to an identity mapping, so that they can be ignored if address translation is not required. Note that the XIP cache is fully virtually addressed, so a cache flush is required after changing the address translation."]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Atrans1(pub u32);
-impl Atrans1 {
-    #[doc = "Physical address base for this virtual address range, in units of 4 kiB (one flash sector). Taking a 24-bit virtual address, firstly bits 23:22 (the two MSBs) are masked to zero, and then BASE is added to bits 23:12 (the upper 12 bits) to form the physical address. Translation wraps on a 16 MiB boundary."]
-    #[inline(always)]
-    pub const fn base(&self) -> u16 {
-        let val = (self.0 >> 0usize) & 0x0fff;
-        val as u16
-    }
-    #[doc = "Physical address base for this virtual address range, in units of 4 kiB (one flash sector). Taking a 24-bit virtual address, firstly bits 23:22 (the two MSBs) are masked to zero, and then BASE is added to bits 23:12 (the upper 12 bits) to form the physical address. Translation wraps on a 16 MiB boundary."]
-    #[inline(always)]
-    pub fn set_base(&mut self, val: u16) {
-        self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
-    }
-    #[doc = "Translation aperture size for this virtual address range, in units of 4 kiB (one flash sector). Bits 21:12 of the virtual address are compared to SIZE. Offsets greater than SIZE return a bus error, and do not cause a QSPI access."]
-    #[inline(always)]
-    pub const fn size(&self) -> u16 {
-        let val = (self.0 >> 16usize) & 0x07ff;
-        val as u16
-    }
-    #[doc = "Translation aperture size for this virtual address range, in units of 4 kiB (one flash sector). Bits 21:12 of the virtual address are compared to SIZE. Offsets greater than SIZE return a bus error, and do not cause a QSPI access."]
-    #[inline(always)]
-    pub fn set_size(&mut self, val: u16) {
-        self.0 = (self.0 & !(0x07ff << 16usize)) | (((val as u32) & 0x07ff) << 16usize);
-    }
-}
-impl Default for Atrans1 {
-    #[inline(always)]
-    fn default() -> Atrans1 {
-        Atrans1(0)
-    }
-}
-#[doc = "Configure address translation for XIP virtual addresses 0x800000 through 0xbfffff (a 4 MiB window starting at +8 MiB). Address translation allows a program image to be executed in place at multiple physical flash addresses (for example, a double-buffered flash image for over-the-air updates), without the overhead of position-independent code. At reset, the address translation registers are initialised to an identity mapping, so that they can be ignored if address translation is not required. Note that the XIP cache is fully virtually addressed, so a cache flush is required after changing the address translation."]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Atrans2(pub u32);
-impl Atrans2 {
-    #[doc = "Physical address base for this virtual address range, in units of 4 kiB (one flash sector). Taking a 24-bit virtual address, firstly bits 23:22 (the two MSBs) are masked to zero, and then BASE is added to bits 23:12 (the upper 12 bits) to form the physical address. Translation wraps on a 16 MiB boundary."]
-    #[inline(always)]
-    pub const fn base(&self) -> u16 {
-        let val = (self.0 >> 0usize) & 0x0fff;
-        val as u16
-    }
-    #[doc = "Physical address base for this virtual address range, in units of 4 kiB (one flash sector). Taking a 24-bit virtual address, firstly bits 23:22 (the two MSBs) are masked to zero, and then BASE is added to bits 23:12 (the upper 12 bits) to form the physical address. Translation wraps on a 16 MiB boundary."]
-    #[inline(always)]
-    pub fn set_base(&mut self, val: u16) {
-        self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
-    }
-    #[doc = "Translation aperture size for this virtual address range, in units of 4 kiB (one flash sector). Bits 21:12 of the virtual address are compared to SIZE. Offsets greater than SIZE return a bus error, and do not cause a QSPI access."]
-    #[inline(always)]
-    pub const fn size(&self) -> u16 {
-        let val = (self.0 >> 16usize) & 0x07ff;
-        val as u16
-    }
-    #[doc = "Translation aperture size for this virtual address range, in units of 4 kiB (one flash sector). Bits 21:12 of the virtual address are compared to SIZE. Offsets greater than SIZE return a bus error, and do not cause a QSPI access."]
-    #[inline(always)]
-    pub fn set_size(&mut self, val: u16) {
-        self.0 = (self.0 & !(0x07ff << 16usize)) | (((val as u32) & 0x07ff) << 16usize);
-    }
-}
-impl Default for Atrans2 {
-    #[inline(always)]
-    fn default() -> Atrans2 {
-        Atrans2(0)
-    }
-}
-#[doc = "Configure address translation for XIP virtual addresses 0xc00000 through 0xffffff (a 4 MiB window starting at +12 MiB). Address translation allows a program image to be executed in place at multiple physical flash addresses (for example, a double-buffered flash image for over-the-air updates), without the overhead of position-independent code. At reset, the address translation registers are initialised to an identity mapping, so that they can be ignored if address translation is not required. Note that the XIP cache is fully virtually addressed, so a cache flush is required after changing the address translation."]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Atrans3(pub u32);
-impl Atrans3 {
-    #[doc = "Physical address base for this virtual address range, in units of 4 kiB (one flash sector). Taking a 24-bit virtual address, firstly bits 23:22 (the two MSBs) are masked to zero, and then BASE is added to bits 23:12 (the upper 12 bits) to form the physical address. Translation wraps on a 16 MiB boundary."]
-    #[inline(always)]
-    pub const fn base(&self) -> u16 {
-        let val = (self.0 >> 0usize) & 0x0fff;
-        val as u16
-    }
-    #[doc = "Physical address base for this virtual address range, in units of 4 kiB (one flash sector). Taking a 24-bit virtual address, firstly bits 23:22 (the two MSBs) are masked to zero, and then BASE is added to bits 23:12 (the upper 12 bits) to form the physical address. Translation wraps on a 16 MiB boundary."]
-    #[inline(always)]
-    pub fn set_base(&mut self, val: u16) {
-        self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
-    }
-    #[doc = "Translation aperture size for this virtual address range, in units of 4 kiB (one flash sector). Bits 21:12 of the virtual address are compared to SIZE. Offsets greater than SIZE return a bus error, and do not cause a QSPI access."]
-    #[inline(always)]
-    pub const fn size(&self) -> u16 {
-        let val = (self.0 >> 16usize) & 0x07ff;
-        val as u16
-    }
-    #[doc = "Translation aperture size for this virtual address range, in units of 4 kiB (one flash sector). Bits 21:12 of the virtual address are compared to SIZE. Offsets greater than SIZE return a bus error, and do not cause a QSPI access."]
-    #[inline(always)]
-    pub fn set_size(&mut self, val: u16) {
-        self.0 = (self.0 & !(0x07ff << 16usize)) | (((val as u32) & 0x07ff) << 16usize);
-    }
-}
-impl Default for Atrans3 {
-    #[inline(always)]
-    fn default() -> Atrans3 {
-        Atrans3(0)
-    }
-}
 #[doc = "Configure address translation for XIP virtual addresses 0x1000000 through 0x13fffff (a 4 MiB window starting at +16 MiB). Address translation allows a program image to be executed in place at multiple physical flash addresses (for example, a double-buffered flash image for over-the-air updates), without the overhead of position-independent code. At reset, the address translation registers are initialised to an identity mapping, so that they can be ignored if address translation is not required. Note that the XIP cache is fully virtually addressed, so a cache flush is required after changing the address translation."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Atrans4(pub u32);
-impl Atrans4 {
+pub struct Atrans(pub u32);
+impl Atrans {
     #[doc = "Physical address base for this virtual address range, in units of 4 kiB (one flash sector). Taking a 24-bit virtual address, firstly bits 23:22 (the two MSBs) are masked to zero, and then BASE is added to bits 23:12 (the upper 12 bits) to form the physical address. Translation wraps on a 16 MiB boundary."]
     #[inline(always)]
     pub const fn base(&self) -> u16 {
@@ -162,112 +26,10 @@ impl Atrans4 {
         self.0 = (self.0 & !(0x07ff << 16usize)) | (((val as u32) & 0x07ff) << 16usize);
     }
 }
-impl Default for Atrans4 {
+impl Default for Atrans {
     #[inline(always)]
-    fn default() -> Atrans4 {
-        Atrans4(0)
-    }
-}
-#[doc = "Configure address translation for XIP virtual addresses 0x1400000 through 0x17fffff (a 4 MiB window starting at +20 MiB). Address translation allows a program image to be executed in place at multiple physical flash addresses (for example, a double-buffered flash image for over-the-air updates), without the overhead of position-independent code. At reset, the address translation registers are initialised to an identity mapping, so that they can be ignored if address translation is not required. Note that the XIP cache is fully virtually addressed, so a cache flush is required after changing the address translation."]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Atrans5(pub u32);
-impl Atrans5 {
-    #[doc = "Physical address base for this virtual address range, in units of 4 kiB (one flash sector). Taking a 24-bit virtual address, firstly bits 23:22 (the two MSBs) are masked to zero, and then BASE is added to bits 23:12 (the upper 12 bits) to form the physical address. Translation wraps on a 16 MiB boundary."]
-    #[inline(always)]
-    pub const fn base(&self) -> u16 {
-        let val = (self.0 >> 0usize) & 0x0fff;
-        val as u16
-    }
-    #[doc = "Physical address base for this virtual address range, in units of 4 kiB (one flash sector). Taking a 24-bit virtual address, firstly bits 23:22 (the two MSBs) are masked to zero, and then BASE is added to bits 23:12 (the upper 12 bits) to form the physical address. Translation wraps on a 16 MiB boundary."]
-    #[inline(always)]
-    pub fn set_base(&mut self, val: u16) {
-        self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
-    }
-    #[doc = "Translation aperture size for this virtual address range, in units of 4 kiB (one flash sector). Bits 21:12 of the virtual address are compared to SIZE. Offsets greater than SIZE return a bus error, and do not cause a QSPI access."]
-    #[inline(always)]
-    pub const fn size(&self) -> u16 {
-        let val = (self.0 >> 16usize) & 0x07ff;
-        val as u16
-    }
-    #[doc = "Translation aperture size for this virtual address range, in units of 4 kiB (one flash sector). Bits 21:12 of the virtual address are compared to SIZE. Offsets greater than SIZE return a bus error, and do not cause a QSPI access."]
-    #[inline(always)]
-    pub fn set_size(&mut self, val: u16) {
-        self.0 = (self.0 & !(0x07ff << 16usize)) | (((val as u32) & 0x07ff) << 16usize);
-    }
-}
-impl Default for Atrans5 {
-    #[inline(always)]
-    fn default() -> Atrans5 {
-        Atrans5(0)
-    }
-}
-#[doc = "Configure address translation for XIP virtual addresses 0x1800000 through 0x1bfffff (a 4 MiB window starting at +24 MiB). Address translation allows a program image to be executed in place at multiple physical flash addresses (for example, a double-buffered flash image for over-the-air updates), without the overhead of position-independent code. At reset, the address translation registers are initialised to an identity mapping, so that they can be ignored if address translation is not required. Note that the XIP cache is fully virtually addressed, so a cache flush is required after changing the address translation."]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Atrans6(pub u32);
-impl Atrans6 {
-    #[doc = "Physical address base for this virtual address range, in units of 4 kiB (one flash sector). Taking a 24-bit virtual address, firstly bits 23:22 (the two MSBs) are masked to zero, and then BASE is added to bits 23:12 (the upper 12 bits) to form the physical address. Translation wraps on a 16 MiB boundary."]
-    #[inline(always)]
-    pub const fn base(&self) -> u16 {
-        let val = (self.0 >> 0usize) & 0x0fff;
-        val as u16
-    }
-    #[doc = "Physical address base for this virtual address range, in units of 4 kiB (one flash sector). Taking a 24-bit virtual address, firstly bits 23:22 (the two MSBs) are masked to zero, and then BASE is added to bits 23:12 (the upper 12 bits) to form the physical address. Translation wraps on a 16 MiB boundary."]
-    #[inline(always)]
-    pub fn set_base(&mut self, val: u16) {
-        self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
-    }
-    #[doc = "Translation aperture size for this virtual address range, in units of 4 kiB (one flash sector). Bits 21:12 of the virtual address are compared to SIZE. Offsets greater than SIZE return a bus error, and do not cause a QSPI access."]
-    #[inline(always)]
-    pub const fn size(&self) -> u16 {
-        let val = (self.0 >> 16usize) & 0x07ff;
-        val as u16
-    }
-    #[doc = "Translation aperture size for this virtual address range, in units of 4 kiB (one flash sector). Bits 21:12 of the virtual address are compared to SIZE. Offsets greater than SIZE return a bus error, and do not cause a QSPI access."]
-    #[inline(always)]
-    pub fn set_size(&mut self, val: u16) {
-        self.0 = (self.0 & !(0x07ff << 16usize)) | (((val as u32) & 0x07ff) << 16usize);
-    }
-}
-impl Default for Atrans6 {
-    #[inline(always)]
-    fn default() -> Atrans6 {
-        Atrans6(0)
-    }
-}
-#[doc = "Configure address translation for XIP virtual addresses 0x1c00000 through 0x1ffffff (a 4 MiB window starting at +28 MiB). Address translation allows a program image to be executed in place at multiple physical flash addresses (for example, a double-buffered flash image for over-the-air updates), without the overhead of position-independent code. At reset, the address translation registers are initialised to an identity mapping, so that they can be ignored if address translation is not required. Note that the XIP cache is fully virtually addressed, so a cache flush is required after changing the address translation."]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Atrans7(pub u32);
-impl Atrans7 {
-    #[doc = "Physical address base for this virtual address range, in units of 4 kiB (one flash sector). Taking a 24-bit virtual address, firstly bits 23:22 (the two MSBs) are masked to zero, and then BASE is added to bits 23:12 (the upper 12 bits) to form the physical address. Translation wraps on a 16 MiB boundary."]
-    #[inline(always)]
-    pub const fn base(&self) -> u16 {
-        let val = (self.0 >> 0usize) & 0x0fff;
-        val as u16
-    }
-    #[doc = "Physical address base for this virtual address range, in units of 4 kiB (one flash sector). Taking a 24-bit virtual address, firstly bits 23:22 (the two MSBs) are masked to zero, and then BASE is added to bits 23:12 (the upper 12 bits) to form the physical address. Translation wraps on a 16 MiB boundary."]
-    #[inline(always)]
-    pub fn set_base(&mut self, val: u16) {
-        self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
-    }
-    #[doc = "Translation aperture size for this virtual address range, in units of 4 kiB (one flash sector). Bits 21:12 of the virtual address are compared to SIZE. Offsets greater than SIZE return a bus error, and do not cause a QSPI access."]
-    #[inline(always)]
-    pub const fn size(&self) -> u16 {
-        let val = (self.0 >> 16usize) & 0x07ff;
-        val as u16
-    }
-    #[doc = "Translation aperture size for this virtual address range, in units of 4 kiB (one flash sector). Bits 21:12 of the virtual address are compared to SIZE. Offsets greater than SIZE return a bus error, and do not cause a QSPI access."]
-    #[inline(always)]
-    pub fn set_size(&mut self, val: u16) {
-        self.0 = (self.0 & !(0x07ff << 16usize)) | (((val as u32) & 0x07ff) << 16usize);
-    }
-}
-impl Default for Atrans7 {
-    #[inline(always)]
-    fn default() -> Atrans7 {
-        Atrans7(0)
+    fn default() -> Atrans {
+        Atrans(0)
     }
 }
 #[doc = "Control and status for direct serial mode Direct serial mode allows the processor to send and receive raw serial frames, for programming, configuration and control of the external memory devices. Only SPI mode 0 (CPOL=0 CPHA=0) is supported."]
@@ -526,11 +288,11 @@ impl Default for DirectTx {
         DirectTx(0)
     }
 }
-#[doc = "Command constants used for reads from memory address window 0. The reset value of the M0_RCMD register is configured to support a basic 03h serial read transfer with no additional configuration."]
+#[doc = "Command constants used for reads from memory address window 1. The reset value of the M1_RCMD register is configured to support a basic 03h serial read transfer with no additional configuration."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct M0rcmd(pub u32);
-impl M0rcmd {
+pub struct Rcmd(pub u32);
+impl Rcmd {
     #[doc = "The command prefix bits to prepend on each new transfer, if Mx_RFMT_PREFIX_LEN is nonzero."]
     #[inline(always)]
     pub const fn prefix(&self) -> u8 {
@@ -554,103 +316,103 @@ impl M0rcmd {
         self.0 = (self.0 & !(0xff << 8usize)) | (((val as u32) & 0xff) << 8usize);
     }
 }
-impl Default for M0rcmd {
+impl Default for Rcmd {
     #[inline(always)]
-    fn default() -> M0rcmd {
-        M0rcmd(0)
+    fn default() -> Rcmd {
+        Rcmd(0)
     }
 }
 #[doc = "Read transfer format configuration for memory address window 0. Configure the bus width of each transfer phase individually, and configure the length or presence of the command prefix, command suffix and dummy/turnaround transfer phases. Only 24-bit addresses are supported. The reset value of the M0_RFMT register is configured to support a basic 03h serial read transfer with no additional configuration."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct M0rfmt(pub u32);
-impl M0rfmt {
+pub struct Rfmt(pub u32);
+impl Rfmt {
     #[doc = "The transfer width used for the command prefix, if any"]
     #[inline(always)]
-    pub const fn prefix_width(&self) -> super::vals::M0rfmtPrefixWidth {
+    pub const fn prefix_width(&self) -> super::vals::PrefixWidth {
         let val = (self.0 >> 0usize) & 0x03;
-        super::vals::M0rfmtPrefixWidth::from_bits(val as u8)
+        super::vals::PrefixWidth::from_bits(val as u8)
     }
     #[doc = "The transfer width used for the command prefix, if any"]
     #[inline(always)]
-    pub fn set_prefix_width(&mut self, val: super::vals::M0rfmtPrefixWidth) {
+    pub fn set_prefix_width(&mut self, val: super::vals::PrefixWidth) {
         self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
     }
     #[doc = "The transfer width used for the address. The address phase always transfers 24 bits in total."]
     #[inline(always)]
-    pub const fn addr_width(&self) -> super::vals::M0rfmtAddrWidth {
+    pub const fn addr_width(&self) -> super::vals::AddrWidth {
         let val = (self.0 >> 2usize) & 0x03;
-        super::vals::M0rfmtAddrWidth::from_bits(val as u8)
+        super::vals::AddrWidth::from_bits(val as u8)
     }
     #[doc = "The transfer width used for the address. The address phase always transfers 24 bits in total."]
     #[inline(always)]
-    pub fn set_addr_width(&mut self, val: super::vals::M0rfmtAddrWidth) {
+    pub fn set_addr_width(&mut self, val: super::vals::AddrWidth) {
         self.0 = (self.0 & !(0x03 << 2usize)) | (((val.to_bits() as u32) & 0x03) << 2usize);
     }
     #[doc = "The width used for the post-address command suffix, if any"]
     #[inline(always)]
-    pub const fn suffix_width(&self) -> super::vals::M0rfmtSuffixWidth {
+    pub const fn suffix_width(&self) -> super::vals::SuffixWidth {
         let val = (self.0 >> 4usize) & 0x03;
-        super::vals::M0rfmtSuffixWidth::from_bits(val as u8)
+        super::vals::SuffixWidth::from_bits(val as u8)
     }
     #[doc = "The width used for the post-address command suffix, if any"]
     #[inline(always)]
-    pub fn set_suffix_width(&mut self, val: super::vals::M0rfmtSuffixWidth) {
+    pub fn set_suffix_width(&mut self, val: super::vals::SuffixWidth) {
         self.0 = (self.0 & !(0x03 << 4usize)) | (((val.to_bits() as u32) & 0x03) << 4usize);
     }
     #[doc = "The width used for the dummy phase, if any. If width is single, SD0/MOSI is held asserted low during the dummy phase, and SD1...SD3 are tristated. If width is dual/quad, all IOs are tristated during the dummy phase."]
     #[inline(always)]
-    pub const fn dummy_width(&self) -> super::vals::M0rfmtDummyWidth {
+    pub const fn dummy_width(&self) -> super::vals::DummyWidth {
         let val = (self.0 >> 6usize) & 0x03;
-        super::vals::M0rfmtDummyWidth::from_bits(val as u8)
+        super::vals::DummyWidth::from_bits(val as u8)
     }
     #[doc = "The width used for the dummy phase, if any. If width is single, SD0/MOSI is held asserted low during the dummy phase, and SD1...SD3 are tristated. If width is dual/quad, all IOs are tristated during the dummy phase."]
     #[inline(always)]
-    pub fn set_dummy_width(&mut self, val: super::vals::M0rfmtDummyWidth) {
+    pub fn set_dummy_width(&mut self, val: super::vals::DummyWidth) {
         self.0 = (self.0 & !(0x03 << 6usize)) | (((val.to_bits() as u32) & 0x03) << 6usize);
     }
     #[doc = "The width used for the data transfer"]
     #[inline(always)]
-    pub const fn data_width(&self) -> super::vals::M0rfmtDataWidth {
+    pub const fn data_width(&self) -> super::vals::DataWidth {
         let val = (self.0 >> 8usize) & 0x03;
-        super::vals::M0rfmtDataWidth::from_bits(val as u8)
+        super::vals::DataWidth::from_bits(val as u8)
     }
     #[doc = "The width used for the data transfer"]
     #[inline(always)]
-    pub fn set_data_width(&mut self, val: super::vals::M0rfmtDataWidth) {
+    pub fn set_data_width(&mut self, val: super::vals::DataWidth) {
         self.0 = (self.0 & !(0x03 << 8usize)) | (((val.to_bits() as u32) & 0x03) << 8usize);
     }
     #[doc = "Length of command prefix, in units of 8 bits. (i.e. 2 cycles for quad width, 4 for dual, 8 for single)"]
     #[inline(always)]
-    pub const fn prefix_len(&self) -> super::vals::M0rfmtPrefixLen {
+    pub const fn prefix_len(&self) -> super::vals::PrefixLen {
         let val = (self.0 >> 12usize) & 0x01;
-        super::vals::M0rfmtPrefixLen::from_bits(val as u8)
+        super::vals::PrefixLen::from_bits(val as u8)
     }
     #[doc = "Length of command prefix, in units of 8 bits. (i.e. 2 cycles for quad width, 4 for dual, 8 for single)"]
     #[inline(always)]
-    pub fn set_prefix_len(&mut self, val: super::vals::M0rfmtPrefixLen) {
+    pub fn set_prefix_len(&mut self, val: super::vals::PrefixLen) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val.to_bits() as u32) & 0x01) << 12usize);
     }
     #[doc = "Length of post-address command suffix, in units of 4 bits. (i.e. 1 cycle for quad width, 2 for dual, 4 for single) Only values of 0 and 8 bits are supported."]
     #[inline(always)]
-    pub const fn suffix_len(&self) -> super::vals::M0rfmtSuffixLen {
+    pub const fn suffix_len(&self) -> super::vals::SuffixLen {
         let val = (self.0 >> 14usize) & 0x03;
-        super::vals::M0rfmtSuffixLen::from_bits(val as u8)
+        super::vals::SuffixLen::from_bits(val as u8)
     }
     #[doc = "Length of post-address command suffix, in units of 4 bits. (i.e. 1 cycle for quad width, 2 for dual, 4 for single) Only values of 0 and 8 bits are supported."]
     #[inline(always)]
-    pub fn set_suffix_len(&mut self, val: super::vals::M0rfmtSuffixLen) {
+    pub fn set_suffix_len(&mut self, val: super::vals::SuffixLen) {
         self.0 = (self.0 & !(0x03 << 14usize)) | (((val.to_bits() as u32) & 0x03) << 14usize);
     }
     #[doc = "Length of dummy phase between command suffix and data phase, in units of 4 bits. (i.e. 1 cycle for quad width, 2 for dual, 4 for single)"]
     #[inline(always)]
-    pub const fn dummy_len(&self) -> super::vals::M0rfmtDummyLen {
+    pub const fn dummy_len(&self) -> super::vals::DummyLen {
         let val = (self.0 >> 16usize) & 0x07;
-        super::vals::M0rfmtDummyLen::from_bits(val as u8)
+        super::vals::DummyLen::from_bits(val as u8)
     }
     #[doc = "Length of dummy phase between command suffix and data phase, in units of 4 bits. (i.e. 1 cycle for quad width, 2 for dual, 4 for single)"]
     #[inline(always)]
-    pub fn set_dummy_len(&mut self, val: super::vals::M0rfmtDummyLen) {
+    pub fn set_dummy_len(&mut self, val: super::vals::DummyLen) {
         self.0 = (self.0 & !(0x07 << 16usize)) | (((val.to_bits() as u32) & 0x07) << 16usize);
     }
     #[doc = "Enable double transfer rate (DTR) for read commands: address, suffix and read data phases are active on both edges of SCK. SDO data is launched centre-aligned on each SCK edge, and SDI data is captured on the SCK edge that follows its launch. DTR is implemented by halving the clock rate; SCK has a period of 2 x CLK_DIV throughout the transfer. The prefix and dummy phases are still single transfer rate. If the suffix is quad-width, it must be 0 or 8 bits in length, to ensure an even number of SCK edges."]
@@ -665,407 +427,17 @@ impl M0rfmt {
         self.0 = (self.0 & !(0x01 << 28usize)) | (((val as u32) & 0x01) << 28usize);
     }
 }
-impl Default for M0rfmt {
+impl Default for Rfmt {
     #[inline(always)]
-    fn default() -> M0rfmt {
-        M0rfmt(0)
-    }
-}
-#[doc = "Timing configuration register for memory address window 0."]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct M0timing(pub u32);
-impl M0timing {
-    #[doc = "Clock divisor. Odd and even divisors are supported. Defines the SCK clock period in units of 1 system clock cycle. Divisors 1..255 are encoded directly, and a divisor of 256 is encoded with a value of CLKDIV=0. The clock divisor can be changed on-the-fly, even when the QMI is currently accessing memory in this address window. All other parameters must only be changed when the QMI is idle. If software is increasing CLKDIV in anticipation of an increase in the system clock frequency, a dummy access to either memory window (and appropriate processor barriers/fences) must be inserted after the Mx_TIMING write to ensure the SCK divisor change is in effect _before_ the system clock is changed."]
-    #[inline(always)]
-    pub const fn clkdiv(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0xff;
-        val as u8
-    }
-    #[doc = "Clock divisor. Odd and even divisors are supported. Defines the SCK clock period in units of 1 system clock cycle. Divisors 1..255 are encoded directly, and a divisor of 256 is encoded with a value of CLKDIV=0. The clock divisor can be changed on-the-fly, even when the QMI is currently accessing memory in this address window. All other parameters must only be changed when the QMI is idle. If software is increasing CLKDIV in anticipation of an increase in the system clock frequency, a dummy access to either memory window (and appropriate processor barriers/fences) must be inserted after the Mx_TIMING write to ensure the SCK divisor change is in effect _before_ the system clock is changed."]
-    #[inline(always)]
-    pub fn set_clkdiv(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
-    }
-    #[doc = "Delay the read data sample timing, in units of one half of a system clock cycle. (Not necessarily half of an SCK cycle.) An RXDELAY of 0 means the sample is captured at the SDI input registers simultaneously with the rising edge of SCK launched from the SCK output register. At higher SCK frequencies, RXDELAY may need to be increased to account for the round trip delay of the pads, and the clock-to-Q delay of the QSPI memory device."]
-    #[inline(always)]
-    pub const fn rxdelay(&self) -> u8 {
-        let val = (self.0 >> 8usize) & 0x07;
-        val as u8
-    }
-    #[doc = "Delay the read data sample timing, in units of one half of a system clock cycle. (Not necessarily half of an SCK cycle.) An RXDELAY of 0 means the sample is captured at the SDI input registers simultaneously with the rising edge of SCK launched from the SCK output register. At higher SCK frequencies, RXDELAY may need to be increased to account for the round trip delay of the pads, and the clock-to-Q delay of the QSPI memory device."]
-    #[inline(always)]
-    pub fn set_rxdelay(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x07 << 8usize)) | (((val as u32) & 0x07) << 8usize);
-    }
-    #[doc = "After this window's chip select is deasserted, it remains deasserted for half an SCK cycle (rounded up to an integer number of system clock cycles), plus MIN_DESELECT additional system clock cycles, before the QMI reasserts either chip select pin. Nonzero values may be required for PSRAM devices which enforce a longer minimum CS deselect time, so that they can perform internal DRAM refresh cycles whilst deselected."]
-    #[inline(always)]
-    pub const fn min_deselect(&self) -> u8 {
-        let val = (self.0 >> 12usize) & 0x1f;
-        val as u8
-    }
-    #[doc = "After this window's chip select is deasserted, it remains deasserted for half an SCK cycle (rounded up to an integer number of system clock cycles), plus MIN_DESELECT additional system clock cycles, before the QMI reasserts either chip select pin. Nonzero values may be required for PSRAM devices which enforce a longer minimum CS deselect time, so that they can perform internal DRAM refresh cycles whilst deselected."]
-    #[inline(always)]
-    pub fn set_min_deselect(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x1f << 12usize)) | (((val as u32) & 0x1f) << 12usize);
-    }
-    #[doc = "Enforce a maximum assertion duration for this window's chip select, in units of 64 system clock cycles. If 0, the QMI is permitted to keep the chip select asserted indefinitely when servicing sequential memory accesses (see COOLDOWN). This feature is required to meet timing constraints of PSRAM devices, which specify a maximum chip select assertion so they can perform DRAM refresh cycles. See also MIN_DESELECT, which can enforce a minimum deselect time. If a memory access is in progress at the time MAX_SELECT is reached, the QMI will wait for the access to complete before deasserting the chip select. This additional time must be accounted for to calculate a safe MAX_SELECT value. In the worst case, this may be a fully-formed serial transfer, including command prefix and address, with a data payload as large as one cache line."]
-    #[inline(always)]
-    pub const fn max_select(&self) -> u8 {
-        let val = (self.0 >> 17usize) & 0x3f;
-        val as u8
-    }
-    #[doc = "Enforce a maximum assertion duration for this window's chip select, in units of 64 system clock cycles. If 0, the QMI is permitted to keep the chip select asserted indefinitely when servicing sequential memory accesses (see COOLDOWN). This feature is required to meet timing constraints of PSRAM devices, which specify a maximum chip select assertion so they can perform DRAM refresh cycles. See also MIN_DESELECT, which can enforce a minimum deselect time. If a memory access is in progress at the time MAX_SELECT is reached, the QMI will wait for the access to complete before deasserting the chip select. This additional time must be accounted for to calculate a safe MAX_SELECT value. In the worst case, this may be a fully-formed serial transfer, including command prefix and address, with a data payload as large as one cache line."]
-    #[inline(always)]
-    pub fn set_max_select(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x3f << 17usize)) | (((val as u32) & 0x3f) << 17usize);
-    }
-    #[doc = "Add up to three additional system clock cycles of active hold between the last falling edge of SCK and the deassertion of this window's chip select. The default hold time is one system clock cycle. Note that flash datasheets usually give chip select active hold time from the last *rising* edge of SCK, and so even zero hold from the last falling edge would be safe. Note that this is a minimum hold time guaranteed by the QMI: the actual chip select active hold may be slightly longer for read transfers with low clock divisors and/or high sample delays. Specifically, if the point two cycles after the last RX data sample is later than the last SCK falling edge, then the hold time is measured from *this* point. Note also that, in case the final SCK pulse is masked to save energy (true for non-DTR reads when COOLDOWN is disabled or PAGE_BREAK is reached), all of QMI's timing logic behaves as though the clock pulse were still present. The SELECT_HOLD time is applied from the point where the last SCK falling edge would be if the clock pulse were not masked."]
-    #[inline(always)]
-    pub const fn select_hold(&self) -> u8 {
-        let val = (self.0 >> 23usize) & 0x03;
-        val as u8
-    }
-    #[doc = "Add up to three additional system clock cycles of active hold between the last falling edge of SCK and the deassertion of this window's chip select. The default hold time is one system clock cycle. Note that flash datasheets usually give chip select active hold time from the last *rising* edge of SCK, and so even zero hold from the last falling edge would be safe. Note that this is a minimum hold time guaranteed by the QMI: the actual chip select active hold may be slightly longer for read transfers with low clock divisors and/or high sample delays. Specifically, if the point two cycles after the last RX data sample is later than the last SCK falling edge, then the hold time is measured from *this* point. Note also that, in case the final SCK pulse is masked to save energy (true for non-DTR reads when COOLDOWN is disabled or PAGE_BREAK is reached), all of QMI's timing logic behaves as though the clock pulse were still present. The SELECT_HOLD time is applied from the point where the last SCK falling edge would be if the clock pulse were not masked."]
-    #[inline(always)]
-    pub fn set_select_hold(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x03 << 23usize)) | (((val as u32) & 0x03) << 23usize);
-    }
-    #[doc = "Add up to one additional system clock cycle of setup between chip select assertion and the first rising edge of SCK. The default setup time is one half SCK period, which is usually sufficient except for very high SCK frequencies with some flash devices."]
-    #[inline(always)]
-    pub const fn select_setup(&self) -> bool {
-        let val = (self.0 >> 25usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Add up to one additional system clock cycle of setup between chip select assertion and the first rising edge of SCK. The default setup time is one half SCK period, which is usually sufficient except for very high SCK frequencies with some flash devices."]
-    #[inline(always)]
-    pub fn set_select_setup(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 25usize)) | (((val as u32) & 0x01) << 25usize);
-    }
-    #[doc = "When page break is enabled, chip select will automatically deassert when crossing certain power-of-2-aligned address boundaries. The next access will always begin a new read/write SPI burst, even if the address of the next access follows in sequence with the last access before the page boundary. Some flash and PSRAM devices forbid crossing page boundaries with a single read/write transfer, or restrict the operating frequency for transfers that do cross page a boundary. This option allows the QMI to safely support those devices. This field has no effect when COOLDOWN is disabled."]
-    #[inline(always)]
-    pub const fn pagebreak(&self) -> super::vals::M0timingPagebreak {
-        let val = (self.0 >> 28usize) & 0x03;
-        super::vals::M0timingPagebreak::from_bits(val as u8)
-    }
-    #[doc = "When page break is enabled, chip select will automatically deassert when crossing certain power-of-2-aligned address boundaries. The next access will always begin a new read/write SPI burst, even if the address of the next access follows in sequence with the last access before the page boundary. Some flash and PSRAM devices forbid crossing page boundaries with a single read/write transfer, or restrict the operating frequency for transfers that do cross page a boundary. This option allows the QMI to safely support those devices. This field has no effect when COOLDOWN is disabled."]
-    #[inline(always)]
-    pub fn set_pagebreak(&mut self, val: super::vals::M0timingPagebreak) {
-        self.0 = (self.0 & !(0x03 << 28usize)) | (((val.to_bits() as u32) & 0x03) << 28usize);
-    }
-    #[doc = "Chip select cooldown period. When a memory transfer finishes, the chip select remains asserted for 64 x COOLDOWN system clock cycles, plus half an SCK clock period (rounded up for odd SCK divisors). After this cooldown expires, the chip select is always deasserted to save power. If the next memory access arrives within the cooldown period, the QMI may be able to append more SCK cycles to the currently ongoing SPI transfer, rather than starting a new transfer. This reduces access latency and increases bus throughput. Specifically, the next access must be in the same direction (read/write), access the same memory window (chip select 0/1), and follow sequentially the address of the last transfer. If any of these are false, the new access will first deassert the chip select, then begin a new transfer. If COOLDOWN is 0, the address alignment configured by PAGEBREAK has been reached, or the total chip select assertion limit MAX_SELECT has been reached, the cooldown period is skipped, and the chip select will always be deasserted one half SCK period after the transfer finishes."]
-    #[inline(always)]
-    pub const fn cooldown(&self) -> u8 {
-        let val = (self.0 >> 30usize) & 0x03;
-        val as u8
-    }
-    #[doc = "Chip select cooldown period. When a memory transfer finishes, the chip select remains asserted for 64 x COOLDOWN system clock cycles, plus half an SCK clock period (rounded up for odd SCK divisors). After this cooldown expires, the chip select is always deasserted to save power. If the next memory access arrives within the cooldown period, the QMI may be able to append more SCK cycles to the currently ongoing SPI transfer, rather than starting a new transfer. This reduces access latency and increases bus throughput. Specifically, the next access must be in the same direction (read/write), access the same memory window (chip select 0/1), and follow sequentially the address of the last transfer. If any of these are false, the new access will first deassert the chip select, then begin a new transfer. If COOLDOWN is 0, the address alignment configured by PAGEBREAK has been reached, or the total chip select assertion limit MAX_SELECT has been reached, the cooldown period is skipped, and the chip select will always be deasserted one half SCK period after the transfer finishes."]
-    #[inline(always)]
-    pub fn set_cooldown(&mut self, val: u8) {
-        self.0 = (self.0 & !(0x03 << 30usize)) | (((val as u32) & 0x03) << 30usize);
-    }
-}
-impl Default for M0timing {
-    #[inline(always)]
-    fn default() -> M0timing {
-        M0timing(0)
-    }
-}
-#[doc = "Command constants used for writes to memory address window 0. The reset value of the M0_WCMD register is configured to support a basic 02h serial write transfer with no additional configuration."]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct M0wcmd(pub u32);
-impl M0wcmd {
-    #[doc = "The command prefix bits to prepend on each new transfer, if Mx_WFMT_PREFIX_LEN is nonzero."]
-    #[inline(always)]
-    pub const fn prefix(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0xff;
-        val as u8
-    }
-    #[doc = "The command prefix bits to prepend on each new transfer, if Mx_WFMT_PREFIX_LEN is nonzero."]
-    #[inline(always)]
-    pub fn set_prefix(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
-    }
-    #[doc = "The command suffix bits following the address, if Mx_WFMT_SUFFIX_LEN is nonzero."]
-    #[inline(always)]
-    pub const fn suffix(&self) -> u8 {
-        let val = (self.0 >> 8usize) & 0xff;
-        val as u8
-    }
-    #[doc = "The command suffix bits following the address, if Mx_WFMT_SUFFIX_LEN is nonzero."]
-    #[inline(always)]
-    pub fn set_suffix(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 8usize)) | (((val as u32) & 0xff) << 8usize);
-    }
-}
-impl Default for M0wcmd {
-    #[inline(always)]
-    fn default() -> M0wcmd {
-        M0wcmd(0)
-    }
-}
-#[doc = "Write transfer format configuration for memory address window 0. Configure the bus width of each transfer phase individually, and configure the length or presence of the command prefix, command suffix and dummy/turnaround transfer phases. Only 24-bit addresses are supported. The reset value of the M0_WFMT register is configured to support a basic 02h serial write transfer. However, writes to this window must first be enabled via the XIP_CTRL_WRITABLE_M0 bit, as XIP memory is read-only by default."]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct M0wfmt(pub u32);
-impl M0wfmt {
-    #[doc = "The transfer width used for the command prefix, if any"]
-    #[inline(always)]
-    pub const fn prefix_width(&self) -> super::vals::M0wfmtPrefixWidth {
-        let val = (self.0 >> 0usize) & 0x03;
-        super::vals::M0wfmtPrefixWidth::from_bits(val as u8)
-    }
-    #[doc = "The transfer width used for the command prefix, if any"]
-    #[inline(always)]
-    pub fn set_prefix_width(&mut self, val: super::vals::M0wfmtPrefixWidth) {
-        self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
-    }
-    #[doc = "The transfer width used for the address. The address phase always transfers 24 bits in total."]
-    #[inline(always)]
-    pub const fn addr_width(&self) -> super::vals::M0wfmtAddrWidth {
-        let val = (self.0 >> 2usize) & 0x03;
-        super::vals::M0wfmtAddrWidth::from_bits(val as u8)
-    }
-    #[doc = "The transfer width used for the address. The address phase always transfers 24 bits in total."]
-    #[inline(always)]
-    pub fn set_addr_width(&mut self, val: super::vals::M0wfmtAddrWidth) {
-        self.0 = (self.0 & !(0x03 << 2usize)) | (((val.to_bits() as u32) & 0x03) << 2usize);
-    }
-    #[doc = "The width used for the post-address command suffix, if any"]
-    #[inline(always)]
-    pub const fn suffix_width(&self) -> super::vals::M0wfmtSuffixWidth {
-        let val = (self.0 >> 4usize) & 0x03;
-        super::vals::M0wfmtSuffixWidth::from_bits(val as u8)
-    }
-    #[doc = "The width used for the post-address command suffix, if any"]
-    #[inline(always)]
-    pub fn set_suffix_width(&mut self, val: super::vals::M0wfmtSuffixWidth) {
-        self.0 = (self.0 & !(0x03 << 4usize)) | (((val.to_bits() as u32) & 0x03) << 4usize);
-    }
-    #[doc = "The width used for the dummy phase, if any. If width is single, SD0/MOSI is held asserted low during the dummy phase, and SD1...SD3 are tristated. If width is dual/quad, all IOs are tristated during the dummy phase."]
-    #[inline(always)]
-    pub const fn dummy_width(&self) -> super::vals::M0wfmtDummyWidth {
-        let val = (self.0 >> 6usize) & 0x03;
-        super::vals::M0wfmtDummyWidth::from_bits(val as u8)
-    }
-    #[doc = "The width used for the dummy phase, if any. If width is single, SD0/MOSI is held asserted low during the dummy phase, and SD1...SD3 are tristated. If width is dual/quad, all IOs are tristated during the dummy phase."]
-    #[inline(always)]
-    pub fn set_dummy_width(&mut self, val: super::vals::M0wfmtDummyWidth) {
-        self.0 = (self.0 & !(0x03 << 6usize)) | (((val.to_bits() as u32) & 0x03) << 6usize);
-    }
-    #[doc = "The width used for the data transfer"]
-    #[inline(always)]
-    pub const fn data_width(&self) -> super::vals::M0wfmtDataWidth {
-        let val = (self.0 >> 8usize) & 0x03;
-        super::vals::M0wfmtDataWidth::from_bits(val as u8)
-    }
-    #[doc = "The width used for the data transfer"]
-    #[inline(always)]
-    pub fn set_data_width(&mut self, val: super::vals::M0wfmtDataWidth) {
-        self.0 = (self.0 & !(0x03 << 8usize)) | (((val.to_bits() as u32) & 0x03) << 8usize);
-    }
-    #[doc = "Length of command prefix, in units of 8 bits. (i.e. 2 cycles for quad width, 4 for dual, 8 for single)"]
-    #[inline(always)]
-    pub const fn prefix_len(&self) -> super::vals::M0wfmtPrefixLen {
-        let val = (self.0 >> 12usize) & 0x01;
-        super::vals::M0wfmtPrefixLen::from_bits(val as u8)
-    }
-    #[doc = "Length of command prefix, in units of 8 bits. (i.e. 2 cycles for quad width, 4 for dual, 8 for single)"]
-    #[inline(always)]
-    pub fn set_prefix_len(&mut self, val: super::vals::M0wfmtPrefixLen) {
-        self.0 = (self.0 & !(0x01 << 12usize)) | (((val.to_bits() as u32) & 0x01) << 12usize);
-    }
-    #[doc = "Length of post-address command suffix, in units of 4 bits. (i.e. 1 cycle for quad width, 2 for dual, 4 for single) Only values of 0 and 8 bits are supported."]
-    #[inline(always)]
-    pub const fn suffix_len(&self) -> super::vals::M0wfmtSuffixLen {
-        let val = (self.0 >> 14usize) & 0x03;
-        super::vals::M0wfmtSuffixLen::from_bits(val as u8)
-    }
-    #[doc = "Length of post-address command suffix, in units of 4 bits. (i.e. 1 cycle for quad width, 2 for dual, 4 for single) Only values of 0 and 8 bits are supported."]
-    #[inline(always)]
-    pub fn set_suffix_len(&mut self, val: super::vals::M0wfmtSuffixLen) {
-        self.0 = (self.0 & !(0x03 << 14usize)) | (((val.to_bits() as u32) & 0x03) << 14usize);
-    }
-    #[doc = "Length of dummy phase between command suffix and data phase, in units of 4 bits. (i.e. 1 cycle for quad width, 2 for dual, 4 for single)"]
-    #[inline(always)]
-    pub const fn dummy_len(&self) -> super::vals::M0wfmtDummyLen {
-        let val = (self.0 >> 16usize) & 0x07;
-        super::vals::M0wfmtDummyLen::from_bits(val as u8)
-    }
-    #[doc = "Length of dummy phase between command suffix and data phase, in units of 4 bits. (i.e. 1 cycle for quad width, 2 for dual, 4 for single)"]
-    #[inline(always)]
-    pub fn set_dummy_len(&mut self, val: super::vals::M0wfmtDummyLen) {
-        self.0 = (self.0 & !(0x07 << 16usize)) | (((val.to_bits() as u32) & 0x07) << 16usize);
-    }
-    #[doc = "Enable double transfer rate (DTR) for write commands: address, suffix and write data phases are active on both edges of SCK. SDO data is launched centre-aligned on each SCK edge, and SDI data is captured on the SCK edge that follows its launch. DTR is implemented by halving the clock rate; SCK has a period of 2 x CLK_DIV throughout the transfer. The prefix and dummy phases are still single transfer rate. If the suffix is quad-width, it must be 0 or 8 bits in length, to ensure an even number of SCK edges."]
-    #[inline(always)]
-    pub const fn dtr(&self) -> bool {
-        let val = (self.0 >> 28usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Enable double transfer rate (DTR) for write commands: address, suffix and write data phases are active on both edges of SCK. SDO data is launched centre-aligned on each SCK edge, and SDI data is captured on the SCK edge that follows its launch. DTR is implemented by halving the clock rate; SCK has a period of 2 x CLK_DIV throughout the transfer. The prefix and dummy phases are still single transfer rate. If the suffix is quad-width, it must be 0 or 8 bits in length, to ensure an even number of SCK edges."]
-    #[inline(always)]
-    pub fn set_dtr(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 28usize)) | (((val as u32) & 0x01) << 28usize);
-    }
-}
-impl Default for M0wfmt {
-    #[inline(always)]
-    fn default() -> M0wfmt {
-        M0wfmt(0)
-    }
-}
-#[doc = "Command constants used for reads from memory address window 1. The reset value of the M1_RCMD register is configured to support a basic 03h serial read transfer with no additional configuration."]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct M1rcmd(pub u32);
-impl M1rcmd {
-    #[doc = "The command prefix bits to prepend on each new transfer, if Mx_RFMT_PREFIX_LEN is nonzero."]
-    #[inline(always)]
-    pub const fn prefix(&self) -> u8 {
-        let val = (self.0 >> 0usize) & 0xff;
-        val as u8
-    }
-    #[doc = "The command prefix bits to prepend on each new transfer, if Mx_RFMT_PREFIX_LEN is nonzero."]
-    #[inline(always)]
-    pub fn set_prefix(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
-    }
-    #[doc = "The command suffix bits following the address, if Mx_RFMT_SUFFIX_LEN is nonzero."]
-    #[inline(always)]
-    pub const fn suffix(&self) -> u8 {
-        let val = (self.0 >> 8usize) & 0xff;
-        val as u8
-    }
-    #[doc = "The command suffix bits following the address, if Mx_RFMT_SUFFIX_LEN is nonzero."]
-    #[inline(always)]
-    pub fn set_suffix(&mut self, val: u8) {
-        self.0 = (self.0 & !(0xff << 8usize)) | (((val as u32) & 0xff) << 8usize);
-    }
-}
-impl Default for M1rcmd {
-    #[inline(always)]
-    fn default() -> M1rcmd {
-        M1rcmd(0)
-    }
-}
-#[doc = "Read transfer format configuration for memory address window 1. Configure the bus width of each transfer phase individually, and configure the length or presence of the command prefix, command suffix and dummy/turnaround transfer phases. Only 24-bit addresses are supported. The reset value of the M1_RFMT register is configured to support a basic 03h serial read transfer with no additional configuration."]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct M1rfmt(pub u32);
-impl M1rfmt {
-    #[doc = "The transfer width used for the command prefix, if any"]
-    #[inline(always)]
-    pub const fn prefix_width(&self) -> super::vals::M1rfmtPrefixWidth {
-        let val = (self.0 >> 0usize) & 0x03;
-        super::vals::M1rfmtPrefixWidth::from_bits(val as u8)
-    }
-    #[doc = "The transfer width used for the command prefix, if any"]
-    #[inline(always)]
-    pub fn set_prefix_width(&mut self, val: super::vals::M1rfmtPrefixWidth) {
-        self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
-    }
-    #[doc = "The transfer width used for the address. The address phase always transfers 24 bits in total."]
-    #[inline(always)]
-    pub const fn addr_width(&self) -> super::vals::M1rfmtAddrWidth {
-        let val = (self.0 >> 2usize) & 0x03;
-        super::vals::M1rfmtAddrWidth::from_bits(val as u8)
-    }
-    #[doc = "The transfer width used for the address. The address phase always transfers 24 bits in total."]
-    #[inline(always)]
-    pub fn set_addr_width(&mut self, val: super::vals::M1rfmtAddrWidth) {
-        self.0 = (self.0 & !(0x03 << 2usize)) | (((val.to_bits() as u32) & 0x03) << 2usize);
-    }
-    #[doc = "The width used for the post-address command suffix, if any"]
-    #[inline(always)]
-    pub const fn suffix_width(&self) -> super::vals::M1rfmtSuffixWidth {
-        let val = (self.0 >> 4usize) & 0x03;
-        super::vals::M1rfmtSuffixWidth::from_bits(val as u8)
-    }
-    #[doc = "The width used for the post-address command suffix, if any"]
-    #[inline(always)]
-    pub fn set_suffix_width(&mut self, val: super::vals::M1rfmtSuffixWidth) {
-        self.0 = (self.0 & !(0x03 << 4usize)) | (((val.to_bits() as u32) & 0x03) << 4usize);
-    }
-    #[doc = "The width used for the dummy phase, if any. If width is single, SD0/MOSI is held asserted low during the dummy phase, and SD1...SD3 are tristated. If width is dual/quad, all IOs are tristated during the dummy phase."]
-    #[inline(always)]
-    pub const fn dummy_width(&self) -> super::vals::M1rfmtDummyWidth {
-        let val = (self.0 >> 6usize) & 0x03;
-        super::vals::M1rfmtDummyWidth::from_bits(val as u8)
-    }
-    #[doc = "The width used for the dummy phase, if any. If width is single, SD0/MOSI is held asserted low during the dummy phase, and SD1...SD3 are tristated. If width is dual/quad, all IOs are tristated during the dummy phase."]
-    #[inline(always)]
-    pub fn set_dummy_width(&mut self, val: super::vals::M1rfmtDummyWidth) {
-        self.0 = (self.0 & !(0x03 << 6usize)) | (((val.to_bits() as u32) & 0x03) << 6usize);
-    }
-    #[doc = "The width used for the data transfer"]
-    #[inline(always)]
-    pub const fn data_width(&self) -> super::vals::M1rfmtDataWidth {
-        let val = (self.0 >> 8usize) & 0x03;
-        super::vals::M1rfmtDataWidth::from_bits(val as u8)
-    }
-    #[doc = "The width used for the data transfer"]
-    #[inline(always)]
-    pub fn set_data_width(&mut self, val: super::vals::M1rfmtDataWidth) {
-        self.0 = (self.0 & !(0x03 << 8usize)) | (((val.to_bits() as u32) & 0x03) << 8usize);
-    }
-    #[doc = "Length of command prefix, in units of 8 bits. (i.e. 2 cycles for quad width, 4 for dual, 8 for single)"]
-    #[inline(always)]
-    pub const fn prefix_len(&self) -> super::vals::M1rfmtPrefixLen {
-        let val = (self.0 >> 12usize) & 0x01;
-        super::vals::M1rfmtPrefixLen::from_bits(val as u8)
-    }
-    #[doc = "Length of command prefix, in units of 8 bits. (i.e. 2 cycles for quad width, 4 for dual, 8 for single)"]
-    #[inline(always)]
-    pub fn set_prefix_len(&mut self, val: super::vals::M1rfmtPrefixLen) {
-        self.0 = (self.0 & !(0x01 << 12usize)) | (((val.to_bits() as u32) & 0x01) << 12usize);
-    }
-    #[doc = "Length of post-address command suffix, in units of 4 bits. (i.e. 1 cycle for quad width, 2 for dual, 4 for single) Only values of 0 and 8 bits are supported."]
-    #[inline(always)]
-    pub const fn suffix_len(&self) -> super::vals::M1rfmtSuffixLen {
-        let val = (self.0 >> 14usize) & 0x03;
-        super::vals::M1rfmtSuffixLen::from_bits(val as u8)
-    }
-    #[doc = "Length of post-address command suffix, in units of 4 bits. (i.e. 1 cycle for quad width, 2 for dual, 4 for single) Only values of 0 and 8 bits are supported."]
-    #[inline(always)]
-    pub fn set_suffix_len(&mut self, val: super::vals::M1rfmtSuffixLen) {
-        self.0 = (self.0 & !(0x03 << 14usize)) | (((val.to_bits() as u32) & 0x03) << 14usize);
-    }
-    #[doc = "Length of dummy phase between command suffix and data phase, in units of 4 bits. (i.e. 1 cycle for quad width, 2 for dual, 4 for single)"]
-    #[inline(always)]
-    pub const fn dummy_len(&self) -> super::vals::M1rfmtDummyLen {
-        let val = (self.0 >> 16usize) & 0x07;
-        super::vals::M1rfmtDummyLen::from_bits(val as u8)
-    }
-    #[doc = "Length of dummy phase between command suffix and data phase, in units of 4 bits. (i.e. 1 cycle for quad width, 2 for dual, 4 for single)"]
-    #[inline(always)]
-    pub fn set_dummy_len(&mut self, val: super::vals::M1rfmtDummyLen) {
-        self.0 = (self.0 & !(0x07 << 16usize)) | (((val.to_bits() as u32) & 0x07) << 16usize);
-    }
-    #[doc = "Enable double transfer rate (DTR) for read commands: address, suffix and read data phases are active on both edges of SCK. SDO data is launched centre-aligned on each SCK edge, and SDI data is captured on the SCK edge that follows its launch. DTR is implemented by halving the clock rate; SCK has a period of 2 x CLK_DIV throughout the transfer. The prefix and dummy phases are still single transfer rate. If the suffix is quad-width, it must be 0 or 8 bits in length, to ensure an even number of SCK edges."]
-    #[inline(always)]
-    pub const fn dtr(&self) -> bool {
-        let val = (self.0 >> 28usize) & 0x01;
-        val != 0
-    }
-    #[doc = "Enable double transfer rate (DTR) for read commands: address, suffix and read data phases are active on both edges of SCK. SDO data is launched centre-aligned on each SCK edge, and SDI data is captured on the SCK edge that follows its launch. DTR is implemented by halving the clock rate; SCK has a period of 2 x CLK_DIV throughout the transfer. The prefix and dummy phases are still single transfer rate. If the suffix is quad-width, it must be 0 or 8 bits in length, to ensure an even number of SCK edges."]
-    #[inline(always)]
-    pub fn set_dtr(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 28usize)) | (((val as u32) & 0x01) << 28usize);
-    }
-}
-impl Default for M1rfmt {
-    #[inline(always)]
-    fn default() -> M1rfmt {
-        M1rfmt(0)
+    fn default() -> Rfmt {
+        Rfmt(0)
     }
 }
 #[doc = "Timing configuration register for memory address window 1."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct M1timing(pub u32);
-impl M1timing {
+pub struct Timing(pub u32);
+impl Timing {
     #[doc = "Clock divisor. Odd and even divisors are supported. Defines the SCK clock period in units of 1 system clock cycle. Divisors 1..255 are encoded directly, and a divisor of 256 is encoded with a value of CLKDIV=0. The clock divisor can be changed on-the-fly, even when the QMI is currently accessing memory in this address window. All other parameters must only be changed when the QMI is idle. If software is increasing CLKDIV in anticipation of an increase in the system clock frequency, a dummy access to either memory window (and appropriate processor barriers/fences) must be inserted after the Mx_TIMING write to ensure the SCK divisor change is in effect _before_ the system clock is changed."]
     #[inline(always)]
     pub const fn clkdiv(&self) -> u8 {
@@ -1134,13 +506,13 @@ impl M1timing {
     }
     #[doc = "When page break is enabled, chip select will automatically deassert when crossing certain power-of-2-aligned address boundaries. The next access will always begin a new read/write SPI burst, even if the address of the next access follows in sequence with the last access before the page boundary. Some flash and PSRAM devices forbid crossing page boundaries with a single read/write transfer, or restrict the operating frequency for transfers that do cross page a boundary. This option allows the QMI to safely support those devices. This field has no effect when COOLDOWN is disabled."]
     #[inline(always)]
-    pub const fn pagebreak(&self) -> super::vals::M1timingPagebreak {
+    pub const fn pagebreak(&self) -> super::vals::Pagebreak {
         let val = (self.0 >> 28usize) & 0x03;
-        super::vals::M1timingPagebreak::from_bits(val as u8)
+        super::vals::Pagebreak::from_bits(val as u8)
     }
     #[doc = "When page break is enabled, chip select will automatically deassert when crossing certain power-of-2-aligned address boundaries. The next access will always begin a new read/write SPI burst, even if the address of the next access follows in sequence with the last access before the page boundary. Some flash and PSRAM devices forbid crossing page boundaries with a single read/write transfer, or restrict the operating frequency for transfers that do cross page a boundary. This option allows the QMI to safely support those devices. This field has no effect when COOLDOWN is disabled."]
     #[inline(always)]
-    pub fn set_pagebreak(&mut self, val: super::vals::M1timingPagebreak) {
+    pub fn set_pagebreak(&mut self, val: super::vals::Pagebreak) {
         self.0 = (self.0 & !(0x03 << 28usize)) | (((val.to_bits() as u32) & 0x03) << 28usize);
     }
     #[doc = "Chip select cooldown period. When a memory transfer finishes, the chip select remains asserted for 64 x COOLDOWN system clock cycles, plus half an SCK clock period (rounded up for odd SCK divisors). After this cooldown expires, the chip select is always deasserted to save power. If the next memory access arrives within the cooldown period, the QMI may be able to append more SCK cycles to the currently ongoing SPI transfer, rather than starting a new transfer. This reduces access latency and increases bus throughput. Specifically, the next access must be in the same direction (read/write), access the same memory window (chip select 0/1), and follow sequentially the address of the last transfer. If any of these are false, the new access will first deassert the chip select, then begin a new transfer. If COOLDOWN is 0, the address alignment configured by PAGEBREAK has been reached, or the total chip select assertion limit MAX_SELECT has been reached, the cooldown period is skipped, and the chip select will always be deasserted one half SCK period after the transfer finishes."]
@@ -1155,17 +527,17 @@ impl M1timing {
         self.0 = (self.0 & !(0x03 << 30usize)) | (((val as u32) & 0x03) << 30usize);
     }
 }
-impl Default for M1timing {
+impl Default for Timing {
     #[inline(always)]
-    fn default() -> M1timing {
-        M1timing(0)
+    fn default() -> Timing {
+        Timing(0)
     }
 }
 #[doc = "Command constants used for writes to memory address window 1. The reset value of the M1_WCMD register is configured to support a basic 02h serial write transfer with no additional configuration."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct M1wcmd(pub u32);
-impl M1wcmd {
+pub struct Wcmd(pub u32);
+impl Wcmd {
     #[doc = "The command prefix bits to prepend on each new transfer, if Mx_WFMT_PREFIX_LEN is nonzero."]
     #[inline(always)]
     pub const fn prefix(&self) -> u8 {
@@ -1189,103 +561,103 @@ impl M1wcmd {
         self.0 = (self.0 & !(0xff << 8usize)) | (((val as u32) & 0xff) << 8usize);
     }
 }
-impl Default for M1wcmd {
+impl Default for Wcmd {
     #[inline(always)]
-    fn default() -> M1wcmd {
-        M1wcmd(0)
+    fn default() -> Wcmd {
+        Wcmd(0)
     }
 }
 #[doc = "Write transfer format configuration for memory address window 1. Configure the bus width of each transfer phase individually, and configure the length or presence of the command prefix, command suffix and dummy/turnaround transfer phases. Only 24-bit addresses are supported. The reset value of the M1_WFMT register is configured to support a basic 02h serial write transfer. However, writes to this window must first be enabled via the XIP_CTRL_WRITABLE_M1 bit, as XIP memory is read-only by default."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct M1wfmt(pub u32);
-impl M1wfmt {
+pub struct Wfmt(pub u32);
+impl Wfmt {
     #[doc = "The transfer width used for the command prefix, if any"]
     #[inline(always)]
-    pub const fn prefix_width(&self) -> super::vals::M1wfmtPrefixWidth {
+    pub const fn prefix_width(&self) -> super::vals::PrefixWidth {
         let val = (self.0 >> 0usize) & 0x03;
-        super::vals::M1wfmtPrefixWidth::from_bits(val as u8)
+        super::vals::PrefixWidth::from_bits(val as u8)
     }
     #[doc = "The transfer width used for the command prefix, if any"]
     #[inline(always)]
-    pub fn set_prefix_width(&mut self, val: super::vals::M1wfmtPrefixWidth) {
+    pub fn set_prefix_width(&mut self, val: super::vals::PrefixWidth) {
         self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
     }
     #[doc = "The transfer width used for the address. The address phase always transfers 24 bits in total."]
     #[inline(always)]
-    pub const fn addr_width(&self) -> super::vals::M1wfmtAddrWidth {
+    pub const fn addr_width(&self) -> super::vals::AddrWidth {
         let val = (self.0 >> 2usize) & 0x03;
-        super::vals::M1wfmtAddrWidth::from_bits(val as u8)
+        super::vals::AddrWidth::from_bits(val as u8)
     }
     #[doc = "The transfer width used for the address. The address phase always transfers 24 bits in total."]
     #[inline(always)]
-    pub fn set_addr_width(&mut self, val: super::vals::M1wfmtAddrWidth) {
+    pub fn set_addr_width(&mut self, val: super::vals::AddrWidth) {
         self.0 = (self.0 & !(0x03 << 2usize)) | (((val.to_bits() as u32) & 0x03) << 2usize);
     }
     #[doc = "The width used for the post-address command suffix, if any"]
     #[inline(always)]
-    pub const fn suffix_width(&self) -> super::vals::M1wfmtSuffixWidth {
+    pub const fn suffix_width(&self) -> super::vals::SuffixWidth {
         let val = (self.0 >> 4usize) & 0x03;
-        super::vals::M1wfmtSuffixWidth::from_bits(val as u8)
+        super::vals::SuffixWidth::from_bits(val as u8)
     }
     #[doc = "The width used for the post-address command suffix, if any"]
     #[inline(always)]
-    pub fn set_suffix_width(&mut self, val: super::vals::M1wfmtSuffixWidth) {
+    pub fn set_suffix_width(&mut self, val: super::vals::SuffixWidth) {
         self.0 = (self.0 & !(0x03 << 4usize)) | (((val.to_bits() as u32) & 0x03) << 4usize);
     }
     #[doc = "The width used for the dummy phase, if any. If width is single, SD0/MOSI is held asserted low during the dummy phase, and SD1...SD3 are tristated. If width is dual/quad, all IOs are tristated during the dummy phase."]
     #[inline(always)]
-    pub const fn dummy_width(&self) -> super::vals::M1wfmtDummyWidth {
+    pub const fn dummy_width(&self) -> super::vals::DummyWidth {
         let val = (self.0 >> 6usize) & 0x03;
-        super::vals::M1wfmtDummyWidth::from_bits(val as u8)
+        super::vals::DummyWidth::from_bits(val as u8)
     }
     #[doc = "The width used for the dummy phase, if any. If width is single, SD0/MOSI is held asserted low during the dummy phase, and SD1...SD3 are tristated. If width is dual/quad, all IOs are tristated during the dummy phase."]
     #[inline(always)]
-    pub fn set_dummy_width(&mut self, val: super::vals::M1wfmtDummyWidth) {
+    pub fn set_dummy_width(&mut self, val: super::vals::DummyWidth) {
         self.0 = (self.0 & !(0x03 << 6usize)) | (((val.to_bits() as u32) & 0x03) << 6usize);
     }
     #[doc = "The width used for the data transfer"]
     #[inline(always)]
-    pub const fn data_width(&self) -> super::vals::M1wfmtDataWidth {
+    pub const fn data_width(&self) -> super::vals::DataWidth {
         let val = (self.0 >> 8usize) & 0x03;
-        super::vals::M1wfmtDataWidth::from_bits(val as u8)
+        super::vals::DataWidth::from_bits(val as u8)
     }
     #[doc = "The width used for the data transfer"]
     #[inline(always)]
-    pub fn set_data_width(&mut self, val: super::vals::M1wfmtDataWidth) {
+    pub fn set_data_width(&mut self, val: super::vals::DataWidth) {
         self.0 = (self.0 & !(0x03 << 8usize)) | (((val.to_bits() as u32) & 0x03) << 8usize);
     }
     #[doc = "Length of command prefix, in units of 8 bits. (i.e. 2 cycles for quad width, 4 for dual, 8 for single)"]
     #[inline(always)]
-    pub const fn prefix_len(&self) -> super::vals::M1wfmtPrefixLen {
+    pub const fn prefix_len(&self) -> super::vals::PrefixLen {
         let val = (self.0 >> 12usize) & 0x01;
-        super::vals::M1wfmtPrefixLen::from_bits(val as u8)
+        super::vals::PrefixLen::from_bits(val as u8)
     }
     #[doc = "Length of command prefix, in units of 8 bits. (i.e. 2 cycles for quad width, 4 for dual, 8 for single)"]
     #[inline(always)]
-    pub fn set_prefix_len(&mut self, val: super::vals::M1wfmtPrefixLen) {
+    pub fn set_prefix_len(&mut self, val: super::vals::PrefixLen) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val.to_bits() as u32) & 0x01) << 12usize);
     }
     #[doc = "Length of post-address command suffix, in units of 4 bits. (i.e. 1 cycle for quad width, 2 for dual, 4 for single) Only values of 0 and 8 bits are supported."]
     #[inline(always)]
-    pub const fn suffix_len(&self) -> super::vals::M1wfmtSuffixLen {
+    pub const fn suffix_len(&self) -> super::vals::SuffixLen {
         let val = (self.0 >> 14usize) & 0x03;
-        super::vals::M1wfmtSuffixLen::from_bits(val as u8)
+        super::vals::SuffixLen::from_bits(val as u8)
     }
     #[doc = "Length of post-address command suffix, in units of 4 bits. (i.e. 1 cycle for quad width, 2 for dual, 4 for single) Only values of 0 and 8 bits are supported."]
     #[inline(always)]
-    pub fn set_suffix_len(&mut self, val: super::vals::M1wfmtSuffixLen) {
+    pub fn set_suffix_len(&mut self, val: super::vals::SuffixLen) {
         self.0 = (self.0 & !(0x03 << 14usize)) | (((val.to_bits() as u32) & 0x03) << 14usize);
     }
     #[doc = "Length of dummy phase between command suffix and data phase, in units of 4 bits. (i.e. 1 cycle for quad width, 2 for dual, 4 for single)"]
     #[inline(always)]
-    pub const fn dummy_len(&self) -> super::vals::M1wfmtDummyLen {
+    pub const fn dummy_len(&self) -> super::vals::DummyLen {
         let val = (self.0 >> 16usize) & 0x07;
-        super::vals::M1wfmtDummyLen::from_bits(val as u8)
+        super::vals::DummyLen::from_bits(val as u8)
     }
     #[doc = "Length of dummy phase between command suffix and data phase, in units of 4 bits. (i.e. 1 cycle for quad width, 2 for dual, 4 for single)"]
     #[inline(always)]
-    pub fn set_dummy_len(&mut self, val: super::vals::M1wfmtDummyLen) {
+    pub fn set_dummy_len(&mut self, val: super::vals::DummyLen) {
         self.0 = (self.0 & !(0x07 << 16usize)) | (((val.to_bits() as u32) & 0x07) << 16usize);
     }
     #[doc = "Enable double transfer rate (DTR) for write commands: address, suffix and write data phases are active on both edges of SCK. SDO data is launched centre-aligned on each SCK edge, and SDI data is captured on the SCK edge that follows its launch. DTR is implemented by halving the clock rate; SCK has a period of 2 x CLK_DIV throughout the transfer. The prefix and dummy phases are still single transfer rate. If the suffix is quad-width, it must be 0 or 8 bits in length, to ensure an even number of SCK edges."]
@@ -1300,9 +672,9 @@ impl M1wfmt {
         self.0 = (self.0 & !(0x01 << 28usize)) | (((val as u32) & 0x01) << 28usize);
     }
 }
-impl Default for M1wfmt {
+impl Default for Wfmt {
     #[inline(always)]
-    fn default() -> M1wfmt {
-        M1wfmt(0)
+    fn default() -> Wfmt {
+        Wfmt(0)
     }
 }

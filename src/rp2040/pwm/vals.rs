@@ -2,7 +2,7 @@
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub enum Divmode {
     #[doc = "Free-running counting at rate dictated by fractional divider"]
-    DIV = 0,
+    DIV = 0x0,
     #[doc = "Fractional divider operation is gated by the PWM B pin."]
     LEVEL = 0x01,
     #[doc = "Counter advances with each rising edge of the PWM B pin."]

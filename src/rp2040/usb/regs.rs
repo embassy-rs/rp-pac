@@ -32,7 +32,7 @@ impl Default for AddrEndp {
         AddrEndp(0)
     }
 }
-#[doc = "Interrupt endpoint 1. Only valid for HOST mode."]
+#[doc = "Interrupt endpoint 13. Only valid for HOST mode."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct AddrEndpX(pub u32);
@@ -308,7 +308,7 @@ impl Default for EpStatusStallNak {
         EpStatusStallNak(0)
     }
 }
-#[doc = "Interrupt Enable"]
+#[doc = "Interrupt Force"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Int(pub u32);

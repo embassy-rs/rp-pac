@@ -1,7 +1,7 @@
 #[repr(u8)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub enum Cs0size {
-    NONE = 0,
+    NONE = 0x0,
     _8K = 0x01,
     _16K = 0x02,
     _32K = 0x03,
@@ -43,7 +43,7 @@ impl From<Cs0size> for u8 {
 #[repr(u8)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub enum Cs1size {
-    NONE = 0,
+    NONE = 0x0,
     _8K = 0x01,
     _16K = 0x02,
     _32K = 0x03,
@@ -85,7 +85,7 @@ impl From<Cs1size> for u8 {
 #[repr(u8)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub enum Range {
-    _1_15MHZ = 0,
+    _1_15MHZ = 0x0,
     _10_30MHZ = 0x01,
     _25_60MHZ = 0x02,
     _40_100MHZ = 0x03,
@@ -116,7 +116,7 @@ impl From<Range> for u8 {
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub struct UsbWhiteLabelAddr(pub u16);
 impl UsbWhiteLabelAddr {
-    pub const INDEX_USB_DEVICE_VID_VALUE: Self = Self(0);
+    pub const INDEX_USB_DEVICE_VID_VALUE: Self = Self(0x0);
     pub const INDEX_USB_DEVICE_PID_VALUE: Self = Self(0x01);
     pub const INDEX_USB_DEVICE_BCD_DEVICE_VALUE: Self = Self(0x02);
     pub const INDEX_USB_DEVICE_LANG_ID_VALUE: Self = Self(0x03);

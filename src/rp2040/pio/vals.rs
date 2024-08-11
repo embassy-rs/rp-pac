@@ -2,7 +2,7 @@
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub enum SmExecctrlStatusSel {
     #[doc = "All-ones if TX FIFO level < N, otherwise all-zeroes"]
-    TXLEVEL = 0,
+    TXLEVEL = 0x0,
     #[doc = "All-ones if RX FIFO level < N, otherwise all-zeroes"]
     RXLEVEL = 0x01,
 }

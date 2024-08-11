@@ -1,7 +1,7 @@
 #[repr(u8)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub enum Speed {
-    _RESERVED_0 = 0,
+    _RESERVED_0 = 0x0,
     #[doc = "Standard Speed mode of operation"]
     STANDARD = 0x01,
     #[doc = "Fast or Fast Plus mode of operation"]
