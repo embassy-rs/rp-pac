@@ -19,6 +19,26 @@ impl Default for Count {
         Count(0)
     }
 }
+impl core::fmt::Debug for Count {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Count")
+            .field("count", &self.count())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Count {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Count {
+            count: u16,
+        }
+        let proxy = Count {
+            count: self.count(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Ring Oscillator control"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -53,6 +73,29 @@ impl Default for Ctrl {
         Ctrl(0)
     }
 }
+impl core::fmt::Debug for Ctrl {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Ctrl")
+            .field("freq_range", &self.freq_range())
+            .field("enable", &self.enable())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Ctrl {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Ctrl {
+            freq_range: super::vals::FreqRange,
+            enable: super::vals::Enable,
+        }
+        let proxy = Ctrl {
+            freq_range: self.freq_range(),
+            enable: self.enable(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Controls the output divider"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -74,6 +117,22 @@ impl Default for Div {
     #[inline(always)]
     fn default() -> Div {
         Div(0)
+    }
+}
+impl core::fmt::Debug for Div {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Div").field("div", &self.div()).finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Div {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Div {
+            div: super::vals::Div,
+        }
+        let proxy = Div { div: self.div() };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Ring Oscillator pause control"]
@@ -98,6 +157,26 @@ impl Default for Dormant {
     #[inline(always)]
     fn default() -> Dormant {
         Dormant(0)
+    }
+}
+impl core::fmt::Debug for Dormant {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Dormant")
+            .field("dormant", &self.dormant())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Dormant {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Dormant {
+            dormant: super::vals::Dormant,
+        }
+        let proxy = Dormant {
+            dormant: self.dormant(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "The FREQA & FREQB registers control the frequency by controlling the drive strength of each stage The drive strength has 4 levels determined by the number of bits set Increasing the number of bits set increases the drive strength and increases the oscillation frequency 0 bits set is the default drive strength 1 bit set doubles the drive strength 2 bits set triples drive strength 3 bits set quadruples drive strength For frequency randomisation set both DS0_RANDOM=1 & DS1_RANDOM=1"]
@@ -189,6 +268,44 @@ impl Default for Freqa {
         Freqa(0)
     }
 }
+impl core::fmt::Debug for Freqa {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Freqa")
+            .field("ds0", &self.ds0())
+            .field("ds0_random", &self.ds0_random())
+            .field("ds1", &self.ds1())
+            .field("ds1_random", &self.ds1_random())
+            .field("ds2", &self.ds2())
+            .field("ds3", &self.ds3())
+            .field("passwd", &self.passwd())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Freqa {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Freqa {
+            ds0: u8,
+            ds0_random: bool,
+            ds1: u8,
+            ds1_random: bool,
+            ds2: u8,
+            ds3: u8,
+            passwd: super::vals::Passwd,
+        }
+        let proxy = Freqa {
+            ds0: self.ds0(),
+            ds0_random: self.ds0_random(),
+            ds1: self.ds1(),
+            ds1_random: self.ds1_random(),
+            ds2: self.ds2(),
+            ds3: self.ds3(),
+            passwd: self.passwd(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "For a detailed description see freqa register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -256,6 +373,38 @@ impl Default for Freqb {
         Freqb(0)
     }
 }
+impl core::fmt::Debug for Freqb {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Freqb")
+            .field("ds4", &self.ds4())
+            .field("ds5", &self.ds5())
+            .field("ds6", &self.ds6())
+            .field("ds7", &self.ds7())
+            .field("passwd", &self.passwd())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Freqb {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Freqb {
+            ds4: u8,
+            ds5: u8,
+            ds6: u8,
+            ds7: u8,
+            passwd: super::vals::Passwd,
+        }
+        let proxy = Freqb {
+            ds4: self.ds4(),
+            ds5: self.ds5(),
+            ds6: self.ds6(),
+            ds7: self.ds7(),
+            passwd: self.passwd(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Controls the phase shifted output"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -312,6 +461,35 @@ impl Default for Phase {
         Phase(0)
     }
 }
+impl core::fmt::Debug for Phase {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Phase")
+            .field("shift", &self.shift())
+            .field("flip", &self.flip())
+            .field("enable", &self.enable())
+            .field("passwd", &self.passwd())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Phase {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Phase {
+            shift: u8,
+            flip: bool,
+            enable: bool,
+            passwd: u8,
+        }
+        let proxy = Phase {
+            shift: self.shift(),
+            flip: self.flip(),
+            enable: self.enable(),
+            passwd: self.passwd(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "This just reads the state of the oscillator output so randomness is compromised if the ring oscillator is stopped or run at a harmonic of the bus frequency"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -331,6 +509,26 @@ impl Default for Randombit {
     #[inline(always)]
     fn default() -> Randombit {
         Randombit(0)
+    }
+}
+impl core::fmt::Debug for Randombit {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Randombit")
+            .field("randombit", &self.randombit())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Randombit {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Randombit {
+            randombit: bool,
+        }
+        let proxy = Randombit {
+            randombit: self.randombit(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Ring Oscillator Status"]
@@ -387,5 +585,34 @@ impl Default for Status {
     #[inline(always)]
     fn default() -> Status {
         Status(0)
+    }
+}
+impl core::fmt::Debug for Status {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Status")
+            .field("enabled", &self.enabled())
+            .field("div_running", &self.div_running())
+            .field("badwrite", &self.badwrite())
+            .field("stable", &self.stable())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Status {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Status {
+            enabled: bool,
+            div_running: bool,
+            badwrite: bool,
+            stable: bool,
+        }
+        let proxy = Status {
+            enabled: self.enabled(),
+            div_running: self.div_running(),
+            badwrite: self.badwrite(),
+            stable: self.stable(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

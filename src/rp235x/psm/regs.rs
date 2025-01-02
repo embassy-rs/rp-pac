@@ -235,6 +235,98 @@ impl Default for Done {
         Done(0)
     }
 }
+impl core::fmt::Debug for Done {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Done")
+            .field("proc_cold", &self.proc_cold())
+            .field("otp", &self.otp())
+            .field("rosc", &self.rosc())
+            .field("xosc", &self.xosc())
+            .field("resets", &self.resets())
+            .field("clocks", &self.clocks())
+            .field("psm_ready", &self.psm_ready())
+            .field("busfabric", &self.busfabric())
+            .field("rom", &self.rom())
+            .field("bootram", &self.bootram())
+            .field("sram0", &self.sram0())
+            .field("sram1", &self.sram1())
+            .field("sram2", &self.sram2())
+            .field("sram3", &self.sram3())
+            .field("sram4", &self.sram4())
+            .field("sram5", &self.sram5())
+            .field("sram6", &self.sram6())
+            .field("sram7", &self.sram7())
+            .field("sram8", &self.sram8())
+            .field("sram9", &self.sram9())
+            .field("xip", &self.xip())
+            .field("sio", &self.sio())
+            .field("accessctrl", &self.accessctrl())
+            .field("proc0", &self.proc0())
+            .field("proc1", &self.proc1())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Done {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Done {
+            proc_cold: bool,
+            otp: bool,
+            rosc: bool,
+            xosc: bool,
+            resets: bool,
+            clocks: bool,
+            psm_ready: bool,
+            busfabric: bool,
+            rom: bool,
+            bootram: bool,
+            sram0: bool,
+            sram1: bool,
+            sram2: bool,
+            sram3: bool,
+            sram4: bool,
+            sram5: bool,
+            sram6: bool,
+            sram7: bool,
+            sram8: bool,
+            sram9: bool,
+            xip: bool,
+            sio: bool,
+            accessctrl: bool,
+            proc0: bool,
+            proc1: bool,
+        }
+        let proxy = Done {
+            proc_cold: self.proc_cold(),
+            otp: self.otp(),
+            rosc: self.rosc(),
+            xosc: self.xosc(),
+            resets: self.resets(),
+            clocks: self.clocks(),
+            psm_ready: self.psm_ready(),
+            busfabric: self.busfabric(),
+            rom: self.rom(),
+            bootram: self.bootram(),
+            sram0: self.sram0(),
+            sram1: self.sram1(),
+            sram2: self.sram2(),
+            sram3: self.sram3(),
+            sram4: self.sram4(),
+            sram5: self.sram5(),
+            sram6: self.sram6(),
+            sram7: self.sram7(),
+            sram8: self.sram8(),
+            sram9: self.sram9(),
+            xip: self.xip(),
+            sio: self.sio(),
+            accessctrl: self.accessctrl(),
+            proc0: self.proc0(),
+            proc1: self.proc1(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Force into reset (i.e. power it off)"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -470,6 +562,98 @@ impl Default for FrceOff {
     #[inline(always)]
     fn default() -> FrceOff {
         FrceOff(0)
+    }
+}
+impl core::fmt::Debug for FrceOff {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("FrceOff")
+            .field("proc_cold", &self.proc_cold())
+            .field("otp", &self.otp())
+            .field("rosc", &self.rosc())
+            .field("xosc", &self.xosc())
+            .field("resets", &self.resets())
+            .field("clocks", &self.clocks())
+            .field("psm_ready", &self.psm_ready())
+            .field("busfabric", &self.busfabric())
+            .field("rom", &self.rom())
+            .field("bootram", &self.bootram())
+            .field("sram0", &self.sram0())
+            .field("sram1", &self.sram1())
+            .field("sram2", &self.sram2())
+            .field("sram3", &self.sram3())
+            .field("sram4", &self.sram4())
+            .field("sram5", &self.sram5())
+            .field("sram6", &self.sram6())
+            .field("sram7", &self.sram7())
+            .field("sram8", &self.sram8())
+            .field("sram9", &self.sram9())
+            .field("xip", &self.xip())
+            .field("sio", &self.sio())
+            .field("accessctrl", &self.accessctrl())
+            .field("proc0", &self.proc0())
+            .field("proc1", &self.proc1())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for FrceOff {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct FrceOff {
+            proc_cold: bool,
+            otp: bool,
+            rosc: bool,
+            xosc: bool,
+            resets: bool,
+            clocks: bool,
+            psm_ready: bool,
+            busfabric: bool,
+            rom: bool,
+            bootram: bool,
+            sram0: bool,
+            sram1: bool,
+            sram2: bool,
+            sram3: bool,
+            sram4: bool,
+            sram5: bool,
+            sram6: bool,
+            sram7: bool,
+            sram8: bool,
+            sram9: bool,
+            xip: bool,
+            sio: bool,
+            accessctrl: bool,
+            proc0: bool,
+            proc1: bool,
+        }
+        let proxy = FrceOff {
+            proc_cold: self.proc_cold(),
+            otp: self.otp(),
+            rosc: self.rosc(),
+            xosc: self.xosc(),
+            resets: self.resets(),
+            clocks: self.clocks(),
+            psm_ready: self.psm_ready(),
+            busfabric: self.busfabric(),
+            rom: self.rom(),
+            bootram: self.bootram(),
+            sram0: self.sram0(),
+            sram1: self.sram1(),
+            sram2: self.sram2(),
+            sram3: self.sram3(),
+            sram4: self.sram4(),
+            sram5: self.sram5(),
+            sram6: self.sram6(),
+            sram7: self.sram7(),
+            sram8: self.sram8(),
+            sram9: self.sram9(),
+            xip: self.xip(),
+            sio: self.sio(),
+            accessctrl: self.accessctrl(),
+            proc0: self.proc0(),
+            proc1: self.proc1(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Force block out of reset (i.e. power it on)"]
@@ -709,6 +893,98 @@ impl Default for FrceOn {
         FrceOn(0)
     }
 }
+impl core::fmt::Debug for FrceOn {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("FrceOn")
+            .field("proc_cold", &self.proc_cold())
+            .field("otp", &self.otp())
+            .field("rosc", &self.rosc())
+            .field("xosc", &self.xosc())
+            .field("resets", &self.resets())
+            .field("clocks", &self.clocks())
+            .field("psm_ready", &self.psm_ready())
+            .field("busfabric", &self.busfabric())
+            .field("rom", &self.rom())
+            .field("bootram", &self.bootram())
+            .field("sram0", &self.sram0())
+            .field("sram1", &self.sram1())
+            .field("sram2", &self.sram2())
+            .field("sram3", &self.sram3())
+            .field("sram4", &self.sram4())
+            .field("sram5", &self.sram5())
+            .field("sram6", &self.sram6())
+            .field("sram7", &self.sram7())
+            .field("sram8", &self.sram8())
+            .field("sram9", &self.sram9())
+            .field("xip", &self.xip())
+            .field("sio", &self.sio())
+            .field("accessctrl", &self.accessctrl())
+            .field("proc0", &self.proc0())
+            .field("proc1", &self.proc1())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for FrceOn {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct FrceOn {
+            proc_cold: bool,
+            otp: bool,
+            rosc: bool,
+            xosc: bool,
+            resets: bool,
+            clocks: bool,
+            psm_ready: bool,
+            busfabric: bool,
+            rom: bool,
+            bootram: bool,
+            sram0: bool,
+            sram1: bool,
+            sram2: bool,
+            sram3: bool,
+            sram4: bool,
+            sram5: bool,
+            sram6: bool,
+            sram7: bool,
+            sram8: bool,
+            sram9: bool,
+            xip: bool,
+            sio: bool,
+            accessctrl: bool,
+            proc0: bool,
+            proc1: bool,
+        }
+        let proxy = FrceOn {
+            proc_cold: self.proc_cold(),
+            otp: self.otp(),
+            rosc: self.rosc(),
+            xosc: self.xosc(),
+            resets: self.resets(),
+            clocks: self.clocks(),
+            psm_ready: self.psm_ready(),
+            busfabric: self.busfabric(),
+            rom: self.rom(),
+            bootram: self.bootram(),
+            sram0: self.sram0(),
+            sram1: self.sram1(),
+            sram2: self.sram2(),
+            sram3: self.sram3(),
+            sram4: self.sram4(),
+            sram5: self.sram5(),
+            sram6: self.sram6(),
+            sram7: self.sram7(),
+            sram8: self.sram8(),
+            sram9: self.sram9(),
+            xip: self.xip(),
+            sio: self.sio(),
+            accessctrl: self.accessctrl(),
+            proc0: self.proc0(),
+            proc1: self.proc1(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Set to 1 if the watchdog should reset this"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -944,5 +1220,97 @@ impl Default for Wdsel {
     #[inline(always)]
     fn default() -> Wdsel {
         Wdsel(0)
+    }
+}
+impl core::fmt::Debug for Wdsel {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Wdsel")
+            .field("proc_cold", &self.proc_cold())
+            .field("otp", &self.otp())
+            .field("rosc", &self.rosc())
+            .field("xosc", &self.xosc())
+            .field("resets", &self.resets())
+            .field("clocks", &self.clocks())
+            .field("psm_ready", &self.psm_ready())
+            .field("busfabric", &self.busfabric())
+            .field("rom", &self.rom())
+            .field("bootram", &self.bootram())
+            .field("sram0", &self.sram0())
+            .field("sram1", &self.sram1())
+            .field("sram2", &self.sram2())
+            .field("sram3", &self.sram3())
+            .field("sram4", &self.sram4())
+            .field("sram5", &self.sram5())
+            .field("sram6", &self.sram6())
+            .field("sram7", &self.sram7())
+            .field("sram8", &self.sram8())
+            .field("sram9", &self.sram9())
+            .field("xip", &self.xip())
+            .field("sio", &self.sio())
+            .field("accessctrl", &self.accessctrl())
+            .field("proc0", &self.proc0())
+            .field("proc1", &self.proc1())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Wdsel {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Wdsel {
+            proc_cold: bool,
+            otp: bool,
+            rosc: bool,
+            xosc: bool,
+            resets: bool,
+            clocks: bool,
+            psm_ready: bool,
+            busfabric: bool,
+            rom: bool,
+            bootram: bool,
+            sram0: bool,
+            sram1: bool,
+            sram2: bool,
+            sram3: bool,
+            sram4: bool,
+            sram5: bool,
+            sram6: bool,
+            sram7: bool,
+            sram8: bool,
+            sram9: bool,
+            xip: bool,
+            sio: bool,
+            accessctrl: bool,
+            proc0: bool,
+            proc1: bool,
+        }
+        let proxy = Wdsel {
+            proc_cold: self.proc_cold(),
+            otp: self.otp(),
+            rosc: self.rosc(),
+            xosc: self.xosc(),
+            resets: self.resets(),
+            clocks: self.clocks(),
+            psm_ready: self.psm_ready(),
+            busfabric: self.busfabric(),
+            rom: self.rom(),
+            bootram: self.bootram(),
+            sram0: self.sram0(),
+            sram1: self.sram1(),
+            sram2: self.sram2(),
+            sram3: self.sram3(),
+            sram4: self.sram4(),
+            sram5: self.sram5(),
+            sram6: self.sram6(),
+            sram7: self.sram7(),
+            sram8: self.sram8(),
+            sram9: self.sram9(),
+            xip: self.xip(),
+            sio: self.sio(),
+            accessctrl: self.accessctrl(),
+            proc0: self.proc0(),
+            proc1: self.proc1(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

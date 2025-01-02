@@ -15,6 +15,25 @@ impl Arm {
         self.0
     }
 }
+impl core::fmt::Debug for Arm {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        match self.0 {
+            0x0 => f.write_str("YES"),
+            0x5bad => f.write_str("NO"),
+            other => core::write!(f, "0x{:02X}", other),
+        }
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Arm {
+    fn format(&self, f: defmt::Formatter) {
+        match self.0 {
+            0x0 => defmt::write!(f, "YES"),
+            0x5bad => defmt::write!(f, "NO"),
+            other => defmt::write!(f, "0x{:02X}", other),
+        }
+    }
+}
 impl From<u16> for Arm {
     #[inline(always)]
     fn from(val: u16) -> Arm {
@@ -44,6 +63,25 @@ impl Default {
         self.0
     }
 }
+impl core::fmt::Debug for Default {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        match self.0 {
+            0x0 => f.write_str("YES"),
+            0xde => f.write_str("NO"),
+            other => core::write!(f, "0x{:02X}", other),
+        }
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Default {
+    fn format(&self, f: defmt::Formatter) {
+        match self.0 {
+            0x0 => defmt::write!(f, "YES"),
+            0xde => defmt::write!(f, "NO"),
+            other => defmt::write!(f, "0x{:02X}", other),
+        }
+    }
+}
 impl From<u8> for Default {
     #[inline(always)]
     fn from(val: u8) -> Default {
@@ -71,6 +109,25 @@ impl Disarm {
     }
     pub const fn to_bits(self) -> u16 {
         self.0
+    }
+}
+impl core::fmt::Debug for Disarm {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        match self.0 {
+            0x0 => f.write_str("NO"),
+            0xdcaf => f.write_str("YES"),
+            other => core::write!(f, "0x{:02X}", other),
+        }
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Disarm {
+    fn format(&self, f: defmt::Formatter) {
+        match self.0 {
+            0x0 => defmt::write!(f, "NO"),
+            0xdcaf => defmt::write!(f, "YES"),
+            other => defmt::write!(f, "0x{:02X}", other),
+        }
     }
 }
 impl From<u16> for Disarm {

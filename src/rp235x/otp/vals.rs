@@ -1,5 +1,6 @@
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum ArchselCore0 {
     #[doc = "Switch core 0 to Arm (Cortex-M33)"]
     ARM = 0x0,
@@ -29,7 +30,8 @@ impl From<ArchselCore0> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum ArchselCore1 {
     #[doc = "Switch core 1 to Arm (Cortex-M33)"]
     ARM = 0x0,
@@ -59,7 +61,8 @@ impl From<ArchselCore1> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum ArchselStatusCore0 {
     #[doc = "Core 0 is currently Arm (Cortex-M33)"]
     ARM = 0x0,
@@ -89,7 +92,8 @@ impl From<ArchselStatusCore0> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum ArchselStatusCore1 {
     #[doc = "Core 1 is currently Arm (Cortex-M33)"]
     ARM = 0x0,
@@ -119,7 +123,8 @@ impl From<ArchselStatusCore1> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum SwLockNsec {
     READ_WRITE = 0x0,
     READ_ONLY = 0x01,
@@ -149,7 +154,8 @@ impl From<SwLockNsec> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum SwLockSec {
     READ_WRITE = 0x0,
     READ_ONLY = 0x01,

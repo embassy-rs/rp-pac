@@ -21,6 +21,26 @@ impl Default for Baudr {
         Baudr(0)
     }
 }
+impl core::fmt::Debug for Baudr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Baudr")
+            .field("sckdv", &self.sckdv())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Baudr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Baudr {
+            sckdv: u16,
+        }
+        let proxy = Baudr {
+            sckdv: self.sckdv(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Control register 0"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -154,6 +174,56 @@ impl Default for Ctrlr0 {
         Ctrlr0(0)
     }
 }
+impl core::fmt::Debug for Ctrlr0 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Ctrlr0")
+            .field("dfs", &self.dfs())
+            .field("frf", &self.frf())
+            .field("scph", &self.scph())
+            .field("scpol", &self.scpol())
+            .field("tmod", &self.tmod())
+            .field("slv_oe", &self.slv_oe())
+            .field("srl", &self.srl())
+            .field("cfs", &self.cfs())
+            .field("dfs_32", &self.dfs_32())
+            .field("spi_frf", &self.spi_frf())
+            .field("sste", &self.sste())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Ctrlr0 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Ctrlr0 {
+            dfs: u8,
+            frf: u8,
+            scph: bool,
+            scpol: bool,
+            tmod: super::vals::Tmod,
+            slv_oe: bool,
+            srl: bool,
+            cfs: u8,
+            dfs_32: u8,
+            spi_frf: super::vals::SpiFrf,
+            sste: bool,
+        }
+        let proxy = Ctrlr0 {
+            dfs: self.dfs(),
+            frf: self.frf(),
+            scph: self.scph(),
+            scpol: self.scpol(),
+            tmod: self.tmod(),
+            slv_oe: self.slv_oe(),
+            srl: self.srl(),
+            cfs: self.cfs(),
+            dfs_32: self.dfs_32(),
+            spi_frf: self.spi_frf(),
+            sste: self.sste(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Master Control register 1"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -175,6 +245,22 @@ impl Default for Ctrlr1 {
     #[inline(always)]
     fn default() -> Ctrlr1 {
         Ctrlr1(0)
+    }
+}
+impl core::fmt::Debug for Ctrlr1 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Ctrlr1").field("ndf", &self.ndf()).finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Ctrlr1 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Ctrlr1 {
+            ndf: u16,
+        }
+        let proxy = Ctrlr1 { ndf: self.ndf() };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "DMA control"]
@@ -211,6 +297,29 @@ impl Default for Dmacr {
         Dmacr(0)
     }
 }
+impl core::fmt::Debug for Dmacr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Dmacr")
+            .field("rdmae", &self.rdmae())
+            .field("tdmae", &self.tdmae())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Dmacr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Dmacr {
+            rdmae: bool,
+            tdmae: bool,
+        }
+        let proxy = Dmacr {
+            rdmae: self.rdmae(),
+            tdmae: self.tdmae(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "DMA RX data level"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -232,6 +341,26 @@ impl Default for Dmardlr {
     #[inline(always)]
     fn default() -> Dmardlr {
         Dmardlr(0)
+    }
+}
+impl core::fmt::Debug for Dmardlr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Dmardlr")
+            .field("dmardl", &self.dmardl())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Dmardlr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Dmardlr {
+            dmardl: u8,
+        }
+        let proxy = Dmardlr {
+            dmardl: self.dmardl(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "DMA TX data level"]
@@ -257,6 +386,26 @@ impl Default for Dmatdlr {
         Dmatdlr(0)
     }
 }
+impl core::fmt::Debug for Dmatdlr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Dmatdlr")
+            .field("dmatdl", &self.dmatdl())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Dmatdlr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Dmatdlr {
+            dmatdl: u8,
+        }
+        let proxy = Dmatdlr {
+            dmatdl: self.dmatdl(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Interrupt clear"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -278,6 +427,22 @@ impl Default for Icr {
     #[inline(always)]
     fn default() -> Icr {
         Icr(0)
+    }
+}
+impl core::fmt::Debug for Icr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Icr").field("icr", &self.icr()).finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Icr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Icr {
+            icr: bool,
+        }
+        let proxy = Icr { icr: self.icr() };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Interrupt mask"]
@@ -358,6 +523,41 @@ impl Default for Imr {
         Imr(0)
     }
 }
+impl core::fmt::Debug for Imr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Imr")
+            .field("txeim", &self.txeim())
+            .field("txoim", &self.txoim())
+            .field("rxuim", &self.rxuim())
+            .field("rxoim", &self.rxoim())
+            .field("rxfim", &self.rxfim())
+            .field("mstim", &self.mstim())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Imr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Imr {
+            txeim: bool,
+            txoim: bool,
+            rxuim: bool,
+            rxoim: bool,
+            rxfim: bool,
+            mstim: bool,
+        }
+        let proxy = Imr {
+            txeim: self.txeim(),
+            txoim: self.txoim(),
+            rxuim: self.rxuim(),
+            rxoim: self.rxoim(),
+            rxfim: self.rxfim(),
+            mstim: self.mstim(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Interrupt status"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -436,6 +636,41 @@ impl Default for Isr {
         Isr(0)
     }
 }
+impl core::fmt::Debug for Isr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Isr")
+            .field("txeis", &self.txeis())
+            .field("txois", &self.txois())
+            .field("rxuis", &self.rxuis())
+            .field("rxois", &self.rxois())
+            .field("rxfis", &self.rxfis())
+            .field("mstis", &self.mstis())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Isr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Isr {
+            txeis: bool,
+            txois: bool,
+            rxuis: bool,
+            rxois: bool,
+            rxfis: bool,
+            mstis: bool,
+        }
+        let proxy = Isr {
+            txeis: self.txeis(),
+            txois: self.txois(),
+            rxuis: self.rxuis(),
+            rxois: self.rxois(),
+            rxfis: self.rxfis(),
+            mstis: self.mstis(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Multi-master interrupt clear"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -457,6 +692,26 @@ impl Default for Msticr {
     #[inline(always)]
     fn default() -> Msticr {
         Msticr(0)
+    }
+}
+impl core::fmt::Debug for Msticr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Msticr")
+            .field("msticr", &self.msticr())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Msticr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Msticr {
+            msticr: bool,
+        }
+        let proxy = Msticr {
+            msticr: self.msticr(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Microwire Control"]
@@ -502,6 +757,32 @@ impl Default for Mwcr {
     #[inline(always)]
     fn default() -> Mwcr {
         Mwcr(0)
+    }
+}
+impl core::fmt::Debug for Mwcr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Mwcr")
+            .field("mwmod", &self.mwmod())
+            .field("mdd", &self.mdd())
+            .field("mhs", &self.mhs())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Mwcr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Mwcr {
+            mwmod: bool,
+            mdd: bool,
+            mhs: bool,
+        }
+        let proxy = Mwcr {
+            mwmod: self.mwmod(),
+            mdd: self.mdd(),
+            mhs: self.mhs(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Raw interrupt status"]
@@ -582,6 +863,41 @@ impl Default for Risr {
         Risr(0)
     }
 }
+impl core::fmt::Debug for Risr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Risr")
+            .field("txeir", &self.txeir())
+            .field("txoir", &self.txoir())
+            .field("rxuir", &self.rxuir())
+            .field("rxoir", &self.rxoir())
+            .field("rxfir", &self.rxfir())
+            .field("mstir", &self.mstir())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Risr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Risr {
+            txeir: bool,
+            txoir: bool,
+            rxuir: bool,
+            rxoir: bool,
+            rxfir: bool,
+            mstir: bool,
+        }
+        let proxy = Risr {
+            txeir: self.txeir(),
+            txoir: self.txoir(),
+            rxuir: self.rxuir(),
+            rxoir: self.rxoir(),
+            rxfir: self.rxfir(),
+            mstir: self.mstir(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "RX sample delay"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -603,6 +919,24 @@ impl Default for RxSampleDly {
     #[inline(always)]
     fn default() -> RxSampleDly {
         RxSampleDly(0)
+    }
+}
+impl core::fmt::Debug for RxSampleDly {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("RxSampleDly")
+            .field("rsd", &self.rsd())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for RxSampleDly {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct RxSampleDly {
+            rsd: u8,
+        }
+        let proxy = RxSampleDly { rsd: self.rsd() };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "RX FIFO level"]
@@ -628,6 +962,26 @@ impl Default for Rxflr {
         Rxflr(0)
     }
 }
+impl core::fmt::Debug for Rxflr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Rxflr")
+            .field("rxtfl", &self.rxtfl())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Rxflr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Rxflr {
+            rxtfl: u8,
+        }
+        let proxy = Rxflr {
+            rxtfl: self.rxtfl(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "RX FIFO threshold level"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -649,6 +1003,22 @@ impl Default for Rxftlr {
     #[inline(always)]
     fn default() -> Rxftlr {
         Rxftlr(0)
+    }
+}
+impl core::fmt::Debug for Rxftlr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Rxftlr").field("rft", &self.rft()).finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Rxftlr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Rxftlr {
+            rft: u8,
+        }
+        let proxy = Rxftlr { rft: self.rft() };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "RX FIFO overflow interrupt clear"]
@@ -674,6 +1044,26 @@ impl Default for Rxoicr {
         Rxoicr(0)
     }
 }
+impl core::fmt::Debug for Rxoicr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Rxoicr")
+            .field("rxoicr", &self.rxoicr())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Rxoicr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Rxoicr {
+            rxoicr: bool,
+        }
+        let proxy = Rxoicr {
+            rxoicr: self.rxoicr(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "RX FIFO underflow interrupt clear"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -697,6 +1087,26 @@ impl Default for Rxuicr {
         Rxuicr(0)
     }
 }
+impl core::fmt::Debug for Rxuicr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Rxuicr")
+            .field("rxuicr", &self.rxuicr())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Rxuicr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Rxuicr {
+            rxuicr: bool,
+        }
+        let proxy = Rxuicr {
+            rxuicr: self.rxuicr(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Slave enable"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -718,6 +1128,22 @@ impl Default for Ser {
     #[inline(always)]
     fn default() -> Ser {
         Ser(0)
+    }
+}
+impl core::fmt::Debug for Ser {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Ser").field("ser", &self.ser()).finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Ser {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Ser {
+            ser: bool,
+        }
+        let proxy = Ser { ser: self.ser() };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "SPI control"]
@@ -820,6 +1246,47 @@ impl Default for SpiCtrlr0 {
         SpiCtrlr0(0)
     }
 }
+impl core::fmt::Debug for SpiCtrlr0 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SpiCtrlr0")
+            .field("trans_type", &self.trans_type())
+            .field("addr_l", &self.addr_l())
+            .field("inst_l", &self.inst_l())
+            .field("wait_cycles", &self.wait_cycles())
+            .field("spi_ddr_en", &self.spi_ddr_en())
+            .field("inst_ddr_en", &self.inst_ddr_en())
+            .field("spi_rxds_en", &self.spi_rxds_en())
+            .field("xip_cmd", &self.xip_cmd())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for SpiCtrlr0 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct SpiCtrlr0 {
+            trans_type: super::vals::TransType,
+            addr_l: u8,
+            inst_l: super::vals::InstL,
+            wait_cycles: u8,
+            spi_ddr_en: bool,
+            inst_ddr_en: bool,
+            spi_rxds_en: bool,
+            xip_cmd: u8,
+        }
+        let proxy = SpiCtrlr0 {
+            trans_type: self.trans_type(),
+            addr_l: self.addr_l(),
+            inst_l: self.inst_l(),
+            wait_cycles: self.wait_cycles(),
+            spi_ddr_en: self.spi_ddr_en(),
+            inst_ddr_en: self.inst_ddr_en(),
+            spi_rxds_en: self.spi_rxds_en(),
+            xip_cmd: self.xip_cmd(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Status register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -909,6 +1376,44 @@ impl Default for Sr {
         Sr(0)
     }
 }
+impl core::fmt::Debug for Sr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Sr")
+            .field("busy", &self.busy())
+            .field("tfnf", &self.tfnf())
+            .field("tfe", &self.tfe())
+            .field("rfne", &self.rfne())
+            .field("rff", &self.rff())
+            .field("txe", &self.txe())
+            .field("dcol", &self.dcol())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Sr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Sr {
+            busy: bool,
+            tfnf: bool,
+            tfe: bool,
+            rfne: bool,
+            rff: bool,
+            txe: bool,
+            dcol: bool,
+        }
+        let proxy = Sr {
+            busy: self.busy(),
+            tfnf: self.tfnf(),
+            tfe: self.tfe(),
+            rfne: self.rfne(),
+            rff: self.rff(),
+            txe: self.txe(),
+            dcol: self.dcol(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "SSI Enable"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -930,6 +1435,26 @@ impl Default for Ssienr {
     #[inline(always)]
     fn default() -> Ssienr {
         Ssienr(0)
+    }
+}
+impl core::fmt::Debug for Ssienr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Ssienr")
+            .field("ssi_en", &self.ssi_en())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Ssienr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Ssienr {
+            ssi_en: bool,
+        }
+        let proxy = Ssienr {
+            ssi_en: self.ssi_en(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "TX drive edge"]
@@ -955,6 +1480,24 @@ impl Default for TxdDriveEdge {
         TxdDriveEdge(0)
     }
 }
+impl core::fmt::Debug for TxdDriveEdge {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("TxdDriveEdge")
+            .field("tde", &self.tde())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for TxdDriveEdge {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct TxdDriveEdge {
+            tde: u8,
+        }
+        let proxy = TxdDriveEdge { tde: self.tde() };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "TX FIFO level"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -976,6 +1519,26 @@ impl Default for Txflr {
     #[inline(always)]
     fn default() -> Txflr {
         Txflr(0)
+    }
+}
+impl core::fmt::Debug for Txflr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Txflr")
+            .field("tftfl", &self.tftfl())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Txflr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Txflr {
+            tftfl: u8,
+        }
+        let proxy = Txflr {
+            tftfl: self.tftfl(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "TX FIFO threshold level"]
@@ -1001,6 +1564,22 @@ impl Default for Txftlr {
         Txftlr(0)
     }
 }
+impl core::fmt::Debug for Txftlr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Txftlr").field("tft", &self.tft()).finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Txftlr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Txftlr {
+            tft: u8,
+        }
+        let proxy = Txftlr { tft: self.tft() };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "TX FIFO overflow interrupt clear"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -1022,5 +1601,25 @@ impl Default for Txoicr {
     #[inline(always)]
     fn default() -> Txoicr {
         Txoicr(0)
+    }
+}
+impl core::fmt::Debug for Txoicr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Txoicr")
+            .field("txoicr", &self.txoicr())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Txoicr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Txoicr {
+            txoicr: bool,
+        }
+        let proxy = Txoicr {
+            txoicr: self.txoicr(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

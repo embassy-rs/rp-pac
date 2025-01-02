@@ -19,6 +19,26 @@ impl Default for Count {
         Count(0)
     }
 }
+impl core::fmt::Debug for Count {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Count")
+            .field("count", &self.count())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Count {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Count {
+            count: u16,
+        }
+        let proxy = Count {
+            count: self.count(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Crystal Oscillator Control"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -53,6 +73,29 @@ impl Default for Ctrl {
         Ctrl(0)
     }
 }
+impl core::fmt::Debug for Ctrl {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Ctrl")
+            .field("freq_range", &self.freq_range())
+            .field("enable", &self.enable())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Ctrl {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Ctrl {
+            freq_range: super::vals::CtrlFreqRange,
+            enable: super::vals::Enable,
+        }
+        let proxy = Ctrl {
+            freq_range: self.freq_range(),
+            enable: self.enable(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Crystal Oscillator pause control"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -75,6 +118,26 @@ impl Default for Dormant {
     #[inline(always)]
     fn default() -> Dormant {
         Dormant(0)
+    }
+}
+impl core::fmt::Debug for Dormant {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Dormant")
+            .field("dormant", &self.dormant())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Dormant {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Dormant {
+            dormant: super::vals::Dormant,
+        }
+        let proxy = Dormant {
+            dormant: self.dormant(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Controls the startup delay"]
@@ -109,6 +172,29 @@ impl Default for Startup {
     #[inline(always)]
     fn default() -> Startup {
         Startup(0)
+    }
+}
+impl core::fmt::Debug for Startup {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Startup")
+            .field("delay", &self.delay())
+            .field("x4", &self.x4())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Startup {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Startup {
+            delay: u16,
+            x4: bool,
+        }
+        let proxy = Startup {
+            delay: self.delay(),
+            x4: self.x4(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Crystal Oscillator Status"]
@@ -165,5 +251,34 @@ impl Default for Status {
     #[inline(always)]
     fn default() -> Status {
         Status(0)
+    }
+}
+impl core::fmt::Debug for Status {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Status")
+            .field("freq_range", &self.freq_range())
+            .field("enabled", &self.enabled())
+            .field("badwrite", &self.badwrite())
+            .field("stable", &self.stable())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Status {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Status {
+            freq_range: super::vals::StatusFreqRange,
+            enabled: bool,
+            badwrite: bool,
+            stable: bool,
+        }
+        let proxy = Status {
+            freq_range: self.freq_range(),
+            enabled: self.enabled(),
+            badwrite: self.badwrite(),
+            stable: self.stable(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

@@ -21,7 +21,27 @@ impl Default for ChanAbort {
         ChanAbort(0)
     }
 }
-#[doc = "DMA Channel 5 Control and Status"]
+impl core::fmt::Debug for ChanAbort {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("ChanAbort")
+            .field("chan_abort", &self.chan_abort())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for ChanAbort {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct ChanAbort {
+            chan_abort: u16,
+        }
+        let proxy = ChanAbort {
+            chan_abort: self.chan_abort(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
+#[doc = "DMA Channel 0 Control and Status"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct CtrlTrig(pub u32);
@@ -209,6 +229,71 @@ impl Default for CtrlTrig {
         CtrlTrig(0)
     }
 }
+impl core::fmt::Debug for CtrlTrig {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("CtrlTrig")
+            .field("en", &self.en())
+            .field("high_priority", &self.high_priority())
+            .field("data_size", &self.data_size())
+            .field("incr_read", &self.incr_read())
+            .field("incr_write", &self.incr_write())
+            .field("ring_size", &self.ring_size())
+            .field("ring_sel", &self.ring_sel())
+            .field("chain_to", &self.chain_to())
+            .field("treq_sel", &self.treq_sel())
+            .field("irq_quiet", &self.irq_quiet())
+            .field("bswap", &self.bswap())
+            .field("sniff_en", &self.sniff_en())
+            .field("busy", &self.busy())
+            .field("write_error", &self.write_error())
+            .field("read_error", &self.read_error())
+            .field("ahb_error", &self.ahb_error())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for CtrlTrig {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct CtrlTrig {
+            en: bool,
+            high_priority: bool,
+            data_size: super::vals::DataSize,
+            incr_read: bool,
+            incr_write: bool,
+            ring_size: u8,
+            ring_sel: bool,
+            chain_to: u8,
+            treq_sel: super::vals::TreqSel,
+            irq_quiet: bool,
+            bswap: bool,
+            sniff_en: bool,
+            busy: bool,
+            write_error: bool,
+            read_error: bool,
+            ahb_error: bool,
+        }
+        let proxy = CtrlTrig {
+            en: self.en(),
+            high_priority: self.high_priority(),
+            data_size: self.data_size(),
+            incr_read: self.incr_read(),
+            incr_write: self.incr_write(),
+            ring_size: self.ring_size(),
+            ring_sel: self.ring_sel(),
+            chain_to: self.chain_to(),
+            treq_sel: self.treq_sel(),
+            irq_quiet: self.irq_quiet(),
+            bswap: self.bswap(),
+            sniff_en: self.sniff_en(),
+            busy: self.busy(),
+            write_error: self.write_error(),
+            read_error: self.read_error(),
+            ahb_error: self.ahb_error(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Read: get channel DREQ counter (i.e. how many accesses the DMA expects it can perform on the peripheral without overflow/underflow. Write any value: clears the counter, and cause channel to re-initiate DREQ handshake."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -228,6 +313,26 @@ impl Default for DbgCtdreq {
     #[inline(always)]
     fn default() -> DbgCtdreq {
         DbgCtdreq(0)
+    }
+}
+impl core::fmt::Debug for DbgCtdreq {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("DbgCtdreq")
+            .field("dbg_ctdreq", &self.dbg_ctdreq())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for DbgCtdreq {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct DbgCtdreq {
+            dbg_ctdreq: u8,
+        }
+        let proxy = DbgCtdreq {
+            dbg_ctdreq: self.dbg_ctdreq(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Debug RAF, WAF, TDF levels"]
@@ -275,6 +380,32 @@ impl Default for FifoLevels {
         FifoLevels(0)
     }
 }
+impl core::fmt::Debug for FifoLevels {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("FifoLevels")
+            .field("tdf_lvl", &self.tdf_lvl())
+            .field("waf_lvl", &self.waf_lvl())
+            .field("raf_lvl", &self.raf_lvl())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for FifoLevels {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct FifoLevels {
+            tdf_lvl: u8,
+            waf_lvl: u8,
+            raf_lvl: u8,
+        }
+        let proxy = FifoLevels {
+            tdf_lvl: self.tdf_lvl(),
+            waf_lvl: self.waf_lvl(),
+            raf_lvl: self.raf_lvl(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Trigger one or more channels simultaneously"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -298,6 +429,26 @@ impl Default for MultiChanTrigger {
         MultiChanTrigger(0)
     }
 }
+impl core::fmt::Debug for MultiChanTrigger {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("MultiChanTrigger")
+            .field("multi_chan_trigger", &self.multi_chan_trigger())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for MultiChanTrigger {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct MultiChanTrigger {
+            multi_chan_trigger: u16,
+        }
+        let proxy = MultiChanTrigger {
+            multi_chan_trigger: self.multi_chan_trigger(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "The number of channels this DMA instance is equipped with. This DMA supports up to 16 hardware channels, but can be configured with as few as one, to minimise silicon area."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -317,6 +468,26 @@ impl Default for Nchannels {
     #[inline(always)]
     fn default() -> Nchannels {
         Nchannels(0)
+    }
+}
+impl core::fmt::Debug for Nchannels {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Nchannels")
+            .field("n_channels", &self.n_channels())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Nchannels {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Nchannels {
+            n_channels: u8,
+        }
+        let proxy = Nchannels {
+            n_channels: self.n_channels(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Sniffer Control"]
@@ -395,6 +566,41 @@ impl Default for SniffCtrl {
         SniffCtrl(0)
     }
 }
+impl core::fmt::Debug for SniffCtrl {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SniffCtrl")
+            .field("en", &self.en())
+            .field("dmach", &self.dmach())
+            .field("calc", &self.calc())
+            .field("bswap", &self.bswap())
+            .field("out_rev", &self.out_rev())
+            .field("out_inv", &self.out_inv())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for SniffCtrl {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct SniffCtrl {
+            en: bool,
+            dmach: u8,
+            calc: super::vals::Calc,
+            bswap: bool,
+            out_rev: bool,
+            out_inv: bool,
+        }
+        let proxy = SniffCtrl {
+            en: self.en(),
+            dmach: self.dmach(),
+            calc: self.calc(),
+            bswap: self.bswap(),
+            out_rev: self.out_rev(),
+            out_inv: self.out_inv(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Pacing (X/Y) Fractional Timer The pacing timer produces TREQ assertions at a rate set by ((X/Y) * sys_clk). This equation is evaluated every sys_clk cycles and therefore can only generate TREQs at a rate of 1 per sys_clk (i.e. permanent TREQ) or less."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -427,5 +633,28 @@ impl Default for Timer {
     #[inline(always)]
     fn default() -> Timer {
         Timer(0)
+    }
+}
+impl core::fmt::Debug for Timer {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Timer")
+            .field("y", &self.y())
+            .field("x", &self.x())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Timer {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Timer {
+            y: u16,
+            x: u16,
+        }
+        let proxy = Timer {
+            y: self.y(),
+            x: self.x(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

@@ -28,6 +28,29 @@ impl Default for ChCc {
         ChCc(0)
     }
 }
+impl core::fmt::Debug for ChCc {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("ChCc")
+            .field("a", &self.a())
+            .field("b", &self.b())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for ChCc {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct ChCc {
+            a: u16,
+            b: u16,
+        }
+        let proxy = ChCc {
+            a: self.a(),
+            b: self.b(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Control and status register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -115,6 +138,44 @@ impl Default for ChCsr {
         ChCsr(0)
     }
 }
+impl core::fmt::Debug for ChCsr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("ChCsr")
+            .field("en", &self.en())
+            .field("ph_correct", &self.ph_correct())
+            .field("a_inv", &self.a_inv())
+            .field("b_inv", &self.b_inv())
+            .field("divmode", &self.divmode())
+            .field("ph_ret", &self.ph_ret())
+            .field("ph_adv", &self.ph_adv())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for ChCsr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct ChCsr {
+            en: bool,
+            ph_correct: bool,
+            a_inv: bool,
+            b_inv: bool,
+            divmode: super::vals::Divmode,
+            ph_ret: bool,
+            ph_adv: bool,
+        }
+        let proxy = ChCsr {
+            en: self.en(),
+            ph_correct: self.ph_correct(),
+            a_inv: self.a_inv(),
+            b_inv: self.b_inv(),
+            divmode: self.divmode(),
+            ph_ret: self.ph_ret(),
+            ph_adv: self.ph_adv(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Direct access to the PWM counter"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -134,6 +195,22 @@ impl Default for ChCtr {
     #[inline(always)]
     fn default() -> ChCtr {
         ChCtr(0)
+    }
+}
+impl core::fmt::Debug for ChCtr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("ChCtr").field("ctr", &self.ctr()).finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for ChCtr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct ChCtr {
+            ctr: u16,
+        }
+        let proxy = ChCtr { ctr: self.ctr() };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "INT and FRAC form a fixed-point fractional number. Counting rate is system clock frequency divided by this number. Fractional division uses simple 1st-order sigma-delta."]
@@ -166,6 +243,29 @@ impl Default for ChDiv {
         ChDiv(0)
     }
 }
+impl core::fmt::Debug for ChDiv {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("ChDiv")
+            .field("frac", &self.frac())
+            .field("int", &self.int())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for ChDiv {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct ChDiv {
+            frac: u8,
+            int: u8,
+        }
+        let proxy = ChDiv {
+            frac: self.frac(),
+            int: self.int(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Counter wrap value"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -185,6 +285,22 @@ impl Default for ChTop {
     #[inline(always)]
     fn default() -> ChTop {
         ChTop(0)
+    }
+}
+impl core::fmt::Debug for ChTop {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("ChTop").field("top", &self.top()).finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for ChTop {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct ChTop {
+            top: u16,
+        }
+        let proxy = ChTop { top: self.top() };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "This register aliases the CSR_EN bits for all channels. Writing to this register allows multiple channels to be enabled or disabled simultaneously, so they can run in perfect sync. For each channel, there is only one physical EN register bit, which can be accessed through here or CHx_CSR."]
@@ -271,6 +387,47 @@ impl Default for En {
         En(0)
     }
 }
+impl core::fmt::Debug for En {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("En")
+            .field("ch0", &self.ch0())
+            .field("ch1", &self.ch1())
+            .field("ch2", &self.ch2())
+            .field("ch3", &self.ch3())
+            .field("ch4", &self.ch4())
+            .field("ch5", &self.ch5())
+            .field("ch6", &self.ch6())
+            .field("ch7", &self.ch7())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for En {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct En {
+            ch0: bool,
+            ch1: bool,
+            ch2: bool,
+            ch3: bool,
+            ch4: bool,
+            ch5: bool,
+            ch6: bool,
+            ch7: bool,
+        }
+        let proxy = En {
+            ch0: self.ch0(),
+            ch1: self.ch1(),
+            ch2: self.ch2(),
+            ch3: self.ch3(),
+            ch4: self.ch4(),
+            ch5: self.ch5(),
+            ch6: self.ch6(),
+            ch7: self.ch7(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Interrupt Enable"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -353,6 +510,47 @@ impl Default for Inte {
     #[inline(always)]
     fn default() -> Inte {
         Inte(0)
+    }
+}
+impl core::fmt::Debug for Inte {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Inte")
+            .field("ch0", &self.ch0())
+            .field("ch1", &self.ch1())
+            .field("ch2", &self.ch2())
+            .field("ch3", &self.ch3())
+            .field("ch4", &self.ch4())
+            .field("ch5", &self.ch5())
+            .field("ch6", &self.ch6())
+            .field("ch7", &self.ch7())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Inte {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Inte {
+            ch0: bool,
+            ch1: bool,
+            ch2: bool,
+            ch3: bool,
+            ch4: bool,
+            ch5: bool,
+            ch6: bool,
+            ch7: bool,
+        }
+        let proxy = Inte {
+            ch0: self.ch0(),
+            ch1: self.ch1(),
+            ch2: self.ch2(),
+            ch3: self.ch3(),
+            ch4: self.ch4(),
+            ch5: self.ch5(),
+            ch6: self.ch6(),
+            ch7: self.ch7(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Interrupt Force"]
@@ -439,6 +637,47 @@ impl Default for Intf {
         Intf(0)
     }
 }
+impl core::fmt::Debug for Intf {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Intf")
+            .field("ch0", &self.ch0())
+            .field("ch1", &self.ch1())
+            .field("ch2", &self.ch2())
+            .field("ch3", &self.ch3())
+            .field("ch4", &self.ch4())
+            .field("ch5", &self.ch5())
+            .field("ch6", &self.ch6())
+            .field("ch7", &self.ch7())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Intf {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Intf {
+            ch0: bool,
+            ch1: bool,
+            ch2: bool,
+            ch3: bool,
+            ch4: bool,
+            ch5: bool,
+            ch6: bool,
+            ch7: bool,
+        }
+        let proxy = Intf {
+            ch0: self.ch0(),
+            ch1: self.ch1(),
+            ch2: self.ch2(),
+            ch3: self.ch3(),
+            ch4: self.ch4(),
+            ch5: self.ch5(),
+            ch6: self.ch6(),
+            ch7: self.ch7(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Raw Interrupts"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -523,6 +762,47 @@ impl Default for Intr {
         Intr(0)
     }
 }
+impl core::fmt::Debug for Intr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Intr")
+            .field("ch0", &self.ch0())
+            .field("ch1", &self.ch1())
+            .field("ch2", &self.ch2())
+            .field("ch3", &self.ch3())
+            .field("ch4", &self.ch4())
+            .field("ch5", &self.ch5())
+            .field("ch6", &self.ch6())
+            .field("ch7", &self.ch7())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Intr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Intr {
+            ch0: bool,
+            ch1: bool,
+            ch2: bool,
+            ch3: bool,
+            ch4: bool,
+            ch5: bool,
+            ch6: bool,
+            ch7: bool,
+        }
+        let proxy = Intr {
+            ch0: self.ch0(),
+            ch1: self.ch1(),
+            ch2: self.ch2(),
+            ch3: self.ch3(),
+            ch4: self.ch4(),
+            ch5: self.ch5(),
+            ch6: self.ch6(),
+            ch7: self.ch7(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Interrupt status after masking & forcing"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -605,5 +885,46 @@ impl Default for Ints {
     #[inline(always)]
     fn default() -> Ints {
         Ints(0)
+    }
+}
+impl core::fmt::Debug for Ints {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Ints")
+            .field("ch0", &self.ch0())
+            .field("ch1", &self.ch1())
+            .field("ch2", &self.ch2())
+            .field("ch3", &self.ch3())
+            .field("ch4", &self.ch4())
+            .field("ch5", &self.ch5())
+            .field("ch6", &self.ch6())
+            .field("ch7", &self.ch7())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Ints {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Ints {
+            ch0: bool,
+            ch1: bool,
+            ch2: bool,
+            ch3: bool,
+            ch4: bool,
+            ch5: bool,
+            ch6: bool,
+            ch7: bool,
+        }
+        let proxy = Ints {
+            ch0: self.ch0(),
+            ch1: self.ch1(),
+            ch2: self.ch2(),
+            ch3: self.ch3(),
+            ch4: self.ch4(),
+            ch5: self.ch5(),
+            ch6: self.ch6(),
+            ch7: self.ch7(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

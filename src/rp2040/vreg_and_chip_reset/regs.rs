@@ -32,6 +32,29 @@ impl Default for Bod {
         Bod(0)
     }
 }
+impl core::fmt::Debug for Bod {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Bod")
+            .field("en", &self.en())
+            .field("vsel", &self.vsel())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Bod {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Bod {
+            en: bool,
+            vsel: u8,
+        }
+        let proxy = Bod {
+            en: self.en(),
+            vsel: self.vsel(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Chip reset control and status"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -88,6 +111,35 @@ impl Default for ChipReset {
         ChipReset(0)
     }
 }
+impl core::fmt::Debug for ChipReset {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("ChipReset")
+            .field("had_por", &self.had_por())
+            .field("had_run", &self.had_run())
+            .field("had_psm_restart", &self.had_psm_restart())
+            .field("psm_restart_flag", &self.psm_restart_flag())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for ChipReset {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct ChipReset {
+            had_por: bool,
+            had_run: bool,
+            had_psm_restart: bool,
+            psm_restart_flag: bool,
+        }
+        let proxy = ChipReset {
+            had_por: self.had_por(),
+            had_run: self.had_run(),
+            had_psm_restart: self.had_psm_restart(),
+            psm_restart_flag: self.psm_restart_flag(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Voltage regulator control and status"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -142,5 +194,34 @@ impl Default for Vreg {
     #[inline(always)]
     fn default() -> Vreg {
         Vreg(0)
+    }
+}
+impl core::fmt::Debug for Vreg {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Vreg")
+            .field("en", &self.en())
+            .field("hiz", &self.hiz())
+            .field("vsel", &self.vsel())
+            .field("rok", &self.rok())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Vreg {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Vreg {
+            en: bool,
+            hiz: bool,
+            vsel: u8,
+            rok: bool,
+        }
+        let proxy = Vreg {
+            en: self.en(),
+            hiz: self.hiz(),
+            vsel: self.vsel(),
+            rok: self.rok(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

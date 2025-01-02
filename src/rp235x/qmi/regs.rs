@@ -1,4 +1,4 @@
-#[doc = "Configure address translation for XIP virtual addresses 0x1000000 through 0x13fffff (a 4 MiB window starting at +16 MiB). Address translation allows a program image to be executed in place at multiple physical flash addresses (for example, a double-buffered flash image for over-the-air updates), without the overhead of position-independent code. At reset, the address translation registers are initialised to an identity mapping, so that they can be ignored if address translation is not required. Note that the XIP cache is fully virtually addressed, so a cache flush is required after changing the address translation."]
+#[doc = "Configure address translation for XIP virtual addresses 0x000000 through 0x3fffff (a 4 MiB window starting at +0 MiB). Address translation allows a program image to be executed in place at multiple physical flash addresses (for example, a double-buffered flash image for over-the-air updates), without the overhead of position-independent code. At reset, the address translation registers are initialised to an identity mapping, so that they can be ignored if address translation is not required. Note that the XIP cache is fully virtually addressed, so a cache flush is required after changing the address translation."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Atrans(pub u32);
@@ -30,6 +30,29 @@ impl Default for Atrans {
     #[inline(always)]
     fn default() -> Atrans {
         Atrans(0)
+    }
+}
+impl core::fmt::Debug for Atrans {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Atrans")
+            .field("base", &self.base())
+            .field("size", &self.size())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Atrans {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Atrans {
+            base: u16,
+            size: u16,
+        }
+        let proxy = Atrans {
+            base: self.base(),
+            size: self.size(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Control and status for direct serial mode Direct serial mode allows the processor to send and receive raw serial frames, for programming, configuration and control of the external memory devices. Only SPI mode 0 (CPOL=0 CPHA=0) is supported."]
@@ -198,6 +221,65 @@ impl Default for DirectCsr {
         DirectCsr(0)
     }
 }
+impl core::fmt::Debug for DirectCsr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("DirectCsr")
+            .field("en", &self.en())
+            .field("busy", &self.busy())
+            .field("assert_cs0n", &self.assert_cs0n())
+            .field("assert_cs1n", &self.assert_cs1n())
+            .field("auto_cs0n", &self.auto_cs0n())
+            .field("auto_cs1n", &self.auto_cs1n())
+            .field("txfull", &self.txfull())
+            .field("txempty", &self.txempty())
+            .field("txlevel", &self.txlevel())
+            .field("rxempty", &self.rxempty())
+            .field("rxfull", &self.rxfull())
+            .field("rxlevel", &self.rxlevel())
+            .field("clkdiv", &self.clkdiv())
+            .field("rxdelay", &self.rxdelay())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for DirectCsr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct DirectCsr {
+            en: bool,
+            busy: bool,
+            assert_cs0n: bool,
+            assert_cs1n: bool,
+            auto_cs0n: bool,
+            auto_cs1n: bool,
+            txfull: bool,
+            txempty: bool,
+            txlevel: u8,
+            rxempty: bool,
+            rxfull: bool,
+            rxlevel: u8,
+            clkdiv: u8,
+            rxdelay: u8,
+        }
+        let proxy = DirectCsr {
+            en: self.en(),
+            busy: self.busy(),
+            assert_cs0n: self.assert_cs0n(),
+            assert_cs1n: self.assert_cs1n(),
+            auto_cs0n: self.auto_cs0n(),
+            auto_cs1n: self.auto_cs1n(),
+            txfull: self.txfull(),
+            txempty: self.txempty(),
+            txlevel: self.txlevel(),
+            rxempty: self.rxempty(),
+            rxfull: self.rxfull(),
+            rxlevel: self.rxlevel(),
+            clkdiv: self.clkdiv(),
+            rxdelay: self.rxdelay(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Receive FIFO for direct mode"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -219,6 +301,26 @@ impl Default for DirectRx {
     #[inline(always)]
     fn default() -> DirectRx {
         DirectRx(0)
+    }
+}
+impl core::fmt::Debug for DirectRx {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("DirectRx")
+            .field("direct_rx", &self.direct_rx())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for DirectRx {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct DirectRx {
+            direct_rx: u16,
+        }
+        let proxy = DirectRx {
+            direct_rx: self.direct_rx(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Transmit FIFO for direct mode"]
@@ -288,7 +390,39 @@ impl Default for DirectTx {
         DirectTx(0)
     }
 }
-#[doc = "Command constants used for reads from memory address window 1. The reset value of the M1_RCMD register is configured to support a basic 03h serial read transfer with no additional configuration."]
+impl core::fmt::Debug for DirectTx {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("DirectTx")
+            .field("data", &self.data())
+            .field("iwidth", &self.iwidth())
+            .field("dwidth", &self.dwidth())
+            .field("oe", &self.oe())
+            .field("nopush", &self.nopush())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for DirectTx {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct DirectTx {
+            data: u16,
+            iwidth: super::vals::Iwidth,
+            dwidth: bool,
+            oe: bool,
+            nopush: bool,
+        }
+        let proxy = DirectTx {
+            data: self.data(),
+            iwidth: self.iwidth(),
+            dwidth: self.dwidth(),
+            oe: self.oe(),
+            nopush: self.nopush(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
+#[doc = "Command constants used for reads from memory address window 0. The reset value of the M0_RCMD register is configured to support a basic 03h serial read transfer with no additional configuration."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Rcmd(pub u32);
@@ -320,6 +454,29 @@ impl Default for Rcmd {
     #[inline(always)]
     fn default() -> Rcmd {
         Rcmd(0)
+    }
+}
+impl core::fmt::Debug for Rcmd {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Rcmd")
+            .field("prefix", &self.prefix())
+            .field("suffix", &self.suffix())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Rcmd {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Rcmd {
+            prefix: u8,
+            suffix: u8,
+        }
+        let proxy = Rcmd {
+            prefix: self.prefix(),
+            suffix: self.suffix(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Read transfer format configuration for memory address window 0. Configure the bus width of each transfer phase individually, and configure the length or presence of the command prefix, command suffix and dummy/turnaround transfer phases. Only 24-bit addresses are supported. The reset value of the M0_RFMT register is configured to support a basic 03h serial read transfer with no additional configuration."]
@@ -433,7 +590,51 @@ impl Default for Rfmt {
         Rfmt(0)
     }
 }
-#[doc = "Timing configuration register for memory address window 1."]
+impl core::fmt::Debug for Rfmt {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Rfmt")
+            .field("prefix_width", &self.prefix_width())
+            .field("addr_width", &self.addr_width())
+            .field("suffix_width", &self.suffix_width())
+            .field("dummy_width", &self.dummy_width())
+            .field("data_width", &self.data_width())
+            .field("prefix_len", &self.prefix_len())
+            .field("suffix_len", &self.suffix_len())
+            .field("dummy_len", &self.dummy_len())
+            .field("dtr", &self.dtr())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Rfmt {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Rfmt {
+            prefix_width: super::vals::PrefixWidth,
+            addr_width: super::vals::AddrWidth,
+            suffix_width: super::vals::SuffixWidth,
+            dummy_width: super::vals::DummyWidth,
+            data_width: super::vals::DataWidth,
+            prefix_len: super::vals::PrefixLen,
+            suffix_len: super::vals::SuffixLen,
+            dummy_len: super::vals::DummyLen,
+            dtr: bool,
+        }
+        let proxy = Rfmt {
+            prefix_width: self.prefix_width(),
+            addr_width: self.addr_width(),
+            suffix_width: self.suffix_width(),
+            dummy_width: self.dummy_width(),
+            data_width: self.data_width(),
+            prefix_len: self.prefix_len(),
+            suffix_len: self.suffix_len(),
+            dummy_len: self.dummy_len(),
+            dtr: self.dtr(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
+#[doc = "Timing configuration register for memory address window 0."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Timing(pub u32);
@@ -533,7 +734,48 @@ impl Default for Timing {
         Timing(0)
     }
 }
-#[doc = "Command constants used for writes to memory address window 1. The reset value of the M1_WCMD register is configured to support a basic 02h serial write transfer with no additional configuration."]
+impl core::fmt::Debug for Timing {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Timing")
+            .field("clkdiv", &self.clkdiv())
+            .field("rxdelay", &self.rxdelay())
+            .field("min_deselect", &self.min_deselect())
+            .field("max_select", &self.max_select())
+            .field("select_hold", &self.select_hold())
+            .field("select_setup", &self.select_setup())
+            .field("pagebreak", &self.pagebreak())
+            .field("cooldown", &self.cooldown())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Timing {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Timing {
+            clkdiv: u8,
+            rxdelay: u8,
+            min_deselect: u8,
+            max_select: u8,
+            select_hold: u8,
+            select_setup: bool,
+            pagebreak: super::vals::Pagebreak,
+            cooldown: u8,
+        }
+        let proxy = Timing {
+            clkdiv: self.clkdiv(),
+            rxdelay: self.rxdelay(),
+            min_deselect: self.min_deselect(),
+            max_select: self.max_select(),
+            select_hold: self.select_hold(),
+            select_setup: self.select_setup(),
+            pagebreak: self.pagebreak(),
+            cooldown: self.cooldown(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
+#[doc = "Command constants used for writes to memory address window 0. The reset value of the M0_WCMD register is configured to support a basic 02h serial write transfer with no additional configuration."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Wcmd(pub u32);
@@ -567,7 +809,30 @@ impl Default for Wcmd {
         Wcmd(0)
     }
 }
-#[doc = "Write transfer format configuration for memory address window 1. Configure the bus width of each transfer phase individually, and configure the length or presence of the command prefix, command suffix and dummy/turnaround transfer phases. Only 24-bit addresses are supported. The reset value of the M1_WFMT register is configured to support a basic 02h serial write transfer. However, writes to this window must first be enabled via the XIP_CTRL_WRITABLE_M1 bit, as XIP memory is read-only by default."]
+impl core::fmt::Debug for Wcmd {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Wcmd")
+            .field("prefix", &self.prefix())
+            .field("suffix", &self.suffix())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Wcmd {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Wcmd {
+            prefix: u8,
+            suffix: u8,
+        }
+        let proxy = Wcmd {
+            prefix: self.prefix(),
+            suffix: self.suffix(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
+#[doc = "Write transfer format configuration for memory address window 0. Configure the bus width of each transfer phase individually, and configure the length or presence of the command prefix, command suffix and dummy/turnaround transfer phases. Only 24-bit addresses are supported. The reset value of the M0_WFMT register is configured to support a basic 02h serial write transfer. However, writes to this window must first be enabled via the XIP_CTRL_WRITABLE_M0 bit, as XIP memory is read-only by default."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Wfmt(pub u32);
@@ -676,5 +941,49 @@ impl Default for Wfmt {
     #[inline(always)]
     fn default() -> Wfmt {
         Wfmt(0)
+    }
+}
+impl core::fmt::Debug for Wfmt {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Wfmt")
+            .field("prefix_width", &self.prefix_width())
+            .field("addr_width", &self.addr_width())
+            .field("suffix_width", &self.suffix_width())
+            .field("dummy_width", &self.dummy_width())
+            .field("data_width", &self.data_width())
+            .field("prefix_len", &self.prefix_len())
+            .field("suffix_len", &self.suffix_len())
+            .field("dummy_len", &self.dummy_len())
+            .field("dtr", &self.dtr())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Wfmt {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Wfmt {
+            prefix_width: super::vals::PrefixWidth,
+            addr_width: super::vals::AddrWidth,
+            suffix_width: super::vals::SuffixWidth,
+            dummy_width: super::vals::DummyWidth,
+            data_width: super::vals::DataWidth,
+            prefix_len: super::vals::PrefixLen,
+            suffix_len: super::vals::SuffixLen,
+            dummy_len: super::vals::DummyLen,
+            dtr: bool,
+        }
+        let proxy = Wfmt {
+            prefix_width: self.prefix_width(),
+            addr_width: self.addr_width(),
+            suffix_width: self.suffix_width(),
+            dummy_width: self.dummy_width(),
+            data_width: self.data_width(),
+            prefix_len: self.prefix_len(),
+            suffix_len: self.suffix_len(),
+            dummy_len: self.dummy_len(),
+            dtr: self.dtr(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

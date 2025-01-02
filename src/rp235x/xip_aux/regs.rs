@@ -21,6 +21,26 @@ impl Default for QmiDirectRx {
         QmiDirectRx(0)
     }
 }
+impl core::fmt::Debug for QmiDirectRx {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("QmiDirectRx")
+            .field("qmi_direct_rx", &self.qmi_direct_rx())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for QmiDirectRx {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct QmiDirectRx {
+            qmi_direct_rx: u16,
+        }
+        let proxy = QmiDirectRx {
+            qmi_direct_rx: self.qmi_direct_rx(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Write to the QMI direct-mode TX FIFO (fast bus access to QMI_DIRECT_TX)"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -86,5 +106,37 @@ impl Default for QmiDirectTx {
     #[inline(always)]
     fn default() -> QmiDirectTx {
         QmiDirectTx(0)
+    }
+}
+impl core::fmt::Debug for QmiDirectTx {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("QmiDirectTx")
+            .field("data", &self.data())
+            .field("iwidth", &self.iwidth())
+            .field("dwidth", &self.dwidth())
+            .field("oe", &self.oe())
+            .field("nopush", &self.nopush())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for QmiDirectTx {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct QmiDirectTx {
+            data: u16,
+            iwidth: super::vals::Iwidth,
+            dwidth: bool,
+            oe: bool,
+            nopush: bool,
+        }
+        let proxy = QmiDirectTx {
+            data: self.data(),
+            iwidth: self.iwidth(),
+            dwidth: self.dwidth(),
+            oe: self.oe(),
+            nopush: self.nopush(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

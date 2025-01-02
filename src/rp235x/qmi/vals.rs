@@ -1,5 +1,6 @@
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum AddrWidth {
     #[doc = "Single width"]
     S = 0x0,
@@ -32,7 +33,8 @@ impl From<AddrWidth> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum DataWidth {
     #[doc = "Single width"]
     S = 0x0,
@@ -65,7 +67,8 @@ impl From<DataWidth> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum DummyLen {
     #[doc = "No dummy phase"]
     NONE = 0x0,
@@ -107,7 +110,8 @@ impl From<DummyLen> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum DummyWidth {
     #[doc = "Single width"]
     S = 0x0,
@@ -140,7 +144,8 @@ impl From<DummyWidth> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Iwidth {
     #[doc = "Single width"]
     S = 0x0,
@@ -173,7 +178,8 @@ impl From<Iwidth> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Pagebreak {
     #[doc = "No page boundary is enforced"]
     NONE = 0x0,
@@ -207,7 +213,8 @@ impl From<Pagebreak> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum PrefixLen {
     #[doc = "No prefix"]
     NONE = 0x0,
@@ -237,7 +244,8 @@ impl From<PrefixLen> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum PrefixWidth {
     #[doc = "Single width"]
     S = 0x0,
@@ -270,7 +278,8 @@ impl From<PrefixWidth> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum SuffixLen {
     #[doc = "No suffix"]
     NONE = 0x0,
@@ -302,7 +311,8 @@ impl From<SuffixLen> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum SuffixWidth {
     #[doc = "Single width"]
     S = 0x0,

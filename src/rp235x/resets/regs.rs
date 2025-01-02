@@ -270,6 +270,110 @@ impl Default for Peripherals {
         Peripherals(0)
     }
 }
+impl core::fmt::Debug for Peripherals {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Peripherals")
+            .field("adc", &self.adc())
+            .field("busctrl", &self.busctrl())
+            .field("dma", &self.dma())
+            .field("hstx", &self.hstx())
+            .field("i2c0", &self.i2c0())
+            .field("i2c1", &self.i2c1())
+            .field("io_bank0", &self.io_bank0())
+            .field("io_qspi", &self.io_qspi())
+            .field("jtag", &self.jtag())
+            .field("pads_bank0", &self.pads_bank0())
+            .field("pads_qspi", &self.pads_qspi())
+            .field("pio0", &self.pio0())
+            .field("pio1", &self.pio1())
+            .field("pio2", &self.pio2())
+            .field("pll_sys", &self.pll_sys())
+            .field("pll_usb", &self.pll_usb())
+            .field("pwm", &self.pwm())
+            .field("sha256", &self.sha256())
+            .field("spi0", &self.spi0())
+            .field("spi1", &self.spi1())
+            .field("syscfg", &self.syscfg())
+            .field("sysinfo", &self.sysinfo())
+            .field("tbman", &self.tbman())
+            .field("timer0", &self.timer0())
+            .field("timer1", &self.timer1())
+            .field("trng", &self.trng())
+            .field("uart0", &self.uart0())
+            .field("uart1", &self.uart1())
+            .field("usbctrl", &self.usbctrl())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Peripherals {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Peripherals {
+            adc: bool,
+            busctrl: bool,
+            dma: bool,
+            hstx: bool,
+            i2c0: bool,
+            i2c1: bool,
+            io_bank0: bool,
+            io_qspi: bool,
+            jtag: bool,
+            pads_bank0: bool,
+            pads_qspi: bool,
+            pio0: bool,
+            pio1: bool,
+            pio2: bool,
+            pll_sys: bool,
+            pll_usb: bool,
+            pwm: bool,
+            sha256: bool,
+            spi0: bool,
+            spi1: bool,
+            syscfg: bool,
+            sysinfo: bool,
+            tbman: bool,
+            timer0: bool,
+            timer1: bool,
+            trng: bool,
+            uart0: bool,
+            uart1: bool,
+            usbctrl: bool,
+        }
+        let proxy = Peripherals {
+            adc: self.adc(),
+            busctrl: self.busctrl(),
+            dma: self.dma(),
+            hstx: self.hstx(),
+            i2c0: self.i2c0(),
+            i2c1: self.i2c1(),
+            io_bank0: self.io_bank0(),
+            io_qspi: self.io_qspi(),
+            jtag: self.jtag(),
+            pads_bank0: self.pads_bank0(),
+            pads_qspi: self.pads_qspi(),
+            pio0: self.pio0(),
+            pio1: self.pio1(),
+            pio2: self.pio2(),
+            pll_sys: self.pll_sys(),
+            pll_usb: self.pll_usb(),
+            pwm: self.pwm(),
+            sha256: self.sha256(),
+            spi0: self.spi0(),
+            spi1: self.spi1(),
+            syscfg: self.syscfg(),
+            sysinfo: self.sysinfo(),
+            tbman: self.tbman(),
+            timer0: self.timer0(),
+            timer1: self.timer1(),
+            trng: self.trng(),
+            uart0: self.uart0(),
+            uart1: self.uart1(),
+            usbctrl: self.usbctrl(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Wdsel(pub u32);
@@ -540,5 +644,109 @@ impl Default for Wdsel {
     #[inline(always)]
     fn default() -> Wdsel {
         Wdsel(0)
+    }
+}
+impl core::fmt::Debug for Wdsel {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Wdsel")
+            .field("adc", &self.adc())
+            .field("busctrl", &self.busctrl())
+            .field("dma", &self.dma())
+            .field("hstx", &self.hstx())
+            .field("i2c0", &self.i2c0())
+            .field("i2c1", &self.i2c1())
+            .field("io_bank0", &self.io_bank0())
+            .field("io_qspi", &self.io_qspi())
+            .field("jtag", &self.jtag())
+            .field("pads_bank0", &self.pads_bank0())
+            .field("pads_qspi", &self.pads_qspi())
+            .field("pio0", &self.pio0())
+            .field("pio1", &self.pio1())
+            .field("pio2", &self.pio2())
+            .field("pll_sys", &self.pll_sys())
+            .field("pll_usb", &self.pll_usb())
+            .field("pwm", &self.pwm())
+            .field("sha256", &self.sha256())
+            .field("spi0", &self.spi0())
+            .field("spi1", &self.spi1())
+            .field("syscfg", &self.syscfg())
+            .field("sysinfo", &self.sysinfo())
+            .field("tbman", &self.tbman())
+            .field("timer0", &self.timer0())
+            .field("timer1", &self.timer1())
+            .field("trng", &self.trng())
+            .field("uart0", &self.uart0())
+            .field("uart1", &self.uart1())
+            .field("usbctrl", &self.usbctrl())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Wdsel {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Wdsel {
+            adc: bool,
+            busctrl: bool,
+            dma: bool,
+            hstx: bool,
+            i2c0: bool,
+            i2c1: bool,
+            io_bank0: bool,
+            io_qspi: bool,
+            jtag: bool,
+            pads_bank0: bool,
+            pads_qspi: bool,
+            pio0: bool,
+            pio1: bool,
+            pio2: bool,
+            pll_sys: bool,
+            pll_usb: bool,
+            pwm: bool,
+            sha256: bool,
+            spi0: bool,
+            spi1: bool,
+            syscfg: bool,
+            sysinfo: bool,
+            tbman: bool,
+            timer0: bool,
+            timer1: bool,
+            trng: bool,
+            uart0: bool,
+            uart1: bool,
+            usbctrl: bool,
+        }
+        let proxy = Wdsel {
+            adc: self.adc(),
+            busctrl: self.busctrl(),
+            dma: self.dma(),
+            hstx: self.hstx(),
+            i2c0: self.i2c0(),
+            i2c1: self.i2c1(),
+            io_bank0: self.io_bank0(),
+            io_qspi: self.io_qspi(),
+            jtag: self.jtag(),
+            pads_bank0: self.pads_bank0(),
+            pads_qspi: self.pads_qspi(),
+            pio0: self.pio0(),
+            pio1: self.pio1(),
+            pio2: self.pio2(),
+            pll_sys: self.pll_sys(),
+            pll_usb: self.pll_usb(),
+            pwm: self.pwm(),
+            sha256: self.sha256(),
+            spi0: self.spi0(),
+            spi1: self.spi1(),
+            syscfg: self.syscfg(),
+            sysinfo: self.sysinfo(),
+            tbman: self.tbman(),
+            timer0: self.timer0(),
+            timer1: self.timer1(),
+            trng: self.trng(),
+            uart0: self.uart0(),
+            uart1: self.uart1(),
+            usbctrl: self.usbctrl(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

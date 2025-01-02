@@ -1,4 +1,4 @@
-#[doc = "Data control register for output bit 7"]
+#[doc = "Data control register for output bit 0"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Bit(pub u32);
@@ -52,6 +52,35 @@ impl Default for Bit {
     #[inline(always)]
     fn default() -> Bit {
         Bit(0)
+    }
+}
+impl core::fmt::Debug for Bit {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Bit")
+            .field("sel_p", &self.sel_p())
+            .field("sel_n", &self.sel_n())
+            .field("inv", &self.inv())
+            .field("clk", &self.clk())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Bit {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Bit {
+            sel_p: u8,
+            sel_n: u8,
+            inv: bool,
+            clk: bool,
+        }
+        let proxy = Bit {
+            sel_p: self.sel_p(),
+            sel_n: self.sel_n(),
+            inv: self.inv(),
+            clk: self.clk(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[repr(transparent)]
@@ -153,6 +182,47 @@ impl Default for Csr {
         Csr(0)
     }
 }
+impl core::fmt::Debug for Csr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Csr")
+            .field("en", &self.en())
+            .field("expand_en", &self.expand_en())
+            .field("coupled_mode", &self.coupled_mode())
+            .field("coupled_sel", &self.coupled_sel())
+            .field("shift", &self.shift())
+            .field("n_shifts", &self.n_shifts())
+            .field("clkphase", &self.clkphase())
+            .field("clkdiv", &self.clkdiv())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Csr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Csr {
+            en: bool,
+            expand_en: bool,
+            coupled_mode: bool,
+            coupled_sel: u8,
+            shift: u8,
+            n_shifts: u8,
+            clkphase: u8,
+            clkdiv: u8,
+        }
+        let proxy = Csr {
+            en: self.en(),
+            expand_en: self.expand_en(),
+            coupled_mode: self.coupled_mode(),
+            coupled_sel: self.coupled_sel(),
+            shift: self.shift(),
+            n_shifts: self.n_shifts(),
+            clkphase: self.clkphase(),
+            clkdiv: self.clkdiv(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Configure the optional shifter inside the command expander"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -207,6 +277,35 @@ impl Default for ExpandShift {
     #[inline(always)]
     fn default() -> ExpandShift {
         ExpandShift(0)
+    }
+}
+impl core::fmt::Debug for ExpandShift {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("ExpandShift")
+            .field("raw_shift", &self.raw_shift())
+            .field("raw_n_shifts", &self.raw_n_shifts())
+            .field("enc_shift", &self.enc_shift())
+            .field("enc_n_shifts", &self.enc_n_shifts())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for ExpandShift {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct ExpandShift {
+            raw_shift: u8,
+            raw_n_shifts: u8,
+            enc_shift: u8,
+            enc_n_shifts: u8,
+        }
+        let proxy = ExpandShift {
+            raw_shift: self.raw_shift(),
+            raw_n_shifts: self.raw_n_shifts(),
+            enc_shift: self.enc_shift(),
+            enc_n_shifts: self.enc_n_shifts(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Configure the optional TMDS encoder inside the command expander"]
@@ -285,5 +384,40 @@ impl Default for ExpandTmds {
     #[inline(always)]
     fn default() -> ExpandTmds {
         ExpandTmds(0)
+    }
+}
+impl core::fmt::Debug for ExpandTmds {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("ExpandTmds")
+            .field("l0_rot", &self.l0_rot())
+            .field("l0_nbits", &self.l0_nbits())
+            .field("l1_rot", &self.l1_rot())
+            .field("l1_nbits", &self.l1_nbits())
+            .field("l2_rot", &self.l2_rot())
+            .field("l2_nbits", &self.l2_nbits())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for ExpandTmds {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct ExpandTmds {
+            l0_rot: u8,
+            l0_nbits: u8,
+            l1_rot: u8,
+            l1_nbits: u8,
+            l2_rot: u8,
+            l2_nbits: u8,
+        }
+        let proxy = ExpandTmds {
+            l0_rot: self.l0_rot(),
+            l0_nbits: self.l0_nbits(),
+            l1_rot: self.l1_rot(),
+            l1_nbits: self.l1_nbits(),
+            l2_rot: self.l2_rot(),
+            l2_nbits: self.l2_nbits(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

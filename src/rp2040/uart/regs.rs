@@ -142,6 +142,59 @@ impl Default for Uartcr {
         Uartcr(0)
     }
 }
+impl core::fmt::Debug for Uartcr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Uartcr")
+            .field("uarten", &self.uarten())
+            .field("siren", &self.siren())
+            .field("sirlp", &self.sirlp())
+            .field("lbe", &self.lbe())
+            .field("txe", &self.txe())
+            .field("rxe", &self.rxe())
+            .field("dtr", &self.dtr())
+            .field("rts", &self.rts())
+            .field("out1", &self.out1())
+            .field("out2", &self.out2())
+            .field("rtsen", &self.rtsen())
+            .field("ctsen", &self.ctsen())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Uartcr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Uartcr {
+            uarten: bool,
+            siren: bool,
+            sirlp: bool,
+            lbe: bool,
+            txe: bool,
+            rxe: bool,
+            dtr: bool,
+            rts: bool,
+            out1: bool,
+            out2: bool,
+            rtsen: bool,
+            ctsen: bool,
+        }
+        let proxy = Uartcr {
+            uarten: self.uarten(),
+            siren: self.siren(),
+            sirlp: self.sirlp(),
+            lbe: self.lbe(),
+            txe: self.txe(),
+            rxe: self.rxe(),
+            dtr: self.dtr(),
+            rts: self.rts(),
+            out1: self.out1(),
+            out2: self.out2(),
+            rtsen: self.rtsen(),
+            ctsen: self.ctsen(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "DMA Control Register, UARTDMACR"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -185,6 +238,32 @@ impl Default for Uartdmacr {
     #[inline(always)]
     fn default() -> Uartdmacr {
         Uartdmacr(0)
+    }
+}
+impl core::fmt::Debug for Uartdmacr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Uartdmacr")
+            .field("rxdmae", &self.rxdmae())
+            .field("txdmae", &self.txdmae())
+            .field("dmaonerr", &self.dmaonerr())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Uartdmacr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Uartdmacr {
+            rxdmae: bool,
+            txdmae: bool,
+            dmaonerr: bool,
+        }
+        let proxy = Uartdmacr {
+            rxdmae: self.rxdmae(),
+            txdmae: self.txdmae(),
+            dmaonerr: self.dmaonerr(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Data Register, UARTDR"]
@@ -254,6 +333,38 @@ impl Default for Uartdr {
         Uartdr(0)
     }
 }
+impl core::fmt::Debug for Uartdr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Uartdr")
+            .field("data", &self.data())
+            .field("fe", &self.fe())
+            .field("pe", &self.pe())
+            .field("be", &self.be())
+            .field("oe", &self.oe())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Uartdr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Uartdr {
+            data: u8,
+            fe: bool,
+            pe: bool,
+            be: bool,
+            oe: bool,
+        }
+        let proxy = Uartdr {
+            data: self.data(),
+            fe: self.fe(),
+            pe: self.pe(),
+            be: self.be(),
+            oe: self.oe(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Fractional Baud Rate Register, UARTFBRD"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -275,6 +386,26 @@ impl Default for Uartfbrd {
     #[inline(always)]
     fn default() -> Uartfbrd {
         Uartfbrd(0)
+    }
+}
+impl core::fmt::Debug for Uartfbrd {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Uartfbrd")
+            .field("baud_divfrac", &self.baud_divfrac())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Uartfbrd {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Uartfbrd {
+            baud_divfrac: u8,
+        }
+        let proxy = Uartfbrd {
+            baud_divfrac: self.baud_divfrac(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Flag Register, UARTFR"]
@@ -388,6 +519,50 @@ impl Default for Uartfr {
         Uartfr(0)
     }
 }
+impl core::fmt::Debug for Uartfr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Uartfr")
+            .field("cts", &self.cts())
+            .field("dsr", &self.dsr())
+            .field("dcd", &self.dcd())
+            .field("busy", &self.busy())
+            .field("rxfe", &self.rxfe())
+            .field("txff", &self.txff())
+            .field("rxff", &self.rxff())
+            .field("txfe", &self.txfe())
+            .field("ri", &self.ri())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Uartfr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Uartfr {
+            cts: bool,
+            dsr: bool,
+            dcd: bool,
+            busy: bool,
+            rxfe: bool,
+            txff: bool,
+            rxff: bool,
+            txfe: bool,
+            ri: bool,
+        }
+        let proxy = Uartfr {
+            cts: self.cts(),
+            dsr: self.dsr(),
+            dcd: self.dcd(),
+            busy: self.busy(),
+            rxfe: self.rxfe(),
+            txff: self.txff(),
+            rxff: self.rxff(),
+            txfe: self.txfe(),
+            ri: self.ri(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Integer Baud Rate Register, UARTIBRD"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -409,6 +584,26 @@ impl Default for Uartibrd {
     #[inline(always)]
     fn default() -> Uartibrd {
         Uartibrd(0)
+    }
+}
+impl core::fmt::Debug for Uartibrd {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Uartibrd")
+            .field("baud_divint", &self.baud_divint())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Uartibrd {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Uartibrd {
+            baud_divint: u16,
+        }
+        let proxy = Uartibrd {
+            baud_divint: self.baud_divint(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Interrupt Clear Register, UARTICR"]
@@ -544,6 +739,56 @@ impl Default for Uarticr {
         Uarticr(0)
     }
 }
+impl core::fmt::Debug for Uarticr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Uarticr")
+            .field("rimic", &self.rimic())
+            .field("ctsmic", &self.ctsmic())
+            .field("dcdmic", &self.dcdmic())
+            .field("dsrmic", &self.dsrmic())
+            .field("rxic", &self.rxic())
+            .field("txic", &self.txic())
+            .field("rtic", &self.rtic())
+            .field("feic", &self.feic())
+            .field("peic", &self.peic())
+            .field("beic", &self.beic())
+            .field("oeic", &self.oeic())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Uarticr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Uarticr {
+            rimic: bool,
+            ctsmic: bool,
+            dcdmic: bool,
+            dsrmic: bool,
+            rxic: bool,
+            txic: bool,
+            rtic: bool,
+            feic: bool,
+            peic: bool,
+            beic: bool,
+            oeic: bool,
+        }
+        let proxy = Uarticr {
+            rimic: self.rimic(),
+            ctsmic: self.ctsmic(),
+            dcdmic: self.dcdmic(),
+            dsrmic: self.dsrmic(),
+            rxic: self.rxic(),
+            txic: self.txic(),
+            rtic: self.rtic(),
+            feic: self.feic(),
+            peic: self.peic(),
+            beic: self.beic(),
+            oeic: self.oeic(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Interrupt FIFO Level Select Register, UARTIFLS"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -578,6 +823,29 @@ impl Default for Uartifls {
         Uartifls(0)
     }
 }
+impl core::fmt::Debug for Uartifls {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Uartifls")
+            .field("txiflsel", &self.txiflsel())
+            .field("rxiflsel", &self.rxiflsel())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Uartifls {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Uartifls {
+            txiflsel: u8,
+            rxiflsel: u8,
+        }
+        let proxy = Uartifls {
+            txiflsel: self.txiflsel(),
+            rxiflsel: self.rxiflsel(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "IrDA Low-Power Counter Register, UARTILPR"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -599,6 +867,26 @@ impl Default for Uartilpr {
     #[inline(always)]
     fn default() -> Uartilpr {
         Uartilpr(0)
+    }
+}
+impl core::fmt::Debug for Uartilpr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Uartilpr")
+            .field("ilpdvsr", &self.ilpdvsr())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Uartilpr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Uartilpr {
+            ilpdvsr: u8,
+        }
+        let proxy = Uartilpr {
+            ilpdvsr: self.ilpdvsr(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Interrupt Mask Set/Clear Register, UARTIMSC"]
@@ -734,6 +1022,56 @@ impl Default for Uartimsc {
         Uartimsc(0)
     }
 }
+impl core::fmt::Debug for Uartimsc {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Uartimsc")
+            .field("rimim", &self.rimim())
+            .field("ctsmim", &self.ctsmim())
+            .field("dcdmim", &self.dcdmim())
+            .field("dsrmim", &self.dsrmim())
+            .field("rxim", &self.rxim())
+            .field("txim", &self.txim())
+            .field("rtim", &self.rtim())
+            .field("feim", &self.feim())
+            .field("peim", &self.peim())
+            .field("beim", &self.beim())
+            .field("oeim", &self.oeim())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Uartimsc {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Uartimsc {
+            rimim: bool,
+            ctsmim: bool,
+            dcdmim: bool,
+            dsrmim: bool,
+            rxim: bool,
+            txim: bool,
+            rtim: bool,
+            feim: bool,
+            peim: bool,
+            beim: bool,
+            oeim: bool,
+        }
+        let proxy = Uartimsc {
+            rimim: self.rimim(),
+            ctsmim: self.ctsmim(),
+            dcdmim: self.dcdmim(),
+            dsrmim: self.dsrmim(),
+            rxim: self.rxim(),
+            txim: self.txim(),
+            rtim: self.rtim(),
+            feim: self.feim(),
+            peim: self.peim(),
+            beim: self.beim(),
+            oeim: self.oeim(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Line Control Register, UARTLCR_H"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -821,6 +1159,44 @@ impl Default for UartlcrH {
     #[inline(always)]
     fn default() -> UartlcrH {
         UartlcrH(0)
+    }
+}
+impl core::fmt::Debug for UartlcrH {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("UartlcrH")
+            .field("brk", &self.brk())
+            .field("pen", &self.pen())
+            .field("eps", &self.eps())
+            .field("stp2", &self.stp2())
+            .field("fen", &self.fen())
+            .field("wlen", &self.wlen())
+            .field("sps", &self.sps())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for UartlcrH {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct UartlcrH {
+            brk: bool,
+            pen: bool,
+            eps: bool,
+            stp2: bool,
+            fen: bool,
+            wlen: u8,
+            sps: bool,
+        }
+        let proxy = UartlcrH {
+            brk: self.brk(),
+            pen: self.pen(),
+            eps: self.eps(),
+            stp2: self.stp2(),
+            fen: self.fen(),
+            wlen: self.wlen(),
+            sps: self.sps(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Masked Interrupt Status Register, UARTMIS"]
@@ -956,6 +1332,56 @@ impl Default for Uartmis {
         Uartmis(0)
     }
 }
+impl core::fmt::Debug for Uartmis {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Uartmis")
+            .field("rimmis", &self.rimmis())
+            .field("ctsmmis", &self.ctsmmis())
+            .field("dcdmmis", &self.dcdmmis())
+            .field("dsrmmis", &self.dsrmmis())
+            .field("rxmis", &self.rxmis())
+            .field("txmis", &self.txmis())
+            .field("rtmis", &self.rtmis())
+            .field("femis", &self.femis())
+            .field("pemis", &self.pemis())
+            .field("bemis", &self.bemis())
+            .field("oemis", &self.oemis())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Uartmis {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Uartmis {
+            rimmis: bool,
+            ctsmmis: bool,
+            dcdmmis: bool,
+            dsrmmis: bool,
+            rxmis: bool,
+            txmis: bool,
+            rtmis: bool,
+            femis: bool,
+            pemis: bool,
+            bemis: bool,
+            oemis: bool,
+        }
+        let proxy = Uartmis {
+            rimmis: self.rimmis(),
+            ctsmmis: self.ctsmmis(),
+            dcdmmis: self.dcdmmis(),
+            dsrmmis: self.dsrmmis(),
+            rxmis: self.rxmis(),
+            txmis: self.txmis(),
+            rtmis: self.rtmis(),
+            femis: self.femis(),
+            pemis: self.pemis(),
+            bemis: self.bemis(),
+            oemis: self.oemis(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "UARTPCellID0 Register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -977,6 +1403,26 @@ impl Default for Uartpcellid0 {
     #[inline(always)]
     fn default() -> Uartpcellid0 {
         Uartpcellid0(0)
+    }
+}
+impl core::fmt::Debug for Uartpcellid0 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Uartpcellid0")
+            .field("uartpcellid0", &self.uartpcellid0())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Uartpcellid0 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Uartpcellid0 {
+            uartpcellid0: u8,
+        }
+        let proxy = Uartpcellid0 {
+            uartpcellid0: self.uartpcellid0(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "UARTPCellID1 Register"]
@@ -1002,6 +1448,26 @@ impl Default for Uartpcellid1 {
         Uartpcellid1(0)
     }
 }
+impl core::fmt::Debug for Uartpcellid1 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Uartpcellid1")
+            .field("uartpcellid1", &self.uartpcellid1())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Uartpcellid1 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Uartpcellid1 {
+            uartpcellid1: u8,
+        }
+        let proxy = Uartpcellid1 {
+            uartpcellid1: self.uartpcellid1(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "UARTPCellID2 Register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -1023,6 +1489,26 @@ impl Default for Uartpcellid2 {
     #[inline(always)]
     fn default() -> Uartpcellid2 {
         Uartpcellid2(0)
+    }
+}
+impl core::fmt::Debug for Uartpcellid2 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Uartpcellid2")
+            .field("uartpcellid2", &self.uartpcellid2())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Uartpcellid2 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Uartpcellid2 {
+            uartpcellid2: u8,
+        }
+        let proxy = Uartpcellid2 {
+            uartpcellid2: self.uartpcellid2(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "UARTPCellID3 Register"]
@@ -1048,6 +1534,26 @@ impl Default for Uartpcellid3 {
         Uartpcellid3(0)
     }
 }
+impl core::fmt::Debug for Uartpcellid3 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Uartpcellid3")
+            .field("uartpcellid3", &self.uartpcellid3())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Uartpcellid3 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Uartpcellid3 {
+            uartpcellid3: u8,
+        }
+        let proxy = Uartpcellid3 {
+            uartpcellid3: self.uartpcellid3(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "UARTPeriphID0 Register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -1069,6 +1575,26 @@ impl Default for Uartperiphid0 {
     #[inline(always)]
     fn default() -> Uartperiphid0 {
         Uartperiphid0(0)
+    }
+}
+impl core::fmt::Debug for Uartperiphid0 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Uartperiphid0")
+            .field("partnumber0", &self.partnumber0())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Uartperiphid0 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Uartperiphid0 {
+            partnumber0: u8,
+        }
+        let proxy = Uartperiphid0 {
+            partnumber0: self.partnumber0(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "UARTPeriphID1 Register"]
@@ -1105,6 +1631,29 @@ impl Default for Uartperiphid1 {
         Uartperiphid1(0)
     }
 }
+impl core::fmt::Debug for Uartperiphid1 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Uartperiphid1")
+            .field("partnumber1", &self.partnumber1())
+            .field("designer0", &self.designer0())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Uartperiphid1 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Uartperiphid1 {
+            partnumber1: u8,
+            designer0: u8,
+        }
+        let proxy = Uartperiphid1 {
+            partnumber1: self.partnumber1(),
+            designer0: self.designer0(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "UARTPeriphID2 Register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -1139,6 +1688,29 @@ impl Default for Uartperiphid2 {
         Uartperiphid2(0)
     }
 }
+impl core::fmt::Debug for Uartperiphid2 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Uartperiphid2")
+            .field("designer1", &self.designer1())
+            .field("revision", &self.revision())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Uartperiphid2 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Uartperiphid2 {
+            designer1: u8,
+            revision: u8,
+        }
+        let proxy = Uartperiphid2 {
+            designer1: self.designer1(),
+            revision: self.revision(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "UARTPeriphID3 Register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -1160,6 +1732,26 @@ impl Default for Uartperiphid3 {
     #[inline(always)]
     fn default() -> Uartperiphid3 {
         Uartperiphid3(0)
+    }
+}
+impl core::fmt::Debug for Uartperiphid3 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Uartperiphid3")
+            .field("configuration", &self.configuration())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Uartperiphid3 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Uartperiphid3 {
+            configuration: u8,
+        }
+        let proxy = Uartperiphid3 {
+            configuration: self.configuration(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Raw Interrupt Status Register, UARTRIS"]
@@ -1295,6 +1887,56 @@ impl Default for Uartris {
         Uartris(0)
     }
 }
+impl core::fmt::Debug for Uartris {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Uartris")
+            .field("rirmis", &self.rirmis())
+            .field("ctsrmis", &self.ctsrmis())
+            .field("dcdrmis", &self.dcdrmis())
+            .field("dsrrmis", &self.dsrrmis())
+            .field("rxris", &self.rxris())
+            .field("txris", &self.txris())
+            .field("rtris", &self.rtris())
+            .field("feris", &self.feris())
+            .field("peris", &self.peris())
+            .field("beris", &self.beris())
+            .field("oeris", &self.oeris())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Uartris {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Uartris {
+            rirmis: bool,
+            ctsrmis: bool,
+            dcdrmis: bool,
+            dsrrmis: bool,
+            rxris: bool,
+            txris: bool,
+            rtris: bool,
+            feris: bool,
+            peris: bool,
+            beris: bool,
+            oeris: bool,
+        }
+        let proxy = Uartris {
+            rirmis: self.rirmis(),
+            ctsrmis: self.ctsrmis(),
+            dcdrmis: self.dcdrmis(),
+            dsrrmis: self.dsrrmis(),
+            rxris: self.rxris(),
+            txris: self.txris(),
+            rtris: self.rtris(),
+            feris: self.feris(),
+            peris: self.peris(),
+            beris: self.beris(),
+            oeris: self.oeris(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Receive Status Register/Error Clear Register, UARTRSR/UARTECR"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -1349,5 +1991,34 @@ impl Default for Uartrsr {
     #[inline(always)]
     fn default() -> Uartrsr {
         Uartrsr(0)
+    }
+}
+impl core::fmt::Debug for Uartrsr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Uartrsr")
+            .field("fe", &self.fe())
+            .field("pe", &self.pe())
+            .field("be", &self.be())
+            .field("oe", &self.oe())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Uartrsr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Uartrsr {
+            fe: bool,
+            pe: bool,
+            be: bool,
+            oe: bool,
+        }
+        let proxy = Uartrsr {
+            fe: self.fe(),
+            pe: self.pe(),
+            be: self.be(),
+            oe: self.oe(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

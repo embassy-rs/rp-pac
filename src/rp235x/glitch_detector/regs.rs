@@ -19,6 +19,22 @@ impl Default for Arm {
         Arm(0)
     }
 }
+impl core::fmt::Debug for Arm {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Arm").field("arm", &self.arm()).finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Arm {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Arm {
+            arm: super::vals::Arm,
+        }
+        let proxy = Arm { arm: self.arm() };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Disarm(pub u32);
@@ -41,6 +57,26 @@ impl Default for Disarm {
         Disarm(0)
     }
 }
+impl core::fmt::Debug for Disarm {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Disarm")
+            .field("disarm", &self.disarm())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Disarm {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Disarm {
+            disarm: super::vals::Disarm,
+        }
+        let proxy = Disarm {
+            disarm: self.disarm(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Lock(pub u32);
@@ -61,6 +97,22 @@ impl Default for Lock {
     #[inline(always)]
     fn default() -> Lock {
         Lock(0)
+    }
+}
+impl core::fmt::Debug for Lock {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Lock").field("lock", &self.lock()).finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Lock {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Lock {
+            lock: u8,
+        }
+        let proxy = Lock { lock: self.lock() };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Adjust the sensitivity of glitch detectors to values other than their OTP-provided defaults. This register is Secure read/write only."]
@@ -172,6 +224,50 @@ impl Default for Sensitivity {
         Sensitivity(0)
     }
 }
+impl core::fmt::Debug for Sensitivity {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Sensitivity")
+            .field("det0", &self.det0())
+            .field("det1", &self.det1())
+            .field("det2", &self.det2())
+            .field("det3", &self.det3())
+            .field("det0_inv", &self.det0_inv())
+            .field("det1_inv", &self.det1_inv())
+            .field("det2_inv", &self.det2_inv())
+            .field("det3_inv", &self.det3_inv())
+            .field("default", &self.default())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Sensitivity {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Sensitivity {
+            det0: u8,
+            det1: u8,
+            det2: u8,
+            det3: u8,
+            det0_inv: u8,
+            det1_inv: u8,
+            det2_inv: u8,
+            det3_inv: u8,
+            default: super::vals::Default,
+        }
+        let proxy = Sensitivity {
+            det0: self.det0(),
+            det1: self.det1(),
+            det2: self.det2(),
+            det3: self.det3(),
+            det0_inv: self.det0_inv(),
+            det1_inv: self.det1_inv(),
+            det2_inv: self.det2_inv(),
+            det3_inv: self.det3_inv(),
+            default: self.default(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Simulate the firing of one or more detectors. Writing ones to this register will set the matching bits in STATUS_TRIG. If the glitch detectors are currently armed, writing ones will also immediately reset the switched core power domain, and set the reset reason latches in POWMAN_CHIP_RESET to indicate a glitch detector resets. This register is Secure read/write only."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -191,6 +287,26 @@ impl Default for TrigForce {
     #[inline(always)]
     fn default() -> TrigForce {
         TrigForce(0)
+    }
+}
+impl core::fmt::Debug for TrigForce {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("TrigForce")
+            .field("trig_force", &self.trig_force())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for TrigForce {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct TrigForce {
+            trig_force: u8,
+        }
+        let proxy = TrigForce {
+            trig_force: self.trig_force(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Set when a detector output triggers. Write-1-clear. (May immediately return high if the detector remains in a failed state. Detectors can only be cleared by a full reset of the switched core power domain.) This register is Secure read/write only."]
@@ -239,5 +355,34 @@ impl Default for TrigStatus {
     #[inline(always)]
     fn default() -> TrigStatus {
         TrigStatus(0)
+    }
+}
+impl core::fmt::Debug for TrigStatus {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("TrigStatus")
+            .field("det0", &self.det0())
+            .field("det1", &self.det1())
+            .field("det2", &self.det2())
+            .field("det3", &self.det3())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for TrigStatus {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct TrigStatus {
+            det0: bool,
+            det1: bool,
+            det2: bool,
+            det3: bool,
+        }
+        let proxy = TrigStatus {
+            det0: self.det0(),
+            det1: self.det1(),
+            det2: self.det2(),
+            det3: self.det3(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

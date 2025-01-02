@@ -32,3 +32,29 @@ impl Default for CtrlStatus {
         CtrlStatus(0)
     }
 }
+impl core::fmt::Debug for CtrlStatus {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("CtrlStatus")
+            .field("trace_capture_fifo_flush", &self.trace_capture_fifo_flush())
+            .field(
+                "trace_capture_fifo_overflow",
+                &self.trace_capture_fifo_overflow(),
+            )
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for CtrlStatus {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct CtrlStatus {
+            trace_capture_fifo_flush: bool,
+            trace_capture_fifo_overflow: bool,
+        }
+        let proxy = CtrlStatus {
+            trace_capture_fifo_flush: self.trace_capture_fifo_flush(),
+            trace_capture_fifo_overflow: self.trace_capture_fifo_overflow(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}

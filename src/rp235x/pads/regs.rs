@@ -97,6 +97,47 @@ impl Default for GpioCtrl {
         GpioCtrl(0)
     }
 }
+impl core::fmt::Debug for GpioCtrl {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("GpioCtrl")
+            .field("slewfast", &self.slewfast())
+            .field("schmitt", &self.schmitt())
+            .field("pde", &self.pde())
+            .field("pue", &self.pue())
+            .field("drive", &self.drive())
+            .field("ie", &self.ie())
+            .field("od", &self.od())
+            .field("iso", &self.iso())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for GpioCtrl {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct GpioCtrl {
+            slewfast: bool,
+            schmitt: bool,
+            pde: bool,
+            pue: bool,
+            drive: super::vals::Drive,
+            ie: bool,
+            od: bool,
+            iso: bool,
+        }
+        let proxy = GpioCtrl {
+            slewfast: self.slewfast(),
+            schmitt: self.schmitt(),
+            pde: self.pde(),
+            pue: self.pue(),
+            drive: self.drive(),
+            ie: self.ie(),
+            od: self.od(),
+            iso: self.iso(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Voltage select. Per bank control"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -116,5 +157,25 @@ impl Default for VoltageSelect {
     #[inline(always)]
     fn default() -> VoltageSelect {
         VoltageSelect(0)
+    }
+}
+impl core::fmt::Debug for VoltageSelect {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("VoltageSelect")
+            .field("voltage_select", &self.voltage_select())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for VoltageSelect {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct VoltageSelect {
+            voltage_select: super::vals::VoltageSelect,
+        }
+        let proxy = VoltageSelect {
+            voltage_select: self.voltage_select(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

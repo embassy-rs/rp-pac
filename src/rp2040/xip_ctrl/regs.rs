@@ -43,6 +43,32 @@ impl Default for Ctrl {
         Ctrl(0)
     }
 }
+impl core::fmt::Debug for Ctrl {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Ctrl")
+            .field("en", &self.en())
+            .field("err_badwrite", &self.err_badwrite())
+            .field("power_down", &self.power_down())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Ctrl {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Ctrl {
+            en: bool,
+            err_badwrite: bool,
+            power_down: bool,
+        }
+        let proxy = Ctrl {
+            en: self.en(),
+            err_badwrite: self.err_badwrite(),
+            power_down: self.power_down(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Cache Flush control"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -64,6 +90,26 @@ impl Default for Flush {
     #[inline(always)]
     fn default() -> Flush {
         Flush(0)
+    }
+}
+impl core::fmt::Debug for Flush {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Flush")
+            .field("flush", &self.flush())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Flush {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Flush {
+            flush: bool,
+        }
+        let proxy = Flush {
+            flush: self.flush(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Cache Status"]
@@ -111,6 +157,32 @@ impl Default for Stat {
         Stat(0)
     }
 }
+impl core::fmt::Debug for Stat {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Stat")
+            .field("flush_ready", &self.flush_ready())
+            .field("fifo_empty", &self.fifo_empty())
+            .field("fifo_full", &self.fifo_full())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Stat {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Stat {
+            flush_ready: bool,
+            fifo_empty: bool,
+            fifo_full: bool,
+        }
+        let proxy = Stat {
+            flush_ready: self.flush_ready(),
+            fifo_empty: self.fifo_empty(),
+            fifo_full: self.fifo_full(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "FIFO stream address"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -134,6 +206,26 @@ impl Default for StreamAddr {
         StreamAddr(0)
     }
 }
+impl core::fmt::Debug for StreamAddr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("StreamAddr")
+            .field("stream_addr", &self.stream_addr())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for StreamAddr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct StreamAddr {
+            stream_addr: u32,
+        }
+        let proxy = StreamAddr {
+            stream_addr: self.stream_addr(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "FIFO stream control"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -155,5 +247,25 @@ impl Default for StreamCtr {
     #[inline(always)]
     fn default() -> StreamCtr {
         StreamCtr(0)
+    }
+}
+impl core::fmt::Debug for StreamCtr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("StreamCtr")
+            .field("stream_ctr", &self.stream_ctr())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for StreamCtr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct StreamCtr {
+            stream_ctr: u32,
+        }
+        let proxy = StreamCtr {
+            stream_ctr: self.stream_ctr(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

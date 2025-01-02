@@ -32,7 +32,30 @@ impl Default for AddrEndp {
         AddrEndp(0)
     }
 }
-#[doc = "Interrupt endpoint 13. Only valid for HOST mode."]
+impl core::fmt::Debug for AddrEndp {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("AddrEndp")
+            .field("address", &self.address())
+            .field("endpoint", &self.endpoint())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for AddrEndp {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct AddrEndp {
+            address: u8,
+            endpoint: u8,
+        }
+        let proxy = AddrEndp {
+            address: self.address(),
+            endpoint: self.endpoint(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
+#[doc = "Interrupt endpoint 1. Only valid for HOST mode."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct AddrEndpX(pub u32);
@@ -88,6 +111,35 @@ impl Default for AddrEndpX {
         AddrEndpX(0)
     }
 }
+impl core::fmt::Debug for AddrEndpX {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("AddrEndpX")
+            .field("address", &self.address())
+            .field("endpoint", &self.endpoint())
+            .field("intep_dir", &self.intep_dir())
+            .field("intep_preamble", &self.intep_preamble())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for AddrEndpX {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct AddrEndpX {
+            address: u8,
+            endpoint: u8,
+            intep_dir: bool,
+            intep_preamble: bool,
+        }
+        let proxy = AddrEndpX {
+            address: self.address(),
+            endpoint: self.endpoint(),
+            intep_dir: self.intep_dir(),
+            intep_preamble: self.intep_preamble(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Which of the double buffers should be handled. Only valid if using an interrupt per buffer (i.e. not per 2 buffers). Not valid for host interrupt endpoint polling because they are only single buffered."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -124,6 +176,103 @@ impl Default for BuffCpuShouldHandle {
     #[inline(always)]
     fn default() -> BuffCpuShouldHandle {
         BuffCpuShouldHandle(0)
+    }
+}
+impl core::fmt::Debug for BuffCpuShouldHandle {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("BuffCpuShouldHandle")
+            .field(
+                "ep_in",
+                &[
+                    self.ep_in(0usize),
+                    self.ep_in(1usize),
+                    self.ep_in(2usize),
+                    self.ep_in(3usize),
+                    self.ep_in(4usize),
+                    self.ep_in(5usize),
+                    self.ep_in(6usize),
+                    self.ep_in(7usize),
+                    self.ep_in(8usize),
+                    self.ep_in(9usize),
+                    self.ep_in(10usize),
+                    self.ep_in(11usize),
+                    self.ep_in(12usize),
+                    self.ep_in(13usize),
+                    self.ep_in(14usize),
+                    self.ep_in(15usize),
+                ],
+            )
+            .field(
+                "ep_out",
+                &[
+                    self.ep_out(0usize),
+                    self.ep_out(1usize),
+                    self.ep_out(2usize),
+                    self.ep_out(3usize),
+                    self.ep_out(4usize),
+                    self.ep_out(5usize),
+                    self.ep_out(6usize),
+                    self.ep_out(7usize),
+                    self.ep_out(8usize),
+                    self.ep_out(9usize),
+                    self.ep_out(10usize),
+                    self.ep_out(11usize),
+                    self.ep_out(12usize),
+                    self.ep_out(13usize),
+                    self.ep_out(14usize),
+                    self.ep_out(15usize),
+                ],
+            )
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for BuffCpuShouldHandle {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct BuffCpuShouldHandle {
+            ep_in: [bool; 16usize],
+            ep_out: [bool; 16usize],
+        }
+        let proxy = BuffCpuShouldHandle {
+            ep_in: [
+                self.ep_in(0usize),
+                self.ep_in(1usize),
+                self.ep_in(2usize),
+                self.ep_in(3usize),
+                self.ep_in(4usize),
+                self.ep_in(5usize),
+                self.ep_in(6usize),
+                self.ep_in(7usize),
+                self.ep_in(8usize),
+                self.ep_in(9usize),
+                self.ep_in(10usize),
+                self.ep_in(11usize),
+                self.ep_in(12usize),
+                self.ep_in(13usize),
+                self.ep_in(14usize),
+                self.ep_in(15usize),
+            ],
+            ep_out: [
+                self.ep_out(0usize),
+                self.ep_out(1usize),
+                self.ep_out(2usize),
+                self.ep_out(3usize),
+                self.ep_out(4usize),
+                self.ep_out(5usize),
+                self.ep_out(6usize),
+                self.ep_out(7usize),
+                self.ep_out(8usize),
+                self.ep_out(9usize),
+                self.ep_out(10usize),
+                self.ep_out(11usize),
+                self.ep_out(12usize),
+                self.ep_out(13usize),
+                self.ep_out(14usize),
+                self.ep_out(15usize),
+            ],
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Buffer status register. A bit set here indicates that a buffer has completed on the endpoint (if the buffer interrupt is enabled). It is possible for 2 buffers to be completed, so clearing the buffer status bit may instantly re set it on the next clock cycle."]
@@ -164,6 +313,103 @@ impl Default for BuffStatus {
         BuffStatus(0)
     }
 }
+impl core::fmt::Debug for BuffStatus {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("BuffStatus")
+            .field(
+                "ep_in",
+                &[
+                    self.ep_in(0usize),
+                    self.ep_in(1usize),
+                    self.ep_in(2usize),
+                    self.ep_in(3usize),
+                    self.ep_in(4usize),
+                    self.ep_in(5usize),
+                    self.ep_in(6usize),
+                    self.ep_in(7usize),
+                    self.ep_in(8usize),
+                    self.ep_in(9usize),
+                    self.ep_in(10usize),
+                    self.ep_in(11usize),
+                    self.ep_in(12usize),
+                    self.ep_in(13usize),
+                    self.ep_in(14usize),
+                    self.ep_in(15usize),
+                ],
+            )
+            .field(
+                "ep_out",
+                &[
+                    self.ep_out(0usize),
+                    self.ep_out(1usize),
+                    self.ep_out(2usize),
+                    self.ep_out(3usize),
+                    self.ep_out(4usize),
+                    self.ep_out(5usize),
+                    self.ep_out(6usize),
+                    self.ep_out(7usize),
+                    self.ep_out(8usize),
+                    self.ep_out(9usize),
+                    self.ep_out(10usize),
+                    self.ep_out(11usize),
+                    self.ep_out(12usize),
+                    self.ep_out(13usize),
+                    self.ep_out(14usize),
+                    self.ep_out(15usize),
+                ],
+            )
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for BuffStatus {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct BuffStatus {
+            ep_in: [bool; 16usize],
+            ep_out: [bool; 16usize],
+        }
+        let proxy = BuffStatus {
+            ep_in: [
+                self.ep_in(0usize),
+                self.ep_in(1usize),
+                self.ep_in(2usize),
+                self.ep_in(3usize),
+                self.ep_in(4usize),
+                self.ep_in(5usize),
+                self.ep_in(6usize),
+                self.ep_in(7usize),
+                self.ep_in(8usize),
+                self.ep_in(9usize),
+                self.ep_in(10usize),
+                self.ep_in(11usize),
+                self.ep_in(12usize),
+                self.ep_in(13usize),
+                self.ep_in(14usize),
+                self.ep_in(15usize),
+            ],
+            ep_out: [
+                self.ep_out(0usize),
+                self.ep_out(1usize),
+                self.ep_out(2usize),
+                self.ep_out(3usize),
+                self.ep_out(4usize),
+                self.ep_out(5usize),
+                self.ep_out(6usize),
+                self.ep_out(7usize),
+                self.ep_out(8usize),
+                self.ep_out(9usize),
+                self.ep_out(10usize),
+                self.ep_out(11usize),
+                self.ep_out(12usize),
+                self.ep_out(13usize),
+                self.ep_out(14usize),
+                self.ep_out(15usize),
+            ],
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Device only: Can be set to ignore the buffer control register for this endpoint in case you would like to revoke a buffer. A NAK will be sent for every access to the endpoint until this bit is cleared. A corresponding bit in `EP_ABORT_DONE` is set when it is safe to modify the buffer control register."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -200,6 +446,103 @@ impl Default for EpAbort {
     #[inline(always)]
     fn default() -> EpAbort {
         EpAbort(0)
+    }
+}
+impl core::fmt::Debug for EpAbort {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("EpAbort")
+            .field(
+                "ep_in",
+                &[
+                    self.ep_in(0usize),
+                    self.ep_in(1usize),
+                    self.ep_in(2usize),
+                    self.ep_in(3usize),
+                    self.ep_in(4usize),
+                    self.ep_in(5usize),
+                    self.ep_in(6usize),
+                    self.ep_in(7usize),
+                    self.ep_in(8usize),
+                    self.ep_in(9usize),
+                    self.ep_in(10usize),
+                    self.ep_in(11usize),
+                    self.ep_in(12usize),
+                    self.ep_in(13usize),
+                    self.ep_in(14usize),
+                    self.ep_in(15usize),
+                ],
+            )
+            .field(
+                "ep_out",
+                &[
+                    self.ep_out(0usize),
+                    self.ep_out(1usize),
+                    self.ep_out(2usize),
+                    self.ep_out(3usize),
+                    self.ep_out(4usize),
+                    self.ep_out(5usize),
+                    self.ep_out(6usize),
+                    self.ep_out(7usize),
+                    self.ep_out(8usize),
+                    self.ep_out(9usize),
+                    self.ep_out(10usize),
+                    self.ep_out(11usize),
+                    self.ep_out(12usize),
+                    self.ep_out(13usize),
+                    self.ep_out(14usize),
+                    self.ep_out(15usize),
+                ],
+            )
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for EpAbort {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct EpAbort {
+            ep_in: [bool; 16usize],
+            ep_out: [bool; 16usize],
+        }
+        let proxy = EpAbort {
+            ep_in: [
+                self.ep_in(0usize),
+                self.ep_in(1usize),
+                self.ep_in(2usize),
+                self.ep_in(3usize),
+                self.ep_in(4usize),
+                self.ep_in(5usize),
+                self.ep_in(6usize),
+                self.ep_in(7usize),
+                self.ep_in(8usize),
+                self.ep_in(9usize),
+                self.ep_in(10usize),
+                self.ep_in(11usize),
+                self.ep_in(12usize),
+                self.ep_in(13usize),
+                self.ep_in(14usize),
+                self.ep_in(15usize),
+            ],
+            ep_out: [
+                self.ep_out(0usize),
+                self.ep_out(1usize),
+                self.ep_out(2usize),
+                self.ep_out(3usize),
+                self.ep_out(4usize),
+                self.ep_out(5usize),
+                self.ep_out(6usize),
+                self.ep_out(7usize),
+                self.ep_out(8usize),
+                self.ep_out(9usize),
+                self.ep_out(10usize),
+                self.ep_out(11usize),
+                self.ep_out(12usize),
+                self.ep_out(13usize),
+                self.ep_out(14usize),
+                self.ep_out(15usize),
+            ],
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Device only: Used in conjunction with `EP_ABORT`. Set once an endpoint is idle so the programmer knows it is safe to modify the buffer control register."]
@@ -240,6 +583,103 @@ impl Default for EpAbortDone {
         EpAbortDone(0)
     }
 }
+impl core::fmt::Debug for EpAbortDone {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("EpAbortDone")
+            .field(
+                "ep_in",
+                &[
+                    self.ep_in(0usize),
+                    self.ep_in(1usize),
+                    self.ep_in(2usize),
+                    self.ep_in(3usize),
+                    self.ep_in(4usize),
+                    self.ep_in(5usize),
+                    self.ep_in(6usize),
+                    self.ep_in(7usize),
+                    self.ep_in(8usize),
+                    self.ep_in(9usize),
+                    self.ep_in(10usize),
+                    self.ep_in(11usize),
+                    self.ep_in(12usize),
+                    self.ep_in(13usize),
+                    self.ep_in(14usize),
+                    self.ep_in(15usize),
+                ],
+            )
+            .field(
+                "ep_out",
+                &[
+                    self.ep_out(0usize),
+                    self.ep_out(1usize),
+                    self.ep_out(2usize),
+                    self.ep_out(3usize),
+                    self.ep_out(4usize),
+                    self.ep_out(5usize),
+                    self.ep_out(6usize),
+                    self.ep_out(7usize),
+                    self.ep_out(8usize),
+                    self.ep_out(9usize),
+                    self.ep_out(10usize),
+                    self.ep_out(11usize),
+                    self.ep_out(12usize),
+                    self.ep_out(13usize),
+                    self.ep_out(14usize),
+                    self.ep_out(15usize),
+                ],
+            )
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for EpAbortDone {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct EpAbortDone {
+            ep_in: [bool; 16usize],
+            ep_out: [bool; 16usize],
+        }
+        let proxy = EpAbortDone {
+            ep_in: [
+                self.ep_in(0usize),
+                self.ep_in(1usize),
+                self.ep_in(2usize),
+                self.ep_in(3usize),
+                self.ep_in(4usize),
+                self.ep_in(5usize),
+                self.ep_in(6usize),
+                self.ep_in(7usize),
+                self.ep_in(8usize),
+                self.ep_in(9usize),
+                self.ep_in(10usize),
+                self.ep_in(11usize),
+                self.ep_in(12usize),
+                self.ep_in(13usize),
+                self.ep_in(14usize),
+                self.ep_in(15usize),
+            ],
+            ep_out: [
+                self.ep_out(0usize),
+                self.ep_out(1usize),
+                self.ep_out(2usize),
+                self.ep_out(3usize),
+                self.ep_out(4usize),
+                self.ep_out(5usize),
+                self.ep_out(6usize),
+                self.ep_out(7usize),
+                self.ep_out(8usize),
+                self.ep_out(9usize),
+                self.ep_out(10usize),
+                self.ep_out(11usize),
+                self.ep_out(12usize),
+                self.ep_out(13usize),
+                self.ep_out(14usize),
+                self.ep_out(15usize),
+            ],
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Device: this bit must be set in conjunction with the `STALL` bit in the buffer control register to send a STALL on EP0. The device controller clears these bits when a SETUP packet is received because the USB spec requires that a STALL condition is cleared when a SETUP packet is received."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -268,6 +708,29 @@ impl Default for EpStallArm {
     #[inline(always)]
     fn default() -> EpStallArm {
         EpStallArm(0)
+    }
+}
+impl core::fmt::Debug for EpStallArm {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("EpStallArm")
+            .field("ep0_in", &self.ep0_in())
+            .field("ep0_out", &self.ep0_out())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for EpStallArm {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct EpStallArm {
+            ep0_in: bool,
+            ep0_out: bool,
+        }
+        let proxy = EpStallArm {
+            ep0_in: self.ep0_in(),
+            ep0_out: self.ep0_out(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Device: bits are set when the `IRQ_ON_NAK` or `IRQ_ON_STALL` bits are set. For EP0 this comes from `SIE_CTRL`. For all other endpoints it comes from the endpoint control register."]
@@ -308,7 +771,104 @@ impl Default for EpStatusStallNak {
         EpStatusStallNak(0)
     }
 }
-#[doc = "Interrupt Force"]
+impl core::fmt::Debug for EpStatusStallNak {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("EpStatusStallNak")
+            .field(
+                "ep_in",
+                &[
+                    self.ep_in(0usize),
+                    self.ep_in(1usize),
+                    self.ep_in(2usize),
+                    self.ep_in(3usize),
+                    self.ep_in(4usize),
+                    self.ep_in(5usize),
+                    self.ep_in(6usize),
+                    self.ep_in(7usize),
+                    self.ep_in(8usize),
+                    self.ep_in(9usize),
+                    self.ep_in(10usize),
+                    self.ep_in(11usize),
+                    self.ep_in(12usize),
+                    self.ep_in(13usize),
+                    self.ep_in(14usize),
+                    self.ep_in(15usize),
+                ],
+            )
+            .field(
+                "ep_out",
+                &[
+                    self.ep_out(0usize),
+                    self.ep_out(1usize),
+                    self.ep_out(2usize),
+                    self.ep_out(3usize),
+                    self.ep_out(4usize),
+                    self.ep_out(5usize),
+                    self.ep_out(6usize),
+                    self.ep_out(7usize),
+                    self.ep_out(8usize),
+                    self.ep_out(9usize),
+                    self.ep_out(10usize),
+                    self.ep_out(11usize),
+                    self.ep_out(12usize),
+                    self.ep_out(13usize),
+                    self.ep_out(14usize),
+                    self.ep_out(15usize),
+                ],
+            )
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for EpStatusStallNak {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct EpStatusStallNak {
+            ep_in: [bool; 16usize],
+            ep_out: [bool; 16usize],
+        }
+        let proxy = EpStatusStallNak {
+            ep_in: [
+                self.ep_in(0usize),
+                self.ep_in(1usize),
+                self.ep_in(2usize),
+                self.ep_in(3usize),
+                self.ep_in(4usize),
+                self.ep_in(5usize),
+                self.ep_in(6usize),
+                self.ep_in(7usize),
+                self.ep_in(8usize),
+                self.ep_in(9usize),
+                self.ep_in(10usize),
+                self.ep_in(11usize),
+                self.ep_in(12usize),
+                self.ep_in(13usize),
+                self.ep_in(14usize),
+                self.ep_in(15usize),
+            ],
+            ep_out: [
+                self.ep_out(0usize),
+                self.ep_out(1usize),
+                self.ep_out(2usize),
+                self.ep_out(3usize),
+                self.ep_out(4usize),
+                self.ep_out(5usize),
+                self.ep_out(6usize),
+                self.ep_out(7usize),
+                self.ep_out(8usize),
+                self.ep_out(9usize),
+                self.ep_out(10usize),
+                self.ep_out(11usize),
+                self.ep_out(12usize),
+                self.ep_out(13usize),
+                self.ep_out(14usize),
+                self.ep_out(15usize),
+            ],
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
+#[doc = "Interrupt Enable"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Int(pub u32);
@@ -540,6 +1100,83 @@ impl Default for Int {
         Int(0)
     }
 }
+impl core::fmt::Debug for Int {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Int")
+            .field("host_conn_dis", &self.host_conn_dis())
+            .field("host_resume", &self.host_resume())
+            .field("host_sof", &self.host_sof())
+            .field("trans_complete", &self.trans_complete())
+            .field("buff_status", &self.buff_status())
+            .field("error_data_seq", &self.error_data_seq())
+            .field("error_rx_timeout", &self.error_rx_timeout())
+            .field("error_rx_overflow", &self.error_rx_overflow())
+            .field("error_bit_stuff", &self.error_bit_stuff())
+            .field("error_crc", &self.error_crc())
+            .field("stall", &self.stall())
+            .field("vbus_detect", &self.vbus_detect())
+            .field("bus_reset", &self.bus_reset())
+            .field("dev_conn_dis", &self.dev_conn_dis())
+            .field("dev_suspend", &self.dev_suspend())
+            .field("dev_resume_from_host", &self.dev_resume_from_host())
+            .field("setup_req", &self.setup_req())
+            .field("dev_sof", &self.dev_sof())
+            .field("abort_done", &self.abort_done())
+            .field("ep_stall_nak", &self.ep_stall_nak())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Int {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Int {
+            host_conn_dis: bool,
+            host_resume: bool,
+            host_sof: bool,
+            trans_complete: bool,
+            buff_status: bool,
+            error_data_seq: bool,
+            error_rx_timeout: bool,
+            error_rx_overflow: bool,
+            error_bit_stuff: bool,
+            error_crc: bool,
+            stall: bool,
+            vbus_detect: bool,
+            bus_reset: bool,
+            dev_conn_dis: bool,
+            dev_suspend: bool,
+            dev_resume_from_host: bool,
+            setup_req: bool,
+            dev_sof: bool,
+            abort_done: bool,
+            ep_stall_nak: bool,
+        }
+        let proxy = Int {
+            host_conn_dis: self.host_conn_dis(),
+            host_resume: self.host_resume(),
+            host_sof: self.host_sof(),
+            trans_complete: self.trans_complete(),
+            buff_status: self.buff_status(),
+            error_data_seq: self.error_data_seq(),
+            error_rx_timeout: self.error_rx_timeout(),
+            error_rx_overflow: self.error_rx_overflow(),
+            error_bit_stuff: self.error_bit_stuff(),
+            error_crc: self.error_crc(),
+            stall: self.stall(),
+            vbus_detect: self.vbus_detect(),
+            bus_reset: self.bus_reset(),
+            dev_conn_dis: self.dev_conn_dis(),
+            dev_suspend: self.dev_suspend(),
+            dev_resume_from_host: self.dev_resume_from_host(),
+            setup_req: self.setup_req(),
+            dev_sof: self.dev_sof(),
+            abort_done: self.abort_done(),
+            ep_stall_nak: self.ep_stall_nak(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "interrupt endpoint control register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -561,6 +1198,26 @@ impl Default for IntEpCtrl {
     #[inline(always)]
     fn default() -> IntEpCtrl {
         IntEpCtrl(0)
+    }
+}
+impl core::fmt::Debug for IntEpCtrl {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IntEpCtrl")
+            .field("int_ep_active", &self.int_ep_active())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IntEpCtrl {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IntEpCtrl {
+            int_ep_active: u16,
+        }
+        let proxy = IntEpCtrl {
+            int_ep_active: self.int_ep_active(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Main control register"]
@@ -608,6 +1265,32 @@ impl Default for MainCtrl {
         MainCtrl(0)
     }
 }
+impl core::fmt::Debug for MainCtrl {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("MainCtrl")
+            .field("controller_en", &self.controller_en())
+            .field("host_ndevice", &self.host_ndevice())
+            .field("sim_timing", &self.sim_timing())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for MainCtrl {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct MainCtrl {
+            controller_en: bool,
+            host_ndevice: bool,
+            sim_timing: bool,
+        }
+        let proxy = MainCtrl {
+            controller_en: self.controller_en(),
+            host_ndevice: self.host_ndevice(),
+            sim_timing: self.sim_timing(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Used by the host controller. Sets the wait time in microseconds before trying again if the device replies with a NAK."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -640,6 +1323,29 @@ impl Default for NakPoll {
     #[inline(always)]
     fn default() -> NakPoll {
         NakPoll(0)
+    }
+}
+impl core::fmt::Debug for NakPoll {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("NakPoll")
+            .field("delay_ls", &self.delay_ls())
+            .field("delay_fs", &self.delay_fs())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for NakPoll {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct NakPoll {
+            delay_ls: u16,
+            delay_fs: u16,
+        }
+        let proxy = NakPoll {
+            delay_ls: self.delay_ls(),
+            delay_fs: self.delay_fs(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "SIE control register"]
@@ -918,6 +1624,95 @@ impl Default for SieCtrl {
         SieCtrl(0)
     }
 }
+impl core::fmt::Debug for SieCtrl {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SieCtrl")
+            .field("start_trans", &self.start_trans())
+            .field("send_setup", &self.send_setup())
+            .field("send_data", &self.send_data())
+            .field("receive_data", &self.receive_data())
+            .field("stop_trans", &self.stop_trans())
+            .field("preamble_en", &self.preamble_en())
+            .field("sof_sync", &self.sof_sync())
+            .field("sof_en", &self.sof_en())
+            .field("keep_alive_en", &self.keep_alive_en())
+            .field("vbus_en", &self.vbus_en())
+            .field("resume", &self.resume())
+            .field("reset_bus", &self.reset_bus())
+            .field("pulldown_en", &self.pulldown_en())
+            .field("pullup_en", &self.pullup_en())
+            .field("rpu_opt", &self.rpu_opt())
+            .field("transceiver_pd", &self.transceiver_pd())
+            .field("direct_dm", &self.direct_dm())
+            .field("direct_dp", &self.direct_dp())
+            .field("direct_en", &self.direct_en())
+            .field("ep0_int_nak", &self.ep0_int_nak())
+            .field("ep0_int_2buf", &self.ep0_int_2buf())
+            .field("ep0_int_1buf", &self.ep0_int_1buf())
+            .field("ep0_double_buf", &self.ep0_double_buf())
+            .field("ep0_int_stall", &self.ep0_int_stall())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for SieCtrl {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct SieCtrl {
+            start_trans: bool,
+            send_setup: bool,
+            send_data: bool,
+            receive_data: bool,
+            stop_trans: bool,
+            preamble_en: bool,
+            sof_sync: bool,
+            sof_en: bool,
+            keep_alive_en: bool,
+            vbus_en: bool,
+            resume: bool,
+            reset_bus: bool,
+            pulldown_en: bool,
+            pullup_en: bool,
+            rpu_opt: bool,
+            transceiver_pd: bool,
+            direct_dm: bool,
+            direct_dp: bool,
+            direct_en: bool,
+            ep0_int_nak: bool,
+            ep0_int_2buf: bool,
+            ep0_int_1buf: bool,
+            ep0_double_buf: bool,
+            ep0_int_stall: bool,
+        }
+        let proxy = SieCtrl {
+            start_trans: self.start_trans(),
+            send_setup: self.send_setup(),
+            send_data: self.send_data(),
+            receive_data: self.receive_data(),
+            stop_trans: self.stop_trans(),
+            preamble_en: self.preamble_en(),
+            sof_sync: self.sof_sync(),
+            sof_en: self.sof_en(),
+            keep_alive_en: self.keep_alive_en(),
+            vbus_en: self.vbus_en(),
+            resume: self.resume(),
+            reset_bus: self.reset_bus(),
+            pulldown_en: self.pulldown_en(),
+            pullup_en: self.pullup_en(),
+            rpu_opt: self.rpu_opt(),
+            transceiver_pd: self.transceiver_pd(),
+            direct_dm: self.direct_dm(),
+            direct_dp: self.direct_dp(),
+            direct_en: self.direct_en(),
+            ep0_int_nak: self.ep0_int_nak(),
+            ep0_int_2buf: self.ep0_int_2buf(),
+            ep0_int_1buf: self.ep0_int_1buf(),
+            ep0_double_buf: self.ep0_double_buf(),
+            ep0_int_stall: self.ep0_int_stall(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "SIE status register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -1128,6 +1923,77 @@ impl Default for SieStatus {
         SieStatus(0)
     }
 }
+impl core::fmt::Debug for SieStatus {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SieStatus")
+            .field("vbus_detected", &self.vbus_detected())
+            .field("line_state", &self.line_state())
+            .field("suspended", &self.suspended())
+            .field("speed", &self.speed())
+            .field("vbus_over_curr", &self.vbus_over_curr())
+            .field("resume", &self.resume())
+            .field("connected", &self.connected())
+            .field("setup_rec", &self.setup_rec())
+            .field("trans_complete", &self.trans_complete())
+            .field("bus_reset", &self.bus_reset())
+            .field("crc_error", &self.crc_error())
+            .field("bit_stuff_error", &self.bit_stuff_error())
+            .field("rx_overflow", &self.rx_overflow())
+            .field("rx_timeout", &self.rx_timeout())
+            .field("nak_rec", &self.nak_rec())
+            .field("stall_rec", &self.stall_rec())
+            .field("ack_rec", &self.ack_rec())
+            .field("data_seq_error", &self.data_seq_error())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for SieStatus {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct SieStatus {
+            vbus_detected: bool,
+            line_state: u8,
+            suspended: bool,
+            speed: u8,
+            vbus_over_curr: bool,
+            resume: bool,
+            connected: bool,
+            setup_rec: bool,
+            trans_complete: bool,
+            bus_reset: bool,
+            crc_error: bool,
+            bit_stuff_error: bool,
+            rx_overflow: bool,
+            rx_timeout: bool,
+            nak_rec: bool,
+            stall_rec: bool,
+            ack_rec: bool,
+            data_seq_error: bool,
+        }
+        let proxy = SieStatus {
+            vbus_detected: self.vbus_detected(),
+            line_state: self.line_state(),
+            suspended: self.suspended(),
+            speed: self.speed(),
+            vbus_over_curr: self.vbus_over_curr(),
+            resume: self.resume(),
+            connected: self.connected(),
+            setup_rec: self.setup_rec(),
+            trans_complete: self.trans_complete(),
+            bus_reset: self.bus_reset(),
+            crc_error: self.crc_error(),
+            bit_stuff_error: self.bit_stuff_error(),
+            rx_overflow: self.rx_overflow(),
+            rx_timeout: self.rx_timeout(),
+            nak_rec: self.nak_rec(),
+            stall_rec: self.stall_rec(),
+            ack_rec: self.ack_rec(),
+            data_seq_error: self.data_seq_error(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Read the last SOF (Start of Frame) frame number seen. In device mode the last SOF received from the host. In host mode the last SOF sent by the host."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -1149,6 +2015,26 @@ impl Default for SofRd {
         SofRd(0)
     }
 }
+impl core::fmt::Debug for SofRd {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SofRd")
+            .field("count", &self.count())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for SofRd {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct SofRd {
+            count: u16,
+        }
+        let proxy = SofRd {
+            count: self.count(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Set the SOF (Start of Frame) frame number in the host controller. The SOF packet is sent every 1ms and the host will increment the frame number by 1 each time."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -1168,6 +2054,26 @@ impl Default for SofWr {
     #[inline(always)]
     fn default() -> SofWr {
         SofWr(0)
+    }
+}
+impl core::fmt::Debug for SofWr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SofWr")
+            .field("count", &self.count())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for SofWr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct SofWr {
+            count: u16,
+        }
+        let proxy = SofWr {
+            count: self.count(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Where to connect the USB controller. Should be to_phy by default."]
@@ -1216,6 +2122,35 @@ impl Default for UsbMuxing {
     #[inline(always)]
     fn default() -> UsbMuxing {
         UsbMuxing(0)
+    }
+}
+impl core::fmt::Debug for UsbMuxing {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("UsbMuxing")
+            .field("to_phy", &self.to_phy())
+            .field("to_extphy", &self.to_extphy())
+            .field("to_digital_pad", &self.to_digital_pad())
+            .field("softcon", &self.softcon())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for UsbMuxing {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct UsbMuxing {
+            to_phy: bool,
+            to_extphy: bool,
+            to_digital_pad: bool,
+            softcon: bool,
+        }
+        let proxy = UsbMuxing {
+            to_phy: self.to_phy(),
+            to_extphy: self.to_extphy(),
+            to_digital_pad: self.to_digital_pad(),
+            softcon: self.softcon(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Overrides for the power signals in the event that the VBUS signals are not hooked up to GPIO. Set the value of the override and then the override enable so switch over to the override value."]
@@ -1282,6 +2217,41 @@ impl Default for UsbPwr {
     #[inline(always)]
     fn default() -> UsbPwr {
         UsbPwr(0)
+    }
+}
+impl core::fmt::Debug for UsbPwr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("UsbPwr")
+            .field("vbus_en", &self.vbus_en())
+            .field("vbus_en_override_en", &self.vbus_en_override_en())
+            .field("vbus_detect", &self.vbus_detect())
+            .field("vbus_detect_override_en", &self.vbus_detect_override_en())
+            .field("overcurr_detect", &self.overcurr_detect())
+            .field("overcurr_detect_en", &self.overcurr_detect_en())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for UsbPwr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct UsbPwr {
+            vbus_en: bool,
+            vbus_en_override_en: bool,
+            vbus_detect: bool,
+            vbus_detect_override_en: bool,
+            overcurr_detect: bool,
+            overcurr_detect_en: bool,
+        }
+        let proxy = UsbPwr {
+            vbus_en: self.vbus_en(),
+            vbus_en_override_en: self.vbus_en_override_en(),
+            vbus_detect: self.vbus_detect(),
+            vbus_detect_override_en: self.vbus_detect_override_en(),
+            overcurr_detect: self.overcurr_detect(),
+            overcurr_detect_en: self.overcurr_detect_en(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Note that most functions are driven directly from usb_fsls controller. This register allows more detailed control/status from the USB PHY. Useful for debug but not expected to be used in normal operation Use in conjunction with usbphy_direct_override register"]
@@ -1519,6 +2489,86 @@ impl Default for UsbphyDirect {
         UsbphyDirect(0)
     }
 }
+impl core::fmt::Debug for UsbphyDirect {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("UsbphyDirect")
+            .field("dp_pullup_hisel", &self.dp_pullup_hisel())
+            .field("dp_pullup_en", &self.dp_pullup_en())
+            .field("dp_pulldn_en", &self.dp_pulldn_en())
+            .field("dm_pullup_hisel", &self.dm_pullup_hisel())
+            .field("dm_pullup_en", &self.dm_pullup_en())
+            .field("dm_pulldn_en", &self.dm_pulldn_en())
+            .field("tx_dp_oe", &self.tx_dp_oe())
+            .field("tx_dm_oe", &self.tx_dm_oe())
+            .field("tx_dp", &self.tx_dp())
+            .field("tx_dm", &self.tx_dm())
+            .field("rx_pd", &self.rx_pd())
+            .field("tx_pd", &self.tx_pd())
+            .field("tx_fsslew", &self.tx_fsslew())
+            .field("tx_diffmode", &self.tx_diffmode())
+            .field("rx_dd", &self.rx_dd())
+            .field("rx_dp", &self.rx_dp())
+            .field("rx_dm", &self.rx_dm())
+            .field("dp_ovcn", &self.dp_ovcn())
+            .field("dm_ovcn", &self.dm_ovcn())
+            .field("dp_ovv", &self.dp_ovv())
+            .field("dm_ovv", &self.dm_ovv())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for UsbphyDirect {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct UsbphyDirect {
+            dp_pullup_hisel: bool,
+            dp_pullup_en: bool,
+            dp_pulldn_en: bool,
+            dm_pullup_hisel: bool,
+            dm_pullup_en: bool,
+            dm_pulldn_en: bool,
+            tx_dp_oe: bool,
+            tx_dm_oe: bool,
+            tx_dp: bool,
+            tx_dm: bool,
+            rx_pd: bool,
+            tx_pd: bool,
+            tx_fsslew: bool,
+            tx_diffmode: bool,
+            rx_dd: bool,
+            rx_dp: bool,
+            rx_dm: bool,
+            dp_ovcn: bool,
+            dm_ovcn: bool,
+            dp_ovv: bool,
+            dm_ovv: bool,
+        }
+        let proxy = UsbphyDirect {
+            dp_pullup_hisel: self.dp_pullup_hisel(),
+            dp_pullup_en: self.dp_pullup_en(),
+            dp_pulldn_en: self.dp_pulldn_en(),
+            dm_pullup_hisel: self.dm_pullup_hisel(),
+            dm_pullup_en: self.dm_pullup_en(),
+            dm_pulldn_en: self.dm_pulldn_en(),
+            tx_dp_oe: self.tx_dp_oe(),
+            tx_dm_oe: self.tx_dm_oe(),
+            tx_dp: self.tx_dp(),
+            tx_dm: self.tx_dm(),
+            rx_pd: self.rx_pd(),
+            tx_pd: self.tx_pd(),
+            tx_fsslew: self.tx_fsslew(),
+            tx_diffmode: self.tx_diffmode(),
+            rx_dd: self.rx_dd(),
+            rx_dp: self.rx_dp(),
+            rx_dm: self.rx_dm(),
+            dp_ovcn: self.dp_ovcn(),
+            dm_ovcn: self.dm_ovcn(),
+            dp_ovv: self.dp_ovv(),
+            dm_ovv: self.dm_ovv(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct UsbphyDirectOverride(pub u32);
@@ -1670,6 +2720,71 @@ impl Default for UsbphyDirectOverride {
         UsbphyDirectOverride(0)
     }
 }
+impl core::fmt::Debug for UsbphyDirectOverride {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("UsbphyDirectOverride")
+            .field(
+                "dp_pullup_hisel_override_en",
+                &self.dp_pullup_hisel_override_en(),
+            )
+            .field(
+                "dm_pullup_hisel_override_en",
+                &self.dm_pullup_hisel_override_en(),
+            )
+            .field("dp_pullup_en_override_en", &self.dp_pullup_en_override_en())
+            .field("dp_pulldn_en_override_en", &self.dp_pulldn_en_override_en())
+            .field("dm_pulldn_en_override_en", &self.dm_pulldn_en_override_en())
+            .field("tx_dp_oe_override_en", &self.tx_dp_oe_override_en())
+            .field("tx_dm_oe_override_en", &self.tx_dm_oe_override_en())
+            .field("tx_dp_override_en", &self.tx_dp_override_en())
+            .field("tx_dm_override_en", &self.tx_dm_override_en())
+            .field("rx_pd_override_en", &self.rx_pd_override_en())
+            .field("tx_pd_override_en", &self.tx_pd_override_en())
+            .field("tx_fsslew_override_en", &self.tx_fsslew_override_en())
+            .field("dm_pullup_override_en", &self.dm_pullup_override_en())
+            .field("tx_diffmode_override_en", &self.tx_diffmode_override_en())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for UsbphyDirectOverride {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct UsbphyDirectOverride {
+            dp_pullup_hisel_override_en: bool,
+            dm_pullup_hisel_override_en: bool,
+            dp_pullup_en_override_en: bool,
+            dp_pulldn_en_override_en: bool,
+            dm_pulldn_en_override_en: bool,
+            tx_dp_oe_override_en: bool,
+            tx_dm_oe_override_en: bool,
+            tx_dp_override_en: bool,
+            tx_dm_override_en: bool,
+            rx_pd_override_en: bool,
+            tx_pd_override_en: bool,
+            tx_fsslew_override_en: bool,
+            dm_pullup_override_en: bool,
+            tx_diffmode_override_en: bool,
+        }
+        let proxy = UsbphyDirectOverride {
+            dp_pullup_hisel_override_en: self.dp_pullup_hisel_override_en(),
+            dm_pullup_hisel_override_en: self.dm_pullup_hisel_override_en(),
+            dp_pullup_en_override_en: self.dp_pullup_en_override_en(),
+            dp_pulldn_en_override_en: self.dp_pulldn_en_override_en(),
+            dm_pulldn_en_override_en: self.dm_pulldn_en_override_en(),
+            tx_dp_oe_override_en: self.tx_dp_oe_override_en(),
+            tx_dm_oe_override_en: self.tx_dm_oe_override_en(),
+            tx_dp_override_en: self.tx_dp_override_en(),
+            tx_dm_override_en: self.tx_dm_override_en(),
+            rx_pd_override_en: self.rx_pd_override_en(),
+            tx_pd_override_en: self.tx_pd_override_en(),
+            tx_fsslew_override_en: self.tx_fsslew_override_en(),
+            dm_pullup_override_en: self.dm_pullup_override_en(),
+            tx_diffmode_override_en: self.tx_diffmode_override_en(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Note that most functions are driven directly from usb_fsls controller. This register allows more detailed control/status from the USB PHY. Useful for debug but not expected to be used in normal operation"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -1702,5 +2817,28 @@ impl Default for UsbphyTrim {
     #[inline(always)]
     fn default() -> UsbphyTrim {
         UsbphyTrim(0)
+    }
+}
+impl core::fmt::Debug for UsbphyTrim {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("UsbphyTrim")
+            .field("dp_pulldn_trim", &self.dp_pulldn_trim())
+            .field("dm_pulldn_trim", &self.dm_pulldn_trim())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for UsbphyTrim {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct UsbphyTrim {
+            dp_pulldn_trim: u8,
+            dm_pulldn_trim: u8,
+        }
+        let proxy = UsbphyTrim {
+            dp_pulldn_trim: self.dp_pulldn_trim(),
+            dm_pulldn_trim: self.dm_pulldn_trim(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

@@ -109,6 +109,50 @@ impl Default for Cs {
         Cs(0)
     }
 }
+impl core::fmt::Debug for Cs {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Cs")
+            .field("en", &self.en())
+            .field("ts_en", &self.ts_en())
+            .field("start_once", &self.start_once())
+            .field("start_many", &self.start_many())
+            .field("ready", &self.ready())
+            .field("err", &self.err())
+            .field("err_sticky", &self.err_sticky())
+            .field("ainsel", &self.ainsel())
+            .field("rrobin", &self.rrobin())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Cs {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Cs {
+            en: bool,
+            ts_en: bool,
+            start_once: bool,
+            start_many: bool,
+            ready: bool,
+            err: bool,
+            err_sticky: bool,
+            ainsel: u8,
+            rrobin: u8,
+        }
+        let proxy = Cs {
+            en: self.en(),
+            ts_en: self.ts_en(),
+            start_once: self.start_once(),
+            start_many: self.start_many(),
+            ready: self.ready(),
+            err: self.err(),
+            err_sticky: self.err_sticky(),
+            ainsel: self.ainsel(),
+            rrobin: self.rrobin(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Clock divider. If non-zero, CS_START_MANY will start conversions at regular intervals rather than back-to-back. The divider is reset when either of these fields are written. Total period is 1 + INT + FRAC / 256"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -141,6 +185,29 @@ impl Default for Div {
     #[inline(always)]
     fn default() -> Div {
         Div(0)
+    }
+}
+impl core::fmt::Debug for Div {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Div")
+            .field("frac", &self.frac())
+            .field("int", &self.int())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Div {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Div {
+            frac: u8,
+            int: u16,
+        }
+        let proxy = Div {
+            frac: self.frac(),
+            int: self.int(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "FIFO control and status"]
@@ -261,6 +328,53 @@ impl Default for Fcs {
         Fcs(0)
     }
 }
+impl core::fmt::Debug for Fcs {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Fcs")
+            .field("en", &self.en())
+            .field("shift", &self.shift())
+            .field("err", &self.err())
+            .field("dreq_en", &self.dreq_en())
+            .field("empty", &self.empty())
+            .field("full", &self.full())
+            .field("under", &self.under())
+            .field("over", &self.over())
+            .field("level", &self.level())
+            .field("thresh", &self.thresh())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Fcs {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Fcs {
+            en: bool,
+            shift: bool,
+            err: bool,
+            dreq_en: bool,
+            empty: bool,
+            full: bool,
+            under: bool,
+            over: bool,
+            level: u8,
+            thresh: u8,
+        }
+        let proxy = Fcs {
+            en: self.en(),
+            shift: self.shift(),
+            err: self.err(),
+            dreq_en: self.dreq_en(),
+            empty: self.empty(),
+            full: self.full(),
+            under: self.under(),
+            over: self.over(),
+            level: self.level(),
+            thresh: self.thresh(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Conversion result FIFO"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -293,6 +407,29 @@ impl Default for Fifo {
         Fifo(0)
     }
 }
+impl core::fmt::Debug for Fifo {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Fifo")
+            .field("val", &self.val())
+            .field("err", &self.err())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Fifo {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Fifo {
+            val: u16,
+            err: bool,
+        }
+        let proxy = Fifo {
+            val: self.val(),
+            err: self.err(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Interrupt Enable"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -316,6 +453,22 @@ impl Default for Int {
         Int(0)
     }
 }
+impl core::fmt::Debug for Int {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Int").field("fifo", &self.fifo()).finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Int {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Int {
+            fifo: bool,
+        }
+        let proxy = Int { fifo: self.fifo() };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Result of most recent ADC conversion"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -335,5 +488,25 @@ impl Default for Result {
     #[inline(always)]
     fn default() -> Result {
         Result(0)
+    }
+}
+impl core::fmt::Debug for Result {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Result")
+            .field("result", &self.result())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Result {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Result {
+            result: u16,
+        }
+        let proxy = Result {
+            result: self.result(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

@@ -1,5 +1,6 @@
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio0ctrlFuncsel {
     JTAG_TCK = 0x0,
     SPI0_RX = 0x01,
@@ -57,7 +58,8 @@ impl From<Gpio0ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio10ctrlFuncsel {
     _RESERVED_0 = 0x0,
     SPI1_SCLK = 0x01,
@@ -115,7 +117,8 @@ impl From<Gpio10ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio11ctrlFuncsel {
     _RESERVED_0 = 0x0,
     SPI1_TX = 0x01,
@@ -173,7 +176,8 @@ impl From<Gpio11ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio12ctrlFuncsel {
     _RESERVED_0 = 0x0,
     SPI1_RX = 0x01,
@@ -231,7 +235,8 @@ impl From<Gpio12ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio13ctrlFuncsel {
     _RESERVED_0 = 0x0,
     SPI1_SS_N = 0x01,
@@ -289,7 +294,8 @@ impl From<Gpio13ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio14ctrlFuncsel {
     _RESERVED_0 = 0x0,
     SPI1_SCLK = 0x01,
@@ -347,7 +353,8 @@ impl From<Gpio14ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio15ctrlFuncsel {
     _RESERVED_0 = 0x0,
     SPI1_TX = 0x01,
@@ -405,7 +412,8 @@ impl From<Gpio15ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio16ctrlFuncsel {
     _RESERVED_0 = 0x0,
     SPI0_RX = 0x01,
@@ -463,7 +471,8 @@ impl From<Gpio16ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio17ctrlFuncsel {
     _RESERVED_0 = 0x0,
     SPI0_SS_N = 0x01,
@@ -521,7 +530,8 @@ impl From<Gpio17ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio18ctrlFuncsel {
     _RESERVED_0 = 0x0,
     SPI0_SCLK = 0x01,
@@ -579,7 +589,8 @@ impl From<Gpio18ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio19ctrlFuncsel {
     _RESERVED_0 = 0x0,
     SPI0_TX = 0x01,
@@ -637,7 +648,8 @@ impl From<Gpio19ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio1ctrlFuncsel {
     JTAG_TMS = 0x0,
     SPI0_SS_N = 0x01,
@@ -695,7 +707,8 @@ impl From<Gpio1ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio20ctrlFuncsel {
     _RESERVED_0 = 0x0,
     SPI0_RX = 0x01,
@@ -753,7 +766,8 @@ impl From<Gpio20ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio21ctrlFuncsel {
     _RESERVED_0 = 0x0,
     SPI0_SS_N = 0x01,
@@ -811,7 +825,8 @@ impl From<Gpio21ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio22ctrlFuncsel {
     _RESERVED_0 = 0x0,
     SPI0_SCLK = 0x01,
@@ -869,7 +884,8 @@ impl From<Gpio22ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio23ctrlFuncsel {
     _RESERVED_0 = 0x0,
     SPI0_TX = 0x01,
@@ -927,7 +943,8 @@ impl From<Gpio23ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio24ctrlFuncsel {
     _RESERVED_0 = 0x0,
     SPI1_RX = 0x01,
@@ -985,7 +1002,8 @@ impl From<Gpio24ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio25ctrlFuncsel {
     _RESERVED_0 = 0x0,
     SPI1_SS_N = 0x01,
@@ -1043,7 +1061,8 @@ impl From<Gpio25ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio26ctrlFuncsel {
     _RESERVED_0 = 0x0,
     SPI1_SCLK = 0x01,
@@ -1101,7 +1120,8 @@ impl From<Gpio26ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio27ctrlFuncsel {
     _RESERVED_0 = 0x0,
     SPI1_TX = 0x01,
@@ -1159,7 +1179,8 @@ impl From<Gpio27ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio28ctrlFuncsel {
     _RESERVED_0 = 0x0,
     SPI1_RX = 0x01,
@@ -1217,7 +1238,8 @@ impl From<Gpio28ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio29ctrlFuncsel {
     _RESERVED_0 = 0x0,
     SPI1_SS_N = 0x01,
@@ -1275,7 +1297,8 @@ impl From<Gpio29ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio2ctrlFuncsel {
     JTAG_TDI = 0x0,
     SPI0_SCLK = 0x01,
@@ -1333,7 +1356,8 @@ impl From<Gpio2ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio3ctrlFuncsel {
     JTAG_TDO = 0x0,
     SPI0_TX = 0x01,
@@ -1391,7 +1415,8 @@ impl From<Gpio3ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio4ctrlFuncsel {
     _RESERVED_0 = 0x0,
     SPI0_RX = 0x01,
@@ -1449,7 +1474,8 @@ impl From<Gpio4ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio5ctrlFuncsel {
     _RESERVED_0 = 0x0,
     SPI0_SS_N = 0x01,
@@ -1507,7 +1533,8 @@ impl From<Gpio5ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio6ctrlFuncsel {
     _RESERVED_0 = 0x0,
     SPI0_SCLK = 0x01,
@@ -1565,7 +1592,8 @@ impl From<Gpio6ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio7ctrlFuncsel {
     _RESERVED_0 = 0x0,
     SPI0_TX = 0x01,
@@ -1623,7 +1651,8 @@ impl From<Gpio7ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio8ctrlFuncsel {
     _RESERVED_0 = 0x0,
     SPI1_RX = 0x01,
@@ -1681,7 +1710,8 @@ impl From<Gpio8ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Gpio9ctrlFuncsel {
     _RESERVED_0 = 0x0,
     SPI1_SS_N = 0x01,
@@ -1739,7 +1769,8 @@ impl From<Gpio9ctrlFuncsel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Inover {
     #[doc = "don't invert the peri input"]
     NORMAL = 0x0,
@@ -1773,7 +1804,8 @@ impl From<Inover> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Irqover {
     #[doc = "don't invert the interrupt"]
     NORMAL = 0x0,
@@ -1807,7 +1839,8 @@ impl From<Irqover> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Oeover {
     #[doc = "drive output enable from peripheral signal selected by funcsel"]
     NORMAL = 0x0,
@@ -1841,7 +1874,8 @@ impl From<Oeover> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Outover {
     #[doc = "drive output from peripheral signal selected by funcsel"]
     NORMAL = 0x0,

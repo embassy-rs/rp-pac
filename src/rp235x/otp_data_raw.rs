@@ -13,82 +13,82 @@ impl BootKey {
     pub const fn as_ptr(&self) -> *mut () {
         self.ptr as _
     }
-    #[doc = "Bits 15:0 of SHA-256 hash of boot key 1 (ECC)"]
+    #[doc = "Bits 15:0 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
     pub const fn part0(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
     }
-    #[doc = "Bits 31:16 of SHA-256 hash of boot key 1 (ECC)"]
+    #[doc = "Bits 31:16 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
     pub const fn part1(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
     }
-    #[doc = "Bits 47:32 of SHA-256 hash of boot key 1 (ECC)"]
+    #[doc = "Bits 47:32 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
     pub const fn part2(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
     }
-    #[doc = "Bits 63:48 of SHA-256 hash of boot key 1 (ECC)"]
+    #[doc = "Bits 63:48 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
     pub const fn part3(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
     }
-    #[doc = "Bits 79:64 of SHA-256 hash of boot key 1 (ECC)"]
+    #[doc = "Bits 79:64 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
     pub const fn part4(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x10usize) as _) }
     }
-    #[doc = "Bits 95:80 of SHA-256 hash of boot key 1 (ECC)"]
+    #[doc = "Bits 95:80 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
     pub const fn part5(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x14usize) as _) }
     }
-    #[doc = "Bits 111:96 of SHA-256 hash of boot key 1 (ECC)"]
+    #[doc = "Bits 111:96 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
     pub const fn part6(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x18usize) as _) }
     }
-    #[doc = "Bits 127:112 of SHA-256 hash of boot key 1 (ECC)"]
+    #[doc = "Bits 127:112 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
     pub const fn part7(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x1cusize) as _) }
     }
-    #[doc = "Bits 143:128 of SHA-256 hash of boot key 1 (ECC)"]
+    #[doc = "Bits 143:128 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
     pub const fn part8(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x20usize) as _) }
     }
-    #[doc = "Bits 159:144 of SHA-256 hash of boot key 1 (ECC)"]
+    #[doc = "Bits 159:144 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
     pub const fn part9(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x24usize) as _) }
     }
-    #[doc = "Bits 175:160 of SHA-256 hash of boot key 1 (ECC)"]
+    #[doc = "Bits 175:160 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
     pub const fn part10(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x28usize) as _) }
     }
-    #[doc = "Bits 191:176 of SHA-256 hash of boot key 1 (ECC)"]
+    #[doc = "Bits 191:176 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
     pub const fn part11(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x2cusize) as _) }
     }
-    #[doc = "Bits 207:192 of SHA-256 hash of boot key 1 (ECC)"]
+    #[doc = "Bits 207:192 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
     pub const fn part12(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x30usize) as _) }
     }
-    #[doc = "Bits 223:208 of SHA-256 hash of boot key 1 (ECC)"]
+    #[doc = "Bits 223:208 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
     pub const fn part13(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x34usize) as _) }
     }
-    #[doc = "Bits 239:224 of SHA-256 hash of boot key 1 (ECC)"]
+    #[doc = "Bits 239:224 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
     pub const fn part14(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x38usize) as _) }
     }
-    #[doc = "Bits 255:240 of SHA-256 hash of boot key 1 (ECC)"]
+    #[doc = "Bits 255:240 of SHA-256 hash of boot key 3 (ECC)"]
     #[inline(always)]
     pub const fn part15(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x3cusize) as _) }
@@ -109,42 +109,42 @@ impl Key {
     pub const fn as_ptr(&self) -> *mut () {
         self.ptr as _
     }
-    #[doc = "Bits 15:0 of OTP access key 1 (ECC)"]
+    #[doc = "Bits 15:0 of OTP access key 6 (ECC)"]
     #[inline(always)]
     pub const fn part0(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
     }
-    #[doc = "Bits 31:16 of OTP access key 1 (ECC)"]
+    #[doc = "Bits 31:16 of OTP access key 6 (ECC)"]
     #[inline(always)]
     pub const fn part1(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
     }
-    #[doc = "Bits 47:32 of OTP access key 1 (ECC)"]
+    #[doc = "Bits 47:32 of OTP access key 6 (ECC)"]
     #[inline(always)]
     pub const fn part2(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
     }
-    #[doc = "Bits 63:48 of OTP access key 1 (ECC)"]
+    #[doc = "Bits 63:48 of OTP access key 6 (ECC)"]
     #[inline(always)]
     pub const fn part3(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
     }
-    #[doc = "Bits 79:64 of OTP access key 1 (ECC)"]
+    #[doc = "Bits 79:64 of OTP access key 6 (ECC)"]
     #[inline(always)]
     pub const fn part4(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x10usize) as _) }
     }
-    #[doc = "Bits 95:80 of OTP access key 1 (ECC)"]
+    #[doc = "Bits 95:80 of OTP access key 6 (ECC)"]
     #[inline(always)]
     pub const fn part5(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x14usize) as _) }
     }
-    #[doc = "Bits 111:96 of OTP access key 1 (ECC)"]
+    #[doc = "Bits 111:96 of OTP access key 6 (ECC)"]
     #[inline(always)]
     pub const fn part6(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x18usize) as _) }
     }
-    #[doc = "Bits 127:112 of OTP access key 1 (ECC)"]
+    #[doc = "Bits 127:112 of OTP access key 6 (ECC)"]
     #[inline(always)]
     pub const fn part7(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x1cusize) as _) }
@@ -504,12 +504,12 @@ impl PageLock {
     pub const fn as_ptr(&self) -> *mut () {
         self.ptr as _
     }
-    #[doc = "Lock configuration LSBs for page 62 (rows 0xf80 through 0xfbf). Locks are stored with 3-way majority vote encoding, so that bits can be set independently. This OTP location is always readable, and is write-protected by its own permissions."]
+    #[doc = "Lock configuration LSBs for page 9 (rows 0x240 through 0x27f). Locks are stored with 3-way majority vote encoding, so that bits can be set independently. This OTP location is always readable, and is write-protected by its own permissions."]
     #[inline(always)]
     pub const fn lock0(self) -> crate::common::Reg<regs::PageLock0, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
     }
-    #[doc = "Lock configuration MSBs for page 62 (rows 0xf80 through 0xfbf). Locks are stored with 3-way majority vote encoding, so that bits can be set independently. This OTP location is always readable, and is write-protected by its own permissions."]
+    #[doc = "Lock configuration MSBs for page 9 (rows 0x240 through 0x27f). Locks are stored with 3-way majority vote encoding, so that bits can be set independently. This OTP location is always readable, and is write-protected by its own permissions."]
     #[inline(always)]
     pub const fn lock1(self) -> crate::common::Reg<regs::PageLock1, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }

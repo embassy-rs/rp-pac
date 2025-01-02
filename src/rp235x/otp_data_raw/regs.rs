@@ -236,6 +236,107 @@ impl Default for BootFlags0 {
         BootFlags0(0)
     }
 }
+impl core::fmt::Debug for BootFlags0 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("BootFlags0")
+            .field("disable_bootsel_exec2", &self.disable_bootsel_exec2())
+            .field("enable_bootsel_led", &self.enable_bootsel_led())
+            .field(
+                "enable_bootsel_non_default_pll_xosc_cfg",
+                &self.enable_bootsel_non_default_pll_xosc_cfg(),
+            )
+            .field("flash_io_voltage_1v8", &self.flash_io_voltage_1v8())
+            .field("fast_sigcheck_rosc_div", &self.fast_sigcheck_rosc_div())
+            .field("flash_devinfo_enable", &self.flash_devinfo_enable())
+            .field(
+                "override_flash_partition_slot_size",
+                &self.override_flash_partition_slot_size(),
+            )
+            .field("single_flash_binary", &self.single_flash_binary())
+            .field("disable_auto_switch_arch", &self.disable_auto_switch_arch())
+            .field("secure_partition_table", &self.secure_partition_table())
+            .field("hashed_partition_table", &self.hashed_partition_table())
+            .field("rollback_required", &self.rollback_required())
+            .field("disable_flash_boot", &self.disable_flash_boot())
+            .field("disable_otp_boot", &self.disable_otp_boot())
+            .field("enable_otp_boot", &self.enable_otp_boot())
+            .field("disable_power_scratch", &self.disable_power_scratch())
+            .field("disable_watchdog_scratch", &self.disable_watchdog_scratch())
+            .field(
+                "disable_bootsel_usb_msd_ifc",
+                &self.disable_bootsel_usb_msd_ifc(),
+            )
+            .field(
+                "disable_bootsel_usb_picoboot_ifc",
+                &self.disable_bootsel_usb_picoboot_ifc(),
+            )
+            .field(
+                "disable_bootsel_uart_boot",
+                &self.disable_bootsel_uart_boot(),
+            )
+            .field(
+                "disable_xip_access_on_sram_entry",
+                &self.disable_xip_access_on_sram_entry(),
+            )
+            .field("disable_sram_window_boot", &self.disable_sram_window_boot())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for BootFlags0 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct BootFlags0 {
+            disable_bootsel_exec2: bool,
+            enable_bootsel_led: bool,
+            enable_bootsel_non_default_pll_xosc_cfg: bool,
+            flash_io_voltage_1v8: bool,
+            fast_sigcheck_rosc_div: bool,
+            flash_devinfo_enable: bool,
+            override_flash_partition_slot_size: bool,
+            single_flash_binary: bool,
+            disable_auto_switch_arch: bool,
+            secure_partition_table: bool,
+            hashed_partition_table: bool,
+            rollback_required: bool,
+            disable_flash_boot: bool,
+            disable_otp_boot: bool,
+            enable_otp_boot: bool,
+            disable_power_scratch: bool,
+            disable_watchdog_scratch: bool,
+            disable_bootsel_usb_msd_ifc: bool,
+            disable_bootsel_usb_picoboot_ifc: bool,
+            disable_bootsel_uart_boot: bool,
+            disable_xip_access_on_sram_entry: bool,
+            disable_sram_window_boot: bool,
+        }
+        let proxy = BootFlags0 {
+            disable_bootsel_exec2: self.disable_bootsel_exec2(),
+            enable_bootsel_led: self.enable_bootsel_led(),
+            enable_bootsel_non_default_pll_xosc_cfg: self.enable_bootsel_non_default_pll_xosc_cfg(),
+            flash_io_voltage_1v8: self.flash_io_voltage_1v8(),
+            fast_sigcheck_rosc_div: self.fast_sigcheck_rosc_div(),
+            flash_devinfo_enable: self.flash_devinfo_enable(),
+            override_flash_partition_slot_size: self.override_flash_partition_slot_size(),
+            single_flash_binary: self.single_flash_binary(),
+            disable_auto_switch_arch: self.disable_auto_switch_arch(),
+            secure_partition_table: self.secure_partition_table(),
+            hashed_partition_table: self.hashed_partition_table(),
+            rollback_required: self.rollback_required(),
+            disable_flash_boot: self.disable_flash_boot(),
+            disable_otp_boot: self.disable_otp_boot(),
+            enable_otp_boot: self.enable_otp_boot(),
+            disable_power_scratch: self.disable_power_scratch(),
+            disable_watchdog_scratch: self.disable_watchdog_scratch(),
+            disable_bootsel_usb_msd_ifc: self.disable_bootsel_usb_msd_ifc(),
+            disable_bootsel_usb_picoboot_ifc: self.disable_bootsel_usb_picoboot_ifc(),
+            disable_bootsel_uart_boot: self.disable_bootsel_uart_boot(),
+            disable_xip_access_on_sram_entry: self.disable_xip_access_on_sram_entry(),
+            disable_sram_window_boot: self.disable_sram_window_boot(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Disable/Enable boot paths/features in the RP2350 mask ROM. Disables always supersede enables. Enables are provided where there are other configurations in OTP that must be valid. (RBIT-3)"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -292,6 +393,35 @@ impl Default for BootFlags1 {
         BootFlags1(0)
     }
 }
+impl core::fmt::Debug for BootFlags1 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("BootFlags1")
+            .field("key_valid", &self.key_valid())
+            .field("key_invalid", &self.key_invalid())
+            .field("double_tap_delay", &self.double_tap_delay())
+            .field("double_tap", &self.double_tap())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for BootFlags1 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct BootFlags1 {
+            key_valid: u8,
+            key_invalid: u8,
+            double_tap_delay: u8,
+            double_tap: bool,
+        }
+        let proxy = BootFlags1 {
+            key_valid: self.key_valid(),
+            key_invalid: self.key_invalid(),
+            double_tap_delay: self.double_tap_delay(),
+            double_tap: self.double_tap(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Pin configuration for LED status, used by USB bootloader. (ECC) Must be valid if BOOT_FLAGS0_ENABLE_BOOTSEL_LED is set."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -324,6 +454,29 @@ impl Default for BootselLedCfg {
     #[inline(always)]
     fn default() -> BootselLedCfg {
         BootselLedCfg(0)
+    }
+}
+impl core::fmt::Debug for BootselLedCfg {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("BootselLedCfg")
+            .field("pin", &self.pin())
+            .field("activelow", &self.activelow())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for BootselLedCfg {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct BootselLedCfg {
+            pin: u8,
+            activelow: u16,
+        }
+        let proxy = BootselLedCfg {
+            pin: self.pin(),
+            activelow: self.activelow(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Optional PLL configuration for BOOTSEL mode. (ECC) This should be configured to produce an exact 48 MHz based on the crystal oscillator frequency. User mode software may also use this value to calculate the expected crystal frequency based on an assumed 48 MHz PLL output. If no configuration is given, the crystal is assumed to be 12 MHz. The PLL frequency can be calculated as: PLL out = (XOSC frequency / (REFDIV+1)) x FBDIV / (POSTDIV1 x POSTDIV2) Conversely the crystal frequency can be calculated as: XOSC frequency = 48 MHz x (REFDIV+1) x (POSTDIV1 x POSTDIV2) / FBDIV (Note the +1 on REFDIV is because the value stored in this OTP location is the actual divisor value minus one.) Used if and only if ENABLE_BOOTSEL_NON_DEFAULT_PLL_XOSC_CFG is set in BOOT_FLAGS0. That bit should be set only after this row and BOOTSEL_XOSC_CFG are both correctly programmed."]
@@ -382,6 +535,35 @@ impl Default for BootselPllCfg {
         BootselPllCfg(0)
     }
 }
+impl core::fmt::Debug for BootselPllCfg {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("BootselPllCfg")
+            .field("fbdiv", &self.fbdiv())
+            .field("postdiv1", &self.postdiv1())
+            .field("postdiv2", &self.postdiv2())
+            .field("refdiv", &self.refdiv())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for BootselPllCfg {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct BootselPllCfg {
+            fbdiv: u16,
+            postdiv1: u8,
+            postdiv2: u8,
+            refdiv: u16,
+        }
+        let proxy = BootselPllCfg {
+            fbdiv: self.fbdiv(),
+            postdiv1: self.postdiv1(),
+            postdiv2: self.postdiv2(),
+            refdiv: self.refdiv(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Non-default crystal oscillator configuration for the USB bootloader. (ECC) These values may also be used by user code configuring the crystal oscillator. Used if and only if ENABLE_BOOTSEL_NON_DEFAULT_PLL_XOSC_CFG is set in BOOT_FLAGS0. That bit should be set only after this row and BOOTSEL_PLL_CFG are both correctly programmed."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -416,6 +598,29 @@ impl Default for BootselXoscCfg {
         BootselXoscCfg(0)
     }
 }
+impl core::fmt::Debug for BootselXoscCfg {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("BootselXoscCfg")
+            .field("startup", &self.startup())
+            .field("range", &self.range())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for BootselXoscCfg {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct BootselXoscCfg {
+            startup: u16,
+            range: super::vals::Range,
+        }
+        let proxy = BootselXoscCfg {
+            startup: self.startup(),
+            range: self.range(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Page 0 critical boot flags (RBIT-8)"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -448,6 +653,29 @@ impl Default for Crit0 {
     #[inline(always)]
     fn default() -> Crit0 {
         Crit0(0)
+    }
+}
+impl core::fmt::Debug for Crit0 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Crit0")
+            .field("arm_disable", &self.arm_disable())
+            .field("riscv_disable", &self.riscv_disable())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Crit0 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Crit0 {
+            arm_disable: bool,
+            riscv_disable: bool,
+        }
+        let proxy = Crit0 {
+            arm_disable: self.arm_disable(),
+            riscv_disable: self.riscv_disable(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Page 1 critical boot flags (RBIT-8)"]
@@ -528,6 +756,41 @@ impl Default for Crit1 {
         Crit1(0)
     }
 }
+impl core::fmt::Debug for Crit1 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Crit1")
+            .field("secure_boot_enable", &self.secure_boot_enable())
+            .field("secure_debug_disable", &self.secure_debug_disable())
+            .field("debug_disable", &self.debug_disable())
+            .field("boot_arch", &self.boot_arch())
+            .field("glitch_detector_enable", &self.glitch_detector_enable())
+            .field("glitch_detector_sens", &self.glitch_detector_sens())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Crit1 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Crit1 {
+            secure_boot_enable: bool,
+            secure_debug_disable: bool,
+            debug_disable: bool,
+            boot_arch: bool,
+            glitch_detector_enable: bool,
+            glitch_detector_sens: u8,
+        }
+        let proxy = Crit1 {
+            secure_boot_enable: self.secure_boot_enable(),
+            secure_debug_disable: self.secure_debug_disable(),
+            debug_disable: self.debug_disable(),
+            boot_arch: self.boot_arch(),
+            glitch_detector_enable: self.glitch_detector_enable(),
+            glitch_detector_sens: self.glitch_detector_sens(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Stores information about external flash device(s). (ECC) Assumed to be valid if BOOT_FLAGS0_FLASH_DEVINFO_ENABLE is set."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -584,7 +847,36 @@ impl Default for FlashDevinfo {
         FlashDevinfo(0)
     }
 }
-#[doc = "Valid flag for key 6. Once the valid flag is set, the key can no longer be read or written, and becomes a valid fixed key for protecting OTP pages."]
+impl core::fmt::Debug for FlashDevinfo {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("FlashDevinfo")
+            .field("cs1_gpio", &self.cs1_gpio())
+            .field("d8h_erase_supported", &self.d8h_erase_supported())
+            .field("cs0_size", &self.cs0_size())
+            .field("cs1_size", &self.cs1_size())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for FlashDevinfo {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct FlashDevinfo {
+            cs1_gpio: u8,
+            d8h_erase_supported: bool,
+            cs0_size: super::vals::Cs0size,
+            cs1_size: super::vals::Cs1size,
+        }
+        let proxy = FlashDevinfo {
+            cs1_gpio: self.cs1_gpio(),
+            d8h_erase_supported: self.d8h_erase_supported(),
+            cs0_size: self.cs0_size(),
+            cs1_size: self.cs1_size(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
+#[doc = "Valid flag for key 1. Once the valid flag is set, the key can no longer be read or written, and becomes a valid fixed key for protecting OTP pages."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct KeyValid(pub u32);
@@ -625,6 +917,32 @@ impl Default for KeyValid {
     #[inline(always)]
     fn default() -> KeyValid {
         KeyValid(0)
+    }
+}
+impl core::fmt::Debug for KeyValid {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("KeyValid")
+            .field("valid", &self.valid())
+            .field("valid_r1", &self.valid_r1())
+            .field("valid_r2", &self.valid_r2())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for KeyValid {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct KeyValid {
+            valid: bool,
+            valid_r1: bool,
+            valid_r2: bool,
+        }
+        let proxy = KeyValid {
+            valid: self.valid(),
+            valid_r1: self.valid_r1(),
+            valid_r2: self.valid_r2(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Lock configuration LSBs for page 63 (rows 0xfc0 through 0xfff). Locks are stored with 3-way majority vote encoding, so that bits can be set independently. This OTP location is always readable, and is write-protected by its own permissions."]
@@ -705,6 +1023,41 @@ impl Default for PageLock0 {
         PageLock0(0)
     }
 }
+impl core::fmt::Debug for PageLock0 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("PageLock0")
+            .field("key_w", &self.key_w())
+            .field("key_r", &self.key_r())
+            .field("no_key_state", &self.no_key_state())
+            .field("rma", &self.rma())
+            .field("r1", &self.r1())
+            .field("r2", &self.r2())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for PageLock0 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct PageLock0 {
+            key_w: u8,
+            key_r: u8,
+            no_key_state: super::vals::PageLockNoKeyState,
+            rma: bool,
+            r1: u8,
+            r2: u8,
+        }
+        let proxy = PageLock0 {
+            key_w: self.key_w(),
+            key_r: self.key_r(),
+            no_key_state: self.no_key_state(),
+            rma: self.rma(),
+            r1: self.r1(),
+            r2: self.r2(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Lock configuration MSBs for page 63 (rows 0xfc0 through 0xfff). Locks are stored with 3-way majority vote encoding, so that bits can be set independently. This OTP location is always readable, and is write-protected by its own permissions."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -770,6 +1123,38 @@ impl Default for PageLock1 {
     #[inline(always)]
     fn default() -> PageLock1 {
         PageLock1(0)
+    }
+}
+impl core::fmt::Debug for PageLock1 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("PageLock1")
+            .field("lock_s", &self.lock_s())
+            .field("lock_ns", &self.lock_ns())
+            .field("lock_bl", &self.lock_bl())
+            .field("r1", &self.r1())
+            .field("r2", &self.r2())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for PageLock1 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct PageLock1 {
+            lock_s: super::vals::PageLock,
+            lock_ns: super::vals::PageLock,
+            lock_bl: super::vals::PageLock,
+            r1: u8,
+            r2: u8,
+        }
+        let proxy = PageLock1 {
+            lock_s: self.lock_s(),
+            lock_ns: self.lock_ns(),
+            lock_bl: self.lock_bl(),
+            r1: self.r1(),
+            r2: self.r2(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "USB boot specific feature flags (RBIT-3)"]
@@ -982,6 +1367,127 @@ impl Default for UsbBootFlags {
         UsbBootFlags(0)
     }
 }
+impl core::fmt::Debug for UsbBootFlags {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("UsbBootFlags")
+            .field(
+                "wl_usb_device_vid_value_valid",
+                &self.wl_usb_device_vid_value_valid(),
+            )
+            .field(
+                "wl_usb_device_pid_value_valid",
+                &self.wl_usb_device_pid_value_valid(),
+            )
+            .field(
+                "wl_usb_device_serial_number_value_valid",
+                &self.wl_usb_device_serial_number_value_valid(),
+            )
+            .field(
+                "wl_usb_device_lang_id_value_valid",
+                &self.wl_usb_device_lang_id_value_valid(),
+            )
+            .field(
+                "wl_usb_device_manufacturer_strdef_valid",
+                &self.wl_usb_device_manufacturer_strdef_valid(),
+            )
+            .field(
+                "wl_usb_device_product_strdef_valid",
+                &self.wl_usb_device_product_strdef_valid(),
+            )
+            .field(
+                "wl_usb_device_serial_number_strdef_valid",
+                &self.wl_usb_device_serial_number_strdef_valid(),
+            )
+            .field(
+                "wl_usb_config_attributes_max_power_values_valid",
+                &self.wl_usb_config_attributes_max_power_values_valid(),
+            )
+            .field(
+                "wl_volume_label_strdef_valid",
+                &self.wl_volume_label_strdef_valid(),
+            )
+            .field(
+                "wl_scsi_inquiry_vendor_strdef_valid",
+                &self.wl_scsi_inquiry_vendor_strdef_valid(),
+            )
+            .field(
+                "wl_scsi_inquiry_product_strdef_valid",
+                &self.wl_scsi_inquiry_product_strdef_valid(),
+            )
+            .field(
+                "wl_scsi_inquiry_version_strdef_valid",
+                &self.wl_scsi_inquiry_version_strdef_valid(),
+            )
+            .field(
+                "wl_index_htm_redirect_url_strdef_valid",
+                &self.wl_index_htm_redirect_url_strdef_valid(),
+            )
+            .field(
+                "wl_index_htm_redirect_name_strdef_valid",
+                &self.wl_index_htm_redirect_name_strdef_valid(),
+            )
+            .field(
+                "wl_info_uf2_txt_model_strdef_valid",
+                &self.wl_info_uf2_txt_model_strdef_valid(),
+            )
+            .field(
+                "wl_info_uf2_txt_board_id_strdef_valid",
+                &self.wl_info_uf2_txt_board_id_strdef_valid(),
+            )
+            .field("white_label_addr_valid", &self.white_label_addr_valid())
+            .field("dp_dm_swap", &self.dp_dm_swap())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for UsbBootFlags {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct UsbBootFlags {
+            wl_usb_device_vid_value_valid: bool,
+            wl_usb_device_pid_value_valid: bool,
+            wl_usb_device_serial_number_value_valid: bool,
+            wl_usb_device_lang_id_value_valid: bool,
+            wl_usb_device_manufacturer_strdef_valid: bool,
+            wl_usb_device_product_strdef_valid: bool,
+            wl_usb_device_serial_number_strdef_valid: bool,
+            wl_usb_config_attributes_max_power_values_valid: bool,
+            wl_volume_label_strdef_valid: bool,
+            wl_scsi_inquiry_vendor_strdef_valid: bool,
+            wl_scsi_inquiry_product_strdef_valid: bool,
+            wl_scsi_inquiry_version_strdef_valid: bool,
+            wl_index_htm_redirect_url_strdef_valid: bool,
+            wl_index_htm_redirect_name_strdef_valid: bool,
+            wl_info_uf2_txt_model_strdef_valid: bool,
+            wl_info_uf2_txt_board_id_strdef_valid: bool,
+            white_label_addr_valid: bool,
+            dp_dm_swap: bool,
+        }
+        let proxy = UsbBootFlags {
+            wl_usb_device_vid_value_valid: self.wl_usb_device_vid_value_valid(),
+            wl_usb_device_pid_value_valid: self.wl_usb_device_pid_value_valid(),
+            wl_usb_device_serial_number_value_valid: self.wl_usb_device_serial_number_value_valid(),
+            wl_usb_device_lang_id_value_valid: self.wl_usb_device_lang_id_value_valid(),
+            wl_usb_device_manufacturer_strdef_valid: self.wl_usb_device_manufacturer_strdef_valid(),
+            wl_usb_device_product_strdef_valid: self.wl_usb_device_product_strdef_valid(),
+            wl_usb_device_serial_number_strdef_valid: self
+                .wl_usb_device_serial_number_strdef_valid(),
+            wl_usb_config_attributes_max_power_values_valid: self
+                .wl_usb_config_attributes_max_power_values_valid(),
+            wl_volume_label_strdef_valid: self.wl_volume_label_strdef_valid(),
+            wl_scsi_inquiry_vendor_strdef_valid: self.wl_scsi_inquiry_vendor_strdef_valid(),
+            wl_scsi_inquiry_product_strdef_valid: self.wl_scsi_inquiry_product_strdef_valid(),
+            wl_scsi_inquiry_version_strdef_valid: self.wl_scsi_inquiry_version_strdef_valid(),
+            wl_index_htm_redirect_url_strdef_valid: self.wl_index_htm_redirect_url_strdef_valid(),
+            wl_index_htm_redirect_name_strdef_valid: self.wl_index_htm_redirect_name_strdef_valid(),
+            wl_info_uf2_txt_model_strdef_valid: self.wl_info_uf2_txt_model_strdef_valid(),
+            wl_info_uf2_txt_board_id_strdef_valid: self.wl_info_uf2_txt_board_id_strdef_valid(),
+            white_label_addr_valid: self.white_label_addr_valid(),
+            dp_dm_swap: self.dp_dm_swap(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Row index of the USB_WHITE_LABEL structure within OTP (ECC) The table has 16 rows, each of which are also ECC and marked valid by the corresponding valid bit in USB_BOOT_FLAGS (ECC). The entries are either _VALUEs where the 16 bit value is used as is, or _STRDEFs which acts as a pointers to a string value. The value stored in a _STRDEF is two separate bytes: The low seven bits of the first (LSB) byte indicates the number of characters in the string, and the top bit of the first (LSB) byte if set to indicate that each character in the string is two bytes (Unicode) versus one byte if unset. The second (MSB) byte represents the location of the string data, and is encoded as the number of rows from this USB_WHITE_LABEL_ADDR; i.e. the row of the start of the string is USB_WHITE_LABEL_ADDR value + msb_byte. In each case, the corresponding valid bit enables replacing the default value for the corresponding item provided by the boot rom. Note that Unicode _STRDEFs are only supported for USB_DEVICE_PRODUCT_STRDEF, USB_DEVICE_SERIAL_NUMBER_STRDEF and USB_DEVICE_MANUFACTURER_STRDEF. Unicode values will be ignored if specified for other fields, and non-unicode values for these three items will be converted to Unicode characters by setting the upper 8 bits to zero. Note that if the USB_WHITE_LABEL structure or the corresponding strings are not readable by BOOTSEL mode based on OTP permissions, or if alignment requirements are not met, then the corresponding default values are used. The index values indicate where each field is located (row USB_WHITE_LABEL_ADDR value + index):"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -1002,5 +1508,25 @@ impl Default for UsbWhiteLabelAddr {
     #[inline(always)]
     fn default() -> UsbWhiteLabelAddr {
         UsbWhiteLabelAddr(0)
+    }
+}
+impl core::fmt::Debug for UsbWhiteLabelAddr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("UsbWhiteLabelAddr")
+            .field("usb_white_label_addr", &self.usb_white_label_addr())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for UsbWhiteLabelAddr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct UsbWhiteLabelAddr {
+            usb_white_label_addr: super::vals::UsbWhiteLabelAddr,
+        }
+        let proxy = UsbWhiteLabelAddr {
+            usb_white_label_addr: self.usb_white_label_addr(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

@@ -1,5 +1,6 @@
-#![doc = "Peripheral access API (generated using chiptool v0.1.0 (689341a 2024-02-15))"]
+#![doc = "Peripheral access API (generated using chiptool v0.1.0 (e09c27d 2025-01-02))"]
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Interrupt {
     #[doc = "0 - TIMER_IRQ_0"]
     TIMER_IRQ_0 = 0,

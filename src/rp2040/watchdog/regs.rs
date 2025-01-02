@@ -76,6 +76,41 @@ impl Default for Ctrl {
         Ctrl(0)
     }
 }
+impl core::fmt::Debug for Ctrl {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Ctrl")
+            .field("time", &self.time())
+            .field("pause_jtag", &self.pause_jtag())
+            .field("pause_dbg0", &self.pause_dbg0())
+            .field("pause_dbg1", &self.pause_dbg1())
+            .field("enable", &self.enable())
+            .field("trigger", &self.trigger())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Ctrl {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Ctrl {
+            time: u32,
+            pause_jtag: bool,
+            pause_dbg0: bool,
+            pause_dbg1: bool,
+            enable: bool,
+            trigger: bool,
+        }
+        let proxy = Ctrl {
+            time: self.time(),
+            pause_jtag: self.pause_jtag(),
+            pause_dbg0: self.pause_dbg0(),
+            pause_dbg1: self.pause_dbg1(),
+            enable: self.enable(),
+            trigger: self.trigger(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Load the watchdog timer. The maximum setting is 0xffffff which corresponds to 0xffffff / 2 ticks before triggering a watchdog reset (see errata RP2040-E1)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -95,6 +130,22 @@ impl Default for Load {
     #[inline(always)]
     fn default() -> Load {
         Load(0)
+    }
+}
+impl core::fmt::Debug for Load {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Load").field("load", &self.load()).finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Load {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Load {
+            load: u32,
+        }
+        let proxy = Load { load: self.load() };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Logs the reason for the last reset. Both bits are zero for the case of a hardware reset."]
@@ -125,6 +176,29 @@ impl Default for Reason {
     #[inline(always)]
     fn default() -> Reason {
         Reason(0)
+    }
+}
+impl core::fmt::Debug for Reason {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Reason")
+            .field("timer", &self.timer())
+            .field("force", &self.force())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Reason {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Reason {
+            timer: bool,
+            force: bool,
+        }
+        let proxy = Reason {
+            timer: self.timer(),
+            force: self.force(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Controls the tick generator"]
@@ -181,5 +255,34 @@ impl Default for Tick {
     #[inline(always)]
     fn default() -> Tick {
         Tick(0)
+    }
+}
+impl core::fmt::Debug for Tick {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Tick")
+            .field("cycles", &self.cycles())
+            .field("enable", &self.enable())
+            .field("running", &self.running())
+            .field("count", &self.count())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Tick {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Tick {
+            cycles: u16,
+            enable: bool,
+            running: bool,
+            count: u16,
+        }
+        let proxy = Tick {
+            cycles: self.cycles(),
+            enable: self.enable(),
+            running: self.running(),
+            count: self.count(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

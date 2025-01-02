@@ -21,6 +21,26 @@ impl Default for Cpsr {
         Cpsr(0)
     }
 }
+impl core::fmt::Debug for Cpsr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Cpsr")
+            .field("cpsdvsr", &self.cpsdvsr())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Cpsr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Cpsr {
+            cpsdvsr: u8,
+        }
+        let proxy = Cpsr {
+            cpsdvsr: self.cpsdvsr(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Control register 0, SSPCR0 on page 3-4"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -88,6 +108,38 @@ impl Default for Cr0 {
         Cr0(0)
     }
 }
+impl core::fmt::Debug for Cr0 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Cr0")
+            .field("dss", &self.dss())
+            .field("frf", &self.frf())
+            .field("spo", &self.spo())
+            .field("sph", &self.sph())
+            .field("scr", &self.scr())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Cr0 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Cr0 {
+            dss: u8,
+            frf: u8,
+            spo: bool,
+            sph: bool,
+            scr: u8,
+        }
+        let proxy = Cr0 {
+            dss: self.dss(),
+            frf: self.frf(),
+            spo: self.spo(),
+            sph: self.sph(),
+            scr: self.scr(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Control register 1, SSPCR1 on page 3-5"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -144,6 +196,35 @@ impl Default for Cr1 {
         Cr1(0)
     }
 }
+impl core::fmt::Debug for Cr1 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Cr1")
+            .field("lbm", &self.lbm())
+            .field("sse", &self.sse())
+            .field("ms", &self.ms())
+            .field("sod", &self.sod())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Cr1 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Cr1 {
+            lbm: bool,
+            sse: bool,
+            ms: bool,
+            sod: bool,
+        }
+        let proxy = Cr1 {
+            lbm: self.lbm(),
+            sse: self.sse(),
+            ms: self.ms(),
+            sod: self.sod(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "DMA control register, SSPDMACR on page 3-12"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -178,6 +259,29 @@ impl Default for Dmacr {
         Dmacr(0)
     }
 }
+impl core::fmt::Debug for Dmacr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Dmacr")
+            .field("rxdmae", &self.rxdmae())
+            .field("txdmae", &self.txdmae())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Dmacr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Dmacr {
+            rxdmae: bool,
+            txdmae: bool,
+        }
+        let proxy = Dmacr {
+            rxdmae: self.rxdmae(),
+            txdmae: self.txdmae(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Data register, SSPDR on page 3-6"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -199,6 +303,22 @@ impl Default for Dr {
     #[inline(always)]
     fn default() -> Dr {
         Dr(0)
+    }
+}
+impl core::fmt::Debug for Dr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Dr").field("data", &self.data()).finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Dr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Dr {
+            data: u16,
+        }
+        let proxy = Dr { data: self.data() };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Interrupt clear register, SSPICR on page 3-11"]
@@ -233,6 +353,29 @@ impl Default for Icr {
     #[inline(always)]
     fn default() -> Icr {
         Icr(0)
+    }
+}
+impl core::fmt::Debug for Icr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Icr")
+            .field("roric", &self.roric())
+            .field("rtic", &self.rtic())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Icr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Icr {
+            roric: bool,
+            rtic: bool,
+        }
+        let proxy = Icr {
+            roric: self.roric(),
+            rtic: self.rtic(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Interrupt mask set or clear register, SSPIMSC on page 3-9"]
@@ -291,6 +434,35 @@ impl Default for Imsc {
         Imsc(0)
     }
 }
+impl core::fmt::Debug for Imsc {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Imsc")
+            .field("rorim", &self.rorim())
+            .field("rtim", &self.rtim())
+            .field("rxim", &self.rxim())
+            .field("txim", &self.txim())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Imsc {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Imsc {
+            rorim: bool,
+            rtim: bool,
+            rxim: bool,
+            txim: bool,
+        }
+        let proxy = Imsc {
+            rorim: self.rorim(),
+            rtim: self.rtim(),
+            rxim: self.rxim(),
+            txim: self.txim(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Masked interrupt status register, SSPMIS on page 3-11"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -347,6 +519,35 @@ impl Default for Mis {
         Mis(0)
     }
 }
+impl core::fmt::Debug for Mis {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Mis")
+            .field("rormis", &self.rormis())
+            .field("rtmis", &self.rtmis())
+            .field("rxmis", &self.rxmis())
+            .field("txmis", &self.txmis())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Mis {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Mis {
+            rormis: bool,
+            rtmis: bool,
+            rxmis: bool,
+            txmis: bool,
+        }
+        let proxy = Mis {
+            rormis: self.rormis(),
+            rtmis: self.rtmis(),
+            rxmis: self.rxmis(),
+            txmis: self.txmis(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "PrimeCell identification registers, SSPPCellID0-3 on page 3-16"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -368,6 +569,26 @@ impl Default for Pcellid0 {
     #[inline(always)]
     fn default() -> Pcellid0 {
         Pcellid0(0)
+    }
+}
+impl core::fmt::Debug for Pcellid0 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Pcellid0")
+            .field("ssppcellid0", &self.ssppcellid0())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Pcellid0 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Pcellid0 {
+            ssppcellid0: u8,
+        }
+        let proxy = Pcellid0 {
+            ssppcellid0: self.ssppcellid0(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "PrimeCell identification registers, SSPPCellID0-3 on page 3-16"]
@@ -393,6 +614,26 @@ impl Default for Pcellid1 {
         Pcellid1(0)
     }
 }
+impl core::fmt::Debug for Pcellid1 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Pcellid1")
+            .field("ssppcellid1", &self.ssppcellid1())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Pcellid1 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Pcellid1 {
+            ssppcellid1: u8,
+        }
+        let proxy = Pcellid1 {
+            ssppcellid1: self.ssppcellid1(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "PrimeCell identification registers, SSPPCellID0-3 on page 3-16"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -414,6 +655,26 @@ impl Default for Pcellid2 {
     #[inline(always)]
     fn default() -> Pcellid2 {
         Pcellid2(0)
+    }
+}
+impl core::fmt::Debug for Pcellid2 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Pcellid2")
+            .field("ssppcellid2", &self.ssppcellid2())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Pcellid2 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Pcellid2 {
+            ssppcellid2: u8,
+        }
+        let proxy = Pcellid2 {
+            ssppcellid2: self.ssppcellid2(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "PrimeCell identification registers, SSPPCellID0-3 on page 3-16"]
@@ -439,6 +700,26 @@ impl Default for Pcellid3 {
         Pcellid3(0)
     }
 }
+impl core::fmt::Debug for Pcellid3 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Pcellid3")
+            .field("ssppcellid3", &self.ssppcellid3())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Pcellid3 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Pcellid3 {
+            ssppcellid3: u8,
+        }
+        let proxy = Pcellid3 {
+            ssppcellid3: self.ssppcellid3(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Peripheral identification registers, SSPPeriphID0-3 on page 3-13"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -460,6 +741,26 @@ impl Default for Periphid0 {
     #[inline(always)]
     fn default() -> Periphid0 {
         Periphid0(0)
+    }
+}
+impl core::fmt::Debug for Periphid0 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Periphid0")
+            .field("partnumber0", &self.partnumber0())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Periphid0 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Periphid0 {
+            partnumber0: u8,
+        }
+        let proxy = Periphid0 {
+            partnumber0: self.partnumber0(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Peripheral identification registers, SSPPeriphID0-3 on page 3-13"]
@@ -496,6 +797,29 @@ impl Default for Periphid1 {
         Periphid1(0)
     }
 }
+impl core::fmt::Debug for Periphid1 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Periphid1")
+            .field("partnumber1", &self.partnumber1())
+            .field("designer0", &self.designer0())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Periphid1 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Periphid1 {
+            partnumber1: u8,
+            designer0: u8,
+        }
+        let proxy = Periphid1 {
+            partnumber1: self.partnumber1(),
+            designer0: self.designer0(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Peripheral identification registers, SSPPeriphID0-3 on page 3-13"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -530,6 +854,29 @@ impl Default for Periphid2 {
         Periphid2(0)
     }
 }
+impl core::fmt::Debug for Periphid2 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Periphid2")
+            .field("designer1", &self.designer1())
+            .field("revision", &self.revision())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Periphid2 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Periphid2 {
+            designer1: u8,
+            revision: u8,
+        }
+        let proxy = Periphid2 {
+            designer1: self.designer1(),
+            revision: self.revision(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Peripheral identification registers, SSPPeriphID0-3 on page 3-13"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -551,6 +898,26 @@ impl Default for Periphid3 {
     #[inline(always)]
     fn default() -> Periphid3 {
         Periphid3(0)
+    }
+}
+impl core::fmt::Debug for Periphid3 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Periphid3")
+            .field("configuration", &self.configuration())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Periphid3 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Periphid3 {
+            configuration: u8,
+        }
+        let proxy = Periphid3 {
+            configuration: self.configuration(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Raw interrupt status register, SSPRIS on page 3-10"]
@@ -607,6 +974,35 @@ impl Default for Ris {
     #[inline(always)]
     fn default() -> Ris {
         Ris(0)
+    }
+}
+impl core::fmt::Debug for Ris {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Ris")
+            .field("rorris", &self.rorris())
+            .field("rtris", &self.rtris())
+            .field("rxris", &self.rxris())
+            .field("txris", &self.txris())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Ris {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Ris {
+            rorris: bool,
+            rtris: bool,
+            rxris: bool,
+            txris: bool,
+        }
+        let proxy = Ris {
+            rorris: self.rorris(),
+            rtris: self.rtris(),
+            rxris: self.rxris(),
+            txris: self.txris(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Status register, SSPSR on page 3-7"]
@@ -674,5 +1070,37 @@ impl Default for Sr {
     #[inline(always)]
     fn default() -> Sr {
         Sr(0)
+    }
+}
+impl core::fmt::Debug for Sr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Sr")
+            .field("tfe", &self.tfe())
+            .field("tnf", &self.tnf())
+            .field("rne", &self.rne())
+            .field("rff", &self.rff())
+            .field("bsy", &self.bsy())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Sr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Sr {
+            tfe: bool,
+            tnf: bool,
+            rne: bool,
+            rff: bool,
+            bsy: bool,
+        }
+        let proxy = Sr {
+            tfe: self.tfe(),
+            tnf: self.tnf(),
+            rne: self.rne(),
+            rff: self.rff(),
+            bsy: self.bsy(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

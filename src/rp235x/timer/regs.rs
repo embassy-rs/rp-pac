@@ -19,6 +19,26 @@ impl Default for Armed {
         Armed(0)
     }
 }
+impl core::fmt::Debug for Armed {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Armed")
+            .field("armed", &self.armed())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Armed {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Armed {
+            armed: u8,
+        }
+        let proxy = Armed {
+            armed: self.armed(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Set bits high to enable pause when the corresponding debug ports are active"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -53,7 +73,30 @@ impl Default for Dbgpause {
         Dbgpause(0)
     }
 }
-#[doc = "Interrupt status after masking & forcing"]
+impl core::fmt::Debug for Dbgpause {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Dbgpause")
+            .field("dbg0", &self.dbg0())
+            .field("dbg1", &self.dbg1())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Dbgpause {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Dbgpause {
+            dbg0: bool,
+            dbg1: bool,
+        }
+        let proxy = Dbgpause {
+            dbg0: self.dbg0(),
+            dbg1: self.dbg1(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
+#[doc = "Interrupt Enable"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Int(pub u32);
@@ -78,6 +121,39 @@ impl Default for Int {
         Int(0)
     }
 }
+impl core::fmt::Debug for Int {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Int")
+            .field(
+                "alarm",
+                &[
+                    self.alarm(0usize),
+                    self.alarm(1usize),
+                    self.alarm(2usize),
+                    self.alarm(3usize),
+                ],
+            )
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Int {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Int {
+            alarm: [bool; 4usize],
+        }
+        let proxy = Int {
+            alarm: [
+                self.alarm(0usize),
+                self.alarm(1usize),
+                self.alarm(2usize),
+                self.alarm(3usize),
+            ],
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Set locked bit to disable write access to timer Once set, cannot be cleared (without a reset)"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -97,6 +173,26 @@ impl Default for Locked {
     #[inline(always)]
     fn default() -> Locked {
         Locked(0)
+    }
+}
+impl core::fmt::Debug for Locked {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Locked")
+            .field("locked", &self.locked())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Locked {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Locked {
+            locked: bool,
+        }
+        let proxy = Locked {
+            locked: self.locked(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Set high to pause the timer"]
@@ -120,6 +216,26 @@ impl Default for Pause {
         Pause(0)
     }
 }
+impl core::fmt::Debug for Pause {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Pause")
+            .field("pause", &self.pause())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Pause {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Pause {
+            pause: bool,
+        }
+        let proxy = Pause {
+            pause: self.pause(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Selects the source for the timer. Defaults to the normal tick configured in the ticks block (typically configured to 1 microsecond). Writing to 1 will ignore the tick and count clk_sys cycles instead."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -139,5 +255,25 @@ impl Default for Source {
     #[inline(always)]
     fn default() -> Source {
         Source(0)
+    }
+}
+impl core::fmt::Debug for Source {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Source")
+            .field("clk_sys", &self.clk_sys())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Source {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Source {
+            clk_sys: super::vals::ClkSys,
+        }
+        let proxy = Source {
+            clk_sys: self.clk_sys(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

@@ -43,6 +43,32 @@ impl Default for Cs {
         Cs(0)
     }
 }
+impl core::fmt::Debug for Cs {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Cs")
+            .field("refdiv", &self.refdiv())
+            .field("bypass", &self.bypass())
+            .field("lock", &self.lock())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Cs {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Cs {
+            refdiv: u8,
+            bypass: bool,
+            lock: bool,
+        }
+        let proxy = Cs {
+            refdiv: self.refdiv(),
+            bypass: self.bypass(),
+            lock: self.lock(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Feedback divisor (note: this PLL does not support fractional division)"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -64,6 +90,26 @@ impl Default for FbdivInt {
     #[inline(always)]
     fn default() -> FbdivInt {
         FbdivInt(0)
+    }
+}
+impl core::fmt::Debug for FbdivInt {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("FbdivInt")
+            .field("fbdiv_int", &self.fbdiv_int())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for FbdivInt {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct FbdivInt {
+            fbdiv_int: u16,
+        }
+        let proxy = FbdivInt {
+            fbdiv_int: self.fbdiv_int(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Controls the PLL post dividers for the primary output (note: this PLL does not have a secondary output) the primary output is driven from VCO divided by postdiv1*postdiv2"]
@@ -98,6 +144,29 @@ impl Default for Prim {
     #[inline(always)]
     fn default() -> Prim {
         Prim(0)
+    }
+}
+impl core::fmt::Debug for Prim {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Prim")
+            .field("postdiv2", &self.postdiv2())
+            .field("postdiv1", &self.postdiv1())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Prim {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Prim {
+            postdiv2: u8,
+            postdiv1: u8,
+        }
+        let proxy = Prim {
+            postdiv2: self.postdiv2(),
+            postdiv1: self.postdiv1(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Controls the PLL power modes."]
@@ -154,5 +223,34 @@ impl Default for Pwr {
     #[inline(always)]
     fn default() -> Pwr {
         Pwr(0)
+    }
+}
+impl core::fmt::Debug for Pwr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Pwr")
+            .field("pd", &self.pd())
+            .field("dsmpd", &self.dsmpd())
+            .field("postdivpd", &self.postdivpd())
+            .field("vcopd", &self.vcopd())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Pwr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Pwr {
+            pd: bool,
+            dsmpd: bool,
+            postdivpd: bool,
+            vcopd: bool,
+        }
+        let proxy = Pwr {
+            pd: self.pd(),
+            dsmpd: self.dsmpd(),
+            postdivpd: self.postdivpd(),
+            vcopd: self.vcopd(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

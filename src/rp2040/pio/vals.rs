@@ -1,5 +1,6 @@
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum SmExecctrlStatusSel {
     #[doc = "All-ones if TX FIFO level < N, otherwise all-zeroes"]
     TXLEVEL = 0x0,

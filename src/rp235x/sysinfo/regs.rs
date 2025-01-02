@@ -46,6 +46,35 @@ impl Default for ChipId {
         ChipId(0)
     }
 }
+impl core::fmt::Debug for ChipId {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("ChipId")
+            .field("stop_bit", &self.stop_bit())
+            .field("manufacturer", &self.manufacturer())
+            .field("part", &self.part())
+            .field("revision", &self.revision())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for ChipId {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct ChipId {
+            stop_bit: bool,
+            manufacturer: u16,
+            part: u16,
+            revision: u8,
+        }
+        let proxy = ChipId {
+            stop_bit: self.stop_bit(),
+            manufacturer: self.manufacturer(),
+            part: self.part(),
+            revision: self.revision(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct PackageSel(pub u32);
@@ -64,6 +93,26 @@ impl Default for PackageSel {
     #[inline(always)]
     fn default() -> PackageSel {
         PackageSel(0)
+    }
+}
+impl core::fmt::Debug for PackageSel {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("PackageSel")
+            .field("package_sel", &self.package_sel())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for PackageSel {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct PackageSel {
+            package_sel: bool,
+        }
+        let proxy = PackageSel {
+            package_sel: self.package_sel(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Platform register. Allows software to know what environment it is running in during pre-production development. Post-production, the PLATFORM is always ASIC, non-SIM."]
@@ -121,5 +170,37 @@ impl Default for Platform {
     #[inline(always)]
     fn default() -> Platform {
         Platform(0)
+    }
+}
+impl core::fmt::Debug for Platform {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Platform")
+            .field("fpga", &self.fpga())
+            .field("asic", &self.asic())
+            .field("hdlsim", &self.hdlsim())
+            .field("batchsim", &self.batchsim())
+            .field("gatesim", &self.gatesim())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Platform {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Platform {
+            fpga: bool,
+            asic: bool,
+            hdlsim: bool,
+            batchsim: bool,
+            gatesim: bool,
+        }
+        let proxy = Platform {
+            fpga: self.fpga(),
+            asic: self.asic(),
+            hdlsim: self.hdlsim(),
+            batchsim: self.batchsim(),
+            gatesim: self.gatesim(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
