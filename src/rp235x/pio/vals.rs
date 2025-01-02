@@ -17,6 +17,27 @@ impl ExecctrlStatusN {
         self.0
     }
 }
+impl core::fmt::Debug for ExecctrlStatusN {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        match self.0 {
+            0x0 => f.write_str("IRQ"),
+            0x08 => f.write_str("IRQ_PREVPIO"),
+            0x10 => f.write_str("IRQ_NEXTPIO"),
+            other => core::write!(f, "0x{:02X}", other),
+        }
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for ExecctrlStatusN {
+    fn format(&self, f: defmt::Formatter) {
+        match self.0 {
+            0x0 => defmt::write!(f, "IRQ"),
+            0x08 => defmt::write!(f, "IRQ_PREVPIO"),
+            0x10 => defmt::write!(f, "IRQ_NEXTPIO"),
+            other => defmt::write!(f, "0x{:02X}", other),
+        }
+    }
+}
 impl From<u8> for ExecctrlStatusN {
     #[inline(always)]
     fn from(val: u8) -> ExecctrlStatusN {
@@ -30,7 +51,8 @@ impl From<ExecctrlStatusN> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum ExecctrlStatusSel {
     #[doc = "All-ones if TX FIFO level < N, otherwise all-zeroes"]
     TXLEVEL = 0x0,
@@ -63,7 +85,8 @@ impl From<ExecctrlStatusSel> for u8 {
     }
 }
 #[repr(u8)]
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Version {
     #[doc = "Version 0 (RP2040)"]
     V0 = 0x0,

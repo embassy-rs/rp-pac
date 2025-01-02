@@ -19,6 +19,26 @@ impl Default for NmiMask1 {
         NmiMask1(0)
     }
 }
+impl core::fmt::Debug for NmiMask1 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("NmiMask1")
+            .field("nmi_mask1", &self.nmi_mask1())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for NmiMask1 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct NmiMask1 {
+            nmi_mask1: u32,
+        }
+        let proxy = NmiMask1 {
+            nmi_mask1: self.nmi_mask1(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Nonstandard sleep control register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -62,5 +82,31 @@ impl Default for Sleepctrl {
     #[inline(always)]
     fn default() -> Sleepctrl {
         Sleepctrl(0)
+    }
+}
+impl core::fmt::Debug for Sleepctrl {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Sleepctrl")
+            .field("light_sleep", &self.light_sleep())
+            .field("wicenreq", &self.wicenreq())
+            .field("wicenack", &self.wicenack())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Sleepctrl {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Sleepctrl {
+            light_sleep: bool,
+            wicenreq: bool,
+            wicenack: bool,
+        }
+        let proxy = Sleepctrl {
+            light_sleep: self.light_sleep(),
+            wicenreq: self.wicenreq(),
+            wicenack: self.wicenack(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

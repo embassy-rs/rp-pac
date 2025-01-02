@@ -32,6 +32,29 @@ impl Default for DivCsr {
         DivCsr(0)
     }
 }
+impl core::fmt::Debug for DivCsr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("DivCsr")
+            .field("ready", &self.ready())
+            .field("dirty", &self.dirty())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for DivCsr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct DivCsr {
+            ready: bool,
+            dirty: bool,
+        }
+        let proxy = DivCsr {
+            ready: self.ready(),
+            dirty: self.dirty(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Status register for inter-core FIFOs (mailboxes). There is one FIFO in the core 0 -> core 1 direction, and one core 1 -> core 0. Both are 32 bits wide and 8 words deep. Core 0 can see the read side of the 1->0 FIFO (RX), and the write side of 0->1 FIFO (TX). Core 1 can see the read side of the 0->1 FIFO (RX), and the write side of 1->0 FIFO (TX). The SIO IRQ for each core is the logical OR of the VLD, WOF and ROE fields of its FIFO_ST register."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -88,6 +111,35 @@ impl Default for FifoSt {
         FifoSt(0)
     }
 }
+impl core::fmt::Debug for FifoSt {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("FifoSt")
+            .field("vld", &self.vld())
+            .field("rdy", &self.rdy())
+            .field("wof", &self.wof())
+            .field("roe", &self.roe())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for FifoSt {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct FifoSt {
+            vld: bool,
+            rdy: bool,
+            wof: bool,
+            roe: bool,
+        }
+        let proxy = FifoSt {
+            vld: self.vld(),
+            rdy: self.rdy(),
+            wof: self.wof(),
+            roe: self.roe(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Values written here are atomically added to ACCUM0 Reading yields lane 0's raw shift and mask value (BASE0 not added)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -109,6 +161,26 @@ impl Default for Interp0accum0add {
         Interp0accum0add(0)
     }
 }
+impl core::fmt::Debug for Interp0accum0add {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Interp0accum0add")
+            .field("interp0_accum0_add", &self.interp0_accum0_add())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Interp0accum0add {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Interp0accum0add {
+            interp0_accum0_add: u32,
+        }
+        let proxy = Interp0accum0add {
+            interp0_accum0_add: self.interp0_accum0_add(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Values written here are atomically added to ACCUM1 Reading yields lane 1's raw shift and mask value (BASE1 not added)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -128,6 +200,26 @@ impl Default for Interp0accum1add {
     #[inline(always)]
     fn default() -> Interp0accum1add {
         Interp0accum1add(0)
+    }
+}
+impl core::fmt::Debug for Interp0accum1add {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Interp0accum1add")
+            .field("interp0_accum1_add", &self.interp0_accum1_add())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Interp0accum1add {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Interp0accum1add {
+            interp0_accum1_add: u32,
+        }
+        let proxy = Interp0accum1add {
+            interp0_accum1_add: self.interp0_accum1_add(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Control register for lane 0"]
@@ -274,6 +366,59 @@ impl Default for Interp0ctrlLane0 {
         Interp0ctrlLane0(0)
     }
 }
+impl core::fmt::Debug for Interp0ctrlLane0 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Interp0ctrlLane0")
+            .field("shift", &self.shift())
+            .field("mask_lsb", &self.mask_lsb())
+            .field("mask_msb", &self.mask_msb())
+            .field("signed", &self.signed())
+            .field("cross_input", &self.cross_input())
+            .field("cross_result", &self.cross_result())
+            .field("add_raw", &self.add_raw())
+            .field("force_msb", &self.force_msb())
+            .field("blend", &self.blend())
+            .field("overf0", &self.overf0())
+            .field("overf1", &self.overf1())
+            .field("overf", &self.overf())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Interp0ctrlLane0 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Interp0ctrlLane0 {
+            shift: u8,
+            mask_lsb: u8,
+            mask_msb: u8,
+            signed: bool,
+            cross_input: bool,
+            cross_result: bool,
+            add_raw: bool,
+            force_msb: u8,
+            blend: bool,
+            overf0: bool,
+            overf1: bool,
+            overf: bool,
+        }
+        let proxy = Interp0ctrlLane0 {
+            shift: self.shift(),
+            mask_lsb: self.mask_lsb(),
+            mask_msb: self.mask_msb(),
+            signed: self.signed(),
+            cross_input: self.cross_input(),
+            cross_result: self.cross_result(),
+            add_raw: self.add_raw(),
+            force_msb: self.force_msb(),
+            blend: self.blend(),
+            overf0: self.overf0(),
+            overf1: self.overf1(),
+            overf: self.overf(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Control register for lane 1"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -374,6 +519,47 @@ impl Default for Interp0ctrlLane1 {
         Interp0ctrlLane1(0)
     }
 }
+impl core::fmt::Debug for Interp0ctrlLane1 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Interp0ctrlLane1")
+            .field("shift", &self.shift())
+            .field("mask_lsb", &self.mask_lsb())
+            .field("mask_msb", &self.mask_msb())
+            .field("signed", &self.signed())
+            .field("cross_input", &self.cross_input())
+            .field("cross_result", &self.cross_result())
+            .field("add_raw", &self.add_raw())
+            .field("force_msb", &self.force_msb())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Interp0ctrlLane1 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Interp0ctrlLane1 {
+            shift: u8,
+            mask_lsb: u8,
+            mask_msb: u8,
+            signed: bool,
+            cross_input: bool,
+            cross_result: bool,
+            add_raw: bool,
+            force_msb: u8,
+        }
+        let proxy = Interp0ctrlLane1 {
+            shift: self.shift(),
+            mask_lsb: self.mask_lsb(),
+            mask_msb: self.mask_msb(),
+            signed: self.signed(),
+            cross_input: self.cross_input(),
+            cross_result: self.cross_result(),
+            add_raw: self.add_raw(),
+            force_msb: self.force_msb(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Values written here are atomically added to ACCUM0 Reading yields lane 0's raw shift and mask value (BASE0 not added)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -395,6 +581,26 @@ impl Default for Interp1accum0add {
         Interp1accum0add(0)
     }
 }
+impl core::fmt::Debug for Interp1accum0add {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Interp1accum0add")
+            .field("interp1_accum0_add", &self.interp1_accum0_add())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Interp1accum0add {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Interp1accum0add {
+            interp1_accum0_add: u32,
+        }
+        let proxy = Interp1accum0add {
+            interp1_accum0_add: self.interp1_accum0_add(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Values written here are atomically added to ACCUM1 Reading yields lane 1's raw shift and mask value (BASE1 not added)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -414,6 +620,26 @@ impl Default for Interp1accum1add {
     #[inline(always)]
     fn default() -> Interp1accum1add {
         Interp1accum1add(0)
+    }
+}
+impl core::fmt::Debug for Interp1accum1add {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Interp1accum1add")
+            .field("interp1_accum1_add", &self.interp1_accum1_add())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Interp1accum1add {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Interp1accum1add {
+            interp1_accum1_add: u32,
+        }
+        let proxy = Interp1accum1add {
+            interp1_accum1_add: self.interp1_accum1_add(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Control register for lane 0"]
@@ -560,6 +786,59 @@ impl Default for Interp1ctrlLane0 {
         Interp1ctrlLane0(0)
     }
 }
+impl core::fmt::Debug for Interp1ctrlLane0 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Interp1ctrlLane0")
+            .field("shift", &self.shift())
+            .field("mask_lsb", &self.mask_lsb())
+            .field("mask_msb", &self.mask_msb())
+            .field("signed", &self.signed())
+            .field("cross_input", &self.cross_input())
+            .field("cross_result", &self.cross_result())
+            .field("add_raw", &self.add_raw())
+            .field("force_msb", &self.force_msb())
+            .field("clamp", &self.clamp())
+            .field("overf0", &self.overf0())
+            .field("overf1", &self.overf1())
+            .field("overf", &self.overf())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Interp1ctrlLane0 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Interp1ctrlLane0 {
+            shift: u8,
+            mask_lsb: u8,
+            mask_msb: u8,
+            signed: bool,
+            cross_input: bool,
+            cross_result: bool,
+            add_raw: bool,
+            force_msb: u8,
+            clamp: bool,
+            overf0: bool,
+            overf1: bool,
+            overf: bool,
+        }
+        let proxy = Interp1ctrlLane0 {
+            shift: self.shift(),
+            mask_lsb: self.mask_lsb(),
+            mask_msb: self.mask_msb(),
+            signed: self.signed(),
+            cross_input: self.cross_input(),
+            cross_result: self.cross_result(),
+            add_raw: self.add_raw(),
+            force_msb: self.force_msb(),
+            clamp: self.clamp(),
+            overf0: self.overf0(),
+            overf1: self.overf1(),
+            overf: self.overf(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Control register for lane 1"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -658,5 +937,46 @@ impl Default for Interp1ctrlLane1 {
     #[inline(always)]
     fn default() -> Interp1ctrlLane1 {
         Interp1ctrlLane1(0)
+    }
+}
+impl core::fmt::Debug for Interp1ctrlLane1 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Interp1ctrlLane1")
+            .field("shift", &self.shift())
+            .field("mask_lsb", &self.mask_lsb())
+            .field("mask_msb", &self.mask_msb())
+            .field("signed", &self.signed())
+            .field("cross_input", &self.cross_input())
+            .field("cross_result", &self.cross_result())
+            .field("add_raw", &self.add_raw())
+            .field("force_msb", &self.force_msb())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Interp1ctrlLane1 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Interp1ctrlLane1 {
+            shift: u8,
+            mask_lsb: u8,
+            mask_msb: u8,
+            signed: bool,
+            cross_input: bool,
+            cross_result: bool,
+            add_raw: bool,
+            force_msb: u8,
+        }
+        let proxy = Interp1ctrlLane1 {
+            shift: self.shift(),
+            mask_lsb: self.mask_lsb(),
+            mask_msb: self.mask_msb(),
+            signed: self.signed(),
+            cross_input: self.cross_input(),
+            cross_result: self.cross_result(),
+            add_raw: self.add_raw(),
+            force_msb: self.force_msb(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

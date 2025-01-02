@@ -9,12 +9,14 @@ description = "Peripheral Access Crate (PAC) for Raspberry Pi Silicon chips."
 [dependencies]
 cortex-m = "0.7.1"
 cortex-m-rt = { version = ">=0.6.15,<0.8", optional = true }
+defmt = { version = "0.3.10", optional = true }
 
 [features]
 default = []
 rt = ["cortex-m-rt/device"]
 rp2040 = []
 rp235x = []
+defmt = ["dep:defmt"]
 
 [package.metadata.embassy_docs]
 src_base = "https://github.com/embassy-rs/rp-pac/blob/v$VERSION/src/"

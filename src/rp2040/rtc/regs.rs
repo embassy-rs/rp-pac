@@ -19,6 +19,26 @@ impl Default for ClkdivM1 {
         ClkdivM1(0)
     }
 }
+impl core::fmt::Debug for ClkdivM1 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("ClkdivM1")
+            .field("clkdiv_m1", &self.clkdiv_m1())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for ClkdivM1 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct ClkdivM1 {
+            clkdiv_m1: u16,
+        }
+        let proxy = ClkdivM1 {
+            clkdiv_m1: self.clkdiv_m1(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "RTC Control and status"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -75,6 +95,35 @@ impl Default for Ctrl {
         Ctrl(0)
     }
 }
+impl core::fmt::Debug for Ctrl {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Ctrl")
+            .field("rtc_enable", &self.rtc_enable())
+            .field("rtc_active", &self.rtc_active())
+            .field("load", &self.load())
+            .field("force_notleapyear", &self.force_notleapyear())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Ctrl {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Ctrl {
+            rtc_enable: bool,
+            rtc_active: bool,
+            load: bool,
+            force_notleapyear: bool,
+        }
+        let proxy = Ctrl {
+            rtc_enable: self.rtc_enable(),
+            rtc_active: self.rtc_active(),
+            load: self.load(),
+            force_notleapyear: self.force_notleapyear(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Interrupt Enable"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -94,6 +143,22 @@ impl Default for Int {
     #[inline(always)]
     fn default() -> Int {
         Int(0)
+    }
+}
+impl core::fmt::Debug for Int {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Int").field("rtc", &self.rtc()).finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Int {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Int {
+            rtc: bool,
+        }
+        let proxy = Int { rtc: self.rtc() };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Interrupt setup register 0"]
@@ -192,6 +257,47 @@ impl Default for IrqSetup0 {
     #[inline(always)]
     fn default() -> IrqSetup0 {
         IrqSetup0(0)
+    }
+}
+impl core::fmt::Debug for IrqSetup0 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IrqSetup0")
+            .field("day", &self.day())
+            .field("month", &self.month())
+            .field("year", &self.year())
+            .field("day_ena", &self.day_ena())
+            .field("month_ena", &self.month_ena())
+            .field("year_ena", &self.year_ena())
+            .field("match_ena", &self.match_ena())
+            .field("match_active", &self.match_active())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IrqSetup0 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IrqSetup0 {
+            day: u8,
+            month: u8,
+            year: u16,
+            day_ena: bool,
+            month_ena: bool,
+            year_ena: bool,
+            match_ena: bool,
+            match_active: bool,
+        }
+        let proxy = IrqSetup0 {
+            day: self.day(),
+            month: self.month(),
+            year: self.year(),
+            day_ena: self.day_ena(),
+            month_ena: self.month_ena(),
+            year_ena: self.year_ena(),
+            match_ena: self.match_ena(),
+            match_active: self.match_active(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Interrupt setup register 1"]
@@ -294,6 +400,47 @@ impl Default for IrqSetup1 {
         IrqSetup1(0)
     }
 }
+impl core::fmt::Debug for IrqSetup1 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IrqSetup1")
+            .field("sec", &self.sec())
+            .field("min", &self.min())
+            .field("hour", &self.hour())
+            .field("dotw", &self.dotw())
+            .field("sec_ena", &self.sec_ena())
+            .field("min_ena", &self.min_ena())
+            .field("hour_ena", &self.hour_ena())
+            .field("dotw_ena", &self.dotw_ena())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IrqSetup1 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IrqSetup1 {
+            sec: u8,
+            min: u8,
+            hour: u8,
+            dotw: u8,
+            sec_ena: bool,
+            min_ena: bool,
+            hour_ena: bool,
+            dotw_ena: bool,
+        }
+        let proxy = IrqSetup1 {
+            sec: self.sec(),
+            min: self.min(),
+            hour: self.hour(),
+            dotw: self.dotw(),
+            sec_ena: self.sec_ena(),
+            min_ena: self.min_ena(),
+            hour_ena: self.hour_ena(),
+            dotw_ena: self.dotw_ena(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "RTC register 0 Read this before RTC 1!"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -350,6 +497,35 @@ impl Default for Rtc0 {
         Rtc0(0)
     }
 }
+impl core::fmt::Debug for Rtc0 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Rtc0")
+            .field("sec", &self.sec())
+            .field("min", &self.min())
+            .field("hour", &self.hour())
+            .field("dotw", &self.dotw())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Rtc0 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Rtc0 {
+            sec: u8,
+            min: u8,
+            hour: u8,
+            dotw: u8,
+        }
+        let proxy = Rtc0 {
+            sec: self.sec(),
+            min: self.min(),
+            hour: self.hour(),
+            dotw: self.dotw(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "RTC register 1."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -395,6 +571,32 @@ impl Default for Rtc1 {
         Rtc1(0)
     }
 }
+impl core::fmt::Debug for Rtc1 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Rtc1")
+            .field("day", &self.day())
+            .field("month", &self.month())
+            .field("year", &self.year())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Rtc1 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Rtc1 {
+            day: u8,
+            month: u8,
+            year: u16,
+        }
+        let proxy = Rtc1 {
+            day: self.day(),
+            month: self.month(),
+            year: self.year(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "RTC setup register 0"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -438,6 +640,32 @@ impl Default for Setup0 {
     #[inline(always)]
     fn default() -> Setup0 {
         Setup0(0)
+    }
+}
+impl core::fmt::Debug for Setup0 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Setup0")
+            .field("day", &self.day())
+            .field("month", &self.month())
+            .field("year", &self.year())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Setup0 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Setup0 {
+            day: u8,
+            month: u8,
+            year: u16,
+        }
+        let proxy = Setup0 {
+            day: self.day(),
+            month: self.month(),
+            year: self.year(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "RTC setup register 1"]
@@ -494,5 +722,34 @@ impl Default for Setup1 {
     #[inline(always)]
     fn default() -> Setup1 {
         Setup1(0)
+    }
+}
+impl core::fmt::Debug for Setup1 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Setup1")
+            .field("sec", &self.sec())
+            .field("min", &self.min())
+            .field("hour", &self.hour())
+            .field("dotw", &self.dotw())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Setup1 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Setup1 {
+            sec: u8,
+            min: u8,
+            hour: u8,
+            dotw: u8,
+        }
+        let proxy = Setup1 {
+            sec: self.sec(),
+            min: self.min(),
+            hour: self.hour(),
+            dotw: self.dotw(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

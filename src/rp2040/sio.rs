@@ -95,22 +95,22 @@ impl Gpio {
     pub const fn as_ptr(&self) -> *mut () {
         self.ptr as _
     }
-    #[doc = "GPIO output enable"]
+    #[doc = "GPIO output value"]
     #[inline(always)]
     pub const fn value(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
     }
-    #[doc = "GPIO output enable set"]
+    #[doc = "GPIO output value set"]
     #[inline(always)]
     pub const fn value_set(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
     }
-    #[doc = "GPIO output enable clear"]
+    #[doc = "GPIO output value clear"]
     #[inline(always)]
     pub const fn value_clr(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
     }
-    #[doc = "GPIO output enable XOR"]
+    #[doc = "GPIO output value XOR"]
     #[inline(always)]
     pub const fn value_xor(self) -> crate::common::Reg<u32, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }

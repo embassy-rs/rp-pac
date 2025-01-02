@@ -54,6 +54,35 @@ impl Default for BusPriority {
         BusPriority(0)
     }
 }
+impl core::fmt::Debug for BusPriority {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("BusPriority")
+            .field("proc0", &self.proc0())
+            .field("proc1", &self.proc1())
+            .field("dma_r", &self.dma_r())
+            .field("dma_w", &self.dma_w())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for BusPriority {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct BusPriority {
+            proc0: bool,
+            proc1: bool,
+            dma_r: bool,
+            dma_w: bool,
+        }
+        let proxy = BusPriority {
+            proc0: self.proc0(),
+            proc1: self.proc1(),
+            dma_r: self.dma_r(),
+            dma_w: self.dma_w(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Bus priority acknowledge"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -77,18 +106,38 @@ impl Default for BusPriorityAck {
         BusPriorityAck(0)
     }
 }
-#[doc = "Bus fabric performance counter 2"]
+impl core::fmt::Debug for BusPriorityAck {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("BusPriorityAck")
+            .field("bus_priority_ack", &self.bus_priority_ack())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for BusPriorityAck {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct BusPriorityAck {
+            bus_priority_ack: bool,
+        }
+        let proxy = BusPriorityAck {
+            bus_priority_ack: self.bus_priority_ack(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
+#[doc = "Bus fabric performance counter 0"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Perfctr(pub u32);
 impl Perfctr {
-    #[doc = "Busfabric saturating performance counter 2 Count some event signal from the busfabric arbiters. Write any value to clear. Select an event to count using PERFSEL2"]
+    #[doc = "Busfabric saturating performance counter 0 Count some event signal from the busfabric arbiters. Write any value to clear. Select an event to count using PERFSEL0"]
     #[inline(always)]
     pub const fn perfctr(&self) -> u32 {
         let val = (self.0 >> 0usize) & 0x00ff_ffff;
         val as u32
     }
-    #[doc = "Busfabric saturating performance counter 2 Count some event signal from the busfabric arbiters. Write any value to clear. Select an event to count using PERFSEL2"]
+    #[doc = "Busfabric saturating performance counter 0 Count some event signal from the busfabric arbiters. Write any value to clear. Select an event to count using PERFSEL0"]
     #[inline(always)]
     pub fn set_perfctr(&mut self, val: u32) {
         self.0 = (self.0 & !(0x00ff_ffff << 0usize)) | (((val as u32) & 0x00ff_ffff) << 0usize);
@@ -98,6 +147,26 @@ impl Default for Perfctr {
     #[inline(always)]
     fn default() -> Perfctr {
         Perfctr(0)
+    }
+}
+impl core::fmt::Debug for Perfctr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Perfctr")
+            .field("perfctr", &self.perfctr())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Perfctr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Perfctr {
+            perfctr: u32,
+        }
+        let proxy = Perfctr {
+            perfctr: self.perfctr(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Bus fabric performance event select for PERFCTR0"]
@@ -121,5 +190,25 @@ impl Default for Perfsel {
     #[inline(always)]
     fn default() -> Perfsel {
         Perfsel(0)
+    }
+}
+impl core::fmt::Debug for Perfsel {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Perfsel")
+            .field("perfsel", &self.perfsel())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Perfsel {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Perfsel {
+            perfsel: super::vals::Perfsel,
+        }
+        let proxy = Perfsel {
+            perfsel: self.perfsel(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

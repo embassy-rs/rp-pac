@@ -48,3 +48,32 @@ impl Default for Stat {
         Stat(0)
     }
 }
+impl core::fmt::Debug for Stat {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Stat")
+            .field("level", &self.level())
+            .field("full", &self.full())
+            .field("empty", &self.empty())
+            .field("wof", &self.wof())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Stat {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Stat {
+            level: u8,
+            full: bool,
+            empty: bool,
+            wof: bool,
+        }
+        let proxy = Stat {
+            level: self.level(),
+            full: self.full(),
+            empty: self.empty(),
+            wof: self.wof(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}

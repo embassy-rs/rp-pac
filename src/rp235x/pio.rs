@@ -13,17 +13,17 @@ impl Irq {
     pub const fn as_ptr(&self) -> *mut () {
         self.ptr as _
     }
-    #[doc = "Interrupt Enable for irq0"]
+    #[doc = "Interrupt Enable for irq1"]
     #[inline(always)]
     pub const fn inte(self) -> crate::common::Reg<regs::Intr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
     }
-    #[doc = "Interrupt Force for irq0"]
+    #[doc = "Interrupt Force for irq1"]
     #[inline(always)]
     pub const fn intf(self) -> crate::common::Reg<regs::Intr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
     }
-    #[doc = "Interrupt status after masking & forcing for irq0"]
+    #[doc = "Interrupt status after masking & forcing for irq1"]
     #[inline(always)]
     pub const fn ints(self) -> crate::common::Reg<regs::Intr, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
@@ -157,7 +157,7 @@ impl RxfPutGet {
     pub const fn as_ptr(&self) -> *mut () {
         self.ptr as _
     }
-    #[doc = "Direct read/write access to entry 0 of SM2's RX FIFO, if SHIFTCTRL_FJOIN_RX_PUT xor SHIFTCTRL_FJOIN_RX_GET is set."]
+    #[doc = "Direct read/write access to entry 0 of SM3's RX FIFO, if SHIFTCTRL_FJOIN_RX_PUT xor SHIFTCTRL_FJOIN_RX_GET is set."]
     #[inline(always)]
     pub const fn putget(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
         assert!(n < 4usize);

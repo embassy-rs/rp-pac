@@ -43,6 +43,32 @@ impl Default for AutocorrStatistic {
         AutocorrStatistic(0)
     }
 }
+impl core::fmt::Debug for AutocorrStatistic {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("AutocorrStatistic")
+            .field("autocorr_trys", &self.autocorr_trys())
+            .field("autocorr_fails", &self.autocorr_fails())
+            .field("reserved", &self.reserved())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for AutocorrStatistic {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct AutocorrStatistic {
+            autocorr_trys: u16,
+            autocorr_fails: u8,
+            reserved: u16,
+        }
+        let proxy = AutocorrStatistic {
+            autocorr_trys: self.autocorr_trys(),
+            autocorr_fails: self.autocorr_fails(),
+            reserved: self.reserved(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Enable signal for the random source."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -75,6 +101,29 @@ impl Default for RndSourceEnable {
     #[inline(always)]
     fn default() -> RndSourceEnable {
         RndSourceEnable(0)
+    }
+}
+impl core::fmt::Debug for RndSourceEnable {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("RndSourceEnable")
+            .field("rnd_src_en", &self.rnd_src_en())
+            .field("reserved", &self.reserved())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for RndSourceEnable {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct RndSourceEnable {
+            rnd_src_en: bool,
+            reserved: u32,
+        }
+        let proxy = RndSourceEnable {
+            rnd_src_en: self.rnd_src_en(),
+            reserved: self.reserved(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Collected BIST results."]
@@ -111,6 +160,29 @@ impl Default for RngBistCntr0 {
         RngBistCntr0(0)
     }
 }
+impl core::fmt::Debug for RngBistCntr0 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("RngBistCntr0")
+            .field("rosc_cntr_val", &self.rosc_cntr_val())
+            .field("reserved", &self.reserved())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for RngBistCntr0 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct RngBistCntr0 {
+            rosc_cntr_val: u32,
+            reserved: u16,
+        }
+        let proxy = RngBistCntr0 {
+            rosc_cntr_val: self.rosc_cntr_val(),
+            reserved: self.reserved(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Collected BIST results."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -143,6 +215,29 @@ impl Default for RngBistCntr1 {
     #[inline(always)]
     fn default() -> RngBistCntr1 {
         RngBistCntr1(0)
+    }
+}
+impl core::fmt::Debug for RngBistCntr1 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("RngBistCntr1")
+            .field("rosc_cntr_val", &self.rosc_cntr_val())
+            .field("reserved", &self.reserved())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for RngBistCntr1 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct RngBistCntr1 {
+            rosc_cntr_val: u32,
+            reserved: u16,
+        }
+        let proxy = RngBistCntr1 {
+            rosc_cntr_val: self.rosc_cntr_val(),
+            reserved: self.reserved(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Collected BIST results."]
@@ -179,6 +274,29 @@ impl Default for RngBistCntr2 {
         RngBistCntr2(0)
     }
 }
+impl core::fmt::Debug for RngBistCntr2 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("RngBistCntr2")
+            .field("rosc_cntr_val", &self.rosc_cntr_val())
+            .field("reserved", &self.reserved())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for RngBistCntr2 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct RngBistCntr2 {
+            rosc_cntr_val: u32,
+            reserved: u16,
+        }
+        let proxy = RngBistCntr2 {
+            rosc_cntr_val: self.rosc_cntr_val(),
+            reserved: self.reserved(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Enable the RNG debug mode"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -211,6 +329,29 @@ impl Default for RngDebugEnInput {
     #[inline(always)]
     fn default() -> RngDebugEnInput {
         RngDebugEnInput(0)
+    }
+}
+impl core::fmt::Debug for RngDebugEnInput {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("RngDebugEnInput")
+            .field("rng_debug_en", &self.rng_debug_en())
+            .field("reserved", &self.reserved())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for RngDebugEnInput {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct RngDebugEnInput {
+            rng_debug_en: bool,
+            reserved: u32,
+        }
+        let proxy = RngDebugEnInput {
+            rng_debug_en: self.rng_debug_en(),
+            reserved: self.reserved(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Interrupt/status bit clear Register."]
@@ -280,6 +421,38 @@ impl Default for RngIcr {
         RngIcr(0)
     }
 }
+impl core::fmt::Debug for RngIcr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("RngIcr")
+            .field("ehr_valid", &self.ehr_valid())
+            .field("autocorr_err", &self.autocorr_err())
+            .field("crngt_err", &self.crngt_err())
+            .field("vn_err", &self.vn_err())
+            .field("reserved", &self.reserved())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for RngIcr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct RngIcr {
+            ehr_valid: bool,
+            autocorr_err: bool,
+            crngt_err: bool,
+            vn_err: bool,
+            reserved: u32,
+        }
+        let proxy = RngIcr {
+            ehr_valid: self.ehr_valid(),
+            autocorr_err: self.autocorr_err(),
+            crngt_err: self.crngt_err(),
+            vn_err: self.vn_err(),
+            reserved: self.reserved(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Interrupt masking."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -347,6 +520,38 @@ impl Default for RngImr {
         RngImr(0)
     }
 }
+impl core::fmt::Debug for RngImr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("RngImr")
+            .field("ehr_valid_int_mask", &self.ehr_valid_int_mask())
+            .field("autocorr_err_int_mask", &self.autocorr_err_int_mask())
+            .field("crngt_err_int_mask", &self.crngt_err_int_mask())
+            .field("vn_err_int_mask", &self.vn_err_int_mask())
+            .field("reserved", &self.reserved())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for RngImr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct RngImr {
+            ehr_valid_int_mask: bool,
+            autocorr_err_int_mask: bool,
+            crngt_err_int_mask: bool,
+            vn_err_int_mask: bool,
+            reserved: u32,
+        }
+        let proxy = RngImr {
+            ehr_valid_int_mask: self.ehr_valid_int_mask(),
+            autocorr_err_int_mask: self.autocorr_err_int_mask(),
+            crngt_err_int_mask: self.crngt_err_int_mask(),
+            vn_err_int_mask: self.vn_err_int_mask(),
+            reserved: self.reserved(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "RNG status register. If corresponding RNG_IMR bit is unmasked, an interrupt will be generated."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -412,6 +617,38 @@ impl Default for RngIsr {
     #[inline(always)]
     fn default() -> RngIsr {
         RngIsr(0)
+    }
+}
+impl core::fmt::Debug for RngIsr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("RngIsr")
+            .field("ehr_valid", &self.ehr_valid())
+            .field("autocorr_err", &self.autocorr_err())
+            .field("crngt_err", &self.crngt_err())
+            .field("vn_err", &self.vn_err())
+            .field("reserved", &self.reserved())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for RngIsr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct RngIsr {
+            ehr_valid: bool,
+            autocorr_err: bool,
+            crngt_err: bool,
+            vn_err: bool,
+            reserved: u32,
+        }
+        let proxy = RngIsr {
+            ehr_valid: self.ehr_valid(),
+            autocorr_err: self.autocorr_err(),
+            crngt_err: self.crngt_err(),
+            vn_err: self.vn_err(),
+            reserved: self.reserved(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Displays the version settings of the TRNG."]
@@ -525,6 +762,50 @@ impl Default for RngVersion {
         RngVersion(0)
     }
 }
+impl core::fmt::Debug for RngVersion {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("RngVersion")
+            .field("ehr_width_192", &self.ehr_width_192())
+            .field("crngt_exists", &self.crngt_exists())
+            .field("autocorr_exists", &self.autocorr_exists())
+            .field("trng_tests_bypass_en", &self.trng_tests_bypass_en())
+            .field("prng_exists", &self.prng_exists())
+            .field("kat_exists", &self.kat_exists())
+            .field("reseeding_exists", &self.reseeding_exists())
+            .field("rng_use_5_sboxes", &self.rng_use_5_sboxes())
+            .field("reserved", &self.reserved())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for RngVersion {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct RngVersion {
+            ehr_width_192: bool,
+            crngt_exists: bool,
+            autocorr_exists: bool,
+            trng_tests_bypass_en: bool,
+            prng_exists: bool,
+            kat_exists: bool,
+            reseeding_exists: bool,
+            rng_use_5_sboxes: bool,
+            reserved: u32,
+        }
+        let proxy = RngVersion {
+            ehr_width_192: self.ehr_width_192(),
+            crngt_exists: self.crngt_exists(),
+            autocorr_exists: self.autocorr_exists(),
+            trng_tests_bypass_en: self.trng_tests_bypass_en(),
+            prng_exists: self.prng_exists(),
+            kat_exists: self.kat_exists(),
+            reseeding_exists: self.reseeding_exists(),
+            rng_use_5_sboxes: self.rng_use_5_sboxes(),
+            reserved: self.reserved(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Reset the counter of collected bits in the RNG."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -557,6 +838,29 @@ impl Default for RstBitsCounter {
     #[inline(always)]
     fn default() -> RstBitsCounter {
         RstBitsCounter(0)
+    }
+}
+impl core::fmt::Debug for RstBitsCounter {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("RstBitsCounter")
+            .field("rst_bits_counter", &self.rst_bits_counter())
+            .field("reserved", &self.reserved())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for RstBitsCounter {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct RstBitsCounter {
+            rst_bits_counter: bool,
+            reserved: u32,
+        }
+        let proxy = RstBitsCounter {
+            rst_bits_counter: self.rst_bits_counter(),
+            reserved: self.reserved(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "RNG Busy indication."]
@@ -593,6 +897,29 @@ impl Default for TrngBusy {
         TrngBusy(0)
     }
 }
+impl core::fmt::Debug for TrngBusy {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("TrngBusy")
+            .field("trng_busy", &self.trng_busy())
+            .field("reserved", &self.reserved())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for TrngBusy {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct TrngBusy {
+            trng_busy: bool,
+            reserved: u32,
+        }
+        let proxy = TrngBusy {
+            trng_busy: self.trng_busy(),
+            reserved: self.reserved(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Selecting the inverter-chain length."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -625,6 +952,29 @@ impl Default for TrngConfig {
     #[inline(always)]
     fn default() -> TrngConfig {
         TrngConfig(0)
+    }
+}
+impl core::fmt::Debug for TrngConfig {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("TrngConfig")
+            .field("rnd_src_sel", &self.rnd_src_sel())
+            .field("reserved", &self.reserved())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for TrngConfig {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct TrngConfig {
+            rnd_src_sel: u8,
+            reserved: u32,
+        }
+        let proxy = TrngConfig {
+            rnd_src_sel: self.rnd_src_sel(),
+            reserved: self.reserved(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Debug register."]
@@ -683,6 +1033,35 @@ impl Default for TrngDebugControl {
         TrngDebugControl(0)
     }
 }
+impl core::fmt::Debug for TrngDebugControl {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("TrngDebugControl")
+            .field("reserved", &self.reserved())
+            .field("vnc_bypass", &self.vnc_bypass())
+            .field("trng_crngt_bypass", &self.trng_crngt_bypass())
+            .field("auto_correlate_bypass", &self.auto_correlate_bypass())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for TrngDebugControl {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct TrngDebugControl {
+            reserved: bool,
+            vnc_bypass: bool,
+            trng_crngt_bypass: bool,
+            auto_correlate_bypass: bool,
+        }
+        let proxy = TrngDebugControl {
+            reserved: self.reserved(),
+            vnc_bypass: self.vnc_bypass(),
+            trng_crngt_bypass: self.trng_crngt_bypass(),
+            auto_correlate_bypass: self.auto_correlate_bypass(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Generate internal SW reset within the RNG block."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -717,6 +1096,29 @@ impl Default for TrngSwReset {
         TrngSwReset(0)
     }
 }
+impl core::fmt::Debug for TrngSwReset {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("TrngSwReset")
+            .field("trng_sw_reset", &self.trng_sw_reset())
+            .field("reserved", &self.reserved())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for TrngSwReset {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct TrngSwReset {
+            trng_sw_reset: bool,
+            reserved: u32,
+        }
+        let proxy = TrngSwReset {
+            trng_sw_reset: self.trng_sw_reset(),
+            reserved: self.reserved(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "192 bit collection indication."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -749,5 +1151,28 @@ impl Default for TrngValid {
     #[inline(always)]
     fn default() -> TrngValid {
         TrngValid(0)
+    }
+}
+impl core::fmt::Debug for TrngValid {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("TrngValid")
+            .field("ehr_valid", &self.ehr_valid())
+            .field("reserved", &self.reserved())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for TrngValid {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct TrngValid {
+            ehr_valid: bool,
+            reserved: u32,
+        }
+        let proxy = TrngValid {
+            ehr_valid: self.ehr_valid(),
+            reserved: self.reserved(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

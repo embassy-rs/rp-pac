@@ -98,6 +98,47 @@ impl Default for Dbgforce {
         Dbgforce(0)
     }
 }
+impl core::fmt::Debug for Dbgforce {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Dbgforce")
+            .field("proc0_swdo", &self.proc0_swdo())
+            .field("proc0_swdi", &self.proc0_swdi())
+            .field("proc0_swclk", &self.proc0_swclk())
+            .field("proc0_attach", &self.proc0_attach())
+            .field("proc1_swdo", &self.proc1_swdo())
+            .field("proc1_swdi", &self.proc1_swdi())
+            .field("proc1_swclk", &self.proc1_swclk())
+            .field("proc1_attach", &self.proc1_attach())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Dbgforce {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Dbgforce {
+            proc0_swdo: bool,
+            proc0_swdi: bool,
+            proc0_swclk: bool,
+            proc0_attach: bool,
+            proc1_swdo: bool,
+            proc1_swdi: bool,
+            proc1_swclk: bool,
+            proc1_attach: bool,
+        }
+        let proxy = Dbgforce {
+            proc0_swdo: self.proc0_swdo(),
+            proc0_swdi: self.proc0_swdi(),
+            proc0_swclk: self.proc0_swclk(),
+            proc0_attach: self.proc0_attach(),
+            proc1_swdo: self.proc1_swdo(),
+            proc1_swdi: self.proc1_swdi(),
+            proc1_swclk: self.proc1_swclk(),
+            proc1_attach: self.proc1_attach(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Control power downs to memories. Set high to power down memories. Use with extreme caution"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -182,6 +223,47 @@ impl Default for Mempowerdown {
         Mempowerdown(0)
     }
 }
+impl core::fmt::Debug for Mempowerdown {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Mempowerdown")
+            .field("sram0", &self.sram0())
+            .field("sram1", &self.sram1())
+            .field("sram2", &self.sram2())
+            .field("sram3", &self.sram3())
+            .field("sram4", &self.sram4())
+            .field("sram5", &self.sram5())
+            .field("usb", &self.usb())
+            .field("rom", &self.rom())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Mempowerdown {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Mempowerdown {
+            sram0: bool,
+            sram1: bool,
+            sram2: bool,
+            sram3: bool,
+            sram4: bool,
+            sram5: bool,
+            usb: bool,
+            rom: bool,
+        }
+        let proxy = Mempowerdown {
+            sram0: self.sram0(),
+            sram1: self.sram1(),
+            sram2: self.sram2(),
+            sram3: self.sram3(),
+            sram4: self.sram4(),
+            sram5: self.sram5(),
+            usb: self.usb(),
+            rom: self.rom(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Configuration for processors"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -238,6 +320,35 @@ impl Default for ProcConfig {
         ProcConfig(0)
     }
 }
+impl core::fmt::Debug for ProcConfig {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("ProcConfig")
+            .field("proc0_halted", &self.proc0_halted())
+            .field("proc1_halted", &self.proc1_halted())
+            .field("proc0_dap_instid", &self.proc0_dap_instid())
+            .field("proc1_dap_instid", &self.proc1_dap_instid())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for ProcConfig {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct ProcConfig {
+            proc0_halted: bool,
+            proc1_halted: bool,
+            proc0_dap_instid: u8,
+            proc1_dap_instid: u8,
+        }
+        let proxy = ProcConfig {
+            proc0_halted: self.proc0_halted(),
+            proc1_halted: self.proc1_halted(),
+            proc0_dap_instid: self.proc0_dap_instid(),
+            proc1_dap_instid: self.proc1_dap_instid(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "For each bit, if 1, bypass the input synchronizer between that GPIO and the GPIO input register in the SIO. The input synchronizers should generally be unbypassed, to avoid injecting metastabilities into processors. If you're feeling brave, you can bypass to save two cycles of input latency. This register applies to GPIO 0...29."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -259,6 +370,26 @@ impl Default for ProcInSyncBypass {
         ProcInSyncBypass(0)
     }
 }
+impl core::fmt::Debug for ProcInSyncBypass {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("ProcInSyncBypass")
+            .field("proc_in_sync_bypass", &self.proc_in_sync_bypass())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for ProcInSyncBypass {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct ProcInSyncBypass {
+            proc_in_sync_bypass: u32,
+        }
+        let proxy = ProcInSyncBypass {
+            proc_in_sync_bypass: self.proc_in_sync_bypass(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "For each bit, if 1, bypass the input synchronizer between that GPIO and the GPIO input register in the SIO. The input synchronizers should generally be unbypassed, to avoid injecting metastabilities into processors. If you're feeling brave, you can bypass to save two cycles of input latency. This register applies to GPIO 30...35 (the QSPI IOs)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -278,5 +409,25 @@ impl Default for ProcInSyncBypassHi {
     #[inline(always)]
     fn default() -> ProcInSyncBypassHi {
         ProcInSyncBypassHi(0)
+    }
+}
+impl core::fmt::Debug for ProcInSyncBypassHi {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("ProcInSyncBypassHi")
+            .field("proc_in_sync_bypass_hi", &self.proc_in_sync_bypass_hi())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for ProcInSyncBypassHi {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct ProcInSyncBypassHi {
+            proc_in_sync_bypass_hi: u8,
+        }
+        let proxy = ProcInSyncBypassHi {
+            proc_in_sync_bypass_hi: self.proc_in_sync_bypass_hi(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

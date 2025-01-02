@@ -57,6 +57,38 @@ impl Default for GpioCtrl {
         GpioCtrl(0)
     }
 }
+impl core::fmt::Debug for GpioCtrl {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("GpioCtrl")
+            .field("funcsel", &self.funcsel())
+            .field("outover", &self.outover())
+            .field("oeover", &self.oeover())
+            .field("inover", &self.inover())
+            .field("irqover", &self.irqover())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for GpioCtrl {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct GpioCtrl {
+            funcsel: u8,
+            outover: super::vals::Outover,
+            oeover: super::vals::Oeover,
+            inover: super::vals::Inover,
+            irqover: super::vals::Irqover,
+        }
+        let proxy = GpioCtrl {
+            funcsel: self.funcsel(),
+            outover: self.outover(),
+            oeover: self.oeover(),
+            inover: self.inover(),
+            irqover: self.irqover(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "GPIO status"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -157,7 +189,48 @@ impl Default for GpioStatus {
         GpioStatus(0)
     }
 }
-#[doc = "Interrupt status after masking & forcing for proc1"]
+impl core::fmt::Debug for GpioStatus {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("GpioStatus")
+            .field("outfromperi", &self.outfromperi())
+            .field("outtopad", &self.outtopad())
+            .field("oefromperi", &self.oefromperi())
+            .field("oetopad", &self.oetopad())
+            .field("infrompad", &self.infrompad())
+            .field("intoperi", &self.intoperi())
+            .field("irqfrompad", &self.irqfrompad())
+            .field("irqtoproc", &self.irqtoproc())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for GpioStatus {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct GpioStatus {
+            outfromperi: bool,
+            outtopad: bool,
+            oefromperi: bool,
+            oetopad: bool,
+            infrompad: bool,
+            intoperi: bool,
+            irqfrompad: bool,
+            irqtoproc: bool,
+        }
+        let proxy = GpioStatus {
+            outfromperi: self.outfromperi(),
+            outtopad: self.outtopad(),
+            oefromperi: self.oefromperi(),
+            oetopad: self.oetopad(),
+            infrompad: self.infrompad(),
+            intoperi: self.intoperi(),
+            irqfrompad: self.irqfrompad(),
+            irqtoproc: self.irqtoproc(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
+#[doc = "Interrupt Enable for dormant_wake"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Int(pub u32);
@@ -219,5 +292,118 @@ impl Default for Int {
     #[inline(always)]
     fn default() -> Int {
         Int(0)
+    }
+}
+impl core::fmt::Debug for Int {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Int")
+            .field(
+                "level_low",
+                &[
+                    self.level_low(0usize),
+                    self.level_low(1usize),
+                    self.level_low(2usize),
+                    self.level_low(3usize),
+                    self.level_low(4usize),
+                    self.level_low(5usize),
+                    self.level_low(6usize),
+                    self.level_low(7usize),
+                ],
+            )
+            .field(
+                "level_high",
+                &[
+                    self.level_high(0usize),
+                    self.level_high(1usize),
+                    self.level_high(2usize),
+                    self.level_high(3usize),
+                    self.level_high(4usize),
+                    self.level_high(5usize),
+                    self.level_high(6usize),
+                    self.level_high(7usize),
+                ],
+            )
+            .field(
+                "edge_low",
+                &[
+                    self.edge_low(0usize),
+                    self.edge_low(1usize),
+                    self.edge_low(2usize),
+                    self.edge_low(3usize),
+                    self.edge_low(4usize),
+                    self.edge_low(5usize),
+                    self.edge_low(6usize),
+                    self.edge_low(7usize),
+                ],
+            )
+            .field(
+                "edge_high",
+                &[
+                    self.edge_high(0usize),
+                    self.edge_high(1usize),
+                    self.edge_high(2usize),
+                    self.edge_high(3usize),
+                    self.edge_high(4usize),
+                    self.edge_high(5usize),
+                    self.edge_high(6usize),
+                    self.edge_high(7usize),
+                ],
+            )
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Int {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Int {
+            level_low: [bool; 8usize],
+            level_high: [bool; 8usize],
+            edge_low: [bool; 8usize],
+            edge_high: [bool; 8usize],
+        }
+        let proxy = Int {
+            level_low: [
+                self.level_low(0usize),
+                self.level_low(1usize),
+                self.level_low(2usize),
+                self.level_low(3usize),
+                self.level_low(4usize),
+                self.level_low(5usize),
+                self.level_low(6usize),
+                self.level_low(7usize),
+            ],
+            level_high: [
+                self.level_high(0usize),
+                self.level_high(1usize),
+                self.level_high(2usize),
+                self.level_high(3usize),
+                self.level_high(4usize),
+                self.level_high(5usize),
+                self.level_high(6usize),
+                self.level_high(7usize),
+            ],
+            edge_low: [
+                self.edge_low(0usize),
+                self.edge_low(1usize),
+                self.edge_low(2usize),
+                self.edge_low(3usize),
+                self.edge_low(4usize),
+                self.edge_low(5usize),
+                self.edge_low(6usize),
+                self.edge_low(7usize),
+            ],
+            edge_high: [
+                self.edge_high(0usize),
+                self.edge_high(1usize),
+                self.edge_high(2usize),
+                self.edge_high(3usize),
+                self.edge_high(4usize),
+                self.edge_high(5usize),
+                self.edge_high(6usize),
+                self.edge_high(7usize),
+            ],
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

@@ -20,6 +20,26 @@ impl Default for AlarmTime15to0 {
         AlarmTime15to0(0)
     }
 }
+impl core::fmt::Debug for AlarmTime15to0 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("AlarmTime15to0")
+            .field("alarm_time_15to0", &self.alarm_time_15to0())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for AlarmTime15to0 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct AlarmTime15to0 {
+            alarm_time_15to0: u16,
+        }
+        let proxy = AlarmTime15to0 {
+            alarm_time_15to0: self.alarm_time_15to0(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct AlarmTime31to16(pub u32);
@@ -40,6 +60,26 @@ impl Default for AlarmTime31to16 {
     #[inline(always)]
     fn default() -> AlarmTime31to16 {
         AlarmTime31to16(0)
+    }
+}
+impl core::fmt::Debug for AlarmTime31to16 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("AlarmTime31to16")
+            .field("alarm_time_31to16", &self.alarm_time_31to16())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for AlarmTime31to16 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct AlarmTime31to16 {
+            alarm_time_31to16: u16,
+        }
+        let proxy = AlarmTime31to16 {
+            alarm_time_31to16: self.alarm_time_31to16(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[repr(transparent)]
@@ -64,6 +104,26 @@ impl Default for AlarmTime47to32 {
         AlarmTime47to32(0)
     }
 }
+impl core::fmt::Debug for AlarmTime47to32 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("AlarmTime47to32")
+            .field("alarm_time_47to32", &self.alarm_time_47to32())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for AlarmTime47to32 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct AlarmTime47to32 {
+            alarm_time_47to32: u16,
+        }
+        let proxy = AlarmTime47to32 {
+            alarm_time_47to32: self.alarm_time_47to32(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct AlarmTime63to48(pub u32);
@@ -86,6 +146,26 @@ impl Default for AlarmTime63to48 {
         AlarmTime63to48(0)
     }
 }
+impl core::fmt::Debug for AlarmTime63to48 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("AlarmTime63to48")
+            .field("alarm_time_63to48", &self.alarm_time_63to48())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for AlarmTime63to48 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct AlarmTime63to48 {
+            alarm_time_63to48: u16,
+        }
+        let proxy = AlarmTime63to48 {
+            alarm_time_63to48: self.alarm_time_63to48(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Indicates a bad password has been used"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -105,6 +185,26 @@ impl Default for Badpasswd {
     #[inline(always)]
     fn default() -> Badpasswd {
         Badpasswd(0)
+    }
+}
+impl core::fmt::Debug for Badpasswd {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Badpasswd")
+            .field("badpasswd", &self.badpasswd())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Badpasswd {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Badpasswd {
+            badpasswd: bool,
+        }
+        let proxy = Badpasswd {
+            badpasswd: self.badpasswd(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Brown-out Detection Settings"]
@@ -141,6 +241,29 @@ impl Default for Bod {
         Bod(0)
     }
 }
+impl core::fmt::Debug for Bod {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Bod")
+            .field("en", &self.en())
+            .field("vsel", &self.vsel())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Bod {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Bod {
+            en: bool,
+            vsel: u8,
+        }
+        let proxy = Bod {
+            en: self.en(),
+            vsel: self.vsel(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Brown-out Detection Control"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -162,6 +285,26 @@ impl Default for BodCtrl {
     #[inline(always)]
     fn default() -> BodCtrl {
         BodCtrl(0)
+    }
+}
+impl core::fmt::Debug for BodCtrl {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("BodCtrl")
+            .field("isolate", &self.isolate())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for BodCtrl {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct BodCtrl {
+            isolate: bool,
+        }
+        let proxy = BodCtrl {
+            isolate: self.isolate(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Brown-out Detection Low Power Entry Settings"]
@@ -198,6 +341,29 @@ impl Default for BodLpEntry {
         BodLpEntry(0)
     }
 }
+impl core::fmt::Debug for BodLpEntry {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("BodLpEntry")
+            .field("en", &self.en())
+            .field("vsel", &self.vsel())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for BodLpEntry {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct BodLpEntry {
+            en: bool,
+            vsel: u8,
+        }
+        let proxy = BodLpEntry {
+            en: self.en(),
+            vsel: self.vsel(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Brown-out Detection Low Power Exit Settings"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -232,6 +398,29 @@ impl Default for BodLpExit {
         BodLpExit(0)
     }
 }
+impl core::fmt::Debug for BodLpExit {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("BodLpExit")
+            .field("en", &self.en())
+            .field("vsel", &self.vsel())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for BodLpExit {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct BodLpExit {
+            en: bool,
+            vsel: u8,
+        }
+        let proxy = BodLpExit {
+            en: self.en(),
+            vsel: self.vsel(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Tell the bootrom to ignore the BOOT0..3 registers following the next RSM reset (e.g. the next core power down/up). If an early boot stage has soft-locked some OTP pages in order to protect their contents from later stages, there is a risk that Secure code running at a later stage can unlock the pages by powering the core up and down. This register can be used to ensure that the bootloader runs as normal on the next power up, preventing Secure code at a later stage from accessing OTP in its unlocked state. Should be used in conjunction with the OTP BOOTDIS register."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -264,6 +453,29 @@ impl Default for Bootdis {
     #[inline(always)]
     fn default() -> Bootdis {
         Bootdis(0)
+    }
+}
+impl core::fmt::Debug for Bootdis {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Bootdis")
+            .field("now", &self.now())
+            .field("next", &self.next())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Bootdis {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Bootdis {
+            now: bool,
+            next: bool,
+        }
+        let proxy = Bootdis {
+            now: self.now(),
+            next: self.next(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Chip reset control and status"]
@@ -432,6 +644,74 @@ impl Default for ChipReset {
         ChipReset(0)
     }
 }
+impl core::fmt::Debug for ChipReset {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("ChipReset")
+            .field("double_tap", &self.double_tap())
+            .field("rescue_flag", &self.rescue_flag())
+            .field("had_por", &self.had_por())
+            .field("had_bor", &self.had_bor())
+            .field("had_run_low", &self.had_run_low())
+            .field("had_dp_reset_req", &self.had_dp_reset_req())
+            .field("had_rescue", &self.had_rescue())
+            .field(
+                "had_watchdog_reset_powman_async",
+                &self.had_watchdog_reset_powman_async(),
+            )
+            .field(
+                "had_watchdog_reset_powman",
+                &self.had_watchdog_reset_powman(),
+            )
+            .field(
+                "had_watchdog_reset_swcore",
+                &self.had_watchdog_reset_swcore(),
+            )
+            .field("had_swcore_pd", &self.had_swcore_pd())
+            .field("had_glitch_detect", &self.had_glitch_detect())
+            .field("had_hzd_sys_reset_req", &self.had_hzd_sys_reset_req())
+            .field("had_watchdog_reset_rsm", &self.had_watchdog_reset_rsm())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for ChipReset {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct ChipReset {
+            double_tap: bool,
+            rescue_flag: bool,
+            had_por: bool,
+            had_bor: bool,
+            had_run_low: bool,
+            had_dp_reset_req: bool,
+            had_rescue: bool,
+            had_watchdog_reset_powman_async: bool,
+            had_watchdog_reset_powman: bool,
+            had_watchdog_reset_swcore: bool,
+            had_swcore_pd: bool,
+            had_glitch_detect: bool,
+            had_hzd_sys_reset_req: bool,
+            had_watchdog_reset_rsm: bool,
+        }
+        let proxy = ChipReset {
+            double_tap: self.double_tap(),
+            rescue_flag: self.rescue_flag(),
+            had_por: self.had_por(),
+            had_bor: self.had_bor(),
+            had_run_low: self.had_run_low(),
+            had_dp_reset_req: self.had_dp_reset_req(),
+            had_rescue: self.had_rescue(),
+            had_watchdog_reset_powman_async: self.had_watchdog_reset_powman_async(),
+            had_watchdog_reset_powman: self.had_watchdog_reset_powman(),
+            had_watchdog_reset_swcore: self.had_watchdog_reset_swcore(),
+            had_swcore_pd: self.had_swcore_pd(),
+            had_glitch_detect: self.had_glitch_detect(),
+            had_hzd_sys_reset_req: self.had_hzd_sys_reset_req(),
+            had_watchdog_reset_rsm: self.had_watchdog_reset_rsm(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Indicates current powerup request state pwrup events can be cleared by removing the enable from the pwrup register. The alarm pwrup req can be cleared by clearing timer.alarm_enab 0 = chip reset, for the source of the last reset see POWMAN_CHIP_RESET 1 = pwrup0 2 = pwrup1 3 = pwrup2 4 = pwrup3 5 = coresight_pwrup 6 = alarm_pwrup"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -451,6 +731,26 @@ impl Default for CurrentPwrupReq {
     #[inline(always)]
     fn default() -> CurrentPwrupReq {
         CurrentPwrupReq(0)
+    }
+}
+impl core::fmt::Debug for CurrentPwrupReq {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("CurrentPwrupReq")
+            .field("current_pwrup_req", &self.current_pwrup_req())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for CurrentPwrupReq {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct CurrentPwrupReq {
+            current_pwrup_req: u8,
+        }
+        let proxy = CurrentPwrupReq {
+            current_pwrup_req: self.current_pwrup_req(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[repr(transparent)]
@@ -475,6 +775,26 @@ impl Default for DbgPwrcfg {
         DbgPwrcfg(0)
     }
 }
+impl core::fmt::Debug for DbgPwrcfg {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("DbgPwrcfg")
+            .field("ignore", &self.ignore())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for DbgPwrcfg {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct DbgPwrcfg {
+            ignore: bool,
+        }
+        let proxy = DbgPwrcfg {
+            ignore: self.ignore(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Dbgconfig(pub u32);
@@ -495,6 +815,26 @@ impl Default for Dbgconfig {
     #[inline(always)]
     fn default() -> Dbgconfig {
         Dbgconfig(0)
+    }
+}
+impl core::fmt::Debug for Dbgconfig {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Dbgconfig")
+            .field("dp_instid", &self.dp_instid())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Dbgconfig {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Dbgconfig {
+            dp_instid: u8,
+        }
+        let proxy = Dbgconfig {
+            dp_instid: self.dp_instid(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Configures a gpio as a power mode aware control output"]
@@ -560,6 +900,38 @@ impl Default for ExtCtrl {
         ExtCtrl(0)
     }
 }
+impl core::fmt::Debug for ExtCtrl {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("ExtCtrl")
+            .field("gpio_select", &self.gpio_select())
+            .field("init", &self.init())
+            .field("init_state", &self.init_state())
+            .field("lp_entry_state", &self.lp_entry_state())
+            .field("lp_exit_state", &self.lp_exit_state())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for ExtCtrl {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct ExtCtrl {
+            gpio_select: u8,
+            init: bool,
+            init_state: bool,
+            lp_entry_state: bool,
+            lp_exit_state: bool,
+        }
+        let proxy = ExtCtrl {
+            gpio_select: self.gpio_select(),
+            init: self.init(),
+            init_state: self.init_state(),
+            lp_entry_state: self.lp_entry_state(),
+            lp_exit_state: self.lp_exit_state(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Select a GPIO to use as a time reference, the source can be used to drive the low power clock at 32kHz, or to provide a 1ms tick to the timer, or provide a 1Hz tick to the timer. The tick selection is controlled by the POWMAN_TIMER register."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -592,6 +964,29 @@ impl Default for ExtTimeRef {
     #[inline(always)]
     fn default() -> ExtTimeRef {
         ExtTimeRef(0)
+    }
+}
+impl core::fmt::Debug for ExtTimeRef {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("ExtTimeRef")
+            .field("source_sel", &self.source_sel())
+            .field("drive_lpck", &self.drive_lpck())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for ExtTimeRef {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct ExtTimeRef {
+            source_sel: u8,
+            drive_lpck: bool,
+        }
+        let proxy = ExtTimeRef {
+            source_sel: self.source_sel(),
+            drive_lpck: self.drive_lpck(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Interrupt Enable"]
@@ -646,6 +1041,35 @@ impl Default for Int {
         Int(0)
     }
 }
+impl core::fmt::Debug for Int {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Int")
+            .field("vreg_output_low", &self.vreg_output_low())
+            .field("timer", &self.timer())
+            .field("state_req_ignored", &self.state_req_ignored())
+            .field("pwrup_while_waiting", &self.pwrup_while_waiting())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Int {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Int {
+            vreg_output_low: bool,
+            timer: bool,
+            state_req_ignored: bool,
+            pwrup_while_waiting: bool,
+        }
+        let proxy = Int {
+            vreg_output_low: self.vreg_output_low(),
+            timer: self.timer(),
+            state_req_ignored: self.state_req_ignored(),
+            pwrup_while_waiting: self.pwrup_while_waiting(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Indicates which pwrup source triggered the last switched-core power up 0 = chip reset, for the source of the last reset see POWMAN_CHIP_RESET 1 = pwrup0 2 = pwrup1 3 = pwrup2 4 = pwrup3 5 = coresight_pwrup 6 = alarm_pwrup"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -665,6 +1089,26 @@ impl Default for LastSwcorePwrup {
     #[inline(always)]
     fn default() -> LastSwcorePwrup {
         LastSwcorePwrup(0)
+    }
+}
+impl core::fmt::Debug for LastSwcorePwrup {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("LastSwcorePwrup")
+            .field("last_swcore_pwrup", &self.last_swcore_pwrup())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for LastSwcorePwrup {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct LastSwcorePwrup {
+            last_swcore_pwrup: u8,
+        }
+        let proxy = LastSwcorePwrup {
+            last_swcore_pwrup: self.last_swcore_pwrup(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Low power oscillator control register."]
@@ -701,6 +1145,29 @@ impl Default for Lposc {
         Lposc(0)
     }
 }
+impl core::fmt::Debug for Lposc {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Lposc")
+            .field("mode", &self.mode())
+            .field("trim", &self.trim())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Lposc {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Lposc {
+            mode: u8,
+            trim: u8,
+        }
+        let proxy = Lposc {
+            mode: self.mode(),
+            trim: self.trim(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Informs the AON Timer of the fractional component of the clock frequency when running off the LPOSC."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -724,6 +1191,26 @@ impl Default for LposcFreqKhzFrac {
         LposcFreqKhzFrac(0)
     }
 }
+impl core::fmt::Debug for LposcFreqKhzFrac {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("LposcFreqKhzFrac")
+            .field("lposc_freq_khz_frac", &self.lposc_freq_khz_frac())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for LposcFreqKhzFrac {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct LposcFreqKhzFrac {
+            lposc_freq_khz_frac: u16,
+        }
+        let proxy = LposcFreqKhzFrac {
+            lposc_freq_khz_frac: self.lposc_freq_khz_frac(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Informs the AON Timer of the integer component of the clock frequency when running off the LPOSC."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -745,6 +1232,26 @@ impl Default for LposcFreqKhzInt {
     #[inline(always)]
     fn default() -> LposcFreqKhzInt {
         LposcFreqKhzInt(0)
+    }
+}
+impl core::fmt::Debug for LposcFreqKhzInt {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("LposcFreqKhzInt")
+            .field("lposc_freq_khz_int", &self.lposc_freq_khz_int())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for LposcFreqKhzInt {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct LposcFreqKhzInt {
+            lposc_freq_khz_int: u8,
+        }
+        let proxy = LposcFreqKhzInt {
+            lposc_freq_khz_int: self.lposc_freq_khz_int(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "power state machine delays"]
@@ -792,6 +1299,32 @@ impl Default for PowDelay {
         PowDelay(0)
     }
 }
+impl core::fmt::Debug for PowDelay {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("PowDelay")
+            .field("swcore_step", &self.swcore_step())
+            .field("xip_step", &self.xip_step())
+            .field("sram_step", &self.sram_step())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for PowDelay {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct PowDelay {
+            swcore_step: u8,
+            xip_step: u8,
+            sram_step: u8,
+        }
+        let proxy = PowDelay {
+            swcore_step: self.swcore_step(),
+            xip_step: self.xip_step(),
+            sram_step: self.sram_step(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct PowFastdiv(pub u32);
@@ -812,6 +1345,26 @@ impl Default for PowFastdiv {
     #[inline(always)]
     fn default() -> PowFastdiv {
         PowFastdiv(0)
+    }
+}
+impl core::fmt::Debug for PowFastdiv {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("PowFastdiv")
+            .field("pow_fastdiv", &self.pow_fastdiv())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for PowFastdiv {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct PowFastdiv {
+            pow_fastdiv: u16,
+        }
+        let proxy = PowFastdiv {
+            pow_fastdiv: self.pow_fastdiv(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "4 GPIO powerup events can be configured to wake the chip up from a low power state. The pwrups are level/edge sensitive and can be set to trigger on a high/rising or low/falling event The number of gpios available depends on the package option. An invalid selection will be ignored source = 0 selects gpio0 . . source = 47 selects gpio47 source = 48 selects qspi_ss source = 49 selects qspi_sd0 source = 50 selects qspi_sd1 source = 51 selects qspi_sd2 source = 52 selects qspi_sd3 source = 53 selects qspi_sclk level = 0 triggers the pwrup when the source is low level = 1 triggers the pwrup when the source is high"]
@@ -886,6 +1439,41 @@ impl Default for Pwrup {
     #[inline(always)]
     fn default() -> Pwrup {
         Pwrup(0)
+    }
+}
+impl core::fmt::Debug for Pwrup {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Pwrup")
+            .field("source", &self.source())
+            .field("enable", &self.enable())
+            .field("direction", &self.direction())
+            .field("mode", &self.mode())
+            .field("status", &self.status())
+            .field("raw_status", &self.raw_status())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Pwrup {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Pwrup {
+            source: u8,
+            enable: bool,
+            direction: super::vals::Direction,
+            mode: super::vals::Mode,
+            status: bool,
+            raw_status: bool,
+        }
+        let proxy = Pwrup {
+            source: self.source(),
+            enable: self.enable(),
+            direction: self.direction(),
+            mode: self.mode(),
+            status: self.status(),
+            raw_status: self.raw_status(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "For configuration of the power sequencer Writes are ignored while POWMAN_STATE_CHANGING=1"]
@@ -1021,6 +1609,56 @@ impl Default for SeqCfg {
         SeqCfg(0)
     }
 }
+impl core::fmt::Debug for SeqCfg {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SeqCfg")
+            .field("hw_pwrup_sram1", &self.hw_pwrup_sram1())
+            .field("hw_pwrup_sram0", &self.hw_pwrup_sram0())
+            .field("use_vreg_lp", &self.use_vreg_lp())
+            .field("use_vreg_hp", &self.use_vreg_hp())
+            .field("use_bod_lp", &self.use_bod_lp())
+            .field("use_bod_hp", &self.use_bod_hp())
+            .field("run_lposc_in_lp", &self.run_lposc_in_lp())
+            .field("use_fast_powck", &self.use_fast_powck())
+            .field("using_vreg_lp", &self.using_vreg_lp())
+            .field("using_bod_lp", &self.using_bod_lp())
+            .field("using_fast_powck", &self.using_fast_powck())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for SeqCfg {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct SeqCfg {
+            hw_pwrup_sram1: bool,
+            hw_pwrup_sram0: bool,
+            use_vreg_lp: bool,
+            use_vreg_hp: bool,
+            use_bod_lp: bool,
+            use_bod_hp: bool,
+            run_lposc_in_lp: bool,
+            use_fast_powck: bool,
+            using_vreg_lp: bool,
+            using_bod_lp: bool,
+            using_fast_powck: bool,
+        }
+        let proxy = SeqCfg {
+            hw_pwrup_sram1: self.hw_pwrup_sram1(),
+            hw_pwrup_sram0: self.hw_pwrup_sram0(),
+            use_vreg_lp: self.use_vreg_lp(),
+            use_vreg_hp: self.use_vreg_hp(),
+            use_bod_lp: self.use_bod_lp(),
+            use_bod_hp: self.use_bod_hp(),
+            run_lposc_in_lp: self.run_lposc_in_lp(),
+            use_fast_powck: self.use_fast_powck(),
+            using_vreg_lp: self.using_vreg_lp(),
+            using_bod_lp: self.using_bod_lp(),
+            using_fast_powck: self.using_fast_powck(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SetTime15to0(pub u32);
@@ -1041,6 +1679,26 @@ impl Default for SetTime15to0 {
     #[inline(always)]
     fn default() -> SetTime15to0 {
         SetTime15to0(0)
+    }
+}
+impl core::fmt::Debug for SetTime15to0 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SetTime15to0")
+            .field("set_time_15to0", &self.set_time_15to0())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for SetTime15to0 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct SetTime15to0 {
+            set_time_15to0: u16,
+        }
+        let proxy = SetTime15to0 {
+            set_time_15to0: self.set_time_15to0(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[repr(transparent)]
@@ -1065,6 +1723,26 @@ impl Default for SetTime31to16 {
         SetTime31to16(0)
     }
 }
+impl core::fmt::Debug for SetTime31to16 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SetTime31to16")
+            .field("set_time_31to16", &self.set_time_31to16())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for SetTime31to16 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct SetTime31to16 {
+            set_time_31to16: u16,
+        }
+        let proxy = SetTime31to16 {
+            set_time_31to16: self.set_time_31to16(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SetTime47to32(pub u32);
@@ -1087,6 +1765,26 @@ impl Default for SetTime47to32 {
         SetTime47to32(0)
     }
 }
+impl core::fmt::Debug for SetTime47to32 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SetTime47to32")
+            .field("set_time_47to32", &self.set_time_47to32())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for SetTime47to32 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct SetTime47to32 {
+            set_time_47to32: u16,
+        }
+        let proxy = SetTime47to32 {
+            set_time_47to32: self.set_time_47to32(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SetTime63to48(pub u32);
@@ -1107,6 +1805,26 @@ impl Default for SetTime63to48 {
     #[inline(always)]
     fn default() -> SetTime63to48 {
         SetTime63to48(0)
+    }
+}
+impl core::fmt::Debug for SetTime63to48 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SetTime63to48")
+            .field("set_time_63to48", &self.set_time_63to48())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for SetTime63to48 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct SetTime63to48 {
+            set_time_63to48: u16,
+        }
+        let proxy = SetTime63to48 {
+            set_time_63to48: self.set_time_63to48(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "This register controls the power state of the 4 power domains. The current power state is indicated in POWMAN_STATE_CURRENT which is read-only. To change the state, write to POWMAN_STATE_REQ. The coding of POWMAN_STATE_CURRENT & POWMAN_STATE_REQ corresponds to the power states defined in the datasheet: bit 3 = SWCORE bit 2 = XIP cache bit 1 = SRAM0 bit 0 = SRAM1 0 = powered up 1 = powered down When POWMAN_STATE_REQ is written, the POWMAN_STATE_WAITING flag is set while the Power Manager determines what is required. If an invalid transition is requested the Power Manager will still register the request in POWMAN_STATE_REQ but will also set the POWMAN_BAD_REQ flag. It will then implement the power-up requests and ignore the power down requests. To do nothing would risk entering an unrecoverable lock-up state. Invalid requests are: any combination of power up and power down requests any request that results in swcore boing powered and xip unpowered If the request is to power down the switched-core domain then POWMAN_STATE_WAITING stays active until the processors halt. During this time the POWMAN_STATE_REQ field can be re-written to change or cancel the request. When the power state transition begins the POWMAN_STATE_WAITING_flag is cleared, the POWMAN_STATE_CHANGING flag is set and POWMAN register writes are ignored until the transition completes."]
@@ -1197,6 +1915,47 @@ impl Default for State {
     #[inline(always)]
     fn default() -> State {
         State(0)
+    }
+}
+impl core::fmt::Debug for State {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("State")
+            .field("current", &self.current())
+            .field("req", &self.req())
+            .field("req_ignored", &self.req_ignored())
+            .field("pwrup_while_waiting", &self.pwrup_while_waiting())
+            .field("bad_sw_req", &self.bad_sw_req())
+            .field("bad_hw_req", &self.bad_hw_req())
+            .field("waiting", &self.waiting())
+            .field("changing", &self.changing())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for State {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct State {
+            current: u8,
+            req: u8,
+            req_ignored: bool,
+            pwrup_while_waiting: bool,
+            bad_sw_req: bool,
+            bad_hw_req: bool,
+            waiting: bool,
+            changing: bool,
+        }
+        let proxy = State {
+            current: self.current(),
+            req: self.req(),
+            req_ignored: self.req_ignored(),
+            pwrup_while_waiting: self.pwrup_while_waiting(),
+            bad_sw_req: self.bad_sw_req(),
+            bad_hw_req: self.bad_hw_req(),
+            waiting: self.waiting(),
+            changing: self.changing(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[repr(transparent)]
@@ -1364,6 +2123,65 @@ impl Default for Timer {
         Timer(0)
     }
 }
+impl core::fmt::Debug for Timer {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Timer")
+            .field("nonsec_write", &self.nonsec_write())
+            .field("run", &self.run())
+            .field("clear", &self.clear())
+            .field("alarm_enab", &self.alarm_enab())
+            .field("pwrup_on_alarm", &self.pwrup_on_alarm())
+            .field("alarm", &self.alarm())
+            .field("use_lposc", &self.use_lposc())
+            .field("use_xosc", &self.use_xosc())
+            .field("use_gpio_1khz", &self.use_gpio_1khz())
+            .field("use_gpio_1hz", &self.use_gpio_1hz())
+            .field("using_xosc", &self.using_xosc())
+            .field("using_lposc", &self.using_lposc())
+            .field("using_gpio_1khz", &self.using_gpio_1khz())
+            .field("using_gpio_1hz", &self.using_gpio_1hz())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Timer {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Timer {
+            nonsec_write: bool,
+            run: bool,
+            clear: bool,
+            alarm_enab: bool,
+            pwrup_on_alarm: bool,
+            alarm: bool,
+            use_lposc: bool,
+            use_xosc: bool,
+            use_gpio_1khz: bool,
+            use_gpio_1hz: bool,
+            using_xosc: bool,
+            using_lposc: bool,
+            using_gpio_1khz: bool,
+            using_gpio_1hz: bool,
+        }
+        let proxy = Timer {
+            nonsec_write: self.nonsec_write(),
+            run: self.run(),
+            clear: self.clear(),
+            alarm_enab: self.alarm_enab(),
+            pwrup_on_alarm: self.pwrup_on_alarm(),
+            alarm: self.alarm(),
+            use_lposc: self.use_lposc(),
+            use_xosc: self.use_xosc(),
+            use_gpio_1khz: self.use_gpio_1khz(),
+            use_gpio_1hz: self.use_gpio_1hz(),
+            using_xosc: self.using_xosc(),
+            using_lposc: self.using_lposc(),
+            using_gpio_1khz: self.using_gpio_1khz(),
+            using_gpio_1hz: self.using_gpio_1hz(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Voltage Regulator Settings"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -1407,6 +2225,32 @@ impl Default for Vreg {
     #[inline(always)]
     fn default() -> Vreg {
         Vreg(0)
+    }
+}
+impl core::fmt::Debug for Vreg {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Vreg")
+            .field("hiz", &self.hiz())
+            .field("vsel", &self.vsel())
+            .field("update_in_progress", &self.update_in_progress())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Vreg {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Vreg {
+            hiz: bool,
+            vsel: u8,
+            update_in_progress: bool,
+        }
+        let proxy = Vreg {
+            hiz: self.hiz(),
+            vsel: self.vsel(),
+            update_in_progress: self.update_in_progress(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Voltage Regulator Control"]
@@ -1476,6 +2320,38 @@ impl Default for VregCtrl {
         VregCtrl(0)
     }
 }
+impl core::fmt::Debug for VregCtrl {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("VregCtrl")
+            .field("ht_th", &self.ht_th())
+            .field("disable_voltage_limit", &self.disable_voltage_limit())
+            .field("isolate", &self.isolate())
+            .field("unlock", &self.unlock())
+            .field("rst_n", &self.rst_n())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for VregCtrl {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct VregCtrl {
+            ht_th: u8,
+            disable_voltage_limit: bool,
+            isolate: bool,
+            unlock: bool,
+            rst_n: bool,
+        }
+        let proxy = VregCtrl {
+            ht_th: self.ht_th(),
+            disable_voltage_limit: self.disable_voltage_limit(),
+            isolate: self.isolate(),
+            unlock: self.unlock(),
+            rst_n: self.rst_n(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Voltage Regulator Low Power Entry Settings"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -1519,6 +2395,32 @@ impl Default for VregLpEntry {
     #[inline(always)]
     fn default() -> VregLpEntry {
         VregLpEntry(0)
+    }
+}
+impl core::fmt::Debug for VregLpEntry {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("VregLpEntry")
+            .field("hiz", &self.hiz())
+            .field("mode", &self.mode())
+            .field("vsel", &self.vsel())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for VregLpEntry {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct VregLpEntry {
+            hiz: bool,
+            mode: bool,
+            vsel: u8,
+        }
+        let proxy = VregLpEntry {
+            hiz: self.hiz(),
+            mode: self.mode(),
+            vsel: self.vsel(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Voltage Regulator Low Power Exit Settings"]
@@ -1566,6 +2468,32 @@ impl Default for VregLpExit {
         VregLpExit(0)
     }
 }
+impl core::fmt::Debug for VregLpExit {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("VregLpExit")
+            .field("hiz", &self.hiz())
+            .field("mode", &self.mode())
+            .field("vsel", &self.vsel())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for VregLpExit {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct VregLpExit {
+            hiz: bool,
+            mode: bool,
+            vsel: u8,
+        }
+        let proxy = VregLpExit {
+            hiz: self.hiz(),
+            mode: self.mode(),
+            vsel: self.vsel(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Voltage Regulator Status"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -1598,6 +2526,29 @@ impl Default for VregSts {
     #[inline(always)]
     fn default() -> VregSts {
         VregSts(0)
+    }
+}
+impl core::fmt::Debug for VregSts {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("VregSts")
+            .field("startup", &self.startup())
+            .field("vout_ok", &self.vout_ok())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for VregSts {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct VregSts {
+            startup: bool,
+            vout_ok: bool,
+        }
+        let proxy = VregSts {
+            startup: self.startup(),
+            vout_ok: self.vout_ok(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Allows a watchdog reset to reset the internal state of powman in addition to the power-on state machine (PSM). Note that powman ignores watchdog resets that do not select at least the CLOCKS stage or earlier stages in the PSM. If using these bits, it's recommended to set PSM_WDSEL to all-ones in addition to the desired bits in this register. Failing to select CLOCKS or earlier will result in the POWMAN_WDSEL register having no effect."]
@@ -1656,6 +2607,35 @@ impl Default for Wdsel {
         Wdsel(0)
     }
 }
+impl core::fmt::Debug for Wdsel {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Wdsel")
+            .field("reset_powman_async", &self.reset_powman_async())
+            .field("reset_powman", &self.reset_powman())
+            .field("reset_swcore", &self.reset_swcore())
+            .field("reset_rsm", &self.reset_rsm())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Wdsel {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Wdsel {
+            reset_powman_async: bool,
+            reset_powman: bool,
+            reset_swcore: bool,
+            reset_rsm: bool,
+        }
+        let proxy = Wdsel {
+            reset_powman_async: self.reset_powman_async(),
+            reset_powman: self.reset_powman(),
+            reset_swcore: self.reset_swcore(),
+            reset_rsm: self.reset_rsm(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Informs the AON Timer of the fractional component of the clock frequency when running off the XOSC."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -1679,6 +2659,26 @@ impl Default for XoscFreqKhzFrac {
         XoscFreqKhzFrac(0)
     }
 }
+impl core::fmt::Debug for XoscFreqKhzFrac {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("XoscFreqKhzFrac")
+            .field("xosc_freq_khz_frac", &self.xosc_freq_khz_frac())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for XoscFreqKhzFrac {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct XoscFreqKhzFrac {
+            xosc_freq_khz_frac: u16,
+        }
+        let proxy = XoscFreqKhzFrac {
+            xosc_freq_khz_frac: self.xosc_freq_khz_frac(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Informs the AON Timer of the integer component of the clock frequency when running off the XOSC."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -1700,5 +2700,25 @@ impl Default for XoscFreqKhzInt {
     #[inline(always)]
     fn default() -> XoscFreqKhzInt {
         XoscFreqKhzInt(0)
+    }
+}
+impl core::fmt::Debug for XoscFreqKhzInt {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("XoscFreqKhzInt")
+            .field("xosc_freq_khz_int", &self.xosc_freq_khz_int())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for XoscFreqKhzInt {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct XoscFreqKhzInt {
+            xosc_freq_khz_int: u16,
+        }
+        let proxy = XoscFreqKhzInt {
+            xosc_freq_khz_int: self.xosc_freq_khz_int(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

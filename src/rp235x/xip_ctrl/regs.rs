@@ -131,6 +131,56 @@ impl Default for Ctrl {
         Ctrl(0)
     }
 }
+impl core::fmt::Debug for Ctrl {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Ctrl")
+            .field("en_secure", &self.en_secure())
+            .field("en_nonsecure", &self.en_nonsecure())
+            .field("power_down", &self.power_down())
+            .field("no_uncached_sec", &self.no_uncached_sec())
+            .field("no_uncached_nonsec", &self.no_uncached_nonsec())
+            .field("no_untranslated_sec", &self.no_untranslated_sec())
+            .field("no_untranslated_nonsec", &self.no_untranslated_nonsec())
+            .field("maint_nonsec", &self.maint_nonsec())
+            .field("split_ways", &self.split_ways())
+            .field("writable_m0", &self.writable_m0())
+            .field("writable_m1", &self.writable_m1())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Ctrl {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Ctrl {
+            en_secure: bool,
+            en_nonsecure: bool,
+            power_down: bool,
+            no_uncached_sec: bool,
+            no_uncached_nonsec: bool,
+            no_untranslated_sec: bool,
+            no_untranslated_nonsec: bool,
+            maint_nonsec: bool,
+            split_ways: bool,
+            writable_m0: bool,
+            writable_m1: bool,
+        }
+        let proxy = Ctrl {
+            en_secure: self.en_secure(),
+            en_nonsecure: self.en_nonsecure(),
+            power_down: self.power_down(),
+            no_uncached_sec: self.no_uncached_sec(),
+            no_uncached_nonsec: self.no_uncached_nonsec(),
+            no_untranslated_sec: self.no_untranslated_sec(),
+            no_untranslated_nonsec: self.no_untranslated_nonsec(),
+            maint_nonsec: self.maint_nonsec(),
+            split_ways: self.split_ways(),
+            writable_m0: self.writable_m0(),
+            writable_m1: self.writable_m1(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Stat(pub u32);
@@ -164,6 +214,29 @@ impl Default for Stat {
         Stat(0)
     }
 }
+impl core::fmt::Debug for Stat {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Stat")
+            .field("fifo_empty", &self.fifo_empty())
+            .field("fifo_full", &self.fifo_full())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Stat {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Stat {
+            fifo_empty: bool,
+            fifo_full: bool,
+        }
+        let proxy = Stat {
+            fifo_empty: self.fifo_empty(),
+            fifo_full: self.fifo_full(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "FIFO stream address"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -187,6 +260,26 @@ impl Default for StreamAddr {
         StreamAddr(0)
     }
 }
+impl core::fmt::Debug for StreamAddr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("StreamAddr")
+            .field("stream_addr", &self.stream_addr())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for StreamAddr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct StreamAddr {
+            stream_addr: u32,
+        }
+        let proxy = StreamAddr {
+            stream_addr: self.stream_addr(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "FIFO stream control"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -208,5 +301,25 @@ impl Default for StreamCtr {
     #[inline(always)]
     fn default() -> StreamCtr {
         StreamCtr(0)
+    }
+}
+impl core::fmt::Debug for StreamCtr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("StreamCtr")
+            .field("stream_ctr", &self.stream_ctr())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for StreamCtr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct StreamCtr {
+            stream_ctr: u32,
+        }
+        let proxy = StreamCtr {
+            stream_ctr: self.stream_ctr(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

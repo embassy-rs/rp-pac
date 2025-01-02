@@ -19,6 +19,26 @@ impl Default for DoorbellInClr {
         DoorbellInClr(0)
     }
 }
+impl core::fmt::Debug for DoorbellInClr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("DoorbellInClr")
+            .field("doorbell_in_clr", &self.doorbell_in_clr())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for DoorbellInClr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct DoorbellInClr {
+            doorbell_in_clr: u8,
+        }
+        let proxy = DoorbellInClr {
+            doorbell_in_clr: self.doorbell_in_clr(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Write 1s to trigger doorbell interrupts on this core. Read to get status of doorbells currently asserted on this core."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -38,6 +58,26 @@ impl Default for DoorbellInSet {
     #[inline(always)]
     fn default() -> DoorbellInSet {
         DoorbellInSet(0)
+    }
+}
+impl core::fmt::Debug for DoorbellInSet {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("DoorbellInSet")
+            .field("doorbell_in_set", &self.doorbell_in_set())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for DoorbellInSet {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct DoorbellInSet {
+            doorbell_in_set: u8,
+        }
+        let proxy = DoorbellInSet {
+            doorbell_in_set: self.doorbell_in_set(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Clear doorbells which have been posted to the opposite core. This register is intended for debugging and initialisation purposes. Writing 1 to a bit in DOORBELL_OUT_CLR clears the corresponding bit in DOORBELL_IN on the opposite core. Clearing all bits will cause that core's doorbell interrupt to deassert. Since the usual order of events is for software to send events using DOORBELL_OUT_SET, and acknowledge incoming events by writing to DOORBELL_IN_CLR, this register should be used with caution to avoid race conditions. Reading returns the status of the doorbells currently asserted on the other core, i.e. is equivalent to that core reading its own DOORBELL_IN status."]
@@ -61,6 +101,26 @@ impl Default for DoorbellOutClr {
         DoorbellOutClr(0)
     }
 }
+impl core::fmt::Debug for DoorbellOutClr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("DoorbellOutClr")
+            .field("doorbell_out_clr", &self.doorbell_out_clr())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for DoorbellOutClr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct DoorbellOutClr {
+            doorbell_out_clr: u8,
+        }
+        let proxy = DoorbellOutClr {
+            doorbell_out_clr: self.doorbell_out_clr(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Trigger a doorbell interrupt on the opposite core. Write 1 to a bit to set the corresponding bit in DOORBELL_IN on the opposite core. This raises the opposite core's doorbell interrupt. Read to get the status of the doorbells currently asserted on the opposite core. This is equivalent to that core reading its own DOORBELL_IN status."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -80,6 +140,26 @@ impl Default for DoorbellOutSet {
     #[inline(always)]
     fn default() -> DoorbellOutSet {
         DoorbellOutSet(0)
+    }
+}
+impl core::fmt::Debug for DoorbellOutSet {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("DoorbellOutSet")
+            .field("doorbell_out_set", &self.doorbell_out_set())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for DoorbellOutSet {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct DoorbellOutSet {
+            doorbell_out_set: u8,
+        }
+        let proxy = DoorbellOutSet {
+            doorbell_out_set: self.doorbell_out_set(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Status register for inter-core FIFOs (mailboxes). There is one FIFO in the core 0 -> core 1 direction, and one core 1 -> core 0. Both are 32 bits wide and 8 words deep. Core 0 can see the read side of the 1->0 FIFO (RX), and the write side of 0->1 FIFO (TX). Core 1 can see the read side of the 0->1 FIFO (RX), and the write side of 1->0 FIFO (TX). The SIO IRQ for each core is the logical OR of the VLD, WOF and ROE fields of its FIFO_ST register."]
@@ -138,6 +218,35 @@ impl Default for FifoSt {
         FifoSt(0)
     }
 }
+impl core::fmt::Debug for FifoSt {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("FifoSt")
+            .field("vld", &self.vld())
+            .field("rdy", &self.rdy())
+            .field("wof", &self.wof())
+            .field("roe", &self.roe())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for FifoSt {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct FifoSt {
+            vld: bool,
+            rdy: bool,
+            wof: bool,
+            roe: bool,
+        }
+        let proxy = FifoSt {
+            vld: self.vld(),
+            rdy: self.rdy(),
+            wof: self.wof(),
+            roe: self.roe(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Values written here are atomically added to ACCUM0 Reading yields lane 0's raw shift and mask value (BASE0 not added)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -159,6 +268,26 @@ impl Default for Interp0accum0add {
         Interp0accum0add(0)
     }
 }
+impl core::fmt::Debug for Interp0accum0add {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Interp0accum0add")
+            .field("interp0_accum0_add", &self.interp0_accum0_add())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Interp0accum0add {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Interp0accum0add {
+            interp0_accum0_add: u32,
+        }
+        let proxy = Interp0accum0add {
+            interp0_accum0_add: self.interp0_accum0_add(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Values written here are atomically added to ACCUM1 Reading yields lane 1's raw shift and mask value (BASE1 not added)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -178,6 +307,26 @@ impl Default for Interp0accum1add {
     #[inline(always)]
     fn default() -> Interp0accum1add {
         Interp0accum1add(0)
+    }
+}
+impl core::fmt::Debug for Interp0accum1add {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Interp0accum1add")
+            .field("interp0_accum1_add", &self.interp0_accum1_add())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Interp0accum1add {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Interp0accum1add {
+            interp0_accum1_add: u32,
+        }
+        let proxy = Interp0accum1add {
+            interp0_accum1_add: self.interp0_accum1_add(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Control register for lane 0"]
@@ -324,6 +473,59 @@ impl Default for Interp0ctrlLane0 {
         Interp0ctrlLane0(0)
     }
 }
+impl core::fmt::Debug for Interp0ctrlLane0 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Interp0ctrlLane0")
+            .field("shift", &self.shift())
+            .field("mask_lsb", &self.mask_lsb())
+            .field("mask_msb", &self.mask_msb())
+            .field("signed", &self.signed())
+            .field("cross_input", &self.cross_input())
+            .field("cross_result", &self.cross_result())
+            .field("add_raw", &self.add_raw())
+            .field("force_msb", &self.force_msb())
+            .field("blend", &self.blend())
+            .field("overf0", &self.overf0())
+            .field("overf1", &self.overf1())
+            .field("overf", &self.overf())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Interp0ctrlLane0 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Interp0ctrlLane0 {
+            shift: u8,
+            mask_lsb: u8,
+            mask_msb: u8,
+            signed: bool,
+            cross_input: bool,
+            cross_result: bool,
+            add_raw: bool,
+            force_msb: u8,
+            blend: bool,
+            overf0: bool,
+            overf1: bool,
+            overf: bool,
+        }
+        let proxy = Interp0ctrlLane0 {
+            shift: self.shift(),
+            mask_lsb: self.mask_lsb(),
+            mask_msb: self.mask_msb(),
+            signed: self.signed(),
+            cross_input: self.cross_input(),
+            cross_result: self.cross_result(),
+            add_raw: self.add_raw(),
+            force_msb: self.force_msb(),
+            blend: self.blend(),
+            overf0: self.overf0(),
+            overf1: self.overf1(),
+            overf: self.overf(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Control register for lane 1"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -424,6 +626,47 @@ impl Default for Interp0ctrlLane1 {
         Interp0ctrlLane1(0)
     }
 }
+impl core::fmt::Debug for Interp0ctrlLane1 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Interp0ctrlLane1")
+            .field("shift", &self.shift())
+            .field("mask_lsb", &self.mask_lsb())
+            .field("mask_msb", &self.mask_msb())
+            .field("signed", &self.signed())
+            .field("cross_input", &self.cross_input())
+            .field("cross_result", &self.cross_result())
+            .field("add_raw", &self.add_raw())
+            .field("force_msb", &self.force_msb())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Interp0ctrlLane1 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Interp0ctrlLane1 {
+            shift: u8,
+            mask_lsb: u8,
+            mask_msb: u8,
+            signed: bool,
+            cross_input: bool,
+            cross_result: bool,
+            add_raw: bool,
+            force_msb: u8,
+        }
+        let proxy = Interp0ctrlLane1 {
+            shift: self.shift(),
+            mask_lsb: self.mask_lsb(),
+            mask_msb: self.mask_msb(),
+            signed: self.signed(),
+            cross_input: self.cross_input(),
+            cross_result: self.cross_result(),
+            add_raw: self.add_raw(),
+            force_msb: self.force_msb(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Values written here are atomically added to ACCUM0 Reading yields lane 0's raw shift and mask value (BASE0 not added)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -445,6 +688,26 @@ impl Default for Interp1accum0add {
         Interp1accum0add(0)
     }
 }
+impl core::fmt::Debug for Interp1accum0add {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Interp1accum0add")
+            .field("interp1_accum0_add", &self.interp1_accum0_add())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Interp1accum0add {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Interp1accum0add {
+            interp1_accum0_add: u32,
+        }
+        let proxy = Interp1accum0add {
+            interp1_accum0_add: self.interp1_accum0_add(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Values written here are atomically added to ACCUM1 Reading yields lane 1's raw shift and mask value (BASE1 not added)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -464,6 +727,26 @@ impl Default for Interp1accum1add {
     #[inline(always)]
     fn default() -> Interp1accum1add {
         Interp1accum1add(0)
+    }
+}
+impl core::fmt::Debug for Interp1accum1add {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Interp1accum1add")
+            .field("interp1_accum1_add", &self.interp1_accum1_add())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Interp1accum1add {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Interp1accum1add {
+            interp1_accum1_add: u32,
+        }
+        let proxy = Interp1accum1add {
+            interp1_accum1_add: self.interp1_accum1_add(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Control register for lane 0"]
@@ -610,6 +893,59 @@ impl Default for Interp1ctrlLane0 {
         Interp1ctrlLane0(0)
     }
 }
+impl core::fmt::Debug for Interp1ctrlLane0 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Interp1ctrlLane0")
+            .field("shift", &self.shift())
+            .field("mask_lsb", &self.mask_lsb())
+            .field("mask_msb", &self.mask_msb())
+            .field("signed", &self.signed())
+            .field("cross_input", &self.cross_input())
+            .field("cross_result", &self.cross_result())
+            .field("add_raw", &self.add_raw())
+            .field("force_msb", &self.force_msb())
+            .field("clamp", &self.clamp())
+            .field("overf0", &self.overf0())
+            .field("overf1", &self.overf1())
+            .field("overf", &self.overf())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Interp1ctrlLane0 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Interp1ctrlLane0 {
+            shift: u8,
+            mask_lsb: u8,
+            mask_msb: u8,
+            signed: bool,
+            cross_input: bool,
+            cross_result: bool,
+            add_raw: bool,
+            force_msb: u8,
+            clamp: bool,
+            overf0: bool,
+            overf1: bool,
+            overf: bool,
+        }
+        let proxy = Interp1ctrlLane0 {
+            shift: self.shift(),
+            mask_lsb: self.mask_lsb(),
+            mask_msb: self.mask_msb(),
+            signed: self.signed(),
+            cross_input: self.cross_input(),
+            cross_result: self.cross_result(),
+            add_raw: self.add_raw(),
+            force_msb: self.force_msb(),
+            clamp: self.clamp(),
+            overf0: self.overf0(),
+            overf1: self.overf1(),
+            overf: self.overf(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Control register for lane 1"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -710,6 +1046,47 @@ impl Default for Interp1ctrlLane1 {
         Interp1ctrlLane1(0)
     }
 }
+impl core::fmt::Debug for Interp1ctrlLane1 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Interp1ctrlLane1")
+            .field("shift", &self.shift())
+            .field("mask_lsb", &self.mask_lsb())
+            .field("mask_msb", &self.mask_msb())
+            .field("signed", &self.signed())
+            .field("cross_input", &self.cross_input())
+            .field("cross_result", &self.cross_result())
+            .field("add_raw", &self.add_raw())
+            .field("force_msb", &self.force_msb())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Interp1ctrlLane1 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Interp1ctrlLane1 {
+            shift: u8,
+            mask_lsb: u8,
+            mask_msb: u8,
+            signed: bool,
+            cross_input: bool,
+            cross_result: bool,
+            add_raw: bool,
+            force_msb: u8,
+        }
+        let proxy = Interp1ctrlLane1 {
+            shift: self.shift(),
+            mask_lsb: self.mask_lsb(),
+            mask_msb: self.mask_msb(),
+            signed: self.signed(),
+            cross_input: self.cross_input(),
+            cross_result: self.cross_result(),
+            add_raw: self.add_raw(),
+            force_msb: self.force_msb(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Control register for the RISC-V 64-bit Machine-mode timer. This timer is only present in the Secure SIO, so is only accessible to an Arm core in Secure mode or a RISC-V core in Machine mode. Note whilst this timer follows the RISC-V privileged specification, it is equally usable by the Arm cores. The interrupts are routed to normal system-level interrupt lines as well as to the MIP.MTIP inputs on the RISC-V cores."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -766,6 +1143,35 @@ impl Default for MtimeCtrl {
         MtimeCtrl(0)
     }
 }
+impl core::fmt::Debug for MtimeCtrl {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("MtimeCtrl")
+            .field("en", &self.en())
+            .field("fullspeed", &self.fullspeed())
+            .field("dbgpause_core0", &self.dbgpause_core0())
+            .field("dbgpause_core1", &self.dbgpause_core1())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for MtimeCtrl {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct MtimeCtrl {
+            en: bool,
+            fullspeed: bool,
+            dbgpause_core0: bool,
+            dbgpause_core1: bool,
+        }
+        let proxy = MtimeCtrl {
+            en: self.en(),
+            fullspeed: self.fullspeed(),
+            dbgpause_core0: self.dbgpause_core0(),
+            dbgpause_core1: self.dbgpause_core1(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Detach certain core-local peripherals from Secure SIO, and attach them to Non-secure SIO, so that Non-secure software can use them. Attempting to access one of these peripherals from the Secure SIO when it is attached to the Non-secure SIO, or vice versa, will generate a bus error. This register is per-core, and is only present on the Secure SIO. Most SIO hardware is duplicated across the Secure and Non-secure SIO, so is not listed in this register."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -809,6 +1215,32 @@ impl Default for PeriNonsec {
     #[inline(always)]
     fn default() -> PeriNonsec {
         PeriNonsec(0)
+    }
+}
+impl core::fmt::Debug for PeriNonsec {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("PeriNonsec")
+            .field("interp0", &self.interp0())
+            .field("interp1", &self.interp1())
+            .field("tmds", &self.tmds())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for PeriNonsec {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct PeriNonsec {
+            interp0: bool,
+            interp1: bool,
+            tmds: bool,
+        }
+        let proxy = PeriNonsec {
+            interp0: self.interp0(),
+            interp1: self.interp1(),
+            tmds: self.tmds(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Control the assertion of the standard software interrupt (MIP.MSIP) on the RISC-V cores. Unlike the RISC-V timer, this interrupt is not routed to a normal system-level interrupt line, so can not be used by the Arm cores. It is safe for both cores to write to this register on the same cycle. The set/clear effect is accumulated across both cores, and then applied. If a flag is both set and cleared on the same cycle, only the set takes effect."]
@@ -865,6 +1297,35 @@ impl Default for RiscvSoftirq {
     #[inline(always)]
     fn default() -> RiscvSoftirq {
         RiscvSoftirq(0)
+    }
+}
+impl core::fmt::Debug for RiscvSoftirq {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("RiscvSoftirq")
+            .field("core0_set", &self.core0_set())
+            .field("core1_set", &self.core1_set())
+            .field("core0_clr", &self.core0_clr())
+            .field("core1_clr", &self.core1_clr())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for RiscvSoftirq {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct RiscvSoftirq {
+            core0_set: bool,
+            core1_set: bool,
+            core0_clr: bool,
+            core1_clr: bool,
+        }
+        let proxy = RiscvSoftirq {
+            core0_set: self.core0_set(),
+            core1_set: self.core1_set(),
+            core0_clr: self.core0_clr(),
+            core1_clr: self.core1_clr(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Control register for TMDS encoder."]
@@ -987,5 +1448,52 @@ impl Default for TmdsCtrl {
     #[inline(always)]
     fn default() -> TmdsCtrl {
         TmdsCtrl(0)
+    }
+}
+impl core::fmt::Debug for TmdsCtrl {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("TmdsCtrl")
+            .field("l0_rot", &self.l0_rot())
+            .field("l1_rot", &self.l1_rot())
+            .field("l2_rot", &self.l2_rot())
+            .field("l0_nbits", &self.l0_nbits())
+            .field("l1_nbits", &self.l1_nbits())
+            .field("l2_nbits", &self.l2_nbits())
+            .field("interleave", &self.interleave())
+            .field("pix_shift", &self.pix_shift())
+            .field("pix2_noshift", &self.pix2_noshift())
+            .field("clear_balance", &self.clear_balance())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for TmdsCtrl {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct TmdsCtrl {
+            l0_rot: u8,
+            l1_rot: u8,
+            l2_rot: u8,
+            l0_nbits: u8,
+            l1_nbits: u8,
+            l2_nbits: u8,
+            interleave: bool,
+            pix_shift: super::vals::PixShift,
+            pix2_noshift: bool,
+            clear_balance: bool,
+        }
+        let proxy = TmdsCtrl {
+            l0_rot: self.l0_rot(),
+            l1_rot: self.l1_rot(),
+            l2_rot: self.l2_rot(),
+            l0_nbits: self.l0_nbits(),
+            l1_nbits: self.l1_nbits(),
+            l2_nbits: self.l2_nbits(),
+            interleave: self.interleave(),
+            pix_shift: self.pix_shift(),
+            pix2_noshift: self.pix2_noshift(),
+            clear_balance: self.clear_balance(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

@@ -20,7 +20,7 @@ impl HstxCtrl {
     }
     #[doc = "Data control register for output bit 0"]
     #[inline(always)]
-    pub const fn bit_(self, n: usize) -> crate::common::Reg<regs::Bit, crate::common::RW> {
+    pub const fn bit(self, n: usize) -> crate::common::Reg<regs::Bit, crate::common::RW> {
         assert!(n < 8usize);
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize + n * 4usize) as _) }
     }

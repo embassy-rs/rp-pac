@@ -21,6 +21,26 @@ impl Default for IcAckGeneralCall {
         IcAckGeneralCall(0)
     }
 }
+impl core::fmt::Debug for IcAckGeneralCall {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcAckGeneralCall")
+            .field("ack_gen_call", &self.ack_gen_call())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcAckGeneralCall {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcAckGeneralCall {
+            ack_gen_call: bool,
+        }
+        let proxy = IcAckGeneralCall {
+            ack_gen_call: self.ack_gen_call(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Clear ACTIVITY Interrupt Register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -42,6 +62,26 @@ impl Default for IcClrActivity {
     #[inline(always)]
     fn default() -> IcClrActivity {
         IcClrActivity(0)
+    }
+}
+impl core::fmt::Debug for IcClrActivity {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcClrActivity")
+            .field("clr_activity", &self.clr_activity())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcClrActivity {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcClrActivity {
+            clr_activity: bool,
+        }
+        let proxy = IcClrActivity {
+            clr_activity: self.clr_activity(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Clear GEN_CALL Interrupt Register"]
@@ -67,6 +107,26 @@ impl Default for IcClrGenCall {
         IcClrGenCall(0)
     }
 }
+impl core::fmt::Debug for IcClrGenCall {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcClrGenCall")
+            .field("clr_gen_call", &self.clr_gen_call())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcClrGenCall {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcClrGenCall {
+            clr_gen_call: bool,
+        }
+        let proxy = IcClrGenCall {
+            clr_gen_call: self.clr_gen_call(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Clear Combined and Individual Interrupt Register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -88,6 +148,26 @@ impl Default for IcClrIntr {
     #[inline(always)]
     fn default() -> IcClrIntr {
         IcClrIntr(0)
+    }
+}
+impl core::fmt::Debug for IcClrIntr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcClrIntr")
+            .field("clr_intr", &self.clr_intr())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcClrIntr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcClrIntr {
+            clr_intr: bool,
+        }
+        let proxy = IcClrIntr {
+            clr_intr: self.clr_intr(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Clear RD_REQ Interrupt Register"]
@@ -113,6 +193,26 @@ impl Default for IcClrRdReq {
         IcClrRdReq(0)
     }
 }
+impl core::fmt::Debug for IcClrRdReq {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcClrRdReq")
+            .field("clr_rd_req", &self.clr_rd_req())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcClrRdReq {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcClrRdReq {
+            clr_rd_req: bool,
+        }
+        let proxy = IcClrRdReq {
+            clr_rd_req: self.clr_rd_req(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Clear RESTART_DET Interrupt Register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -134,6 +234,26 @@ impl Default for IcClrRestartDet {
     #[inline(always)]
     fn default() -> IcClrRestartDet {
         IcClrRestartDet(0)
+    }
+}
+impl core::fmt::Debug for IcClrRestartDet {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcClrRestartDet")
+            .field("clr_restart_det", &self.clr_restart_det())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcClrRestartDet {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcClrRestartDet {
+            clr_restart_det: bool,
+        }
+        let proxy = IcClrRestartDet {
+            clr_restart_det: self.clr_restart_det(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Clear RX_DONE Interrupt Register"]
@@ -159,6 +279,26 @@ impl Default for IcClrRxDone {
         IcClrRxDone(0)
     }
 }
+impl core::fmt::Debug for IcClrRxDone {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcClrRxDone")
+            .field("clr_rx_done", &self.clr_rx_done())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcClrRxDone {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcClrRxDone {
+            clr_rx_done: bool,
+        }
+        let proxy = IcClrRxDone {
+            clr_rx_done: self.clr_rx_done(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Clear RX_OVER Interrupt Register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -180,6 +320,26 @@ impl Default for IcClrRxOver {
     #[inline(always)]
     fn default() -> IcClrRxOver {
         IcClrRxOver(0)
+    }
+}
+impl core::fmt::Debug for IcClrRxOver {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcClrRxOver")
+            .field("clr_rx_over", &self.clr_rx_over())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcClrRxOver {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcClrRxOver {
+            clr_rx_over: bool,
+        }
+        let proxy = IcClrRxOver {
+            clr_rx_over: self.clr_rx_over(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Clear RX_UNDER Interrupt Register"]
@@ -205,6 +365,26 @@ impl Default for IcClrRxUnder {
         IcClrRxUnder(0)
     }
 }
+impl core::fmt::Debug for IcClrRxUnder {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcClrRxUnder")
+            .field("clr_rx_under", &self.clr_rx_under())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcClrRxUnder {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcClrRxUnder {
+            clr_rx_under: bool,
+        }
+        let proxy = IcClrRxUnder {
+            clr_rx_under: self.clr_rx_under(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Clear START_DET Interrupt Register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -226,6 +406,26 @@ impl Default for IcClrStartDet {
     #[inline(always)]
     fn default() -> IcClrStartDet {
         IcClrStartDet(0)
+    }
+}
+impl core::fmt::Debug for IcClrStartDet {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcClrStartDet")
+            .field("clr_start_det", &self.clr_start_det())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcClrStartDet {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcClrStartDet {
+            clr_start_det: bool,
+        }
+        let proxy = IcClrStartDet {
+            clr_start_det: self.clr_start_det(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Clear STOP_DET Interrupt Register"]
@@ -251,6 +451,26 @@ impl Default for IcClrStopDet {
         IcClrStopDet(0)
     }
 }
+impl core::fmt::Debug for IcClrStopDet {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcClrStopDet")
+            .field("clr_stop_det", &self.clr_stop_det())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcClrStopDet {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcClrStopDet {
+            clr_stop_det: bool,
+        }
+        let proxy = IcClrStopDet {
+            clr_stop_det: self.clr_stop_det(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Clear TX_ABRT Interrupt Register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -274,6 +494,26 @@ impl Default for IcClrTxAbrt {
         IcClrTxAbrt(0)
     }
 }
+impl core::fmt::Debug for IcClrTxAbrt {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcClrTxAbrt")
+            .field("clr_tx_abrt", &self.clr_tx_abrt())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcClrTxAbrt {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcClrTxAbrt {
+            clr_tx_abrt: bool,
+        }
+        let proxy = IcClrTxAbrt {
+            clr_tx_abrt: self.clr_tx_abrt(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Clear TX_OVER Interrupt Register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -295,6 +535,26 @@ impl Default for IcClrTxOver {
     #[inline(always)]
     fn default() -> IcClrTxOver {
         IcClrTxOver(0)
+    }
+}
+impl core::fmt::Debug for IcClrTxOver {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcClrTxOver")
+            .field("clr_tx_over", &self.clr_tx_over())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcClrTxOver {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcClrTxOver {
+            clr_tx_over: bool,
+        }
+        let proxy = IcClrTxOver {
+            clr_tx_over: self.clr_tx_over(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Component Parameter Register 1 Note This register is not implemented and therefore reads as 0. If it was implemented it would be a constant read-only register that contains encoded information about the component's parameter settings. Fields shown below are the settings for those parameters"]
@@ -395,6 +655,47 @@ impl Default for IcCompParam1 {
     #[inline(always)]
     fn default() -> IcCompParam1 {
         IcCompParam1(0)
+    }
+}
+impl core::fmt::Debug for IcCompParam1 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcCompParam1")
+            .field("apb_data_width", &self.apb_data_width())
+            .field("max_speed_mode", &self.max_speed_mode())
+            .field("hc_count_values", &self.hc_count_values())
+            .field("intr_io", &self.intr_io())
+            .field("has_dma", &self.has_dma())
+            .field("add_encoded_params", &self.add_encoded_params())
+            .field("rx_buffer_depth", &self.rx_buffer_depth())
+            .field("tx_buffer_depth", &self.tx_buffer_depth())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcCompParam1 {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcCompParam1 {
+            apb_data_width: u8,
+            max_speed_mode: u8,
+            hc_count_values: bool,
+            intr_io: bool,
+            has_dma: bool,
+            add_encoded_params: bool,
+            rx_buffer_depth: u8,
+            tx_buffer_depth: u8,
+        }
+        let proxy = IcCompParam1 {
+            apb_data_width: self.apb_data_width(),
+            max_speed_mode: self.max_speed_mode(),
+            hc_count_values: self.hc_count_values(),
+            intr_io: self.intr_io(),
+            has_dma: self.has_dma(),
+            add_encoded_params: self.add_encoded_params(),
+            rx_buffer_depth: self.rx_buffer_depth(),
+            tx_buffer_depth: self.tx_buffer_depth(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "I2C Control Register. This register can be written only when the DW_apb_i2c is disabled, which corresponds to the IC_ENABLE\\[0\\] register being set to 0. Writes at other times have no effect. Read/Write Access: - bit 10 is read only. - bit 11 is read only - bit 16 is read only - bit 17 is read only - bits 18 and 19 are read only."]
@@ -519,6 +820,56 @@ impl Default for IcCon {
         IcCon(0)
     }
 }
+impl core::fmt::Debug for IcCon {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcCon")
+            .field("master_mode", &self.master_mode())
+            .field("speed", &self.speed())
+            .field("ic_10bitaddr_slave", &self.ic_10bitaddr_slave())
+            .field("ic_10bitaddr_master", &self.ic_10bitaddr_master())
+            .field("ic_restart_en", &self.ic_restart_en())
+            .field("ic_slave_disable", &self.ic_slave_disable())
+            .field("stop_det_ifaddressed", &self.stop_det_ifaddressed())
+            .field("tx_empty_ctrl", &self.tx_empty_ctrl())
+            .field("rx_fifo_full_hld_ctrl", &self.rx_fifo_full_hld_ctrl())
+            .field(
+                "stop_det_if_master_active",
+                &self.stop_det_if_master_active(),
+            )
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcCon {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcCon {
+            master_mode: bool,
+            speed: super::vals::Speed,
+            ic_10bitaddr_slave: bool,
+            ic_10bitaddr_master: bool,
+            ic_restart_en: bool,
+            ic_slave_disable: bool,
+            stop_det_ifaddressed: bool,
+            tx_empty_ctrl: bool,
+            rx_fifo_full_hld_ctrl: bool,
+            stop_det_if_master_active: bool,
+        }
+        let proxy = IcCon {
+            master_mode: self.master_mode(),
+            speed: self.speed(),
+            ic_10bitaddr_slave: self.ic_10bitaddr_slave(),
+            ic_10bitaddr_master: self.ic_10bitaddr_master(),
+            ic_restart_en: self.ic_restart_en(),
+            ic_slave_disable: self.ic_slave_disable(),
+            stop_det_ifaddressed: self.stop_det_ifaddressed(),
+            tx_empty_ctrl: self.tx_empty_ctrl(),
+            rx_fifo_full_hld_ctrl: self.rx_fifo_full_hld_ctrl(),
+            stop_det_if_master_active: self.stop_det_if_master_active(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "I2C Rx/Tx Data Buffer and Command Register; this is the register the CPU writes to when filling the TX FIFO and the CPU reads from when retrieving bytes from RX FIFO. The size of the register changes as follows: Write: - 11 bits when IC_EMPTYFIFO_HOLD_MASTER_EN=1 - 9 bits when IC_EMPTYFIFO_HOLD_MASTER_EN=0 Read: - 12 bits when IC_FIRST_DATA_BYTE_STATUS = 1 - 8 bits when IC_FIRST_DATA_BYTE_STATUS = 0 Note: In order for the DW_apb_i2c to continue acknowledging reads, a read command should be written for every byte that is to be received; otherwise the DW_apb_i2c will stop acknowledging."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -586,6 +937,38 @@ impl Default for IcDataCmd {
         IcDataCmd(0)
     }
 }
+impl core::fmt::Debug for IcDataCmd {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcDataCmd")
+            .field("dat", &self.dat())
+            .field("cmd", &self.cmd())
+            .field("stop", &self.stop())
+            .field("restart", &self.restart())
+            .field("first_data_byte", &self.first_data_byte())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcDataCmd {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcDataCmd {
+            dat: u8,
+            cmd: bool,
+            stop: bool,
+            restart: bool,
+            first_data_byte: bool,
+        }
+        let proxy = IcDataCmd {
+            dat: self.dat(),
+            cmd: self.cmd(),
+            stop: self.stop(),
+            restart: self.restart(),
+            first_data_byte: self.first_data_byte(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "DMA Control Register The register is used to enable the DMA Controller interface operation. There is a separate bit for transmit and receive. This can be programmed regardless of the state of IC_ENABLE."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -620,6 +1003,29 @@ impl Default for IcDmaCr {
         IcDmaCr(0)
     }
 }
+impl core::fmt::Debug for IcDmaCr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcDmaCr")
+            .field("rdmae", &self.rdmae())
+            .field("tdmae", &self.tdmae())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcDmaCr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcDmaCr {
+            rdmae: bool,
+            tdmae: bool,
+        }
+        let proxy = IcDmaCr {
+            rdmae: self.rdmae(),
+            tdmae: self.tdmae(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "I2C Receive Data Level Register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -643,6 +1049,26 @@ impl Default for IcDmaRdlr {
         IcDmaRdlr(0)
     }
 }
+impl core::fmt::Debug for IcDmaRdlr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcDmaRdlr")
+            .field("dmardl", &self.dmardl())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcDmaRdlr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcDmaRdlr {
+            dmardl: u8,
+        }
+        let proxy = IcDmaRdlr {
+            dmardl: self.dmardl(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "DMA Transmit Data Level Register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -664,6 +1090,26 @@ impl Default for IcDmaTdlr {
     #[inline(always)]
     fn default() -> IcDmaTdlr {
         IcDmaTdlr(0)
+    }
+}
+impl core::fmt::Debug for IcDmaTdlr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcDmaTdlr")
+            .field("dmatdl", &self.dmatdl())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcDmaTdlr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcDmaTdlr {
+            dmatdl: u8,
+        }
+        let proxy = IcDmaTdlr {
+            dmatdl: self.dmatdl(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "I2C Enable Register"]
@@ -711,6 +1157,32 @@ impl Default for IcEnable {
         IcEnable(0)
     }
 }
+impl core::fmt::Debug for IcEnable {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcEnable")
+            .field("enable", &self.enable())
+            .field("abort", &self.abort())
+            .field("tx_cmd_block", &self.tx_cmd_block())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcEnable {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcEnable {
+            enable: bool,
+            abort: bool,
+            tx_cmd_block: bool,
+        }
+        let proxy = IcEnable {
+            enable: self.enable(),
+            abort: self.abort(),
+            tx_cmd_block: self.tx_cmd_block(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "I2C Enable Status Register The register is used to report the DW_apb_i2c hardware status when the IC_ENABLE\\[0\\] register is set from 1 to 0; that is, when DW_apb_i2c is disabled. If IC_ENABLE\\[0\\] has been set to 1, bits 2:1 are forced to 0, and bit 0 is forced to 1. If IC_ENABLE\\[0\\] has been set to 0, bits 2:1 is only be valid as soon as bit 0 is read as '0'. Note: When IC_ENABLE\\[0\\] has been set to 0, a delay occurs for bit 0 to be read as 0 because disabling the DW_apb_i2c depends on I2C bus activities."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -756,6 +1228,32 @@ impl Default for IcEnableStatus {
         IcEnableStatus(0)
     }
 }
+impl core::fmt::Debug for IcEnableStatus {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcEnableStatus")
+            .field("ic_en", &self.ic_en())
+            .field("slv_disabled_while_busy", &self.slv_disabled_while_busy())
+            .field("slv_rx_data_lost", &self.slv_rx_data_lost())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcEnableStatus {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcEnableStatus {
+            ic_en: bool,
+            slv_disabled_while_busy: bool,
+            slv_rx_data_lost: bool,
+        }
+        let proxy = IcEnableStatus {
+            ic_en: self.ic_en(),
+            slv_disabled_while_busy: self.slv_disabled_while_busy(),
+            slv_rx_data_lost: self.slv_rx_data_lost(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Fast Mode or Fast Mode Plus I2C Clock SCL High Count Register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -777,6 +1275,26 @@ impl Default for IcFsSclHcnt {
     #[inline(always)]
     fn default() -> IcFsSclHcnt {
         IcFsSclHcnt(0)
+    }
+}
+impl core::fmt::Debug for IcFsSclHcnt {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcFsSclHcnt")
+            .field("ic_fs_scl_hcnt", &self.ic_fs_scl_hcnt())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcFsSclHcnt {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcFsSclHcnt {
+            ic_fs_scl_hcnt: u16,
+        }
+        let proxy = IcFsSclHcnt {
+            ic_fs_scl_hcnt: self.ic_fs_scl_hcnt(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Fast Mode or Fast Mode Plus I2C Clock SCL Low Count Register"]
@@ -802,6 +1320,26 @@ impl Default for IcFsSclLcnt {
         IcFsSclLcnt(0)
     }
 }
+impl core::fmt::Debug for IcFsSclLcnt {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcFsSclLcnt")
+            .field("ic_fs_scl_lcnt", &self.ic_fs_scl_lcnt())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcFsSclLcnt {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcFsSclLcnt {
+            ic_fs_scl_lcnt: u16,
+        }
+        let proxy = IcFsSclLcnt {
+            ic_fs_scl_lcnt: self.ic_fs_scl_lcnt(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "I2C SS, FS or FM+ spike suppression limit This register is used to store the duration, measured in ic_clk cycles, of the longest spike that is filtered out by the spike suppression logic when the component is operating in SS, FS or FM+ modes. The relevant I2C requirement is tSP (table 4) as detailed in the I2C Bus Specification. This register must be programmed with a minimum value of 1."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -823,6 +1361,26 @@ impl Default for IcFsSpklen {
     #[inline(always)]
     fn default() -> IcFsSpklen {
         IcFsSpklen(0)
+    }
+}
+impl core::fmt::Debug for IcFsSpklen {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcFsSpklen")
+            .field("ic_fs_spklen", &self.ic_fs_spklen())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcFsSpklen {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcFsSpklen {
+            ic_fs_spklen: u8,
+        }
+        let proxy = IcFsSpklen {
+            ic_fs_spklen: self.ic_fs_spklen(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "I2C Interrupt Mask Register. These bits mask their corresponding interrupt status bits. This register is active low; a value of 0 masks the interrupt, whereas a value of 1 unmasks the interrupt."]
@@ -980,6 +1538,62 @@ impl Default for IcIntrMask {
         IcIntrMask(0)
     }
 }
+impl core::fmt::Debug for IcIntrMask {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcIntrMask")
+            .field("m_rx_under", &self.m_rx_under())
+            .field("m_rx_over", &self.m_rx_over())
+            .field("m_rx_full", &self.m_rx_full())
+            .field("m_tx_over", &self.m_tx_over())
+            .field("m_tx_empty", &self.m_tx_empty())
+            .field("m_rd_req", &self.m_rd_req())
+            .field("m_tx_abrt", &self.m_tx_abrt())
+            .field("m_rx_done", &self.m_rx_done())
+            .field("m_activity", &self.m_activity())
+            .field("m_stop_det", &self.m_stop_det())
+            .field("m_start_det", &self.m_start_det())
+            .field("m_gen_call", &self.m_gen_call())
+            .field("m_restart_det", &self.m_restart_det())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcIntrMask {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcIntrMask {
+            m_rx_under: bool,
+            m_rx_over: bool,
+            m_rx_full: bool,
+            m_tx_over: bool,
+            m_tx_empty: bool,
+            m_rd_req: bool,
+            m_tx_abrt: bool,
+            m_rx_done: bool,
+            m_activity: bool,
+            m_stop_det: bool,
+            m_start_det: bool,
+            m_gen_call: bool,
+            m_restart_det: bool,
+        }
+        let proxy = IcIntrMask {
+            m_rx_under: self.m_rx_under(),
+            m_rx_over: self.m_rx_over(),
+            m_rx_full: self.m_rx_full(),
+            m_tx_over: self.m_tx_over(),
+            m_tx_empty: self.m_tx_empty(),
+            m_rd_req: self.m_rd_req(),
+            m_tx_abrt: self.m_tx_abrt(),
+            m_rx_done: self.m_rx_done(),
+            m_activity: self.m_activity(),
+            m_stop_det: self.m_stop_det(),
+            m_start_det: self.m_start_det(),
+            m_gen_call: self.m_gen_call(),
+            m_restart_det: self.m_restart_det(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "I2C Interrupt Status Register Each bit in this register has a corresponding mask bit in the IC_INTR_MASK register. These bits are cleared by reading the matching interrupt clear register. The unmasked raw versions of these bits are available in the IC_RAW_INTR_STAT register."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -1133,6 +1747,62 @@ impl Default for IcIntrStat {
     #[inline(always)]
     fn default() -> IcIntrStat {
         IcIntrStat(0)
+    }
+}
+impl core::fmt::Debug for IcIntrStat {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcIntrStat")
+            .field("r_rx_under", &self.r_rx_under())
+            .field("r_rx_over", &self.r_rx_over())
+            .field("r_rx_full", &self.r_rx_full())
+            .field("r_tx_over", &self.r_tx_over())
+            .field("r_tx_empty", &self.r_tx_empty())
+            .field("r_rd_req", &self.r_rd_req())
+            .field("r_tx_abrt", &self.r_tx_abrt())
+            .field("r_rx_done", &self.r_rx_done())
+            .field("r_activity", &self.r_activity())
+            .field("r_stop_det", &self.r_stop_det())
+            .field("r_start_det", &self.r_start_det())
+            .field("r_gen_call", &self.r_gen_call())
+            .field("r_restart_det", &self.r_restart_det())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcIntrStat {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcIntrStat {
+            r_rx_under: bool,
+            r_rx_over: bool,
+            r_rx_full: bool,
+            r_tx_over: bool,
+            r_tx_empty: bool,
+            r_rd_req: bool,
+            r_tx_abrt: bool,
+            r_rx_done: bool,
+            r_activity: bool,
+            r_stop_det: bool,
+            r_start_det: bool,
+            r_gen_call: bool,
+            r_restart_det: bool,
+        }
+        let proxy = IcIntrStat {
+            r_rx_under: self.r_rx_under(),
+            r_rx_over: self.r_rx_over(),
+            r_rx_full: self.r_rx_full(),
+            r_tx_over: self.r_tx_over(),
+            r_tx_empty: self.r_tx_empty(),
+            r_rd_req: self.r_rd_req(),
+            r_tx_abrt: self.r_tx_abrt(),
+            r_rx_done: self.r_rx_done(),
+            r_activity: self.r_activity(),
+            r_stop_det: self.r_stop_det(),
+            r_start_det: self.r_start_det(),
+            r_gen_call: self.r_gen_call(),
+            r_restart_det: self.r_restart_det(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "I2C Raw Interrupt Status Register Unlike the IC_INTR_STAT register, these bits are not masked so they always show the true status of the DW_apb_i2c."]
@@ -1290,6 +1960,62 @@ impl Default for IcRawIntrStat {
         IcRawIntrStat(0)
     }
 }
+impl core::fmt::Debug for IcRawIntrStat {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcRawIntrStat")
+            .field("rx_under", &self.rx_under())
+            .field("rx_over", &self.rx_over())
+            .field("rx_full", &self.rx_full())
+            .field("tx_over", &self.tx_over())
+            .field("tx_empty", &self.tx_empty())
+            .field("rd_req", &self.rd_req())
+            .field("tx_abrt", &self.tx_abrt())
+            .field("rx_done", &self.rx_done())
+            .field("activity", &self.activity())
+            .field("stop_det", &self.stop_det())
+            .field("start_det", &self.start_det())
+            .field("gen_call", &self.gen_call())
+            .field("restart_det", &self.restart_det())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcRawIntrStat {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcRawIntrStat {
+            rx_under: bool,
+            rx_over: bool,
+            rx_full: bool,
+            tx_over: bool,
+            tx_empty: bool,
+            rd_req: bool,
+            tx_abrt: bool,
+            rx_done: bool,
+            activity: bool,
+            stop_det: bool,
+            start_det: bool,
+            gen_call: bool,
+            restart_det: bool,
+        }
+        let proxy = IcRawIntrStat {
+            rx_under: self.rx_under(),
+            rx_over: self.rx_over(),
+            rx_full: self.rx_full(),
+            tx_over: self.tx_over(),
+            tx_empty: self.tx_empty(),
+            rd_req: self.rd_req(),
+            tx_abrt: self.tx_abrt(),
+            rx_done: self.rx_done(),
+            activity: self.activity(),
+            stop_det: self.stop_det(),
+            start_det: self.start_det(),
+            gen_call: self.gen_call(),
+            restart_det: self.restart_det(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "I2C Receive FIFO Threshold Register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -1311,6 +2037,26 @@ impl Default for IcRxTl {
     #[inline(always)]
     fn default() -> IcRxTl {
         IcRxTl(0)
+    }
+}
+impl core::fmt::Debug for IcRxTl {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcRxTl")
+            .field("rx_tl", &self.rx_tl())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcRxTl {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcRxTl {
+            rx_tl: u8,
+        }
+        let proxy = IcRxTl {
+            rx_tl: self.rx_tl(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "I2C Receive FIFO Level Register This register contains the number of valid data entries in the receive FIFO buffer. It is cleared whenever: - The I2C is disabled - Whenever there is a transmit abort caused by any of the events tracked in IC_TX_ABRT_SOURCE The register increments whenever data is placed into the receive FIFO and decrements when data is taken from the receive FIFO."]
@@ -1336,6 +2082,26 @@ impl Default for IcRxflr {
         IcRxflr(0)
     }
 }
+impl core::fmt::Debug for IcRxflr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcRxflr")
+            .field("rxflr", &self.rxflr())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcRxflr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcRxflr {
+            rxflr: u8,
+        }
+        let proxy = IcRxflr {
+            rxflr: self.rxflr(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "I2C Slave Address Register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -1357,6 +2123,26 @@ impl Default for IcSar {
     #[inline(always)]
     fn default() -> IcSar {
         IcSar(0)
+    }
+}
+impl core::fmt::Debug for IcSar {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcSar")
+            .field("ic_sar", &self.ic_sar())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcSar {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcSar {
+            ic_sar: u16,
+        }
+        let proxy = IcSar {
+            ic_sar: self.ic_sar(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "I2C SDA Hold Time Length Register The bits \\[15:0\\] of this register are used to control the hold time of SDA during transmit in both slave and master mode (after SCL goes from HIGH to LOW). The bits \\[23:16\\] of this register are used to extend the SDA transition (if any) whenever SCL is HIGH in the receiver in either master or slave mode. Writes to this register succeed only when IC_ENABLE\\[0\\]=0. The values in this register are in units of ic_clk period. The value programmed in IC_SDA_TX_HOLD must be greater than the minimum hold time in each mode (one cycle in master mode, seven cycles in slave mode) for the value to be implemented. The programmed SDA hold time during transmit (IC_SDA_TX_HOLD) cannot exceed at any time the duration of the low part of scl. Therefore the programmed value cannot be larger than N_SCL_LOW-2, where N_SCL_LOW is the duration of the low part of the scl period measured in ic_clk cycles."]
@@ -1393,6 +2179,29 @@ impl Default for IcSdaHold {
         IcSdaHold(0)
     }
 }
+impl core::fmt::Debug for IcSdaHold {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcSdaHold")
+            .field("ic_sda_tx_hold", &self.ic_sda_tx_hold())
+            .field("ic_sda_rx_hold", &self.ic_sda_rx_hold())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcSdaHold {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcSdaHold {
+            ic_sda_tx_hold: u16,
+            ic_sda_rx_hold: u8,
+        }
+        let proxy = IcSdaHold {
+            ic_sda_tx_hold: self.ic_sda_tx_hold(),
+            ic_sda_rx_hold: self.ic_sda_rx_hold(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "I2C SDA Setup Register This register controls the amount of time delay (in terms of number of ic_clk clock periods) introduced in the rising edge of SCL - relative to SDA changing - when DW_apb_i2c services a read request in a slave-transmitter operation. The relevant I2C requirement is tSU:DAT (note 4) as detailed in the I2C Bus Specification. This register must be programmed with a value equal to or greater than 2. Writes to this register succeed only when IC_ENABLE\\[0\\] = 0. Note: The length of setup time is calculated using \\[(IC_SDA_SETUP - 1) * (ic_clk_period)\\], so if the user requires 10 ic_clk periods of setup time, they should program a value of 11. The IC_SDA_SETUP register is only used by the DW_apb_i2c when operating as a slave transmitter."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -1414,6 +2223,26 @@ impl Default for IcSdaSetup {
     #[inline(always)]
     fn default() -> IcSdaSetup {
         IcSdaSetup(0)
+    }
+}
+impl core::fmt::Debug for IcSdaSetup {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcSdaSetup")
+            .field("sda_setup", &self.sda_setup())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcSdaSetup {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcSdaSetup {
+            sda_setup: u8,
+        }
+        let proxy = IcSdaSetup {
+            sda_setup: self.sda_setup(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Generate Slave Data NACK Register The register is used to generate a NACK for the data part of a transfer when DW_apb_i2c is acting as a slave-receiver. This register only exists when the IC_SLV_DATA_NACK_ONLY parameter is set to 1. When this parameter disabled, this register does not exist and writing to the register's address has no effect. A write can occur on this register if both of the following conditions are met: - DW_apb_i2c is disabled (IC_ENABLE\\[0\\] = 0) - Slave part is inactive (IC_STATUS\\[6\\] = 0) Note: The IC_STATUS\\[6\\] is a register read-back location for the internal slv_activity signal; the user should poll this before writing the ic_slv_data_nack_only bit."]
@@ -1439,6 +2268,24 @@ impl Default for IcSlvDataNackOnly {
         IcSlvDataNackOnly(0)
     }
 }
+impl core::fmt::Debug for IcSlvDataNackOnly {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcSlvDataNackOnly")
+            .field("nack", &self.nack())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcSlvDataNackOnly {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcSlvDataNackOnly {
+            nack: bool,
+        }
+        let proxy = IcSlvDataNackOnly { nack: self.nack() };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Standard Speed I2C Clock SCL High Count Register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -1462,6 +2309,26 @@ impl Default for IcSsSclHcnt {
         IcSsSclHcnt(0)
     }
 }
+impl core::fmt::Debug for IcSsSclHcnt {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcSsSclHcnt")
+            .field("ic_ss_scl_hcnt", &self.ic_ss_scl_hcnt())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcSsSclHcnt {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcSsSclHcnt {
+            ic_ss_scl_hcnt: u16,
+        }
+        let proxy = IcSsSclHcnt {
+            ic_ss_scl_hcnt: self.ic_ss_scl_hcnt(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Standard Speed I2C Clock SCL Low Count Register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -1483,6 +2350,26 @@ impl Default for IcSsSclLcnt {
     #[inline(always)]
     fn default() -> IcSsSclLcnt {
         IcSsSclLcnt(0)
+    }
+}
+impl core::fmt::Debug for IcSsSclLcnt {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcSsSclLcnt")
+            .field("ic_ss_scl_lcnt", &self.ic_ss_scl_lcnt())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcSsSclLcnt {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcSsSclLcnt {
+            ic_ss_scl_lcnt: u16,
+        }
+        let proxy = IcSsSclLcnt {
+            ic_ss_scl_lcnt: self.ic_ss_scl_lcnt(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "I2C Status Register This is a read-only register used to indicate the current transfer status and FIFO status. The status register may be read at any time. None of the bits in this register request an interrupt. When the I2C is disabled by writing 0 in bit 0 of the IC_ENABLE register: - Bits 1 and 2 are set to 1 - Bits 3 and 10 are set to 0 When the master or slave state machines goes to idle and ic_en=0: - Bits 5 and 6 are set to 0"]
@@ -1574,6 +2461,44 @@ impl Default for IcStatus {
         IcStatus(0)
     }
 }
+impl core::fmt::Debug for IcStatus {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcStatus")
+            .field("activity", &self.activity())
+            .field("tfnf", &self.tfnf())
+            .field("tfe", &self.tfe())
+            .field("rfne", &self.rfne())
+            .field("rff", &self.rff())
+            .field("mst_activity", &self.mst_activity())
+            .field("slv_activity", &self.slv_activity())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcStatus {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcStatus {
+            activity: bool,
+            tfnf: bool,
+            tfe: bool,
+            rfne: bool,
+            rff: bool,
+            mst_activity: bool,
+            slv_activity: bool,
+        }
+        let proxy = IcStatus {
+            activity: self.activity(),
+            tfnf: self.tfnf(),
+            tfe: self.tfe(),
+            rfne: self.rfne(),
+            rff: self.rff(),
+            mst_activity: self.mst_activity(),
+            slv_activity: self.slv_activity(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "I2C Target Address Register This register is 12 bits wide, and bits 31:12 are reserved. This register can be written to only when IC_ENABLE\\[0\\] is set to 0. Note: If the software or application is aware that the DW_apb_i2c is not using the TAR address for the pending commands in the Tx FIFO, then it is possible to update the TAR address even while the Tx FIFO has entries (IC_STATUS\\[2\\]= 0). - It is not necessary to perform any write to this register if DW_apb_i2c is enabled as an I2C slave only."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -1617,6 +2542,32 @@ impl Default for IcTar {
     #[inline(always)]
     fn default() -> IcTar {
         IcTar(0)
+    }
+}
+impl core::fmt::Debug for IcTar {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcTar")
+            .field("ic_tar", &self.ic_tar())
+            .field("gc_or_start", &self.gc_or_start())
+            .field("special", &self.special())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcTar {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcTar {
+            ic_tar: u16,
+            gc_or_start: bool,
+            special: bool,
+        }
+        let proxy = IcTar {
+            ic_tar: self.ic_tar(),
+            gc_or_start: self.gc_or_start(),
+            special: self.special(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "I2C Transmit Abort Source Register This register has 32 bits that indicate the source of the TX_ABRT bit. Except for Bit 9, this register is cleared whenever the IC_CLR_TX_ABRT register or the IC_CLR_INTR register is read. To clear Bit 9, the source of the ABRT_SBYTE_NORSTRT must be fixed first; RESTART must be enabled (IC_CON\\[5\\]=1), the SPECIAL bit must be cleared (IC_TAR\\[11\\]), or the GC_OR_START bit must be cleared (IC_TAR\\[10\\]). Once the source of the ABRT_SBYTE_NORSTRT is fixed, then this bit can be cleared in the same manner as other bits in this register. If the source of the ABRT_SBYTE_NORSTRT is not fixed before attempting to clear this bit, Bit 9 clears for one cycle and is then re-asserted."]
@@ -1829,6 +2780,77 @@ impl Default for IcTxAbrtSource {
         IcTxAbrtSource(0)
     }
 }
+impl core::fmt::Debug for IcTxAbrtSource {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcTxAbrtSource")
+            .field("abrt_7b_addr_noack", &self.abrt_7b_addr_noack())
+            .field("abrt_10addr1_noack", &self.abrt_10addr1_noack())
+            .field("abrt_10addr2_noack", &self.abrt_10addr2_noack())
+            .field("abrt_txdata_noack", &self.abrt_txdata_noack())
+            .field("abrt_gcall_noack", &self.abrt_gcall_noack())
+            .field("abrt_gcall_read", &self.abrt_gcall_read())
+            .field("abrt_hs_ackdet", &self.abrt_hs_ackdet())
+            .field("abrt_sbyte_ackdet", &self.abrt_sbyte_ackdet())
+            .field("abrt_hs_norstrt", &self.abrt_hs_norstrt())
+            .field("abrt_sbyte_norstrt", &self.abrt_sbyte_norstrt())
+            .field("abrt_10b_rd_norstrt", &self.abrt_10b_rd_norstrt())
+            .field("abrt_master_dis", &self.abrt_master_dis())
+            .field("arb_lost", &self.arb_lost())
+            .field("abrt_slvflush_txfifo", &self.abrt_slvflush_txfifo())
+            .field("abrt_slv_arblost", &self.abrt_slv_arblost())
+            .field("abrt_slvrd_intx", &self.abrt_slvrd_intx())
+            .field("abrt_user_abrt", &self.abrt_user_abrt())
+            .field("tx_flush_cnt", &self.tx_flush_cnt())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcTxAbrtSource {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcTxAbrtSource {
+            abrt_7b_addr_noack: bool,
+            abrt_10addr1_noack: bool,
+            abrt_10addr2_noack: bool,
+            abrt_txdata_noack: bool,
+            abrt_gcall_noack: bool,
+            abrt_gcall_read: bool,
+            abrt_hs_ackdet: bool,
+            abrt_sbyte_ackdet: bool,
+            abrt_hs_norstrt: bool,
+            abrt_sbyte_norstrt: bool,
+            abrt_10b_rd_norstrt: bool,
+            abrt_master_dis: bool,
+            arb_lost: bool,
+            abrt_slvflush_txfifo: bool,
+            abrt_slv_arblost: bool,
+            abrt_slvrd_intx: bool,
+            abrt_user_abrt: bool,
+            tx_flush_cnt: u16,
+        }
+        let proxy = IcTxAbrtSource {
+            abrt_7b_addr_noack: self.abrt_7b_addr_noack(),
+            abrt_10addr1_noack: self.abrt_10addr1_noack(),
+            abrt_10addr2_noack: self.abrt_10addr2_noack(),
+            abrt_txdata_noack: self.abrt_txdata_noack(),
+            abrt_gcall_noack: self.abrt_gcall_noack(),
+            abrt_gcall_read: self.abrt_gcall_read(),
+            abrt_hs_ackdet: self.abrt_hs_ackdet(),
+            abrt_sbyte_ackdet: self.abrt_sbyte_ackdet(),
+            abrt_hs_norstrt: self.abrt_hs_norstrt(),
+            abrt_sbyte_norstrt: self.abrt_sbyte_norstrt(),
+            abrt_10b_rd_norstrt: self.abrt_10b_rd_norstrt(),
+            abrt_master_dis: self.abrt_master_dis(),
+            arb_lost: self.arb_lost(),
+            abrt_slvflush_txfifo: self.abrt_slvflush_txfifo(),
+            abrt_slv_arblost: self.abrt_slv_arblost(),
+            abrt_slvrd_intx: self.abrt_slvrd_intx(),
+            abrt_user_abrt: self.abrt_user_abrt(),
+            tx_flush_cnt: self.tx_flush_cnt(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "I2C Transmit FIFO Threshold Register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -1852,6 +2874,26 @@ impl Default for IcTxTl {
         IcTxTl(0)
     }
 }
+impl core::fmt::Debug for IcTxTl {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcTxTl")
+            .field("tx_tl", &self.tx_tl())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcTxTl {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcTxTl {
+            tx_tl: u8,
+        }
+        let proxy = IcTxTl {
+            tx_tl: self.tx_tl(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "I2C Transmit FIFO Level Register This register contains the number of valid data entries in the transmit FIFO buffer. It is cleared whenever: - The I2C is disabled - There is a transmit abort - that is, TX_ABRT bit is set in the IC_RAW_INTR_STAT register - The slave bulk transmit mode is aborted The register increments whenever data is placed into the transmit FIFO and decrements when data is taken from the transmit FIFO."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -1873,5 +2915,25 @@ impl Default for IcTxflr {
     #[inline(always)]
     fn default() -> IcTxflr {
         IcTxflr(0)
+    }
+}
+impl core::fmt::Debug for IcTxflr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IcTxflr")
+            .field("txflr", &self.txflr())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IcTxflr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IcTxflr {
+            txflr: u8,
+        }
+        let proxy = IcTxflr {
+            txflr: self.txflr(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

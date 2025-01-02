@@ -43,6 +43,32 @@ impl Default for Ctrl {
         Ctrl(0)
     }
 }
+impl core::fmt::Debug for Ctrl {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Ctrl")
+            .field("sm_enable", &self.sm_enable())
+            .field("sm_restart", &self.sm_restart())
+            .field("clkdiv_restart", &self.clkdiv_restart())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Ctrl {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Ctrl {
+            sm_enable: u8,
+            sm_restart: u8,
+            clkdiv_restart: u8,
+        }
+        let proxy = Ctrl {
+            sm_enable: self.sm_enable(),
+            sm_restart: self.sm_restart(),
+            clkdiv_restart: self.clkdiv_restart(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "The PIO hardware has some free parameters that may vary between chip products. These should be provided in the chip datasheet, but are also exposed here."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -86,6 +112,32 @@ impl Default for DbgCfginfo {
     #[inline(always)]
     fn default() -> DbgCfginfo {
         DbgCfginfo(0)
+    }
+}
+impl core::fmt::Debug for DbgCfginfo {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("DbgCfginfo")
+            .field("fifo_depth", &self.fifo_depth())
+            .field("sm_count", &self.sm_count())
+            .field("imem_size", &self.imem_size())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for DbgCfginfo {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct DbgCfginfo {
+            fifo_depth: u8,
+            sm_count: u8,
+            imem_size: u8,
+        }
+        let proxy = DbgCfginfo {
+            fifo_depth: self.fifo_depth(),
+            sm_count: self.sm_count(),
+            imem_size: self.imem_size(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "FIFO debug register"]
@@ -142,6 +194,35 @@ impl Default for Fdebug {
     #[inline(always)]
     fn default() -> Fdebug {
         Fdebug(0)
+    }
+}
+impl core::fmt::Debug for Fdebug {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Fdebug")
+            .field("rxstall", &self.rxstall())
+            .field("rxunder", &self.rxunder())
+            .field("txover", &self.txover())
+            .field("txstall", &self.txstall())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Fdebug {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Fdebug {
+            rxstall: u8,
+            rxunder: u8,
+            txover: u8,
+            txstall: u8,
+        }
+        let proxy = Fdebug {
+            rxstall: self.rxstall(),
+            rxunder: self.rxunder(),
+            txover: self.txover(),
+            txstall: self.txstall(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "FIFO levels"]
@@ -228,6 +309,47 @@ impl Default for Flevel {
         Flevel(0)
     }
 }
+impl core::fmt::Debug for Flevel {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Flevel")
+            .field("tx0", &self.tx0())
+            .field("rx0", &self.rx0())
+            .field("tx1", &self.tx1())
+            .field("rx1", &self.rx1())
+            .field("tx2", &self.tx2())
+            .field("rx2", &self.rx2())
+            .field("tx3", &self.tx3())
+            .field("rx3", &self.rx3())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Flevel {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Flevel {
+            tx0: u8,
+            rx0: u8,
+            tx1: u8,
+            rx1: u8,
+            tx2: u8,
+            rx2: u8,
+            tx3: u8,
+            rx3: u8,
+        }
+        let proxy = Flevel {
+            tx0: self.tx0(),
+            rx0: self.rx0(),
+            tx1: self.tx1(),
+            rx1: self.rx1(),
+            tx2: self.tx2(),
+            rx2: self.rx2(),
+            tx3: self.tx3(),
+            rx3: self.rx3(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "FIFO status register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -284,7 +406,36 @@ impl Default for Fstat {
         Fstat(0)
     }
 }
-#[doc = "Write-only access to instruction memory location 30"]
+impl core::fmt::Debug for Fstat {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Fstat")
+            .field("rxfull", &self.rxfull())
+            .field("rxempty", &self.rxempty())
+            .field("txfull", &self.txfull())
+            .field("txempty", &self.txempty())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Fstat {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Fstat {
+            rxfull: u8,
+            rxempty: u8,
+            txfull: u8,
+            txempty: u8,
+        }
+        let proxy = Fstat {
+            rxfull: self.rxfull(),
+            rxempty: self.rxempty(),
+            txfull: self.txfull(),
+            txempty: self.txempty(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
+#[doc = "Write-only access to instruction memory location 0"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct InstrMem(pub u32);
@@ -305,7 +456,27 @@ impl Default for InstrMem {
         InstrMem(0)
     }
 }
-#[doc = "Interrupt status after masking & forcing for irq0"]
+impl core::fmt::Debug for InstrMem {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("InstrMem")
+            .field("instr_mem", &self.instr_mem())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for InstrMem {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct InstrMem {
+            instr_mem: u16,
+        }
+        let proxy = InstrMem {
+            instr_mem: self.instr_mem(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
+#[doc = "Raw Interrupts"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Intr(pub u32);
@@ -425,6 +596,59 @@ impl Default for Intr {
         Intr(0)
     }
 }
+impl core::fmt::Debug for Intr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Intr")
+            .field("sm0_rxnempty", &self.sm0_rxnempty())
+            .field("sm1_rxnempty", &self.sm1_rxnempty())
+            .field("sm2_rxnempty", &self.sm2_rxnempty())
+            .field("sm3_rxnempty", &self.sm3_rxnempty())
+            .field("sm0_txnfull", &self.sm0_txnfull())
+            .field("sm1_txnfull", &self.sm1_txnfull())
+            .field("sm2_txnfull", &self.sm2_txnfull())
+            .field("sm3_txnfull", &self.sm3_txnfull())
+            .field("sm0", &self.sm0())
+            .field("sm1", &self.sm1())
+            .field("sm2", &self.sm2())
+            .field("sm3", &self.sm3())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Intr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Intr {
+            sm0_rxnempty: bool,
+            sm1_rxnempty: bool,
+            sm2_rxnempty: bool,
+            sm3_rxnempty: bool,
+            sm0_txnfull: bool,
+            sm1_txnfull: bool,
+            sm2_txnfull: bool,
+            sm3_txnfull: bool,
+            sm0: bool,
+            sm1: bool,
+            sm2: bool,
+            sm3: bool,
+        }
+        let proxy = Intr {
+            sm0_rxnempty: self.sm0_rxnempty(),
+            sm1_rxnempty: self.sm1_rxnempty(),
+            sm2_rxnempty: self.sm2_rxnempty(),
+            sm3_rxnempty: self.sm3_rxnempty(),
+            sm0_txnfull: self.sm0_txnfull(),
+            sm1_txnfull: self.sm1_txnfull(),
+            sm2_txnfull: self.sm2_txnfull(),
+            sm3_txnfull: self.sm3_txnfull(),
+            sm0: self.sm0(),
+            sm1: self.sm1(),
+            sm2: self.sm2(),
+            sm3: self.sm3(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "State machine IRQ flags register. Write 1 to clear. There are 8 state machine IRQ flags, which can be set, cleared, and waited on by the state machines. There's no fixed association between flags and state machines -- any state machine can use any flag. Any of the 8 flags can be used for timing synchronisation between state machines, using IRQ and WAIT instructions. The lower four of these flags are also routed out to system-level interrupt requests, alongside FIFO status interrupts -- see e.g. IRQ0_INTE."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -444,6 +668,22 @@ impl Default for Irq {
     #[inline(always)]
     fn default() -> Irq {
         Irq(0)
+    }
+}
+impl core::fmt::Debug for Irq {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Irq").field("irq", &self.irq()).finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Irq {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Irq {
+            irq: u8,
+        }
+        let proxy = Irq { irq: self.irq() };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Writing a 1 to each of these bits will forcibly assert the corresponding IRQ. Note this is different to the INTF register: writing here affects PIO internal state. INTF just asserts the processor-facing IRQ signal for testing ISRs, and is not visible to the state machines."]
@@ -467,7 +707,27 @@ impl Default for IrqForce {
         IrqForce(0)
     }
 }
-#[doc = "Current instruction address of state machine 3"]
+impl core::fmt::Debug for IrqForce {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IrqForce")
+            .field("irq_force", &self.irq_force())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for IrqForce {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct IrqForce {
+            irq_force: u8,
+        }
+        let proxy = IrqForce {
+            irq_force: self.irq_force(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
+#[doc = "Current instruction address of state machine 0"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SmAddr(pub u32);
@@ -486,6 +746,24 @@ impl Default for SmAddr {
     #[inline(always)]
     fn default() -> SmAddr {
         SmAddr(0)
+    }
+}
+impl core::fmt::Debug for SmAddr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SmAddr")
+            .field("addr", &self.addr())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for SmAddr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct SmAddr {
+            addr: u8,
+        }
+        let proxy = SmAddr { addr: self.addr() };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Clock divisor register for state machine 0 Frequency = clock freq / (CLKDIV_INT + CLKDIV_FRAC / 256)"]
@@ -520,6 +798,29 @@ impl Default for SmClkdiv {
     #[inline(always)]
     fn default() -> SmClkdiv {
         SmClkdiv(0)
+    }
+}
+impl core::fmt::Debug for SmClkdiv {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SmClkdiv")
+            .field("frac", &self.frac())
+            .field("int", &self.int())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for SmClkdiv {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct SmClkdiv {
+            frac: u8,
+            int: u16,
+        }
+        let proxy = SmClkdiv {
+            frac: self.frac(),
+            int: self.int(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Execution/behavioural settings for state machine 0"]
@@ -655,7 +956,57 @@ impl Default for SmExecctrl {
         SmExecctrl(0)
     }
 }
-#[doc = "Read to see the instruction currently addressed by state machine 3's program counter Write to execute an instruction immediately (including jumps) and then resume execution."]
+impl core::fmt::Debug for SmExecctrl {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SmExecctrl")
+            .field("status_n", &self.status_n())
+            .field("status_sel", &self.status_sel())
+            .field("wrap_bottom", &self.wrap_bottom())
+            .field("wrap_top", &self.wrap_top())
+            .field("out_sticky", &self.out_sticky())
+            .field("inline_out_en", &self.inline_out_en())
+            .field("out_en_sel", &self.out_en_sel())
+            .field("jmp_pin", &self.jmp_pin())
+            .field("side_pindir", &self.side_pindir())
+            .field("side_en", &self.side_en())
+            .field("exec_stalled", &self.exec_stalled())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for SmExecctrl {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct SmExecctrl {
+            status_n: u8,
+            status_sel: super::vals::SmExecctrlStatusSel,
+            wrap_bottom: u8,
+            wrap_top: u8,
+            out_sticky: bool,
+            inline_out_en: bool,
+            out_en_sel: u8,
+            jmp_pin: u8,
+            side_pindir: bool,
+            side_en: bool,
+            exec_stalled: bool,
+        }
+        let proxy = SmExecctrl {
+            status_n: self.status_n(),
+            status_sel: self.status_sel(),
+            wrap_bottom: self.wrap_bottom(),
+            wrap_top: self.wrap_top(),
+            out_sticky: self.out_sticky(),
+            inline_out_en: self.inline_out_en(),
+            out_en_sel: self.out_en_sel(),
+            jmp_pin: self.jmp_pin(),
+            side_pindir: self.side_pindir(),
+            side_en: self.side_en(),
+            exec_stalled: self.exec_stalled(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
+#[doc = "Read to see the instruction currently addressed by state machine 0's program counter Write to execute an instruction immediately (including jumps) and then resume execution."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SmInstr(pub u32);
@@ -674,6 +1025,26 @@ impl Default for SmInstr {
     #[inline(always)]
     fn default() -> SmInstr {
         SmInstr(0)
+    }
+}
+impl core::fmt::Debug for SmInstr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SmInstr")
+            .field("instr", &self.instr())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for SmInstr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct SmInstr {
+            instr: u16,
+        }
+        let proxy = SmInstr {
+            instr: self.instr(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "State machine pin control"]
@@ -763,6 +1134,44 @@ impl Default for SmPinctrl {
     #[inline(always)]
     fn default() -> SmPinctrl {
         SmPinctrl(0)
+    }
+}
+impl core::fmt::Debug for SmPinctrl {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SmPinctrl")
+            .field("out_base", &self.out_base())
+            .field("set_base", &self.set_base())
+            .field("sideset_base", &self.sideset_base())
+            .field("in_base", &self.in_base())
+            .field("out_count", &self.out_count())
+            .field("set_count", &self.set_count())
+            .field("sideset_count", &self.sideset_count())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for SmPinctrl {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct SmPinctrl {
+            out_base: u8,
+            set_base: u8,
+            sideset_base: u8,
+            in_base: u8,
+            out_count: u8,
+            set_count: u8,
+            sideset_count: u8,
+        }
+        let proxy = SmPinctrl {
+            out_base: self.out_base(),
+            set_base: self.set_base(),
+            sideset_base: self.sideset_base(),
+            in_base: self.in_base(),
+            out_count: self.out_count(),
+            set_count: self.set_count(),
+            sideset_count: self.sideset_count(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Control behaviour of the input/output shift registers for state machine 0"]
@@ -863,5 +1272,46 @@ impl Default for SmShiftctrl {
     #[inline(always)]
     fn default() -> SmShiftctrl {
         SmShiftctrl(0)
+    }
+}
+impl core::fmt::Debug for SmShiftctrl {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SmShiftctrl")
+            .field("autopush", &self.autopush())
+            .field("autopull", &self.autopull())
+            .field("in_shiftdir", &self.in_shiftdir())
+            .field("out_shiftdir", &self.out_shiftdir())
+            .field("push_thresh", &self.push_thresh())
+            .field("pull_thresh", &self.pull_thresh())
+            .field("fjoin_tx", &self.fjoin_tx())
+            .field("fjoin_rx", &self.fjoin_rx())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for SmShiftctrl {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct SmShiftctrl {
+            autopush: bool,
+            autopull: bool,
+            in_shiftdir: bool,
+            out_shiftdir: bool,
+            push_thresh: u8,
+            pull_thresh: u8,
+            fjoin_tx: bool,
+            fjoin_rx: bool,
+        }
+        let proxy = SmShiftctrl {
+            autopush: self.autopush(),
+            autopull: self.autopull(),
+            in_shiftdir: self.in_shiftdir(),
+            out_shiftdir: self.out_shiftdir(),
+            push_thresh: self.push_thresh(),
+            pull_thresh: self.pull_thresh(),
+            fjoin_tx: self.fjoin_tx(),
+            fjoin_rx: self.fjoin_rx(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

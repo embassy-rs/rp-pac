@@ -32,6 +32,29 @@ impl Default for Archsel {
         Archsel(0)
     }
 }
+impl core::fmt::Debug for Archsel {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Archsel")
+            .field("core0", &self.core0())
+            .field("core1", &self.core1())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Archsel {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Archsel {
+            core0: super::vals::ArchselCore0,
+            core1: super::vals::ArchselCore1,
+        }
+        let proxy = Archsel {
+            core0: self.core0(),
+            core1: self.core1(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Get the current architecture select state of each core. Cores sample the current value of the ARCHSEL register when their warm reset is released, at which point the corresponding bit in this register will also update."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -64,6 +87,29 @@ impl Default for ArchselStatus {
     #[inline(always)]
     fn default() -> ArchselStatus {
         ArchselStatus(0)
+    }
+}
+impl core::fmt::Debug for ArchselStatus {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("ArchselStatus")
+            .field("core0", &self.core0())
+            .field("core1", &self.core1())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for ArchselStatus {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct ArchselStatus {
+            core0: super::vals::ArchselStatusCore0,
+            core1: super::vals::ArchselStatusCore1,
+        }
+        let proxy = ArchselStatus {
+            core0: self.core0(),
+            core1: self.core1(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "During BIST, count address locations that have at least one leaky bit"]
@@ -133,6 +179,38 @@ impl Default for Bist {
         Bist(0)
     }
 }
+impl core::fmt::Debug for Bist {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Bist")
+            .field("cnt", &self.cnt())
+            .field("cnt_max", &self.cnt_max())
+            .field("cnt_ena", &self.cnt_ena())
+            .field("cnt_clr", &self.cnt_clr())
+            .field("cnt_fail", &self.cnt_fail())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Bist {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Bist {
+            cnt: u16,
+            cnt_max: u16,
+            cnt_ena: bool,
+            cnt_clr: bool,
+            cnt_fail: bool,
+        }
+        let proxy = Bist {
+            cnt: self.cnt(),
+            cnt_max: self.cnt_max(),
+            cnt_ena: self.cnt_ena(),
+            cnt_clr: self.cnt_clr(),
+            cnt_fail: self.cnt_fail(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Tell the bootrom to ignore scratch register boot vectors (both power manager and watchdog) on the next power up. If an early boot stage has soft-locked some OTP pages in order to protect their contents from later stages, there is a risk that Secure code running at a later stage can unlock the pages by performing a watchdog reset that resets the OTP. This register can be used to ensure that the bootloader runs as normal on the next power up, preventing Secure code at a later stage from accessing OTP in its unlocked state. Should be used in conjunction with the power manager BOOTDIS register."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -165,6 +243,29 @@ impl Default for Bootdis {
     #[inline(always)]
     fn default() -> Bootdis {
         Bootdis(0)
+    }
+}
+impl core::fmt::Debug for Bootdis {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Bootdis")
+            .field("now", &self.now())
+            .field("next", &self.next())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Bootdis {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Bootdis {
+            now: bool,
+            next: bool,
+        }
+        let proxy = Bootdis {
+            now: self.now(),
+            next: self.next(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Quickly check values of critical flags read during boot up"]
@@ -251,6 +352,47 @@ impl Default for Critical {
         Critical(0)
     }
 }
+impl core::fmt::Debug for Critical {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Critical")
+            .field("secure_boot_enable", &self.secure_boot_enable())
+            .field("secure_debug_disable", &self.secure_debug_disable())
+            .field("debug_disable", &self.debug_disable())
+            .field("default_archsel", &self.default_archsel())
+            .field("glitch_detector_enable", &self.glitch_detector_enable())
+            .field("glitch_detector_sens", &self.glitch_detector_sens())
+            .field("arm_disable", &self.arm_disable())
+            .field("riscv_disable", &self.riscv_disable())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Critical {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Critical {
+            secure_boot_enable: bool,
+            secure_debug_disable: bool,
+            debug_disable: bool,
+            default_archsel: bool,
+            glitch_detector_enable: bool,
+            glitch_detector_sens: u8,
+            arm_disable: bool,
+            riscv_disable: bool,
+        }
+        let proxy = Critical {
+            secure_boot_enable: self.secure_boot_enable(),
+            secure_debug_disable: self.secure_debug_disable(),
+            debug_disable: self.debug_disable(),
+            default_archsel: self.default_archsel(),
+            glitch_detector_enable: self.glitch_detector_enable(),
+            glitch_detector_sens: self.glitch_detector_sens(),
+            arm_disable: self.arm_disable(),
+            riscv_disable: self.riscv_disable(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Debug for OTP power-on state machine"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -329,6 +471,41 @@ impl Default for Dbg {
         Dbg(0)
     }
 }
+impl core::fmt::Debug for Dbg {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Dbg")
+            .field("psm_done", &self.psm_done())
+            .field("boot_done", &self.boot_done())
+            .field("rosc_up_seen", &self.rosc_up_seen())
+            .field("rosc_up", &self.rosc_up())
+            .field("psm_state", &self.psm_state())
+            .field("customer_rma_flag", &self.customer_rma_flag())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Dbg {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Dbg {
+            psm_done: bool,
+            boot_done: bool,
+            rosc_up_seen: bool,
+            rosc_up: bool,
+            psm_state: u8,
+            customer_rma_flag: bool,
+        }
+        let proxy = Dbg {
+            psm_done: self.psm_done(),
+            boot_done: self.boot_done(),
+            rosc_up_seen: self.rosc_up_seen(),
+            rosc_up: self.rosc_up(),
+            psm_state: self.psm_state(),
+            customer_rma_flag: self.customer_rma_flag(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Enable a debug feature that has been disabled. Debug features are disabled if one of the relevant critical boot flags is set in OTP (DEBUG_DISABLE or SECURE_DEBUG_DISABLE), OR if a debug key is marked valid in OTP, and the matching key value has not been supplied over SWD. Specifically: - The DEBUG_DISABLE flag disables all debug features. This can be fully overridden by setting all bits of this register. - The SECURE_DEBUG_DISABLE flag disables secure processor debug. This can be fully overridden by setting the PROC0_SECURE and PROC1_SECURE bits of this register. - If a single debug key has been registered, and no matching key value has been supplied over SWD, then all debug features are disabled. This can be fully overridden by setting all bits of this register. - If both debug keys have been registered, and the Non-secure key's value (key 6) has been supplied over SWD, secure processor debug is disabled. This can be fully overridden by setting the PROC0_SECURE and PROC1_SECURE bits of this register. - If both debug keys have been registered, and the Secure key's value (key 5) has been supplied over SWD, then no debug features are disabled by the key mechanism. However, note that in this case debug features may still be disabled by the critical boot flags."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -394,6 +571,38 @@ impl Default for Debugen {
     #[inline(always)]
     fn default() -> Debugen {
         Debugen(0)
+    }
+}
+impl core::fmt::Debug for Debugen {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Debugen")
+            .field("proc0", &self.proc0())
+            .field("proc0_secure", &self.proc0_secure())
+            .field("proc1", &self.proc1())
+            .field("proc1_secure", &self.proc1_secure())
+            .field("misc", &self.misc())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Debugen {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Debugen {
+            proc0: bool,
+            proc0_secure: bool,
+            proc1: bool,
+            proc1_secure: bool,
+            misc: bool,
+        }
+        let proxy = Debugen {
+            proc0: self.proc0(),
+            proc0_secure: self.proc0_secure(),
+            proc1: self.proc1(),
+            proc1_secure: self.proc1_secure(),
+            misc: self.misc(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Write 1s to lock corresponding bits in DEBUGEN. This register is reset by the processor cold reset."]
@@ -463,6 +672,38 @@ impl Default for DebugenLock {
         DebugenLock(0)
     }
 }
+impl core::fmt::Debug for DebugenLock {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("DebugenLock")
+            .field("proc0", &self.proc0())
+            .field("proc0_secure", &self.proc0_secure())
+            .field("proc1", &self.proc1())
+            .field("proc1_secure", &self.proc1_secure())
+            .field("misc", &self.misc())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for DebugenLock {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct DebugenLock {
+            proc0: bool,
+            proc0_secure: bool,
+            proc1: bool,
+            proc1_secure: bool,
+            misc: bool,
+        }
+        let proxy = DebugenLock {
+            proc0: self.proc0(),
+            proc0_secure: self.proc0_secure(),
+            proc1: self.proc1(),
+            proc1_secure: self.proc1_secure(),
+            misc: self.misc(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Interrupt Enable"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -520,6 +761,38 @@ impl Default for Int {
         Int(0)
     }
 }
+impl core::fmt::Debug for Int {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Int")
+            .field("sbpi_flag_n", &self.sbpi_flag_n())
+            .field("sbpi_wr_fail", &self.sbpi_wr_fail())
+            .field("apb_dctrl_fail", &self.apb_dctrl_fail())
+            .field("apb_rd_sec_fail", &self.apb_rd_sec_fail())
+            .field("apb_rd_nsec_fail", &self.apb_rd_nsec_fail())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Int {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Int {
+            sbpi_flag_n: bool,
+            sbpi_wr_fail: bool,
+            apb_dctrl_fail: bool,
+            apb_rd_sec_fail: bool,
+            apb_rd_nsec_fail: bool,
+        }
+        let proxy = Int {
+            sbpi_flag_n: self.sbpi_flag_n(),
+            sbpi_wr_fail: self.sbpi_wr_fail(),
+            apb_dctrl_fail: self.apb_dctrl_fail(),
+            apb_rd_sec_fail: self.apb_rd_sec_fail(),
+            apb_rd_nsec_fail: self.apb_rd_nsec_fail(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Which keys were valid (enrolled) at boot time"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -539,6 +812,26 @@ impl Default for KeyValid {
     #[inline(always)]
     fn default() -> KeyValid {
         KeyValid(0)
+    }
+}
+impl core::fmt::Debug for KeyValid {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("KeyValid")
+            .field("key_valid", &self.key_valid())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for KeyValid {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct KeyValid {
+            key_valid: u8,
+        }
+        let proxy = KeyValid {
+            key_valid: self.key_valid(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Dispatch instructions to the SBPI interface, used for programming the OTP fuses."]
@@ -628,6 +921,44 @@ impl Default for SbpiInstr {
         SbpiInstr(0)
     }
 }
+impl core::fmt::Debug for SbpiInstr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SbpiInstr")
+            .field("short_wdata", &self.short_wdata())
+            .field("cmd", &self.cmd())
+            .field("target", &self.target())
+            .field("payload_size_m1", &self.payload_size_m1())
+            .field("has_payload", &self.has_payload())
+            .field("is_wr", &self.is_wr())
+            .field("exec", &self.exec())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for SbpiInstr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct SbpiInstr {
+            short_wdata: u8,
+            cmd: u8,
+            target: u8,
+            payload_size_m1: u8,
+            has_payload: bool,
+            is_wr: bool,
+            exec: bool,
+        }
+        let proxy = SbpiInstr {
+            short_wdata: self.short_wdata(),
+            cmd: self.cmd(),
+            target: self.target(),
+            payload_size_m1: self.payload_size_m1(),
+            has_payload: self.has_payload(),
+            is_wr: self.is_wr(),
+            exec: self.exec(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SbpiStatus(pub u32);
@@ -694,7 +1025,39 @@ impl Default for SbpiStatus {
         SbpiStatus(0)
     }
 }
-#[doc = "Software lock register for page 2. Locks are initialised from the OTP lock pages at reset. This register can be written to further advance the lock state of each page (until next reset), and read to check the current lock state of a page."]
+impl core::fmt::Debug for SbpiStatus {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SbpiStatus")
+            .field("rdata_vld", &self.rdata_vld())
+            .field("instr_done", &self.instr_done())
+            .field("instr_miss", &self.instr_miss())
+            .field("flag", &self.flag())
+            .field("miso", &self.miso())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for SbpiStatus {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct SbpiStatus {
+            rdata_vld: bool,
+            instr_done: bool,
+            instr_miss: bool,
+            flag: bool,
+            miso: u8,
+        }
+        let proxy = SbpiStatus {
+            rdata_vld: self.rdata_vld(),
+            instr_done: self.instr_done(),
+            instr_miss: self.instr_miss(),
+            flag: self.flag(),
+            miso: self.miso(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
+#[doc = "Software lock register for page 0. Locks are initialised from the OTP lock pages at reset. This register can be written to further advance the lock state of each page (until next reset), and read to check the current lock state of a page."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SwLock(pub u32);
@@ -726,6 +1089,29 @@ impl Default for SwLock {
     #[inline(always)]
     fn default() -> SwLock {
         SwLock(0)
+    }
+}
+impl core::fmt::Debug for SwLock {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SwLock")
+            .field("sec", &self.sec())
+            .field("nsec", &self.nsec())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for SwLock {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct SwLock {
+            sec: super::vals::SwLockSec,
+            nsec: super::vals::SwLockNsec,
+        }
+        let proxy = SwLock {
+            sec: self.sec(),
+            nsec: self.nsec(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Controls for APB data read interface (USER interface)"]
@@ -760,5 +1146,28 @@ impl Default for Usr {
     #[inline(always)]
     fn default() -> Usr {
         Usr(0)
+    }
+}
+impl core::fmt::Debug for Usr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Usr")
+            .field("dctrl", &self.dctrl())
+            .field("pd", &self.pd())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Usr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Usr {
+            dctrl: bool,
+            pd: bool,
+        }
+        let proxy = Usr {
+            dctrl: self.dctrl(),
+            pd: self.pd(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

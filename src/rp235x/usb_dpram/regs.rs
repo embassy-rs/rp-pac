@@ -123,6 +123,50 @@ impl Default for EpBufferControl {
         EpBufferControl(0)
     }
 }
+impl core::fmt::Debug for EpBufferControl {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("EpBufferControl")
+            .field("length", &[self.length(0usize), self.length(1usize)])
+            .field(
+                "available",
+                &[self.available(0usize), self.available(1usize)],
+            )
+            .field("stall", &self.stall())
+            .field("reset", &self.reset())
+            .field("pid", &[self.pid(0usize), self.pid(1usize)])
+            .field("last", &[self.last(0usize), self.last(1usize)])
+            .field("full", &[self.full(0usize), self.full(1usize)])
+            .field("double_buffer_iso_offset", &self.double_buffer_iso_offset())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for EpBufferControl {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct EpBufferControl {
+            length: [u16; 2usize],
+            available: [bool; 2usize],
+            stall: bool,
+            reset: bool,
+            pid: [bool; 2usize],
+            last: [bool; 2usize],
+            full: [bool; 2usize],
+            double_buffer_iso_offset: super::vals::EpBufferControlDoubleBufferIsoOffset,
+        }
+        let proxy = EpBufferControl {
+            length: [self.length(0usize), self.length(1usize)],
+            available: [self.available(0usize), self.available(1usize)],
+            stall: self.stall(),
+            reset: self.reset(),
+            pid: [self.pid(0usize), self.pid(1usize)],
+            last: [self.last(0usize), self.last(1usize)],
+            full: [self.full(0usize), self.full(1usize)],
+            double_buffer_iso_offset: self.double_buffer_iso_offset(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct EpControl(pub u32);
@@ -220,6 +264,50 @@ impl Default for EpControl {
         EpControl(0)
     }
 }
+impl core::fmt::Debug for EpControl {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("EpControl")
+            .field("buffer_address", &self.buffer_address())
+            .field("interrupt_on_nak", &self.interrupt_on_nak())
+            .field("interrupt_on_stall", &self.interrupt_on_stall())
+            .field("endpoint_type", &self.endpoint_type())
+            .field(
+                "interrupt_per_double_buff",
+                &self.interrupt_per_double_buff(),
+            )
+            .field("interrupt_per_buff", &self.interrupt_per_buff())
+            .field("double_buffered", &self.double_buffered())
+            .field("enable", &self.enable())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for EpControl {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct EpControl {
+            buffer_address: u16,
+            interrupt_on_nak: bool,
+            interrupt_on_stall: bool,
+            endpoint_type: super::vals::EpControlEndpointType,
+            interrupt_per_double_buff: bool,
+            interrupt_per_buff: bool,
+            double_buffered: bool,
+            enable: bool,
+        }
+        let proxy = EpControl {
+            buffer_address: self.buffer_address(),
+            interrupt_on_nak: self.interrupt_on_nak(),
+            interrupt_on_stall: self.interrupt_on_stall(),
+            endpoint_type: self.endpoint_type(),
+            interrupt_per_double_buff: self.interrupt_per_double_buff(),
+            interrupt_per_buff: self.interrupt_per_buff(),
+            double_buffered: self.double_buffered(),
+            enable: self.enable(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
 #[doc = "Bytes 4-7 of the setup packet from the host."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -248,6 +336,29 @@ impl Default for SetupPacketHigh {
     #[inline(always)]
     fn default() -> SetupPacketHigh {
         SetupPacketHigh(0)
+    }
+}
+impl core::fmt::Debug for SetupPacketHigh {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SetupPacketHigh")
+            .field("windex", &self.windex())
+            .field("wlength", &self.wlength())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for SetupPacketHigh {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct SetupPacketHigh {
+            windex: u16,
+            wlength: u16,
+        }
+        let proxy = SetupPacketHigh {
+            windex: self.windex(),
+            wlength: self.wlength(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }
 #[doc = "Bytes 0-3 of the SETUP packet from the host."]
@@ -287,5 +398,31 @@ impl Default for SetupPacketLow {
     #[inline(always)]
     fn default() -> SetupPacketLow {
         SetupPacketLow(0)
+    }
+}
+impl core::fmt::Debug for SetupPacketLow {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SetupPacketLow")
+            .field("bmrequesttype", &self.bmrequesttype())
+            .field("brequest", &self.brequest())
+            .field("wvalue", &self.wvalue())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for SetupPacketLow {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct SetupPacketLow {
+            bmrequesttype: u8,
+            brequest: u8,
+            wvalue: u16,
+        }
+        let proxy = SetupPacketLow {
+            bmrequesttype: self.bmrequesttype(),
+            brequest: self.brequest(),
+            wvalue: self.wvalue(),
+        };
+        defmt::write!(f, "{}", proxy)
     }
 }

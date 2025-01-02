@@ -76,3 +76,38 @@ impl Default for Csr {
         Csr(0)
     }
 }
+impl core::fmt::Debug for Csr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Csr")
+            .field("start", &self.start())
+            .field("wdata_rdy", &self.wdata_rdy())
+            .field("sum_vld", &self.sum_vld())
+            .field("err_wdata_not_rdy", &self.err_wdata_not_rdy())
+            .field("dma_size", &self.dma_size())
+            .field("bswap", &self.bswap())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Csr {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct Csr {
+            start: bool,
+            wdata_rdy: bool,
+            sum_vld: bool,
+            err_wdata_not_rdy: bool,
+            dma_size: super::vals::DmaSize,
+            bswap: bool,
+        }
+        let proxy = Csr {
+            start: self.start(),
+            wdata_rdy: self.wdata_rdy(),
+            sum_vld: self.sum_vld(),
+            err_wdata_not_rdy: self.err_wdata_not_rdy(),
+            dma_size: self.dma_size(),
+            bswap: self.bswap(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}

@@ -19,3 +19,23 @@ impl Default for BootlockStat {
         BootlockStat(0)
     }
 }
+impl core::fmt::Debug for BootlockStat {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("BootlockStat")
+            .field("bootlock_stat", &self.bootlock_stat())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for BootlockStat {
+    fn format(&self, f: defmt::Formatter) {
+        #[derive(defmt :: Format)]
+        struct BootlockStat {
+            bootlock_stat: u8,
+        }
+        let proxy = BootlockStat {
+            bootlock_stat: self.bootlock_stat(),
+        };
+        defmt::write!(f, "{}", proxy)
+    }
+}
