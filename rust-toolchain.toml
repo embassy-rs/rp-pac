@@ -1,5 +1,5 @@
 [toolchain]
-channel = "nightly-2024-09-06"
+channel = "nightly-2024-12-10"
 targets = [
     "thumbv6m-none-eabi",
     "thumbv8m.main-none-eabihf",
